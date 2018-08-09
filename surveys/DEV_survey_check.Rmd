@@ -1,0 +1,114 @@
+---
+title: "DEV Survey Check"
+author: "Dani Cosme"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    highlight: tango
+    theme: united
+    toc: true
+    toc_float: 
+      collapsed: TRUE
+      smooth_scroll: TRUE
+    df_print: paged
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE, error=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Packages
+```{r packages, warning = FALSE, message = FALSE, error = FALSE}
+if (!require(tidyverse)) {
+  install.packages('tidyverse')
+}
+
+if (!require(knitr)) {
+  install.packages('knitr')
+}
+
+if (!require(devtools)) {
+  install.packages('devtools')
+}
+
+if (!require(scorequaltrics)) {
+  devtools::install_github('jflournoy/qualtrics')
+}
+```
+
+## Define variables
+```{r variables}
+cred_file_location = '~/credentials.yaml.DEFAULT'
+sid_column_name = 'Login'
+survey_name_filter = 'DEV'
+sid_pattern = 'DEV[0-9]{3}'
+exclude_sid = '99|DEV737' # subject IDs to exclude
+```
+
+## Pull survey list from Qualtrics
+To do this, you'll need a Qualtrics API token saved in credentials file on your local machine. If you don't have a file, follow these steps to create one:
+
+1. Generate an API token for Qualtrics. Follow the steps outlined [here](https://www.qualtrics.com/support/integrations/api-integration/overview/)
+
+2. Create `credentials.yaml.DEFAULT` in the `credentialDir` and add API token information
+
+```
+credentialDir='/Users/danicosme/' #replace with your path
+
+if [ ! -f ${credentialDir}credentials.yaml.DEFAULT ]; then
+  cd ${credentialDir}
+  touch credentials.yaml.DEFAULT
+  echo "user: dcosme#oregon" >> credentials.yaml.DEFAULT #replace with your token information
+  echo "token: Ik0XNNQVZFdriLEnot..." >> credentials.yaml.DEFAULT #replace with your token information
+else
+  echo "credential file already exists in this location"
+fi
+```
+
+```{r survey list}
+# load credential file
+credentials = scorequaltrics::creds_from_file(cred_file_location)
+
+# filter
+surveysAvail = scorequaltrics::get_surveys(credentials)
+surveysFiltered = filter(surveysAvail, grepl(survey_name_filter, SurveyName))
+```
+
+## Get survey data
+```{r get data}
+surveys = scorequaltrics::get_survey_data(surveysFiltered,
+                                          credentials, 
+                                          pid_col = sid_column_name)
+```
+
+## Tidy data
+```{r tidy}
+surveys1 = surveys %>%
+  mutate(Login = gsub("Dev", "DEV", Login),
+         Login = gsub("dev", "DEV", Login),
+         Login = ifelse(grepl("^[0-9]{3}$", Login), paste0("DEV", Login), Login))
+```
+
+## Summarize
+### Completed surveys
+```{r summarize_complete}
+surveys1 %>%
+  filter(item == "Finished" & value == "1") %>%
+  filter(!grepl(exclude_sid, Login)) %>%
+  filter(grepl("DEV", Login)) %>%
+  group_by(survey_name, Login) %>%
+  summarize(n = n()) %>%
+  spread(survey_name, n)
+```
+
+### Incomplete surveys
+```{r summarize_incomplete}
+surveys1 %>%
+  filter(item == "Finished" & value == "0") %>%
+  filter(!grepl(exclude_sid, Login)) %>%
+  filter(grepl("DEV", Login)) %>%
+  group_by(survey_name, Login) %>%
+  summarize(n = n()) %>%
+  spread(survey_name, n)
+```
