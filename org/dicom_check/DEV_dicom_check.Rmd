@@ -49,6 +49,15 @@ data.tidy = data %>%
          date = ymd(date))
 ```
 
+# summarize
+```{r}
+sessions %>%
+  gather(session, date, -subjectID) %>%
+  filter(!is.na(date)) %>%
+  group_by(session) %>%
+  summarize(n = n())
+```
+
 # verify sessions
 Check if there are too many sessions or if the session dates are incorrect
 ```{r}
