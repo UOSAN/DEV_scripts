@@ -1,68 +1,67 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1326895.svg)](https://doi.org/10.5281/zenodo.1326895)
-
-# Important note:  
-the bidsQC functionality is being integrated into [pybids](https://github.com/INCF/pybids)  as the `validate_sequences` function. The code in this repo is not up to date. Questions? – send a message to kdestasio@gmail.com
-
 # Overview
 
-The scripts in this repo are a combination of wrappers and quality checking scripts that take neuroimaging files from DICOMS to Niftis named and structured as per [BIDS](http://bids.neuroimaging.io/).
+These scripts will check whether each sequence has the correct number of runs within BIDS, based on a configuration file where the user specifies how many runs of each sequence are expected at each time point.
 
-**_Instructions on this page are to run batches of subjects on a high performance cluster running SLURM using a Singularity container of the dcm2Bids package - or - to run the subjects serially on a local machine._**
+## Renaming rules
 
+If there are **more** runs than expected, and the expected number of runs is greater than 1, the runs with the highest run numbers will be retained (up to X number of runs specified in the config file). Surplus runs will be moved to the `tmp_dcm2bids` folder. Retained runs will be renamed as runs 1-X with the lowest numbered run assigned the first number, and so on. If only one run is expected, the same operations just described will occur, but the remaining file will not have the run-number key-value portion of it's file name dropped.
 
-# Table of Contents
+If there are **fewer** runs than expected, a warning will be printed to the errorlog.
 
-- [Dependencies](#dependencies)
-- [Conversion Folder Contents](#repo-contents)
-- [Creating the dcm2bids Configuration File](helper_readme.md)
-- Running dcm2bids
-  - [On a Linux Cluster](/running_dcm2bids_cluster.md)
-  - [Locally](runnung_dcm2bids_local.md)
-- [Running bidsQC](/bidsQC/README.md)
-- [Final BIDS Steps](#final-steps)
+## Instructions
+### The Configuration file
 
+You will need to change some fields in the configuration file.  
 
-# Dependencies<a name="dependencies"/>
-- Python 3 with the `future` module (pip install of cbedetti's `dcm2bids` will install the future module)
-- `dcm2niix`conversion tool. **You need to install it.**
-  - Get via the [rordenlab github](https://github.com/rordenlab/dcm2niix)
-- `dcm2Bids`. **You need to install it.**
-  - Get via [cbedetti's github](https://github.com/cbedetti/Dcm2Bids)
+- Change the paths
+- Change the Sequence and TimePoint information
+- Indicate whether files are gzipped or not zipped
+- Indicate whether the tasks should be labeled by the order in which they were run
+    - If so, indicate which files
 
+Within the configuration file, you are asked to fill out a dictionary for each unique set of sequences and time points in your study. Within "Sequence", the first field entered identifies the sequence type for which you will be listing files. This should be consistent with the name of the folder in which the subsequent sequence files are housed. The next information entered is a series of key:value pairs in which the key is the part of the file name that makes it unique (e.g. task name for functional runs) and the value is the expected number of files with that key in the specified folder.
 
-# Repo Contents<a name="repo-contents"/>
-## Conversion Scripts
-Wrapper around the rordenlab's  `dcm2niix` and cbedetti's `dcm2Bids`. These scripts convert the DICOM files in subjects' directories, convert them to Niftis, and put them in BIDS.  
+**Here's an example:**
 
-  - `config_dcm2bids_batch.py`  
-  - `config_dcm2bids_helper.py` 
-  - `dcm2bids_batch.py`
-  - `dcm2bids_helper.py`  
-  - `fmap_intendedfor.py` 
-  - `study_config.json` 
-  - `subject_list.txt`
+In this example:
+
+* The study has 2 time points, so we will make 2 "TimePoint" objects composed of the appropriate "Sequence" objects
+* The two time points have different functional runs, so we'll make a "func" sequence for each time point
+* Both time points have anatomical images with the same name, so we can create one "anat" sequence for anat and use it in both time points
+* Both time points also have fieldmap images with the same name, so we can also create one "func" sequence to use at both time points
+* Once we've constructed our "TimePoint" objects with the correct contents, we put them into the "expected\_timepoints" object, and we're done!
+
+![](./images/example_config.png)
 
 
-## bidsQC Scripts
+# Run the script
+## On a Cluster
 
-Once Niftis are in BIDS, these scripts can be used to check whether each sequence has the correct number of runs. Files in the target directories are checked against values in the configuration file where the user specifies how many runs of each sequence are expected at each time point. Optional: append the `run-##` key-value string to file names based on sequence order (option specifed in config file).  
+- Log into Talapas
+```
+    ssh -X username@Talapas-ln1.uoregon.edu
+```
+- `cd` to the directory that has your code in it
+- Load the python3 module
+```
+    module load python3
+```
+- Run the `bidsQC.py` script
 
-For step-by-step instructions and a description of the naming rules, see the [bidsQC README.](/bidsQC/README.md)
+```
+    python3 bidsQC.py
+```
+- Check your output and error logs
 
+## Locally
 
-# Final BIDS Steps<a name="final-steps"/>
-## Manually Create Metadata Files
+- `cd` to the directory that has your code in it
+- Run the `bidsQC.py` sciript
+```
+python3 bidsQC.py
+```
+- Check your output and error logs
 
-As per: [http://bids.neuroimaging.io/bids\_spec1.0.0-rc2.pdf](http://bids.neuroimaging.io/bids_spec1.0.0-rc2.pdf)
-
-Place these files in the top level bids directory.
-
-- dataset_description.json
-- phasediff.json
-- A JSON for each functional task with TaskName and RepetitionTime
-- README (optional, but strongly recommended)
-- CHANGES (optional, but strongly recommended)
-
-## Check the BIDS Conversion
+# Check the BIDS Conversion
 
 BIDS validator: [http://incf.github.io/bids-validator](http://incf.github.io/bids-validator/)

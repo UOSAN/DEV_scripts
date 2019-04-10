@@ -23,16 +23,16 @@ from datetime import datetime
 # These variables are used only in the config file path names 
 # and can be commented out if not needed.
 group = "sanlab"
-study = "REV"
-parent_dir = "dcm2bids"
+study = "DEV"
+parent_dir = "bidsQC"
 
 
 # Set directories
 # These variables are used in the main script and need to be defined here.
 # They need to exist prior to running the script (with the exception of `image` 
-# which can be set equal to "NA" if you are running the script locally)
-dicomdir = os.path.join(os.sep, "projects", "lcni", "dcm", group, "Archive", study)
-codedir = os.path.join(os.sep, "projects", group, "shared", study, "REV_scripts", "org", parent_dir)  # Contains subject_list.txt, config file, and dcm2bids_batch.py
+# which can be set equal to " if you are running the script locally)
+dicomdir = os.path.join(os.sep, "projects", "lcni", "dcm", "sanlab", "Berkman", "DEV")
+codedir = os.path.join(os.sep, "projects", group, "shared", study, "dev_scripts", "org", parent_dir, "conversion")  # Contains subject_list.txt, config file, and dcm2bids_batch.py
 configfile = os.path.join(codedir, "study_config.json")  # path to and name of config file
 image = os.path.join(os.sep, "projects", group, "shared", "containers", "Dcm2Bids-master.simg")
 
@@ -49,4 +49,4 @@ subjectlist = "subject_list.txt"
 
 
 # Run on local machine (run_local = True) or high performance cluster with slurm (run_local = False)
-run_local = True
+run_local = False
