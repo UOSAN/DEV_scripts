@@ -3,8 +3,8 @@ import json
 from pprint import pprint
 
 # Change these to your own paths/times/etc.
-bidsdir = os.path.join(os.sep, 'projects', 'sanlab', 'shared', 'Eating', 'bids_data')
-include_echo_time = True
+bidsdir = os.path.join(os.sep, 'projects', 'sanlab', 'shared', 'DEV', 'bids_data')
+include_echo_time = False
 echo_time1 = '0.00253'
 echo_time2 = '0.00499'
 
