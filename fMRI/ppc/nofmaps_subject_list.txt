@@ -1,0 +1,7 @@
+DEV022,wave1
+DEV032,wave1
+DEV050,wave1
+DEV050,wave2
+DEV062,wave1
+DEV062,wave2
+DEV078,wave1
