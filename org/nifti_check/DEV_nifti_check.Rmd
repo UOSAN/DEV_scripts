@@ -1,0 +1,74 @@
+---
+title: "check converted nifti files"
+author: "Dani Cosme"
+date: "4/12/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+# load packages
+```{r}
+library(tidyverse)
+```
+
+
+# rsync .json files
+Since you need to type in your password, you'll probably need to execute this line of code (with your username) directly from the command line
+```{bash}
+rsync -zarv --include "*/" --include="*.json" --exclude="*" -e ssh dcosme@talapas-ln1:/projects/sanlab/shared/DEV/bids_data ~/Desktop/
+```
+
+# load and tidy file names
+```{r}
+data_dir = "~/Desktop/bids_data"
+file_pattern = ".*.json"
+files = list.files(data_dir, pattern = file_pattern, recursive = TRUE)
+
+data = data.frame(file = files) %>%
+  extract(file, c("subjectID", "wave", "dir", "image"), "sub-(DEV[0-9]{3})/ses-wave([0-9]{1})/(.*)/sub-DEV[0-9]{3}_ses-wave[0-9]{1}_(.*).json") %>%
+  extract(image, c("task", "run"), "task-(.*)_acq-([0-9]{1})", remove = FALSE)
+```
+
+# check data
+## anat
+```{r}
+data %>%
+  filter(dir == "anat") %>%
+  group_by(subjectID, wave) %>%
+  summarize(n = n()) %>%
+  spread(wave, n)
+```
+
+## fmaps
+```{r}
+data %>%
+  filter(dir == "fmap") %>%
+  group_by(subjectID, wave) %>%
+  summarize(n = n()) %>%
+  spread(wave, n)
+```
+
+## func
+```{r}
+data %>%
+  filter(dir == "func") %>%
+  group_by(subjectID, wave, task) %>%
+  summarize(n = n()) %>%
+  spread(task, n)
+```
+
+# write ppc file names
+```{r}
+getwd()
+data %>%
+  select(subjectID, wave) %>%
+  unique() %>%
+  mutate(filename = sprintf("%s,wave%s", subjectID, wave)) %>%
+  ungroup() %>%
+  select(filename) %>%
+  write.table(., "~/Documents/code/sanlab/DEV_scripts/fMRI/ppc/subject_list.txt", row.names = FALSE, col.names = FALSE, quote = FALSE)
+```
+
