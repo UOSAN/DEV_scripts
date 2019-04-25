@@ -27,7 +27,7 @@ for subject in $subject_list; do
 	sessid=`echo $subject|awk '{print $2}' FS=","` 
 	sbatch --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
 		   --job-name fmriprep \
-		   --partition=long \
+		   --partition=short \
 		   --cpus-per-task=28 \
 		   --mem=100G \
 		   -o "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_output.txt \
