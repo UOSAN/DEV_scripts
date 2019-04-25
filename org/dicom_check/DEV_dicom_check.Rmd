@@ -27,7 +27,7 @@ library(lubridate)
 # load data
 ```{r}
 data = read.csv("dicoms.csv")
-sessions = read.csv("DEV2_DATA_2019-03-29_1948.csv", na.strings = c("")) %>%
+sessions = read.csv("DEV2_DATA_2019-04-25_0110.csv", na.strings = c("")) %>%
   rename("subjectID" = dev_id) %>%
   select(-redcap_event_name) %>%
   group_by(subjectID) %>%
@@ -74,10 +74,10 @@ Check if there are too many sessions or if the session dates are incorrect
 (merged.check = merged %>%
   mutate(correct_session1 = ifelse(session1 == date_1, 1, 0),
          correct_session2 = ifelse(session2 == date_2, 1, 0),
-         check_order = ifelse(session1 == date_2 | session2 == date_1 | session3 == date_2 | session4 == date_2, 1, 0),
+         check_order = ifelse(session1 == date_2 | session2 == date_1, 1, 0), #| session3 == date_2 | session4 == date_2
          duration = ifelse(!is.na(session2), session2 - session1, NA)) %>%
-  filter(!correct_session1 == 1 | !correct_session2 == 1 | !is.na(session3) | !is.na(session4) | duration < 24) %>%
-  select(subjectID, correct_session1, correct_session2, check_order, duration, date_1, session1, date_2, session2, session3, session4))
+  filter(!correct_session1 == 1 | !correct_session2 == 1 |  duration < 24) %>% #!is.na(session3) | !is.na(session4) |
+  select(subjectID, correct_session1, correct_session2, check_order, duration, date_1, session1, date_2, session2)) #session3, session4
 ```
 
 Duplicates
@@ -87,9 +87,9 @@ Duplicates
   left_join(., merged) %>%
   mutate(correct_session1 = ifelse(session1 == date_1, 1, 0),
          correct_session2 = ifelse(session2 == date_2, 1, 0),
-         check_order = ifelse(session1 == date_2 | session2 == date_1 | session3 == date_2 | session4 == date_2, 1, 0),
+         check_order = ifelse(session1 == date_2 | session2 == date_1 , 1, 0), #| session3 == date_2 | session4 == date_2
          duration = ifelse(!is.na(session2), session2 - session1, NA)) %>%
-  select(folder, subjectID, datetime, correct_session1, correct_session2, check_order, duration, date_1, session1, date_2, session2, session3, session4) %>%
+  select(folder, subjectID, datetime, correct_session1, correct_session2, check_order, duration, date_1, session1, date_2, session2) %>% #, session3, session4
   filter(datetime %in% data.tidy[duplicated(data.tidy$datetime),]$datetime))
 ```
 
@@ -124,10 +124,10 @@ data.tidy %>%
   mutate(check1 = ifelse(session1 == date_1, 1, 0),
          check2 = ifelse(session2 == date_2, 1, 0),
          duration = ifelse(!is.na(session2), session2 - session1, NA)) %>%
-  select(folder, subjectID, datetime, check1, check2, duration, date_1, session1, date_2, session2, session3, session4)
+  select(folder, subjectID, datetime, check1, check2, duration, date_1, session1, date_2, session2) #, session3, session4
 ```
 
-# Issue breakdown
+# Issue breakdown (log of issues fixed)
 **Remove**  
 DEV018_20181025_190858  
 DEV012_20190111_090124  

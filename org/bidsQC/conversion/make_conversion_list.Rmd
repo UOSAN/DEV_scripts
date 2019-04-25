@@ -1,0 +1,46 @@
+---
+title: "Conversion lists"
+author: "Dani Cosme"
+date: "4/24/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE)
+```
+
+# load packages
+```{r}
+library(tidyverse)
+```
+
+# make list
+```{r}
+all = read.csv("~/Documents/code/sanlab/DEV_scripts/org/dicom_check/dicoms.csv")
+completed = read.csv("~/Documents/code/sanlab/DEV_scripts/org/bidsQC/conversion/subject_list.txt", header = FALSE)
+
+all %>%
+  extract(folder, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
+  group_by(subjectID) %>%
+  mutate(wave = sprintf("wave%s",row_number())) %>%
+  filter(!folder %in% completed$V1) %>%
+  filter(!folder == "DEV_20171214") %>%
+  write.table("new_subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+
+all %>%
+  extract(folder, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
+  group_by(subjectID) %>%
+  mutate(wave = sprintf("wave%s",row_number())) %>%
+  filter(!folder == "DEV_20171214") %>%
+  write.table("subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+
+all %>%
+  extract(folder, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
+  group_by(subjectID) %>%
+  mutate(wave = sprintf("wave%s",row_number())) %>%
+  filter(!folder == "DEV_20171214") %>%
+  group_by(wave) %>%
+  summarize(n = n()) %>%
+  spread(wave, n)
+```
+
