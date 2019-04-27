@@ -6,16 +6,16 @@
 #--------------------------------------------------------------
 
 # Set your study scripts folder
-STUDY=/projects/dsnlab/shared/FP/FP_scripts
+STUDY=/projects/sanlab/shared/DEV/DEV_scripts
 
 # Set subject list
-SUBJLIST=`cat subject_list.txt`
+SUBJLIST=`cat test_subject_list.txt`
 
 # Which SID should be replaced?
-REPLACESID=FP001
+REPLACESID=DEV001
 
 # SPM Path
-SPM_PATH=/projects/dsnlab/shared/SPM12
+SPM_PATH=/projects/sanlab/shared/spm12
 
 # Set MATLAB script path
 SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth.m
@@ -39,11 +39,11 @@ mempercpu=8G
 
 # Create and execute batch job
 for SUB in $SUBJLIST; do
-	 	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
-		 	--job-name=${RESULTS_INFIX} \
-		 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}.log \
-		 	--cpus-per-task=${cpuspertask} \
-		 	--mem-per-cpu=${mempercpu} \
-		 	${SHELL_SCRIPT}
-	 	sleep .25
+ 	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
+	 	--job-name=${RESULTS_INFIX} \
+	 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}.log \
+	 	--cpus-per-task=${cpuspertask} \
+	 	--mem-per-cpu=${mempercpu} \
+	 	${SHELL_SCRIPT}
+ 	sleep .25
 done
