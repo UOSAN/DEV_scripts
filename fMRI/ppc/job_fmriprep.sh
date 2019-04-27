@@ -46,3 +46,6 @@ for task in ${tasks[@]}; do
 	echo -e "\ndone"
 	echo -e "\n-----------------------"
 done
+
+# clean tmp folder
+/usr/bin/rm -rvf /tmp/fmriprep*
