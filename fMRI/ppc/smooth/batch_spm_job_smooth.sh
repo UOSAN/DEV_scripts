@@ -17,7 +17,11 @@ REPLACESID=DEV001
 # SPM Path
 SPM_PATH=/projects/sanlab/shared/spm12
 
+# Set tasks to smooth
+TASKS=(ROC WTP SST)
+
 # Set MATLAB script path
+for TASK in ${TASKS[@]};
 SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth.m
 
 # Set shell script to execute
@@ -39,11 +43,18 @@ mempercpu=8G
 
 # Create and execute batch job
 for SUB in $SUBJLIST; do
- 	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
-	 	--job-name=${RESULTS_INFIX} \
-	 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}.log \
-	 	--cpus-per-task=${cpuspertask} \
-	 	--mem-per-cpu=${mempercpu} \
-	 	${SHELL_SCRIPT}
- 	sleep .25
+	
+	# Set MATLAB script path
+	for TASK in ${TASKS[@]};
+		SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth_${TASK}.m # update script name if applicable
+
+		# Run task job
+	 	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
+		 	--job-name=${RESULTS_INFIX} \
+		 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}.log \
+		 	--cpus-per-task=${cpuspertask} \
+		 	--mem-per-cpu=${mempercpu} \
+		 	${SHELL_SCRIPT}
+	 	sleep .25
+	 done
 done
