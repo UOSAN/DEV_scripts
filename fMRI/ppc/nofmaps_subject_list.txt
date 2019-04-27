@@ -1,2 +1,0 @@
-DEV022,wave1
-DEV032,wave1
