@@ -22,19 +22,19 @@
 # * figDPI = plot resolution in dots per inch
 
 # paths
-confoundDir = '/projects/dsnlab/shared/tag/bids_data/derivatives/fmriprep'
-summaryDir = '/projects/dsnlab/shared/tag/TAG_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary'
-plotDir = '/projects/dsnlab/shared/tag/TAG_scripts/fMRI/fx/motion/auto-motion-fmriprep/plots'
-rpDir = '/projects/dsnlab/shared/tag/TAG_scripts/fMRI/fx/motion/auto-motion-fmriprep/rp_txt'
+confoundDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep'
+summaryDir = '/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary'
+plotDir = '/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/plots'
+rpDir = '/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/rp_txt'
 
 # variables
-# please note the expected BIDS file pattern is e.g. sub-[TAG001]_ses-[wave1]_task-[DSD]_run-[01]_bold_confounds.tsv
+# please note the expected BIDS file pattern is e.g. sub-[DEV001]_ses-[wave1]_task-[DSD]_run-[01]_bold_confounds.tsv
 # if you do not include the 'run' argument, you may need to modify the filePattern definition in lines 38 and 56 of auto_motion_fmriprep.R
-study = 'TAG'
+study = 'DEV'
 subPattern = 'sub-(.*[0-9]{3})'
 wavePattern = 'ses-wave([0-9]{1})' # just extract the number
-taskPattern = 'task-(SVC|DSD)'
-runPattern = 'run-([0-9]{2})'
+taskPattern = 'task-(ROC|WTP|SST)'
+runPattern = 'acq-([0-9]{1})'
 writeRP = TRUE
 writePlot = TRUE
 writeEuclidean = TRUE
