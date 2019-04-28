@@ -20,10 +20,6 @@ SPM_PATH=/projects/sanlab/shared/spm12
 # Set tasks to smooth
 TASKS=(ROC WTP SST)
 
-# Set MATLAB script path
-for TASK in ${TASKS[@]};
-SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth.m
-
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
 
@@ -45,7 +41,7 @@ mempercpu=8G
 for SUB in $SUBJLIST; do
 	
 	# Set MATLAB script path
-	for TASK in ${TASKS[@]};
+	for TASK in ${TASKS[@]}; do
 		SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth_${TASK}.m # update script name if applicable
 
 		# Run task job
