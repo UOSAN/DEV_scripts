@@ -15,7 +15,7 @@ output:
 ---
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE, error=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 ```
 
 ## Packages
@@ -43,7 +43,7 @@ cred_file_location = '~/credentials.yaml.DEFAULT'
 sid_column_name = 'Login'
 survey_name_filter = 'DEV'
 sid_pattern = 'DEV[0-9]{3}'
-exclude_sid = '99|DEV737' # subject IDs to exclude
+exclude_sid = '^99|DEV737' # subject IDs to exclude
 ```
 
 ## Pull survey list from Qualtrics
@@ -87,7 +87,8 @@ surveys = scorequaltrics::get_survey_data(surveysFiltered,
 surveys1 = surveys %>%
   mutate(Login = gsub("Dev", "DEV", Login),
          Login = gsub("dev", "DEV", Login),
-         Login = ifelse(grepl("^[0-9]{3}$", Login), paste0("DEV", Login), Login))
+         Login = ifelse(grepl("^[0-9]{3}$", Login), paste0("DEV", Login), Login),
+         Login = ifelse(Login == "DEVO55", "DEV055", Login))
 ```
 
 ## Summarize
@@ -95,20 +96,56 @@ surveys1 = surveys %>%
 ```{r summarize_complete}
 surveys1 %>%
   filter(item == "Finished" & value == "1") %>%
-  filter(!grepl(exclude_sid, Login)) %>%
-  filter(grepl("DEV", Login)) %>%
+  filter(!grepl(exclude_sid, Login) & !is.na(Login)) %>%
+  #filter(grepl("DEV", Login)) %>%
   group_by(survey_name, Login) %>%
   summarize(n = n()) %>%
   spread(survey_name, n)
 ```
 
+#### Dates for subs with >1 completed surveys
+```{r}
+(repeat.subs = surveys1 %>%
+  filter(item == "Finished" & value == "1") %>%
+  filter(!grepl(exclude_sid, Login) & !is.na(Login)) %>%
+  group_by(survey_name, Login) %>%
+  summarize(n = n()) %>%
+  filter(n > 1) %>%
+  spread(survey_name, n))
+
+surveys1 %>%
+  filter(item == "StartDate") %>%
+  filter(Login %in% repeat.subs$Login) %>%
+  group_by(survey_name, Login) %>%
+  mutate(n = n()) %>%
+  filter(n > 1)
+```
+
+
 ### Incomplete surveys
 ```{r summarize_incomplete}
 surveys1 %>%
   filter(item == "Finished" & value == "0") %>%
-  filter(!grepl(exclude_sid, Login)) %>%
-  filter(grepl("DEV", Login)) %>%
+  filter(!grepl(exclude_sid, Login) & !is.na(Login)) %>%
   group_by(survey_name, Login) %>%
   summarize(n = n()) %>%
   spread(survey_name, n)
+```
+
+#### Dates for subs with >1 completed surveys
+```{r}
+(repeat.subs.inc = surveys1 %>%
+  filter(item == "Finished" & value == "0") %>%
+  filter(!grepl(exclude_sid, Login) & !is.na(Login)) %>%
+  group_by(survey_name, Login) %>%
+  summarize(n = n()) %>%
+  filter(n > 1) %>%
+  spread(survey_name, n))
+
+surveys1 %>%
+  filter(item == "StartDate") %>%
+  filter(Login %in% repeat.subs.inc$Login) %>%
+  group_by(survey_name, Login) %>%
+  mutate(n = n()) %>%
+  filter(n > 1)
 ```
