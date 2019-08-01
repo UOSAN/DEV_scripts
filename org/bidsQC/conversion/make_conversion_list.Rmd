@@ -14,33 +14,39 @@ knitr::opts_chunk$set(echo = TRUE, message = FALSE)
 library(tidyverse)
 ```
 
-# make list
+# load and tidy data
 ```{r}
-all = read.csv("~/Documents/code/sanlab/DEV_scripts/org/dicom_check/dicoms.csv")
+all = read.csv("~/Documents/code/sanlab/DEV_scripts/org/dicom_check/dicoms1.csv", header = FALSE) %>%
+  rename("folder" = V1) %>%
+  filter(!folder == "DEV_20171214")
 completed = read.csv("~/Documents/code/sanlab/DEV_scripts/org/bidsQC/conversion/subject_list.txt", header = FALSE)
 
-all %>%
+full_list = all %>%
   extract(folder, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
+  mutate(subjectID = ifelse(folder == "DEV0903_20190607_090700", "DEV093", subjectID)) %>%
   group_by(subjectID) %>%
-  mutate(wave = sprintf("wave%s",row_number())) %>%
-  filter(!folder %in% completed$V1) %>%
-  filter(!folder == "DEV_20171214") %>%
-  write.table("new_subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+  mutate(wave = sprintf("wave%s",row_number())) 
+```
 
-all %>%
-  extract(folder, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
+# check number of files per sub
+```{r}
+full_list %>%
   group_by(subjectID) %>%
-  mutate(wave = sprintf("wave%s",row_number())) %>%
-  filter(!folder == "DEV_20171214") %>%
-  write.table("subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+  summarize(n = n())
 
-all %>%
-  extract(folder, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
-  group_by(subjectID) %>%
-  mutate(wave = sprintf("wave%s",row_number())) %>%
-  filter(!folder == "DEV_20171214") %>%
+full_list %>%
   group_by(wave) %>%
   summarize(n = n()) %>%
   spread(wave, n)
+```
+
+# write lists
+```{r}
+full_list %>%
+  filter(!folder %in% completed$V1) %>%
+  write.table("new_subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+
+full_list %>%
+  write.table("subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
 ```
 

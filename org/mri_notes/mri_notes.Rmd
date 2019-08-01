@@ -1,5 +1,5 @@
 ---
-title: "DEV dicom check"
+title: "DEV MRI notes"
 author: "Dani Cosme"
 date: "`r Sys.Date()`"
 output:
@@ -25,12 +25,8 @@ library(lubridate)
 ```
 
 # load data
-* First download the "session" data report from redcap and drop in the `dicom_check` folder
-* Then create a new `dicoms.csv` file by printing the file list from talapas (e.g. via `cd /projects/lcni/dcm/sanlab/Berkman/DEV/; for i in $(ls -d D*); do echo $i >> /projects/sanlab/shared/DEV/DEV_scripts/org/dicom_check/dicoms.csv; done`)
 ```{r}
-data = read.csv("dicoms1.csv", header = FALSE) %>%
-  rename("folder" = V1)
-sessions = read.csv("DEV2_DATA_2019-08-01_0903.csv", na.strings = c("")) %>%
+notes = read.csv("DEV2_DATA_2019-04-25_0110.csv", na.strings = c("")) %>%
   rename("subjectID" = dev_id) %>%
   select(-redcap_event_name) %>%
   group_by(subjectID) %>%
@@ -46,7 +42,7 @@ sessions = read.csv("DEV2_DATA_2019-08-01_0903.csv", na.strings = c("")) %>%
 # tidy data
 ```{r}
 data.tidy = data %>%
-  extract(folder, c("subjectID", "datetime"), "(DEV[0-9]{3,4})_(.*)", remove = FALSE) %>%
+  extract(folder, c("subjectID", "datetime"), "(DEV[0-9]{3})_(.*)", remove = FALSE) %>%
   extract(datetime, "date", "(.*)_.*", remove = FALSE) %>%
   mutate(datetime = ymd_hms(datetime),
          date = ymd(date))
@@ -59,22 +55,7 @@ sessions %>%
   filter(!is.na(date)) %>%
   group_by(session) %>%
   summarize(n = n())
-
-data.tidy %>%
-  group_by(subjectID) %>%
-  mutate(sessionNum = row_number()) %>%
-  group_by(sessionNum) %>%
-  summarize(n = n())
 ```
-
-# check incorrectly named dicoms
-* DEV_20171214 = test subject, not in the study
-* DEV0903_20190607_090700 = DEV093
-```{r}
-data.tidy %>%
-  filter(!grepl("DEV[0-9]{3}$", subjectID))
-```
-
 
 # verify sessions
 Check if there are too many sessions or if the session dates are incorrect
@@ -87,20 +68,15 @@ Check if there are too many sessions or if the session dates are incorrect
    arrange(subjectID) %>%
    select(-datetime) %>%
    spread(session, date) %>%
-   full_join(., sessions) %>%
-   filter(!is.na(session1)))
+   right_join(., sessions)) 
 
-merged.check = merged %>%
+(merged.check = merged %>%
   mutate(correct_session1 = ifelse(session1 == date_1, 1, 0),
          correct_session2 = ifelse(session2 == date_2, 1, 0),
-         check_missing1 = ifelse((is.na(date_1) & !is.na(session1)) | (!is.na(date_1) & is.na(session1)), 1, 0),
-         check_missing2 = ifelse((is.na(date_2) & !is.na(session2)) | (!is.na(date_2) & is.na(session2)), 1, 0),
          check_order = ifelse(session1 == date_2 | session2 == date_1, 1, 0), #| session3 == date_2 | session4 == date_2
-         duration = ifelse(!is.na(session2), session2 - session1, NA)) 
-
- merged.check %>%
-  filter(!correct_session1 == 1 | !correct_session2 == 1 | duration < 24) %>% #!is.na(session3) | !is.na(session4) |
-  select(subjectID, correct_session1, correct_session2, check_missing1, check_missing2, check_order, duration, date_1, session1, date_2, session2) #session3, session4
+         duration = ifelse(!is.na(session2), session2 - session1, NA)) %>%
+  filter(!correct_session1 == 1 | !correct_session2 == 1 |  duration < 24) %>% #!is.na(session3) | !is.na(session4) |
+  select(subjectID, correct_session1, correct_session2, check_order, duration, date_1, session1, date_2, session2)) #session3, session4
 ```
 
 Duplicates
@@ -130,27 +106,9 @@ merged.check %>%
   filter(!correct_session2 == 1)
 ```
 
-Missing session1 date
-* DEV007 = pilot sub that was deleted from redcap
-* DEV0903 = DEV093
-```{r}
-merged.check %>%
-  filter(!subjectID %in% duplicates$subjectID) %>%
-  filter(check_missing1 == 1)
-```
-
-Missing session2 date
-* DEV0903 = DEV093
-```{r}
-merged.check %>%
-  filter(!subjectID %in% duplicates$subjectID) %>%
-  filter(check_missing2 == 1)
-```
-
 Subs run on dates with messed up files
 ```{r}
 dates = merged.check %>%
-  filter(!correct_session1 == 1 | !correct_session2 == 1 | check_missing1 == 1 | check_missing2 == 1| check_order == 1 | duration < 24) %>%
   filter(!subjectID %in% duplicates$subjectID) %>%
   ungroup() %>%
   gather(session, date, starts_with("session"), starts_with("date")) %>%
@@ -167,26 +125,3 @@ data.tidy %>%
          duration = ifelse(!is.na(session2), session2 - session1, NA)) %>%
   select(folder, subjectID, datetime, check1, check2, duration, date_1, session1, date_2, session2) #, session3, session4
 ```
-
-# Issue breakdown (log of issues fixed)
-**Remove**  
-DEV018_20181025_190858  
-DEV012_20190111_090124  
-DEV068_20181128_101017  
-DEV073_20190312_085608  
-DEV084_20190314_165822  
-  
-**Merge**  
-DEV012_20180806_173955 and DEV012_20180806_181546 into DEV012_20180806_173955  
-  
-**Dates wrong on redcap**  
-DEV032 2018-07-11 instead of 2018-07-25 (rescheduled?)  
-DEV038 2018-10-16 instead of 2018-10-19 (rescheduled?)  
-  
-**Missing**  
-DEV029 missing session 1 (2018-08-08) --> wrong folder??  
-DEV063 missing session 1 (2018-12-07) --> wrong folder??  
-  
-**Rename**  
-DEv025_20180827_163615 --> DEV025_20180827_163615  
-DEV0903_20190607_090700 --> DEV093_20190607_090700
