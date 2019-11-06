@@ -28,9 +28,10 @@ for subject in $subject_list; do
 	sbatch --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
 		   --job-name fmriprep \
 		   --partition=short \
-		   --cpus-per-task=28 \
-		   --mem=100G \
+		   --cpus-per-task=8 \
+		   --mem=10G \
 		   -o "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_output.txt \
 		   -e "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_error.txt \
+		   --account=sanlab \
 		   job_fmriprep.sh
 done
