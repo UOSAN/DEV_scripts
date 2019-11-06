@@ -14,6 +14,9 @@ SUBJLIST=`cat test_subject_list.txt`
 # Which SID should be replaced?
 REPLACESID=DEV001
 
+# Which wave(s) to run?
+WAVE=1:2
+
 # SPM Path
 SPM_PATH=/projects/sanlab/shared/spm12
 
@@ -45,11 +48,13 @@ for SUB in $SUBJLIST; do
 		SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth_${TASK}.m # update script name if applicable
 
 		# Run task job
-	 	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
+	 	sbatch --export ALL,REPLACESID=$REPLACESID,WAVE=$WAVE,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
 		 	--job-name=${RESULTS_INFIX} \
 		 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}.log \
 		 	--cpus-per-task=${cpuspertask} \
 		 	--mem-per-cpu=${mempercpu} \
+			--account=sanlab \
+			--partition=ctn \
 		 	${SHELL_SCRIPT}
 	 	sleep .25
 	 done
