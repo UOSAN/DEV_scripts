@@ -16,9 +16,10 @@ library(tidyverse)
 
 # load and tidy data
 ```{r}
-all = read.csv("~/Documents/code/sanlab/DEV_scripts/org/dicom_check/dicoms1.csv", header = FALSE) %>%
+all = read.csv("~/Documents/code/sanlab/DEV_scripts/org/dicom_check/dicoms.csv", header = FALSE) %>%
   rename("folder" = V1) %>%
   filter(!folder == "DEV_20171214")
+
 completed = read.csv("~/Documents/code/sanlab/DEV_scripts/org/bidsQC/conversion/subject_list.txt", header = FALSE)
 
 full_list = all %>%
