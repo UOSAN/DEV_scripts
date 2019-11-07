@@ -5,7 +5,10 @@
 %-----------------------------------------------------------------------
 for i = 1:numel(waves)
     % define wave number
-    waveNum = i
+    waveNum = waves(i);
+    fprintf('------------------------------------------------------------------------\n')
+    fprintf('Smoothing wave %d\n', waveNum)
+    fprintf('------------------------------------------------------------------------\n')
 
     % create matlabbatch job
     matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave%d/func', waveNum)};
