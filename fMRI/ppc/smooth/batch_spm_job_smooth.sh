@@ -21,7 +21,7 @@ WAVE=1:2
 SPM_PATH=/projects/sanlab/shared/spm12
 
 # Set tasks to smooth
-TASKS=(WTP SST)
+TASKS=(ROC WTP SST)
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
