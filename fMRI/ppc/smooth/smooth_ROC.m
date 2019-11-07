@@ -68,4 +68,7 @@ for i = 1:numel(waves)
     matlabbatch{17}.cfg_basicio.file_dir.file_ops.file_move.files(3) = cfg_dep('Gunzip Files: Gunzipped Files', substruct('.','val', '{}',{10}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('()',{':'}));
     matlabbatch{17}.cfg_basicio.file_dir.file_ops.file_move.files(4) = cfg_dep('Gunzip Files: Gunzipped Files', substruct('.','val', '{}',{14}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('()',{':'}));
     matlabbatch{17}.cfg_basicio.file_dir.file_ops.file_move.action.delete = false;
+   
+    % run job
+    spm_jobman('run',matlabbatch)
 end

@@ -26,4 +26,7 @@ for i = 1:numel(waves)
     matlabbatch{4}.spm.spatial.smooth.prefix = 's6_';
     matlabbatch{5}.cfg_basicio.file_dir.file_ops.file_move.files(1) = cfg_dep('Gunzip Files: Gunzipped Files', substruct('.','val', '{}',{2}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('()',{':'}));
     matlabbatch{5}.cfg_basicio.file_dir.file_ops.file_move.action.delete = false;
+
+    % run job
+    spm_jobman('run',matlabbatch)
 end

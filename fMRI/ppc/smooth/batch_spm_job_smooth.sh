@@ -14,14 +14,14 @@ SUBJLIST=`cat test_subject_list.txt`
 # Which SID should be replaced?
 REPLACESID=DEV001
 
-# Which wave(s) to run?
+# Which wave(s) to run? (e.g. WAVE=1:2 or WAVE=2)
 WAVE=1:2
 
 # SPM Path
 SPM_PATH=/projects/sanlab/shared/spm12
 
 # Set tasks to smooth
-TASKS=(ROC WTP SST)
+TASKS=(WTP SST)
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
@@ -38,7 +38,7 @@ fi
 
 # Set job parameters
 cpuspertask=1
-mempercpu=8G
+mempercpu=1G
 
 # Create and execute batch job
 for SUB in $SUBJLIST; do
@@ -50,11 +50,11 @@ for SUB in $SUBJLIST; do
 		# Run task job
 	 	sbatch --export ALL,REPLACESID=$REPLACESID,WAVE=$WAVE,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
 		 	--job-name=${RESULTS_INFIX} \
-		 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}.log \
+		 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}_${TASK}.log \
 		 	--cpus-per-task=${cpuspertask} \
 		 	--mem-per-cpu=${mempercpu} \
 			--account=sanlab \
-			--partition=ctn \
+			--partition=short \
 		 	${SHELL_SCRIPT}
 	 	sleep .25
 	 done
