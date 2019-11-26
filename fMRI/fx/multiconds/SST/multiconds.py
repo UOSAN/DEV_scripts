@@ -1,9 +1,12 @@
-import scipy.io
-import numpy
 import argparse
+import json
 import re
+from os import PathLike
 from pathlib import Path
-from typing import Union, Iterable, Tuple, List
+from typing import Union, List
+
+import numpy
+import scipy.io
 
 # Define some constants interpret the behavioral data
 NO_RESPONSE = 0
@@ -33,6 +36,8 @@ COUNT_NO_GO = 32
 COUNT_GO = 96
 COUNT_NULL = 128
 COUNT_RESPONSE = 256
+
+STUDY_ID = 'DEV'
 
 
 def read_data(file: Path):
@@ -90,7 +95,7 @@ def create_masks(condition: numpy.ndarray, response: numpy.ndarray) -> List:
     no_go_fail = numpy.logical_and(condition == NO_GO_TRIAL, response != NO_RESPONSE)
     no_go_success = numpy.logical_and(condition == NO_GO_TRIAL, response == NO_RESPONSE)
 
-    null_trials = numpy.nonzero(condition == NULL_TRIAL)
+    null_trials = (condition == NULL_TRIAL)
 
     return list((go_success, no_go_success, no_go_fail, null_trials, go_fail))
 
@@ -125,7 +130,77 @@ def create_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, masks:
     return conditions
 
 
-def main(input_dir: str):
+def write_betaseries(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
+    path = Path(input_dir) / 'betaseries'
+    path.mkdir(parents=True, exist_ok=True)
+    file_name = f'DEV{subject_id}_{wave}_SST1.mat'
+
+    scipy.io.savemat(str(path / file_name), trials)
+
+
+def write_conditions(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
+    path = Path(input_dir) / 'conditions'
+    path.mkdir(parents=True, exist_ok=True)
+    file_name = f'DEV{subject_id}_{wave}_SST1.mat'
+
+    scipy.io.savemat(str(path / file_name), trials)
+
+
+def write_bids_events(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
+    # Write the events.tsv to BIDS only if the BIDS structure already exists
+    subject_path = Path(input_dir) / f'sub-{STUDY_ID}{subject_id}'
+    if subject_path.exists():
+        path = Path(input_dir) / f'sub-{STUDY_ID}{subject_id}' / f'ses-wave{wave}'
+        if wave == '1' or wave == '2':
+            path = path / 'func'
+        else:
+            path = path / 'beh'
+
+        path.mkdir(parents=True, exist_ok=True)
+        file_name = Path(f'sub-{STUDY_ID}{subject_id}_ses-wave{wave}_task-SST_acq-1_events.tsv')
+
+        numpy.savetxt(str(path / file_name),
+                      trials,
+                      delimiter='\t',
+                      header='onset\tduration\ttrial_type',
+                      comments='',
+                      fmt=['%10.5f', '%10.5f', '%s'])
+
+        file_name = Path(f'sub-{STUDY_ID}{subject_id}_ses-wave{wave}_task-SST_acq-1_events.json')
+        write_events_description(path, file_name)
+
+
+def write_events_description(path: Path,
+                             file_name: Path):
+    desc = {
+        "onset": {
+            "LongName": "Onset",
+            "Description": "Onset of the event measured from the beginning of the acquisition of "
+                           "the first volume in the corresponding task imaging data file.",
+            "Units": "s"
+        },
+        "duration": {
+            "LongName": "Duration",
+            "Description": "Duration of the event, measured from onset.",
+            "Units": "s"
+        },
+        "trial_type": {
+            "LongName": "Categorization of a response inhibition task",
+            "Description": "Education level, self-rated by participant",
+            "Levels": {
+                "correct-go": "Go trial, correct response",
+                "failed-go": "Go trial, incorrect or no response",
+                "correct-stop": "No-go or stop trial, correct response",
+                "failed-stop": "No-go or stop trial, incorrect response",
+                "null": "Null trial where cue stimulus is presented for duration"
+            }
+        }
+    }
+    with open(str(path / file_name), 'w') as f:
+        json.dump(desc, f, indent=4)
+
+
+def main(input_dir: str, bids_dir: str = None):
     files = list(Path(input_dir).glob('DEV*.mat'))
     files.sort()
     pattern = 'DEV(\\d{3})_run(\\d{1})_.*mat'
@@ -157,20 +232,21 @@ def main(input_dir: str):
                 print(f'Wrong number of null trials : (subject, expected, actual) '
                       f'({subject_id}, {COUNT_NULL}, {numpy.count_nonzero(masks[3])})')
 
-            trials = create_trials(trial_number, trial_start_time, trial_duration)
+            if bids_dir:
+                trial_type = numpy.empty_like(trial_number, dtype=numpy.object)
+                trial_type_names = ['correct-go', 'correct-stop', 'failed-stop', 'null', 'failed-go']
+                for mask, name in zip(masks, trial_type_names):
+                    numpy.putmask(trial_type, mask, name)
+                write_bids_events(bids_dir, subject_id, wave_number,
+                                  numpy.stack((trial_start_time, trial_duration, trial_type), axis=1))
+            else:
+                trials = create_trials(trial_number, trial_start_time, trial_duration)
 
-            # Create paths and file names
-            path = Path(input_dir) / 'betaseries'
-            path.mkdir(parents=True, exist_ok=True)
-            file_name = f'DEV{subject_id}_{wave_number}_SST1.mat'
+                # Create paths and file names
+                write_betaseries(input_dir, subject_id, wave_number, trials)
 
-            scipy.io.savemat(str(path / file_name), trials)
-
-            path = Path(input_dir) / 'conditions'
-            path.mkdir(parents=True, exist_ok=True)
-
-            conditions = create_conditions(trial_start_time, trial_duration, masks)
-            scipy.io.savemat(str(path / file_name), conditions)
+                conditions = create_conditions(trial_start_time, trial_duration, masks)
+                write_conditions(input_dir, subject_id, wave_number, conditions)
 
 
 if __name__ == "__main__":
@@ -180,10 +256,16 @@ if __name__ == "__main__":
                                      add_help=True,
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
-    parser.add_argument('-i', '--input', metavar='Input directory', action='store', required=True,
+    parser.add_argument('-i', '--input', metavar='Input directory', action='store',
+                        type=str, required=True,
                         help='absolute path to directory containing behavioral output from the SST task.',
                         dest='input_dir'
                         )
+    parser.add_argument('-b', '--bids', metavar='BIDS directory', action='store',
+                        type=str, required=False, default=None,
+                        help='absolute path to your top level bids folder.',
+                        dest='bids_dir'
+                        )
     args = parser.parse_args()
 
-    main(args.input_dir)
+    main(args.input_dir, args.bids_dir)
