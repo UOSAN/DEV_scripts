@@ -147,24 +147,27 @@ def write_conditions(input_dir: Union[PathLike, str], subject_id: str, wave: str
 
 
 def write_bids_events(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
-    # sub-DEV001/ses-wave1/func/sub-DEV001_ses-wave1_task-SST_acq-1_bold.json
-    path = Path(input_dir) / f'sub-{STUDY_ID}{subject_id}' / f'ses-wave{wave}'
-    if wave == '1' or wave == '2':
-        path = path / 'func'
-    else:
-        path = path / 'beh'
-    path.mkdir(parents=True, exist_ok=True)
-    file_name = Path(f'sub-{STUDY_ID}{subject_id}_ses-wave{wave}_task-SST_acq-1_events.tsv')
+    # Write the events.tsv to BIDS only if the BIDS structure already exists
+    subject_path = Path(input_dir) / f'sub-{STUDY_ID}{subject_id}'
+    if subject_path.exists():
+        path = Path(input_dir) / f'sub-{STUDY_ID}{subject_id}' / f'ses-wave{wave}'
+        if wave == '1' or wave == '2':
+            path = path / 'func'
+        else:
+            path = path / 'beh'
 
-    numpy.savetxt(str(path / file_name),
-                  trials,
-                  delimiter='\t',
-                  header='onset\tduration\ttrial_type',
-                  comments='',
-                  fmt=['%10.5f', '%10.5f', '%s'])
+        path.mkdir(parents=True, exist_ok=True)
+        file_name = Path(f'sub-{STUDY_ID}{subject_id}_ses-wave{wave}_task-SST_acq-1_events.tsv')
 
-    file_name = Path(f'sub-{STUDY_ID}{subject_id}_ses-wave{wave}_task-SST_acq-1_events.json')
-    write_events_description(path, file_name)
+        numpy.savetxt(str(path / file_name),
+                      trials,
+                      delimiter='\t',
+                      header='onset\tduration\ttrial_type',
+                      comments='',
+                      fmt=['%10.5f', '%10.5f', '%s'])
+
+        file_name = Path(f'sub-{STUDY_ID}{subject_id}_ses-wave{wave}_task-SST_acq-1_events.json')
+        write_events_description(path, file_name)
 
 
 def write_events_description(path: Path,
