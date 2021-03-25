@@ -1,7 +1,0 @@
--------------------------------------------------------------------------------
-DEV001
-Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/ppc/smooth/smooth_ROC.m
--------------------------------------------------------------------------------
-slurmstepd: error: *** JOB 4431638 ON n011 CANCELLED AT 2019-04-27T12:12:19 ***
-slurmstepd: error: *** JOB 4431639 ON n011 CANCELLED AT 2019-04-27T12:12:23 ***
-slurmstepd: error: *** JOB 4431640 ON n015 CANCELLED AT 2019-04-27T12:12:27 ***
