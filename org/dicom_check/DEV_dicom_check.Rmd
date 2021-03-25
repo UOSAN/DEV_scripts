@@ -227,6 +227,8 @@ dicoms_tidy %>%
 ```
 
 # Issue breakdown (log of issues fixed)
+
+Don't forget to ensure that new_subject_list.txt, when it has been generated, excludes all the folders as below that it should be excluding.
 **Remove**  
 DEV018_20181025_190858  
 DEV012_20190111_090124  

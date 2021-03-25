@@ -29,6 +29,22 @@ full_list = all %>%
   mutate(wave = sprintf("wave%s",row_number())) 
 ```
 
+Exclude entries that we have determined not to process...
+```{r}
+exclusions = c(
+    "DEV018_20181025_190858",
+    "DEV012_20190111_090124",
+    "DEV068_20181128_101017",
+   "DEV073_20190312_085608",
+    "DEV084_20190314_165822",
+    "159_20200126_115140"
+)
+
+full_list = full_list %>%
+    filter((folder %in% exclusions)==FALSE)
+
+```
+
 # check number of files per sub
 ```{r}
 full_list %>%
