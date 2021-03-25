@@ -11,7 +11,7 @@
 
 <meta name="author" content="Dani Cosme, Ben Smith" />
 
-<meta name="date" content="2021-03-24" />
+<meta name="date" content="2021-03-25" />
 
 <title>DEV dicom check</title>
 
@@ -355,11 +355,12 @@ div.tocify {
 
 <h1 class="title toc-ignore">DEV dicom check</h1>
 <h4 class="author">Dani Cosme, Ben Smith</h4>
-<h4 class="date">2021-03-24</h4>
+<h4 class="date">2021-03-25</h4>
 
 </div>
 
 
+<p>depending on environment, may need to run something like: <code>setwd(&quot;org/dicom_check/&quot;)</code></p>
 <div id="load-packages" class="section level1">
 <h1>load packages</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -420,7 +421,7 @@ div.tocify {
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["sessionNum"],"name":[1],"type":["int"],"align":["right"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"182","_rn_":"1"},{"1":"2","2":"149","_rn_":"2"},{"1":"3","2":"2","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["sessionNum"],"name":[1],"type":["int"],"align":["right"]},{"label":["n"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"1","2":"181","_rn_":"1"},{"1":"2","2":"149","_rn_":"2"},{"1":"3","2":"2","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -435,7 +436,7 @@ div.tocify {
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">&quot;DEV[0-9]{3}$&quot;</span>, subjectID))</span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":["folder"],"name":[1],"type":["chr"],"align":["left"]},{"label":["subjectID"],"name":[2],"type":["chr"],"align":["left"]},{"label":["datetime"],"name":[3],"type":["S3: POSIXct"],"align":["right"]},{"label":["date"],"name":[4],"type":["date"],"align":["right"]},{"label":["sessionNum"],"name":[5],"type":["int"],"align":["right"]}],"data":[{"1":"DEV0903_20190607_090700","2":"DEV0903","3":"2019-06-07 09:07:00","4":"2019-06-07","5":"1"},{"1":"DEV_20171214","2":"NA","3":"<NA>","4":"<NA>","5":"1"},{"1":"TEST999_20180219_170145","2":"EST999","3":"2018-02-19 17:01:45","4":"2018-02-19","5":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":["folder"],"name":[1],"type":["chr"],"align":["left"]},{"label":["subjectID"],"name":[2],"type":["chr"],"align":["left"]},{"label":["datetime"],"name":[3],"type":["S3: POSIXct"],"align":["right"]},{"label":["date"],"name":[4],"type":["date"],"align":["right"]},{"label":["sessionNum"],"name":[5],"type":["int"],"align":["right"]}],"data":[{"1":"DEV0903_20190607_090700","2":"DEV0903","3":"2019-06-07 09:07:00","4":"2019-06-07","5":"1"},{"1":"DEV_20171214","2":"NA","3":"<NA>","4":"<NA>","5":"1"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 </div>
@@ -471,11 +472,10 @@ div.tocify {
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">check_missing1 =</span> <span class="fu">ifelse</span>((<span class="fu">is.na</span>(redcap_date_1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(dicom_date_1)) <span class="sc">|</span> (<span class="sc">!</span><span class="fu">is.na</span>(redcap_date_1) <span class="sc">&amp;</span> <span class="fu">is.na</span>(dicom_date_1)), <span class="dv">1</span>, <span class="dv">0</span>),</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">check_missing2 =</span> <span class="fu">ifelse</span>((<span class="fu">is.na</span>(redcap_date_2) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(dicom_date_2)) <span class="sc">|</span> (<span class="sc">!</span><span class="fu">is.na</span>(redcap_date_2) <span class="sc">&amp;</span> <span class="fu">is.na</span>(dicom_date_2)), <span class="dv">1</span>, <span class="dv">0</span>),</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>         <span class="at">check_order =</span> <span class="fu">ifelse</span>(dicom_date_1 <span class="sc">==</span> redcap_date_2 <span class="sc">|</span> dicom_date_2 <span class="sc">==</span> redcap_date_1, <span class="dv">1</span>, <span class="dv">0</span>), <span class="co">#| session3 == redcap_date_2 | session4 == redcap_date_2</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">duration =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dicom_date_2), dicom_date_2 <span class="sc">-</span> dicom_date_1, <span class="cn">NA</span>)) </span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>merged_check <span class="sc">%&gt;%</span></span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>correct_dicom_date_1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> <span class="sc">!</span>correct_dicom_date_2 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> duration <span class="sc">&lt;</span> <span class="dv">24</span>) <span class="sc">%&gt;%</span> <span class="co">#!is.na(session3) | !is.na(session4) |</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(subjectID, correct_dicom_date_1, correct_dicom_date_2, check_missing1, check_missing2, check_order, duration, redcap_date_1, dicom_date_1, redcap_date_2, dicom_date_2) <span class="co">#session3, session4</span></span></code></pre></div>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">duration =</span> <span class="fu">ifelse</span>(<span class="sc">!</span><span class="fu">is.na</span>(dicom_date_2), dicom_date_2 <span class="sc">-</span> dicom_date_1, <span class="cn">NA</span>))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>merged_check <span class="sc">%&gt;%</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>correct_dicom_date_1 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> <span class="sc">!</span>correct_dicom_date_2 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">|</span> duration <span class="sc">&lt;</span> <span class="dv">24</span>) <span class="sc">%&gt;%</span> <span class="co">#!is.na(session3) | !is.na(session4) |</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(subjectID, correct_dicom_date_1, correct_dicom_date_2, check_missing1, check_missing2, check_order, duration, redcap_date_1, dicom_date_1, redcap_date_2, dicom_date_2) <span class="co">#session3, session4</span></span></code></pre></div>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["subjectID"],"name":[1],"type":["chr"],"align":["left"]},{"label":["correct_dicom_date_1"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["correct_dicom_date_2"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["check_missing1"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["check_missing2"],"name":[5],"type":["dbl"],"align":["right"]},{"label":["check_order"],"name":[6],"type":["dbl"],"align":["right"]},{"label":["duration"],"name":[7],"type":["dbl"],"align":["right"]},{"label":["redcap_date_1"],"name":[8],"type":["date"],"align":["right"]},{"label":["dicom_date_1"],"name":[9],"type":["date"],"align":["right"]},{"label":["redcap_date_2"],"name":[10],"type":["date"],"align":["right"]},{"label":["dicom_date_2"],"name":[11],"type":["date"],"align":["right"]}],"data":[{"1":"DEV018","2":"1","3":"0","4":"0","5":"0","6":"0","7":"8","8":"2018-10-17","9":"2018-10-17","10":"2018-11-21","11":"2018-10-25"},{"1":"DEV032","2":"0","3":"NA","4":"0","5":"0","6":"NA","7":"NA","8":"2018-07-11","9":"2018-07-25","10":"<NA>","11":"<NA>"},{"1":"DEV038","2":"1","3":"0","4":"0","5":"0","6":"0","7":"37","8":"2018-09-12","9":"2018-09-12","10":"2018-10-16","11":"2018-10-19"},{"1":"DEV068","2":"0","3":"0","4":"0","5":"0","6":"1","7":"58","8":"2019-01-25","9":"2018-11-28","10":"2019-03-01","11":"2019-01-25"},{"1":"DEV126","2":"1","3":"0","4":"0","5":"0","6":"0","7":"34","8":"2019-07-17","9":"2019-07-17","10":"2019-08-16","11":"2019-08-20"},{"1":"DEV167","2":"1","3":"1","4":"0","5":"0","6":"0","7":"21","8":"2020-02-26","9":"2020-02-26","10":"2020-03-18","11":"2020-03-18"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
@@ -591,7 +591,7 @@ DEV018_20181025_190858<br />
 DEV012_20190111_090124<br />
 DEV068_20181128_101017<br />
 DEV073_20190312_085608<br />
-DEV084_20190314_165822</p>
+DEV084_20190314_165822 159_20200126_115140 (this is the same as DEV159_20200126_115140; Paul &amp; Ben both inspected on 2021-03-24)</p>
 <p><strong>Merge</strong><br />
 DEV012_20180806_173955 and DEV012_20180806_181546 into DEV012_20180806_173955</p>
 <p><strong>Dates wrong on redcap</strong><br />
@@ -609,7 +609,7 @@ DEV0903_20190607_090700 –&gt; DEV093_20190607_090700</p>
 <ul>
 <li>DEV167 has a session duration that is only 21 days between wave 1 and 2.</li>
 <li>Dani’s script notes that DEV 166 was on the same day</li>
-<li>the redcap report doesn’t have more than 2 redcap_dates but some subjects have 3 dicom dates.</li>
+<li>We’re ignoring redcap dates 3 and subsequent. Not sure if this is OK or not.</li>
 </ul>
 <p><strong>Files manually excluded from before August 2019</strong></p>
 <p>phantom_20181211_112538 Phantom^of the opera_20180430_110701 TEST999_20180219_170145 test dev_20180219_155612 Wwe_20180131_135555</p>
