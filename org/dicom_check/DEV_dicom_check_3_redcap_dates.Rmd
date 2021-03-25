@@ -13,6 +13,11 @@ output:
       smooth_scroll: TRUE
     df_print: paged
 ---
+
+I'd created this file to test 3 redcap dates.
+
+However there were 6 subjects who had these; the third session doesn't match their dicom; it was also before 2019-07 so we can safely assume these were dealt with previously.
+
 depending on environment, may need to run something like: `setwd("org/dicom_check/")`
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
@@ -45,7 +50,7 @@ redcap_sessions = read.csv("DEV-Sessions_DATA_2021-03-24_0342.csv", na.strings =
   mutate(date = ymd(date),
          session = sprintf("redcap_%s", session)) %>%
   spread(session, date) %>%
-  select(redcap_date_1, redcap_date_2)
+  select(redcap_date_1, redcap_date_2, redcap_date_3)
 ```
 
 # tidy data
@@ -115,14 +120,21 @@ merged_check = merged %>%
   unique() %>%
   mutate(correct_dicom_date_1 = ifelse(dicom_date_1 == redcap_date_1, 1, 0),
          correct_dicom_date_2 = ifelse(dicom_date_2 == redcap_date_2, 1, 0),
+         correct_dicom_date_3 = ifelse(dicom_date_3 == redcap_date_3, 1, 0),
          check_missing1 = ifelse((is.na(redcap_date_1) & !is.na(dicom_date_1)) | (!is.na(redcap_date_1) & is.na(dicom_date_1)), 1, 0),
          check_missing2 = ifelse((is.na(redcap_date_2) & !is.na(dicom_date_2)) | (!is.na(redcap_date_2) & is.na(dicom_date_2)), 1, 0),
-         check_order = ifelse(dicom_date_1 == redcap_date_2 | dicom_date_2 == redcap_date_1, 1, 0), #| session3 == redcap_date_2 | session4 == redcap_date_2
-         duration = ifelse(!is.na(dicom_date_2), dicom_date_2 - dicom_date_1, NA))
-merged_check %>%
-  filter(!correct_dicom_date_1 == 1 | !correct_dicom_date_2 == 1 | duration < 24) %>% #!is.na(session3) | !is.na(session4) |
-  select(subjectID, correct_dicom_date_1, correct_dicom_date_2, check_missing1, check_missing2, check_order, duration, redcap_date_1, dicom_date_1, redcap_date_2, dicom_date_2) #session3, session4
+         check_missing3 = ifelse((is.na(redcap_date_3) & !is.na(dicom_date_3)) | (!is.na(redcap_date_2) & is.na(dicom_date_2)), 1, 0),
+         check_order = ifelse( (
+         dicom_date_1 == redcap_date_1 &
+           dicom_date_2 == redcap_date_2 &
+           dicom_date_3 == redcap_date_3
+                               ), 0, 1), #| session3 == redcap_date_2 | session4 == redcap_date_2
+         duration1 = ifelse(!is.na(dicom_date_2), dicom_date_2 - dicom_date_1, NA),
+         duration2 = ifelse(!is.na(dicom_date_3), dicom_date_3 - dicom_date_2, NA))
 
+merged_check %>%
+  filter(!correct_dicom_date_1 == 1 | !correct_dicom_date_2 == 1 | !correct_dicom_date_3 == 1 | duration1 < 24) %>% #!is.na(session3) | !is.na(session4) |
+  select(subjectID, correct_dicom_date_1, correct_dicom_date_2, check_missing1, check_missing2, check_order, duration1,duration2, redcap_date_1, dicom_date_1, redcap_date_2, dicom_date_2) #session3, session4
 ```
 
 Duplicates
@@ -256,7 +268,7 @@ DEV0903_20190607_090700 --> DEV093_20190607_090700
 
  - DEV167 has a session duration that is only 21 days between wave 1 and 2.
  - Dani's script notes that DEV 166 was on the same day
- - We're ignoring redcap dates 3 and subsequent. Not sure if this is OK or not.
+ - the redcap report doesn't have more than 2 redcap_dates but some subjects have 3 dicom dates.
 
 **Files manually excluded from before August 2019**
 

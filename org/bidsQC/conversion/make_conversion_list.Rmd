@@ -16,11 +16,11 @@ library(tidyverse)
 
 # load and tidy data
 ```{r}
-all = read.csv("~/Documents/code/sanlab/DEV_scripts/org/dicom_check/dicoms.csv", header = FALSE) %>%
+all = read.csv("org/dicom_check/dicoms_cleaned_20210324.csv", header = FALSE) %>%
   rename("folder" = V1) %>%
   filter(!folder == "DEV_20171214")
 
-completed = read.csv("~/Documents/code/sanlab/DEV_scripts/org/bidsQC/conversion/subject_list.txt", header = FALSE)
+completed = read.csv("org/bidsQC/conversion/subject_list.txt", header = FALSE)
 
 full_list = all %>%
   extract(folder, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
@@ -45,9 +45,9 @@ full_list %>%
 ```{r}
 full_list %>%
   filter(!folder %in% completed$V1) %>%
-  write.table("new_subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+  write.table("org/bidsQC/conversion/new_subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
 
 full_list %>%
-  write.table("subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+  write.table("org/bidsQC/conversion/subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
 ```
 
