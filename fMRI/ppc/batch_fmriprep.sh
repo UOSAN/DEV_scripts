@@ -23,9 +23,12 @@ subject_list=`cat subject_list.txt`
 
 # Loop through subjects and run job_mriqc
 for subject in $subject_list; do
-	subid=`echo $subject|awk '{print $1}' FS=","`
-	sessid=`echo $subject|awk '{print $2}' FS=","` 
-	sbatch --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
+  dcmfolder=`echo $subject|awk '{print $1}' FS=","`
+    #this is obsolete
+	subid=`echo $subject|awk '{print $2}' FS=","`
+	sessid=`echo $subject|awk '{print $3}' FS=","`
+	echo $subid, $sessid
+	echo 'sbatch --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
 		   --job-name fmriprep \
 		   --partition=ctn \
 		   --cpus-per-task=8 \
@@ -33,5 +36,5 @@ for subject in $subject_list; do
 		   -o "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_output.txt \
 		   -e "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_error.txt \
 		   --account=sanlab \
-		   job_fmriprep.sh
+		   job_fmriprep.sh'
 done
