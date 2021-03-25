@@ -1,2 +1,14 @@
 .DS_Store
 .idea/
+fMRI/ppc/smooth/output/
+fMRI/ppc/smooth/output/*
+fMRI/ppc/smooth/sid_batches/*.mat
+fMRI/fx/models/*/sid_batches/fx_betaseries/*.mat
+fMRI/fx/models/output/
+fMRI/ppc/output/
+fMRI/ppc/smooth/output/
+fMRI/ppc/smooth/sid_batches/*/*.mat
+org/bidsQC/bidsQC/logs_bidsQC/
+org/bidsQC/conversion/logs_dcm2bids/*
+org/bidsQC/conversion/logs_dcm2bids/
+org/bidsQC/conversion/logs_dcm2bids
