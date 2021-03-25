@@ -26,8 +26,10 @@ def batch_jobs(subject_list, dicomdir, configfile, niidir):
         wave = entry.split(",")[2]
         subjectpath = os.path.join(dicomdir, subjectdir)
         if os.path.isdir(subjectpath):
-            #look to see if the subject already exists
-            #if it does,
+            #don't need to check the subject already exists because:
+            #1. this is handled by make_converstion_list, which excludes subjects already processed.
+            #2. dcm2bids doesn't process DICOM files where the output already exists.
+
             write_to_outputlog(subjectdir + os.linesep)
             if cfg.run_local:
                 batch_cmd = 'dcm2bids -d {subjectpath} -s {wave} -p {subject} -c {configfile} -o {niidir}  --forceDcm2niix --clobber'.format(subjectpath=subjectpath,  wave=wave, subject=subject, configfile=configfile,  niidir=niidir)
@@ -52,11 +54,6 @@ def touch(path:str):
     """
     with open(path, 'a'):
         os.utime(path, None)
-
-def check_output_already_exists(subject,wave):
-    print os.path.join(cfg.niidir,subject,wave)
-
-
 
 def check_dirs(dir_fullpaths:list):
     """
