@@ -1,0 +1,102 @@
+-------------------------------------------------------------------------------
+DEV052
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/ppc/smooth/smooth_ROC.m
+-------------------------------------------------------------------------------
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+------------------------------------------------------------------------
+Smoothing wave 1
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'Move/Delete Files'
+Done    'Move/Delete Files'
+Done
+
+------------------------------------------------------------------------
+Smoothing wave 2
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'Move/Delete Files'
+Done    'Move/Delete Files'
+Done
+

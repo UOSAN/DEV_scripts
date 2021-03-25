@@ -1,0 +1,686 @@
+
+fMRIprep on DEV069_wave1
+
+Container: /projects/sanlab/shared/containers/fmriprep-latest-2018-09-05.simg
+
+Subject directory: /projects/sanlab/shared/DEV/bids_data
+
+Starting on: ROC
+
+
+190424-03:14:10,751 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV069'].
+      * Run identifier: 20190424-031410_1004bbdf-2680-4530-bba8-51ef150076e6.
+    
+190424-03:14:16,547 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-ROC_acq-1_bold.nii.gz" (0.16 GB / 141 TRs). Memory resampled/largemem=0.63/0.85 GB.
+190424-03:14:17,441 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-ROC_acq-1_bold.nii.gz found.
+190424-03:14:18,134 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:14:19,698 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-ROC_acq-2_bold.nii.gz" (0.16 GB / 141 TRs). Memory resampled/largemem=0.63/0.85 GB.
+190424-03:14:20,463 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-ROC_acq-2_bold.nii.gz found.
+190424-03:14:21,86 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:14:22,529 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-ROC_acq-3_bold.nii.gz" (0.16 GB / 141 TRs). Memory resampled/largemem=0.63/0.85 GB.
+190424-03:14:23,158 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-ROC_acq-3_bold.nii.gz found.
+190424-03:14:23,752 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:14:25,251 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-ROC_acq-4_bold.nii.gz" (0.16 GB / 141 TRs). Memory resampled/largemem=0.63/0.85 GB.
+190424-03:14:25,861 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-ROC_acq-4_bold.nii.gz found.
+190424-03:14:26,449 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:14:27,981 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-ROC_acq-1_bold.nii.gz" (0.16 GB / 141 TRs). Memory resampled/largemem=0.62/0.84 GB.
+190424-03:14:28,589 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-ROC_acq-1_bold.nii.gz found.
+190424-03:14:29,186 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:14:30,571 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-ROC_acq-2_bold.nii.gz" (0.15 GB / 141 TRs). Memory resampled/largemem=0.62/0.84 GB.
+190424-03:14:31,328 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-ROC_acq-2_bold.nii.gz found.
+190424-03:14:31,918 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:14:33,271 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-ROC_acq-3_bold.nii.gz" (0.15 GB / 141 TRs). Memory resampled/largemem=0.61/0.83 GB.
+190424-03:14:33,884 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-ROC_acq-3_bold.nii.gz found.
+190424-03:14:34,478 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:14:36,9 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-ROC_acq-4_bold.nii.gz" (0.15 GB / 141 TRs). Memory resampled/largemem=0.61/0.83 GB.
+190424-03:14:36,631 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-ROC_acq-4_bold.nii.gz found.
+190424-03:14:37,224 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:14:43,226 nipype.workflow IMPORTANT:
+	 Works derived from this fMRIPrep execution should include the following boilerplate:
+
+
+Results included in this manuscript come from preprocessing
+performed using *fMRIPprep* 1.1.4
+(@fmriprep1; @fmriprep2; RRID:SCR_016216),
+which is based on *Nipype* 1.1.1
+(@nipype1; @nipype2; RRID:SCR_002502).
+
+Anatomical data preprocessing
+
+: A total of 2 T1-weighted (T1w) images were found within the input
+BIDS dataset.
+All of them were corrected for intensity non-uniformity (INU)
+using `N4BiasFieldCorrection` [@n4, ANTs 2.2.0].
+A T1w-reference map was computed after registration of
+2 T1w images (after INU-correction) using
+`mri_robust_template` [FreeSurfer 6.0.1, @fs_template].
+The T1w-reference was then skull-stripped using `antsBrainExtraction.sh`
+(ANTs 2.2.0), using OASIS as target template.
+Brain surfaces were reconstructed using `recon-all` [FreeSurfer 6.0.1,
+RRID:SCR_001847, @fs_reconall], and the brain mask estimated
+previously was refined with a custom variation of the method to reconcile
+ANTs-derived and FreeSurfer-derived segmentations of the cortical
+gray-matter of Mindboggle [RRID:SCR_002438, @mindboggle].
+Spatial normalization to the ICBM 152 Nonlinear Asymmetrical
+template version 2009c [@mni, RRID:SCR_008796] was performed
+through nonlinear registration with `antsRegistration`
+[ANTs 2.2.0, RRID:SCR_004757, @ants], using
+brain-extracted versions of both T1w volume and template.
+Brain tissue segmentation of cerebrospinal fluid (CSF),
+white-matter (WM) and gray-matter (GM) was performed on
+the brain-extracted T1w using `fast` [FSL 5.0.9, RRID:SCR_002823,
+@fsl_fast].
+
+
+Functional data preprocessing
+
+: For each of the 8 BOLD runs found per subject (across all
+tasks and sessions), the following preprocessing was performed.
+First, a reference volume and its skull-stripped version were generated
+using a custom methodology of *fMRIPrep*.
+A deformation field to correct for susceptibility distortions was estimated
+based on two echo-planar imaging (EPI) references with opposing phase-encoding
+directions, using `3dQwarp` @afni (AFNI <ver>).
+Based on the estimated susceptibility distortion, an
+unwarped BOLD reference was calculated for a more accurate
+co-registration with the anatomical reference.
+Head-motion parameters with respect to the BOLD reference
+(transformation matrices, and six corresponding rotation and translation
+parameters) are estimated before any spatiotemporal filtering using
+`mcflirt` [FSL 5.0.9, @mcflirt].
+The BOLD time-series (including slice-timing correction when applied)
+were resampled onto their original, native space by applying
+a single, composite transform to correct for head-motion and
+susceptibility distortions.
+These resampled BOLD time-series will be referred to as *preprocessed
+BOLD in original space*, or just *preprocessed BOLD*.
+The BOLD reference was then co-registered to the T1w reference using
+`bbregister` (FreeSurfer) which implements boundary-based registration [@bbr].
+Co-registration was configured with nine degrees of freedom to account
+for distortions remaining in the BOLD reference.
+The BOLD time-series, were resampled to surfaces on the following
+spaces: *fsaverage5*, *fsnative*.
+The BOLD time-series were resampled to MNI152NLin2009cAsym standard space,
+generating a *preprocessed BOLD run in MNI152NLin2009cAsym space*.
+Several confounding time-series were calculated based on the
+*preprocessed BOLD*: framewise displacement (FD), DVARS and
+three region-wise global signals.
+FD and DVARS are calculated for each functional run, both using their
+implementations in *Nipype* [following the definitions by @power_fd_dvars].
+The three global signals are extracted within the CSF, the WM, and
+the whole-brain masks.
+Additionally, a set of physiological regressors were extracted to
+allow for component-based noise correction [*CompCor*, @compcor].
+Principal components are estimated after high-pass filtering the
+*preprocessed BOLD* time-series (using a discrete cosine filter with
+128s cut-off) for the two *CompCor* variants: temporal (tCompCor)
+and anatomical (aCompCor).
+Six tCompCor components are then calculated from the top 5% variable
+voxels within a mask covering the subcortical regions.
+This subcortical mask is obtained by heavily eroding the brain mask,
+which ensures it does not include cortical GM regions.
+For aCompCor, six components are calculated within the intersection of
+the aforementioned mask and the union of CSF and WM masks calculated
+in T1w space, after their projection to the native space of each
+functional run (using the inverse BOLD-to-T1w transformation).
+The head-motion estimates calculated in the correction step were also
+placed within the corresponding confounds file.
+All resamplings can be performed with *a single interpolation
+step* by composing all the pertinent transformations (i.e. head-motion
+transform matrices, susceptibility distortion correction when available,
+and co-registrations to anatomical and template spaces).
+Gridded (volumetric) resamplings were performed using `antsApplyTransforms` (ANTs),
+configured with Lanczos interpolation to minimize the smoothing
+effects of other kernels [@lanczos].
+Non-gridded (surface) resamplings were performed using `mri_vol2surf`
+(FreeSurfer).
+
+
+Many internal operations of *fMRIPrep* use
+*Nilearn* 0.4.2 [@nilearn, RRID:SCR_001362],
+mostly within the functional processing workflow.
+For more details of the pipeline, see [the section corresponding
+to workflows in *fMRIPrep*'s documentation](https://fmriprep.readthedocs.io/en/latest/workflows.html "FMRIPrep's documentation").
+
+
+### References
+
+
+Sentry is attempting to send 1 pending error messages
+Waiting up to 10 seconds
+Press Ctrl-C to quit
+
+
+
+done
+
+-----------------------
+
+Starting on: WTP
+
+
+190424-03:15:31,87 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV069'].
+      * Run identifier: 20190424-031531_be9de7aa-aaf3-4c87-8efe-3af9997d4b0c.
+    
+190424-03:15:35,482 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-WTP_acq-1_bold.nii.gz" (0.10 GB / 93 TRs). Memory resampled/largemem=0.42/0.52 GB.
+190424-03:15:36,266 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-WTP_acq-1_bold.nii.gz found.
+190424-03:15:36,894 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:15:38,402 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-WTP_acq-2_bold.nii.gz" (0.10 GB / 93 TRs). Memory resampled/largemem=0.41/0.52 GB.
+190424-03:15:39,115 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-WTP_acq-2_bold.nii.gz found.
+190424-03:15:39,689 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:15:41,119 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-WTP_acq-3_bold.nii.gz" (0.10 GB / 93 TRs). Memory resampled/largemem=0.41/0.51 GB.
+190424-03:15:41,710 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-WTP_acq-3_bold.nii.gz found.
+190424-03:15:42,274 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:15:43,718 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-WTP_acq-4_bold.nii.gz" (0.10 GB / 93 TRs). Memory resampled/largemem=0.41/0.51 GB.
+190424-03:15:44,892 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-WTP_acq-4_bold.nii.gz found.
+190424-03:15:45,875 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:15:47,669 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-WTP_acq-1_bold.nii.gz" (0.10 GB / 93 TRs). Memory resampled/largemem=0.41/0.52 GB.
+190424-03:15:48,298 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-WTP_acq-1_bold.nii.gz found.
+190424-03:15:48,864 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:15:50,219 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-WTP_acq-2_bold.nii.gz" (0.10 GB / 93 TRs). Memory resampled/largemem=0.41/0.52 GB.
+190424-03:15:50,970 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-WTP_acq-2_bold.nii.gz found.
+190424-03:15:51,537 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:15:52,864 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-WTP_acq-3_bold.nii.gz" (0.10 GB / 93 TRs). Memory resampled/largemem=0.41/0.51 GB.
+190424-03:15:53,451 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-WTP_acq-3_bold.nii.gz found.
+190424-03:15:54,15 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:15:55,494 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-WTP_acq-4_bold.nii.gz" (0.10 GB / 93 TRs). Memory resampled/largemem=0.41/0.51 GB.
+190424-03:15:56,88 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-WTP_acq-4_bold.nii.gz found.
+190424-03:15:56,652 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:16:02,276 nipype.workflow IMPORTANT:
+	 Works derived from this fMRIPrep execution should include the following boilerplate:
+
+
+Results included in this manuscript come from preprocessing
+performed using *fMRIPprep* 1.1.4
+(@fmriprep1; @fmriprep2; RRID:SCR_016216),
+which is based on *Nipype* 1.1.1
+(@nipype1; @nipype2; RRID:SCR_002502).
+
+Anatomical data preprocessing
+
+: A total of 2 T1-weighted (T1w) images were found within the input
+BIDS dataset.
+All of them were corrected for intensity non-uniformity (INU)
+using `N4BiasFieldCorrection` [@n4, ANTs 2.2.0].
+A T1w-reference map was computed after registration of
+2 T1w images (after INU-correction) using
+`mri_robust_template` [FreeSurfer 6.0.1, @fs_template].
+The T1w-reference was then skull-stripped using `antsBrainExtraction.sh`
+(ANTs 2.2.0), using OASIS as target template.
+Brain surfaces were reconstructed using `recon-all` [FreeSurfer 6.0.1,
+RRID:SCR_001847, @fs_reconall], and the brain mask estimated
+previously was refined with a custom variation of the method to reconcile
+ANTs-derived and FreeSurfer-derived segmentations of the cortical
+gray-matter of Mindboggle [RRID:SCR_002438, @mindboggle].
+Spatial normalization to the ICBM 152 Nonlinear Asymmetrical
+template version 2009c [@mni, RRID:SCR_008796] was performed
+through nonlinear registration with `antsRegistration`
+[ANTs 2.2.0, RRID:SCR_004757, @ants], using
+brain-extracted versions of both T1w volume and template.
+Brain tissue segmentation of cerebrospinal fluid (CSF),
+white-matter (WM) and gray-matter (GM) was performed on
+the brain-extracted T1w using `fast` [FSL 5.0.9, RRID:SCR_002823,
+@fsl_fast].
+
+
+Functional data preprocessing
+
+: For each of the 8 BOLD runs found per subject (across all
+tasks and sessions), the following preprocessing was performed.
+First, a reference volume and its skull-stripped version were generated
+using a custom methodology of *fMRIPrep*.
+A deformation field to correct for susceptibility distortions was estimated
+based on two echo-planar imaging (EPI) references with opposing phase-encoding
+directions, using `3dQwarp` @afni (AFNI <ver>).
+Based on the estimated susceptibility distortion, an
+unwarped BOLD reference was calculated for a more accurate
+co-registration with the anatomical reference.
+Head-motion parameters with respect to the BOLD reference
+(transformation matrices, and six corresponding rotation and translation
+parameters) are estimated before any spatiotemporal filtering using
+`mcflirt` [FSL 5.0.9, @mcflirt].
+The BOLD time-series (including slice-timing correction when applied)
+were resampled onto their original, native space by applying
+a single, composite transform to correct for head-motion and
+susceptibility distortions.
+These resampled BOLD time-series will be referred to as *preprocessed
+BOLD in original space*, or just *preprocessed BOLD*.
+The BOLD reference was then co-registered to the T1w reference using
+`bbregister` (FreeSurfer) which implements boundary-based registration [@bbr].
+Co-registration was configured with nine degrees of freedom to account
+for distortions remaining in the BOLD reference.
+The BOLD time-series, were resampled to surfaces on the following
+spaces: *fsaverage5*, *fsnative*.
+The BOLD time-series were resampled to MNI152NLin2009cAsym standard space,
+generating a *preprocessed BOLD run in MNI152NLin2009cAsym space*.
+Several confounding time-series were calculated based on the
+*preprocessed BOLD*: framewise displacement (FD), DVARS and
+three region-wise global signals.
+FD and DVARS are calculated for each functional run, both using their
+implementations in *Nipype* [following the definitions by @power_fd_dvars].
+The three global signals are extracted within the CSF, the WM, and
+the whole-brain masks.
+Additionally, a set of physiological regressors were extracted to
+allow for component-based noise correction [*CompCor*, @compcor].
+Principal components are estimated after high-pass filtering the
+*preprocessed BOLD* time-series (using a discrete cosine filter with
+128s cut-off) for the two *CompCor* variants: temporal (tCompCor)
+and anatomical (aCompCor).
+Six tCompCor components are then calculated from the top 5% variable
+voxels within a mask covering the subcortical regions.
+This subcortical mask is obtained by heavily eroding the brain mask,
+which ensures it does not include cortical GM regions.
+For aCompCor, six components are calculated within the intersection of
+the aforementioned mask and the union of CSF and WM masks calculated
+in T1w space, after their projection to the native space of each
+functional run (using the inverse BOLD-to-T1w transformation).
+The head-motion estimates calculated in the correction step were also
+placed within the corresponding confounds file.
+All resamplings can be performed with *a single interpolation
+step* by composing all the pertinent transformations (i.e. head-motion
+transform matrices, susceptibility distortion correction when available,
+and co-registrations to anatomical and template spaces).
+Gridded (volumetric) resamplings were performed using `antsApplyTransforms` (ANTs),
+configured with Lanczos interpolation to minimize the smoothing
+effects of other kernels [@lanczos].
+Non-gridded (surface) resamplings were performed using `mri_vol2surf`
+(FreeSurfer).
+
+
+Many internal operations of *fMRIPrep* use
+*Nilearn* 0.4.2 [@nilearn, RRID:SCR_001362],
+mostly within the functional processing workflow.
+For more details of the pipeline, see [the section corresponding
+to workflows in *fMRIPrep*'s documentation](https://fmriprep.readthedocs.io/en/latest/workflows.html "FMRIPrep's documentation").
+
+
+### References
+
+
+Sentry is attempting to send 1 pending error messages
+Waiting up to 10 seconds
+Press Ctrl-C to quit
+
+
+
+done
+
+-----------------------
+
+Starting on: SST
+
+
+190424-03:16:54,399 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV069'].
+      * Run identifier: 20190424-031654_d5999f73-4541-4d85-8171-85280afda6ba.
+    
+190424-03:16:58,187 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-SST_acq-1_bold.nii.gz" (0.24 GB / 212 TRs). Memory resampled/largemem=0.94/1.44 GB.
+190424-03:16:58,987 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave1/func/sub-DEV069_ses-wave1_task-SST_acq-1_bold.nii.gz found.
+190424-03:16:59,654 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:17:01,115 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-SST_acq-1_bold.nii.gz" (0.24 GB / 212 TRs). Memory resampled/largemem=0.94/1.44 GB.
+190424-03:17:01,832 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV069/ses-wave2/func/sub-DEV069_ses-wave2_task-SST_acq-1_bold.nii.gz found.
+190424-03:17:02,411 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+190424-03:17:07,270 nipype.workflow IMPORTANT:
+	 Works derived from this fMRIPrep execution should include the following boilerplate:
+
+
+Results included in this manuscript come from preprocessing
+performed using *fMRIPprep* 1.1.4
+(@fmriprep1; @fmriprep2; RRID:SCR_016216),
+which is based on *Nipype* 1.1.1
+(@nipype1; @nipype2; RRID:SCR_002502).
+
+Anatomical data preprocessing
+
+: A total of 2 T1-weighted (T1w) images were found within the input
+BIDS dataset.
+All of them were corrected for intensity non-uniformity (INU)
+using `N4BiasFieldCorrection` [@n4, ANTs 2.2.0].
+A T1w-reference map was computed after registration of
+2 T1w images (after INU-correction) using
+`mri_robust_template` [FreeSurfer 6.0.1, @fs_template].
+The T1w-reference was then skull-stripped using `antsBrainExtraction.sh`
+(ANTs 2.2.0), using OASIS as target template.
+Brain surfaces were reconstructed using `recon-all` [FreeSurfer 6.0.1,
+RRID:SCR_001847, @fs_reconall], and the brain mask estimated
+previously was refined with a custom variation of the method to reconcile
+ANTs-derived and FreeSurfer-derived segmentations of the cortical
+gray-matter of Mindboggle [RRID:SCR_002438, @mindboggle].
+Spatial normalization to the ICBM 152 Nonlinear Asymmetrical
+template version 2009c [@mni, RRID:SCR_008796] was performed
+through nonlinear registration with `antsRegistration`
+[ANTs 2.2.0, RRID:SCR_004757, @ants], using
+brain-extracted versions of both T1w volume and template.
+Brain tissue segmentation of cerebrospinal fluid (CSF),
+white-matter (WM) and gray-matter (GM) was performed on
+the brain-extracted T1w using `fast` [FSL 5.0.9, RRID:SCR_002823,
+@fsl_fast].
+
+
+Functional data preprocessing
+
+: For each of the 2 BOLD runs found per subject (across all
+tasks and sessions), the following preprocessing was performed.
+First, a reference volume and its skull-stripped version were generated
+using a custom methodology of *fMRIPrep*.
+A deformation field to correct for susceptibility distortions was estimated
+based on two echo-planar imaging (EPI) references with opposing phase-encoding
+directions, using `3dQwarp` @afni (AFNI <ver>).
+Based on the estimated susceptibility distortion, an
+unwarped BOLD reference was calculated for a more accurate
+co-registration with the anatomical reference.
+Head-motion parameters with respect to the BOLD reference
+(transformation matrices, and six corresponding rotation and translation
+parameters) are estimated before any spatiotemporal filtering using
+`mcflirt` [FSL 5.0.9, @mcflirt].
+The BOLD time-series (including slice-timing correction when applied)
+were resampled onto their original, native space by applying
+a single, composite transform to correct for head-motion and
+susceptibility distortions.
+These resampled BOLD time-series will be referred to as *preprocessed
+BOLD in original space*, or just *preprocessed BOLD*.
+The BOLD reference was then co-registered to the T1w reference using
+`bbregister` (FreeSurfer) which implements boundary-based registration [@bbr].
+Co-registration was configured with nine degrees of freedom to account
+for distortions remaining in the BOLD reference.
+The BOLD time-series, were resampled to surfaces on the following
+spaces: *fsaverage5*, *fsnative*.
+The BOLD time-series were resampled to MNI152NLin2009cAsym standard space,
+generating a *preprocessed BOLD run in MNI152NLin2009cAsym space*.
+Several confounding time-series were calculated based on the
+*preprocessed BOLD*: framewise displacement (FD), DVARS and
+three region-wise global signals.
+FD and DVARS are calculated for each functional run, both using their
+implementations in *Nipype* [following the definitions by @power_fd_dvars].
+The three global signals are extracted within the CSF, the WM, and
+the whole-brain masks.
+Additionally, a set of physiological regressors were extracted to
+allow for component-based noise correction [*CompCor*, @compcor].
+Principal components are estimated after high-pass filtering the
+*preprocessed BOLD* time-series (using a discrete cosine filter with
+128s cut-off) for the two *CompCor* variants: temporal (tCompCor)
+and anatomical (aCompCor).
+Six tCompCor components are then calculated from the top 5% variable
+voxels within a mask covering the subcortical regions.
+This subcortical mask is obtained by heavily eroding the brain mask,
+which ensures it does not include cortical GM regions.
+For aCompCor, six components are calculated within the intersection of
+the aforementioned mask and the union of CSF and WM masks calculated
+in T1w space, after their projection to the native space of each
+functional run (using the inverse BOLD-to-T1w transformation).
+The head-motion estimates calculated in the correction step were also
+placed within the corresponding confounds file.
+All resamplings can be performed with *a single interpolation
+step* by composing all the pertinent transformations (i.e. head-motion
+transform matrices, susceptibility distortion correction when available,
+and co-registrations to anatomical and template spaces).
+Gridded (volumetric) resamplings were performed using `antsApplyTransforms` (ANTs),
+configured with Lanczos interpolation to minimize the smoothing
+effects of other kernels [@lanczos].
+Non-gridded (surface) resamplings were performed using `mri_vol2surf`
+(FreeSurfer).
+
+
+Many internal operations of *fMRIPrep* use
+*Nilearn* 0.4.2 [@nilearn, RRID:SCR_001362],
+mostly within the functional processing workflow.
+For more details of the pipeline, see [the section corresponding
+to workflows in *fMRIPrep*'s documentation](https://fmriprep.readthedocs.io/en/latest/workflows.html "FMRIPrep's documentation").
+
+
+### References
+
+
+190424-03:17:26,342 nipype.workflow WARNING:
+	 Some nodes demand for more threads than available (1).
+190424-03:17:28,235 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave1_task_SST_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_opposite_wf.split" in "/tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave1_task_SST_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_opposite_wf/split".
+190424-03:17:28,238 nipype.workflow CRITICAL:
+	 Unable to open the file in write mode: /tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave1_task_SST_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_opposite_wf/split/_0x9094944b857d3779d3027746233f332b_unfinished.json
+190424-03:17:28,358 nipype.workflow ERROR:
+	 Node split failed to run on host n013.
+190424-03:17:28,363 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV069/log/20190424-031654_d5999f73-4541-4d85-8171-85280afda6ba/crash-20190424-031728-dcosme-split-cfccb421-5074-4ad6-be2b-3cab118094a3.txt
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 475, in run
+    self, report_type='preexec', is_mapnode=isinstance(self, MapNode))
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 148, in write_report
+    fp.write('\n'.join(lines))
+OSError: [Errno 28] No space left on device
+
+190424-03:17:28,540 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave1_task_SST_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.split" in "/tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave1_task_SST_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/split".
+190424-03:17:28,542 nipype.workflow CRITICAL:
+	 Unable to open the file in write mode: /tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave1_task_SST_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/split/_0xd21414ba0235f6532acd974b6c1ef5ab_unfinished.json
+190424-03:17:30,359 nipype.workflow ERROR:
+	 Node split failed to run on host n013.
+190424-03:17:30,360 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV069/log/20190424-031654_d5999f73-4541-4d85-8171-85280afda6ba/crash-20190424-031730-dcosme-split-c2f5da2c-8307-4a86-9324-bf775213ea5d.txt
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 475, in run
+    self, report_type='preexec', is_mapnode=isinstance(self, MapNode))
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 148, in write_report
+    fp.write('\n'.join(lines))
+OSError: [Errno 28] No space left on device
+
+190424-03:17:31,979 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave1_task_SST_acq_1_wf.bold_reference_wf.validate" in "/tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave1_task_SST_acq_1_wf/bold_reference_wf/validate".
+190424-03:17:31,981 nipype.workflow CRITICAL:
+	 Unable to open the file in write mode: /tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave1_task_SST_acq_1_wf/bold_reference_wf/validate/_0xc8f948ef2a286a5cf61e9dc4adf22306_unfinished.json
+190424-03:17:32,361 nipype.workflow ERROR:
+	 Node validate failed to run on host n013.
+190424-03:17:32,362 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV069/log/20190424-031654_d5999f73-4541-4d85-8171-85280afda6ba/crash-20190424-031732-dcosme-validate-34b0c673-b1a9-4ee0-805d-139cec988f60.txt
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 475, in run
+    self, report_type='preexec', is_mapnode=isinstance(self, MapNode))
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 148, in write_report
+    fp.write('\n'.join(lines))
+OSError: [Errno 28] No space left on device
+
+190424-03:17:32,534 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave2_task_SST_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_opposite_wf.split" in "/tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave2_task_SST_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_opposite_wf/split".
+190424-03:17:32,537 nipype.workflow CRITICAL:
+	 Unable to open the file in write mode: /tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave2_task_SST_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_opposite_wf/split/_0x7ee8dfeccd617e98cc847947dac71f40_unfinished.json
+190424-03:17:34,363 nipype.workflow ERROR:
+	 Node split failed to run on host n013.
+190424-03:17:34,364 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV069/log/20190424-031654_d5999f73-4541-4d85-8171-85280afda6ba/crash-20190424-031734-dcosme-split-c7e754c3-47be-4f27-b895-b2cee3c197dd.txt
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 475, in run
+    self, report_type='preexec', is_mapnode=isinstance(self, MapNode))
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 148, in write_report
+    fp.write('\n'.join(lines))
+OSError: [Errno 28] No space left on device
+
+190424-03:17:34,530 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave2_task_SST_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.split" in "/tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave2_task_SST_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/split".
+190424-03:17:34,532 nipype.workflow CRITICAL:
+	 Unable to open the file in write mode: /tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave2_task_SST_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/split/_0x3425e0d31ebb29ceb7201265916e838e_unfinished.json
+190424-03:17:36,365 nipype.workflow ERROR:
+	 Node split failed to run on host n013.
+190424-03:17:36,366 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV069/log/20190424-031654_d5999f73-4541-4d85-8171-85280afda6ba/crash-20190424-031736-dcosme-split-704c6c11-903c-4e68-bbca-298ab8ccb875.txt
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 475, in run
+    self, report_type='preexec', is_mapnode=isinstance(self, MapNode))
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 148, in write_report
+    fp.write('\n'.join(lines))
+OSError: [Errno 28] No space left on device
+
+190424-03:17:36,531 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave2_task_SST_acq_1_wf.bold_reference_wf.validate" in "/tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave2_task_SST_acq_1_wf/bold_reference_wf/validate".
+190424-03:17:36,532 nipype.workflow CRITICAL:
+	 Unable to open the file in write mode: /tmp/fmriprep_wf/single_subject_DEV069_wf/func_preproc_ses_wave2_task_SST_acq_1_wf/bold_reference_wf/validate/_0x3a1c192c4f6f795009a2110039c28e2c_unfinished.json
+190424-03:17:38,367 nipype.workflow ERROR:
+	 Node validate failed to run on host n013.
+190424-03:17:38,368 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV069/log/20190424-031654_d5999f73-4541-4d85-8171-85280afda6ba/crash-20190424-031738-dcosme-validate-4b1baea2-82d1-4019-bb0d-7a668db4ac97.txt
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 475, in run
+    self, report_type='preexec', is_mapnode=isinstance(self, MapNode))
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 148, in write_report
+    fp.write('\n'.join(lines))
+OSError: [Errno 28] No space left on device
+
+190424-03:17:38,528 nipype.workflow CRITICAL:
+	 Unable to open the file in write mode: /tmp/fmriprep_wf/single_subject_DEV069_wf/about/_0x841b7191032607c6f837e88bba073a01_unfinished.json
+190424-03:17:38,531 nipype.workflow ERROR:
+	 Node about failed to run on host n013.
+190424-03:17:38,532 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV069/log/20190424-031654_d5999f73-4541-4d85-8171-85280afda6ba/crash-20190424-031738-dcosme-about-d6b422d4-d95a-46d3-bb81-e45023adf84d.txt
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 308, in _send_procs_to_workers
+    self.procs[jobid].run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 475, in run
+    self, report_type='preexec', is_mapnode=isinstance(self, MapNode))
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 148, in write_report
+    fp.write('\n'.join(lines))
+OSError: [Errno 28] No space left on device
+
+190424-03:17:38,692 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV069_wf.bidssrc" in "/tmp/fmriprep_wf/single_subject_DEV069_wf/bidssrc".
+190424-03:17:38,694 nipype.workflow CRITICAL:
+	 Unable to open the file in write mode: /tmp/fmriprep_wf/single_subject_DEV069_wf/bidssrc/_0x1ab017103d366230f676ae2aece8f1cb_unfinished.json
+190424-03:17:40,369 nipype.workflow ERROR:
+	 Node bidssrc failed to run on host n013.
+190424-03:17:40,369 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV069/log/20190424-031654_d5999f73-4541-4d85-8171-85280afda6ba/crash-20190424-031740-dcosme-bidssrc-f3996396-e51b-4d96-bbb9-8863af41bc16.txt
+OSError: [Errno 28] No space left on device
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 475, in run
+    self, report_type='preexec', is_mapnode=isinstance(self, MapNode))
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 148, in write_report
+    fp.write('\n'.join(lines))
+OSError: [Errno 28] No space left on device
+
+190424-03:17:42,366 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave1_task_SST_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_opposite_wf.split
+190424-03:17:42,368 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave1_task_SST_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.split
+190424-03:17:42,369 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave1_task_SST_acq_1_wf.bold_reference_wf.validate
+190424-03:17:42,371 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave2_task_SST_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_opposite_wf.split
+190424-03:17:42,372 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave2_task_SST_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.split
+190424-03:17:42,374 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV069_wf.func_preproc_ses_wave2_task_SST_acq_1_wf.bold_reference_wf.validate
+190424-03:17:42,375 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV069_wf.bidssrc
+
+
+
+done
+
+-----------------------

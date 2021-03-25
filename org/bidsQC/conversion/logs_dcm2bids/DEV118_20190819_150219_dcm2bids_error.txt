@@ -1,0 +1,41 @@
+INFO:dcm2bids.dcm2bids:--- dcm2bids start ---
+INFO:dcm2bids.dcm2bids:OS:version: Linux-3.10.0-957.27.2.el7.x86_64-x86_64-with-Ubuntu-16.04-xenial
+INFO:dcm2bids.dcm2bids:python:version: 2.7.11+ (default, Apr 17 2016, 14:00:29) [GCC 5.3.1 20160413]
+INFO:dcm2bids.dcm2bids:dcm2bids:version: 2.1.4
+INFO:dcm2bids.dcm2bids:dcm2niix:version: v1.0.20190902
+INFO:dcm2bids.dcm2bids:participant: sub-DEV118
+INFO:dcm2bids.dcm2bids:session: ses-wave2
+INFO:dcm2bids.dcm2bids:config: /projects/sanlab/shared/DEV/DEV_scripts/org/bidsQC/conversion/study_config.json
+INFO:dcm2bids.dcm2bids:BIDS directory: /projects/sanlab/shared/DEV/bids_data
+INFO:dcm2bids.utils:Running dcm2niix -b y -ba y -z y -f '%3s_%f_%p_%t' -o /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV118_ses-wave2 /projects/lcni/dcm/sanlab/Berkman/DEV/DEV118_20190819_150219
+INFO:dcm2bids.dcm2niix:Check log file for dcm2niix output
+INFO:dcm2bids.sidecar:Sidecars pairing:
+INFO:dcm2bids.sidecar:No Pairing  <-  001_DEV118_20190819_150219_aa_scout_20190819150219
+INFO:dcm2bids.sidecar:No Pairing  <-  002_DEV118_20190819_150219_aa_scout_20190819150219_i00001
+INFO:dcm2bids.sidecar:No Pairing  <-  002_DEV118_20190819_150219_aa_scout_20190819150219_i00002
+INFO:dcm2bids.sidecar:No Pairing  <-  002_DEV118_20190819_150219_aa_scout_20190819150219_i00003
+INFO:dcm2bids.sidecar:No Pairing  <-  002_DEV118_20190819_150219_aa_scout_20190819150219_i00004
+INFO:dcm2bids.sidecar:No Pairing  <-  003_DEV118_20190819_150219_aa_scout_20190819150219_i00001
+INFO:dcm2bids.sidecar:No Pairing  <-  003_DEV118_20190819_150219_aa_scout_20190819150219_i00002
+INFO:dcm2bids.sidecar:No Pairing  <-  003_DEV118_20190819_150219_aa_scout_20190819150219_i00003
+INFO:dcm2bids.sidecar:No Pairing  <-  004_DEV118_20190819_150219_aa_scout_20190819150219_i00001
+INFO:dcm2bids.sidecar:No Pairing  <-  004_DEV118_20190819_150219_aa_scout_20190819150219_i00002
+INFO:dcm2bids.sidecar:No Pairing  <-  004_DEV118_20190819_150219_aa_scout_20190819150219_i00003
+INFO:dcm2bids.sidecar:_task-WTP_acq-1_bold  <-  005_DEV118_20190819_150219_WTP1_20190819150219
+INFO:dcm2bids.sidecar:_task-WTP_acq-2_bold  <-  006_DEV118_20190819_150219_WTP2_20190819150219
+INFO:dcm2bids.sidecar:_task-WTP_acq-3_bold  <-  007_DEV118_20190819_150219_WTP3_20190819150219
+INFO:dcm2bids.sidecar:_task-WTP_acq-4_bold  <-  008_DEV118_20190819_150219_WTP4_20190819150219
+INFO:dcm2bids.sidecar:No Pairing  <-  009_DEV118_20190819_150219_mprage_20190819150219
+INFO:dcm2bids.sidecar:_T1w  <-  010_DEV118_20190819_150219_mprage_20190819150219
+INFO:dcm2bids.sidecar:_dir-ap_epi  <-  011_DEV118_20190819_150219_se_epi_fieldmap_ap_20190819150219
+INFO:dcm2bids.sidecar:_dir-pa_epi  <-  012_DEV118_20190819_150219_se_epi_fieldmap_pa_20190819150219
+INFO:dcm2bids.sidecar:_task-ROC_acq-1_bold  <-  013_DEV118_20190819_150219_ROC1_20190819150219
+INFO:dcm2bids.sidecar:_task-ROC_acq-2_bold  <-  014_DEV118_20190819_150219_ROC2_20190819150219
+INFO:dcm2bids.sidecar:_task-rest_acq-2_bold  <-  015_DEV118_20190819_150219_Resting_2_20190819150219
+INFO:dcm2bids.sidecar:_task-ROC_acq-3_bold  <-  017_DEV118_20190819_150219_ROC3_20190819150219
+INFO:dcm2bids.sidecar:_task-ROC_acq-4_bold  <-  018_DEV118_20190819_150219_ROC4_20190819150219
+INFO:dcm2bids.sidecar:_task-rest_acq-2_bold  <-  019_DEV118_20190819_150219_Resting_2_20190819150219
+INFO:dcm2bids.sidecar:_task-SST_acq-1_bold  <-  021_DEV118_20190819_150219_SST1_20190819150219
+INFO:dcm2bids.sidecar:sub-DEV118/ses-wave2/func/sub-DEV118_ses-wave2_task-rest_acq-2_bold has 2 runs
+INFO:dcm2bids.sidecar:Adding 'run' information to the acquisition
+INFO:dcm2bids.dcm2bids:moving acquisitions into BIDS folder

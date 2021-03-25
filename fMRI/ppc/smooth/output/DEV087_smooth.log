@@ -1,0 +1,237 @@
+-------------------------------------------------------------------------------
+DEV087
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/ppc/smooth/smooth_ROC.m
+-------------------------------------------------------------------------------
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+ 
+To get started, type doc.
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+For product information, visit www.mathworks.com.
+ 
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+[Warning: Incompatible scalefactor in
+"/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV087/ses-wave1/func/s6_sub-DEV087_ses-wave1_task-ROC_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii"
+0.30926~=0.29343.] 
+[> In spm_create_vol>create_vol (line 115)
+  In spm_create_vol (line 13)
+  In spm_smooth>smooth1 (line 105)
+  In spm_smooth (line 37)
+  In spm_run_smooth (line 20)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+[Warning: Incompatible intercept in
+"/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV087/ses-wave1/func/s6_sub-DEV087_ses-wave1_task-ROC_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii"
+8525.6914~=8289.8037.] 
+[> In spm_create_vol>create_vol (line 118)
+  In spm_create_vol (line 13)
+  In spm_smooth>smooth1 (line 105)
+  In spm_smooth (line 37)
+  In spm_run_smooth (line 20)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+[Warning: Incompatible scalefactor in
+"/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV087/ses-wave1/func/s6_sub-DEV087_ses-wave1_task-ROC_acq-2_bold_space-MNI152NLin2009cAsym_preproc.nii"
+0.32537~=0.31452.] 
+[> In spm_create_vol>create_vol (line 115)
+  In spm_create_vol (line 13)
+  In spm_smooth>smooth1 (line 105)
+  In spm_smooth (line 37)
+  In spm_run_smooth (line 20)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+[Warning: Incompatible intercept in
+"/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV087/ses-wave1/func/s6_sub-DEV087_ses-wave1_task-ROC_acq-2_bold_space-MNI152NLin2009cAsym_preproc.nii"
+9520.249~=9100.8037.] 
+[> In spm_create_vol>create_vol (line 118)
+  In spm_create_vol (line 13)
+  In spm_smooth>smooth1 (line 105)
+  In spm_smooth (line 37)
+  In spm_run_smooth (line 20)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'Move/Delete Files'
+Done    'Move/Delete Files'
+Done
+
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+[Warning: Incompatible scalefactor in
+"/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV087/ses-wave1/func/s6_sub-DEV087_ses-wave1_task-ROC_acq-3_bold_space-MNI152NLin2009cAsym_preproc.nii"
+0.31491~=0.31281.] 
+[> In spm_create_vol>create_vol (line 115)
+  In spm_create_vol (line 13)
+  In spm_smooth>smooth1 (line 105)
+  In spm_smooth (line 37)
+  In spm_run_smooth (line 20)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+[Warning: Incompatible intercept in
+"/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV087/ses-wave1/func/s6_sub-DEV087_ses-wave1_task-ROC_acq-3_bold_space-MNI152NLin2009cAsym_preproc.nii"
+8875.9355~=8989.916.] 
+[> In spm_create_vol>create_vol (line 118)
+  In spm_create_vol (line 13)
+  In spm_smooth>smooth1 (line 105)
+  In spm_smooth (line 37)
+  In spm_run_smooth (line 20)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+Done    'Smooth'
+Running 'Move/Delete Files'
+Done    'Move/Delete Files'
+Done
+
+Done    'Smooth'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Done    'Gunzip Files'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Smooth'
+[Warning: Incompatible scalefactor in
+"/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV087/ses-wave1/func/s6_sub-DEV087_ses-wave1_task-ROC_acq-4_bold_space-MNI152NLin2009cAsym_preproc.nii"
+0.32592~=0.29899.] 
+[> In spm_create_vol>create_vol (line 115)
+  In spm_create_vol (line 13)
+  In spm_smooth>smooth1 (line 105)
+  In spm_smooth (line 37)
+  In spm_run_smooth (line 20)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+[Warning: Incompatible intercept in
+"/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV087/ses-wave1/func/s6_sub-DEV087_ses-wave1_task-ROC_acq-4_bold_space-MNI152NLin2009cAsym_preproc.nii"
+9346.3916~=8539.9062.] 
+[> In spm_create_vol>create_vol (line 118)
+  In spm_create_vol (line 13)
+  In spm_smooth>smooth1 (line 105)
+  In spm_smooth (line 37)
+  In spm_run_smooth (line 20)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+Done    'Smooth'
+Running 'Move/Delete Files'
+Done    'Move/Delete Files'
+Done
+

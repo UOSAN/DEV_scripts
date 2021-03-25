@@ -1,0 +1,682 @@
+
+--------------------
+sub-DEV001
+--------------------
+WARNING! Too many json files in sub-DEV001 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV001 ses-wave1 func
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV001 ses-wave2 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV001 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV001 ses-wave2 func
+FILE WARNING! sub-DEV001 MISSING task-SST_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV001 MISSING task-SST_acq-1 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV004
+--------------------
+WARNING! Too many json files in sub-DEV004 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV004 ses-wave1 func
+WARNING! Too many json files in sub-DEV004 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV004 ses-wave2 func
+
+--------------------
+sub-DEV005
+--------------------
+WARNING! Too many json files in sub-DEV005 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV005 ses-wave1 func
+WARNING! Too many json files in sub-DEV005 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV005 ses-wave2 func
+
+--------------------
+sub-DEV006
+--------------------
+
+TIMEPOINT WARNING! sub-DEV006 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV006 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV006 ses-wave1 func
+
+--------------------
+sub-DEV007
+--------------------
+
+TIMEPOINT WARNING! sub-DEV007 has 1 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-2 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-3 json files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-3 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-4 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV008
+--------------------
+WARNING! Too many json files in sub-DEV008 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV008 ses-wave1 func
+WARNING! Too many json files in sub-DEV008 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV008 ses-wave2 func
+
+--------------------
+sub-DEV009
+--------------------
+WARNING! Too many json files in sub-DEV009 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV009 ses-wave1 func
+WARNING! Too many json files in sub-DEV009 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV009 ses-wave2 func
+
+--------------------
+sub-DEV010
+--------------------
+WARNING! Too many json files in sub-DEV010 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV010 ses-wave1 func
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV010 ses-wave2 has 2 total sequence directories Expected 3.
+
+
+--------------------
+sub-DEV011
+--------------------
+WARNING! Too many json files in sub-DEV011 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV011 ses-wave1 func
+WARNING! Too many json files in sub-DEV011 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV011 ses-wave2 func
+
+--------------------
+sub-DEV012
+--------------------
+WARNING! Too many json files in sub-DEV012 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV012 ses-wave1 func
+WARNING! Too many json files in sub-DEV012 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV012 ses-wave2 func
+
+--------------------
+sub-DEV013
+--------------------
+WARNING! Too many json files in sub-DEV013 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV013 ses-wave1 func
+WARNING! Too many json files in sub-DEV013 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV013 ses-wave2 func
+
+--------------------
+sub-DEV014
+--------------------
+WARNING! Too many json files in sub-DEV014 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV014 ses-wave1 func
+WARNING! Too many json files in sub-DEV014 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV014 ses-wave2 func
+
+--------------------
+sub-DEV015
+--------------------
+WARNING! Too many json files in sub-DEV015 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV015 ses-wave1 func
+WARNING! Too many json files in sub-DEV015 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV015 ses-wave2 func
+
+--------------------
+sub-DEV016
+--------------------
+WARNING! Too many json files in sub-DEV016 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV016 ses-wave1 func
+WARNING! Too many json files in sub-DEV016 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV016 ses-wave2 func
+
+--------------------
+sub-DEV017
+--------------------
+WARNING! Too many json files in sub-DEV017 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV017 ses-wave1 func
+WARNING! Too many json files in sub-DEV017 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV017 ses-wave2 func
+
+--------------------
+sub-DEV018
+--------------------
+WARNING! Too many json files in sub-DEV018 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV018 ses-wave1 func
+WARNING! Too many json files in sub-DEV018 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV018 ses-wave2 func
+
+--------------------
+sub-DEV019
+--------------------
+WARNING! Too many json files in sub-DEV019 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV019 ses-wave1 func
+WARNING! Too many json files in sub-DEV019 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV019 ses-wave2 func
+
+--------------------
+sub-DEV020
+--------------------
+WARNING! Too many json files in sub-DEV020 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV020 ses-wave1 func
+WARNING! Too many json files in sub-DEV020 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV020 ses-wave2 func
+FILE WARNING! sub-DEV020 MISSING task-ROC_acq-3 json files in ses-wave2.
+FILE WARNING! sub-DEV020 MISSING task-ROC_acq-3 nii.gz files in ses-wave2.
+FILE WARNING! sub-DEV020 MISSING task-ROC_acq-4 json files in ses-wave2.
+FILE WARNING! sub-DEV020 MISSING task-ROC_acq-4 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV021
+--------------------
+WARNING! Too many json files in sub-DEV021 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV021 ses-wave1 func
+WARNING! Too many json files in sub-DEV021 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV021 ses-wave2 func
+
+--------------------
+sub-DEV022
+--------------------
+
+TIMEPOINT WARNING! sub-DEV022 has 1 ses-wave directories. Expected 2 
+
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV022 ses-wave1 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV022 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV022 ses-wave1 func
+
+--------------------
+sub-DEV023
+--------------------
+WARNING! Too many json files in sub-DEV023 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV023 ses-wave1 func
+WARNING! Too many json files in sub-DEV023 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV023 ses-wave2 func
+
+--------------------
+sub-DEV024
+--------------------
+WARNING! Too many json files in sub-DEV024 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV024 ses-wave1 func
+WARNING! Too many json files in sub-DEV024 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV024 ses-wave2 func
+
+--------------------
+sub-DEV025
+--------------------
+WARNING! Too many json files in sub-DEV025 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV025 ses-wave1 func
+WARNING! Too many json files in sub-DEV025 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV025 ses-wave2 func
+
+--------------------
+sub-DEV026
+--------------------
+WARNING! Too many json files in sub-DEV026 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV026 ses-wave1 func
+WARNING! Too many json files in sub-DEV026 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV026 ses-wave2 func
+
+--------------------
+sub-DEV027
+--------------------
+WARNING! Too many json files in sub-DEV027 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV027 ses-wave1 func
+FILE WARNING! sub-DEV027 MISSING task-SST_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV027 MISSING task-SST_acq-1 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV028
+--------------------
+WARNING! Too many json files in sub-DEV028 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV028 ses-wave1 func
+WARNING! Too many json files in sub-DEV028 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV028 ses-wave2 func
+
+--------------------
+sub-DEV029
+--------------------
+WARNING! Too many json files in sub-DEV029 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV029 ses-wave1 func
+WARNING! Too many json files in sub-DEV029 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV029 ses-wave2 func
+
+--------------------
+sub-DEV030
+--------------------
+WARNING! Too many json files in sub-DEV030 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV030 ses-wave1 func
+WARNING! Too many json files in sub-DEV030 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV030 ses-wave2 func
+
+--------------------
+sub-DEV031
+--------------------
+WARNING! Too many json files in sub-DEV031 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV031 ses-wave1 func
+WARNING! Too many json files in sub-DEV031 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV031 ses-wave2 func
+
+--------------------
+sub-DEV032
+--------------------
+
+TIMEPOINT WARNING! sub-DEV032 has 1 ses-wave directories. Expected 2 
+
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV032 ses-wave1 has 1 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV032 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV032 ses-wave1 func
+
+--------------------
+sub-DEV033
+--------------------
+WARNING! Too many json files in sub-DEV033 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV033 ses-wave1 func
+WARNING! Too many json files in sub-DEV033 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV033 ses-wave2 func
+
+--------------------
+sub-DEV034
+--------------------
+
+TIMEPOINT WARNING! sub-DEV034 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV034 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV034 ses-wave1 func
+
+--------------------
+sub-DEV035
+--------------------
+WARNING! Too many json files in sub-DEV035 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV035 ses-wave1 func
+WARNING! Too many json files in sub-DEV035 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV035 ses-wave2 func
+
+--------------------
+sub-DEV036
+--------------------
+WARNING! Too many json files in sub-DEV036 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV036 ses-wave1 func
+WARNING! Too many json files in sub-DEV036 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV036 ses-wave2 func
+
+--------------------
+sub-DEV037
+--------------------
+
+TIMEPOINT WARNING! sub-DEV037 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV037 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV037 ses-wave1 func
+
+--------------------
+sub-DEV038
+--------------------
+WARNING! Too many json files in sub-DEV038 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV038 ses-wave1 func
+WARNING! Too many json files in sub-DEV038 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV038 ses-wave2 func
+
+--------------------
+sub-DEV039
+--------------------
+WARNING! Too many json files in sub-DEV039 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV039 ses-wave1 func
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV039 ses-wave2 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV039 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV039 ses-wave2 func
+
+--------------------
+sub-DEV040
+--------------------
+WARNING! Too many json files in sub-DEV040 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV040 ses-wave1 func
+WARNING! Too many json files in sub-DEV040 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV040 ses-wave2 func
+
+--------------------
+sub-DEV041
+--------------------
+WARNING! Too many json files in sub-DEV041 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV041 ses-wave1 func
+WARNING! Too many json files in sub-DEV041 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV041 ses-wave2 func
+
+--------------------
+sub-DEV042
+--------------------
+
+TIMEPOINT WARNING! sub-DEV042 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV042 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV042 ses-wave2 func
+
+--------------------
+sub-DEV043
+--------------------
+WARNING! Too many json files in sub-DEV043 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV043 ses-wave1 func
+WARNING! Too many json files in sub-DEV043 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV043 ses-wave2 func
+
+--------------------
+sub-DEV044
+--------------------
+WARNING! Too many json files in sub-DEV044 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV044 ses-wave1 func
+WARNING! Too many json files in sub-DEV044 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV044 ses-wave2 func
+
+--------------------
+sub-DEV046
+--------------------
+WARNING! Too many json files in sub-DEV046 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV046 ses-wave1 func
+WARNING! Too many json files in sub-DEV046 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV046 ses-wave2 func
+
+--------------------
+sub-DEV047
+--------------------
+WARNING! Too many json files in sub-DEV047 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV047 ses-wave1 func
+WARNING! Too many json files in sub-DEV047 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV047 ses-wave2 func
+
+--------------------
+sub-DEV048
+--------------------
+FILE WARNING! sub-DEV048 MISSING task-ROC_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV048 MISSING task-ROC_acq-4 nii.gz files in ses-wave1.
+WARNING! Too many json files in sub-DEV048 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV048 ses-wave2 func
+
+--------------------
+sub-DEV049
+--------------------
+WARNING! Too many json files in sub-DEV049 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV049 ses-wave1 func
+WARNING! Too many json files in sub-DEV049 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV049 ses-wave2 func
+
+--------------------
+sub-DEV050
+--------------------
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV050 ses-wave1 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV050 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV050 ses-wave1 func
+WARNING! Too many json files in sub-DEV050 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV050 ses-wave2 func
+
+--------------------
+sub-DEV051
+--------------------
+WARNING! Too many json files in sub-DEV051 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV051 ses-wave1 func
+WARNING! Too many json files in sub-DEV051 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV051 ses-wave2 func
+
+--------------------
+sub-DEV052
+--------------------
+WARNING! Too many json files in sub-DEV052 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV052 ses-wave1 func
+WARNING! Too many json files in sub-DEV052 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV052 ses-wave2 func
+
+--------------------
+sub-DEV053
+--------------------
+WARNING! Too many json files in sub-DEV053 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV053 ses-wave1 func
+WARNING! Too many json files in sub-DEV053 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV053 ses-wave2 func
+
+--------------------
+sub-DEV054
+--------------------
+WARNING! Too many json files in sub-DEV054 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV054 ses-wave1 func
+WARNING! Too many json files in sub-DEV054 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV054 ses-wave2 func
+
+--------------------
+sub-DEV055
+--------------------
+WARNING! Too many json files in sub-DEV055 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV055 ses-wave1 func
+WARNING! Too many json files in sub-DEV055 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV055 ses-wave2 func
+
+--------------------
+sub-DEV056
+--------------------
+WARNING! Too many json files in sub-DEV056 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV056 ses-wave1 func
+WARNING! Too many json files in sub-DEV056 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV056 ses-wave2 func
+
+--------------------
+sub-DEV057
+--------------------
+WARNING! Too many json files in sub-DEV057 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV057 ses-wave1 func
+WARNING! Too many json files in sub-DEV057 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV057 ses-wave2 func
+
+--------------------
+sub-DEV058
+--------------------
+WARNING! Too many json files in sub-DEV058 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV058 ses-wave1 func
+WARNING! Too many json files in sub-DEV058 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV058 ses-wave2 func
+
+--------------------
+sub-DEV059
+--------------------
+WARNING! Too many json files in sub-DEV059 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV059 ses-wave1 func
+WARNING! Too many json files in sub-DEV059 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV059 ses-wave2 func
+
+--------------------
+sub-DEV060
+--------------------
+WARNING! Too many json files in sub-DEV060 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV060 ses-wave1 func
+WARNING! Too many json files in sub-DEV060 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV060 ses-wave2 func
+
+--------------------
+sub-DEV061
+--------------------
+WARNING! Too many json files in sub-DEV061 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV061 ses-wave1 func
+FILE WARNING! sub-DEV061 MISSING task-SST_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV061 MISSING task-SST_acq-1 nii.gz files in ses-wave1.
+WARNING! Too many json files in sub-DEV061 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV061 ses-wave2 func
+FILE WARNING! sub-DEV061 MISSING task-SST_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV061 MISSING task-SST_acq-1 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV062
+--------------------
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV062 ses-wave1 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV062 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV062 ses-wave1 func
+WARNING! Too many json files in sub-DEV062 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV062 ses-wave2 func
+
+--------------------
+sub-DEV063
+--------------------
+WARNING! Too many json files in sub-DEV063 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV063 ses-wave1 func
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV063 ses-wave2 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV063 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV063 ses-wave2 func
+
+--------------------
+sub-DEV064
+--------------------
+WARNING! Too many json files in sub-DEV064 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV064 ses-wave1 func
+WARNING! Too many json files in sub-DEV064 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV064 ses-wave2 func
+
+--------------------
+sub-DEV065
+--------------------
+WARNING! Too many json files in sub-DEV065 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV065 ses-wave1 func
+WARNING! Too many json files in sub-DEV065 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV065 ses-wave2 func
+
+--------------------
+sub-DEV066
+--------------------
+WARNING! Too many json files in sub-DEV066 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV066 ses-wave1 func
+WARNING! Too many json files in sub-DEV066 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV066 ses-wave2 func
+
+--------------------
+sub-DEV067
+--------------------
+WARNING! Too many json files in sub-DEV067 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV067 ses-wave1 func
+WARNING! Too many json files in sub-DEV067 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV067 ses-wave2 func
+
+--------------------
+sub-DEV068
+--------------------
+WARNING! Too many json files in sub-DEV068 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV068 ses-wave1 func
+WARNING! Too many json files in sub-DEV068 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV068 ses-wave2 func
+
+--------------------
+sub-DEV069
+--------------------
+WARNING! Too many json files in sub-DEV069 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV069 ses-wave1 func
+WARNING! Too many json files in sub-DEV069 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV069 ses-wave2 func
+
+--------------------
+sub-DEV070
+--------------------
+WARNING! Too many json files in sub-DEV070 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV070 ses-wave1 func
+WARNING! Too many json files in sub-DEV070 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV070 ses-wave2 func
+
+--------------------
+sub-DEV072
+--------------------
+
+TIMEPOINT WARNING! sub-DEV072 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV072 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV072 ses-wave1 func
+
+--------------------
+sub-DEV073
+--------------------
+
+TIMEPOINT WARNING! sub-DEV073 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV073 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV073 ses-wave1 func
+
+--------------------
+sub-DEV074
+--------------------
+WARNING! Too many json files in sub-DEV074 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV074 ses-wave1 func
+WARNING! Too many json files in sub-DEV074 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV074 ses-wave2 func
+
+--------------------
+sub-DEV076
+--------------------
+
+TIMEPOINT WARNING! sub-DEV076 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV076 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV076 ses-wave1 func
+
+--------------------
+sub-DEV077
+--------------------
+
+TIMEPOINT WARNING! sub-DEV077 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV077 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV077 ses-wave1 func
+
+--------------------
+sub-DEV078
+--------------------
+
+TIMEPOINT WARNING! sub-DEV078 has 1 ses-wave directories. Expected 2 
+
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV078 ses-wave1 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV078 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV078 ses-wave1 func
+
+--------------------
+sub-DEV079
+--------------------
+
+TIMEPOINT WARNING! sub-DEV079 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV079 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV079 ses-wave1 func
+
+--------------------
+sub-DEV081
+--------------------
+
+TIMEPOINT WARNING! sub-DEV081 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV081 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV081 ses-wave1 func
+
+--------------------
+sub-DEV083
+--------------------
+
+TIMEPOINT WARNING! sub-DEV083 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV083 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV083 ses-wave1 func
+
+--------------------
+sub-DEV084
+--------------------
+
+TIMEPOINT WARNING! sub-DEV084 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV084 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV084 ses-wave1 func
+
+--------------------
+sub-DEV089
+--------------------
+
+TIMEPOINT WARNING! sub-DEV089 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV089 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV089 ses-wave1 func

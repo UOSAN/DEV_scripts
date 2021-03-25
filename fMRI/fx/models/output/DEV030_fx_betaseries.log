@@ -1,0 +1,95 @@
+-------------------------------------------------------------------------------
+DEV030
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/fx_betaseries.m
+-------------------------------------------------------------------------------
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'fMRI model specification'
+
+SPM12: spm_fMRI_design (v5183)                     03:50:05 - 08/05/2019
+========================================================================
+Saving fMRI design                      :               ...SPM.mat saved
+
+SPM12: spm_fmri_spm_ui (v6088)                     03:50:05 - 08/05/2019
+========================================================================
+Mapping files                           :                        ...done
+Calculating globals                     :                        ...done
+Saving SPM configuration                :               ...SPM.mat saved
+Saving SPM configuration                :               ...SPM.mat saved
+Completed                               :          03:50:24 - 08/05/2019
+Done    'fMRI model specification'
+Running 'Model estimation'
+
+SPM12: spm_spm (v6842)                             03:50:24 - 08/05/2019
+========================================================================
+
+SPM12: spm_est_non_sphericity (v6913)              03:50:26 - 08/05/2019
+========================================================================
+Chunk   1/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   3/12                            :                  ...processing                       ...doneChunk   4/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...doneChunk   7/12                            :                  ...processing                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  11/12                            :                  ...processingChunk  12/12                            :                  ...processing
+Temporal non-sphericity (123104 voxels) :             ...ReML estimation
+  ReML Block 1                
+  ReML Iteration 1                      :        ...1.929538e+01 [+4.25]
+  ReML Iteration 2                      :        ...3.786207e-01 [+4.50]
+  ReML Iteration 3                      :        ...2.672275e-02 [+4.75]
+  ReML Iteration 1                      :        ...1.933573e+01 [+2.25]
+  ReML Iteration 2                      :        ...1.695478e-01 [-3.50]
+  ReML Iteration 3                      :        ...9.355909e-03 [-3.25]
+  ReML Block 2                
+  ReML Iteration 1                      :        ...1.980863e+01 [+4.25]
+  ReML Iteration 2                      :        ...5.608648e-01 [+4.50]
+  ReML Iteration 3                      :        ...4.229946e-02 [+4.75]
+  ReML Iteration 1                      :        ...1.985760e+01 [+2.25]
+  ReML Iteration 2                      :        ...8.084600e-02 [-4.50]
+  ReML Block 3                
+  ReML Iteration 1                      :        ...1.962475e+01 [+4.25]
+  ReML Iteration 2                      :        ...3.719834e-01 [+4.50]
+  ReML Iteration 3                      :        ...1.492822e-02 [+4.75]
+  ReML Iteration 1                      :        ...1.968293e+01 [+2.25]
+  ReML Iteration 2                      :        ...5.117891e-02 [-5.50]
+  ReML Block 4                
+  ReML Iteration 1                      :        ...2.105040e+01 [+4.25]
+  ReML Iteration 2                      :        ...7.934473e-01 [+4.50]
+  ReML Iteration 3                      :        ...3.769856e-02 [+4.75]
+  ReML Iteration 1                      :        ...2.111179e+01 [+2.25]
+  ReML Iteration 2                      :        ...1.406463e-01 [-5.50]
+  ReML Iteration 3                      :        ...1.330633e-02 [-13.25]
+
+SPM12: spm_spm (v6842)                             03:50:41 - 08/05/2019
+========================================================================
+Chunk   1/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   3/12                            :                  ...processing                       ...doneChunk   4/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...doneChunk   7/12                            :                  ...processing                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  11/12                            :                  ...processing                       ...doneChunk  12/12                            :                  ...processing                       ...done
+Spatial non-sphericity (over scans)     :      ...estimating derivatives ...writing resels/voxel image                       ...done
+Saving SPM.mat                          :                     ...writing                       ...done
+Completed                               :          03:52:29 - 08/05/2019
+Done
+Done    'Model estimation'
+Done
+

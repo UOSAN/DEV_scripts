@@ -1,0 +1,55 @@
+-------------------------------------------------------------------------------
+DEV007
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/ppc/smooth/smooth_WTP.m
+-------------------------------------------------------------------------------
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+------------------------------------------------------------------------
+Smoothing wave 1
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Gunzip Files'
+Failed  'Gunzip Files'
+Output argument "out" (and maybe others) not assigned during call to "cfg_run_gunzip_files".
+
+No executable modules, but still unresolved dependencies or incomplete module inputs.
+The following modules did not run:
+Failed: Gunzip Files
+Skipped: Expand image frames
+Skipped: Smooth
+Skipped: File Selector (Batch Mode)
+Skipped: Gunzip Files
+Skipped: Expand image frames
+Skipped: Smooth
+Skipped: File Selector (Batch Mode)
+Skipped: Gunzip Files
+Skipped: Expand image frames
+Skipped: Smooth
+Skipped: File Selector (Batch Mode)
+Skipped: Gunzip Files
+Skipped: Expand image frames
+Skipped: Smooth
+Skipped: Move/Delete Files
+
+{Error using MATLABbatch system
+Job execution failed. The full log of this run can be found in MATLAB command
+window, starting with the lines (look for the line showing the exact #job as
+displayed in this error message)
+------------------
+Running job #1
+------------------
+} 

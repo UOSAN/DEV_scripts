@@ -1,0 +1,158 @@
+INFO:dcm2bids:--- dcm2bids start ---
+INFO:dcm2bids:subprocess: dcm2niix
+INFO:dcm2bids:
+Chris Rorden's dcm2niiX version v1.0.20171215 GCC5.3.1 (64-bit Linux)
+usage: dcm2niix [options] <in_folder>
+ Options :
+  -1..-9 : gz compression level (1=fastest..9=smallest, default 6)
+  -b : BIDS sidecar (y/n/o(o=only: no NIfTI), default y)
+   -ba : anonymize BIDS (y/n, default y)
+  -c : comment stored as NIfTI aux_file (up to 24 characters)
+  -d : diffusion volumes sorted by b-value (y/n, default n)
+  -f : filename (%a=antenna  (coil) number, %c=comments, %d=description, %e echo number, %f=folder name, %i ID of patient, %j seriesInstanceUID, %k studyInstanceUID, %m=manufacturer, %n=name of patient, %p=protocol, %s=series number, %t=time, %u=acquisition number, %v=vendor, %x=study ID; %z sequence name; default '%3s_%f_%p_%t')
+  -h : show help
+  -i : ignore derived, localizer and 2D images (y/n, default n)
+  -m : merge 2D slices from same series regardless of study time, echo, coil, orientation, etc. (y/n, default n)
+  -n : only convert this series number - can be used up to 16 times (default convert all)
+  -o : output directory (omit to save to input folder)
+  -p : Philips precise float (not display) scaling (y/n, default y)
+  -s : single file mode, do not convert other images in folder (y/n, default n)
+  -t : text notes includes private patient details (y/n, default n)
+  -u : up-to-date check
+  -v : verbose (n/y or 0/1/2 [no, yes, logorrheic], default 0)
+  -x : crop (y/n, default n)
+  -z : gz compress images (y/i/n/3, default y) [y=pigz, i=internal, n=no, 3=no,3D]
+ Defaults file : /home/dcosme/.dcm2nii.ini
+ Examples :
+  dcm2niix /Users/chris/dir
+  dcm2niix -c "my comment" /Users/chris/dir
+  dcm2niix -o /users/cr/outdir/ -z y ~/dicomdir
+  dcm2niix -f %p_%s -b y -ba n ~/dicomdir
+  dcm2niix -f mystudy%s ~/dicomdir
+  dcm2niix -o "~/dir with spaces/dir" ~/dicomdir
+
+INFO:dcm2bids:dcm2niix:version: v1.0.20171215
+INFO:dcm2bids:participant: DEV075
+INFO:dcm2bids:session: wave2
+INFO:dcm2bids:config: /projects/sanlab/shared/DEV/DEV_scripts/org/bidsQC/conversion/study_config.json
+INFO:dcm2bids:BIDS directory: /projects/sanlab/shared/DEV/bids_data
+INFO:dcm2bids:
+INFO:dcm2bids:--- running dcm2niix ---
+INFO:dcm2bids:subprocess: dcm2niix -b y -ba y -z y -f '%3s_%f_%p_%t' -o /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2 /projects/lcni/dcm/sanlab/Berkman/DEV/DEV075_20190604_135615
+INFO:dcm2bids:
+Chris Rorden's dcm2niiX version v1.0.20171215 GCC5.3.1 (64-bit Linux)
+Found 2471 DICOM image(s)
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 141 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/005_DEV075_20190604_135615_ROC1_20190604135616 (100x100x72x141)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/005_DEV075_20190604_135615_ROC1_20190604135616.nii"
+Convert 176 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/007_DEV075_20190604_135615_mprage_20190604135616 (256x256x176x1)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/007_DEV075_20190604_135615_mprage_20190604135616.nii"
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/020_DEV075_20190604_135615_se_epi_fieldmap_ap_20190604135616 (104x104x72x1)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/020_DEV075_20190604_135615_se_epi_fieldmap_ap_20190604135616.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 141 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/006_DEV075_20190604_135615_ROC2_20190604135616 (100x100x72x141)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/006_DEV075_20190604_135615_ROC2_20190604135616.nii"
+slices not stacked: orientation varies (localizer?) [-0.0139159 0.995639 0.0922466 0.0555179 0.0928825 -0.994128] != [-0.0277014 0.938431 0.344354 0.0500852 0.345357 -0.937134]
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/002_DEV075_20190604_135615_aa_scout_20190604135616 (162x162x1x1)
+Warning: Check that 2D images are not mirrored.
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/002_DEV075_20190604_135615_aa_scout_20190604135616.nii"
+slices not stacked: orientation varies (localizer?) [-0.0277014 0.938431 0.344354 0.0500852 0.345357 -0.937134] != [-0.566056 0.754004 0.333255 0.0367891 0.426958 -0.903523]
+Convert 2 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/002_DEV075_20190604_135615_aa_scout_20190604135616a (162x162x2x1)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/002_DEV075_20190604_135615_aa_scout_20190604135616a.nii"
+slices not stacked: orientation varies (localizer?) [-0.566056 0.754004 0.333255 0.0367891 0.426958 -0.903523] != [0.539942 0.752308 0.377486 0.0367891 0.426958 -0.903523]
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/002_DEV075_20190604_135615_aa_scout_20190604135616b (162x162x1x1)
+Warning: Check that 2D images are not mirrored.
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/002_DEV075_20190604_135615_aa_scout_20190604135616b.nii"
+slices not stacked: orientation varies (localizer?) [0.539942 0.752308 0.377486 0.0367891 0.426958 -0.903523] != [-0.0277014 0.938431 0.344354 0.0500852 0.345357 -0.937134]
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/002_DEV075_20190604_135615_aa_scout_20190604135616c (162x162x1x1)
+Warning: Check that 2D images are not mirrored.
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/002_DEV075_20190604_135615_aa_scout_20190604135616c.nii"
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/021_DEV075_20190604_135615_se_epi_fieldmap_pa_20190604135616 (104x104x72x1)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/021_DEV075_20190604_135615_se_epi_fieldmap_pa_20190604135616.nii"
+Convert 176 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/008_DEV075_20190604_135615_mprage_20190604135616 (256x256x176x1)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/008_DEV075_20190604_135615_mprage_20190604135616.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 414 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/011_DEV075_20190604_135615_Resting_1_20190604135616 (84x84x60x414)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/011_DEV075_20190604_135615_Resting_1_20190604135616.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 414 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/017_DEV075_20190604_135615_Resting_2_20190604135616 (84x84x60x414)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/017_DEV075_20190604_135615_Resting_2_20190604135616.nii"
+Convert 128 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/001_DEV075_20190604_135615_aa_scout_20190604135616 (160x160x128x1)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/001_DEV075_20190604_135615_aa_scout_20190604135616.nii"
+slices not stacked: orientation varies (localizer?) [0.999532 0.00345735 0.0303807 0.0299289 0.0928244 -0.995233] != [0.99875 0.00646577 0.0495672 0.0471545 0.207193 -0.977163]
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/003_DEV075_20190604_135615_aa_scout_20190604135616 (162x162x1x1)
+Warning: Check that 2D images are not mirrored.
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/003_DEV075_20190604_135615_aa_scout_20190604135616.nii"
+slices not stacked: orientation varies (localizer?) [0.99875 0.00646577 0.0495672 0.0471545 0.207193 -0.977163] != [0.998361 0.00871284 0.0565684 0.0555179 0.0928825 -0.994128]
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/003_DEV075_20190604_135615_aa_scout_20190604135616a (162x162x1x1)
+Warning: Check that 2D images are not mirrored.
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/003_DEV075_20190604_135615_aa_scout_20190604135616a.nii"
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/003_DEV075_20190604_135615_aa_scout_20190604135616b (162x162x1x1)
+Warning: Check that 2D images are not mirrored.
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/003_DEV075_20190604_135615_aa_scout_20190604135616b.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 141 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/010_DEV075_20190604_135615_ROC4_20190604135616 (100x100x72x141)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/010_DEV075_20190604_135615_ROC4_20190604135616.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 212 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/019_DEV075_20190604_135615_SST1_20190604135616 (100x100x72x212)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/019_DEV075_20190604_135615_SST1_20190604135616.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 141 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/009_DEV075_20190604_135615_ROC3_20190604135616 (100x100x72x141)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/009_DEV075_20190604_135615_ROC3_20190604135616.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 93 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/015_DEV075_20190604_135615_WTP3_20190604135616 (100x100x72x93)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/015_DEV075_20190604_135615_WTP3_20190604135616.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 93 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/013_DEV075_20190604_135615_WTP1_20190604135616 (100x100x72x93)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/013_DEV075_20190604_135615_WTP1_20190604135616.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 93 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/016_DEV075_20190604_135615_WTP4_20190604135616 (100x100x72x93)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/016_DEV075_20190604_135615_WTP4_20190604135616.nii"
+slices not stacked: orientation varies (localizer?) [0.99881 0.0132658 0.0469376 -0.0320264 0.904174 0.425961] != [0.999532 0.00345735 0.0303807 -0.00626093 0.995677 0.0926776]
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/004_DEV075_20190604_135615_aa_scout_20190604135616 (162x162x1x1)
+Warning: Check that 2D images are not mirrored.
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/004_DEV075_20190604_135615_aa_scout_20190604135616.nii"
+slices not stacked: orientation varies (localizer?) [0.999532 0.00345735 0.0303807 -0.00626093 0.995677 0.0926776] != [0.998361 0.00871284 0.0565684 -0.0110109 0.999121 0.04044]
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/004_DEV075_20190604_135615_aa_scout_20190604135616a (162x162x1x1)
+Warning: Check that 2D images are not mirrored.
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/004_DEV075_20190604_135615_aa_scout_20190604135616a.nii"
+Convert 1 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/004_DEV075_20190604_135615_aa_scout_20190604135616b (162x162x1x1)
+Warning: Check that 2D images are not mirrored.
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/004_DEV075_20190604_135615_aa_scout_20190604135616b.nii"
+slices stacked despite varying acquisition numbers (if this is not desired please recompile)
+Convert 93 DICOM as /projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/014_DEV075_20190604_135615_WTP2_20190604135616 (100x100x72x93)
+compress: "/usr/bin/pigz" -n -f -6 "/projects/sanlab/shared/DEV/bids_data/tmp_dcm2bids/sub-DEV075_ses-wave2/014_DEV075_20190604_135615_WTP2_20190604135616.nii"
+Conversion required 630.978159 seconds (11.405741 for core code).
+
+INFO:dcm2bids:
+INFO:dcm2bids:Sidecars matching:
+INFO:dcm2bids:NO MATCH        001_DEV075_20190604_13..ut_20190604135616.json
+INFO:dcm2bids:NO MATCH        002_DEV075_20190604_13..ut_20190604135616.json
+INFO:dcm2bids:NO MATCH        002_DEV075_20190604_13..t_20190604135616a.json
+INFO:dcm2bids:NO MATCH        002_DEV075_20190604_13..t_20190604135616b.json
+INFO:dcm2bids:NO MATCH        002_DEV075_20190604_13..t_20190604135616c.json
+INFO:dcm2bids:NO MATCH        003_DEV075_20190604_13..ut_20190604135616.json
+INFO:dcm2bids:NO MATCH        003_DEV075_20190604_13..t_20190604135616a.json
+INFO:dcm2bids:NO MATCH        003_DEV075_20190604_13..t_20190604135616b.json
+INFO:dcm2bids:NO MATCH        004_DEV075_20190604_13..ut_20190604135616.json
+INFO:dcm2bids:NO MATCH        004_DEV075_20190604_13..t_20190604135616a.json
+INFO:dcm2bids:NO MATCH        004_DEV075_20190604_13..t_20190604135616b.json
+INFO:dcm2bids:MATCH           005_DEV075_20190604_13..C1_20190604135616.json
+INFO:dcm2bids:MATCH           006_DEV075_20190604_13..C2_20190604135616.json
+INFO:dcm2bids:NO MATCH        007_DEV075_20190604_13..ge_20190604135616.json
+INFO:dcm2bids:MATCH           008_DEV075_20190604_13..ge_20190604135616.json
+INFO:dcm2bids:MATCH           009_DEV075_20190604_13..C3_20190604135616.json
+INFO:dcm2bids:MATCH           010_DEV075_20190604_13..C4_20190604135616.json
+INFO:dcm2bids:MATCH           011_DEV075_20190604_13.._1_20190604135616.json
+INFO:dcm2bids:MATCH           013_DEV075_20190604_13..P1_20190604135616.json
+INFO:dcm2bids:MATCH           014_DEV075_20190604_13..P2_20190604135616.json
+INFO:dcm2bids:MATCH           015_DEV075_20190604_13..P3_20190604135616.json
+INFO:dcm2bids:MATCH           016_DEV075_20190604_13..P4_20190604135616.json
+INFO:dcm2bids:MATCH           017_DEV075_20190604_13.._2_20190604135616.json
+INFO:dcm2bids:MATCH           019_DEV075_20190604_13..T1_20190604135616.json
+INFO:dcm2bids:MATCH           020_DEV075_20190604_13..ap_20190604135616.json
+INFO:dcm2bids:MATCH           021_DEV075_20190604_13..pa_20190604135616.json
+INFO:dcm2bids:
+INFO:dcm2bids:Checking if a description matches several sidecars ...
+INFO:dcm2bids:
+INFO:dcm2bids:moving acquisitions into BIDS output directory

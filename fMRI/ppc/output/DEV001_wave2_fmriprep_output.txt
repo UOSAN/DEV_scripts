@@ -1,0 +1,362 @@
+
+fMRIprep on DEV001_wave2
+
+Container: /projects/sanlab/shared/containers/fmriprep-latest-2018-09-05.simg
+
+Subject directory: /projects/sanlab/shared/DEV/bids_data
+
+Starting on: ROC
+
+
+191106-14:56:24,64 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV001'].
+      * Run identifier: 20191106-145624_3d95e06a-0f09-4b8a-aa22-668bdb7977cb.
+    
+191106-14:56:33,154 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/func/sub-DEV001_ses-wave1_task-ROC_acq-1_bold.nii.gz" (0.16 GB / 145 TRs). Memory resampled/largemem=0.64/0.88 GB.
+191106-14:56:33,718 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/func/sub-DEV001_ses-wave1_task-ROC_acq-1_bold.nii.gz found.
+191106-14:56:34,200 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+191106-14:56:35,393 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/func/sub-DEV001_ses-wave1_task-ROC_acq-2_bold.nii.gz" (0.16 GB / 145 TRs). Memory resampled/largemem=0.64/0.88 GB.
+191106-14:56:35,979 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/func/sub-DEV001_ses-wave1_task-ROC_acq-2_bold.nii.gz found.
+191106-14:56:36,521 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+191106-14:56:37,752 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/func/sub-DEV001_ses-wave1_task-ROC_acq-3_bold.nii.gz" (0.16 GB / 145 TRs). Memory resampled/largemem=0.64/0.88 GB.
+191106-14:56:38,305 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/func/sub-DEV001_ses-wave1_task-ROC_acq-3_bold.nii.gz found.
+191106-14:56:38,780 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+191106-14:56:39,990 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/func/sub-DEV001_ses-wave1_task-ROC_acq-4_bold.nii.gz" (0.16 GB / 145 TRs). Memory resampled/largemem=0.64/0.88 GB.
+191106-14:56:40,547 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/func/sub-DEV001_ses-wave1_task-ROC_acq-4_bold.nii.gz found.
+191106-14:56:41,23 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+191106-14:56:42,261 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave2/func/sub-DEV001_ses-wave2_task-ROC_acq-1_bold.nii.gz" (0.16 GB / 141 TRs). Memory resampled/largemem=0.62/0.84 GB.
+191106-14:56:42,565 nipype.workflow WARNING:
+	 SDC: no fieldmaps found or they were ignored (/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave2/func/sub-DEV001_ses-wave2_task-ROC_acq-1_bold.nii.gz).
+191106-14:56:42,863 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+191106-14:56:43,754 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave2/func/sub-DEV001_ses-wave2_task-ROC_acq-2_bold.nii.gz" (0.16 GB / 141 TRs). Memory resampled/largemem=0.62/0.84 GB.
+191106-14:56:44,177 nipype.workflow WARNING:
+	 SDC: no fieldmaps found or they were ignored (/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave2/func/sub-DEV001_ses-wave2_task-ROC_acq-2_bold.nii.gz).
+191106-14:56:44,474 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+191106-14:56:45,349 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave2/func/sub-DEV001_ses-wave2_task-ROC_acq-3_bold.nii.gz" (0.16 GB / 141 TRs). Memory resampled/largemem=0.63/0.85 GB.
+191106-14:56:45,656 nipype.workflow WARNING:
+	 SDC: no fieldmaps found or they were ignored (/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave2/func/sub-DEV001_ses-wave2_task-ROC_acq-3_bold.nii.gz).
+191106-14:56:45,978 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+191106-14:56:46,967 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave2/func/sub-DEV001_ses-wave2_task-ROC_acq-4_bold.nii.gz" (0.16 GB / 141 TRs). Memory resampled/largemem=0.63/0.85 GB.
+191106-14:56:47,408 nipype.workflow WARNING:
+	 SDC: no fieldmaps found or they were ignored (/projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave2/func/sub-DEV001_ses-wave2_task-ROC_acq-4_bold.nii.gz).
+191106-14:56:47,712 nipype.workflow IMPORTANT:
+	 Creating BOLD surface-sampling workflow.
+191106-14:56:50,527 nipype.workflow IMPORTANT:
+	 Works derived from this fMRIPrep execution should include the following boilerplate:
+
+
+Results included in this manuscript come from preprocessing
+performed using *fMRIPprep* 1.1.4
+(@fmriprep1; @fmriprep2; RRID:SCR_016216),
+which is based on *Nipype* 1.1.1
+(@nipype1; @nipype2; RRID:SCR_002502).
+
+Anatomical data preprocessing
+
+: A total of 2 T1-weighted (T1w) images were found within the input
+BIDS dataset.
+All of them were corrected for intensity non-uniformity (INU)
+using `N4BiasFieldCorrection` [@n4, ANTs 2.2.0].
+A T1w-reference map was computed after registration of
+2 T1w images (after INU-correction) using
+`mri_robust_template` [FreeSurfer 6.0.1, @fs_template].
+The T1w-reference was then skull-stripped using `antsBrainExtraction.sh`
+(ANTs 2.2.0), using OASIS as target template.
+Brain surfaces were reconstructed using `recon-all` [FreeSurfer 6.0.1,
+RRID:SCR_001847, @fs_reconall], and the brain mask estimated
+previously was refined with a custom variation of the method to reconcile
+ANTs-derived and FreeSurfer-derived segmentations of the cortical
+gray-matter of Mindboggle [RRID:SCR_002438, @mindboggle].
+Spatial normalization to the ICBM 152 Nonlinear Asymmetrical
+template version 2009c [@mni, RRID:SCR_008796] was performed
+through nonlinear registration with `antsRegistration`
+[ANTs 2.2.0, RRID:SCR_004757, @ants], using
+brain-extracted versions of both T1w volume and template.
+Brain tissue segmentation of cerebrospinal fluid (CSF),
+white-matter (WM) and gray-matter (GM) was performed on
+the brain-extracted T1w using `fast` [FSL 5.0.9, RRID:SCR_002823,
+@fsl_fast].
+
+
+Functional data preprocessing
+
+: For each of the 8 BOLD runs found per subject (across all
+tasks and sessions), the following preprocessing was performed.
+First, a reference volume and its skull-stripped version were generated
+using a custom methodology of *fMRIPrep*.
+Head-motion parameters with respect to the BOLD reference
+(transformation matrices, and six corresponding rotation and translation
+parameters) are estimated before any spatiotemporal filtering using
+`mcflirt` [FSL 5.0.9, @mcflirt].
+The BOLD time-series (including slice-timing correction when applied)
+were resampled onto their original, native space by applying
+a single, composite transform to correct for head-motion and
+susceptibility distortions.
+These resampled BOLD time-series will be referred to as *preprocessed
+BOLD in original space*, or just *preprocessed BOLD*.
+The BOLD reference was then co-registered to the T1w reference using
+`bbregister` (FreeSurfer) which implements boundary-based registration [@bbr].
+Co-registration was configured with nine degrees of freedom to account
+for distortions remaining in the BOLD reference.
+The BOLD time-series, were resampled to surfaces on the following
+spaces: *fsaverage5*, *fsnative*.
+The BOLD time-series were resampled to MNI152NLin2009cAsym standard space,
+generating a *preprocessed BOLD run in MNI152NLin2009cAsym space*.
+Several confounding time-series were calculated based on the
+*preprocessed BOLD*: framewise displacement (FD), DVARS and
+three region-wise global signals.
+FD and DVARS are calculated for each functional run, both using their
+implementations in *Nipype* [following the definitions by @power_fd_dvars].
+The three global signals are extracted within the CSF, the WM, and
+the whole-brain masks.
+Additionally, a set of physiological regressors were extracted to
+allow for component-based noise correction [*CompCor*, @compcor].
+Principal components are estimated after high-pass filtering the
+*preprocessed BOLD* time-series (using a discrete cosine filter with
+128s cut-off) for the two *CompCor* variants: temporal (tCompCor)
+and anatomical (aCompCor).
+Six tCompCor components are then calculated from the top 5% variable
+voxels within a mask covering the subcortical regions.
+This subcortical mask is obtained by heavily eroding the brain mask,
+which ensures it does not include cortical GM regions.
+For aCompCor, six components are calculated within the intersection of
+the aforementioned mask and the union of CSF and WM masks calculated
+in T1w space, after their projection to the native space of each
+functional run (using the inverse BOLD-to-T1w transformation).
+The head-motion estimates calculated in the correction step were also
+placed within the corresponding confounds file.
+All resamplings can be performed with *a single interpolation
+step* by composing all the pertinent transformations (i.e. head-motion
+transform matrices, susceptibility distortion correction when available,
+and co-registrations to anatomical and template spaces).
+Gridded (volumetric) resamplings were performed using `antsApplyTransforms` (ANTs),
+configured with Lanczos interpolation to minimize the smoothing
+effects of other kernels [@lanczos].
+Non-gridded (surface) resamplings were performed using `mri_vol2surf`
+(FreeSurfer).
+
+
+Functional data preprocessing
+
+: For each of the 8 BOLD runs found per subject (across all
+tasks and sessions), the following preprocessing was performed.
+First, a reference volume and its skull-stripped version were generated
+using a custom methodology of *fMRIPrep*.
+A deformation field to correct for susceptibility distortions was estimated
+based on two echo-planar imaging (EPI) references with opposing phase-encoding
+directions, using `3dQwarp` @afni (AFNI <ver>).
+Based on the estimated susceptibility distortion, an
+unwarped BOLD reference was calculated for a more accurate
+co-registration with the anatomical reference.
+Head-motion parameters with respect to the BOLD reference
+(transformation matrices, and six corresponding rotation and translation
+parameters) are estimated before any spatiotemporal filtering using
+`mcflirt` [FSL 5.0.9, @mcflirt].
+The BOLD time-series (including slice-timing correction when applied)
+were resampled onto their original, native space by applying
+a single, composite transform to correct for head-motion and
+susceptibility distortions.
+These resampled BOLD time-series will be referred to as *preprocessed
+BOLD in original space*, or just *preprocessed BOLD*.
+The BOLD reference was then co-registered to the T1w reference using
+`bbregister` (FreeSurfer) which implements boundary-based registration [@bbr].
+Co-registration was configured with nine degrees of freedom to account
+for distortions remaining in the BOLD reference.
+The BOLD time-series, were resampled to surfaces on the following
+spaces: *fsaverage5*, *fsnative*.
+The BOLD time-series were resampled to MNI152NLin2009cAsym standard space,
+generating a *preprocessed BOLD run in MNI152NLin2009cAsym space*.
+Several confounding time-series were calculated based on the
+*preprocessed BOLD*: framewise displacement (FD), DVARS and
+three region-wise global signals.
+FD and DVARS are calculated for each functional run, both using their
+implementations in *Nipype* [following the definitions by @power_fd_dvars].
+The three global signals are extracted within the CSF, the WM, and
+the whole-brain masks.
+Additionally, a set of physiological regressors were extracted to
+allow for component-based noise correction [*CompCor*, @compcor].
+Principal components are estimated after high-pass filtering the
+*preprocessed BOLD* time-series (using a discrete cosine filter with
+128s cut-off) for the two *CompCor* variants: temporal (tCompCor)
+and anatomical (aCompCor).
+Six tCompCor components are then calculated from the top 5% variable
+voxels within a mask covering the subcortical regions.
+This subcortical mask is obtained by heavily eroding the brain mask,
+which ensures it does not include cortical GM regions.
+For aCompCor, six components are calculated within the intersection of
+the aforementioned mask and the union of CSF and WM masks calculated
+in T1w space, after their projection to the native space of each
+functional run (using the inverse BOLD-to-T1w transformation).
+The head-motion estimates calculated in the correction step were also
+placed within the corresponding confounds file.
+All resamplings can be performed with *a single interpolation
+step* by composing all the pertinent transformations (i.e. head-motion
+transform matrices, susceptibility distortion correction when available,
+and co-registrations to anatomical and template spaces).
+Gridded (volumetric) resamplings were performed using `antsApplyTransforms` (ANTs),
+configured with Lanczos interpolation to minimize the smoothing
+effects of other kernels [@lanczos].
+Non-gridded (surface) resamplings were performed using `mri_vol2surf`
+(FreeSurfer).
+
+
+Many internal operations of *fMRIPrep* use
+*Nilearn* 0.4.2 [@nilearn, RRID:SCR_001362],
+mostly within the functional processing workflow.
+For more details of the pipeline, see [the section corresponding
+to workflows in *fMRIPrep*'s documentation](https://fmriprep.readthedocs.io/en/latest/workflows.html "FMRIPrep's documentation").
+
+
+### References
+
+
+191106-14:57:14,589 nipype.workflow WARNING:
+	 Some nodes exceed the total amount of memory available (9.77GB).
+191106-14:57:14,589 nipype.workflow WARNING:
+	 Some nodes demand for more threads than available (1).
+191106-14:57:15,451 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_opposite_wf.split" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_opposite_wf/split".
+191106-14:57:15,454 nipype.workflow INFO:
+	 [Node] Setting-up "_split0" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_opposite_wf/split/mapflow/_split0".
+191106-14:57:15,455 nipype.workflow INFO:
+	 [Node] Running "_split0" ("nipype.interfaces.fsl.utils.Split"), a CommandLine Interface with command:
+fslsplit /projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/fmap/sub-DEV001_ses-wave1_dir-pa_epi.nii.gz -t
+191106-14:57:16,47 nipype.workflow WARNING:
+	 [Node] Error on "_split0" (/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_opposite_wf/split/mapflow/_split0)
+191106-14:57:16,50 nipype.workflow WARNING:
+	 [Node] Error on "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_opposite_wf.split" (/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_opposite_wf/split)
+191106-14:57:16,613 nipype.workflow ERROR:
+	 Node split failed to run on host n222.
+191106-14:57:16,623 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/log/20191106-145624_3d95e06a-0f09-4b8a-aa22-668bdb7977cb/crash-20191106-145716-dcosme-split-c34b17b5-b790-4cab-927c-8c08e79b6c75.txt
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 480, in run
+    result = self._run_interface(execute=True)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 1259, in _run_interface
+    self.config['execution']['stop_on_first_crash'])))
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 1181, in _collate_results
+    (self.name, '\n'.join(msg)))
+Exception: Subnodes of node: split failed:
+Subnode 0 failed
+Error: Traceback (most recent call last):
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 106, in nodelist_runner
+    result = node.run(updatehash=updatehash)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 480, in run
+    result = self._run_interface(execute=True)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 564, in _run_interface
+    return self._run_command(execute)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 644, in _run_command
+    result = self._interface.run(cwd=outdir)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 523, in run
+    outputs = self.aggregate_outputs(runtime)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 597, in aggregate_outputs
+    predicted_outputs = self._list_outputs()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/fsl/utils.py", line 558, in _list_outputs
+    glob(os.path.join(os.getcwd(), outbase + ext)))
+
+FileNotFoundError: [Errno 2] No such file or directory
+
+
+191106-14:57:16,793 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.split" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/split".
+191106-14:57:16,795 nipype.workflow INFO:
+	 [Node] Setting-up "_split0" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/split/mapflow/_split0".
+191106-14:57:16,796 nipype.workflow INFO:
+	 [Node] Running "_split0" ("nipype.interfaces.fsl.utils.Split"), a CommandLine Interface with command:
+fslsplit /projects/sanlab/shared/DEV/bids_data/sub-DEV001/ses-wave1/fmap/sub-DEV001_ses-wave1_dir-ap_epi.nii.gz -t
+191106-14:57:16,956 nipype.workflow INFO:
+	 [Node] Finished "_split0".
+191106-14:57:16,958 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.split".
+191106-14:57:19,237 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.merge" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/merge".
+191106-14:57:19,253 nipype.workflow INFO:
+	 [Node] Running "merge" ("fmriprep.interfaces.freesurfer.StructuralReference"), a CommandLine Interface with command:
+echo Only one time point!
+191106-14:57:19,344 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.merge".
+191106-14:57:20,789 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.n4_mask" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/n4_mask".
+191106-14:57:20,791 nipype.workflow INFO:
+	 [Node] Running "n4_mask" ("fmriprep.interfaces.nilearn.MaskEPI")
+191106-14:57:22,222 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.n4_mask".
+191106-14:57:22,795 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.n4_correct" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/n4_correct".
+191106-14:57:22,797 nipype.workflow INFO:
+	 [Node] Running "n4_correct" ("nipype.interfaces.ants.segmentation.N4BiasFieldCorrection"), a CommandLine Interface with command:
+N4BiasFieldCorrection -d 3 --input-image /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/split/mapflow/_split0/vol0000.nii.gz --mask-image /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/n4_mask/vol0000_mask.nii.gz --output vol0000_corrected.nii.gz
+191106-14:57:26,854 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.n4_correct".
+191106-14:57:28,805 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass".
+191106-14:57:28,807 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_pass" ("nipype.interfaces.fsl.preprocess.BET"), a CommandLine Interface with command:
+bet /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/n4_correct/vol0000_corrected.nii.gz /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/vol0000_corrected_brain.nii.gz -f 0.20 -m
+191106-14:57:30,467 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass".
+191106-14:57:30,807 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate".
+191106-14:57:30,809 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_dilate" ("nipype.interfaces.fsl.maths.DilateImage"), a CommandLine Interface with command:
+fslmaths -dt char /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/vol0000_corrected_brain_mask.nii.gz -kernel sphere 6.0000 -dilF /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/vol0000_corrected_brain_mask_dil.nii.gz
+191106-14:57:34,457 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate".
+191106-14:57:34,815 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask".
+191106-14:57:34,817 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/vol0000_corrected_brain.nii.gz -mas /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/vol0000_corrected_brain_mask_dil.nii.gz /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask/vol0000_corrected_brain_masked.nii.gz
+191106-14:57:34,969 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask".
+191106-14:57:36,854 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.unifize" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/unifize".
+191106-14:57:36,856 nipype.workflow INFO:
+	 [Node] Running "unifize" ("nipype.interfaces.afni.utils.Unifize"), a CommandLine Interface with command:
+3dUnifize -clfrac 0.2 -rbt 18.3 65.0 90.0 -prefix uni.nii.gz -T2 -input /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/unifize/vol0000_corrected_brain_masked.nii.gz
+191106-14:57:42,823 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.unifize".
+191106-14:57:44,854 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/fixhdr_unifize".
+191106-14:57:44,855 nipype.workflow INFO:
+	 [Node] Running "fixhdr_unifize" ("niworkflows.interfaces.utils.CopyXForm")
+191106-14:57:44,926 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize".
+191106-14:57:46,842 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass" in "/tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass".
+191106-14:57:46,843 nipype.workflow INFO:
+	 [Node] Running "skullstrip_second_pass" ("nipype.interfaces.afni.preprocess.Automask"), a CommandLine Interface with command:
+3dAutomask -apply_prefix uni_xform_masked.nii.gz -dilate 1 -prefix uni_xform_mask.nii.gz /tmp/fmriprep_wf/single_subject_DEV001_wf/func_preproc_ses_wave1_task_ROC_acq_1_wf/sdc_wf/pepolar_unwarp_wf/prepare_epi_matching_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass/uni_xform.nii.gz
+191106-14:57:47,201 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV001_wf.func_preproc_ses_wave1_task_ROC_acq_1_wf.sdc_wf.pepolar_unwarp_wf.prepare_epi_matching_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass".

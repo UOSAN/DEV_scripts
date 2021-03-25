@@ -1,0 +1,5 @@
+-------------------------------------------------------------------------------
+001
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/fx.m
+-------------------------------------------------------------------------------
+/cm/local/apps/slurm/var/spool/job9619710/slurm_script: line 55: /Applications/MATLAB_R2015b.app/bin/matlab: No such file or directory
