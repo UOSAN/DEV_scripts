@@ -19,7 +19,7 @@ runFiles = dir(sprintf('%s/*%s*.mat', inputDir, filePattern));
 filesCell = struct2cell(runFiles);
 
 % initialize table
-eventtable  = cell2table(cell(0,6), 'VariableNames', {'subjectID', 'wave', 'run', 'rating', 'rt', 'condition'});
+eventtable  = cell2table(cell(0,7), 'VariableNames', {'file', 'subjectID', 'wave', 'run', 'rating', 'rt', 'condition'});
 
 %% Load sub runs and save names, onsets, and durations as .mat files
 files = dir(fullfile(inputDir, sprintf('%s_%s_*%s*.mat', sub, wave, filePattern)));
@@ -107,15 +107,27 @@ for j = 1:numel(runNames)
                     trials{2+rowNum,j+2} = length(onsets)-2;
 
                     %% Add subject data to table
-                    tmp.subjectID = cell(length(run_info.onsets),1);
+                    % pull data
+                    tmp.file = cell(length(run_info.responses(idxs_ratings)),1);
+                    tmp.file(:) = {subFileName(1)};
+                    tmp.subjectID = cell(length(run_info.responses(idxs_ratings)),1);
                     tmp.subjectID(:) = {sub};
-                    tmp.wave = cell(length(run_info.onsets),1);
+                    tmp.wave = cell(length(run_info.responses(idxs_ratings)),1);
                     tmp.wave(:) = {wave};
-                    tmp.run = cell(length(run_info.onsets),1);
+                    tmp.run = cell(length(run_info.responses(idxs_ratings)),1);
                     tmp.run(:) = {run};
-                    tmp.rating = run_info.responses';
-                    tmp.rt = run_info.rt';
-                    tmp.condition = run_info.tag;
+                    tmp.rt = run_info.rt(idxs_ratings)';
+                    tmp.condition = run_info.tag(idxs_ratings);
+
+                    % replace missing values if response during
+                    % fixation
+                    ratings = run_info.responses(idxs_ratings);
+                    fixationRatings = run_info.responses(idxs_ratings+1);
+                    missingRatings = find(cellfun(@isempty,ratings));
+                    ratings(missingRatings) = fixationRatings(missingRatings);
+                    tmp.rating = ratings';
+
+                    % convert to table
                     runtable = struct2table(tmp);
                     eventtable = vertcat(eventtable, runtable);
 
@@ -132,16 +144,10 @@ end
 
 % save missing trial info
 %missing(cellfun('isempty', missing)) = {NaN};
-table = cell2table(trials,'VariableNames',[{'subjectID'}, runNames{:}]);
-writetable(table,fullfile(writeDir, sprintf('trials_%s%s.csv', studyName, sub)),'Delimiter',',');
-fprintf('\nTrial info saved in %s\n', fullfile(writeDir, sprintf('trials_%s%s.csv', studyName, sub)))
-
-% save missing trial info
-%trials(cellfun('isempty', trials)) = {NaN};
 table = cell2table(trials,'VariableNames',[{'subjectID'}, {'wave'}, runNames{:}]);
-writetable(table,fullfile(writeDir, sprintf('trials_%s.csv', sub)),'Delimiter',',')
-fprintf('\nTrial info saved in %s\n', fullfile(writeDir, sprintf('trials_%s.csv', sub)))
+writetable(table,fullfile(writeDir, sprintf('trials_%s_1.csv', sub)),'Delimiter',',');
+fprintf('\nTrial info saved in %s\n', fullfile(writeDir, sprintf('trials_%s_1.csv', sub)))
 
 % save event info
-writetable(eventtable,fullfile(writeDir, sprintf('events_%s.csv', sub)),'Delimiter',',')
-fprintf('\nEvent info saved in %s\n', fullfile(writeDir, sprintf('events_%s.csv', sub)))
+writetable(eventtable,fullfile(writeDir, sprintf('events_%s_1.csv', sub)),'Delimiter',',')
+fprintf('\nEvent info saved in %s\n', fullfile(writeDir, sprintf('events_%s_1.csv', sub)))

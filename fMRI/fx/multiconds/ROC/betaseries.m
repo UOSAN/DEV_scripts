@@ -26,7 +26,7 @@ subjectID = subjectID(~cellfun(@isempty,regexp(subjectID, '[0-2]{1}[0-9]{2}')));
 fprintf(1, 'Excluded: %s\n', excluded{:})
 
 % initialize table
-eventtable  = cell2table(cell(0,6), 'VariableNames', {'subjectID', 'wave', 'run', 'rating', 'rt', 'condition'});
+eventtable  = cell2table(cell(0,7), 'VariableNames', {'file', 'subjectID', 'wave', 'run', 'rating', 'rt', 'condition'});
 
 %% Loop through subjects and runs and save names, onsets, and durations as .mat files
 for i = 1:numel(subjectID)
@@ -118,15 +118,27 @@ for i = 1:numel(subjectID)
                         trials{i+j+rowNum,k+2} = length(onsets)-2;
                         
                         %% Add subject data to table
-                        tmp.subjectID = cell(length(run_info.onsets),1);
+                        % pull data
+                        tmp.file = cell(length(run_info.responses(idxs_ratings)),1);
+                        tmp.file(:) = {subFileName(end)};
+                        tmp.subjectID = cell(length(run_info.responses(idxs_ratings)),1);
                         tmp.subjectID(:) = {sub};
-                        tmp.wave = cell(length(run_info.onsets),1);
+                        tmp.wave = cell(length(run_info.responses(idxs_ratings)),1);
                         tmp.wave(:) = {wave};
-                        tmp.run = cell(length(run_info.onsets),1);
+                        tmp.run = cell(length(run_info.responses(idxs_ratings)),1);
                         tmp.run(:) = {run};
-                        tmp.rating = run_info.responses';
-                        tmp.rt = run_info.rt';
-                        tmp.condition = run_info.tag;
+                        tmp.rt = run_info.rt(idxs_ratings)';
+                        tmp.condition = run_info.tag(idxs_ratings);
+                        
+                        % replace missing values if response during
+                        % fixation
+                        ratings = run_info.responses(idxs_ratings);
+                        fixationRatings = run_info.responses(idxs_ratings+1);
+                        missingRatings = find(cellfun(@isempty,ratings));
+                        ratings(missingRatings) = fixationRatings(missingRatings);
+                        tmp.rating = ratings';
+                        
+                        % convert to table
                         runtable = struct2table(tmp);
                         eventtable = vertcat(eventtable, runtable);
 
