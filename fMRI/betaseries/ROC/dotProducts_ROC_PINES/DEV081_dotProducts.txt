@@ -1,0 +1,80 @@
+DEV081 beta_0001.nii PINES.nii.gz 1.00467
+DEV081 beta_0002.nii PINES.nii.gz 1.41846
+DEV081 beta_0003.nii PINES.nii.gz -0.292277
+DEV081 beta_0004.nii PINES.nii.gz 0.695197
+DEV081 beta_0005.nii PINES.nii.gz 0.619528
+DEV081 beta_0006.nii PINES.nii.gz 0.0541485
+DEV081 beta_0007.nii PINES.nii.gz -0.206168
+DEV081 beta_0008.nii PINES.nii.gz -0.279341
+DEV081 beta_0009.nii PINES.nii.gz 1.5524
+DEV081 beta_0010.nii PINES.nii.gz 1.48673
+DEV081 beta_0011.nii PINES.nii.gz 2.3519
+DEV081 beta_0012.nii PINES.nii.gz 3.47539
+DEV081 beta_0013.nii PINES.nii.gz 2.01814
+DEV081 beta_0014.nii PINES.nii.gz 2.235
+DEV081 beta_0015.nii PINES.nii.gz 3.35554
+DEV081 beta_0016.nii PINES.nii.gz 2.16272
+DEV081 beta_0017.nii PINES.nii.gz 0.908538
+DEV081 beta_0018.nii PINES.nii.gz 0.938229
+DEV081 beta_0019.nii PINES.nii.gz 1.82725
+DEV081 beta_0020.nii PINES.nii.gz 1.84074
+DEV081 beta_0028.nii PINES.nii.gz 0.0155658
+DEV081 beta_0029.nii PINES.nii.gz 1.45327
+DEV081 beta_0030.nii PINES.nii.gz 0.241663
+DEV081 beta_0031.nii PINES.nii.gz -0.638694
+DEV081 beta_0032.nii PINES.nii.gz -0.294217
+DEV081 beta_0033.nii PINES.nii.gz 0.445139
+DEV081 beta_0034.nii PINES.nii.gz 1.15145
+DEV081 beta_0035.nii PINES.nii.gz 1.25692
+DEV081 beta_0036.nii PINES.nii.gz 1.31167
+DEV081 beta_0037.nii PINES.nii.gz 0.799414
+DEV081 beta_0038.nii PINES.nii.gz -0.0346504
+DEV081 beta_0039.nii PINES.nii.gz -1.52675
+DEV081 beta_0040.nii PINES.nii.gz 0.482478
+DEV081 beta_0041.nii PINES.nii.gz 0.53589
+DEV081 beta_0042.nii PINES.nii.gz 1.60232
+DEV081 beta_0043.nii PINES.nii.gz -0.249457
+DEV081 beta_0044.nii PINES.nii.gz -1.55755
+DEV081 beta_0045.nii PINES.nii.gz 2.50914
+DEV081 beta_0046.nii PINES.nii.gz 0.930179
+DEV081 beta_0047.nii PINES.nii.gz 0.609189
+DEV081 beta_0055.nii PINES.nii.gz 1.49982
+DEV081 beta_0056.nii PINES.nii.gz 0.529904
+DEV081 beta_0057.nii PINES.nii.gz 2.07093
+DEV081 beta_0058.nii PINES.nii.gz 1.51661
+DEV081 beta_0059.nii PINES.nii.gz -0.0724928
+DEV081 beta_0060.nii PINES.nii.gz 1.33575
+DEV081 beta_0061.nii PINES.nii.gz 0.212348
+DEV081 beta_0062.nii PINES.nii.gz -1.16583
+DEV081 beta_0063.nii PINES.nii.gz 0.4191
+DEV081 beta_0064.nii PINES.nii.gz 1.00081
+DEV081 beta_0065.nii PINES.nii.gz -0.0826567
+DEV081 beta_0066.nii PINES.nii.gz -0.60285
+DEV081 beta_0067.nii PINES.nii.gz 0.360248
+DEV081 beta_0068.nii PINES.nii.gz -0.0681283
+DEV081 beta_0069.nii PINES.nii.gz -0.6003
+DEV081 beta_0070.nii PINES.nii.gz 0.920765
+DEV081 beta_0071.nii PINES.nii.gz -0.907275
+DEV081 beta_0072.nii PINES.nii.gz -1.71493
+DEV081 beta_0073.nii PINES.nii.gz -0.086522
+DEV081 beta_0074.nii PINES.nii.gz -0.451145
+DEV081 beta_0082.nii PINES.nii.gz 48.5511
+DEV081 beta_0083.nii PINES.nii.gz 47.7854
+DEV081 beta_0084.nii PINES.nii.gz 49.0791
+DEV081 beta_0085.nii PINES.nii.gz
+DEV081 beta_0086.nii PINES.nii.gz
+DEV081 beta_0087.nii PINES.nii.gz
+DEV081 beta_0088.nii PINES.nii.gz
+DEV081 beta_0089.nii PINES.nii.gz
+DEV081 beta_0090.nii PINES.nii.gz
+DEV081 beta_0091.nii PINES.nii.gz
+DEV081 beta_0092.nii PINES.nii.gz
+DEV081 beta_0093.nii PINES.nii.gz
+DEV081 beta_0094.nii PINES.nii.gz
+DEV081 beta_0095.nii PINES.nii.gz
+DEV081 beta_0096.nii PINES.nii.gz
+DEV081 beta_0097.nii PINES.nii.gz
+DEV081 beta_0098.nii PINES.nii.gz
+DEV081 beta_0099.nii PINES.nii.gz
+DEV081 beta_0100.nii PINES.nii.gz
+DEV081 beta_0101.nii PINES.nii.gz
