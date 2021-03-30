@@ -12,3 +12,5 @@ org/bidsQC/bidsQC/logs_bidsQC/
 org/bidsQC/conversion/logs_dcm2bids/*
 org/bidsQC/conversion/logs_dcm2bids/
 org/bidsQC/conversion/logs_dcm2bids
+data/
+.Rhistory

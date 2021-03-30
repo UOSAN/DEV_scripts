@@ -1,0 +1,277 @@
+---
+title: "WTP descriptives"
+author: "Dani Cosme"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: show
+    df_print: paged
+    highlight: tango
+    theme: united
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+# load packages
+```{r}
+library(tidyverse)
+```
+
+# define palettes
+```{r}
+food = wesanderson::wes_palette("Zissou1", 2, "continuous")
+```
+
+# load and tidy data
+```{r}
+data = read.csv("~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/WTP/betaseries/events.csv", stringsAsFactors = FALSE) %>%
+  mutate(bid = ifelse(bid == "NULL", NA, bid),
+         bid = as.integer(bid),
+         health = as.factor(health),
+         liking = as.factor(liking)) %>%
+  filter(wave == 1)
+```
+
+# check responses
+Check if wrong buttons were used (i.e., not 5-8)
+
+* DEV002 = wrong button box (i.e. 1-4) used 
+* DEV007 = wrong button box (i.e. 1-4) used
+* DEV011 = code normally
+* DEV017 = exclude; can't tell if they're missed responses or incorrect placement of fingers
+* DEV019 = exclude; can't tell if they're missed responses or incorrect placement of fingers
+* DEV032 = code normally
+* DEV033 = incorrect placement of fingers; recode runs 1-3
+* DEV054 = exclude; technical error?
+* DEV061 = code normally
+
+```{r}
+subs = data %>%
+  mutate(bid = as.character(bid)) %>%
+  group_by(subjectID, run, bid) %>%
+  summarize(n = n()) %>%
+  spread(bid, n) %>%
+  mutate(messed = ifelse(!is.na(`2`), "yes", NA),
+         messed = ifelse(is.na(`5`) & !is.na(`<NA>`), "yes", messed)) %>%
+  filter(messed == "yes") %>% 
+  ungroup() %>% 
+  select(subjectID) %>% 
+  unique()
+
+data %>%
+  mutate(bid = as.character(bid)) %>%
+  group_by(subjectID, run, bid) %>%
+  summarize(n = n()) %>%
+  spread(bid, n) %>%
+  mutate(messed = ifelse(!is.na(`2`), "yes", NA),
+         messed = ifelse(is.na(`5`) & !is.na(`<NA>`), "yes", messed)) %>%
+  filter(subjectID %in% subs$subjectID)
+```
+
+# recode and exclude
+Exclusions
+
+* Didn't scan: DEV002, DEV007
+* MRI motion and data quality exclusions: DEV001, DEV020, DEV032, DEV047, DEV063, DEV067, DEV078
+* Button box exclusions: DEV017, DEV019, DEV054
+
+Recoding
+
+* DEV033: recode runs1-3, but if liking rating < 3, leave as missing
+```{r}
+data.ex = data %>%
+  filter(!subjectID %in% c("DEV002", "DEV007", "DEV001", "DEV020", "DEV032", "DEV047", "DEV063", "DEV067", "DEV078", "DEV017", "DEV019", "DEV054")) %>%
+  mutate(bid = ifelse(subjectID == "DEV033" & !run == "run4", bid - 1, bid),
+         bid = ifelse(subjectID == "DEV033" & !run == "run4" & is.na(bid) & liking_rating > 2, 8, bid),
+         bid = (bid - 5) / 2)
+```
+
+# repeated measures correlation between liking and bid value
+```{r}
+# correlation
+data.ex %>%
+  ggplot(aes(liking_rating, bid, color = health)) +
+    geom_point(position = "jitter", alpha = .1) + 
+    geom_smooth(method = "lm", size = 1.5) +
+    scale_color_manual(values = food) +
+    theme_minimal()
+
+# correlation by liking condition
+data.ex %>%
+  ggplot(aes(liking_rating, bid, color = health)) +
+    geom_point(position = "jitter", alpha = .1) + 
+    geom_smooth(method = "lm", size = 1.5) +
+    facet_grid(~liking) +
+    scale_color_manual(values = food) +
+    theme_minimal()
+
+# average correlation overlaid on individual correlations
+data.ex %>%
+  ggplot(aes(liking_rating, bid, color = health)) +
+    geom_line(aes(group = interaction(subjectID, health)), stat = "smooth", method = "lm", alpha = .15, se = FALSE) +
+    geom_line(stat = "smooth", method = "lm", size = 1.5) +
+    scale_color_manual(values = food) +
+    theme_minimal()
+
+# average correlation overlaid on individual correlations by liking condition
+data.ex %>%
+  ggplot(aes(liking_rating, bid, color = health)) +
+    geom_line(aes(group = interaction(subjectID, health)), stat = "smooth", method = "lm", alpha = .15, se = FALSE) +
+    geom_line(stat = "smooth", method = "lm", size = 1.5) +
+    facet_grid(~liking) +
+    scale_color_manual(values = food) +
+    theme_minimal()
+
+# healthy
+data.ex %>%
+  filter(health == "unhealthy") %>%
+  mutate(subjectID = as.factor(subjectID)) %>% 
+  select(subjectID, liking_rating, bid) %>%
+  rmcorr::rmcorr(subjectID, liking_rating, bid, .)
+
+# unhealthy
+data.ex %>%
+  filter(health == "unhealthy") %>%
+  mutate(subjectID = as.factor(subjectID)) %>% 
+  select(subjectID, liking_rating, bid) %>%
+  rmcorr::rmcorr(subjectID, liking_rating, bid, .)
+
+# 4 conditions separately
+data.ex %>%
+  mutate(subjectID = as.factor(subjectID)) %>% 
+  group_by(health, liking) %>%
+  select(subjectID, liking_rating, bid) %>%
+  do(rmcorr::rmcorr(subjectID, liking_rating, bid, .) %>%
+      tibble() %>%
+      rename("model" = ".") %>%
+      mutate(variable = c("r", "n", "p", "CI", "call", "vars")) %>%
+      filter(variable %in% c("r", "n", "p")) %>%
+      mutate(tidied = purrr::map(model, broom::tidy)) %>%
+      select(variable, tidied) %>%
+      unnest() %>%
+      spread(variable, x)) %>%
+      mutate_if(is.numeric, funs(round(., 2)))
+```
+
+# plot means as a function of health and liking condition
+```{r}
+data.ex %>%
+  mutate(liking_rating = (liking_rating - 1) / 2) %>%
+  gather(type, rating, bid, liking_rating) %>%
+  ggplot(aes(type, rating, fill = health, alpha = liking)) +
+    stat_summary(fun.y = mean, geom = "bar", position = position_dodge(width = 0.95)) +
+    stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(width = 0.95), width = 0) +
+    scale_alpha_discrete(range = c(.6, 1)) +
+    scale_fill_manual(values = food) +
+    scale_y_continuous(limits = c(0,1.5)) +
+    theme_minimal()
+
+data.ex %>%
+  ggplot(aes(bid, fill = health)) +
+    geom_histogram(position = "dodge", binwidth = .25) +
+    scale_fill_manual(values = food) +
+    theme_minimal()
+
+data.ex %>%
+  ggplot(aes(bid, fill = health, alpha = liking)) +
+    geom_histogram(position = "dodge", binwidth = .25) +
+    facet_grid(~liking) +
+    scale_alpha_discrete(range = c(.6, 1)) +
+    scale_fill_manual(values = food) +
+    theme_minimal()
+```
+
+# plot distribution of difference scores
+* positive diff = higher when bidding, negative diff = lower when bidding
+```{r}
+data.ex %>%
+  mutate(liking_rating = (liking_rating - 1) / 2,
+         diff = bid - liking_rating) %>%
+  ggplot(aes(diff, fill = health)) +
+    geom_histogram(position = "dodge", binwidth = .25) +
+    scale_fill_manual(values = food) +
+    labs(x = "difference (bid - liking)") +
+    theme_minimal()
+
+data.ex %>%
+  mutate(liking_rating = (liking_rating - 1) / 2,
+         diff = bid - liking_rating) %>%
+  ggplot(aes(diff, fill = health, alpha = liking)) +
+    geom_histogram(position = "dodge", binwidth = .25) +
+    facet_grid(~liking) +
+    scale_alpha_discrete(range = c(.6, 1)) +
+    scale_fill_manual(values = food) +
+    labs(x = "difference (bid - liking)") +
+    theme_minimal()
+```
+
+# self-control approach
+* bid lower on unhealthy foods
+* bid higher on healthy foods
+* positive diff = higher when bidding, negative diff = lower when bidding
+```{r}
+data.sc2 = data.ex %>%
+  mutate(liking_rating = (liking_rating - 1) / 2,
+         diff = bid - liking_rating,
+         selfcontrol_unhealthy = ifelse(health == "unhealthy" & diff < 0, "yes", "no"),
+         selfcontrol_healthy = ifelse(health == "healthy" & diff > 0, "yes", "no"),
+         selfcontrol = ifelse(selfcontrol_unhealthy == "yes" | selfcontrol_healthy == "yes", "yes", "no"))
+
+data.sc2 %>%
+  filter(!is.na(selfcontrol)) %>%
+  ggplot(aes(selfcontrol, diff, fill = health, alpha = liking)) +
+    stat_summary(fun.y = mean, geom = "bar", position = position_dodge(width = 0.95)) +
+    stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(width = 0.95), width = 0) +
+    scale_alpha_discrete(range = c(.6, 1)) +
+    scale_fill_manual(values = food) +
+    theme_minimal()
+
+data.sc2 %>%
+  filter(!is.na(selfcontrol)) %>%
+  ggplot(aes(diff, fill = health, alpha = liking)) +
+    geom_histogram(position = "dodge", binwidth = .25) +
+    facet_grid(~selfcontrol) +
+    scale_alpha_discrete(range = c(.6, 1)) +
+    scale_fill_manual(values = food) +
+    labs(x = "difference (bid - liking)") +
+    theme_minimal()
+```
+
+* bid lower on liked, unhealthy foods
+* bid higher on disliked, healthy foods
+* positive diff = higher when bidding, negative diff = lower when bidding
+```{r}
+data.sc = data.ex %>%
+  mutate(liking_rating = (liking_rating - 1) / 2,
+         diff = bid - liking_rating,
+         selfcontrol_unhealthy = ifelse(health == "unhealthy" & liking == "liked" & diff < 0, "yes", "no"),
+         selfcontrol_healthy = ifelse(health == "healthy" & liking == "disliked" & diff > 0, "yes", "no"),
+         selfcontrol = ifelse(selfcontrol_unhealthy == "yes" | selfcontrol_healthy == "yes", "yes", "no"))
+
+data.sc %>%
+  filter(!is.na(selfcontrol)) %>%
+  ggplot(aes(selfcontrol, diff, fill = health, alpha = liking)) +
+    stat_summary(fun.y = mean, geom = "bar", position = position_dodge(width = 0.95)) +
+    stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(width = 0.95), width = 0) +
+    scale_alpha_discrete(range = c(.6, 1)) +
+    scale_fill_manual(values = food) +
+    theme_minimal()
+
+data.sc %>%
+  filter(!is.na(selfcontrol)) %>%
+  ggplot(aes(diff, fill = health, alpha = liking)) +
+    geom_histogram(position = "dodge", binwidth = .25) +
+    facet_grid(~selfcontrol) +
+    scale_alpha_discrete(range = c(.6, 1)) +
+    scale_fill_manual(values = food) +
+    labs(x = "difference (bid - liking)") +
+    theme_minimal()
+```

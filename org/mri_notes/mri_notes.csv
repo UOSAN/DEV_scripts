@@ -1,501 +1,427 @@
-"subjectID","date","session","scanner_notes","sst","roc","wtp"
-"DEV001","2018-04-06",1,"","","",""
-"DEV001","2018-05-10",2,"Participant felt like he was uncomfortable in the scanner and had to be pulled out temporarily and fan turned on ( face felt hot)  ","Error with SST we did MPRAGE before SST   ","",""
-"DEV001","",3,"","","",""
-"DEV001","",4,"","","",""
-"DEV001","",5,"","","",""
-"DEV004","2018-04-16",1,"Actual order:  Auto align scout  WTP  MPRAGE  SST   Fieldmap   ROC (2 runs)  Restign state 1  ROC (2 runs)","We weren't sure if she was really hearing the beeps (we couldn't figure out how to play the volume on our end). We can check the behavioral data (e.g. SSRT) to make sure that the beeps were in fact being played","","There were a lot of images that didnt show up, there was just a black box instead. We first noticed in run 2 (about 6-7 trials); about half thr trials on run 3 were blank images.     Before run 4, dani manually repopulated the image folder; but there were still about half that were black"
-"DEV004","2018-05-15",2,"","good","good","good"
-"DEV004","2018-09-03",3,"","","ran 2x","ran 2x"
-"DEV004","2018-11-15",4,"runAuction did not work on Matlab. $1.50 given instead.","","",""
-"DEV004","",5,"","","",""
-"DEV005","2018-04-25",1,"","Participant did not hear beep throughout task. Decide on","",""
-"DEV005","2018-06-12",2,"","","",""
-"DEV005","2018-11-12",3,"","","",""
-"DEV005","",4,"","","",""
-"DEV005","",5,"","","",""
-"DEV006","2018-06-07",1,"","","",""
-"DEV006","",2,"","","",""
-"DEV006","",3,"","","",""
-"DEV006","",4,"","","",""
-"DEV006","",5,"","","",""
-"DEV008","2018-05-07",1,"","","",""
-"DEV008","2018-06-11",2,"Sleepy, not falling asleep but looks kind of close to it.","","Very sleepy. Mild wiggling of foot it seemed like.",""
-"DEV008","",3,"","","",""
-"DEV008","",4,"","","",""
-"DEV008","",5,"","","",""
-"DEV009","2018-04-28",1,"Ghosting images, worse on wtp. ","Ghosting in images","Trouble with roc concept in general  Ghosting images","Ghosting in images"
-"DEV009","2018-06-05",2,"","Left hand middle finger held down throughout many of trials? Button box might be getting stuck. ","",""
-"DEV009","2018-10-01",3,"","","",""
-"DEV009","2018-12-28",4,"Participant said they are hypoglycemic. ","","",""
-"DEV009","",5,"","","",""
-"DEV010","2018-05-09",1,"Did WTP (4 runs) followed by ROC (2 runs)   Order we went in was WTP, ROC, SST. Changed scanner order in mastersheet and in redcap to reflect actual order.  The participant has scoliosis so he had to sit up in between ROC and SST. had to do another auto-align scout  Participant prefers extra padding under the knee to alleviate back pain","Stop signal doesn't have enough healthy stim. Had errors.   The participant didn't mark enough unhealthy food as craved so Lauren rewrote the code...","",""
-"DEV010","2018-06-21",2,"experiencing discomfort from back and headaches. had to stop several times. made through WTP, ROC.     had to stop in between roc1 and 2.     skipped resting state 1 and 2 and fieldmap due to lack of time.","","",""
-"DEV010","2018-09-26",3,"","","","Did WTP, then ASA-24, then ROC, then SST due to technical difficulties. Matlab inn 252 being a fuckboi."
-"DEV010","2018-12-21",4,"","","",""
-"DEV010","",5,"","","",""
-"DEV011","2018-05-24",1,"Fell asleep several times. New dad, very tired. Did extra clinical scan.","","",""
-"DEV011","2018-06-27",2,"Falling asleep in MPRAGE, caused movement  looks like blood flow is causing the brain to 'pulse' meaning the movement was consistent throughout the scans. the operator said it could be due to blood flow pushing extra fluid into the brain","moving during scan   looks like blood flow is causing the brain to 'pulse'","looks like blood flow is causing the brain to 'pulse'  moving less but not great  ","moving during WTP 3 and 4  looks like blood flow is causing the brain to 'pulse' meaning the movement was consistent throughout the scans. the operator said it could be due to blood flow pushing extra fluid into the brain"
-"DEV011","2018-09-26",3,"","He and Stop signal did not get along. He pressed during the beep allot  ","I forgot to 'runGetStim' for the first part of roc. so I canceled as soon as i realized, fixed it and restarted the task  ",""
-"DEV011","2018-12-12",4,"","","",""
-"DEV011","",5,"","","",""
-"DEV012","2018-06-26",1,"heart rate monitor not charged","didn't hear beeps, forgot to test  ","ROC would not display at first, MPRAGE run first then two runs of ROC and then a resting state  ",""
-"DEV012","2018-08-06",2,"Scanning computer shut down in the middle of the scan? Had to reboot, took forever. ","","",""
-"DEV012","2018-10-17",3,"Didn't work on 252, had to use John Snow. Ran out of time, so she stayed after to complete WTP and SST","","",""
-"DEV012","2019-01-11",4,"","","","Did not answer first two bids of Run 1 due to phone ringing."
-"DEV012","",5,"","","",""
-"DEV013","2018-11-08",1,"projector screen is off in color - looks blue/pink in color","","Falling asleep occasionally   ROC 2 - wiggling feet/toes towards the end",""
-"DEV013","2018-12-10",2,"LCNI installed a new switch box. Does not work with current code.     Actual scan order  Scout  MPRAGE  Field maps   Resting state 1  Resting state 2   SST  ROC 1-4  WTP 1-4","Lots of wiggles and large movement spikes","run1- Lots of movement spikes  Run2 - was reminded to hold still, Still large movement spikes  Run 3 - was reminded to hold still, Still large movement spikes  Run 4 - not as much movement ","Wiggles during run 3 "
-"DEV013","2019-03-11",3,"","Had to restart because computer was muted.","",""
-"DEV013","",4,"","","",""
-"DEV013","",5,"","","",""
-"DEV014","2018-06-06",1,"All good!","","",""
-"DEV014","2018-07-09",2,"Did MPRAGE then SST because briefly had trouble with SST. ","","",""
-"DEV014","2018-11-20",3,"","","",""
-"DEV014","2019-02-12",4,"Questioned whether we'd done scanner tasks, when we told her we had, said she was intrigued what she was learning from them.","Frustrated by the task.","When brainstorming health consequences, came up with cancer & heart disease.",""
-"DEV014","",5,"","","",""
-"DEV015","2018-07-03",1,"","","","might have missed the first couple rounds of task? "
-"DEV015","2018-08-08",2,"","","",""
-"DEV015","2018-11-26",3,"Phone was turned off after first task. so no more interuptions","","Says its boring and now she is starving","Missed a few rounds in the middle due to phone going off and becoming distracted. phone put on silent. should not be an issue going forward."
-"DEV015","2019-02-11",4,"","","",""
-"DEV015","",5,"","","",""
-"DEV016","2018-07-09",1,"skipped resting state 2 due to time restraints","went fine, uninterrupted","Run 1 and Run 3, stopped and restarted midway. all from MRI scan issues/ aliasing.","Run 1, stopped and restarted midway"
-"DEV016","2018-08-30",2,"toes were wiggling through out scan. after the first actual resting state he began to move his head a little. late scan participant was very tired.  ","toe wiggles. but not effecting head  Falling asleep a little. had eyes closed off and on throughout   ","falling asleep a little. run 1 on","wiggles. "
-"DEV016","2018-11-30",3,"","","",""
-"DEV016","2019-03-09",4,"","","Brainstormed meaningful short-term health consequences of low energy and financial incentive (i.e., not wanting to waste money on unhealthy foods). For long-term, he stated that weight gain was the most meaningful.",""
-"DEV016","",5,"","","",""
-"DEV017","2018-10-25",1,"extension 2 screen not displaying - got a late start  switched first resting rate with field map","","ROC failed to trigger twice - 3rd time worked",""
-"DEV017","2018-11-26",2,"Had issues with screens displaying again, started a little late because of it.  Changed order to:  1) scout  2) ROC (2 runs)  3) MPRAGE  4) Fieldmap  5) ROC (2 runs)  6) Resting state 1  7) SST  8) Resting State 2  9) WTP","","",""
-"DEV017","2019-03-26",3,"","","",""
-"DEV017","",4,"","","",""
-"DEV017","",5,"","","",""
-"DEV018","2018-10-17",1,"did MPRAGE first while fixing technical difficulties with the projector. Actual run sequence:   MPRAGE  ROC (2 runs)  Fieldmap  ROC(2 runs)  WTP (4 runs)  SST (1 run)  Resting State    *Had to cut one resting state scan since we were short on time","","",""
-"DEV018","2018-11-21",2,"Pulled her out to adjust head. (had a bun) between roc 2 and 3   Kept dozing off and moving  always better after a reminder  ","","wiggles during roc 1 , less wiggles during 2.   Large movement spike at the end of roc 3.  not as many wiggles during 4",""
-"DEV018","2019-02-12",3,"","","",""
-"DEV018","",4,"","","",""
-"DEV018","",5,"","","",""
-"DEV019","2018-06-12",1,"","","","Run 3 - had eyes closed during calibration and missed first couple trials of runs of WTP run 3"
-"DEV019","2018-07-23",2,""," ","",""
-"DEV019","2018-10-23",3,"","had trouble running it at first. running fine now  ","delayed start on run 1. may have missed the first response",""
-"DEV019","2019-01-15",4,"","No issue (Output 1 may be in the wrong folder)  ","No issue","No issue"
-"DEV019","",5,"","","",""
-"DEV020","2018-06-26",1,"","","",""
-"DEV020","2018-08-07",2,"Both resting states were completed while technical difficulties were being solved. ","Had finger stuck on left hand button ran again  ","1. first run it stopped after 6 images, scanner was still running but matlab screen popped up  2. tried the first run again, stopped with one minute left on scanner. Restarted matlab and ran ROC2 instead  3. participant kept moving during first 20 seconds so we had to restart the scan several times  4. ran ROC 2 successfully but had an artifact due to movement ","Movement during first 20 seconds had to redo run 2"
-"DEV020","2018-12-17",3,"","","",""
-"DEV020","2019-02-08",4,"","","",""
-"DEV020","",5,"","","",""
-"DEV021","2018-12-10",1,"Scanner box having trouble, hardware issue. WTP1 didn't trigger 2x, had to bypass box and then it did work. Did MPRAGE first, ","","",""
-"DEV021","2019-01-11",2,"Had issues with earbuds. Scanner operator accidentally assigned her to DEV012 so if there is no scan two data check DEV012 for a scan on 1/11 (operator said they would fix it so hopefully this wont be an issue).    Scan order: scout, field maps, wtp1-4, mprage, roc 1-2, resting state 1, SST and resting state 2.   Quite allot of wiggles during resting states other than that no issuses.","no issues","","issues with earbuds. "
-"DEV021","2019-04-11",3,"","","","participant has a good grasp of task  "
-"DEV021","",4,"","","",""
-"DEV021","",5,"","","",""
-"DEV022","2018-07-03",1,"","","",""
-"DEV022","",2,"","","",""
-"DEV022","",3,"","","",""
-"DEV022","",4,"","","",""
-"DEV022","",5,"","","",""
-"DEV023","2018-07-25",1,"participant held extremely still. there were no issues with the scan  ","","",""
-"DEV023","2018-08-28",2,"Ended up pushing both resting state scans to the very end because we thought we would run out of time.     Final task order:   1) scout  2) ROC (2 runs)  3) MPRage  4) ROC (2 runs)  5) Field Map  6) SST (1 run)  7) WTP (4 runs)  8) Resting State 1  9) Resting State 2","said he 'could have done better' on SST","",""
-"DEV023","2018-12-21",3,"","","",""
-"DEV023","2019-03-27",4,"The participant will be returning from military leadership camp. He said he will be returning 'In the best shape of his life' and that his diet will be very strict because well its the military.  (tried to schedule before camp, a participant became ill)  The appointment was further delayed due to snow. Diet has returned to normal.  ","","",""
-"DEV023","",5,"","","",""
-"DEV024","2018-10-23",1,"","","",""
-"DEV024","2018-11-16",2,"","Projector was going in and out during SST","Falling asleep, especially ROC 2-4",""
-"DEV024","2019-02-11",3,"","","",""
-"DEV024","",4,"","","",""
-"DEV024","",5,"","","",""
-"DEV025","2018-08-27",1,"many wiggles. glasses could be pressing down  ","","wiggles. glasses bugging him","task froze during the end of the task (run 2) . We think button 6 on the right button box was jamming and delaying the program. we replaced the button box and are trying again   "
-"DEV025","2018-10-02",2,"Make sure glasses are set comfortably it helps with movement.   couldn't keep all that still. kept wiggling head and feet    ","","Moved during initial part of scan (run1,2,3). had to restart. Image Ghosted.  Keeps moving regardless of reminders",""
-"DEV025","2019-01-17",3,"","","",""
-"DEV025","2019-03-29",4,"","","Restless in general. Repetitive tapping of hands and feet. ","Started whistling while completing the task."
-"DEV025","",5,"","","",""
-"DEV026","2018-07-26",1,"shifted slightly in middle of scan, not sure how this affected images of his brain","","","may have used wrong buttons for first run  "
-"DEV026","2018-08-30",2,"1) Scout  2) WTP (4runs)  3) MPRage  4) ROC (2 runs)  5) Resting State 1  6) Roc (2 runs)  7) Resting state 2  8) SST (1 run)  9) Field map","said the beep was really quiet during practice beep; turned the volume up all the way but did not hear it at all during the task (data not reliable since he didn't hear the beep at all)    NOTE: realized after the fact that I had plugged in the wrong audio cable (pink microphone cable instead of green speaker cable), which is why the sound wasn't coming through at all. my mistake :/","",""
-"DEV026","2018-11-30",3,"","","",""
-"DEV026","2019-03-06",4,"Did not get to give $5 travel bonus during Session 3, please add in an extra $5 travel bonus for this session   -JE","","",""
-"DEV026","",5,"","","",""
-"DEV027","2018-11-02",1,"Restarted  wtp1 because her ring finger was pressing a button","","",""
-"DEV027","2018-12-06",2,"Was late to getting into the scanner so had to cut resting state 1-2    Actual scan order  Scout   WTP 1-4  MPrage  ROC 1-4  Field maps","no Sound in SST. had to cut after 20 min of trouble shooting. Could have been cable or code issues  ","No issue","no issue"
-"DEV027","2019-03-06",3,"","","",""
-"DEV027","",4,"","","",""
-"DEV027","",5,"","","",""
-"DEV028","2018-07-23",1,"Operator forgot to do the physiology portion of both resting states  Added two resting states at beginning of scan","","Pressing his index for 1 instead of thumb for round 1  Itch on his nose","Movement at beginning of run 2 "
-"DEV028","2018-08-22",2,"weird ROC issue at run 4","","Run 4, 2nd to last image of chocolate stayed on the screen for a long time, it also looked like he had a button held down but he didn't think he had a button held down. Then the scan ended up stopping before the actual task was over, so last trial didn't get scanned. ",""
-"DEV028","2018-12-14",3,"Spinach allergy so all spinach dishes will be rated low","","",""
-"DEV028","2019-02-20",4,"","","",""
-"DEV028","",5,"","","",""
-"DEV029","2018-08-08",1,"leg spasms during resting  was slowly scooting down during scan","","falling asleep slightly during run 3  kept closing eyes during run 4    ","falling asleep  little movement"
-"DEV029","2018-09-13",2,"High movement levels on FIRMM throughout, close to falling asleep in resting and MPRAGE.","","",""
-"DEV029","",3,"","","",""
-"DEV029","",4,"","","",""
-"DEV029","",5,"","","",""
-"DEV030","2018-07-30",1,"wiggles  ","little wiggels. not much","wiggles. scooted down during one session   almost accidentally re ran first run through, canceld and ran for number two.  4th - would not run propperly. tried again","in the wrong folder for the 3rd run. had to redo  "
-"DEV030","2018-09-04",2,"She was coughing and causing wiggles.   had to pull her out for water and redo Scout.","","wiggles due to cough in run 1   wouldnt start roc 4. had to restart","wiggles due to coughing throughout scan"
-"DEV030","2018-12-03",3,"","","",""
-"DEV030","2019-03-09",4,"","Participant had her phone on vibrate and it buzzed a few times during the experiment. She seemed distracted.","",""
-"DEV030","",5,"","","",""
-"DEV031","2018-10-02",1,"She held extremely still! Did great!","","","She was using her pinky for some of the responses.  "
-"DEV031","2018-11-06",2,"Had trouble connecting to the projector, had to reboot jon snow and projector. Late start  May have fallen asleep in resting state 1, lots of movement during that but was very still the rest of the time","","",""
-"DEV031","2019-02-04",3,"","","",""
-"DEV031","",4,"","","",""
-"DEV031","",5,"","","",""
-"DEV032","2018-07-11",1,"changed the tilt to - transfer of coronal to 32 deg  he was pretty anxious about the procedure, so we went through the process pretty slowly   ","seemed to be staying awake  NO beeps throughout entire task","the HR monitor fell off and caused some movement during the first dun through. fingers  were on 6789 so the responses will be off one.   End of second run lots of movement.  3rd run - sleepy    ","participant was sometimes closing eyes during 2nd run. dosing off.  Dosing off during run 3-4  "
-"DEV032","",2,"","","",""
-"DEV032","",3,"","","",""
-"DEV032","",4,"","","",""
-"DEV032","",5,"","","",""
-"DEV033","2018-07-12",1,"","audio issue. no beep at beginning of task. wouldn't work with audio cord plugged in. worked after restart of computer.     ","4th trial did not initially run and restarted the trial ","participant started using pinky. reminded for 4th task. was using index though pinky   "
-"DEV033","2018-08-14",2,"","","",""
-"DEV033","2018-11-14",3,"","","",""
-"DEV033","2019-02-08",4,"","","",""
-"DEV033","",5,"","","",""
-"DEV034","2018-08-10",1,"the scan operator is saying that there might be issues with coding the scanner data for people with larger heads because of the angle for the cutoff the fatty tissue from the neck and some portions of the cerebellum may wrap around to the front of the scan. Do we want to keep the 30 degree tilt? The scan operator did not feel comfortable messing with the tilt because she is a fill in.    Movement during the resting state    had to skip a resting state because scan before hand was running 15 min late  ","","","not much movement during1  little wiggles during 3-4  "
-"DEV034","",2,"","","",""
-"DEV034","",3,"","","",""
-"DEV034","",4,"","","",""
-"DEV034","",5,"","","",""
-"DEV035","2018-08-08",1,"Moved field map to be in between roc2 and wtp and shifted resting states down    Heart rate monitor fell off and participant put it back on best she could may not be on all the way for resting state 2 and SST","","First run of ROC suddenly quit within first minute. Quit Matlab and tried again and it worked. ",""
-"DEV035","2018-09-05",2,"Switched MPRAGE with resting state 2 because of time concerns  Field map after wtp  Resting state done at end","","",""
-"DEV035","2018-12-05",3,"","","",""
-"DEV035","2019-03-07",4,"","SST not completed due to technical difficulty.","",""
-"DEV035","",5,"","","",""
-"DEV036","2018-07-26",1,"breathing measuring thingy wasnt registering deep breaths","no issues. slight wiggles  ","big movement during number 4",""
-"DEV036","2018-08-27",2,"hair is visible in scan. in top of scan. may look weird.     Wiggled a few times. had to use a scout scan  ","was holding down the right index finger button. restarted the task.   She continued to occasionally hold down the right index finger    ","the task was running longer than the MRI was twice  ","wiggles  "
-"DEV036","2018-11-12",3,"Had to do tasks in order WTP-SST-ROC. Participant was pretty chatty and wanted to talk during tasks. ","","",""
-"DEV036","2019-02-05",4,"","","","didn't trigger at first"
-"DEV036","",5,"","","",""
-"DEV037","2018-09-27",1,"","","ROC1 scan ended 30 before the task did (pictures were still showing up on screen). We noticed he was pressing buttons multiple times during ROC2.     Moved feet and crossed legs in ROC3 caused him to move head  ",""
-"DEV037","",2,"","","",""
-"DEV037","",3,"","","",""
-"DEV037","",4,"","","",""
-"DEV037","",5,"","","",""
-"DEV038","2018-09-12",1,"Participant is sick with a cold so potential influence on responses","","Did ROC out of order because I was mistaken about which round we were on. The order we did it was ROC 1, ROC 3, ROC 2, ROC 4",""
-"DEV038","2018-10-16",2,"","","",""
-"DEV038","2019-01-16",3,"","","",""
-"DEV038","2019-04-10",4,"","","",""
-"DEV038","",5,"","","",""
-"DEV039","2018-08-22",1,"because he has such a large head the back of the scan may wrap around to the front  ","could barely hear the beep with machine going","Starting to doze off  ","slight movement  "
-"DEV039","2018-09-28",2,"No issues. some wiggles with button pushes  ","","",""
-"DEV039","2019-01-16",3,"","","",""
-"DEV039","2019-04-08",4,"","did not run on desktop, ran on jon snow.","did not run on desktop, ran on jon snow.",""
-"DEV039","",5,"","","",""
-"DEV040","2018-11-01",1,"Restarted ROC1 because she was using the wrong fingers at first and moving a lot. When we started again she was holding much more still and using the right fingers. Moved a lot during SST","Moving a lot during SST, seems to be moving whole body during certain button presses. ","",""
-"DEV040","2018-12-06",2,"","","",""
-"DEV040","2019-03-05",3,"","","Meaningful health consequences were: stomach ache & diabetes    Note: Participant stressed that the photos for the donut & chocolate category both included a significant amount of appealing and unappealing images of the foods. She wanted us to know this is going to influence her ratings and limit our results.",""
-"DEV040","",4,"","","",""
-"DEV040","",5,"","","",""
-"DEV041","2018-09-18",1,"May have closed eyes in resting state one  ","","","Run 2: moved head in between scan slightly because he felt something in the back of his head "
-"DEV041","2018-10-24",2,"Drunk coffee half an hour before scan to stay awake. Switched MPRAGE to between ROC. Put Resting state 1 & fieldmap after all ROC.","","",""
-"DEV041","2019-01-24",3,"","","",""
-"DEV041","2019-04-22",4,"","","Participant gave feedback that the quality of the image and presentation of food influenced his desire to eat the food. Images of food with white backgrounds or in odd formations (e.g., tall stacks of crackers) were less appealing than food with more detail shown (e.g., salt granules visible on chips).",""
-"DEV041","",5,"","","",""
-"DEV042","2018-10-25",1,"FIRMM was registering a LOT of movement throughout her scan, despite not actually seeing her move at all... I don't know if the sensors were picking up something different or what, but she was extremely still but it registered TONS of movement.","","",""
-"DEV042","2018-11-29",2,"","","",""
-"DEV042","2019-03-04",3,"No issue","","",""
-"DEV042","",4,"","","",""
-"DEV042","",5,"","","",""
-"DEV043","2018-09-26",1,"She has a bridge and a few crowns. There will be a small artifact on the scans. Nothing major","","Cough during ROC 2. ROC 4 didn't start. we had to restart it.",""
-"DEV043","2018-11-02",2,"Switched order to:  1) Scout  2) SST  3) MPRAGE  4) WTP (4 runs)  5) Fieldmap  6) ROC (2 runs)  7) Resting state 1  8) ROC (2 runs)  9) Resting state 2    High spikes on FIRMM throughout (above .8)","","",""
-"DEV043","2019-02-04",3,"","Participant was not fully ready to begin during first 2 trials.","",""
-"DEV043","",4,"","","",""
-"DEV043","",5,"","","",""
-"DEV044","2018-10-03",1,"consistent tremor. movement doesn't seem correlated with button pushes","","constant movement.","no issues run 1-4. there is a consistent movement pattern. nothing too bad, alway under .5MM"
-"DEV044","2018-11-07",2,"","","",""
-"DEV044","",3,"","","",""
-"DEV044","",4,"","","",""
-"DEV044","",5,"","","",""
-"DEV045","2019-04-12",1,"Actual Scan Order: Scout, WTP 1-4, MPRAGE, SST, Field maps, ROC 1-2.  Cut resting states 1 and 2 because we ran out of time.  More movement occurred towards the end of the scan.","Used thumbs instead of index fingers for entire task.","",""
-"DEV045","",2,"","","",""
-"DEV045","",3,"","","",""
-"DEV045","",4,"","","",""
-"DEV045","",5,"","","",""
-"DEV046","2018-10-12",1,"Was sick and coughed a few times. had trouble staying awake but other than that not many issues  ","Had to restart task. scanner error  ","",""
-"DEV046","2018-11-19",2,"Due to time constraints, the resting state 2 is moved to the end of the scan. ","","Late start, feeling a little bit sleepy. ",""
-"DEV046","2019-02-19",3,"","","Did runGetStim twice.",""
-"DEV046","",4,"","","",""
-"DEV046","",5,"","","",""
-"DEV047","2018-10-04",1,"Switched field map with resting state 2","","",""
-"DEV047","2018-11-14",2,"Corrected task order to:  1) scout  2) SST  3) MPRAGE  4) ROC (2 runs)  5) Fieldmap  6) Resting State 1  7) ROC (2 runs)  8) Resting state 2  9) WTP","","Really jerky movements, consistently off top of charts on FIRMM",""
-"DEV047","2019-03-16",3,"","restarted SST because hadn't heard beep 3/4 way through task. In the second run there wasn't a beep until 3/4 way through either, only heard 3 beeps during whole task. ","",""
-"DEV047","",4,"","","",""
-"DEV047","",5,"","","",""
-"DEV048","2018-09-17",1,"had to cut one resting state due to complications. (projector issues, and ear bud issues).  Had to rescout twice. couching, itch and earbuds falling out  Had to cut both resting states and ROC 4","wiggles. ","wiggles durning run two. Heart Monitor fell off.   Had to cut ROC 4 due to time","willingness to pay 3 has ALLOT of movement. couching fit. had to rescout for 4"
-"DEV048","2018-10-22",2,"","Seemed to be missing a lot of button presses. Had to restart the task because we weren't getting any button presses on the right hand, when re-launched still not getting a lot of button presses. ","",""
-"DEV048","2019-01-17",3,"Ran ROC-WTP-SST instead of SST-WTP-ROC.","","",""
-"DEV048","2019-04-24",4,"","","",""
-"DEV048","",5,"","","",""
-"DEV049","2018-10-30",1,"Very sleepy during scans, esp. last scans (SST)","","",""
-"DEV049","2018-12-04",2,"Participant sleeping through scan, or dozing off regularly. Missed several responses near end of WTP 4, missed many responses ROC1. Did SST after ROC1 because she was falling asleep so much, thought the beeps might help wake her up. ","Falling asleep mid way through.","Completely out during ROC 1, 2,3,4","Missed several responses near end of WTP4, moving a lot because falling asleep a lot "
-"DEV049","2019-03-11",3,"Coming off the flu, coughing & sneezing a lot while doing the tasks so that may have distracted her.","For some reason, after the tester beep there literally weren't any beeps until halfway through and then they all came at once.","",""
-"DEV049","",4,"","","",""
-"DEV049","",5,"","","",""
-"DEV050","2019-02-12",1,"Took a long time to get into a scanner because we had to cut off a piercing.    Actual scan order: SCOUTWTP 1-4, MPRAGE, SST, Field maps, ROC 1-2, Resting state, 1, Roc 2-3","Going very slow  ","Roc 3 - lots of wiggles  Roc 4 - some wiggles","Held still. did a great job"
-"DEV050","2019-03-19",2,"Shut eyes during MPRAGE, other than that really stable.","","",""
-"DEV050","",3,"","","",""
-"DEV050","",4,"","","",""
-"DEV050","",5,"","","",""
-"DEV051","2018-10-08",1,"Very good at not moving, hardly broke .3cm the entire scan. Likes one-third volume for SST","","",""
-"DEV051","2018-11-12",2,"","","",""
-"DEV051","2019-02-20",3,"","","Reported that processed meats (i.e. salami or prosciutto) are hard to think of long-term health consequences for.    Also reported that more physical health consequences (i.e. upset stomach or pain from cavities) are more meaningful to her. ",""
-"DEV051","",4,"","","",""
-"DEV051","",5,"","","",""
-"DEV052","2018-10-18",1,"mprage- participant started to fall asleep    Scan order  scout  roc 1&2  mprage  Roc 3&4  field maps  Re ran Roc 4  WTP 1 through 4  roc 2 - died, tried again, died  resting state  SST  Roc 2 - tried it again    ","no issues","run 1 - no issues  run2 - task ended early. not sure if scanner stalled or task failed. will try to run again  run 3  - task ended early. not sure if scanner stalled or task failed. will try to run again  run4 -  added 30 seconds onto scan. scan froze again. (maybe i didn't pull the correct devID number  ran Roc 4 again - went perfectly.         ","run1 - foot wiggles  3-4 no issues    Accidentally hit buttons twice on some occasions hence the auction being $3"
-"DEV052","2018-11-21",2,"","","",""
-"DEV052","2019-02-15",3,"","","",""
-"DEV052","",4,"","","",""
-"DEV052","",5,"","","",""
-"DEV053","2018-11-13",1,"","Moved a little","Switched first resting state with fieldmap ",""
-"DEV053","2018-12-13",2,"","Head movement with button pushes","1 & 2 - Wiggles   3 - large movement spikes - LOTS  ","1- movement spike"
-"DEV053","2019-03-12",3,"","","",""
-"DEV053","",4,"","","",""
-"DEV053","",5,"","","",""
-"DEV054","2018-10-18",1,"","","",""
-"DEV054","2018-11-19",2,"Participant started to get restless during the last bit of the scan (roc 2,3,4 and resting state 1,2)","Some movement with button pushes","run 3 wiggles  less wiggles in run4","Some movement with button pushes. reminded to hold still for button pushes for run two."
-"DEV054","2019-02-22",3,"","","",""
-"DEV054","",4,"","","",""
-"DEV054","",5,"","","",""
-"DEV055","2019-02-06",1,"Got cold - blanket was added during ROC","wiggling  throughout","roc 1 - massive wiggles. reminded as best we could  roc 2 - same as run 1  ","wiggles throughout "
-"DEV055","2019-03-15",2,"Lots of excess movement in the gray zone. Please remind often to keep movement to fingers only when pushing buttons.","","","1st run: she pressed pinky finger for 4 rating. this run was redone.  2nd run: restarted due to excess movement in first 30 seconds of the scan.  4th run: stopped halfway due to low battery. this run was redone."
-"DEV055","",3,"","","",""
-"DEV055","",4,"","","",""
-"DEV055","",5,"","","",""
-"DEV056","2018-10-19",1,"Once or twice off-the-chart movement on FIRM. Accidentally ran resting state 1 twice instead of running resting state 2 the second time, but they are functionally the same.","","",""
-"DEV056","2018-11-19",2,"Closed eyes <1 second 4 times in MPRAGE","","Lots of gray on run 2",""
-"DEV056","2019-02-15",3,"Participant said they were vegan. I don't know if that was mentioned at the beginning of the study or new to her.    PARTICIPANT DID NOT FAST  ","Might be additional button presses throughout the task. participant at one point was rapidly stroking the arrow keys.","Took out phone during ROC 1  ROC 2 - stoking/tapping keys. there will be extra button presses.  ",""
-"DEV056","",4,"","","",""
-"DEV056","",5,"","","",""
-"DEV057","2018-11-09",1,"","","",""
-"DEV057","2018-12-13",2,"Order: MPRage  ROC  Field Maps  ROC  Resting State  SST  Resting  WTP","","","1 - wiggles  2 - wiggles  "
-"DEV057","2019-03-14",3,"","","",""
-"DEV057","",4,"","","",""
-"DEV057","",5,"","","",""
-"DEV058","2018-11-28",1,"OVER EXPLAIN all scanner tasks for session 2. I went through verbal, qualtrics, and practice runs more than once. She still didn't understand the tasks.     Originally labeled wrong as DEV068, fixed. but there will be an extra 068 scout file   Falling asleep during MPRAGE  Had to cut resting state due to scan before running 10 min over.   Actual scan order  Scout, ROC1-4, MPRAGE, Field maps, WTP 1-4, Resting state 1, SST. ","","roc 1 - bunch of wiggles. also pushing the button really late.  Roc 2- better","WTP1 - foot wiggles, reminded again  "
-"DEV058","2019-01-04",2,"Fell asleep during resting state 1   ","some wiggles  Used thumbs for task, not index fingers  ","3: Some wiggles  4: big movement spikes","1) Wiggles with big movement spikes  2) lots of movement, missed one photo  3)  4) "
-"DEV058","2019-04-04",3,"Participant still struggles to understand tasks after verbal explanation and practice.  ","","late answers on first run","Slow to respond  "
-"DEV058","",4,"","","",""
-"DEV058","",5,"","","",""
-"DEV059","2018-11-14",1,"Did resting states at end because we weren't sure if we would have time for them but we did!","","",""
-"DEV059","2018-12-20",2,"operator ran AAScout not aa_scout. May be slightly different?  ","","1- wiggles. reminded to hold still  did better with wiggles","holds really still with very large spikes. I think the sponges are uncomfortable for her  "
-"DEV059","2019-04-02",3,"","","",""
-"DEV059","",4,"","","",""
-"DEV059","",5,"","","",""
-"DEV060","2019-01-08",1,"MPRAGE first, then SST because we were troubleshooting. ","","ROC 1 was still running after the scan stopped, killed the task. Don't think the data from ROC 1 will be useable",""
-"DEV060","2019-02-04",2,"","","",""
-"DEV060","",3,"","","",""
-"DEV060","",4,"","","",""
-"DEV060","",5,"","","",""
-"DEV061","2019-01-11",1,"Actual scan order: Scout, MPRAGE, WTP 1-4, Resting state 1,ROC 1-2, field map, ROC 3-4, Resting State 2.    Fell asleep during resting state 1.  SST would not run.","Issue with code, would not run","ROC 3 ran longer than the actual scan.","WTP 1- Some wiggles were recorded"
-"DEV061","2019-02-15",2,"Closed eyes for a few seconds twice during RS2.","","",""
-"DEV061","",3,"","","",""
-"DEV061","",4,"","","",""
-"DEV061","",5,"","","",""
-"DEV062","2019-03-04",1,"","","",""
-"DEV062","2019-04-02",2,"","","",""
-"DEV062","",3,"","","",""
-"DEV062","",4,"","","",""
-"DEV062","",5,"","","",""
-"DEV063","2018-12-07",1,"","","ROC2 didn't end, something wrong with data. ",""
-"DEV063","2019-01-11",2,"","Switched with WTP and ran as the third task due to technical difficulties.","","Ran tasks after ROC."
-"DEV063","2019-04-13",3,"","","Reported that he only cares about short term health consequences (heart burn).",""
-"DEV063","",4,"","","",""
-"DEV063","",5,"","","",""
-"DEV064","2019-01-15",1,"Makes excess movement when pushing buttons, remind to keep still and use 3 cushions under elbow.    Eyes closed during resting state 2.","","",""
-"DEV064","2019-03-04",2,"Cut 1 resting state due to time conflicts (scan only scheduled for 75 minutes and broken earbuds caused delay)   Moved fieldmap in between ROC2 and WTP  cut both resting states","","",""
-"DEV064","",3,"","","",""
-"DEV064","",4,"","","",""
-"DEV064","",5,"","","",""
-"DEV065","2019-02-14",1,"","Doing a great job of holding still.","some wiggles in ROC 2  some wiggles at the end of ROC 3",""
-"DEV065","2019-03-15",2,"","","",""
-"DEV065","",3,"","","",""
-"DEV065","",4,"","","",""
-"DEV065","",5,"","","",""
-"DEV066","2019-01-31",1,"Actual order: Scout, MPRAGE, SST, Field maps, WTP 1-4, resting state 1, ROC 1-2, resting state 2, ROC 3-4    resting state 1 - asleep  resting state 2 - asleep    The helmet was pressing against face by end of the scan. maybe use a smaller head cushion next time. ","","ROC 2 lots of wiggles  Roc 3 lots of wiggles. The pressure of helmet on forehead may be causing pain","WTP wouldn't trigger during the first run  Wiggles during run 3 and 4 "
-"DEV066","2019-03-08",2,"Resting state 1: Very still, no movement  Smaller head cushion worked much better.  Resting state 2: Some Wiggles","Some wiggles","ROC 1 and 2: Lots of wiggles  ROC 3: Lots of movement.  ROC 4: Fell asleep on and off during scan, lots of movement.","Run 1,2,4 had wiggles. Run 4 may not be usable."
-"DEV066","",3,"","","",""
-"DEV066","",4,"","","",""
-"DEV066","",5,"","","",""
-"DEV067","2019-01-16",1,"actual scan order: scout, MPRAGE, WTP 1, Field maps, ROC 1-4, WTP 2-4,  SST.  Cut both resting states  Verbally explained that she has an innate tendency to rank processed foods lower. ","","","Froze on WTP 1, ran Run 1 successfully  Froze on WTP 2 (twice) Moved on to next scan.    WTP2+ ran fine  "
-"DEV067","2019-02-20",2,"No matter the number of times the participant was reminded there were a lot of wiggles.   ","Lots of wiggles. Constant reminders that did nothing to help  ","More wiggles....  ","Wiggles. tried to remind a lot. only helped slightly"
-"DEV067","",3,"","","",""
-"DEV067","",4,"","","",""
-"DEV067","",5,"","","",""
-"DEV068","2019-01-25",1,"","","",""
-"DEV068","2019-03-01",2,"resting state one and two. insane amount of wiggles. both times.  Resting states completely unusable due to movement. (reminded participant to stay awake before each resting state)  Shifted down at some point during the scan, Head is not in the same position. ","wiggles.","lots of wiggles throughout all 4 runs. reminded participant several times.","wiggle run 1   Did better run 2-4"
-"DEV068","",3,"","","",""
-"DEV068","",4,"","","",""
-"DEV068","",5,"","","",""
-"DEV069","2019-02-01",1,"ROC:Participant has issues with using thumb, there may be more button presses during thumb presses.    Actual Scanner task order: Scout, ROC 1&2, MPRAGE, ROC 3&4, Fieldmap, SST, Resting State 1, WTP 1-2, Resting State 2, WTP 3-4","Kept hitting right index finger for left arrows and right middle finger for right arrows.","ROC1: Kept using a scale of 5 instead of 4. Using index finger through pinky.","WTP 1: Lots of wiggles at the end of scan.  WTP 2: Lots of movement throughout the whole scan.  WTP 3: Scan ended before the task ended."
-"DEV069","2019-03-07",2,"Actual scan order Scout, Field Maps, Roc 1 (rerun of roc 1 due to issues) Roc 2, (rerun of roc 2 due to issues), Scout, ROC 2-3, REsting state 1 SST, Scout (left to use the restroom), WTP 1-4    Participant has limited mobility in fingers and struggles with pushing just one button ","some wiggles at end ","had to rerun ROC 1 and 2 due to technical issues  Some wiggles roc 2 and 3","wiggles during the end of WTP run 2  Lots of wiggles all through run 3.   Wiggles at the start of run 4  "
-"DEV069","",3,"","","",""
-"DEV069","",4,"","","",""
-"DEV069","",5,"","","",""
-"DEV070","2019-01-28",1,"","","",""
-"DEV070","2019-03-04",2,"Fell asleep during resting state one and two","","Roc Run 3 wiggles","WTP run three crashed. reran "
-"DEV070","",3,"","","",""
-"DEV070","",4,"","","",""
-"DEV070","",5,"","","",""
-"DEV071","2019-04-11",1,"Hair artifact due to wet hair on scan.  During Resting state 1 participant fell asleep.  Actual Scan Order: Scout, MPRAGE, SST, WTP 1-4, Resting 1, ROC 1-2, ROC 3-4. Had to skip last resting state because of time.","","","During WTP 1, some foot wiggles were recorded."
-"DEV071","",2,"","","",""
-"DEV071","",3,"","","",""
-"DEV071","",4,"","","",""
-"DEV071","",5,"","","",""
-"DEV072","2019-03-12",1,"Was named 073 instead of 072. Aly will rename the file after the scan.","","",""
-"DEV072","2019-04-16",2,"Participant ID number could not be found in the LCNI. Participant ID number may have been deleted in The LCNI system or it could have been saved under a diferent DEV ID number  ","","ROC 1: Large movement spike at the start of ROC 1   ROC 2: restless movement, occasional large movement spike   ROC 3: wiggles at end  ROC 4: looking great ","Wome movement at the start and end of WTP-2  WTP - 4 Tiny spikes of movement "
-"DEV072","",3,"","","",""
-"DEV072","",4,"","","",""
-"DEV072","",5,"","","",""
-"DEV073","2019-03-07",1,"","","",""
-"DEV073","2019-04-12",2,"Resting state 1 - the pattern of movement is distinctly different even though the participant is awake and holding still.   The exact same pattern began in Resting state2. The participant shows no indication of movement or falling asleep ","Held still!  ","","Did AMAZING!"
-"DEV073","",3,"","","",""
-"DEV073","",4,"","","",""
-"DEV073","",5,"","","",""
-"DEV074","2019-03-01",1,"","","",""
-"DEV074","2019-03-30",2,"Actual scan order Scout, Field maps, ROC 1 (restart, not butten presses) ROC 1-2, MPRAGE, ROC 3-4, REsting state, SST, Resting state, WTP1-4.  Minimal wiggles but did a good job","Had to restart SST because I failed to do a sound check.","Had to restart ROC 1 because he was nit pressing the buttons","Some wiggles"
-"DEV074","",3,"","","",""
-"DEV074","",4,"","","",""
-"DEV074","",5,"","","",""
-"DEV075","",1,"","","",""
-"DEV075","",2,"","","",""
-"DEV075","",3,"","","",""
-"DEV075","",4,"","","",""
-"DEV075","",5,"","","",""
-"DEV076","2019-03-28",1,"Does really well at holding still. Mostly in the green range.","","",""
-"DEV076","",2,"","","",""
-"DEV076","",3,"","","",""
-"DEV076","",4,"","","",""
-"DEV076","",5,"","","",""
-"DEV077","2019-03-17",1,"","","",""
-"DEV077","2019-04-17",2,"Eyes closed about 3 seconds during RS 1 and RS 2","","",""
-"DEV077","",3,"","","",""
-"DEV077","",4,"","","",""
-"DEV077","",5,"","","",""
-"DEV078","2019-03-08",1,"Restarted resting 1 due to motion. Skip resting 2 due to time. ","","Re-started run 1 bc he moved right at the beginning of the scan, which caused ghosting ","run 4; Jolinda noted 'ghosting' on the images, but didn't stop the scan "
-"DEV078","2019-04-17",2,"Moved fieldmap between the ROCs due to time  ","","Lot of movement   Sleepy","Very sleepy - long periods of eyes closed   lots of movement    Had to redo WTP4 because the finger with the heart rate monitor was pressing a button down "
-"DEV078","",3,"","","",""
-"DEV078","",4,"","","",""
-"DEV078","",5,"","","",""
-"DEV079","2019-03-08",1,"Participant did a fantastic job at holding still A++","","Had to rerun roc 1 because I forgot to do run get stim  ","Holding amazingly still!  "
-"DEV079","2019-04-10",2,"Actual scan order: Scout, WTP, MPRAGE, SST, Fieldmaps, ROC (2 runs), Resting State 1, ROC (2 runs), Resting State 2. The order was changed in case we needed to cut a resting state to account for being on time. Held very still throughout the scan.","","",""
-"DEV079","",3,"","","",""
-"DEV079","",4,"","","",""
-"DEV079","",5,"","","",""
-"DEV080","2019-04-11",1,"Actual scanner order: Scout, ROC 1-2, MPRAGE, ROC 3-4, Resting state 1, SST, WTP 1-4, FieldMap.  -No Resting State 2  Resting state 1: Lots of movement for entire scan.","","Practice runs completed at scanner  ROC 1 & 2: Wiggles present","Used pinky accidentally for some of the bids, was given 1.50 extra at end of appointment instead of 2$."
-"DEV080","",2,"","","",""
-"DEV080","",3,"","","",""
-"DEV080","",4,"","","",""
-"DEV080","",5,"","","",""
-"DEV081","2019-03-16",1,"","","",""
-"DEV081","2019-04-19",2,"Make sure to use Input = 1, Response device = 2. Running short on time, moved Resting State 1 back to after WTP. Put resting state 2 after SST.","Had to restart because she couldn't see images. Re-connected cables & it worked after that.","",""
-"DEV081","",3,"","","",""
-"DEV081","",4,"","","",""
-"DEV081","",5,"","","",""
-"DEV082","2019-04-22",1,"Actual scan order: Scout, SST, MPRAGE, ROC (runs 1 & 2), Fieldmaps, Resting State 1. Stopped scan here to help participant. Then, Scout, ROC (runs 3 & 4), WTP (3 runs only). Had to cut Resting State 2 (ran out of time).","","Mentioned he was uncomfortable in the scanner, but willing to continue with the scan. LOTS OF MOVEMENT. Eventually, he asked to stop the scan to get out and stretch. Once he was back in the scanner we re-ran Scout before completing ROC runs 3 & 4.","Only did 3 runs (ran out of time). More movement during this task."
-"DEV082","",2,"","","",""
-"DEV082","",3,"","","",""
-"DEV082","",4,"","","",""
-"DEV082","",5,"","","",""
-"DEV083","2019-03-14",1,"","Said he could only hear it through one ear.","","Fell asleep at start, had to restart task and wake him up, but did good after that. Doing good on FIRMM."
-"DEV083","2019-04-19",2,"Great job holding still throughout the scan. Very sleepy, had a hard time staying awake.","","",""
-"DEV083","",3,"","","",""
-"DEV083","",4,"","","",""
-"DEV083","",5,"","","",""
-"DEV084","2019-03-21",1,"15 mins late due to the scan before ours staying longer to finish. Resting state 2 not completed","","",""
-"DEV084","2019-04-22",2,"Scan will come up as AP (head-foot) coded-coronals, instead of axially-coded. This is because his head is weirdly-shaped, it's more triangular than curved on top, peaks nearer to the nose than most, and is tilted up on the coronal axis. Medium movement on FIRMM throughout, slow breathing rate interfered.","","",""
-"DEV084","",3,"","","",""
-"DEV084","",4,"","","",""
-"DEV084","",5,"","","",""
-"DEV085","2019-04-21",1,"Actual scan order Scout, WTP 1-4, Field maps, Reran WTP 2  because of missing data, Resting state 1, MPRAGE, SST, REsting state 2, ROC 1-4.","SST froze. Ran resting state while matlab restarted","Participant became uncomfortable/pain but wanted to continue so there will be more movement ROC 1-4    Missed button box responses for some of ","WTP 1 - scan finished before task did. Missing the last two.   WTP 2-  scan finished before task did. Missing the last 4. The participant was holding down left thumb. Will rerun this one.   WTP 3&4  -  good"
-"DEV085","",2,"","","",""
-"DEV085","",3,"","","",""
-"DEV085","",4,"","","",""
-"DEV085","",5,"","","",""
-"DEV086","2019-04-15",1,"Significant movement during RS1 (has been consistently happening in previous RS scans so it might not be from the participant)","","",""
-"DEV086","",2,"","","",""
-"DEV086","",3,"","","",""
-"DEV086","",4,"","","",""
-"DEV086","",5,"","","",""
-"DEV087","2019-04-12",1,"Actual task order: Scout, ROC (1&2), MPRAGE, ROC (3&4), Rest 1, WTP, Rest 2, Fieldmaps, SST. Lots of wiggles, had trouble staying awake.","","ROC 1 & 2: continuous wiggles","Participant did a good job staying still during this task, some wiggles during the last run."
-"DEV087","",2,"","","",""
-"DEV087","",3,"","","",""
-"DEV087","",4,"","","",""
-"DEV087","",5,"","","",""
-"DEV088","",1,"","","",""
-"DEV088","",2,"","","",""
-"DEV088","",3,"","","",""
-"DEV088","",4,"","","",""
-"DEV088","",5,"","","",""
-"DEV089","2019-04-04",1,"","","",""
-"DEV089","",2,"","","",""
-"DEV089","",3,"","","",""
-"DEV089","",4,"","","",""
-"DEV089","",5,"","","",""
-"DEV090","2019-04-25",1,"","Large movement spikes  Checked volume with participant before scan. But has pressed during most beeps","Run 1 - wiggles  run 2 much better","Some wiggles during the scan "
-"DEV090","",2,"","","",""
-"DEV090","",3,"","","",""
-"DEV090","",4,"","","",""
-"DEV090","",5,"","","",""
-"DEV091","2019-04-21",1,"","Had to restart. The participant was holding left index finger.  Attempt 2 - participant sometimes presses both indicators. (left and right)","","Did a good job holding still"
-"DEV091","",2,"","","",""
-"DEV091","",3,"","","",""
-"DEV091","",4,"","","",""
-"DEV091","",5,"","","",""
-"DEV092","",1,"","","",""
-"DEV092","",2,"","","",""
-"DEV092","",3,"","","",""
-"DEV092","",4,"","","",""
-"DEV092","",5,"","","",""
-"DEV093","",1,"","","",""
-"DEV093","",2,"","","",""
-"DEV093","",3,"","","",""
-"DEV093","",4,"","","",""
-"DEV093","",5,"","","",""
-"DEV094","",1,"","","",""
-"DEV094","",2,"","","",""
-"DEV094","",3,"","","",""
-"DEV094","",4,"","","",""
-"DEV094","",5,"","","",""
-"DEV095","",1,"","","",""
-"DEV095","",2,"","","",""
-"DEV095","",3,"","","",""
-"DEV095","",4,"","","",""
-"DEV095","",5,"","","",""
-"DEV096","",1,"","","",""
-"DEV096","",2,"","","",""
-"DEV096","",3,"","","",""
-"DEV096","",4,"","","",""
-"DEV096","",5,"","","",""
-"DEV097","",1,"","","",""
-"DEV097","",2,"","","",""
-"DEV097","",3,"","","",""
-"DEV097","",4,"","","",""
-"DEV097","",5,"","","",""
-"DEV098","",1,"","","",""
-"DEV098","",2,"","","",""
-"DEV098","",3,"","","",""
-"DEV098","",4,"","","",""
-"DEV098","",5,"","","",""
-"DEV099","",1,"","","",""
-"DEV099","",2,"","","",""
-"DEV099","",3,"","","",""
-"DEV099","",4,"","","",""
-"DEV099","",5,"","","",""
-"DEV100","",1,"","","",""
-"DEV100","",2,"","","",""
-"DEV100","",3,"","","",""
-"DEV100","",4,"","","",""
-"DEV100","",5,"","","",""
-"DEV101","",1,"","","",""
-"DEV101","",2,"","","",""
-"DEV101","",3,"","","",""
-"DEV101","",4,"","","",""
-"DEV101","",5,"","","",""
-"DEV102","",1,"","","",""
-"DEV102","",2,"","","",""
-"DEV102","",3,"","","",""
-"DEV102","",4,"","","",""
-"DEV102","",5,"","","",""
-"DEV103","",1,"","","",""
-"DEV103","",2,"","","",""
-"DEV103","",3,"","","",""
-"DEV103","",4,"","","",""
-"DEV103","",5,"","","",""
+subjectID,scan_order,session,scanner_notes,ROC,WTP,SST
+DEV001,2,1,,,,
+DEV001,2,2,Participant felt like he was uncomfortable in the scanner and had to be pulled out temporarily and fan turned on ( face felt hot)  ,,,Error with SST we did MPRAGE before SST   
+DEV004,3,1,Actual order:  Auto align scout  WTP  MPRAGE  SST   Fieldmap   ROC (2 runs)  Restign state 1  ROC (2 runs),,"There were a lot of images that didnt show up, there was just a black box instead. We first noticed in run 2 (about 6-7 trials); about half thr trials on run 3 were blank images.     Before run 4, dani manually repopulated the image folder; but there were still about half that were black",We weren't sure if she was really hearing the beeps (we couldn't figure out how to play the volume on our end). We can check the behavioral data (e.g. SSRT) to make sure that the beeps were in fact being played
+DEV004,3,2,,good,good,good
+DEV005,5,1,,,,Participant did not hear beep throughout task. Decide on
+DEV005,5,2,,,,
+DEV006,6,1,,,,
+DEV006,6,2,,,,
+DEV008,1,1,,,,
+DEV008,1,2,"Sleepy, not falling asleep but looks kind of close to it.",Very sleepy. Mild wiggling of foot it seemed like.,,
+DEV009,4,1,"Ghosting images, worse on wtp. ",Trouble with roc concept in general  Ghosting images,Ghosting in images,Ghosting in images
+DEV009,4,2,,,,Left hand middle finger held down throughout many of trials? Button box might be getting stuck. 
+DEV010,4,1,"Did WTP (4 runs) followed by ROC (2 runs)   Order we went in was WTP, ROC, SST. Changed scanner order in mastersheet and in redcap to reflect actual order.  The participant has scoliosis so he had to sit up in between ROC and SST. had to do another auto-align scout  Participant prefers extra padding under the knee to alleviate back pain",,,Stop signal doesn't have enough healthy stim. Had errors.   The participant didn't mark enough unhealthy food as craved so Lauren rewrote the code...
+DEV010,4,2,"experiencing discomfort from back and headaches. had to stop several times. made through WTP, ROC.     had to stop in between roc1 and 2.     skipped resting state 1 and 2 and fieldmap due to lack of time.",,,
+DEV011,3,1,"Fell asleep several times. New dad, very tired. Did extra clinical scan.",,,
+DEV011,3,2,"Falling asleep in MPRAGE, caused movement  looks like blood flow is causing the brain to 'pulse' meaning the movement was consistent throughout the scans. the operator said it could be due to blood flow pushing extra fluid into the brain",looks like blood flow is causing the brain to 'pulse'  moving less but not great  ,moving during WTP 3 and 4  looks like blood flow is causing the brain to 'pulse' meaning the movement was consistent throughout the scans. the operator said it could be due to blood flow pushing extra fluid into the brain,moving during scan   looks like blood flow is causing the brain to 'pulse'
+DEV012,6,1,heart rate monitor not charged,"ROC would not display at first, MPRAGE run first then two runs of ROC and then a resting state  ",,"didn't hear beeps, forgot to test  "
+DEV012,6,2,"Scanning computer shut down in the middle of the scan? Had to reboot, took forever. ",,,
+DEV013,2,1,projector screen is off in color - looks blue/pink in color,Falling asleep occasionally   ROC 2 - wiggling feet/toes towards the end,,
+DEV013,2,2,LCNI installed a new switch box. Does not work with current code.     Actual scan order  Scout  MPRAGE  Field maps   Resting state 1  Resting state 2   SST  ROC 1-4  WTP 1-4,"run1- Lots of movement spikes  Run2 - was reminded to hold still, Still large movement spikes  Run 3 - was reminded to hold still, Still large movement spikes  Run 4 - not as much movement ",Wiggles during run 3 ,Lots of wiggles and large movement spikes
+DEV014,1,1,All good!,,,
+DEV014,1,2,Did MPRAGE then SST because briefly had trouble with SST. ,,,
+DEV015,4,1,,,might have missed the first couple rounds of task? ,
+DEV015,4,2,,,,
+DEV016,3,1,skipped resting state 2 due to time restraints,"Run 1 and Run 3, stopped and restarted midway. all from MRI scan issues/ aliasing.","Run 1, stopped and restarted midway","went fine, uninterrupted"
+DEV016,3,2,toes were wiggling through out scan. after the first actual resting state he began to move his head a little. late scan participant was very tired.  ,falling asleep a little. run 1 on,wiggles. ,toe wiggles. but not effecting head  Falling asleep a little. had eyes closed off and on throughout   
+DEV017,5,1,extension 2 screen not displaying - got a late start  switched first resting rate with field map,ROC failed to trigger twice - 3rd time worked,,
+DEV017,5,2,"Had issues with screens displaying again, started a little late because of it.  Changed order to:  1) scout  2) ROC (2 runs)  3) MPRAGE  4) Fieldmap  5) ROC (2 runs)  6) Resting state 1  7) SST  8) Resting State 2  9) WTP",,,
+DEV018,6,1,did MPRAGE first while fixing technical difficulties with the projector. Actual run sequence:   MPRAGE  ROC (2 runs)  Fieldmap  ROC(2 runs)  WTP (4 runs)  SST (1 run)  Resting State    *Had to cut one resting state scan since we were short on time,,,
+DEV018,6,2,Pulled her out to adjust head. (had a bun) between roc 2 and 3   Kept dozing off and moving  always better after a reminder  ,"wiggles during roc 1 , less wiggles during 2.   Large movement spike at the end of roc 3.  not as many wiggles during 4",,
+DEV019,2,1,,,Run 3 - had eyes closed during calibration and missed first couple trials of runs of WTP run 3,
+DEV019,2,2,,,, 
+DEV020,1,1,,,,
+DEV020,1,2,Both resting states were completed while technical difficulties were being solved. ,"1. first run it stopped after 6 images, scanner was still running but matlab screen popped up  2. tried the first run again, stopped with one minute left on scanner. Restarted matlab and ran ROC2 instead  3. participant kept moving during first 20 seconds so we had to restart the scan several times  4. ran ROC 2 successfully but had an artifact due to movement ",Movement during first 20 seconds had to redo run 2,Had finger stuck on left hand button ran again  
+DEV021,4,1,"Scanner box having trouble, hardware issue. WTP1 didn't trigger 2x, had to bypass box and then it did work. Did MPRAGE first, ",,,
+DEV021,4,2,"Had issues with earbuds. Scanner operator accidentally assigned her to DEV012 so if there is no scan two data check DEV012 for a scan on 1/11 (operator said they would fix it so hopefully this wont be an issue).    Scan order: scout, field maps, wtp1-4, mprage, roc 1-2, resting state 1, SST and resting state 2.   Quite allot of wiggles during resting states other than that no issuses.",,issues with earbuds. ,no issues
+DEV022,3,1,,,,
+DEV022,3,2,,,,
+DEV023,5,1,participant held extremely still. there were no issues with the scan  ,,,
+DEV023,5,2,Ended up pushing both resting state scans to the very end because we thought we would run out of time.     Final task order:   1) scout  2) ROC (2 runs)  3) MPRage  4) ROC (2 runs)  5) Field Map  6) SST (1 run)  7) WTP (4 runs)  8) Resting State 1  9) Resting State 2,,,said he 'could have done better' on SST
+DEV024,2,1,,,,
+DEV024,2,2,,"Falling asleep, especially ROC 2-4",,Projector was going in and out during SST
+DEV025,1,1,many wiggles. glasses could be pressing down  ,wiggles. glasses bugging him,task froze during the end of the task (run 2) . We think button 6 on the right button box was jamming and delaying the program. we replaced the button box and are trying again   ,
+DEV025,1,2,Make sure glasses are set comfortably it helps with movement.   couldn't keep all that still. kept wiggling head and feet    ,"Moved during initial part of scan (run1,2,3). had to restart. Image Ghosted.  Keeps moving regardless of reminders",,
+DEV026,4,1,"shifted slightly in middle of scan, not sure how this affected images of his brain",,may have used wrong buttons for first run  ,
+DEV026,4,2,1) Scout  2) WTP (4runs)  3) MPRage  4) ROC (2 runs)  5) Resting State 1  6) Roc (2 runs)  7) Resting state 2  8) SST (1 run)  9) Field map,,,"said the beep was really quiet during practice beep; turned the volume up all the way but did not hear it at all during the task (data not reliable since he didn't hear the beep at all)    NOTE: realized after the fact that I had plugged in the wrong audio cable (pink microphone cable instead of green speaker cable), which is why the sound wasn't coming through at all. my mistake :/"
+DEV027,3,1,Restarted  wtp1 because her ring finger was pressing a button,,,
+DEV027,3,2,Was late to getting into the scanner so had to cut resting state 1-2    Actual scan order  Scout   WTP 1-4  MPrage  ROC 1-4  Field maps,No issue,no issue,no Sound in SST. had to cut after 20 min of trouble shooting. Could have been cable or code issues  
+DEV028,5,1,Operator forgot to do the physiology portion of both resting states  Added two resting states at beginning of scan,Pressing his index for 1 instead of thumb for round 1  Itch on his nose,Movement at beginning of run 2 ,
+DEV028,5,2,weird ROC issue at run 4,"Run 4, 2nd to last image of chocolate stayed on the screen for a long time, it also looked like he had a button held down but he didn't think he had a button held down. Then the scan ended up stopping before the actual task was over, so last trial didn't get scanned. ",,
+DEV029,6,1,leg spasms during resting  was slowly scooting down during scan,falling asleep slightly during run 3  kept closing eyes during run 4    ,falling asleep  little movement,
+DEV029,6,2,"High movement levels on FIRMM throughout, close to falling asleep in resting and MPRAGE.",,,
+DEV030,2,1,wiggles  ,"wiggles. scooted down during one session   almost accidentally re ran first run through, canceld and ran for number two.  4th - would not run propperly. tried again",in the wrong folder for the 3rd run. had to redo  ,little wiggels. not much
+DEV030,2,2,She was coughing and causing wiggles.   had to pull her out for water and redo Scout.,wiggles due to cough in run 1   wouldnt start roc 4. had to restart,wiggles due to coughing throughout scan,
+DEV031,1,1,She held extremely still! Did great!,,She was using her pinky for some of the responses.  ,
+DEV031,1,2,"Had trouble connecting to the projector, had to reboot jon snow and projector. Late start  May have fallen asleep in resting state 1, lots of movement during that but was very still the rest of the time",,,
+DEV032,4,1,"changed the tilt to - transfer of coronal to 32 deg  he was pretty anxious about the procedure, so we went through the process pretty slowly   ",the HR monitor fell off and caused some movement during the first dun through. fingers  were on 6789 so the responses will be off one.   End of second run lots of movement.  3rd run - sleepy    ,participant was sometimes closing eyes during 2nd run. dosing off.  Dosing off during run 3-4  ,seemed to be staying awake  NO beeps throughout entire task
+DEV032,4,2,,,,
+DEV033,3,1,,4th trial did not initially run and restarted the trial ,participant started using pinky. reminded for 4th task. was using index though pinky   ,audio issue. no beep at beginning of task. wouldn't work with audio cord plugged in. worked after restart of computer.     
+DEV033,3,2,,,,
+DEV034,5,1,the scan operator is saying that there might be issues with coding the scanner data for people with larger heads because of the angle for the cutoff the fatty tissue from the neck and some portions of the cerebellum may wrap around to the front of the scan. Do we want to keep the 30 degree tilt? The scan operator did not feel comfortable messing with the tilt because she is a fill in.    Movement during the resting state    had to skip a resting state because scan before hand was running 15 min late  ,,not much movement during1  little wiggles during 3-4  ,
+DEV034,5,2,,,,
+DEV035,6,1,Moved field map to be in between roc2 and wtp and shifted resting states down    Heart rate monitor fell off and participant put it back on best she could may not be on all the way for resting state 2 and SST,First run of ROC suddenly quit within first minute. Quit Matlab and tried again and it worked. ,,
+DEV035,6,2,Switched MPRAGE with resting state 2 because of time concerns  Field map after wtp  Resting state done at end,,,
+DEV036,2,1,breathing measuring thingy wasnt registering deep breaths,big movement during number 4,,no issues. slight wiggles  
+DEV036,2,2,hair is visible in scan. in top of scan. may look weird.     Wiggled a few times. had to use a scout scan  ,the task was running longer than the MRI was twice  ,wiggles  ,was holding down the right index finger button. restarted the task.   She continued to occasionally hold down the right index finger    
+DEV037,1,1,,ROC1 scan ended 30 before the task did (pictures were still showing up on screen). We noticed he was pressing buttons multiple times during ROC2.     Moved feet and crossed legs in ROC3 caused him to move head  ,,
+DEV037,1,2,,,,
+DEV038,4,1,Participant is sick with a cold so potential influence on responses,"Did ROC out of order because I was mistaken about which round we were on. The order we did it was ROC 1, ROC 3, ROC 2, ROC 4",,
+DEV038,4,2,,,,
+DEV039,3,1,because he has such a large head the back of the scan may wrap around to the front  ,Starting to doze off  ,slight movement  ,could barely hear the beep with machine going
+DEV039,3,2,No issues. some wiggles with button pushes  ,,,
+DEV040,5,1,Restarted ROC1 because she was using the wrong fingers at first and moving a lot. When we started again she was holding much more still and using the right fingers. Moved a lot during SST,,,"Moving a lot during SST, seems to be moving whole body during certain button presses. "
+DEV040,5,2,,,,
+DEV041,6,1,May have closed eyes in resting state one  ,,Run 2: moved head in between scan slightly because he felt something in the back of his head ,
+DEV041,6,2,Drunk coffee half an hour before scan to stay awake. Switched MPRAGE to between ROC. Put Resting state 1 & fieldmap after all ROC.,,,
+DEV042,2,1,"FIRMM was registering a LOT of movement throughout her scan, despite not actually seeing her move at all... I don't know if the sensors were picking up something different or what, but she was extremely still but it registered TONS of movement.",,,
+DEV042,2,2,,,,
+DEV043,1,1,She has a bridge and a few crowns. There will be a small artifact on the scans. Nothing major,Cough during ROC 2. ROC 4 didn't start. we had to restart it.,,
+DEV043,1,2,Switched order to:  1) Scout  2) SST  3) MPRAGE  4) WTP (4 runs)  5) Fieldmap  6) ROC (2 runs)  7) Resting state 1  8) ROC (2 runs)  9) Resting state 2    High spikes on FIRMM throughout (above .8),,,
+DEV044,4,1,consistent tremor. movement doesn't seem correlated with button pushes,constant movement.,"no issues run 1-4. there is a consistent movement pattern. nothing too bad, alway under .5MM",
+DEV044,4,2,,,,
+DEV045,3,1,"Actual Scan Order: Scout, WTP 1-4, MPRAGE, SST, Field maps, ROC 1-2.  Cut resting states 1 and 2 because we ran out of time.  More movement occurred towards the end of the scan.",,,Used thumbs instead of index fingers for entire task.
+DEV045,3,2,,,,
+DEV046,5,1,Was sick and coughed a few times. had trouble staying awake but other than that not many issues  ,,,Had to restart task. scanner error  
+DEV046,5,2,"Due to time constraints, the resting state 2 is moved to the end of the scan. ","Late start, feeling a little bit sleepy. ",,
+DEV047,2,1,Switched field map with resting state 2,,,
+DEV047,2,2,Corrected task order to:  1) scout  2) SST  3) MPRAGE  4) ROC (2 runs)  5) Fieldmap  6) Resting State 1  7) ROC (2 runs)  8) Resting state 2  9) WTP,"Really jerky movements, consistently off top of charts on FIRMM",,
+DEV048,1,1,"had to cut one resting state due to complications. (projector issues, and ear bud issues).  Had to rescout twice. couching, itch and earbuds falling out  Had to cut both resting states and ROC 4",wiggles durning run two. Heart Monitor fell off.   Had to cut ROC 4 due to time,willingness to pay 3 has ALLOT of movement. couching fit. had to rescout for 4,wiggles. 
+DEV048,1,2,,,,"Seemed to be missing a lot of button presses. Had to restart the task because we weren't getting any button presses on the right hand, when re-launched still not getting a lot of button presses. "
+DEV049,4,1,"Very sleepy during scans, esp. last scans (SST)",,,
+DEV049,4,2,"Participant sleeping through scan, or dozing off regularly. Missed several responses near end of WTP 4, missed many responses ROC1. Did SST after ROC1 because she was falling asleep so much, thought the beeps might help wake her up. ","Completely out during ROC 1, 2,3,4","Missed several responses near end of WTP4, moving a lot because falling asleep a lot ",Falling asleep mid way through.
+DEV050,3,1,"Took a long time to get into a scanner because we had to cut off a piercing.    Actual scan order: SCOUTWTP 1-4, MPRAGE, SST, Field maps, ROC 1-2, Resting state, 1, Roc 2-3",Roc 3 - lots of wiggles  Roc 4 - some wiggles,Held still. did a great job,Going very slow  
+DEV050,3,2,"Shut eyes during MPRAGE, other than that really stable.",,,
+DEV051,5,1,"Very good at not moving, hardly broke .3cm the entire scan. Likes one-third volume for SST",,,
+DEV051,5,2,,,,
+DEV052,6,1,"mprage- participant started to fall asleep    Scan order  scout  roc 1&2  mprage  Roc 3&4  field maps  Re ran Roc 4  WTP 1 through 4  roc 2 - died, tried again, died  resting state  SST  Roc 2 - tried it again    ",run 1 - no issues  run2 - task ended early. not sure if scanner stalled or task failed. will try to run again  run 3  - task ended early. not sure if scanner stalled or task failed. will try to run again  run4 -  added 30 seconds onto scan. scan froze again. (maybe i didn't pull the correct devID number  ran Roc 4 again - went perfectly.         ,run1 - foot wiggles  3-4 no issues    Accidentally hit buttons twice on some occasions hence the auction being $3,no issues
+DEV052,6,2,,,,
+DEV053,2,1,,Switched first resting state with fieldmap ,,Moved a little
+DEV053,2,2,,1 & 2 - Wiggles   3 - large movement spikes - LOTS  ,1- movement spike,Head movement with button pushes
+DEV054,1,1,,,,
+DEV054,1,2,"Participant started to get restless during the last bit of the scan (roc 2,3,4 and resting state 1,2)",run 3 wiggles  less wiggles in run4,Some movement with button pushes. reminded to hold still for button pushes for run two.,Some movement with button pushes
+DEV055,4,1,Got cold - blanket was added during ROC,roc 1 - massive wiggles. reminded as best we could  roc 2 - same as run 1  ,wiggles throughout ,wiggling  throughout
+DEV055,4,2,Lots of excess movement in the gray zone. Please remind often to keep movement to fingers only when pushing buttons.,,1st run: she pressed pinky finger for 4 rating. this run was redone.  2nd run: restarted due to excess movement in first 30 seconds of the scan.  4th run: stopped halfway due to low battery. this run was redone.,
+DEV056,3,1,"Once or twice off-the-chart movement on FIRM. Accidentally ran resting state 1 twice instead of running resting state 2 the second time, but they are functionally the same.",,,
+DEV056,3,2,Closed eyes <1 second 4 times in MPRAGE,Lots of gray on run 2,,
+DEV057,5,1,,,,
+DEV057,5,2,Order: MPRage  ROC  Field Maps  ROC  Resting State  SST  Resting  WTP,,1 - wiggles  2 - wiggles  ,
+DEV058,6,1,"OVER EXPLAIN all scanner tasks for session 2. I went through verbal, qualtrics, and practice runs more than once. She still didn't understand the tasks.     Originally labeled wrong as DEV068, fixed. but there will be an extra 068 scout file   Falling asleep during MPRAGE  Had to cut resting state due to scan before running 10 min over.   Actual scan order  Scout, ROC1-4, MPRAGE, Field maps, WTP 1-4, Resting state 1, SST. ",roc 1 - bunch of wiggles. also pushing the button really late.  Roc 2- better,"WTP1 - foot wiggles, reminded again  ",
+DEV058,6,2,Fell asleep during resting state 1   ,3: Some wiggles  4: big movement spikes,"1) Wiggles with big movement spikes  2) lots of movement, missed one photo  3)  4) ","some wiggles  Used thumbs for task, not index fingers  "
+DEV059,2,1,Did resting states at end because we weren't sure if we would have time for them but we did!,,,
+DEV059,2,2,operator ran AAScout not aa_scout. May be slightly different?  ,1- wiggles. reminded to hold still  did better with wiggles,holds really still with very large spikes. I think the sponges are uncomfortable for her  ,
+DEV060,1,1,"MPRAGE first, then SST because we were troubleshooting. ","ROC 1 was still running after the scan stopped, killed the task. Don't think the data from ROC 1 will be useable",,
+DEV060,1,2,,,,
+DEV061,4,1,"Actual scan order: Scout, MPRAGE, WTP 1-4, Resting state 1,ROC 1-2, field map, ROC 3-4, Resting State 2.    Fell asleep during resting state 1.  SST would not run.",ROC 3 ran longer than the actual scan.,WTP 1- Some wiggles were recorded,"Issue with code, would not run"
+DEV061,4,2,Closed eyes for a few seconds twice during RS2.,,,
+DEV062,3,1,,,,
+DEV062,3,2,,,,
+DEV063,5,1,,"ROC2 didn't end, something wrong with data. ",,
+DEV063,5,2,,,Ran tasks after ROC.,Switched with WTP and ran as the third task due to technical difficulties.
+DEV064,6,1,"Makes excess movement when pushing buttons, remind to keep still and use 3 cushions under elbow.    Eyes closed during resting state 2.",,,
+DEV064,6,2,Cut 1 resting state due to time conflicts (scan only scheduled for 75 minutes and broken earbuds caused delay)   Moved fieldmap in between ROC2 and WTP  cut both resting states,,,
+DEV065,2,1,,some wiggles in ROC 2  some wiggles at the end of ROC 3,,Doing a great job of holding still.
+DEV065,2,2,,,,
+DEV066,1,1,"Actual order: Scout, MPRAGE, SST, Field maps, WTP 1-4, resting state 1, ROC 1-2, resting state 2, ROC 3-4    resting state 1 - asleep  resting state 2 - asleep    The helmet was pressing against face by end of the scan. maybe use a smaller head cushion next time. ",ROC 2 lots of wiggles  Roc 3 lots of wiggles. The pressure of helmet on forehead may be causing pain,WTP wouldn't trigger during the first run  Wiggles during run 3 and 4 ,
+DEV066,1,2,"Resting state 1: Very still, no movement  Smaller head cushion worked much better.  Resting state 2: Some Wiggles","ROC 1 and 2: Lots of wiggles  ROC 3: Lots of movement.  ROC 4: Fell asleep on and off during scan, lots of movement.","Run 1,2,4 had wiggles. Run 4 may not be usable.",Some wiggles
+DEV067,4,1,"actual scan order: scout, MPRAGE, WTP 1, Field maps, ROC 1-4, WTP 2-4,  SST.  Cut both resting states  Verbally explained that she has an innate tendency to rank processed foods lower. ",,"Froze on WTP 1, ran Run 1 successfully  Froze on WTP 2 (twice) Moved on to next scan.    WTP2+ ran fine  ",
+DEV067,4,2,No matter the number of times the participant was reminded there were a lot of wiggles.   ,More wiggles....  ,Wiggles. tried to remind a lot. only helped slightly,Lots of wiggles. Constant reminders that did nothing to help  
+DEV068,3,1,,,,
+DEV068,3,2,"resting state one and two. insane amount of wiggles. both times.  Resting states completely unusable due to movement. (reminded participant to stay awake before each resting state)  Shifted down at some point during the scan, Head is not in the same position. ",lots of wiggles throughout all 4 runs. reminded participant several times.,wiggle run 1   Did better run 2-4,wiggles.
+DEV069,5,1,"ROC:Participant has issues with using thumb, there may be more button presses during thumb presses.    Actual Scanner task order: Scout, ROC 1&2, MPRAGE, ROC 3&4, Fieldmap, SST, Resting State 1, WTP 1-2, Resting State 2, WTP 3-4",ROC1: Kept using a scale of 5 instead of 4. Using index finger through pinky.,WTP 1: Lots of wiggles at the end of scan.  WTP 2: Lots of movement throughout the whole scan.  WTP 3: Scan ended before the task ended.,Kept hitting right index finger for left arrows and right middle finger for right arrows.
+DEV069,5,2,"Actual scan order Scout, Field Maps, Roc 1 (rerun of roc 1 due to issues) Roc 2, (rerun of roc 2 due to issues), Scout, ROC 2-3, REsting state 1 SST, Scout (left to use the restroom), WTP 1-4    Participant has limited mobility in fingers and struggles with pushing just one button ",had to rerun ROC 1 and 2 due to technical issues  Some wiggles roc 2 and 3,wiggles during the end of WTP run 2  Lots of wiggles all through run 3.   Wiggles at the start of run 4  ,some wiggles at end 
+DEV070,2,1,,,,
+DEV070,2,2,Fell asleep during resting state one and two,Roc Run 3 wiggles,WTP run three crashed. reran ,
+DEV071,1,1,"Hair artifact due to wet hair on scan.  During Resting state 1 participant fell asleep.  Actual Scan Order: Scout, MPRAGE, SST, WTP 1-4, Resting 1, ROC 1-2, ROC 3-4. Had to skip last resting state because of time.",,"During WTP 1, some foot wiggles were recorded.",
+DEV071,1,2,,"'runWTP' was typed during ROC 2 instead of 'runROC', noticed after the task triggered and restarted ROC 2.","'runWTP' was typed during ROC 2 instead of 'runROC', noticed after the task triggered and restarted ROC 2.",
+DEV072,4,1,Was named 073 instead of 072. Aly will rename the file after the scan.,,,
+DEV072,4,2,Participant ID number could not be found in the LCNI. Participant ID number may have been deleted in The LCNI system or it could have been saved under a diferent DEV ID number  ,"ROC 1: Large movement spike at the start of ROC 1   ROC 2: restless movement, occasional large movement spike   ROC 3: wiggles at end  ROC 4: looking great ",Wome movement at the start and end of WTP-2  WTP - 4 Tiny spikes of movement ,
+DEV073,3,1,,,,
+DEV073,3,2,Resting state 1 - the pattern of movement is distinctly different even though the participant is awake and holding still.   The exact same pattern began in Resting state2. The participant shows no indication of movement or falling asleep ,,Did AMAZING!,Held still!  
+DEV074,5,1,,,,
+DEV074,5,2,"Actual scan order Scout, Field maps, ROC 1 (restart, not butten presses) ROC 1-2, MPRAGE, ROC 3-4, REsting state, SST, Resting state, WTP1-4.  Minimal wiggles but did a good job",Had to restart ROC 1 because he was nit pressing the buttons,Some wiggles,Had to restart SST because I failed to do a sound check.
+DEV075,6,1,,"For runs 1-3 the participant used their index through pinky fingers for ratings (numbers 6-9). For the last run, we asked them to only use thumb through ring finger (numbers 5-8).",,
+DEV075,6,2,,,"When setting up run 1 of WTP matlab told me I was overwriting a previously saved file. I double checked that I had entered the correct information for the participant, session number, etc. and overwrote the previous file. This did not occur for any of the other runs.",
+DEV076,2,1,Does really well at holding still. Mostly in the green range.,,,
+DEV076,2,2,"Scout, MPRAGE, SST, ROC (runs 1 & 2), Resting State 1, ROC (runs 3 & 4), Fieldmaps, WTP, Fieldmaps. Had to cut Resting State 2 in order to re-run SST task.",,,"Started task, but brain images looked weird. The participant was wearing a beanie, so we stopped the scan and had them remove their hat and then re-started the task. Images looked fine then. After the task was re-started, the participant held their right index down throughout the task. Re-ran SST a 3rd time, and the participant did much better with button presses. The SST file saved for this session in Dropbox is for the 3rd run of the task."
+DEV077,1,1,,,,
+DEV077,1,2,Eyes closed about 3 seconds during RS 1 and RS 2,,,
+DEV078,4,1,Restarted resting 1 due to motion. Skip resting 2 due to time. ,"Re-started run 1 bc he moved right at the beginning of the scan, which caused ghosting ","run 4; Jolinda noted 'ghosting' on the images, but didn't stop the scan ",
+DEV078,4,2,Moved fieldmap between the ROCs due to time  ,Lot of movement   Sleepy,Very sleepy - long periods of eyes closed   lots of movement    Had to redo WTP4 because the finger with the heart rate monitor was pressing a button down ,
+DEV079,3,1,Participant did a fantastic job at holding still A++,Had to rerun roc 1 because I forgot to do run get stim  ,Holding amazingly still!  ,
+DEV079,3,2,"Actual scan order: Scout, WTP, MPRAGE, SST, Fieldmaps, ROC (2 runs), Resting State 1, ROC (2 runs), Resting State 2. The order was changed in case we needed to cut a resting state to account for being on time. Held very still throughout the scan.",,,
+DEV080,5,1,"Actual scanner order: Scout, ROC 1-2, MPRAGE, ROC 3-4, Resting state 1, SST, WTP 1-4, FieldMap.  -No Resting State 2  Resting state 1: Lots of movement for entire scan.",Practice runs completed at scanner  ROC 1 & 2: Wiggles present,"Used pinky accidentally for some of the bids, was given 1.50 extra at end of appointment instead of 2$.",
+DEV080,5,2,,,,
+DEV081,6,1,,,,
+DEV081,6,2,"Make sure to use Input = 1, Response device = 2. Running short on time, moved Resting State 1 back to after WTP. Put resting state 2 after SST.",,,Had to restart because she couldn't see images. Re-connected cables & it worked after that.
+DEV082,2,1,"Actual scan order: Scout, SST, MPRAGE, ROC (runs 1 & 2), Fieldmaps, Resting State 1. Stopped scan here to help participant. Then, Scout, ROC (runs 3 & 4), WTP (3 runs only). Had to cut Resting State 2 (ran out of time).","Mentioned he was uncomfortable in the scanner, but willing to continue with the scan. LOTS OF MOVEMENT. Eventually, he asked to stop the scan to get out and stretch. Once he was back in the scanner we re-ran Scout before completing ROC runs 3 & 4.",Only did 3 runs (ran out of time). More movement during this task.,
+DEV082,2,2,,,,
+DEV083,1,1,,,"Fell asleep at start, had to restart task and wake him up, but did good after that. Doing good on FIRMM.",Said he could only hear it through one ear.
+DEV083,1,2,"Great job holding still throughout the scan. Very sleepy, had a hard time staying awake.",,,
+DEV084,4,1,15 mins late due to the scan before ours staying longer to finish. Resting state 2 not completed,,,
+DEV084,4,2,"Scan will come up as AP (head-foot) coded-coronals, instead of axially-coded. This is because his head is weirdly-shaped, it's more triangular than curved on top, peaks nearer to the nose than most, and is tilted up on the coronal axis. Medium movement on FIRMM throughout, slow breathing rate interfered.",,,
+DEV085,3,1,"Actual scan order Scout, WTP 1-4, Field maps, Reran WTP 2  because of missing data, Resting state 1, MPRAGE, SST, REsting state 2, ROC 1-4.",Participant became uncomfortable/pain but wanted to continue so there will be more movement ROC 1-4    Missed button box responses for some of ,WTP 1 - scan finished before task did. Missing the last two.   WTP 2-  scan finished before task did. Missing the last 4. The participant was holding down left thumb. Will rerun this one.   WTP 3&4  -  good,SST froze. Ran resting state while matlab restarted
+DEV085,3,2,,,,
+DEV086,5,1,Significant movement during RS1 (has been consistently happening in previous RS scans so it might not be from the participant),,,
+DEV086,5,2,,,,
+DEV087,6,1,"Actual task order: Scout, ROC (1&2), MPRAGE, ROC (3&4), Rest 1, WTP, Rest 2, Fieldmaps, SST. Lots of wiggles, had trouble staying awake.",ROC 1 & 2: continuous wiggles,"Participant did a good job staying still during this task, some wiggles during the last run.",
+DEV087,6,2,"troubles with WTP, ran SST while troubleshooting o order was ROC-SST-WTP",,,
+DEV088,2,1,,"health consequences: obesity, risk of weight gain, sugar crash.   Feels like thinking of regulate strategies doesn't help too much because she was very hungry. Contingent on the image quality. ",,
+DEV088,2,2,"Constant movement, she was told about it but the movement persisted. ",Lots of movement. <0.4,,She said the beep was hard to hear/did not hear it after the scan. 
+DEV089,1,1,,,,
+DEV089,1,2,close eyes on MPRAGE 2x for 4+ seconds each.,,,
+DEV090,4,1,,Run 1 - wiggles  run 2 much better,Some wiggles during the scan ,Large movement spikes  Checked volume with participant before scan. But has pressed during most beeps
+DEV090,4,2,Eyes closed for 15+ secs in RS1,,,
+DEV091,3,1,,,Did a good job holding still,Had to restart. The participant was holding left index finger.  Attempt 2 - participant sometimes presses both indicators. (left and right)
+DEV091,3,2,"Actual scan order: Scout, Field maps, WTP 1-4, MPRAGE, SST, Resting state 1, ROC 1-2, REsting state 2, ROC 3-4",,WTP 1: Large movement spike at the start of scan   WTP 2: Large movement spike at the end of the scan ,Said she could hear the beep.  Small movement spike towards the end of task.  
+DEV092,5,1,,,,
+DEV092,5,2,,,,
+DEV093,2,1,,,,Great job holding still.
+DEV093,2,2,Little to movement. Great scan   ,,,
+DEV094,1,1,,ROC4 was not completed due to time.,,
+DEV094,1,2,"Please do not mention providing a printout of their MRI. LAK has significant brain atrophy uncommon for her age that is not actionable. Scott and Ali are aware of this decision. For any questions, contact VB or LK    -JE",She looks sleepy.,,
+DEV095,4,1,Wiggles during resting state 2.  Closed eyes 6 seconds twice.,Negative Consequences used: Focused on tooth decay and visiting the dentist for sweet items. Weight gain and discomfort was used for savory/salty foods.  ROC 1 and 2 participant mentioned that she may have fallen asleep.,,
+DEV095,4,2,,,,
+DEV096,3,1,"The participant had movement throughout the scan. Gave several reminders to hold still, but she had a hard time keeping completely still.",,,
+DEV096,3,2,,,,
+DEV097,5,1,,"Health consequences used: Listed heart disease, diabetes, and overall appearance (feeling greasy and weight gain) as consequences.",,
+DEV097,5,2,"Actual scan order: Scout, ROC 1-2, MPRage, ROC 3, Resting State 1 (and Matlab restart), ROC 4, SST, Resting State 2, WTP 1-4, Fieldmaps.","After ROC3 Matlab had an error (IPK error?) with the keyboard. ROC 3 triggered normally and finished. Started ROC 4 and the task didn't trigger, so matlab was restarted and it then stopped reading the keyboard entirely. Computer was then shut down and rebooted. During this process we did resting state 1. After computer reboot everything started working again.",,
+DEV098,6,1,"Participant has calcification in her hands. She has problems reaching the buttons. Based on the calcification on her fingers, we put the heart rate monitor on her pinky and it may not be picking up the heart rate. We didn't get through all of the tasks.     ","During ROC 1, she pressed buttons 2 and 3 instead of 6 or 7. Only did 2 runs of ROC, was running on a time crunch. ",Participant has trouble pressing '7' with her middle finger. Sometimes will press the '6' ,"Went straight to SST instead of resting state. Had to restart the first trial because her presses weren't being recorded. We did a second trial but she wasn't able to hear the beeps. We did a third trial, but stopped the task half way through because her presses weren't coming through. "
+DEV098,6,2,,Is doing AMAZING.,,can't get right hand button presses. We restarted and still can't get it.Data won't work. 
+DEV099,2,1,,Mentioned gaining weight as a consequence that will affect his ability to go on hikes or go hunting. He said that it was 'a little' effective.    ,,
+DEV099,2,2,"MPRAGE: participant closed their eyes halfway through the scan. Might have fallen asleep    large movement spike throughout all scans. No matter what I told him or what we adjusted.    Could not stay awake during resting scans. I reminded to stay awake several times but he would instantly close eyes.   LARGE movement spikes Resting state 1     Actual scan order: Scout, Field maps, SST1, SST restart, MPRAGE, ROC 1, ROC 2, ROC 2 restart, ROC 3, ROC 4, Resting State 1, WTP 1-4, ",Restarted ROC 1 due to large movement spikes.   large movement spike throughout all scans. No matter what I told him.  ,,Large movement spikes that seem to line up with button presses. Will remind him to hold still after this scan  
+DEV100,1,1,Had to start late due to previous appt running late,"Health Consequences: Trouble breathing, being out of shape, cardiovascular diseases, and intentionally making decisions that contribute to not taking care of your body.",,
+DEV100,1,2,"Closed eyes for >1 min during MPRAGE, RS 1, RS2.",,,
+DEV101,4,1,Participant had tons of movement for the whole MRI scan. Told him to take deep breaths but this did not improve the movement amount.   During resting state 2 participant fell asleep for a few seconds.,"During ROC 2 and 4 participant did not complete ratings for some foods, and was fighting sleep for all of the ROC runs.",,
+DEV101,4,2,Participant seemed to struggle to keep his eyes open during both resting state scans,Second run of ROC was the first actual trial,,Left index finger looked like it stuck for a short portion of the beep task
+DEV102,3,1,Eyes closed for 5+ seconds 1 time on RS 2.,Talked about not gaining weight and not fitting into clothing as well. Also discussed not feeling well from headaches/stomachaches after eating a lot of a certain food. Said that it wasn't very effective because she usually just focuses on the food and doesn't ever think of its consequences.    ,,
+DEV102,3,2,"Actual scan order  Scout, MPRAGE, WTP 1-4, Field maps, SST, Resting state 1, ROC 1-2, REsting state 2, ROC 2-4    Re-ran roc 2 due to non-variance in responses",Because she had a really hard time coming up with regulation tasls I had her recite them before the start of the scan.,,Large movement spike during SST
+DEV103,5,1,Pulled her out of the scan to adjust head pads after first resting state.,"Health consequences used: Empty calories can lead to unintentional weight gain, joint problems. Also focused on the fact that she does want to be healthy due to her job as a herbalist (large outdoor component).",,
+DEV103,5,2,Eyes closed for 30+ seconds for MPRAGE,Eyes closed for 10+ seconds during ROC run 2,,
+DEV104,6,1,,,,
+DEV104,6,2,,,,
+DEV105,2,1,,"Health Consequences Used: Weight gain, High cholesterol, and not being able to achieve goal to become more active.",,Started run of SST and had to stop the task because the projector in the MRI room went dark during the 'calibrating scanner' screen at the beginning of the task. Fixed the problem and restarted SST.
+DEV105,2,2,,,,
+DEV106,1,1,Had a small bit of water at the beginning of appt.   bit of a late start due to the previous scan running over time  Cut one resting state due to time constraints  The second WTP3 is actually WTP4: scanner operator error,"Health Consequences used: Mainly short term consequences, weight gain and acne issues specifically.  Did bring up how excess weight gain could lead to heart problems in the future.","difficulty getting the task to trigger, ",
+DEV106,1,2,,,,
+DEV107,4,1,"Eyes closed during MPRAGE, Resting state 1, and resting state 2.",,,
+DEV107,4,2,,at end of ROC 2 task ran longer than the actual scan,,used thumbs instead of pointer fingers 
+DEV108,3,1,,Health consequences: High blood pressure and weight gain were primarily used.  ,Two false starts for WTP run 1. Third run of WTP 1 was correct.,
+DEV108,3,2,"Right thumb holding down button during MPRAGE.  Left index finger was held down during SST, we restarted the task. ","Her consequences were, heart problems, stomach pain, digestive problems, diabetes.     During run 3 the laptop was delayed from the scanner.",,
+DEV109,5,1,,,,
+DEV109,5,2,,,,
+DEV110,6,1,"Actual scan order: Scout, ROC (runs 1 & 2), MPRAGE, ROC (runs 3 & 4),  WTP [1 & 2], SST, WTP [3 & 4], Fieldmaps. We had to cut Resting States 1 & 2 due to time contraints and tech issues.","For health consequences, the participant used 'feeling greasy' for salty snacks, 'stomach pain' for soft drinks, and 'teeth hurting, feeling nauseous' for candy.   ","Because we were short on time we wanted to make sure we at least had some runs of WTP and a full run of SST. So we did WTP runs 1 & 2, then SST, followed by WTP runs 3 & 4.",
+DEV110,6,2,"Actual scan order: Scout, ROC 1-2, projector fix, MPRAGE, ROC 3-4, WTP 1-4, field maps, SST, Resting state 1. Had to cut resting state 2 due to projector issues.",During ROC 1-2 projector in the scan would flicker during the rating screens. Participant notified us and projector was restarted. Her responses may have been before or after the rating screens of the task.,Missed a couple ratings/button boxes didn't register a response for some images.,
+DEV111,2,1,"Participant became restless/ uncomfortable during the second half of the scan.    Actual scan order: Scout, fieldmaps, SST, SST (Attempt two) MPRAGE, ROC 1-2, Resting state 1, ROC 2-3, REsting state 2, WTP 1-2, Scout, Field maps, WTP 3-4","Were the reframes useful: some helpful other ones didn't matter to him. he still really wanted that food    reframes used: stomach ache, heartburn, Feel gross, heart disease    Roc 3-4. Started to have movement spikes. I reminded the participant to relax and hold still.",Had to re scout after WTP2 due to large movement.   Large movement spikes during WTP2,Forgot to check to see if the participant could hear the beep. restarted task. The participant can hear the beep
+DEV111,2,2,,,,
+DEV112,1,1,,,Marked some ratings twice for WTP 2.,
+DEV112,1,2,Participant was sensitive to the static in the earbuds so after the only run of SST we went in and removed the headphones and replaced them with regular earplugs. Rest of the scan continued as normal.,First run of ROC was quit because we did not runGetStim before    Second run was the first full attempt,,
+DEV113,4,1,,"Health Consequences: Intolerance to gluten and sugars will make her feel sick, and unnecessary weight gain will  contribute to an unhealthy lifestyle (not being able to walk up the stairs, joint issues). ",,
+DEV113,4,2,MPRAGE - closes eyes occasionally. struggling to stay awake  Resting state 1- Large movement spike  Resting state 2 - massive movement spike at the very end. other than that. Great scan  ,small movement spike run2.  Small movement spikes run 3,,
+DEV114,3,1,,"Health consequences the participant used included long term health consequences: heart disease, ending up in the hospital (brother's heart attack), fear of diabetes, and short term health consequences: nausea, sweats, energy crashes, feeling ill, heartburn, weight gain.    Reported that using the regulate strategies made him feel that he will be approaching food differently. He says he'll definitely be using it. During the 'Look' trials he says that he started to think about regulating anyway.",,
+DEV114,3,2,,"During run 3 an update window opened. It did not completely cover the food items and he still responded to them but for the last part of run 3, there was a popup on the task screen.     He found himself regulating during the green border look parts. 'It just happened naturally'",,
+DEV115,5,1,"Actual Scanner order: Scout, ROC1-2, MPRage, ROC3-4,Resting state 1, SST, field maps, Participant needed water (sat up on scanner table), Scout, Resting state 2, WTP 1-4, Fieldmaps, Flare scan",,,
+DEV115,5,2,,,,
+DEV116,2,1,,,,
+DEV116,2,2,,,,
+DEV117,1,1,"Actual scan order: Scout, SST, MPRage, Fieldmaps, Participant head adjustment, scout, field maps, WTP 1-4, Resting state 1, ROC 1-2, Resting state 2, ROC3-4","Runs 1,2, and 4 had a lot of movement",Double ratings for some images (pressed while picture was up and then pressed while rating scale was also up),
+DEV117,1,2,,,,
+DEV118,4,1,,,No input for first two auction images on run 1 of WTP    Two runs of WTP Run 4 but first one is actually WTP Run 3  ,
+DEV118,4,2,,,,
+DEV119,3,1,,,,
+DEV119,3,2,,,,
+DEV120,5,1,,,,
+DEV120,5,2,,,,
+DEV121,2,1,,,,
+DEV121,2,2,,,,
+DEV122,2,1,"Participant had lots of movement during his MPRAGE so it was done again.  Movement during scan may be due to button boxes not being stable enough, with each press his entire arm moved. Told him to move it in a more stable position for the rest of the scan (This occurred right after ROC4 ended.    Actual Scan Order: Scout, SST, MPRAGE, Fieldmaps, ROC 1-2, MPRAGE, ROC 3-4, Resting state 1, WTP 1-4,   ","During the ROC 1 he did not rate the first image.    Participant kept closing his eyes and jolting himself awake during ROC 3 and 4 (He did not fall asleep for an extended period of time, but he may have missed a couple of ratings and there was a lot of movement during these runs.)",,
+DEV122,2,2,Falling asleep during MPRAGE - end  Left ring finger pressed down during RS #1 ,Falling asleep a little throughout ,Falling asleep a little throughout,
+DEV123,1,1,,,,
+DEV123,1,2,,,,
+DEV124,4,1,"Go into session one, and recollect address and family to contact. Was not saved in session 0 due to a technical issue ",,,
+DEV124,4,2,,Might have forgotten to runGetStim for ROC. ,"May be multiple runs, overwrote first file, then there was an issue with john snow connector port then had to quit matlab then was able to do the task",
+DEV125,3,1,"WTP would not launch, so we did SST first. WTP successfully launched after we did runGetStim again. Actual scan order: Scout, SST, MPRAGE, WTP (1-4), Resting State 1, ROC (runs 1 & 2), Resting State 2, Fieldmaps, ROC (runs 3 & 4).   One of the electrodes on the heart rate monitor wasn't lighting up. So, the scanner is registering the heartbeat, but the scanner computer is not. So, heart rate data during the scan might be affected.   ",,"The task initially launched and images were visible; however, staff noticed that the connection to the projector went out near the end WTP run 2. Therefore, the participant missed some images to bid on. We changed ports on the mac for the USB and the projector worked better after that.","After the scan, the participant reported that the images on the screen had been flickering in and out. This issue was not caught until the 2nd run of WTP."
+DEV125,3,2,,,,
+DEV126,5,1,,Rating the food when the picture is present and agin when the rating is present during the first run of ROC    She thought about the attributes of the food instead of negative consequences during the first run of ROC    ,,Had to pull participant out before beep task to put in proper ear plugs
+DEV126,5,2,"Actual scanner order: Scout, ROC1+2, MPRAGE, Fieldmaps, ROC3, restart of ROC 3, ROC 4, Resting state 1, SST, Resting state 2, WTP 1-4",ROC 1 had minor issues with monitor (screen flickered)  ROC 3 triggered and proceeded for about two images before it froze and was restarted.,,
+DEV127,6,1,,,,
+DEV127,6,2,,,,
+DEV128,2,1,,,,
+DEV128,2,2,,midway through ROC 1 task right thumb was held down for a while ,,
+DEV129,1,1,,,,
+DEV129,1,2,stopped during RS #1 - participant had to cough   re-did RS #1   falling asleep during ROC #4   re-did WTP #1 at end of scan,,WTP 1: right pinky (#9) held down for a little bit - using pointer through pinky instead of thumb through ring finger (6-9 instead of 5-8)   Re-did WTP #1 at end of scan,
+DEV130,4,1,,,None,
+DEV130,4,2,Eyes closed briefly during MPRage and were heavy for the few scans that followed,,,
+DEV131,3,1,,,,
+DEV131,3,2,,,,
+DEV132,5,1,"During MPRAGE participant started falling asleep, ROC 3 and 4 had lots of movement.",,,
+DEV132,5,2,"Actual Scanner Order: ROC1-2, MPRAGE, Fieldmaps, ROC3-4, SST,WTP1-4  ROC2 lots of movement, Fell asleep briefly during MPRAGE",,,
+DEV133,6,1,Used 2 extra sponges (4 total) around her head.,,,
+DEV133,6,2,"Operator did not line up the first MPRAGE so we redid it, there will be two runs. Might be 2 resting state 1 scans, we had to pull her out of the scanner due to pressure on her head. No resting state 2 because she said it makes her head hurt.",,,
+DEV134,2,1,,,,
+DEV134,2,2,During Resting State 1: pinky on right hand was held down,,,
+DEV135,1,1,,Hiccuped when candy corn was on screen.,,
+DEV135,1,2,,"ROC run 1 was launched 3 times. Jon Snow apparently automatically began to update during ROC1. We then switched victoria's laptop to attempt to run ROC1 a second time, this did not work. Jon Snow finished updating by then so we attempted to run ROC1 a third time and it worked. Pay attention to the third run of ROC1. ",,
+DEV136,4,1,,,,
+DEV136,4,2,,,,
+DEV137,3,1,Did a good job keeping still during all the scanner tasks but had quite a bit of movement for both resting state scans,,,
+DEV137,3,2,,,,Lots of movement when pushing buttons on the button boxes
+DEV138,5,1,,,,Beep noise only out of the right ear bud.
+DEV138,5,2,,,,
+DEV139,2,1,,,,
+DEV139,2,2,,ROC 4 had to be restarted because it froze due to 'user terminated operation' - probably due to a dropbox pop up as the task started,,
+DEV140,1,1,"during the last rin of ROC 'runWTP' was typed instead of 'runROC' therefore, an extra run if WTP was done in the ROC folder and then we did the actual last run of ROC after ","during the last rin of ROC 'runWTP' was typed instead of 'runROC' therefore, an extra run if WTP was done in the ROC folder and then we did the actual last run of ROC after ",,
+DEV140,1,2,Started to get a little sleepy and close eyes briefly during Resting State 1,,Screen malfunction for first run of WTP; had to start over,
+DEV141,4,1,had to pull her out and readjust her ear buds    we did auto align scout on more time,,,
+DEV141,4,2,,,,
+DEV142,3,1,,,,
+DEV142,3,2,,,,
+DEV143,5,1,,"Had a huge movement while calibrating scanner so had to restart ROC1. In the second run of ROC1, the task froze briefly for a moment and then continued to run after scan had completed. Just moved on to ROC2 at this point for timing sake. ",,
+DEV143,5,2,,,,
+DEV144,6,1,,,,
+DEV144,6,2,,,,
+DEV145,2,1,She drank a lot of coffee before the scan. ,Lots of movement.,"During run 1, participant squeezed squeeze ball because earplugs fell out. ",Lots of movement during SST (>0.8). 
+DEV145,2,2,,,,
+DEV146,4,1,,,,
+DEV146,4,2,,,,
+DEV147,4,1,,,,
+DEV147,4,2,,,,
+DEV148,3,1,,,,
+DEV148,3,2,,,,
+DEV149,5,1,She had a hard time staying awake during Resting State 1 & 2 scans. Her eyes kept closing.,,,
+DEV149,5,2,,,,
+DEV150,6,1,,,,
+DEV150,6,2,,,,
+DEV151,2,1,"During ROC run 2, the task froze when the scan was complete. Also, #7 button box was held down during the second half of ROC2. During all of the ROC tasks, she missed some buttons because she was dozing off a bit. Lots of movement in the scanner",,,Held down #7 button for the first run of SST. Scott went in the scanner and we restarted SST. 
+DEV151,2,2,,,,
+DEV152,1,1,"She held down on left, 4th finger during the first resting state",,,
+DEV152,1,2,,,,
+DEV153,4,1,,participant coughing a bit at end of ROC #3 but movement on FIRMM looked normal?? ,,
+DEV153,4,2,,,,
+DEV154,3,1,,,,holding down ring finger on left hand (1) during SST - restarted task 
+DEV154,3,2,,,,
+DEV155,5,1,restarted ROC2 a bunch - see above  skipped RS2 - ran out of time,"Has done this task before during the freshman project???;   ROC2 didn't trigger - restarted, 7 held down during second try - restarted, 1 held down during calibration of third try - restarted",,
+DEV155,5,2,,,,
+DEV156,6,1,,,,
+DEV156,6,2,,,,
+DEV157,2,1,,,,
+DEV157,2,2,,,,
+DEV158,1,1,,,,
+DEV158,1,2,,,,
+DEV159,4,1,,,,
+DEV159,4,2,,,,
+DEV160,3,1,,,,
+DEV160,3,2,,,,
+DEV161,5,1,,,,
+DEV161,5,2,,,,
+DEV162,2,1,,,,
+DEV162,2,2,,,,
+DEV163,1,1,,,,
+DEV163,1,2,,,,
+DEV164,4,1,,,,
+DEV164,4,2,,,,
+DEV165,3,1,,,,
+DEV165,3,2,,,,
+DEV166,5,1,,,,
+DEV166,5,2,,,,
+DEV167,6,1,,,,
+DEV167,6,2,,,,
+DEV168,2,1,,,,
+DEV168,2,2,,,,
+DEV169,1,1,,,,
+DEV169,1,2,,,,
+DEV170,4,1,,,,
+DEV170,4,2,,,,
+DEV171,3,1,,,,
+DEV171,3,2,,,,
+DEV172,5,1,,,,
+DEV172,5,2,,,,
+DEV173,6,1,,,,
+DEV173,6,2,,,,
+DEV174,2,1,,,,
+DEV174,2,2,,,,
+DEV175,1,1,,,,
+DEV175,1,2,,,,
+DEV176,4,1,,,,
+DEV176,4,2,,,,
+DEV177,3,1,,,,
+DEV177,3,2,,,,
+DEV178,5,1,,,,
+DEV178,5,2,,,,
+DEV179,6,1,,,,
+DEV179,6,2,,,,
+DEV180,2,1,,,,
+DEV180,2,2,,,,
+DEV181,1,1,,,,
+DEV181,1,2,,,,
+DEV182,4,1,,,,
+DEV182,4,2,,,,
+DEV183,3,1,,,,
+DEV183,3,2,,,,
+DEV184,5,1,,,,
+DEV184,5,2,,,,
+DEV185,2,1,,,,
+DEV185,2,2,,,,
+DEV186,1,1,,,,
+DEV186,1,2,,,,
+DEV187,4,1,,,,
+DEV187,4,2,,,,
+DEV188,3,1,,,,
+DEV188,3,2,,,,
+DEV189,5,1,,,,
+DEV189,5,2,,,,
+DEV190,6,1,,,,
+DEV190,6,2,,,,
+DEV191,2,1,,,,
+DEV191,2,2,,,,
+DEV192,1,1,,,,
+DEV192,1,2,,,,
+DEV193,4,1,,,,
+DEV193,4,2,,,,
+DEV194,3,1,,,,
+DEV194,3,2,,,,
+DEV195,5,1,,,,
+DEV195,5,2,,,,
+DEV196,6,1,,,,
+DEV196,6,2,,,,
+DEV197,2,1,,,,
+DEV197,2,2,,,,
+DEV198,1,1,,,,
+DEV198,1,2,,,,
+DEV199,4,1,,,,
+DEV199,4,2,,,,
+DEV200,3,1,,,,
+DEV200,3,2,,,,
+DEV201,5,1,,,,
+DEV201,5,2,,,,
+DEV202,6,1,,,,
+DEV202,6,2,,,,
+DEV203,2,1,,,,
+DEV203,2,2,,,,
+DEV204,1,1,,,,
+DEV204,1,2,,,,
+DEV205,4,1,,,,
+DEV205,4,2,,,,
+DEV206,3,1,,,,
+DEV206,3,2,,,,
+DEV207,5,1,,,,
+DEV207,5,2,,,,
+DEV208,2,1,,,,
+DEV208,2,2,,,,
+DEV209,1,1,,,,
+DEV209,1,2,,,,
+DEV210,4,1,,,,
+DEV210,4,2,,,,
+DEV211,3,1,,,,
+DEV211,3,2,,,,
+DEV220,2,1,,,,
+DEV220,2,2,,,,
+DEV221,NA,1,,,,
+DEV221,NA,2,,,,
+DEV550,NA,1,,,,
+DEV550,NA,2,,,,
+DEV999,NA,1,,,,
+DEV999,NA,2,,,,
+TEST,5,1,,,,
+TEST,5,2,,,,
