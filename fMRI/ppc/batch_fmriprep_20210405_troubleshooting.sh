@@ -19,7 +19,7 @@ fi
 
 
 # Set subject list
-subject_list=`cat new_subject_list_20210324.txt` 
+subject_list=`cat subject_list_attempt_again_20210405.txt` 
 
 # Loop through subjects and run job_mriqc
 for subject in $subject_list; do

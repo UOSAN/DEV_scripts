@@ -32,6 +32,7 @@ for subject in $subject_list; do
 		   --job-name fmriprep \
 		   --partition=ctn \
 		   --cpus-per-task=8 \
+		   --time=3-00:00:00 \
 		   --mem=10G \
 		   -o "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_output.txt \
 		   -e "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_error.txt \
