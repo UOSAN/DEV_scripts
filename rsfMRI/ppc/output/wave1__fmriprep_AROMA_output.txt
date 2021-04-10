@@ -1,0 +1,16 @@
+
+fMRIprep on wave1_
+
+Container: /projects/sanlab/shared/containers/fmriprep-latest-2018-09-05.simg
+
+Subject directory: /projects/sanlab/shared/DEV/bids_data
+
+Starting on: rest
+
+
+
+
+
+done
+
+-----------------------

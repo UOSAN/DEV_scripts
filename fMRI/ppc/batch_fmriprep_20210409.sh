@@ -3,10 +3,8 @@
 # This batch file calls on your subject list (which contains both ID and wave number: SID000,wave1). 
 # And runs the job_fmriprep.sh file for each subject. 
 # It saves the ouput and error files in specified directories.
-# created to test how quick it is to run a job that's already been run.
 #
 # Set your directories
-
 
 container=containers/fmriprep-latest-2018-09-05.simg
 freesurferlicense=/projects/sanlab/shared/containers/license.txt
@@ -21,7 +19,7 @@ fi
 
 
 # Set subject list
-subject_list=`cat subject_list_sub_075.txt`
+subject_list=`cat new_subject_list_20210409.txt` 
 
 # Loop through subjects and run job_mriqc
 for subject in $subject_list; do
@@ -32,8 +30,9 @@ for subject in $subject_list; do
 	echo $subid, $sessid
 	sbatch --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
 		   --job-name fmriprep \
-		   --partition=short \
+		   --partition=ctn \
 		   --cpus-per-task=8 \
+		   --time=3-00:00:00 \
 		   --mem=10G \
 		   -o "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_output.txt \
 		   -e "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_error.txt \
