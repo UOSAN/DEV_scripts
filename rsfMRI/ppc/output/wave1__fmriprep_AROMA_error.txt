@@ -1,0 +1,23 @@
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+Process Process-2:
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/cli/run.py", line 414, in build_workflow
+    bids_dir, participant_label=opts.participant_label)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/utils/bids.py", line 106, in collect_participants
+    ', '.join(participant_label)), bids_dir)
+fmriprep.utils.bids.BIDSError: 
+---------- BIDS root folder: "/projects/sanlab/shared/DEV/bids_data" ----------
+           Could not find participants [wave1]
+-------------------------------------------------------------------------------
+/cm/local/apps/slurm/var/spool/job14531562/slurm_script: line 42: --ignore: command not found
