@@ -26,6 +26,13 @@ mkdir -p $working_dir
 # Run container using singularity
 cd $bids_dir
 
+#create a temp dir just for this job
+job_tempdir=${study}_${subid}_${sessid}
+
+mkdir -p /tmp/${job_tempdir}
+#creating a temp dir for the specific job prevents this job from interfering with other job's temp files
+#in the event they're running simultaneously
+
 for task in ${tasks[@]}; do
 	echo -e "\nStarting on: $task"
 	echo -e "\n"
@@ -33,7 +40,7 @@ for task in ${tasks[@]}; do
 	PYTHONPATH="" singularity run --bind "${group_dir}":"${group_dir}" $image $bids_dir $derivatives participant \
 		--participant_label $subid \
 		-t $task \
-		-w /tmp \
+		-w /tmp/${job_tempdir} \
 		--output-space {T1w,template,fsaverage5,fsnative} \
 		--nthreads 1 \
 		--mem-mb 32000 \
@@ -48,4 +55,4 @@ for task in ${tasks[@]}; do
 done
 
 # clean tmp folder
-/usr/bin/rm -rvf /tmp/fmriprep*
+/usr/bin/rm -rvf /tmp/${job_tempdir}/fmriprep*
