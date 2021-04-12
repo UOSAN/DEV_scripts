@@ -27,7 +27,7 @@ mkdir -p $working_dir
 cd $bids_dir
 
 #create a temp dir just for this job
-job_tempdir=${study}_${subid}_${sessid}
+job_tempdir=${USER}_${study}_${subid}_${sessid}
 
 mkdir -p /tmp/${job_tempdir}
 #creating a temp dir for the specific job prevents this job from interfering with other job's temp files

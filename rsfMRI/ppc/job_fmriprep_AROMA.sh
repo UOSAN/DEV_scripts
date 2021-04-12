@@ -38,7 +38,7 @@ for task in ${tasks[@]}; do
 		--nthreads 1 \
 		--mem-mb 10000 \
 		--fs-license-file $freesurferlicense \
-        --use-aroma
+		--fs-no-reconall \
 		--ignore slicetiming \
 		--longitudinal
 
@@ -49,4 +49,4 @@ for task in ${tasks[@]}; do
 done
 
 # clean tmp folder
-/usr/bin/rm -rvf /tmp/fmriprep*
+#/usr/bin/rm -rvf /tmp/fmriprep*
