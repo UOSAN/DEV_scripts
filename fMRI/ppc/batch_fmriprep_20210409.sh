@@ -19,7 +19,8 @@ fi
 
 
 # Set subject list
-subject_list=`cat new_subject_list_20210409.txt` 
+#subject_list=`cat new_subject_list_20210409.txt` 
+subject_list=`cat subject_list_sub_124.txt`
 
 # Loop through subjects and run job_mriqc
 for subject in $subject_list; do
@@ -33,7 +34,7 @@ for subject in $subject_list; do
 		   --partition=ctn \
 		   --cpus-per-task=8 \
 		   --time=3-00:00:00 \
-		   --mem=10G \
+		   --mem=32G \
 		   -o "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_output.txt \
 		   -e "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_error.txt \
 		   --account=sanlab \

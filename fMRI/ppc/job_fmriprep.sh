@@ -36,7 +36,7 @@ for task in ${tasks[@]}; do
 		-w /tmp \
 		--output-space {T1w,template,fsaverage5,fsnative} \
 		--nthreads 1 \
-		--mem-mb 10000 \
+		--mem-mb 32000 \
 		--fs-license-file $freesurferlicense \
 		--ignore slicetiming \
 		--longitudinal
