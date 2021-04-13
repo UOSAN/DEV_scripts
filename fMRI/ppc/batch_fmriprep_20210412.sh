@@ -20,7 +20,7 @@ fi
 
 # Set subject list
 #subject_list=`cat new_subject_list_20210409.txt` 
-subject_list=`cat subject_list_sub_134.txt`
+subject_list=`cat subect_list_subs_101_104_115.txt`
 
 # Loop through subjects and run job_mriqc
 for subject in $subject_list; do
@@ -29,8 +29,8 @@ for subject in $subject_list; do
 	subid=`echo $subject|awk '{print $2}' FS=","`
 	sessid=`echo $subject|awk '{print $3}' FS=","`
 	echo $subid, $sessid
-	sbatch --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
-		   --job-name fmriprep \
+	sbatch --dependency=singleton --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
+		   --job-name fmriprep_${subid} \
 		   --partition=ctn \
 		   --cpus-per-task=8 \
 		   --time=3-00:00:00 \

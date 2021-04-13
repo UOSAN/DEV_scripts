@@ -43,7 +43,7 @@ for task in ${tasks[@]}; do
 		-w /tmp/${job_tempdir} \
 		--output-space {T1w,template,fsaverage5,fsnative} \
 		--nthreads 1 \
-		--mem-mb 32000 \
+		--mem-mb 16000 \
 		--fs-license-file $freesurferlicense \
 		--ignore slicetiming \
 		--longitudinal
