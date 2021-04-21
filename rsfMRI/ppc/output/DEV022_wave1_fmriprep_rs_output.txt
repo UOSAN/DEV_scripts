@@ -1,0 +1,1157 @@
+
+fMRIprep on DEV022_wave1
+
+Container: /projects/sanlab/shared/containers/fmriprep-latest-2018-09-05.simg
+
+Subject directory: /projects/sanlab/shared/DEV/bids_data
+
+Starting on: rest
+
+
+210415-21:29:59,213 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV022'].
+      * Run identifier: 20210415-212959_9eec80ba-ef3c-43f7-a435-17b7996e7c0d.
+    
+210415-21:30:25,651 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV022/ses-wave1/func/sub-DEV022_ses-wave1_task-rest_acq-1_bold.nii.gz" (0.24 GB / 414 TRs). Memory resampled/largemem=0.95/1.93 GB.
+210415-21:30:26,243 nipype.workflow WARNING:
+	 SDC: no fieldmaps found or they were ignored (/projects/sanlab/shared/DEV/bids_data/sub-DEV022/ses-wave1/func/sub-DEV022_ses-wave1_task-rest_acq-1_bold.nii.gz).
+210415-21:30:27,544 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV022/ses-wave1/func/sub-DEV022_ses-wave1_task-rest_acq-2_bold.nii.gz" (0.24 GB / 414 TRs). Memory resampled/largemem=0.95/1.93 GB.
+210415-21:30:27,954 nipype.workflow WARNING:
+	 SDC: no fieldmaps found or they were ignored (/projects/sanlab/shared/DEV/bids_data/sub-DEV022/ses-wave1/func/sub-DEV022_ses-wave1_task-rest_acq-2_bold.nii.gz).
+210415-21:30:31,584 nipype.workflow IMPORTANT:
+	 Works derived from this fMRIPrep execution should include the following boilerplate:
+
+
+Results included in this manuscript come from preprocessing
+performed using *fMRIPprep* 1.1.4
+(@fmriprep1; @fmriprep2; RRID:SCR_016216),
+which is based on *Nipype* 1.1.1
+(@nipype1; @nipype2; RRID:SCR_002502).
+
+Anatomical data preprocessing
+
+: The T1-weighted (T1w) image was corrected for intensity non-uniformity (INU)
+using `N4BiasFieldCorrection` [@n4, ANTs 2.2.0],
+and used as T1w-reference throughout the workflow.
+The T1w-reference was then skull-stripped using `antsBrainExtraction.sh`
+(ANTs 2.2.0), using OASIS as target template.
+Spatial normalization to the ICBM 152 Nonlinear Asymmetrical
+template version 2009c [@mni, RRID:SCR_008796] was performed
+through nonlinear registration with `antsRegistration`
+[ANTs 2.2.0, RRID:SCR_004757, @ants], using
+brain-extracted versions of both T1w volume and template.
+Brain tissue segmentation of cerebrospinal fluid (CSF),
+white-matter (WM) and gray-matter (GM) was performed on
+the brain-extracted T1w using `fast` [FSL 5.0.9, RRID:SCR_002823,
+@fsl_fast].
+
+
+Functional data preprocessing
+
+: For each of the 2 BOLD runs found per subject (across all
+tasks and sessions), the following preprocessing was performed.
+First, a reference volume and its skull-stripped version were generated
+using a custom methodology of *fMRIPrep*.
+Head-motion parameters with respect to the BOLD reference
+(transformation matrices, and six corresponding rotation and translation
+parameters) are estimated before any spatiotemporal filtering using
+`mcflirt` [FSL 5.0.9, @mcflirt].
+The BOLD time-series (including slice-timing correction when applied)
+were resampled onto their original, native space by applying
+a single, composite transform to correct for head-motion and
+susceptibility distortions.
+These resampled BOLD time-series will be referred to as *preprocessed
+BOLD in original space*, or just *preprocessed BOLD*.
+The BOLD reference was then co-registered to the T1w reference using
+`flirt` [FSL 5.0.9, @flirt] with the boundary-based registration [@bbr]
+cost-function.
+Co-registration was configured with nine degrees of freedom to account
+for distortions remaining in the BOLD reference.
+The BOLD time-series were resampled to MNI152NLin2009cAsym standard space,
+generating a *preprocessed BOLD run in MNI152NLin2009cAsym space*.
+Several confounding time-series were calculated based on the
+*preprocessed BOLD*: framewise displacement (FD), DVARS and
+three region-wise global signals.
+FD and DVARS are calculated for each functional run, both using their
+implementations in *Nipype* [following the definitions by @power_fd_dvars].
+The three global signals are extracted within the CSF, the WM, and
+the whole-brain masks.
+Additionally, a set of physiological regressors were extracted to
+allow for component-based noise correction [*CompCor*, @compcor].
+Principal components are estimated after high-pass filtering the
+*preprocessed BOLD* time-series (using a discrete cosine filter with
+128s cut-off) for the two *CompCor* variants: temporal (tCompCor)
+and anatomical (aCompCor).
+Six tCompCor components are then calculated from the top 5% variable
+voxels within a mask covering the subcortical regions.
+This subcortical mask is obtained by heavily eroding the brain mask,
+which ensures it does not include cortical GM regions.
+For aCompCor, six components are calculated within the intersection of
+the aforementioned mask and the union of CSF and WM masks calculated
+in T1w space, after their projection to the native space of each
+functional run (using the inverse BOLD-to-T1w transformation).
+The head-motion estimates calculated in the correction step were also
+placed within the corresponding confounds file.
+All resamplings can be performed with *a single interpolation
+step* by composing all the pertinent transformations (i.e. head-motion
+transform matrices, susceptibility distortion correction when available,
+and co-registrations to anatomical and template spaces).
+Gridded (volumetric) resamplings were performed using `antsApplyTransforms` (ANTs),
+configured with Lanczos interpolation to minimize the smoothing
+effects of other kernels [@lanczos].
+Non-gridded (surface) resamplings were performed using `mri_vol2surf`
+(FreeSurfer).
+
+
+Many internal operations of *fMRIPrep* use
+*Nilearn* 0.4.2 [@nilearn, RRID:SCR_001362],
+mostly within the functional processing workflow.
+For more details of the pipeline, see [the section corresponding
+to workflows in *fMRIPrep*'s documentation](https://fmriprep.readthedocs.io/en/latest/workflows.html "FMRIPrep's documentation").
+
+
+### References
+
+
+210415-21:30:42,547 nipype.workflow WARNING:
+	 Some nodes exceed the total amount of memory available (9.77GB).
+210415-21:30:42,548 nipype.workflow WARNING:
+	 Some nodes demand for more threads than available (1).
+210415-21:30:45,258 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.validate" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/validate".
+210415-21:30:45,261 nipype.workflow INFO:
+	 [Node] Running "validate" ("fmriprep.interfaces.images.ValidateImage")
+210415-21:30:56,85 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.validate".
+210415-21:30:56,700 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_split" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_split".
+210415-21:30:56,703 nipype.workflow INFO:
+	 [Node] Running "bold_split" ("nipype.interfaces.fsl.utils.Split"), a CommandLine Interface with command:
+fslsplit /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/validate/sub-DEV022_ses-wave1_task-rest_acq-1_bold_valid.nii.gz -t
+210415-21:31:22,413 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_split".
+210415-21:31:22,891 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_mni_trans_wf.gen_ref" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_mni_trans_wf/gen_ref".
+210415-21:31:22,895 nipype.workflow INFO:
+	 [Node] Running "gen_ref" ("niworkflows.interfaces.utils.GenerateSamplingReference")
+210415-21:31:23,889 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_mni_trans_wf.gen_ref".
+210415-21:31:24,867 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.gen_ref" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/gen_ref".
+210415-21:31:24,870 nipype.workflow INFO:
+	 [Node] Running "gen_ref" ("niworkflows.interfaces.registration.EstimateReferenceImage")
+210415-21:31:26,536 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.gen_ref".
+210415-21:31:26,732 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_hmc_wf.mcflirt" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_hmc_wf/mcflirt".
+210415-21:31:26,736 nipype.workflow INFO:
+	 [Node] Running "mcflirt" ("nipype.interfaces.fsl.preprocess.MCFLIRT"), a CommandLine Interface with command:
+mcflirt -in /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/validate/sub-DEV022_ses-wave1_task-rest_acq-1_bold_valid.nii.gz -out /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_hmc_wf/mcflirt/sub-DEV022_ses-wave1_task-rest_acq-1_bold_valid_mcf.nii.gz -reffile /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/gen_ref/ref_image.nii.gz -mats -plots
+210415-21:32:58,613 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_hmc_wf.mcflirt".
+210415-21:32:58,837 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_hmc_wf.normalize_motion" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_hmc_wf/normalize_motion".
+210415-21:32:58,840 nipype.workflow INFO:
+	 [Node] Running "normalize_motion" ("niworkflows.interfaces.utils.NormalizeMotionParams")
+210415-21:32:58,866 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_hmc_wf.normalize_motion".
+210415-21:33:00,977 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_confounds_wf.fdisp" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_confounds_wf/fdisp".
+210415-21:33:00,981 nipype.workflow INFO:
+	 [Node] Running "fdisp" ("nipype.algorithms.confounds.FramewiseDisplacement")
+210415-21:33:01,5 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_confounds_wf.fdisp".
+210415-21:33:02,887 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_hmc_wf.fsl2itk" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_hmc_wf/fsl2itk".
+210415-21:33:02,922 nipype.workflow INFO:
+	 [Node] Running "fsl2itk" ("fmriprep.interfaces.itk.MCFLIRT2ITK")
+210415-21:33:52,283 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_hmc_wf.fsl2itk".
+210415-21:33:53,14 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_mask".
+210415-21:33:53,19 nipype.workflow INFO:
+	 [Node] Running "n4_mask" ("fmriprep.interfaces.nilearn.MaskEPI")
+210415-21:33:54,536 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_mask".
+210415-21:33:54,948 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_transform" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_transform".
+210415-21:33:54,985 nipype.workflow INFO:
+	 [Node] Running "bold_transform" ("fmriprep.interfaces.itk.MultiApplyTransforms")
+210415-21:37:28,999 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_transform".
+210415-21:37:29,238 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.merge" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/merge".
+210415-21:37:29,275 nipype.workflow INFO:
+	 [Node] Running "merge" ("fmriprep.interfaces.nilearn.Merge")
+210415-21:38:07,684 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.merge".
+210415-21:38:09,234 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_confounds_wf.non_steady_state" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_confounds_wf/non_steady_state".
+210415-21:38:09,238 nipype.workflow INFO:
+	 [Node] Running "non_steady_state" ("nipype.algorithms.confounds.NonSteadyStateDetector")
+210415-21:38:13,183 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_confounds_wf.non_steady_state".
+210415-21:38:15,239 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.validate" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/validate".
+210415-21:38:15,243 nipype.workflow INFO:
+	 [Node] Running "validate" ("fmriprep.interfaces.images.ValidateImage")
+210415-21:38:29,130 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.validate".
+210415-21:38:31,256 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.gen_ref" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/gen_ref".
+210415-21:38:31,260 nipype.workflow INFO:
+	 [Node] Running "gen_ref" ("niworkflows.interfaces.registration.EstimateReferenceImage")
+210415-21:38:33,85 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.gen_ref".
+210415-21:38:33,256 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_mask".
+210415-21:38:33,259 nipype.workflow INFO:
+	 [Node] Running "n4_mask" ("fmriprep.interfaces.nilearn.MaskEPI")
+210415-21:38:34,208 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_mask".
+210415-21:38:35,262 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_correct" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_correct".
+210415-21:38:35,267 nipype.workflow INFO:
+	 [Node] Running "n4_correct" ("nipype.interfaces.ants.segmentation.N4BiasFieldCorrection"), a CommandLine Interface with command:
+N4BiasFieldCorrection -d 3 --input-image /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/gen_ref/ref_image.nii.gz --mask-image /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_mask/ref_image_mask.nii.gz --output ref_image_corrected.nii.gz
+210415-21:38:38,589 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_correct".
+210415-21:38:39,266 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass".
+210415-21:38:39,272 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_pass" ("nipype.interfaces.fsl.preprocess.BET"), a CommandLine Interface with command:
+bet /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_correct/ref_image_corrected.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain.nii.gz -f 0.20 -m
+210415-21:38:41,574 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass".
+210415-21:38:43,270 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate".
+210415-21:38:43,276 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_dilate" ("nipype.interfaces.fsl.maths.DilateImage"), a CommandLine Interface with command:
+fslmaths -dt char /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain_mask.nii.gz -kernel sphere 6.0000 -dilF /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/ref_image_corrected_brain_mask_dil.nii.gz
+210415-21:38:45,269 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate".
+210415-21:38:47,283 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask".
+210415-21:38:47,288 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain.nii.gz -mas /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/ref_image_corrected_brain_mask_dil.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask/ref_image_corrected_brain_masked.nii.gz
+210415-21:38:47,577 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask".
+210415-21:38:49,274 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.unifize" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/unifize".
+210415-21:38:49,280 nipype.workflow INFO:
+	 [Node] Running "unifize" ("nipype.interfaces.afni.utils.Unifize"), a CommandLine Interface with command:
+3dUnifize -clfrac 0.2 -rbt 18.3 65.0 90.0 -prefix uni.nii.gz -T2 -input /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/unifize/ref_image_corrected_brain_masked.nii.gz
+210415-21:38:52,901 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.unifize".
+210415-21:38:53,280 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_unifize".
+210415-21:38:53,284 nipype.workflow INFO:
+	 [Node] Running "fixhdr_unifize" ("niworkflows.interfaces.utils.CopyXForm")
+210415-21:38:53,419 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize".
+210415-21:38:55,280 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass".
+210415-21:38:55,286 nipype.workflow INFO:
+	 [Node] Running "skullstrip_second_pass" ("nipype.interfaces.afni.preprocess.Automask"), a CommandLine Interface with command:
+3dAutomask -apply_prefix uni_xform_masked.nii.gz -dilate 1 -prefix uni_xform_mask.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass/uni_xform.nii.gz
+210415-21:38:55,776 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass".
+210415-21:38:57,283 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_skullstrip2" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_skullstrip2".
+210415-21:38:57,287 nipype.workflow INFO:
+	 [Node] Running "fixhdr_skullstrip2" ("niworkflows.interfaces.utils.CopyXForm")
+210415-21:38:57,353 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_skullstrip2".
+210415-21:38:59,286 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.combine_masks" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks".
+210415-21:38:59,291 nipype.workflow INFO:
+	 [Node] Running "combine_masks" ("nipype.interfaces.fsl.maths.BinaryMaths"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain_mask.nii.gz -mul /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_skullstrip2/uni_xform_mask_xform.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks/ref_image_corrected_brain_mask_maths.nii.gz
+210415-21:38:59,506 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.combine_masks".
+210415-21:39:01,289 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_confounds_wf.dvars" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_confounds_wf/dvars".
+210415-21:39:01,294 nipype.workflow INFO:
+	 [Node] Running "dvars" ("nipype.algorithms.confounds.ComputeDVARS")
+210415-21:39:30,476 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_confounds_wf.dvars".
+210415-21:39:31,319 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.apply_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask".
+210415-21:39:31,324 nipype.workflow INFO:
+	 [Node] Running "apply_mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_unifize/uni_xform.nii.gz -mas /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks/ref_image_corrected_brain_mask_maths.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/uni_xform_masked.nii.gz
+210415-21:39:31,600 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.apply_mask".
+210415-21:39:33,404 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_correct" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_correct".
+210415-21:39:33,410 nipype.workflow INFO:
+	 [Node] Running "n4_correct" ("nipype.interfaces.ants.segmentation.N4BiasFieldCorrection"), a CommandLine Interface with command:
+N4BiasFieldCorrection -d 3 --input-image /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/gen_ref/ref_image.nii.gz --mask-image /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_mask/ref_image_mask.nii.gz --output ref_image_corrected.nii.gz
+210415-21:39:36,897 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_correct".
+210415-21:39:37,325 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass".
+210415-21:39:37,331 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_pass" ("nipype.interfaces.fsl.preprocess.BET"), a CommandLine Interface with command:
+bet /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_correct/ref_image_corrected.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain.nii.gz -f 0.20 -m
+210415-21:39:39,758 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass".
+210415-21:39:41,329 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate".
+210415-21:39:41,335 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_dilate" ("nipype.interfaces.fsl.maths.DilateImage"), a CommandLine Interface with command:
+fslmaths -dt char /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain_mask.nii.gz -kernel sphere 6.0000 -dilF /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/ref_image_corrected_brain_mask_dil.nii.gz
+210415-21:39:43,429 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate".
+210415-21:39:45,334 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask".
+210415-21:39:45,339 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain.nii.gz -mas /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/ref_image_corrected_brain_mask_dil.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask/ref_image_corrected_brain_masked.nii.gz
+210415-21:39:45,610 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask".
+210415-21:39:47,334 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.unifize" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/unifize".
+210415-21:39:47,341 nipype.workflow INFO:
+	 [Node] Running "unifize" ("nipype.interfaces.afni.utils.Unifize"), a CommandLine Interface with command:
+3dUnifize -clfrac 0.2 -rbt 18.3 65.0 90.0 -prefix uni.nii.gz -T2 -input /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/unifize/ref_image_corrected_brain_masked.nii.gz
+210415-21:39:50,956 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.unifize".
+210415-21:39:51,340 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_unifize".
+210415-21:39:51,344 nipype.workflow INFO:
+	 [Node] Running "fixhdr_unifize" ("niworkflows.interfaces.utils.CopyXForm")
+210415-21:39:51,478 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize".
+210415-21:39:53,340 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass".
+210415-21:39:53,346 nipype.workflow INFO:
+	 [Node] Running "skullstrip_second_pass" ("nipype.interfaces.afni.preprocess.Automask"), a CommandLine Interface with command:
+3dAutomask -apply_prefix uni_xform_masked.nii.gz -dilate 1 -prefix uni_xform_mask.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass/uni_xform.nii.gz
+210415-21:39:53,819 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass".
+210415-21:39:55,343 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_skullstrip2" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_skullstrip2".
+210415-21:39:55,347 nipype.workflow INFO:
+	 [Node] Running "fixhdr_skullstrip2" ("niworkflows.interfaces.utils.CopyXForm")
+210415-21:39:55,413 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_skullstrip2".
+210415-21:39:57,345 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.combine_masks" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks".
+210415-21:39:57,350 nipype.workflow INFO:
+	 [Node] Running "combine_masks" ("nipype.interfaces.fsl.maths.BinaryMaths"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain_mask.nii.gz -mul /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_skullstrip2/uni_xform_mask_xform.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks/ref_image_corrected_brain_mask_maths.nii.gz
+210415-21:39:57,564 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.combine_masks".
+210415-21:39:59,348 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.apply_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask".
+210415-21:39:59,353 nipype.workflow INFO:
+	 [Node] Running "apply_mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_unifize/uni_xform.nii.gz -mas /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks/ref_image_corrected_brain_mask_maths.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/uni_xform_masked.nii.gz
+210415-21:39:59,614 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.apply_mask".
+210415-21:40:01,354 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.validate" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/validate".
+210415-21:40:01,357 nipype.workflow INFO:
+	 [Node] Running "validate" ("fmriprep.interfaces.images.ValidateImage")
+210415-21:40:12,834 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.validate".
+210415-21:40:13,362 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_split" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_split".
+210415-21:40:13,365 nipype.workflow INFO:
+	 [Node] Running "bold_split" ("nipype.interfaces.fsl.utils.Split"), a CommandLine Interface with command:
+fslsplit /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/validate/sub-DEV022_ses-wave1_task-rest_acq-2_bold_valid.nii.gz -t
+210415-21:40:38,180 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_split".
+210415-21:40:39,396 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_mni_trans_wf.gen_ref" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_mni_trans_wf/gen_ref".
+210415-21:40:39,400 nipype.workflow INFO:
+	 [Node] Running "gen_ref" ("niworkflows.interfaces.utils.GenerateSamplingReference")
+210415-21:40:40,287 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_mni_trans_wf.gen_ref".
+210415-21:40:41,520 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.gen_ref" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/gen_ref".
+210415-21:40:41,524 nipype.workflow INFO:
+	 [Node] Running "gen_ref" ("niworkflows.interfaces.registration.EstimateReferenceImage")
+210415-21:40:43,814 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.813994:++ 3dvolreg: AFNI version=Debian-16.2.07~dfsg.1-5~nd16.04+1 (Jun 12 2017) [64-bit]
+210415-21:40:43,814 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.813994:++ Authored by: RW Cox
+210415-21:40:43,815 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.815805:[7m*+ WARNING:[0m   If you are performing spatial transformations on an oblique dset, 
+210415-21:40:43,815 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.815805:  such as /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/gen_ref/slice.nii.gz,
+210415-21:40:43,816 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.815805:  or viewing/combining it with volumes of differing obliquity,
+210415-21:40:43,816 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.815805:  you should consider running: 
+210415-21:40:43,816 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.815805:     3dWarp -deoblique 
+210415-21:40:43,816 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.815805:  on this and  other oblique datasets in the same session.
+210415-21:40:43,816 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.815805: See 3dWarp -help for details.
+210415-21:40:43,816 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.815805:++ Oblique dataset:/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/gen_ref/slice.nii.gz is 34.396664 degrees from plumb.
+210415-21:40:43,816 nipype.interface INFO:
+	 stderr 2021-04-15T21:40:43.816487:++ Coarse del was 10, replaced with 6
+210415-21:41:13,347 nipype.interface INFO:
+	 stderr 2021-04-15T21:41:13.347419:++ Max displacement in automask = 0.73 (mm) at sub-brick 19
+210415-21:41:13,347 nipype.interface INFO:
+	 stderr 2021-04-15T21:41:13.347419:++ Max delta displ  in automask = 0.39 (mm) at sub-brick 2
+210415-21:41:15,168 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.gen_ref".
+210415-21:41:15,430 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_hmc_wf.mcflirt" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_hmc_wf/mcflirt".
+210415-21:41:15,436 nipype.workflow INFO:
+	 [Node] Running "mcflirt" ("nipype.interfaces.fsl.preprocess.MCFLIRT"), a CommandLine Interface with command:
+mcflirt -in /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/validate/sub-DEV022_ses-wave1_task-rest_acq-2_bold_valid.nii.gz -out /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_hmc_wf/mcflirt/sub-DEV022_ses-wave1_task-rest_acq-2_bold_valid_mcf.nii.gz -reffile /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/gen_ref/ref_image.nii.gz -mats -plots
+210415-21:42:46,637 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_hmc_wf.mcflirt".
+210415-21:42:47,532 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_hmc_wf.normalize_motion" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_hmc_wf/normalize_motion".
+210415-21:42:47,536 nipype.workflow INFO:
+	 [Node] Running "normalize_motion" ("niworkflows.interfaces.utils.NormalizeMotionParams")
+210415-21:42:47,563 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_hmc_wf.normalize_motion".
+210415-21:42:49,669 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_confounds_wf.fdisp" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_confounds_wf/fdisp".
+210415-21:42:49,673 nipype.workflow INFO:
+	 [Node] Running "fdisp" ("nipype.algorithms.confounds.FramewiseDisplacement")
+210415-21:42:49,697 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_confounds_wf.fdisp".
+210415-21:42:51,580 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_hmc_wf.fsl2itk" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_hmc_wf/fsl2itk".
+210415-21:42:51,615 nipype.workflow INFO:
+	 [Node] Running "fsl2itk" ("fmriprep.interfaces.itk.MCFLIRT2ITK")
+210415-21:43:43,775 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_hmc_wf.fsl2itk".
+210415-21:43:45,705 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_mask".
+210415-21:43:45,709 nipype.workflow INFO:
+	 [Node] Running "n4_mask" ("fmriprep.interfaces.nilearn.MaskEPI")
+210415-21:43:47,2 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_mask".
+210415-21:43:47,636 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_transform" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_transform".
+210415-21:43:47,654 nipype.workflow INFO:
+	 [Node] Running "bold_transform" ("fmriprep.interfaces.itk.MultiApplyTransforms")
+210415-21:47:22,734 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_transform".
+210415-21:47:23,945 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.merge" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/merge".
+210415-21:47:23,982 nipype.workflow INFO:
+	 [Node] Running "merge" ("fmriprep.interfaces.nilearn.Merge")
+210415-21:48:02,712 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.merge".
+210415-21:48:03,932 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_confounds_wf.non_steady_state" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_confounds_wf/non_steady_state".
+210415-21:48:03,935 nipype.workflow INFO:
+	 [Node] Running "non_steady_state" ("nipype.algorithms.confounds.NonSteadyStateDetector")
+210415-21:48:08,137 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_confounds_wf.non_steady_state".
+210415-21:48:09,937 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.validate" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/validate".
+210415-21:48:09,940 nipype.workflow INFO:
+	 [Node] Running "validate" ("fmriprep.interfaces.images.ValidateImage")
+210415-21:48:24,17 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.validate".
+210415-21:48:25,953 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.gen_ref" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/gen_ref".
+210415-21:48:25,957 nipype.workflow INFO:
+	 [Node] Running "gen_ref" ("niworkflows.interfaces.registration.EstimateReferenceImage")
+210415-21:48:28,599 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.599167:++ 3dvolreg: AFNI version=Debian-16.2.07~dfsg.1-5~nd16.04+1 (Jun 12 2017) [64-bit]
+210415-21:48:28,599 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.599167:++ Authored by: RW Cox
+210415-21:48:28,600 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600292:** AFNI converts NIFTI_datatype=4 (INT16) in file /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/gen_ref/slice.nii.gz to FLOAT32
+210415-21:48:28,600 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600292:     Warnings of this type will be muted for this session.
+210415-21:48:28,600 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600292:     Set AFNI_NIFTI_TYPE_WARN to YES to see them all, NO to see none.
+210415-21:48:28,601 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600998:[7m*+ WARNING:[0m   If you are performing spatial transformations on an oblique dset, 
+210415-21:48:28,601 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600998:  such as /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/gen_ref/slice.nii.gz,
+210415-21:48:28,601 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600998:  or viewing/combining it with volumes of differing obliquity,
+210415-21:48:28,601 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600998:  you should consider running: 
+210415-21:48:28,601 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600998:     3dWarp -deoblique 
+210415-21:48:28,601 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600998:  on this and  other oblique datasets in the same session.
+210415-21:48:28,601 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600998: See 3dWarp -help for details.
+210415-21:48:28,601 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.600998:++ Oblique dataset:/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/gen_ref/slice.nii.gz is 34.396664 degrees from plumb.
+210415-21:48:28,601 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:28.601623:++ Coarse del was 10, replaced with 6
+210415-21:48:59,16 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:59.016167:++ Max displacement in automask = 0.21 (mm) at sub-brick 19
+210415-21:48:59,16 nipype.interface INFO:
+	 stderr 2021-04-15T21:48:59.016167:++ Max delta displ  in automask = 0.11 (mm) at sub-brick 6
+210415-21:49:01,269 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.gen_ref".
+210415-21:49:01,993 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_mask".
+210415-21:49:01,998 nipype.workflow INFO:
+	 [Node] Running "n4_mask" ("fmriprep.interfaces.nilearn.MaskEPI")
+210415-21:49:03,441 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_mask".
+210415-21:49:03,996 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_correct" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_correct".
+210415-21:49:04,0 nipype.workflow INFO:
+	 [Node] Running "n4_correct" ("nipype.interfaces.ants.segmentation.N4BiasFieldCorrection"), a CommandLine Interface with command:
+N4BiasFieldCorrection -d 3 --input-image /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/gen_ref/ref_image.nii.gz --mask-image /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_mask/ref_image_mask.nii.gz --output ref_image_corrected.nii.gz
+210415-21:49:07,482 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_correct".
+210415-21:49:08,0 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass".
+210415-21:49:08,6 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_pass" ("nipype.interfaces.fsl.preprocess.BET"), a CommandLine Interface with command:
+bet /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_correct/ref_image_corrected.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain.nii.gz -f 0.20 -m
+210415-21:49:10,317 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass".
+210415-21:49:12,4 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate".
+210415-21:49:12,9 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_dilate" ("nipype.interfaces.fsl.maths.DilateImage"), a CommandLine Interface with command:
+fslmaths -dt char /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain_mask.nii.gz -kernel sphere 6.0000 -dilF /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/ref_image_corrected_brain_mask_dil.nii.gz
+210415-21:49:14,53 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate".
+210415-21:49:16,9 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask".
+210415-21:49:16,14 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain.nii.gz -mas /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/ref_image_corrected_brain_mask_dil.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask/ref_image_corrected_brain_masked.nii.gz
+210415-21:49:16,304 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask".
+210415-21:49:18,10 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.unifize" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/unifize".
+210415-21:49:18,16 nipype.workflow INFO:
+	 [Node] Running "unifize" ("nipype.interfaces.afni.utils.Unifize"), a CommandLine Interface with command:
+3dUnifize -clfrac 0.2 -rbt 18.3 65.0 90.0 -prefix uni.nii.gz -T2 -input /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/unifize/ref_image_corrected_brain_masked.nii.gz
+210415-21:49:21,552 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.unifize".
+210415-21:49:22,15 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_unifize".
+210415-21:49:22,19 nipype.workflow INFO:
+	 [Node] Running "fixhdr_unifize" ("niworkflows.interfaces.utils.CopyXForm")
+210415-21:49:22,152 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize".
+210415-21:49:24,15 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass".
+210415-21:49:24,21 nipype.workflow INFO:
+	 [Node] Running "skullstrip_second_pass" ("nipype.interfaces.afni.preprocess.Automask"), a CommandLine Interface with command:
+3dAutomask -apply_prefix uni_xform_masked.nii.gz -dilate 1 -prefix uni_xform_mask.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass/uni_xform.nii.gz
+210415-21:49:24,523 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass".
+210415-21:49:26,18 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_skullstrip2" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_skullstrip2".
+210415-21:49:26,22 nipype.workflow INFO:
+	 [Node] Running "fixhdr_skullstrip2" ("niworkflows.interfaces.utils.CopyXForm")
+210415-21:49:26,88 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_skullstrip2".
+210415-21:49:28,21 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.combine_masks" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks".
+210415-21:49:28,26 nipype.workflow INFO:
+	 [Node] Running "combine_masks" ("nipype.interfaces.fsl.maths.BinaryMaths"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain_mask.nii.gz -mul /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_skullstrip2/uni_xform_mask_xform.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks/ref_image_corrected_brain_mask_maths.nii.gz
+210415-21:49:28,307 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.combine_masks".
+210415-21:49:30,25 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_confounds_wf.dvars" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_confounds_wf/dvars".
+210415-21:49:30,29 nipype.workflow INFO:
+	 [Node] Running "dvars" ("nipype.algorithms.confounds.ComputeDVARS")
+210415-21:49:59,156 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_confounds_wf.dvars".
+210415-21:50:00,68 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.apply_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask".
+210415-21:50:00,73 nipype.workflow INFO:
+	 [Node] Running "apply_mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_unifize/uni_xform.nii.gz -mas /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks/ref_image_corrected_brain_mask_maths.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_bold_trans_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/uni_xform_masked.nii.gz
+210415-21:50:00,399 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_bold_trans_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.apply_mask".
+210415-21:50:02,59 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_correct" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_correct".
+210415-21:50:02,65 nipype.workflow INFO:
+	 [Node] Running "n4_correct" ("nipype.interfaces.ants.segmentation.N4BiasFieldCorrection"), a CommandLine Interface with command:
+N4BiasFieldCorrection -d 3 --input-image /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/gen_ref/ref_image.nii.gz --mask-image /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_mask/ref_image_mask.nii.gz --output ref_image_corrected.nii.gz
+210415-21:50:05,452 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.n4_correct".
+210415-21:50:06,70 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass".
+210415-21:50:06,76 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_pass" ("nipype.interfaces.fsl.preprocess.BET"), a CommandLine Interface with command:
+bet /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/n4_correct/ref_image_corrected.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain.nii.gz -f 0.20 -m
+210415-21:50:08,363 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_pass".
+210415-21:50:10,66 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate".
+210415-21:50:10,71 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_dilate" ("nipype.interfaces.fsl.maths.DilateImage"), a CommandLine Interface with command:
+fslmaths -dt char /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain_mask.nii.gz -kernel sphere 6.0000 -dilF /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/ref_image_corrected_brain_mask_dil.nii.gz
+210415-21:50:12,87 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_dilate".
+210415-21:50:14,71 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask".
+210415-21:50:14,76 nipype.workflow INFO:
+	 [Node] Running "skullstrip_first_mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain.nii.gz -mas /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_dilate/ref_image_corrected_brain_mask_dil.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_mask/ref_image_corrected_brain_masked.nii.gz
+210415-21:50:14,349 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_first_mask".
+210415-21:50:16,72 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.unifize" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/unifize".
+210415-21:50:16,78 nipype.workflow INFO:
+	 [Node] Running "unifize" ("nipype.interfaces.afni.utils.Unifize"), a CommandLine Interface with command:
+3dUnifize -clfrac 0.2 -rbt 18.3 65.0 90.0 -prefix uni.nii.gz -T2 -input /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/unifize/ref_image_corrected_brain_masked.nii.gz
+210415-21:50:19,566 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.unifize".
+210415-21:50:20,76 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_unifize".
+210415-21:50:20,80 nipype.workflow INFO:
+	 [Node] Running "fixhdr_unifize" ("niworkflows.interfaces.utils.CopyXForm")
+210415-21:50:20,215 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_unifize".
+210415-21:50:22,77 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass".
+210415-21:50:22,83 nipype.workflow INFO:
+	 [Node] Running "skullstrip_second_pass" ("nipype.interfaces.afni.preprocess.Automask"), a CommandLine Interface with command:
+3dAutomask -apply_prefix uni_xform_masked.nii.gz -dilate 1 -prefix uni_xform_mask.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_second_pass/uni_xform.nii.gz
+210415-21:50:22,579 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.skullstrip_second_pass".
+210415-21:50:24,80 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_skullstrip2" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_skullstrip2".
+210415-21:50:24,84 nipype.workflow INFO:
+	 [Node] Running "fixhdr_skullstrip2" ("niworkflows.interfaces.utils.CopyXForm")
+210415-21:50:24,149 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.fixhdr_skullstrip2".
+210415-21:50:26,82 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.combine_masks" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks".
+210415-21:50:26,88 nipype.workflow INFO:
+	 [Node] Running "combine_masks" ("nipype.interfaces.fsl.maths.BinaryMaths"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/skullstrip_first_pass/ref_image_corrected_brain_mask.nii.gz -mul /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_skullstrip2/uni_xform_mask_xform.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks/ref_image_corrected_brain_mask_maths.nii.gz
+210415-21:50:26,309 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.combine_masks".
+210415-21:50:28,85 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.apply_mask" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask".
+210415-21:50:28,90 nipype.workflow INFO:
+	 [Node] Running "apply_mask" ("nipype.interfaces.fsl.maths.ApplyMask"), a CommandLine Interface with command:
+fslmaths /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/fixhdr_unifize/uni_xform.nii.gz -mas /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/combine_masks/ref_image_corrected_brain_mask_maths.nii.gz /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/uni_xform_masked.nii.gz
+210415-21:50:28,357 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reference_wf.enhance_and_skullstrip_bold_wf.apply_mask".
+210415-21:50:30,211 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.bidssrc" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/bidssrc".
+210415-21:50:30,215 nipype.workflow INFO:
+	 [Node] Running "bidssrc" ("fmriprep.interfaces.bids.BIDSDataGrabber")
+210415-21:50:30,217 nipype.interface WARNING:
+	 No 't2w' images found for sub-<undefined>
+210415-21:50:30,217 nipype.interface WARNING:
+	 No 'flair' images found for sub-<undefined>
+210415-21:50:30,217 nipype.interface WARNING:
+	 No 'fmap' images found for sub-<undefined>
+210415-21:50:30,218 nipype.interface WARNING:
+	 No 'sbref' images found for sub-<undefined>
+210415-21:50:30,218 nipype.interface WARNING:
+	 No 'roi' images found for sub-<undefined>
+210415-21:50:30,226 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.bidssrc".
+210415-21:50:32,86 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.anat_template_wf.t1_template_dimensions" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/anat_template_wf/t1_template_dimensions".
+210415-21:50:32,90 nipype.workflow INFO:
+	 [Node] Running "t1_template_dimensions" ("fmriprep.interfaces.images.TemplateDimensions")
+210415-21:50:32,226 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.anat_template_wf.t1_template_dimensions".
+210415-21:50:34,382 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.anat_derivatives_wf.t1_name" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/anat_derivatives_wf/t1_name".
+210415-21:50:34,386 nipype.workflow INFO:
+	 [Node] Running "t1_name" ("nipype.interfaces.utility.wrappers.Function")
+210415-21:50:34,395 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.anat_derivatives_wf.t1_name".
+210415-21:50:36,173 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.anat_template_wf.t1_conform" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/anat_template_wf/t1_conform".
+210415-21:50:36,179 nipype.workflow INFO:
+	 [Node] Setting-up "_t1_conform0" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/anat_template_wf/t1_conform/mapflow/_t1_conform0".
+210415-21:50:36,184 nipype.workflow INFO:
+	 [Node] Running "_t1_conform0" ("fmriprep.interfaces.images.Conform")
+210415-21:50:36,231 nipype.workflow INFO:
+	 [Node] Finished "_t1_conform0".
+210415-21:50:36,236 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.anat_template_wf.t1_conform".
+210415-21:50:38,97 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.skullstrip_ants_wf.t1_skull_strip" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/skullstrip_ants_wf/t1_skull_strip".
+210415-21:50:38,104 nipype.workflow INFO:
+	 [Node] Running "t1_skull_strip" ("nipype.interfaces.ants.segmentation.BrainExtraction"), a CommandLine Interface with command:
+antsBrainExtraction.sh -a /projects/sanlab/shared/DEV/bids_data/sub-DEV022/ses-wave1/anat/sub-DEV022_ses-wave1_T1w.nii.gz -m /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/skullstrip_ants_wf/t1_skull_strip/T_template0_BrainCerebellumProbabilityMask.nii.gz -e /niworkflows_data/ants_oasis_template_ras/T_template0.nii.gz -d 3 -f /niworkflows_data/ants_oasis_template_ras/T_template0_BrainCerebellumRegistrationMask.nii.gz -s nii.gz -k 1 -o highres001_ -q 1 -u 1
+210415-22:05:48,648 nipype.workflow INFO:
+	 [Node] Finished "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.skullstrip_ants_wf.t1_skull_strip".
+210415-22:05:49,769 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reg_wf.fsl_bbr_wf.flt_bbr_init" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reg_wf/fsl_bbr_wf/flt_bbr_init".
+210415-22:05:49,777 nipype.workflow INFO:
+	 [Node] Running "flt_bbr_init" ("niworkflows.interfaces.registration.FLIRTRPT"), a CommandLine Interface with command:
+flirt -in /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/uni_xform_masked.nii.gz -ref /tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/skullstrip_ants_wf/t1_skull_strip/highres001_BrainExtractionBrain.nii.gz -out uni_xform_masked_flirt.nii.gz -omat uni_xform_masked_flirt.mat -dof 6 -usesqform
+210415-22:06:25,594 nipype.workflow WARNING:
+	 [Node] Error on "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reg_wf.fsl_bbr_wf.flt_bbr_init" (/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reg_wf/fsl_bbr_wf/flt_bbr_init)
+210415-22:06:27,282 nipype.workflow ERROR:
+	 Node flt_bbr_init failed to run on host n026.
+210415-22:06:27,284 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/rs_derivatives/fmriprep/sub-DEV022/log/20210415-212959_9eec80ba-ef3c-43f7-a435-17b7996e7c0d/crash-20210415-220627-kcheung3-flt_bbr_init-9b66687d-36c4-4b1c-b509-1ac420cf60c7.txt
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 644, in _run_command
+    result = self._interface.run(cwd=outdir)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 522, in run
+    runtime = self._post_run_hook(runtime)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/registration.py", line 186, in _post_run_hook
+    return super(FLIRTRPT, self)._post_run_hook(runtime)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/mixins/reporting.py", line 47, in _post_run_hook
+    self._generate_report()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/report_base.py", line 77, in _generate_report
+    out_file=self._out_report
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/viz/utils.py", line 435, in compose_view
+    fig.save(out_file)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/svgutils/transform.py", line 275, in save
+    fid = open(fname, 'wb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reg_wf/fsl_bbr_wf/flt_bbr_init/report.svg'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 480, in run
+    result = self._run_interface(execute=True)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 564, in _run_interface
+    return self._run_command(execute)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 648, in _run_command
+    _save_resultfile(result, outdir, self.name)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/utils.py", line 246, in save_resultfile
+    savepkl(resultsfile, result)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 720, in savepkl
+    pkl_file = gzip.open(filename, 'wb')
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reg_wf/fsl_bbr_wf/flt_bbr_init/result_flt_bbr_init.pklz'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 484, in run
+    os.remove(hashfile_unfinished)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reg_wf/fsl_bbr_wf/flt_bbr_init/_0x5a678b9b32171842e0f2fce49f2b4916_unfinished.json'
+
+210415-22:06:27,417 nipype.workflow WARNING:
+	 Error while checking node hash, forcing re-run. Although this error may not prevent the workflow from running, it could indicate a major problem. Please report a new issue at https://github.com/nipy/nipype/issues adding the following information:
+
+	Node: fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reg_wf.gen_ref
+	Interface: niworkflows.interfaces.utils.GenerateSamplingReference
+	Traceback:
+Traceback (most recent call last):
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/base.py", line 338, in _local_hash_check
+    cached, updated = self.procs[jobid].is_cached()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/result_apply_mask.pklz'
+
+210415-22:06:27,420 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reg_wf.gen_ref" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reg_wf/gen_ref".
+210415-22:06:29,284 nipype.workflow ERROR:
+	 Node gen_ref failed to run on host n026.
+210415-22:06:29,284 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/rs_derivatives/fmriprep/sub-DEV022/log/20210415-212959_9eec80ba-ef3c-43f7-a435-17b7996e7c0d/crash-20210415-220629-kcheung3-gen_ref-8567f2f1-66d1-496c-beb1-c95b5f60d83f.txt
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 417, in run
+    cached, updated = self.is_cached()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_2_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/result_apply_mask.pklz'
+
+210415-22:06:29,406 nipype.workflow WARNING:
+	 Error while checking node hash, forcing re-run. Although this error may not prevent the workflow from running, it could indicate a major problem. Please report a new issue at https://github.com/nipy/nipype/issues adding the following information:
+
+	Node: fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reg_wf.fsl_bbr_wf.flt_bbr_init
+	Interface: niworkflows.interfaces.registration.FLIRTRPT
+	Traceback:
+Traceback (most recent call last):
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/base.py", line 338, in _local_hash_check
+    cached, updated = self.procs[jobid].is_cached()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/result_apply_mask.pklz'
+
+210415-22:06:29,410 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reg_wf.fsl_bbr_wf.flt_bbr_init" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reg_wf/fsl_bbr_wf/flt_bbr_init".
+210415-22:06:31,286 nipype.workflow ERROR:
+	 Node flt_bbr_init failed to run on host n026.
+210415-22:06:31,286 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/rs_derivatives/fmriprep/sub-DEV022/log/20210415-212959_9eec80ba-ef3c-43f7-a435-17b7996e7c0d/crash-20210415-220631-kcheung3-flt_bbr_init-6739da44-c2b8-475d-8d32-85f23a14e7dc.txt
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 417, in run
+    cached, updated = self.is_cached()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/result_apply_mask.pklz'
+
+210415-22:06:31,408 nipype.workflow WARNING:
+	 Error while checking node hash, forcing re-run. Although this error may not prevent the workflow from running, it could indicate a major problem. Please report a new issue at https://github.com/nipy/nipype/issues adding the following information:
+
+	Node: fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reg_wf.gen_ref
+	Interface: niworkflows.interfaces.utils.GenerateSamplingReference
+	Traceback:
+Traceback (most recent call last):
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/base.py", line 338, in _local_hash_check
+    cached, updated = self.procs[jobid].is_cached()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/result_apply_mask.pklz'
+
+210415-22:06:31,410 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reg_wf.gen_ref" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reg_wf/gen_ref".
+210415-22:06:33,288 nipype.workflow ERROR:
+	 Node gen_ref failed to run on host n026.
+210415-22:06:33,288 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/rs_derivatives/fmriprep/sub-DEV022/log/20210415-212959_9eec80ba-ef3c-43f7-a435-17b7996e7c0d/crash-20210415-220633-kcheung3-gen_ref-4c526900-b250-4041-bd9c-9e054ce9ea00.txt
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 417, in run
+    cached, updated = self.is_cached()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/func_preproc_ses_wave1_task_rest_acq_1_wf/bold_reference_wf/enhance_and_skullstrip_bold_wf/apply_mask/result_apply_mask.pklz'
+
+210415-22:06:33,408 nipype.workflow WARNING:
+	 Error while checking node hash, forcing re-run. Although this error may not prevent the workflow from running, it could indicate a major problem. Please report a new issue at https://github.com/nipy/nipype/issues adding the following information:
+
+	Node: fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.t1_seg
+	Interface: nipype.interfaces.fsl.preprocess.FAST
+	Traceback:
+Traceback (most recent call last):
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/base.py", line 338, in _local_hash_check
+    cached, updated = self.procs[jobid].is_cached()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/skullstrip_ants_wf/t1_skull_strip/result_t1_skull_strip.pklz'
+
+210415-22:06:33,411 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.t1_seg" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/t1_seg".
+210415-22:06:35,290 nipype.workflow ERROR:
+	 Node t1_seg failed to run on host n026.
+210415-22:06:35,290 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/rs_derivatives/fmriprep/sub-DEV022/log/20210415-212959_9eec80ba-ef3c-43f7-a435-17b7996e7c0d/crash-20210415-220635-kcheung3-t1_seg-c0fb2a5c-89a3-4bbe-a816-b5f3a9d88e47.txt
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 417, in run
+    cached, updated = self.is_cached()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/skullstrip_ants_wf/t1_skull_strip/result_t1_skull_strip.pklz'
+
+210415-22:06:35,410 nipype.workflow WARNING:
+	 Error while checking node hash, forcing re-run. Although this error may not prevent the workflow from running, it could indicate a major problem. Please report a new issue at https://github.com/nipy/nipype/issues adding the following information:
+
+	Node: fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.t1_2_mni
+	Interface: niworkflows.interfaces.registration.RobustMNINormalizationRPT
+	Traceback:
+Traceback (most recent call last):
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/base.py", line 338, in _local_hash_check
+    cached, updated = self.procs[jobid].is_cached()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/bidssrc/result_bidssrc.pklz'
+
+210415-22:06:35,414 nipype.workflow INFO:
+	 [Node] Setting-up "fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.t1_2_mni" in "/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/anat_preproc_wf/t1_2_mni".
+210415-22:06:37,292 nipype.workflow ERROR:
+	 Node t1_2_mni failed to run on host n026.
+210415-22:06:37,292 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/rs_derivatives/fmriprep/sub-DEV022/log/20210415-212959_9eec80ba-ef3c-43f7-a435-17b7996e7c0d/crash-20210415-220637-kcheung3-t1_2_mni-3fc4063b-9b71-4e36-93b1-f23c2568f8d1.txt
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69, in run_node
+    result['result'] = node.run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 417, in run
+    cached, updated = self.is_cached()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/bidssrc/result_bidssrc.pklz'
+
+210415-22:06:37,412 nipype.workflow WARNING:
+	 Error while checking node hash, forcing re-run. Although this error may not prevent the workflow from running, it could indicate a major problem. Please report a new issue at https://github.com/nipy/nipype/issues adding the following information:
+
+	Node: fmriprep_wf.single_subject_DEV022_wf.ds_report_about
+	Interface: fmriprep.interfaces.bids.DerivativesDataSink
+	Traceback:
+Traceback (most recent call last):
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/base.py", line 338, in _local_hash_check
+    cached, updated = self.procs[jobid].is_cached()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/bidssrc/result_bidssrc.pklz'
+
+210415-22:06:37,414 nipype.workflow ERROR:
+	 Node ds_report_about failed to run on host n026.
+210415-22:06:37,414 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/rs_derivatives/fmriprep/sub-DEV022/log/20210415-212959_9eec80ba-ef3c-43f7-a435-17b7996e7c0d/crash-20210415-220637-kcheung3-ds_report_about-e75553d6-c173-46fe-99b8-00f31a9ecf15.txt
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 308, in _send_procs_to_workers
+    self.procs[jobid].run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 417, in run
+    cached, updated = self.is_cached()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/bidssrc/result_bidssrc.pklz'
+
+210415-22:06:37,531 nipype.workflow WARNING:
+	 Error while checking node hash, forcing re-run. Although this error may not prevent the workflow from running, it could indicate a major problem. Please report a new issue at https://github.com/nipy/nipype/issues adding the following information:
+
+	Node: fmriprep_wf.single_subject_DEV022_wf.bids_info
+	Interface: fmriprep.interfaces.bids.BIDSInfo
+	Traceback:
+Traceback (most recent call last):
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/base.py", line 338, in _local_hash_check
+    cached, updated = self.procs[jobid].is_cached()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/bidssrc/result_bidssrc.pklz'
+
+210415-22:06:37,532 nipype.workflow ERROR:
+	 Node bids_info failed to run on host n026.
+210415-22:06:37,532 nipype.workflow ERROR:
+	 Saving crash info to /projects/sanlab/shared/DEV/bids_data/rs_derivatives/fmriprep/sub-DEV022/log/20210415-212959_9eec80ba-ef3c-43f7-a435-17b7996e7c0d/crash-20210415-220637-kcheung3-bids_info-2af4ac13-f64a-4ec6-b5d2-db53663bb022.txt
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 308, in _send_procs_to_workers
+    self.procs[jobid].run(updatehash=updatehash)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 417, in run
+    cached, updated = self.is_cached()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 303, in is_cached
+    hashed_inputs, hashvalue = self._get_hashval()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 497, in _get_hashval
+    self._get_inputs()
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 524, in _get_inputs
+    results = loadpkl(results_file)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 642, in loadpkl
+    pkl_file = gzip.open(infile, 'rb')
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 53, in open
+    binary_file = GzipFile(filename, gz_mode, compresslevel)
+  File "/usr/local/miniconda/lib/python3.6/gzip.py", line 163, in __init__
+    fileobj = self.myfileobj = builtins.open(filename, mode or 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/kcheung3_DEV_DEV022_wave1/fmriprep_wf/single_subject_DEV022_wf/bidssrc/result_bidssrc.pklz'
+
+210415-22:06:39,291 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reg_wf.fsl_bbr_wf.flt_bbr_init
+210415-22:06:39,292 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_2_wf.bold_reg_wf.gen_ref
+210415-22:06:39,292 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reg_wf.fsl_bbr_wf.flt_bbr_init
+210415-22:06:39,293 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV022_wf.func_preproc_ses_wave1_task_rest_acq_1_wf.bold_reg_wf.gen_ref
+210415-22:06:39,293 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.t1_seg
+210415-22:06:39,295 nipype.workflow ERROR:
+	 could not run node: fmriprep_wf.single_subject_DEV022_wf.anat_preproc_wf.t1_2_mni
+
+
+
+done
+
+-----------------------

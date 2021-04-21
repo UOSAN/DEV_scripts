@@ -1,0 +1,144 @@
+
+fMRIprep on DEV026_wave2
+
+Container: /projects/sanlab/shared/containers/fmriprep-latest-2018-09-05.simg
+
+Subject directory: /projects/sanlab/shared/DEV/bids_data
+
+Starting on: rest
+
+
+210415-21:30:53,662 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV026'].
+      * Run identifier: 20210415-213053_116b7806-59c1-4d0c-bf84-1e0364575bb3.
+    
+210415-21:30:59,64 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV026/ses-wave1/func/sub-DEV026_ses-wave1_task-rest_acq-1_bold.nii.gz" (0.25 GB / 414 TRs). Memory resampled/largemem=1.00/2.04 GB.
+210415-21:31:00,311 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV026/ses-wave1/func/sub-DEV026_ses-wave1_task-rest_acq-1_bold.nii.gz found.
+210415-21:31:01,947 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV026/ses-wave1/func/sub-DEV026_ses-wave1_task-rest_acq-2_bold.nii.gz" (0.25 GB / 414 TRs). Memory resampled/largemem=1.00/2.04 GB.
+210415-21:31:02,946 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV026/ses-wave1/func/sub-DEV026_ses-wave1_task-rest_acq-2_bold.nii.gz found.
+210415-21:31:04,439 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV026/ses-wave2/func/sub-DEV026_ses-wave2_task-rest_acq-1_bold.nii.gz" (0.25 GB / 414 TRs). Memory resampled/largemem=0.99/2.01 GB.
+210415-21:31:05,387 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV026/ses-wave2/func/sub-DEV026_ses-wave2_task-rest_acq-1_bold.nii.gz found.
+210415-21:31:07,30 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV026/ses-wave2/func/sub-DEV026_ses-wave2_task-rest_acq-2_bold.nii.gz" (0.25 GB / 414 TRs). Memory resampled/largemem=0.99/2.01 GB.
+210415-21:31:08,112 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV026/ses-wave2/func/sub-DEV026_ses-wave2_task-rest_acq-2_bold.nii.gz found.
+210415-21:31:13,87 nipype.workflow IMPORTANT:
+	 Works derived from this fMRIPrep execution should include the following boilerplate:
+
+
+Results included in this manuscript come from preprocessing
+performed using *fMRIPprep* 1.1.4
+(@fmriprep1; @fmriprep2; RRID:SCR_016216),
+which is based on *Nipype* 1.1.1
+(@nipype1; @nipype2; RRID:SCR_002502).
+
+Anatomical data preprocessing
+
+: A total of 2 T1-weighted (T1w) images were found within the input
+BIDS dataset.
+All of them were corrected for intensity non-uniformity (INU)
+using `N4BiasFieldCorrection` [@n4, ANTs 2.2.0].
+A T1w-reference map was computed after registration of
+2 T1w images (after INU-correction) using
+`mri_robust_template` [FreeSurfer 6.0.1, @fs_template].
+The T1w-reference was then skull-stripped using `antsBrainExtraction.sh`
+(ANTs 2.2.0), using OASIS as target template.
+Spatial normalization to the ICBM 152 Nonlinear Asymmetrical
+template version 2009c [@mni, RRID:SCR_008796] was performed
+through nonlinear registration with `antsRegistration`
+[ANTs 2.2.0, RRID:SCR_004757, @ants], using
+brain-extracted versions of both T1w volume and template.
+Brain tissue segmentation of cerebrospinal fluid (CSF),
+white-matter (WM) and gray-matter (GM) was performed on
+the brain-extracted T1w using `fast` [FSL 5.0.9, RRID:SCR_002823,
+@fsl_fast].
+
+
+Functional data preprocessing
+
+: For each of the 4 BOLD runs found per subject (across all
+tasks and sessions), the following preprocessing was performed.
+First, a reference volume and its skull-stripped version were generated
+using a custom methodology of *fMRIPrep*.
+A deformation field to correct for susceptibility distortions was estimated
+based on two echo-planar imaging (EPI) references with opposing phase-encoding
+directions, using `3dQwarp` @afni (AFNI <ver>).
+Based on the estimated susceptibility distortion, an
+unwarped BOLD reference was calculated for a more accurate
+co-registration with the anatomical reference.
+Head-motion parameters with respect to the BOLD reference
+(transformation matrices, and six corresponding rotation and translation
+parameters) are estimated before any spatiotemporal filtering using
+`mcflirt` [FSL 5.0.9, @mcflirt].
+The BOLD time-series (including slice-timing correction when applied)
+were resampled onto their original, native space by applying
+a single, composite transform to correct for head-motion and
+susceptibility distortions.
+These resampled BOLD time-series will be referred to as *preprocessed
+BOLD in original space*, or just *preprocessed BOLD*.
+The BOLD reference was then co-registered to the T1w reference using
+`flirt` [FSL 5.0.9, @flirt] with the boundary-based registration [@bbr]
+cost-function.
+Co-registration was configured with nine degrees of freedom to account
+for distortions remaining in the BOLD reference.
+The BOLD time-series were resampled to MNI152NLin2009cAsym standard space,
+generating a *preprocessed BOLD run in MNI152NLin2009cAsym space*.
+Several confounding time-series were calculated based on the
+*preprocessed BOLD*: framewise displacement (FD), DVARS and
+three region-wise global signals.
+FD and DVARS are calculated for each functional run, both using their
+implementations in *Nipype* [following the definitions by @power_fd_dvars].
+The three global signals are extracted within the CSF, the WM, and
+the whole-brain masks.
+Additionally, a set of physiological regressors were extracted to
+allow for component-based noise correction [*CompCor*, @compcor].
+Principal components are estimated after high-pass filtering the
+*preprocessed BOLD* time-series (using a discrete cosine filter with
+128s cut-off) for the two *CompCor* variants: temporal (tCompCor)
+and anatomical (aCompCor).
+Six tCompCor components are then calculated from the top 5% variable
+voxels within a mask covering the subcortical regions.
+This subcortical mask is obtained by heavily eroding the brain mask,
+which ensures it does not include cortical GM regions.
+For aCompCor, six components are calculated within the intersection of
+the aforementioned mask and the union of CSF and WM masks calculated
+in T1w space, after their projection to the native space of each
+functional run (using the inverse BOLD-to-T1w transformation).
+The head-motion estimates calculated in the correction step were also
+placed within the corresponding confounds file.
+All resamplings can be performed with *a single interpolation
+step* by composing all the pertinent transformations (i.e. head-motion
+transform matrices, susceptibility distortion correction when available,
+and co-registrations to anatomical and template spaces).
+Gridded (volumetric) resamplings were performed using `antsApplyTransforms` (ANTs),
+configured with Lanczos interpolation to minimize the smoothing
+effects of other kernels [@lanczos].
+Non-gridded (surface) resamplings were performed using `mri_vol2surf`
+(FreeSurfer).
+
+
+Many internal operations of *fMRIPrep* use
+*Nilearn* 0.4.2 [@nilearn, RRID:SCR_001362],
+mostly within the functional processing workflow.
+For more details of the pipeline, see [the section corresponding
+to workflows in *fMRIPrep*'s documentation](https://fmriprep.readthedocs.io/en/latest/workflows.html "FMRIPrep's documentation").
+
+
+### References
+
+
+
+
+
+done
+
+-----------------------

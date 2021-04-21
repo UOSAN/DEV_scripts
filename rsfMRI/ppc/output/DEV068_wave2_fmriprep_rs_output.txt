@@ -1,0 +1,43 @@
+
+fMRIprep on DEV068_wave2
+
+Container: /projects/sanlab/shared/containers/fmriprep-latest-2018-09-05.simg
+
+Subject directory: /projects/sanlab/shared/DEV/bids_data
+
+Starting on: rest
+
+
+210416-09:58:31,228 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV068'].
+      * Run identifier: 20210416-095831_04333085-7523-49bf-b119-9b7f5607733e.
+    
+210416-09:58:37,332 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV068-backup/ses-wave1/func/sub-DEV068_ses-wave1_task-rest_acq-1_bold.nii.gz" (0.23 GB / 414 TRs). Memory resampled/largemem=0.93/1.90 GB.
+210416-09:58:39,420 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV068-backup/ses-wave1/func/sub-DEV068_ses-wave1_task-rest_acq-1_bold.nii.gz found.
+210416-09:58:41,76 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV068-backup/ses-wave1/func/sub-DEV068_ses-wave1_task-rest_acq-2_bold.nii.gz" (0.23 GB / 414 TRs). Memory resampled/largemem=0.94/1.90 GB.
+210416-09:58:42,556 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV068-backup/ses-wave1/func/sub-DEV068_ses-wave1_task-rest_acq-2_bold.nii.gz found.
+210416-09:58:44,8 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV068-backup/ses-wave2/func/sub-DEV068_ses-wave2_task-rest_acq-1_bold.nii.gz" (0.23 GB / 414 TRs). Memory resampled/largemem=0.93/1.89 GB.
+210416-09:58:45,485 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV068-backup/ses-wave2/func/sub-DEV068_ses-wave2_task-rest_acq-1_bold.nii.gz found.
+210416-09:58:47,92 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV068-backup/ses-wave2/func/sub-DEV068_ses-wave2_task-rest_acq-2_bold.nii.gz" (0.23 GB / 414 TRs). Memory resampled/largemem=0.92/1.87 GB.
+210416-09:58:48,560 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV068-backup/ses-wave2/func/sub-DEV068_ses-wave2_task-rest_acq-2_bold.nii.gz found.
+210416-09:58:50,24 nipype.workflow IMPORTANT:
+	 Creating bold processing workflow for "/projects/sanlab/shared/DEV/bids_data/sub-DEV068/ses-wave1/func/sub-DEV068_ses-wave1_task-rest_acq-1_bold.nii.gz" (0.23 GB / 414 TRs). Memory resampled/largemem=0.93/1.90 GB.
+210416-09:58:51,457 nipype.workflow IMPORTANT:
+	 SDC: fieldmap estimation of type "epi" intended for /projects/sanlab/shared/DEV/bids_data/sub-DEV068/ses-wave1/func/sub-DEV068_ses-wave1_task-rest_acq-1_bold.nii.gz found.
+
+
+
+done
+
+-----------------------

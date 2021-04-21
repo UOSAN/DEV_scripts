@@ -1,0 +1,46 @@
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+pandoc-citeproc: reference afni not found
+[WARNING] This document format requires a nonempty <title> element.
+  Please specify either 'title' or 'pagetitle' in the metadata.
+  Falling back to 'CITATION'
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/site-packages/bids/grabbids/bids_layout.py:116: UserWarning: 'dataset_description.json' file is missing from project root. You may want to set the root path to a valid BIDS project.
+  warnings.warn("'dataset_description.json' file is missing from "
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/managers.py", line 749, in _callmethod
+    conn = self._tls.connection
+AttributeError: 'ForkAwareLocal' object has no attribute 'connection'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/local/miniconda/bin/fmriprep", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/cli/run.py", line 291, in main
+    fmriprep_wf = retval['workflow']
+  File "<string>", line 2, in __getitem__
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/managers.py", line 753, in _callmethod
+    self._connect()
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/managers.py", line 740, in _connect
+    conn = self._Client(self._token.address, authkey=self._authkey)
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/connection.py", line 487, in Client
+    c = SocketClient(address)
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/connection.py", line 614, in SocketClient
+    s.connect(address)
+FileNotFoundError: [Errno 2] No such file or directory
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/util.py", line 262, in _run_finalizers
+    finalizer()
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/util.py", line 186, in __call__
+    res = self._callback(*self._args, **self._kwargs)
+  File "/usr/local/miniconda/lib/python3.6/shutil.py", line 471, in rmtree
+    onerror(os.lstat, path, sys.exc_info())
+  File "/usr/local/miniconda/lib/python3.6/shutil.py", line 469, in rmtree
+    orig_st = os.lstat(path)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/pymp-b3ipuvr_'

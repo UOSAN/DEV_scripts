@@ -1,0 +1,27 @@
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/site-packages/bids/grabbids/bids_layout.py:116: UserWarning: 'dataset_description.json' file is missing from project root. You may want to set the root path to a valid BIDS project.
+  warnings.warn("'dataset_description.json' file is missing from "
+Process Process-2:
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/cli/run.py", line 542, in build_workflow
+    ignore_aroma_err=opts.ignore_aroma_denoising_errors,
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/workflows/base.py", line 210, in init_fmriprep_wf
+    ignore_aroma_err=ignore_aroma_err)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/workflows/base.py", line 513, in init_single_subject_wf
+    'inputnode.t1_2_fsnative_reverse_transform')]),
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/workflows.py", line 155, in connect
+    self._check_nodes(newnodes)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/workflows.py", line 727, in _check_nodes
+    'Duplicate node name "%s" found.' % node.name)
+OSError: Duplicate node name "func_preproc_ses_wave1_task_rest_acq_1_wf" found.

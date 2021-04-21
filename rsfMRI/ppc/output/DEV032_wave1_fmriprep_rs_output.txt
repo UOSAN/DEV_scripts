@@ -1,0 +1,23 @@
+
+fMRIprep on DEV032_wave1
+
+Container: /projects/sanlab/shared/containers/fmriprep-latest-2018-09-05.simg
+
+Subject directory: /projects/sanlab/shared/DEV/bids_data
+
+Starting on: rest
+
+
+210415-21:30:51,220 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV032'].
+      * Run identifier: 20210415-213051_0f6b5f4f-4ccd-4430-a31c-1ecdec373cb1.
+    
+
+
+
+done
+
+-----------------------
