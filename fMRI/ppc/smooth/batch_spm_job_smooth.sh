@@ -9,7 +9,7 @@
 STUDY=/projects/sanlab/shared/DEV/DEV_scripts
 
 # Set subject list
-SUBJLIST=`cat test_subject_list.txt`
+SUBJLIST=`cat new_subject_list_202104.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV001
@@ -54,7 +54,7 @@ for SUB in $SUBJLIST; do
 		 	--cpus-per-task=${cpuspertask} \
 		 	--mem-per-cpu=${mempercpu} \
 			--account=sanlab \
-			--partition=short \
+			--partition=ctn \
 		 	${SHELL_SCRIPT}
 	 	sleep .25
 	 done
