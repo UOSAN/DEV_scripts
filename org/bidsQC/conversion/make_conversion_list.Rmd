@@ -66,4 +66,18 @@ full_list %>%
 full_list %>%
   write.table("org/bidsQC/conversion/subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
 ```
+# write subject-only lists
 
+```{r}
+#this code is untested! we need output files with just the subject names in them. this is what these do.
+full_list %>%
+  filter(!folder %in% completed$V1) %>%
+  group_by(subjectID) %>%
+  select(subjectID) %>%
+  write.table("org/bidsQC/conversion/new_subject_list_single_col.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+
+full_list %>%
+  group_by(subjectID) %>%
+  select(subjectID) %>%
+  write.table("org/bidsQC/conversion/subject_list_single_col.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+```
