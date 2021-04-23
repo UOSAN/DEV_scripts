@@ -9,7 +9,7 @@
 STUDY=/projects/sanlab/shared/DEV/DEV_scripts
 
 # Set subject list
-SUBJLIST=`cat new_subject_list_202104.txt`
+SUBJLIST=`cat test_subject_list_20210423.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV001
