@@ -42,7 +42,10 @@ mempercpu=8G
 
 # Create and execute batch job
 for SUB in $SUBJLIST; do
- 	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
+	#an ID on its own. need this for certain parts of the script
+	SUBID=$(sed "s/DEV//" <<< $SUB)
+	
+ 	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SUBID=$SUBID,SPM_PATH=$SPM_PATH,  \
 	 	--job-name=${RESULTS_INFIX} \
 	 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}.log \
 	 	--cpus-per-task=${cpuspertask} \

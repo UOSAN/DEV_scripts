@@ -5,7 +5,7 @@ textstuffcell=textscan(fileID, '%[^\n]');
 fclose(fileID);
 
 regexp=num2str(replacesid);
-replaceexpr=num2str(sub);
+replaceexpr=num2str(subid);
 disp(regexp);
 disp(replaceexpr);
 newtextcell=cellfun(@(x) regexprep(x, regexp, replaceexpr), textstuffcell{1}, 'UniformOutput', false);
