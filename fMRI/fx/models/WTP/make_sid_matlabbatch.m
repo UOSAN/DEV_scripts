@@ -18,4 +18,7 @@ if ~exist(outdirfull, 'dir')
   mkdir(outdirfull);
 end
 
+disp("fileoutput");
+disp(fullfile(outdirfull,strcat(num2str(sub),'_',outfile,'.mat')));
+
 save(fullfile(outdirfull,strcat(num2str(sub),'_',outfile,'.mat')),'matlabbatch');
