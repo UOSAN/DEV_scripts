@@ -1,0 +1,57 @@
+,subj,wave,ROC_missing_input_acq,WTP_missing_input_acq,SST_missing_input_acq,ROC_missing_entirely_input_acq,WTP_missing_entirely_input_acq,SST_missing_entirely_input_acq,any_missing_output_acq_bool
+1,sub-DEV001/,ses-wave2,set(),set(),{1},set(),set(),{1},True
+7,sub-DEV007/,ses-wave1,set(),"{1, 2, 3, 4}",set(),set(),"{1, 2, 3, 4}",set(),True
+33,sub-DEV020/,ses-wave2,"{3, 4}",set(),set(),"{3, 4}",set(),set(),True
+46,sub-DEV027/,ses-wave2,set(),set(),{1},set(),set(),{1},True
+82,sub-DEV048/,ses-wave1,{4},set(),set(),{4},set(),set(),True
+108,sub-DEV061/,ses-wave1,set(),set(),{1},set(),set(),{1},True
+109,sub-DEV061/,ses-wave2,set(),set(),{1},set(),set(),{1},True
+149,sub-DEV082/,ses-wave1,set(),{4},set(),set(),{4},set(),True
+170,sub-DEV094/,ses-wave1,{4},set(),set(),{4},set(),set(),True
+177,sub-DEV098/,ses-wave1,"{1, 3, 4}",set(),{1},"{3, 4}",set(),set(),True
+178,sub-DEV098/,ses-wave2,set(),set(),{1},set(),set(),set(),True
+184,sub-DEV101/,ses-wave2,{1},set(),set(),set(),set(),set(),True
+192,sub-DEV106/,ses-wave1,set(),{4},set(),set(),{4},set(),True
+214,sub-DEV118/,ses-wave1,set(),{3},set(),set(),{3},set(),True
+217,sub-DEV119/,ses-wave2,set(),{2},set(),set(),set(),set(),True
+224,sub-DEV124/,ses-wave2,set(),{1},set(),set(),set(),set(),True
+228,sub-DEV126/,ses-wave2,{3},set(),set(),set(),set(),set(),True
+234,sub-DEV129/,ses-wave2,set(),{1},set(),set(),set(),set(),True
+243,sub-DEV135/,ses-wave2,{1},set(),set(),set(),set(),set(),True
+249,sub-DEV139/,ses-wave2,{4},set(),set(),set(),set(),set(),True
+250,sub-DEV140/,ses-wave1,{4},set(),set(),set(),set(),set(),True
+251,sub-DEV140/,ses-wave2,set(),{1},set(),set(),set(),set(),True
+254,sub-DEV143/,ses-wave1,{1},set(),set(),set(),set(),set(),True
+266,sub-DEV151/,ses-wave1,set(),set(),{1},set(),set(),set(),True
+267,sub-DEV151/,ses-wave2,"{1, 4}",set(),set(),set(),set(),set(),True
+269,sub-DEV153/,ses-wave1,"{1, 2, 3, 4}","{1, 2, 3, 4}",{1},"{1, 2, 3, 4}","{1, 2, 3, 4}",{1},True
+270,sub-DEV153/,ses-wave2,"{1, 2, 3, 4}","{1, 2, 3, 4}",{1},"{1, 2, 3, 4}","{1, 2, 3, 4}",{1},True
+271,sub-DEV154/,ses-wave1,{4},set(),{1},{4},set(),set(),True
+273,sub-DEV155/,ses-wave1,{2},set(),set(),set(),set(),set(),True
+275,sub-DEV156/,ses-wave1,{1},set(),set(),set(),set(),set(),True
+276,sub-DEV156/,ses-wave2,{2},set(),set(),set(),set(),set(),True
+279,sub-DEV158/,ses-wave1,{1},{2},set(),set(),set(),set(),True
+280,sub-DEV158/,ses-wave2,{1},set(),set(),set(),set(),set(),True
+282,sub-DEV159/,ses-wave2,set(),{4},set(),set(),set(),set(),True
+283,sub-DEV161/,ses-wave1,{3},set(),set(),set(),set(),set(),True
+285,sub-DEV163/,ses-wave1,set(),set(),{1},set(),set(),set(),True
+288,sub-DEV164/,ses-wave2,{1},set(),set(),set(),set(),set(),True
+290,sub-DEV167/,ses-wave1,{1},set(),set(),set(),set(),set(),True
+291,sub-DEV167/,ses-wave2,{4},set(),set(),set(),set(),set(),True
+293,sub-DEV169/,ses-wave1,{1},set(),set(),set(),set(),set(),True
+294,sub-DEV170/,ses-wave1,{2},set(),{1},set(),set(),set(),True
+295,sub-DEV171/,ses-wave1,{1},set(),set(),set(),set(),set(),True
+298,sub-DEV174/,ses-wave1,set(),set(),{1},set(),set(),set(),True
+299,sub-DEV176/,ses-wave1,{4},set(),set(),set(),set(),set(),True
+306,sub-DEV180/,ses-wave1,{2},set(),set(),set(),set(),set(),True
+308,sub-DEV181/,ses-wave1,set(),set(),{1},set(),set(),{1},True
+309,sub-DEV181/,ses-wave2,{2},set(),set(),set(),set(),set(),True
+310,sub-DEV182/,ses-wave1,{2},set(),set(),set(),set(),set(),True
+312,sub-DEV183/,ses-wave1,{2},set(),set(),set(),set(),set(),True
+314,sub-DEV185/,ses-wave1,set(),set(),{1},set(),set(),set(),True
+315,sub-DEV185/,ses-wave2,{2},set(),{1},set(),set(),set(),True
+319,sub-DEV187/,ses-wave2,set(),set(),{1},set(),set(),set(),True
+320,sub-DEV190/,ses-wave1,"{1, 2}",set(),{1},set(),set(),set(),True
+322,sub-DEV191/,ses-wave1,{2},set(),set(),set(),set(),set(),True
+323,sub-DEV192/,ses-wave1,{4},set(),{1},{4},set(),set(),True
+325,sub-DEV194/,ses-wave1,set(),{2},set(),set(),set(),set(),True

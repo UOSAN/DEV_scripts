@@ -9,7 +9,7 @@
 STUDY=/projects/sanlab/shared/DEV/DEV_scripts
 
 # Set subject list
-SUBJLIST=`cat test_subject_list_20210423.txt`
+SUBJLIST=`cat test_subject_list_20210429.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV001
@@ -48,8 +48,8 @@ for SUB in $SUBJLIST; do
 		SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth_${TASK}.m # update script name if applicable
 
 		# Run task job
-	 	sbatch --export ALL,REPLACESID=$REPLACESID,WAVE=$WAVE,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
-		 	--job-name=${RESULTS_INFIX} \
+	 	sbatch --dependency=singleton --export ALL,REPLACESID=$REPLACESID,WAVE=$WAVE,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
+		 	--job-name=${RESULTS_INFIX}_${SUB} \
 		 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}_${TASK}.log \
 		 	--cpus-per-task=${cpuspertask} \
 		 	--mem-per-cpu=${mempercpu} \

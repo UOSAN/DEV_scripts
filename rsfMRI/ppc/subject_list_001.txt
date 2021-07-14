@@ -1,0 +1,4 @@
+DEV001,wave1,2
+DEV001,wave1,1
+DEV001,wave2,2
+DEV001,wave2,1

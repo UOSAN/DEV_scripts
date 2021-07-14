@@ -19,7 +19,7 @@ fi
 
 
 # Set subject list
-subject_list=`cat subject_list_0419.txt` 
+subject_list=`cat subject_list_0604.txt` 
 
 pre_subid=""
 pre_sessionid=""

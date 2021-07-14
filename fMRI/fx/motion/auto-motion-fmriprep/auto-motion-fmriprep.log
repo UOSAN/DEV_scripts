@@ -1,0 +1,13 @@
+running
+  '/packages/R/3.6.1_gcc7/lib64/R/bin/R --slave --no-restore --file=auto_motion_fmriprep.R'
+
+Loading required package: tidyverse
+Warning in install.packages("tidyverse", repos = osuRepo) :
+  'lib = "/gpfs/packages/R/3.6.1_gcc7/lib64/R/library"' is not writable
+Error in install.packages("tidyverse", repos = osuRepo) : 
+  unable to install packages
+In addition: Warning message:
+In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called ‘tidyverse’
+Execution halted
+srun: error: n222: task 0: Exited with exit code 1
