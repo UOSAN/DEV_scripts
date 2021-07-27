@@ -32,16 +32,19 @@ mempercpu=8G
 #strings because this really is just treated as strings; they're not being accessed as numbers
 declare -a arr=("0" "2" "4") 
 
-for item in "${arr[@]}"
+for item in "${arr[@]}"; do
 
+    echo "looping"
+
+    echo $item
     # Set MATLAB script path
-    SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_betaseries_ns_6s_split_${item}.m
+    SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_betaseries_ns_2s_split_${item}.m
 
     # RRV the results files
-    RESULTS_INFIX=fx_betaseries_ns_split_${item}
+    RESULTS_INFIX=fx_betaseries_ns_2s_split_${item}
 
     # Set output dir and make it if it doesn't exist
-    OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_ns_6s_split_${item}
+    OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_ns_2s_split_${item}
 
     if [ ! -d ${OUTPUTDIR} ]; then
         mkdir -p ${OUTPUTDIR}
