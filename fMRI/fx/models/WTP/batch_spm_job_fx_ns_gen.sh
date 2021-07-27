@@ -21,16 +21,16 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/${1}.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_betaseries_${1}.m
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
 
 # RRV the results files
-RESULTS_INFIX=fx_betaseries_ns
+RESULTS_INFIX=fx_betaseries_${1}
 
 # Set output dir and make it if it doesn't exist
-OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_ns
+OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_${1}
 
 if [ ! -d ${OUTPUTDIR} ]; then
 	mkdir -p ${OUTPUTDIR}
