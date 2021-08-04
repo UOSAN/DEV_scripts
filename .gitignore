@@ -10,6 +10,13 @@ fMRI/ppc/output/
 fMRI/ppc/smooth/output/
 fMRI/ppc/smooth/sid_batches/*/*.mat
 fMRI/ppc/smooth/.ipynb_checkpoints/*
+fMRI/ml/*.log
+fMRI/ml/*.err
+fMRI/ml/__pycache__/*
+fMRI/ml/__pycache__
+fMRI/ml/nilearn_cache/*
+fMRI/ml/nilearn_cache
+
 org/bidsQC/bidsQC/logs_bidsQC/
 org/bidsQC/conversion/logs_dcm2bids/*
 org/bidsQC/conversion/logs_dcm2bids/

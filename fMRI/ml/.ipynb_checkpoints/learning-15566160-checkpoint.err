@@ -1,0 +1,6 @@
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+Traceback (most recent call last):
+  File "ns_40_subj_sample_simple_task_set_2.py", line 4, in <module>
+    Brain_Data__60subs.pkl
+NameError: name 'Brain_Data__60subs' is not defined
