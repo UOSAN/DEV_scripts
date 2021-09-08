@@ -26,8 +26,20 @@ library(lubridate)
 ```
 
 # load data
-* First download the "session" data report from redcap and drop in the `dicom_check` folder
-* Then create a new `dicoms.csv` file by printing the file list from talapas (e.g. via `cd /projects/lcni/dcm/sanlab/Berkman/DEV/; for i in $(ls -d *); do echo $i >> /projects/sanlab/shared/DEV/DEV_scripts/org/dicom_check/dicoms.csv; done`)
+* First download the "sessions" data report from redcap and drop in the `dicom_check` folder
+* Then create a new `dicoms.csv` file by printing the file list from talapas using the script:
+
+
+```
+cd /projects/lcni/dcm/sanlab/Berkman/DEV/; 
+for i in $(ls -d *); 
+  do echo $i >> /projects/sanlab/shared/DEV/DEV_scripts/org/dicom_check/dicoms.csv; 
+done
+```
+
+* Then you'll want to clean it up
+
+
 ```{r}
 # dicom info
 dicoms = read.csv("dicoms_cleaned_20210324.csv", header = FALSE) %>%

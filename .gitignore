@@ -36,3 +36,4 @@ fMRI/fx/models/output_ns
 fMRI/fx/models/output_ns/*
 rsfMRI/baseline_analysis/subject_correlation/concatenate/DEV*.csv
 rsfMRI/baseline_analysis/subject_connectivity/DEV*.csv
+.Rproj.user
