@@ -13,7 +13,7 @@ module load fsl/5.0.10
 output_dir=/projects/sanlab/shared/DEV/DEV_scripts/rsfMRI/baseline_analysis/outputs/
 
 # Set subject list
-subject_list=`cat /projects/sanlab/shared/DEV/DEV_scripts/rsfMRI/baseline_analysis/baseline_correlation_subjectList.txt` 
+subject_list=`cat /projects/sanlab/shared/DEV/DEV_scripts/rsfMRI/baseline_analysis/baseline_connectivity_subjectList_addiction.txt` 
 
 # Loop through subjects
 for subject in $subject_list; do

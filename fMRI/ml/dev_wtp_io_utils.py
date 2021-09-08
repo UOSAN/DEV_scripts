@@ -586,7 +586,7 @@ def asizeof_fmt(obj, suffix='B'):
 #                          key= lambda x: -x[1])[:10]:
 
 
-def import_wtp_w1_subjs_to_pkl(subjs,betaseries_fileid, behavioral_design):
+def import_wtp_w1_subjs_to_pkl(subjs,betaseries_fileid, behavioral_design,out_folder = '../data/'):
     betaseries_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave1/betaseries_'
     betaseries_path = betaseries_repo + betaseries_fileid + "/"
     print(betaseries_path)

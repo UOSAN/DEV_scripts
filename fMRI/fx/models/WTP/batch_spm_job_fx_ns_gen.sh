@@ -44,6 +44,8 @@ mempercpu=8G
 for SUB in $SUBJLIST; do
 	#an ID on its own. need this for certain parts of the script
 	SUBID=$(sed "s/DEV//" <<< $SUB)
+
+	echo "${OUTPUTDIR}"
 	
  	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SUBID=$SUBID,SPM_PATH=$SPM_PATH,  \
 	 	--job-name=${RESULTS_INFIX} \
