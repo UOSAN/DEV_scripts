@@ -1,4 +1,6 @@
 .DS_Store
+.ipynb_checkpoints/*
+.ipynb_checkpoints
 .idea/
 fMRI/ppc/smooth/output/
 fMRI/ppc/smooth/output/*
@@ -10,6 +12,7 @@ fMRI/ppc/output/
 fMRI/ppc/smooth/output/
 fMRI/ppc/smooth/sid_batches/*/*.mat
 fMRI/ppc/smooth/.ipynb_checkpoints/*
+fMRI/ml/log-archive/*
 fMRI/ml/*.log
 fMRI/ml/*.err
 fMRI/ml/__pycache__/*
@@ -31,7 +34,7 @@ rsfMRI/607_project/outputs/
 rsfMRI/607_project/outputs/*
 rsfMRI/607_project/subject_pcorr/*.csv
 rsfMRI/baseline_analysis/subject_correlation/baseline_acq/*.csv
-
+rsfMRI/baseline_analysis/edge_dv_shuffle/BMI_acq1_shuffle.csv
 fMRI/fx/models/output_ns
 fMRI/fx/models/output_ns/*
 rsfMRI/baseline_analysis/subject_correlation/concatenate/DEV*.csv

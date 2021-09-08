@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#SBATCH --partition=ctn        ### Partition (like a queue in PBS)
+#SBATCH --partition=ctn,long        ### Partition (like a queue in PBS)
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=16
