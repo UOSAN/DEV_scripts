@@ -16,7 +16,8 @@ library(tidyverse)
 
 # load and tidy data
 ```{r}
-all = read.csv("org/dicom_check/dicoms_cleaned_20210324.csv", header = FALSE) %>%
+setwd("../../../")
+all = read.csv("org/dicom_check/dicoms_cleaned_20210908.csv", header = FALSE) %>%
   rename("folder" = V1) %>%
   filter(!folder == "DEV_20171214")
 
@@ -24,7 +25,12 @@ completed = read.csv("org/bidsQC/conversion/subject_list.txt", header = FALSE)
 
 full_list = all %>%
   extract(folder, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
-  mutate(subjectID = ifelse(folder == "DEV0903_20190607_090700", "DEV093", subjectID)) %>%
+  mutate(subjectID = case_when(
+    folder == "DEV0903_20190607_090700" ~ "DEV093",
+    folder == "DEV_20210714_173417" ~ "DEV205",
+    folder == "DEV_20210608_170401" ~ "DEV198",
+    TRUE ~ subjectID
+  )) %>%
   group_by(subjectID) %>%
   mutate(wave = sprintf("wave%s",row_number())) 
 ```
@@ -59,6 +65,7 @@ full_list %>%
 
 # write lists
 ```{r}
+setwd("../../../")
 full_list %>%
   filter(!folder %in% completed$V1) %>%
   write.table("org/bidsQC/conversion/new_subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
@@ -69,6 +76,7 @@ full_list %>%
 # write subject-only lists
 
 ```{r}
+setwd("../../../")
 #this code is untested! we need output files with just the subject names in them. this is what these do.
 full_list %>%
   filter(!folder %in% completed$V1) %>%

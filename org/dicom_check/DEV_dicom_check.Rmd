@@ -37,16 +37,23 @@ for i in $(ls -d *);
 done
 ```
 
-* Then you'll want to clean it up
+* Then you'll want to clean it up--creating it as a new dicoms_cleaned file and then entering info below.
+
+```{r}
+#update each of these
+dicom_filename <-"dicoms_cleaned_20210908.csv"
+redcap_filename <- "DEV-Sessions_DATA_2021-09-08_1937.csv"
+```
+
 
 
 ```{r}
 # dicom info
-dicoms = read.csv("dicoms_cleaned_20210324.csv", header = FALSE) %>%
+dicoms = read.csv(dicom_filename, header = FALSE) %>%
   rename("folder" = V1)
 
 # redcap session info
-redcap_sessions = read.csv("DEV-Sessions_DATA_2021-03-24_0342.csv", na.strings = c("")) %>%
+redcap_sessions = read.csv(redcap_filename, na.strings = c("")) %>%
   rename("subjectID" = dev_id) %>%
   select(-redcap_event_name) %>%
   group_by(subjectID) %>%
@@ -237,6 +244,18 @@ dicoms_tidy %>%
          duration = ifelse(!is.na(dicom_date_2), dicom_date_2 - dicom_date_1, NA)) %>%
   select(folder, subjectID, sessionNum, datetime, check, duration, redcap_date_1, dicom_date_1, redcap_date_2, dicom_date_2)
 ```
+# Further investigation
+
+two DICOM folders missing subject IDs:
+ - DEV_20210608_170401
+ - DEV_20210714_173417
+ 
+```{r}
+dates_from_dicoms_with_sid_missing <- as.Date(c("2021-06-08","2021-07-14"))
+
+redcap_sessions %>% filter(redcap_date_1 %in% dates_from_dicoms_with_sid_missing | redcap_date_2 %in% dates_from_dicoms_with_sid_missing)
+```
+ 
 
 # Issue breakdown (log of issues fixed)
 
@@ -262,9 +281,14 @@ DEV029 missing session 1 (2018-08-08) --> found in wrong folder
 DEV063 missing session 1 (2018-12-07) --> found in wrong folder
 DEV126 missing session 1 (2019-07-17) --> dates confirmed on calpendo; wrong folder??  
   
-**Rename**  
+**Rename/remap**  
+
+Input DICOM folders are not renamed. The subject IDs are manually remapped in make_conversion_list.Rmd. Not sure what happens after that...maybe nothing.
+
 DEv025_20180827_163615 --> DEV025_20180827_163615  
 DEV0903_20190607_090700 --> DEV093_20190607_090700
+DEV_20210714_173417 --> DEV205_20210714_173417
+DEV_20210608_170401 --> DEV198_20210608_170401
 
 # Outstanding potentially unresolved issues
 
