@@ -201,13 +201,17 @@ def write_events_description(path: Path,
 
 
 def main(input_dir: str, bids_dir: str = None):
+
+    print(input_dir)
+	
     files = list(Path(input_dir).glob('DEV*.mat'))
     files.sort()
-    pattern = 'DEV(\\d{3})_run(\\d{1})_.*mat'
+    pattern = 'DEV(\\d{3})_run(\\d{1})_*.mat'
     for f in files:
         match = re.search(pattern, str(f.name))
         if match:
             subject_id, wave_number = match.groups()
+            print(f.name)
 
             # Read data out of the .mat file
             trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time = \
@@ -251,6 +255,7 @@ def main(input_dir: str, bids_dir: str = None):
 
 if __name__ == "__main__":
     description = 'Create multi-condition files for SST task in DEV study'
+    print(description)
 
     parser = argparse.ArgumentParser(description=description,
                                      add_help=True,
