@@ -4,10 +4,13 @@
 % D.Cos 10/2018
 
 %% Load data and intialize variables
-inputDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ROC/output';
+%inputDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ROC/output';
+inputDir = '/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/ROC/output';
 runNames = {'run1', 'run2', 'run3', 'run4'};
 waveNames = {'1', '2'};
-writeDir = '~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
+
+%writeDir = '~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
+writeDir = '～/Google Drive/oregon/preprocessing/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
 studyName = 'DEV';
 filePattern = 'run'; 
 nTrials = 20;
@@ -28,6 +31,7 @@ fprintf(1, 'Excluded: %s\n', excluded{:})
 % initialize table
 eventtable  = cell2table(cell(0,7), 'VariableNames', {'file', 'subjectID', 'wave', 'run', 'rating', 'rt', 'condition'});
 
+trials = {};
 %% Loop through subjects and runs and save names, onsets, and durations as .mat files
 for i = 1:numel(subjectID)
     sub = subjectID{i};
