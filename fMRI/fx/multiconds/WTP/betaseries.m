@@ -27,6 +27,7 @@ fprintf(1, 'Excluded: %s\n', excluded{:})
 % initialize table
 eventtable  = cell2table(cell(0,9), 'VariableNames', {'subjectID', 'wave', 'run', 'foodpic', 'health', 'liking', 'liking_rating', 'bid', 'rt'});
 
+trials = {};
 %% Loop through subjects and runs and save names, onsets, and durations as .mat files
 for i = 1:numel(subjectID)
     sub = subjectID{i};
