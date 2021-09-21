@@ -206,7 +206,9 @@ def main(input_dir: str, bids_dir: str = None):
 	
     files = list(Path(input_dir).glob('DEV*.mat'))
     files.sort()
-    pattern = 'DEV(\\d{3})_run(\\d{1})_*.mat'
+    pattern = 'DEV(\\d{3})_run(\\d{1})_.*.mat'
+    #pattern = 'DEV(\\d{3})_(\\d{1})_SST1\\.mat'
+    
     for f in files:
         match = re.search(pattern, str(f.name))
         if match:

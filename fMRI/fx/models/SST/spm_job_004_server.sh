@@ -1,6 +1,22 @@
+## Set your study
+STUDY=DEV
+
+# SPM Path
+SPM_PATH=/projects/sanlab/shared/spm12
+
+# Set scripts directory path
+SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
+
+# Set MATLAB script path
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_betaseries_w1_from_spm7.m
+
+# Which SID should be replaced?
+REPLACESID=DEV004
+
+
+SUB=DEV004
+
 #!/bin/bash
-
-
 #--------------------------------------------------------------
 # This script:
 #	* Creates a batch job for $SUB
@@ -22,7 +38,6 @@ fi
 echo -------------------------------------------------------------------------------
 echo "${SUB}"
 echo "Running ${SCRIPT}"
-echo "(replaces id is $REPLACESID)"
 echo -------------------------------------------------------------------------------
 
 module load matlab
