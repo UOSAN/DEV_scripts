@@ -20,13 +20,15 @@ bidsdir = os.path.join(os.sep, 'projects', group, 'shared', study, 'bids_data') 
 
 # Create a dictionary (the thing below) for each timepoint in your study where the pairs are 'sequence_directory_name' : 'expected_number_runs'
 # Each unique version of a sequence gets its own entry, e.g. 'gng_acq-1' and 'gng_acq-2'
-sequence1 = Sequence('func', {'task-ROC_acq-1': 1, 'task-ROC_acq-2':1, 'task-ROC_acq-3':1, 'task-ROC_acq-4':1,
-							  'task-WTP_acq-1': 1, 'task-WTP_acq-2':1, 'task-WTP_acq-3':1, 'task-WTP_acq-4':1,
-							  'task-SST_acq-1': 1})
+sequence1 = Sequence('func', {
+  'task-ROC_acq-1': 1, 'task-ROC_acq-2':1, 'task-ROC_acq-3':1, 'task-ROC_acq-4':1,
+	'task-WTP_acq-1': 1, 'task-WTP_acq-2':1, 'task-WTP_acq-3':1, 'task-WTP_acq-4':1,
+	'task-SST_acq-1': 1,
+	'rest_acq-1':1,'rest_acq-2':1}) #added rest, BJS 2021-09-23
 sequence2 = Sequence('anat', {'T1w':1})
 sequence3 = Sequence('fmap', {'dir-ap':1, 'dir-pa':1})
-timepoint1 = TimePoint('ses-wave1', [sequence1, sequence2, sequence4])
-timepoint2 = TimePoint('ses-wave2', [sequence1, sequence2, sequence4])
+timepoint1 = TimePoint('ses-wave1', [sequence1, sequence2, sequence3])
+timepoint2 = TimePoint('ses-wave2', [sequence1, sequence2, sequence3])
 expected_timepoints = [timepoint1, timepoint2]
 
 
