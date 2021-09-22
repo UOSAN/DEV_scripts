@@ -21,12 +21,13 @@ def main():
     logfile_fullpaths = cfg.errorlog, cfg.outputlog
     create_logfiles(logfile_fullpaths)
     subjectdirs = get_subjectdirs()
-    write_to_outputlog("\nScript ran on %i subject directories\n" % (len(subjectdirs)))
+    write_to_outputlog("\nScript running on %i subject directories\n" % (len(subjectdirs)))
     for subject in subjectdirs:
         write_to_errorlog("\n" + "-"*20 + "\n" + subject + "\n" + "-"*20)
         write_to_outputlog("\n" + "-"*20 + "\n" + subject + "\n" + "-"*20)
         timepoints = get_timepoints(subject)
         check_timepoint_count(timepoints, cfg.expected_timepoints, subject)
+        write_to_outputlog("Expecting timepoints like: "+ str(cfg.expected_timepoints))
         for timepoint in timepoints:
             sequence_folder_names = get_sequences(subject, timepoint)
             expected_timepoint = [etp for etp in cfg.expected_timepoints if etp.name == timepoint]
