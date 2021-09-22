@@ -21,6 +21,14 @@ if (!require(tidyverse)) {
   install.packages('tidyverse', repos = osuRepo)
 }
 
+required_packages <- c('tidyverse','caret','randomForest')
+for (package in required_packages){
+  if (!require(package,character.only = TRUE)) {
+    install.packages(package, repos = osuRepo)
+  }
+}
+
+
 #------------------------------------------------------
 # source the config file
 #------------------------------------------------------
