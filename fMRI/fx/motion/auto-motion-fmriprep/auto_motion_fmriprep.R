@@ -39,12 +39,16 @@ source('config.R')
 #------------------------------------------------------
 fileList = list.files(confoundDir, pattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_"), recursive = TRUE)
 
-for (file in fileList) {
+for (file_i in 1:length(fileList)) {
+  file=fileList[file_i]
+  if(file_i%%10==0){
+    cat(". ")
+  }
   
   # if the merged dataset doesn't exist, create it
   if (!exists('dataset')) {
     filePattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_")
-    dataset = read_tsv(file.path(confoundDir, file)) %>% 
+    dataset = read_tsv(file.path(confoundDir, file),col_types="dddccc") %>% 
       mutate(file = file) %>%
       extract(file, c('subjectID', 'wave', 'task', 'run'),
               file.path('sub-.*','ses-.*', 'func', filePattern)) %>%
@@ -62,7 +66,7 @@ for (file in fileList) {
   # if the merged dataset does exist, append to it
   else {
     filePattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_")
-    tmp = read_tsv(file.path(confoundDir, file)) %>% 
+    tmp = read_tsv(file.path(confoundDir, file),col_types="dddccc")  %>% 
       mutate(file = file) %>%
       extract(file, c('subjectID', 'wave', 'task', 'run'),
               file.path('sub-.*','ses-.*', 'func', filePattern)) %>%
