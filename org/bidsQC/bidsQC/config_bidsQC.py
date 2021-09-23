@@ -30,6 +30,9 @@ sequence2 = Sequence('anat', {'T1w':1})
 sequence3 = Sequence('fmap', {'dir-ap':1, 'dir-pa':1})
 timepoint1 = TimePoint('ses-wave1', [sequence1, sequence2, sequence3])
 timepoint2 = TimePoint('ses-wave2', [sequence1, sequence2, sequence3])
+timepoint3 = TimePoint('ses-wave3', [sequence1, sequence2, sequence3])
+timepoint4 = TimePoint('ses-wave4', [sequence1, sequence2, sequence3])
+timepoint5 = TimePoint('ses-wave5', [sequence1, sequence2, sequence3])
 expected_timepoints = [timepoint1, timepoint2]
 
 
