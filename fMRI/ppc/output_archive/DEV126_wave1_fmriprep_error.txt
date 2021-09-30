@@ -1,0 +1,168 @@
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+[WARNING] This document format requires a nonempty <title> element.
+  Please specify either 'title' or 'pagetitle' in the metadata.
+  Falling back to 'CITATION'
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/site-packages/bids/grabbids/bids_layout.py:116: UserWarning: 'dataset_description.json' file is missing from project root. You may want to set the root path to a valid BIDS project.
+  warnings.warn("'dataset_description.json' file is missing from "
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+Fatal Python error: Segmentation fault
+
+Current thread 0x00002aaae28a4700 (most recent call first):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nibabel/openers.py", line 93 in _gzip_open
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nibabel/openers.py", line 164 in __init__
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nibabel/fileholders.py", line 70 in get_prepare_fileobj
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nibabel/analyze.py", line 974 in from_file_map
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nibabel/keywordonly.py", line 17 in wrapper
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nibabel/analyze.py", line 1028 in from_filename
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nibabel/keywordonly.py", line 17 in wrapper
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nibabel/loadsave.py", line 49 in load
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/utils.py", line 161 in _copyxform
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/fixes.py", line 29 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 521 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/interfaces/itk.py", line 262 in _applytfms
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 56 in run
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 69 in _worker
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 864 in run
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 916 in _bootstrap_inner
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 884 in _bootstrap
+
+Thread 0x00002aaae32a9700 (most recent call first):
+  File "/usr/local/miniconda/lib/python3.6/tokenize.py", line 452 in open
+  File "/usr/local/miniconda/lib/python3.6/linecache.py", line 136 in updatecache
+  File "/usr/local/miniconda/lib/python3.6/linecache.py", line 47 in getlines
+  File "/usr/local/miniconda/lib/python3.6/linecache.py", line 16 in getline
+  File "/usr/local/miniconda/lib/python3.6/traceback.py", line 282 in line
+  File "/usr/local/miniconda/lib/python3.6/traceback.py", line 358 in extract
+  File "/usr/local/miniconda/lib/python3.6/traceback.py", line 497 in __init__
+  File "/usr/local/miniconda/lib/python3.6/traceback.py", line 117 in format_exception
+  File "/usr/local/miniconda/lib/python3.6/traceback.py", line 163 in format_exc
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 527 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/interfaces/itk.py", line 262 in _applytfms
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 56 in run
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 69 in _worker
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 864 in run
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 916 in _bootstrap_inner
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 884 in _bootstrap
+
+Thread 0x00002aaae2ca6700 (most recent call first):
+  File "/usr/local/miniconda/lib/python3.6/subprocess.py", line 1537 in _communicate
+  File "/usr/local/miniconda/lib/python3.6/subprocess.py", line 843 in communicate
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 834 in run_command
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 1030 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/fixes.py", line 24 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 521 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/interfaces/itk.py", line 262 in _applytfms
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 56 in run
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 69 in _worker
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 864 in run
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 916 in _bootstrap_inner
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 884 in _bootstrap
+
+Thread 0x00002aaae2aa5700 (most recent call first):
+  File "/usr/local/miniconda/lib/python3.6/subprocess.py", line 1404 in _try_wait
+  File "/usr/local/miniconda/lib/python3.6/subprocess.py", line 1457 in wait
+  File "/usr/local/miniconda/lib/python3.6/subprocess.py", line 1540 in _communicate
+  File "/usr/local/miniconda/lib/python3.6/subprocess.py", line 843 in communicate
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 834 in run_command
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 1030 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/fixes.py", line 24 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 521 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/interfaces/itk.py", line 262 in _applytfms
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 56 in run
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 69 in _worker
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 864 in run
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 916 in _bootstrap_inner
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 884 in _bootstrap
+
+Thread 0x00002aaae26a3700 (most recent call first):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 851 in run_command
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 1030 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/fixes.py", line 24 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 521 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/interfaces/itk.py", line 262 in _applytfms
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 56 in run
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 69 in _worker
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 864 in run
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 916 in _bootstrap_inner
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 884 in _bootstrap
+
+Thread 0x00002aaae34aa700 (most recent call first):
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nibabel/loadsave.py", line 40 in load
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/utils.py", line 161 in _copyxform
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/fixes.py", line 29 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 521 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/interfaces/itk.py", line 262 in _applytfms
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 56 in run
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 69 in _worker
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 864 in run
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 916 in _bootstrap_inner
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 884 in _bootstrap
+
+Thread 0x00002aaae30a8700 (most recent call first):
+  File "/usr/local/miniconda/lib/python3.6/selectors.py", line 376 in select
+  File "/usr/local/miniconda/lib/python3.6/subprocess.py", line 1514 in _communicate
+  File "/usr/local/miniconda/lib/python3.6/subprocess.py", line 843 in communicate
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 834 in run_command
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 1030 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/niworkflows/interfaces/fixes.py", line 24 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 521 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/interfaces/itk.py", line 262 in _applytfms
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 56 in run
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 69 in _worker
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 864 in run
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 916 in _bootstrap_inner
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 884 in _bootstrap
+
+Thread 0x00002aaae2ea7700 (most recent call first):
+  File "/usr/local/miniconda/lib/python3.6/linecache.py", line 74 in checkcache
+  File "/usr/local/miniconda/lib/python3.6/traceback.py", line 354 in extract
+  File "/usr/local/miniconda/lib/python3.6/traceback.py", line 497 in __init__
+  File "/usr/local/miniconda/lib/python3.6/traceback.py", line 117 in format_exception
+  File "/usr/local/miniconda/lib/python3.6/traceback.py", line 163 in format_exc
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 527 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/interfaces/itk.py", line 262 in _applytfms
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 56 in run
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/thread.py", line 69 in _worker
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 864 in run
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 916 in _bootstrap_inner
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 884 in _bootstrap
+
+Thread 0x00002aaaaaae1440 (most recent call first):
+  File "/usr/local/miniconda/lib/python3.6/threading.py", line 295 in wait
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/_base.py", line 427 in result
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/_base.py", line 586 in result_iterator
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/interfaces/itk.py", line 143 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/interfaces/base/core.py", line 521 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 644 in _run_command
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 564 in _run_interface
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/nodes.py", line 480 in run
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 69 in run_node
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/process.py", line 175 in _process_worker
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/process.py", line 93 in run
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/process.py", line 258 in _bootstrap
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/spawn.py", line 118 in _main
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/forkserver.py", line 231 in _serve_one
+  File "/usr/local/miniconda/lib/python3.6/multiprocessing/forkserver.py", line 196 in main
+  File "<string>", line 1 in <module>
+exception calling callback for <Future at 0x2aaaebd4fe80 state=finished raised BrokenProcessPool>
+Traceback (most recent call last):
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/_base.py", line 324, in _invoke_callbacks
+    callback(self)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/plugins/multiproc.py", line 143, in _async_callback
+    result = args.result()
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/_base.py", line 425, in result
+    return self.__get_result()
+  File "/usr/local/miniconda/lib/python3.6/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+concurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.
+slurmstepd: error: *** JOB 14462859 ON n222 CANCELLED AT 2021-04-04T19:43:28 DUE TO TIME LIMIT ***

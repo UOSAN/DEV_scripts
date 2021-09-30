@@ -15,6 +15,10 @@ from pympler.asizeof import asizeof
 import gc #garbage collection
 import pickle
 
+class BehavioralDataNotFoundForBrainDataException(Exception):
+    """Behavioral data could not be matched to a subject."""
+    pass
+
 #run_object = dev155_wtp_wave1_taskoutput['Data']['run1']
 def get_run_event_stage_df(run_object):
     """get a list of individual event stage items.
@@ -326,7 +330,10 @@ def get_Brain_Data_betas_for_sub(
     subj_behav_design = behavdesign[[s in sub_label for s in behavdesign.subject]]
     del(behavdesign)
     
-    if len(subj_behav_design)!=64:
+    if (len(subj_behav_design)==0):
+        raise BehavioralDataNotFoundForBrainDataException(
+            "Found no behavioral data for subject " + sub_label + ". Please ensure the data exists - it is probably missing from the source.")
+    elif len(subj_behav_design)!=64:
         raise Exception("For "+sub_label+", expected 64 beta events but found " + str(len(subj_behav_design)))
 
     

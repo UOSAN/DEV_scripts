@@ -1,0 +1,149 @@
+##########################################################
+
+For MacOS or Linux, use this command to create SSH tunnel:
+
+    ssh -N -L localhost:43255:n138:46099 bsmith16@talapas-ln2.uoregon.edu
+
+Or try this if that doesn't work:
+
+    ssh -N -L localhost:43255:n138:46099 bsmith16@talapas-ln2.uoregon.edu
+
+For Windows/MobaXterm, use this info:
+
+    Forwarded port: 43255
+    Remote server: n138
+    Remote port: 46099
+    SSH server: talapas-ln2.uoregon.edu
+    SSH login: bsmith16
+    SSH port: 22
+
+Then use this URL to access Jupyter (NOT the one in the log below):
+
+    http://localhost:43255
+
+##########################################################
+[I 16:48:01.052 NotebookApp] [nb_conda_kernels] enabled, 10 kernels found
+[W 16:48:01.662 NotebookApp] WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.
+[I 16:48:01.701 NotebookApp] [jupyter_nbextensions_configurator] enabled 0.4.1
+/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyter_server/transutils.py:13: FutureWarning: The alias `_()` will be deprecated. Use `_i18n()` instead.
+  warnings.warn(warn_msg, FutureWarning)
+[W 2021-09-22 16:48:02.061 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
+[W 2021-09-22 16:48:02.065 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-22 16:48:02.065 LabApp] 'port_retries' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-22 16:48:02.065 LabApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-22 16:48:02.065 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-22 16:48:02.065 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-22 16:48:02.065 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-22 16:48:02.065 LabApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2021-09-22 16:48:02.066 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
+[I 2021-09-22 16:48:02.074 LabApp] JupyterLab extension loaded from /home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyterlab
+[I 2021-09-22 16:48:02.075 LabApp] JupyterLab application directory is /gpfs/home/bsmith16/.conda/envs/jupyter_base_env/share/jupyter/lab
+[I 16:48:02.082 NotebookApp] Will shut down after 600 seconds with no kernels or terminals.
+[I 16:48:02.082 NotebookApp] Serving notebooks from local directory: /gpfs/projects/sanlab/shared/DEV/DEV_scripts/org/bidsQC/bidsQC
+[I 16:48:02.082 NotebookApp] Jupyter Notebook 6.3.0 is running at:
+[I 16:48:02.082 NotebookApp] http://n138:46099/
+[I 16:48:02.082 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 16:48:14.115 NotebookApp] 302 GET / (172.20.13.244) 1.020000ms
+[I 16:48:14.299 NotebookApp] 302 GET /tree? (172.20.13.244) 1.650000ms
+[I 16:48:21.984 NotebookApp] 302 POST /login?next=%2Ftree%3F (172.20.13.244) 2.490000ms
+[I 16:50:18.811 NotebookApp] 301 GET /static/favicons/favicon.ico (172.20.13.244) 67.650000ms
+[W 2021-09-22 16:50:22.594 LabApp] Could not determine jupyterlab build status without nodejs
+[W 16:50:23.425 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.449 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.514 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.524 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.546 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.563 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.590 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.607 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.659 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.669 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.878 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.890 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:23.986 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.020 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.034 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.053 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.084 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.192 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.289 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.299 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.339 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.346 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.360 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.372 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.391 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.403 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.440 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.447 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.599 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.607 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.678 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.711 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.725 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.744 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.775 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:50:24.881 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[I 16:53:00.178 NotebookApp] 302 GET / (172.20.13.244) 0.930000ms
+[I 16:53:08.289 NotebookApp] 301 GET /static/favicons/favicon.ico (172.20.13.244) 0.610000ms
+[W 2021-09-22 16:53:11.353 LabApp] Could not determine jupyterlab build status without nodejs
+[W 16:53:11.532 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:11.553 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:11.635 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:11.654 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:11.685 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:11.711 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:11.750 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:11.777 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:11.854 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:11.870 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.113 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.124 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.220 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.264 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.283 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.308 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.349 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.487 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.584 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.594 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.633 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.640 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.653 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.666 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.684 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.696 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.733 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.740 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.890 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.898 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:12.969 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:13.002 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:13.016 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:13.034 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:13.065 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:53:13.172 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[I 16:53:27.315 NotebookApp] Kernel started: da1d1d54-02a5-4a09-b294-c757b7307793, name: python3
+[I 16:53:29.585 NotebookApp] 301 GET /static/favicons/favicon-busy-1.ico (172.20.13.244) 0.650000ms
+[I 16:55:15.689 NotebookApp] Saving file at /bidsQC.py
+[I 16:55:19.589 NotebookApp] Saving file at /bidsQC.py
+[I 16:55:55.541 NotebookApp] Saving file at /bidsQC.py
+[I 16:56:08.241 NotebookApp] Saving file at /bidsQC.py
+[I 17:04:51.886 NotebookApp] Saving file at /bidsQC.py
+[I 17:06:42.881 NotebookApp] Saving file at /bidsQC.py
+[W 17:09:03.257 NotebookApp] 404 GET /api/contents/load_multisubject_brain_data_wtpw1.ipynb?content=0&1632355746545 (172.20.13.244): No such file or directory: load_multisubject_brain_data_wtpw1.ipynb
+[W 17:09:03.258 NotebookApp] No such file or directory: load_multisubject_brain_data_wtpw1.ipynb
+[W 17:09:03.258 NotebookApp] 404 GET /api/contents/load_multisubject_brain_data_wtpw1.ipynb?content=0&1632355746545 (172.20.13.244) 2.720000ms referer=http://localhost:43255/lab
+[W 17:09:03.261 NotebookApp] 404 GET /api/contents/get_main_behavioral_dev_wtp_data.ipynb?content=0&1632355746546 (172.20.13.244): No such file or directory: get_main_behavioral_dev_wtp_data.ipynb
+[W 17:09:03.261 NotebookApp] No such file or directory: get_main_behavioral_dev_wtp_data.ipynb
+[W 17:09:03.262 NotebookApp] 404 GET /api/contents/get_main_behavioral_dev_wtp_data.ipynb?content=0&1632355746546 (172.20.13.244) 2.270000ms referer=http://localhost:43255/lab
+[W 17:09:03.265 NotebookApp] 404 GET /api/contents/load_multisubject_brain_data_wtpw1_grouped.ipynb?content=0&1632355746548 (172.20.13.244): No such file or directory: load_multisubject_brain_data_wtpw1_grouped.ipynb
+[W 17:09:03.265 NotebookApp] No such file or directory: load_multisubject_brain_data_wtpw1_grouped.ipynb
+[W 17:09:03.266 NotebookApp] 404 GET /api/contents/load_multisubject_brain_data_wtpw1_grouped.ipynb?content=0&1632355746548 (172.20.13.244) 2.270000ms referer=http://localhost:43255/lab
+[W 17:09:03.269 NotebookApp] 404 GET /api/contents/load_multisubject_brain_data_clean.ipynb?content=0&1632355746550 (172.20.13.244): No such file or directory: load_multisubject_brain_data_clean.ipynb
+[W 17:09:03.269 NotebookApp] No such file or directory: load_multisubject_brain_data_clean.ipynb
+[W 17:09:03.270 NotebookApp] 404 GET /api/contents/load_multisubject_brain_data_clean.ipynb?content=0&1632355746550 (172.20.13.244) 2.310000ms referer=http://localhost:43255/lab
+[I 17:10:21.660 NotebookApp] Saving file at /bidsQC.py
+[I 17:10:41.628 NotebookApp] Saving file at /bidsQC.py
+[I 19:49:29.295 NotebookApp] Starting buffering for da1d1d54-02a5-4a09-b294-c757b7307793:3f0f73e3-cf61-4469-a60f-cd1430fe6dcf
+slurmstepd: error: *** JOB 16282284 ON n138 CANCELLED AT 2021-09-22T20:48:16 DUE TO TIME LIMIT ***

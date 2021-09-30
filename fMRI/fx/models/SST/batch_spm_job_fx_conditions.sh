@@ -9,10 +9,10 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=`cat test_subject_list.txt`
+SUBJLIST=`cat subject_list_single_col_20210908.txt`
 
 # Which SID should be replaced?
-REPLACESID=004
+REPLACESID=DEV004
 
 # SPM Path
 SPM_PATH=/projects/sanlab/shared/spm12
@@ -20,8 +20,11 @@ SPM_PATH=/projects/sanlab/shared/spm12
 # Set scripts directory path
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
+#Set task
+TASK=SST
+
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_conditions.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/$TASK/fx_conditions_w1.m
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
@@ -30,7 +33,7 @@ SHELL_SCRIPT=spm_job.sh
 RESULTS_INFIX=fx_conditions
 
 # Set output dir and make it if it doesn't exist
-OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output
+OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_${TASK}_${RESULTS_INFIX}
 
 if [ ! -d ${OUTPUTDIR} ]; then
 	mkdir -p ${OUTPUTDIR}

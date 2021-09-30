@@ -7,6 +7,6 @@
 #SBATCH --mem-per-cpu=1000
 #SBATCH --partition=ctn
 
-module load R gcc
+#module load R gcc
 
 srun Rscript --verbose auto_motion_fmriprep.R

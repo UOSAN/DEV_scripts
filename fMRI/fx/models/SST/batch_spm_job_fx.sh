@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=`cat 1s_test_subject_list.txt`
+SUBJLIST=`cat subject_list_single_col_20210908.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV004
@@ -21,7 +21,7 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_betaseries_w1_from_spm7.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_betaseries_w1.m
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
@@ -50,6 +50,6 @@ for SUB in $SUBJLIST; do
 	 	--account=sanlab \
 	 	${SHELL_SCRIPT}
 	 	
-	 #echo bash spm_job.sh --REPLACESID=$REPLACESID --SCRIPT=$SCRIPT --SUB=$SUB --SPM_PATH=$SPM_PATH
+	echo bash spm_job.sh --REPLACESID=$REPLACESID --SCRIPT=$SCRIPT --SUB=$SUB --SPM_PATH=$SPM_PATH
  	sleep .25
 done
