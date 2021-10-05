@@ -85,6 +85,28 @@ for (file_i in 1:length(fileList)) {
   }
 }
 
+#remove runs that have NA values for some reason. they will crash the analysis.
+#BJS 2021-10-06
+check_cols <- c("tCompCor00","tCompCor01","tCompCor02","tCompCor03","tCompCor04","tCompCor05","aCompCor00","aCompCor01","aCompCor02","aCompCor03","aCompCor04","aCompCor05")
+row_has_na_val <- rowSums(is.na(dataset[,check_cols]))>0
+rows_with_na_vals<-dataset[row_has_na_val,]
+
+runs_to_remove <- unique(rows_with_na_vals[c("subjectID","wave","task","run")])
+
+for (r in 1:nrow(runs_to_remove)){
+  
+  rows_to_remove_for_run <- (dataset$subjectID==runs_to_remove[r,"subjectID"] & 
+          dataset$wave==runs_to_remove[r,"wave"] & 
+          dataset$task==runs_to_remove[r,"task"] & 
+          dataset$run==runs_to_remove[r,"run"])
+  
+  print(paste0("removing ",sum(rows_to_remove_for_run)," rows relate to the following run"))
+  print(runs_to_remove[r,])
+  
+  dataset <- dataset[!rows_to_remove_for_run,]
+  
+}
+#add the current image state for debugging
 state_filename <- "confounds_loaded_state.RData"
 save.image(state_filename)
 #------------------------------------------------------
