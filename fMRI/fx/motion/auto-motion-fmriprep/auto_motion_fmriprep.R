@@ -43,6 +43,7 @@ for (file_i in 1:length(fileList)) {
   file=fileList[file_i]
   if(file_i%%10==0){
     cat(". ")
+    flush.console()
   }
   
   # if the merged dataset doesn't exist, create it
@@ -84,11 +85,15 @@ for (file_i in 1:length(fileList)) {
   }
 }
 
+state_filename <- "confounds_loaded_state.RData"
+save.image(state_filename)
 #------------------------------------------------------
 # apply classifier
 #------------------------------------------------------
 # load classifier
 mlModel = readRDS('motion_classifier.rds')
+
+
 
 # apply model
 dataset$trash = predict(mlModel, dataset)
@@ -222,4 +227,9 @@ if (writePlot) {
       ggsave(plot, file = file.path(plotDir, paste0(.$subjectID[[1]], '_', .$wave[[1]], '_', .$task[[1]], '_', .$run[[1]], figFormat)), height = figHeight, width = figWidth, dpi = figDPI)
       data.frame()
     })
+}
+
+if (file.exists(state_filename)) {
+  #Delete file if it exists
+  file.remove(state_filename)
 }
