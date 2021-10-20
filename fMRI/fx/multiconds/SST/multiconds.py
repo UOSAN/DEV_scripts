@@ -100,6 +100,38 @@ def create_masks(condition: numpy.ndarray, response: numpy.ndarray) -> List:
     return list((go_success, no_go_success, no_go_fail, null_trials, go_fail))
 
 
+def create_pes_masks_from_masks(condition_masks: List, condition: numpy.ndarray) -> List:
+    """Create masks of post-error slowing conditions, derived from the original set of masks"""
+
+    go_success = condition_masks[0]
+    no_go_success = condition_masks[1]
+    no_go_fail = condition_masks[2]
+    null_trials = condition_masks[3]
+    go_fail = condition_masks[4]
+
+    go = condition==GO_TRIAL
+
+    #marks if each trial is a (successful or failed) go that follows a failed stop
+    #we shift by 2, not 1, because we ignore the "NULL TRIAL" that occurs reliably every second trial
+    go_following_failed_stop = np.append([False, False], (go[2:] & no_go_fail[:(len(no_go_fail)-2)]))
+    #marks if each trial is a (successful or failed) go that follows a successful stop
+    go_following_successful_stop = np.append([False, False], (go[2:] & no_go_success[:(len(no_go_fail)-2)]))
+
+    null_trials = condition==NULL_TRIAL
+
+    #create one beta for all the other SuccessGo trials
+    other_successful_go = go_success & (go_following_successful_stop==False) & (go_following_failed_stop==False)
+    #then just pass on the other masks as returned from create_masks
+
+
+    other_failed_go = go_fail & (go_following_successful_stop==False) & (go_following_failed_stop==False)
+
+    #['GoFollowingCorrectStop', 'GoFollowingFailedStop', 
+    #'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'OtherFailedGo'
+    return list((go_following_successful_stop, go_following_failed_stop,
+                 other_successful_go, no_go_success, no_go_fail, null_trials, other_failed_go
+                ))
+
 def create_trials(trial_number: numpy.ndarray, trial_start_time: numpy.ndarray, trial_duration: numpy.ndarray):
     # Output names (trial number or condition name (GoFail, GoSuccess, NoGoFail, NoGoSuccess)),
     # onsets (when the thing started),
@@ -129,6 +161,22 @@ def create_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, masks:
                   'durations': durations}
     return conditions
 
+def create_pes_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, pes_masks: List):
+    names = numpy.asarray(['GoFollowingCorrectStop', 'GoFollowingFailedStop',
+                           'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'OtherFailedGo'], dtype=numpy.object)
+    onsets = numpy.zeros((len(pes_masks),), dtype=numpy.object)
+    durations = numpy.zeros((len(pes_masks),), dtype=numpy.object)
+    # onsets and durations have to be reshaped from 1-d numpy arrays to Nx1 arrays so when written
+    # by scipy.io.savemat, the correct cell array is created in matlab
+    for i, mask in enumerate(pes_masks):
+        onsets[i] = start_time[mask].reshape(numpy.count_nonzero(mask), 1)
+        durations[i] = duration[mask].reshape(numpy.count_nonzero(mask), 1)
+
+    conditions = {'names': names,
+                  'onsets': onsets,
+                  'durations': durations}
+    return conditions
+
 
 def write_betaseries(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
     path = Path(input_dir) / 'betaseries'
@@ -138,13 +186,12 @@ def write_betaseries(input_dir: Union[PathLike, str], subject_id: str, wave: str
     scipy.io.savemat(str(path / file_name), trials)
 
 
-def write_conditions(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
-    path = Path(input_dir) / 'conditions'
+def write_beta_data(input_dir: Union[PathLike, str], subfolder, subject_id: str, wave: str, trials):
+    path = Path(input_dir) / subfolder
     path.mkdir(parents=True, exist_ok=True)
     file_name = f'DEV{subject_id}_{wave}_SST1.mat'
 
     scipy.io.savemat(str(path / file_name), trials)
-
 
 def write_bids_events(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
     # Write the events.tsv to BIDS only if the BIDS structure already exists
@@ -199,16 +246,25 @@ def write_events_description(path: Path,
     with open(str(path / file_name), 'w') as f:
         json.dump(desc, f, indent=4)
 
+#for debugging, can help to summarize what's inside the mask.
+def print_mask_signature(masks):
+    print([str(np.sum(m)) + ' True of ' + (str(len(m))) for m in masks])
+    print(np.sum([np.sum(m) for m in masks]))
 
-def main(input_dir: str, bids_dir: str = None):
+
+def main(input_dir: str, bids_dir: str = None, file_limit=None):
 
     print(input_dir)
-	
+
     files = list(Path(input_dir).glob('DEV*.mat'))
     files.sort()
     pattern = 'DEV(\\d{3})_run(\\d{1})_.*.mat'
     #pattern = 'DEV(\\d{3})_(\\d{1})_SST1\\.mat'
     
+    #for testing
+    if file_limit is not None:
+        files = files[0:file_limit]
+
     for f in files:
         match = re.search(pattern, str(f.name))
         if match:
@@ -221,6 +277,11 @@ def main(input_dir: str, bids_dir: str = None):
 
             # Create masks for the various conditions
             masks = create_masks(go_no_go_condition, subject_response)
+            print_mask_signature(masks)
+
+            #create masks for the post-error slowing
+            pes_masks = create_pes_masks_from_masks(masks, go_no_go_condition)
+            print_mask_signature(pes_masks)
 
             # Perform some quality checking on the numbers of responses (should be 256),
             # the number of null trials (should be 128),
@@ -238,21 +299,25 @@ def main(input_dir: str, bids_dir: str = None):
                 print(f'Wrong number of null trials : (subject, expected, actual) '
                       f'({subject_id}, {COUNT_NULL}, {numpy.count_nonzero(masks[3])})')
 
-            if bids_dir:
+            if bids_dir: #create MAT files storing behavioral information
                 trial_type = numpy.empty_like(trial_number, dtype=numpy.object)
                 trial_type_names = ['correct-go', 'correct-stop', 'failed-stop', 'null', 'failed-go']
                 for mask, name in zip(masks, trial_type_names):
                     numpy.putmask(trial_type, mask, name)
                 write_bids_events(bids_dir, subject_id, wave_number,
                                   numpy.stack((trial_start_time, trial_duration, trial_type), axis=1))
-            else:
+            else: #create onset files for SPM first-level analysis
                 trials = create_trials(trial_number, trial_start_time, trial_duration)
 
                 # Create paths and file names
                 write_betaseries(input_dir, subject_id, wave_number, trials)
 
                 conditions = create_conditions(trial_start_time, trial_duration, masks)
-                write_conditions(input_dir, subject_id, wave_number, conditions)
+                write_beta_data(input_dir, 'conditions', subject_id, wave_number, conditions)
+
+                pes_conditions = create_pes_conditions(trial_start_time, trial_duration, pes_masks)
+                write_beta_data(input_dir, 'pes_conditions', subject_id, wave_number, pes_conditions)
+            print("written data for subject " + str(subject_id))
 
 
 if __name__ == "__main__":
