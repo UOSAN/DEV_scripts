@@ -113,9 +113,9 @@ def create_pes_masks_from_masks(condition_masks: List, condition: numpy.ndarray)
 
     #marks if each trial is a (successful or failed) go that follows a failed stop
     #we shift by 2, not 1, because we ignore the "NULL TRIAL" that occurs reliably every second trial
-    go_following_failed_stop = np.append([False, False], (go[2:] & no_go_fail[:(len(no_go_fail)-2)]))
+    go_following_failed_stop = numpy.append([False, False], (go[2:] & no_go_fail[:(len(no_go_fail)-2)]))
     #marks if each trial is a (successful or failed) go that follows a successful stop
-    go_following_successful_stop = np.append([False, False], (go[2:] & no_go_success[:(len(no_go_fail)-2)]))
+    go_following_successful_stop = numpy.append([False, False], (go[2:] & no_go_success[:(len(no_go_fail)-2)]))
 
     null_trials = condition==NULL_TRIAL
 
