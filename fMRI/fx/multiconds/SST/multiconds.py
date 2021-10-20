@@ -100,7 +100,7 @@ def create_masks(condition: numpy.ndarray, response: numpy.ndarray) -> List:
     return list((go_success, no_go_success, no_go_fail, null_trials, go_fail))
 
 
-def create_pes_masks_from_masks(condition_masks: List, condition: numpy.ndarray) -> List:
+def create_pes_masks_from_masks(condition_masks: List) -> List:
     """Create masks of post-error slowing conditions, derived from the original set of masks"""
 
     go_success = condition_masks[0]
@@ -108,28 +108,28 @@ def create_pes_masks_from_masks(condition_masks: List, condition: numpy.ndarray)
     no_go_fail = condition_masks[2]
     null_trials = condition_masks[3]
     go_fail = condition_masks[4]
+    
+    raise Exception("change this to only use SUCCESSFUL goes not failed goes.")
 
-    go = condition==GO_TRIAL
+    #go = condition==GO_TRIAL
 
     #marks if each trial is a (successful or failed) go that follows a failed stop
     #we shift by 2, not 1, because we ignore the "NULL TRIAL" that occurs reliably every second trial
-    go_following_failed_stop = numpy.append([False, False], (go[2:] & no_go_fail[:(len(no_go_fail)-2)]))
+    go_success_following_failed_stop = numpy.append([False, False], (go_success[2:] & no_go_fail[:(len(no_go_fail)-2)]))
     #marks if each trial is a (successful or failed) go that follows a successful stop
-    go_following_successful_stop = numpy.append([False, False], (go[2:] & no_go_success[:(len(no_go_fail)-2)]))
-
-    null_trials = condition==NULL_TRIAL
+    go_success_following_successful_stop = numpy.append([False, False], (go_success[2:] & no_go_success[:(len(no_go_success)-2)]))
 
     #create one beta for all the other SuccessGo trials
-    other_successful_go = go_success & (go_following_successful_stop==False) & (go_following_failed_stop==False)
+    other_successful_go = go_success & (go_success_following_successful_stop==False) & (go_success_following_failed_stop==False)
     #then just pass on the other masks as returned from create_masks
 
 
-    other_failed_go = go_fail & (go_following_successful_stop==False) & (go_following_failed_stop==False)
+    #other_failed_go = go_fail & (go_following_successful_stop==False) & (go_following_failed_stop==False)
 
     #['GoFollowingCorrectStop', 'GoFollowingFailedStop', 
     #'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'OtherFailedGo'
-    return list((go_following_successful_stop, go_following_failed_stop,
-                 other_successful_go, no_go_success, no_go_fail, null_trials, other_failed_go
+    return list((go_success_following_successful_stop, go_success_following_failed_stop,
+                 other_successful_go, no_go_success, no_go_fail, null_trials, go_fail
                 ))
 
 def create_trials(trial_number: numpy.ndarray, trial_start_time: numpy.ndarray, trial_duration: numpy.ndarray):
@@ -175,8 +175,8 @@ def create_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, masks:
     return conditions
 
 def create_pes_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, pes_masks: List):
-    names = numpy.asarray(['GoFollowingCorrectStop', 'GoFollowingFailedStop',
-                           'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'OtherFailedGo'], dtype=numpy.object)
+    names = numpy.asarray(['CorrectGoFollowingCorrectStop', 'CorrectGoFollowingFailedStop',
+                           'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo'], dtype=numpy.object)
     onsets = numpy.zeros((len(pes_masks),), dtype=numpy.object)
     durations = numpy.zeros((len(pes_masks),), dtype=numpy.object)
     # onsets and durations have to be reshaped from 1-d numpy arrays to Nx1 arrays so when written
