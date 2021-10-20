@@ -295,7 +295,7 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None):
             print_mask_signature(masks)
 
             #create masks for the post-error slowing
-            pes_masks = create_pes_masks_from_masks(masks, go_no_go_condition)
+            pes_masks = create_pes_masks_from_masks(masks)
             print_mask_signature(pes_masks)
 
             # Perform some quality checking on the numbers of responses (should be 256),
