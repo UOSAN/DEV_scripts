@@ -263,8 +263,8 @@ def write_events_description(path: Path,
 
 #for debugging, can help to summarize what's inside the mask.
 def print_mask_signature(masks):
-    print([str(np.sum(m)) + ' True of ' + (str(len(m))) for m in masks])
-    print(np.sum([np.sum(m) for m in masks]))
+    print([str(numpy.sum(m)) + ' True of ' + (str(len(m))) for m in masks])
+    print(numpy.sum([numpy.sum(m) for m in masks]))
 
 
 def main(input_dir: str, bids_dir: str = None, file_limit=None):
