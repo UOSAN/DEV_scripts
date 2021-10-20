@@ -334,7 +334,7 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None):
 
                 pes_conditions = create_pes_conditions(trial_start_time, trial_duration, pes_masks)
                 write_beta_data(input_dir, 'pes_conditions', subject_id, wave_number, pes_conditions)
-            	print("written data for subject " + str(subject_id))
+                print("written data for subject " + str(subject_id))
         else:
             print("match not found for " + str(f.name))
 
