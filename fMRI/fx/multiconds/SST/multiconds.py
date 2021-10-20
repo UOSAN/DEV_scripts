@@ -115,23 +115,37 @@ def create_trials(trial_number: numpy.ndarray, trial_start_time: numpy.ndarray, 
 
 
 def create_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, masks: List):
-    names = numpy.asarray(['CorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo'], dtype=numpy.object)
-    onsets = numpy.zeros((len(masks),), dtype=numpy.object)
-    durations = numpy.zeros((len(masks),), dtype=numpy.object)
+    #redesign 2021-10 BJS which only adds conditions with a non-zero amount of trials.
+    names = []
+    onsets = []
+    durations = []
+    for i, cond_name in enumerate(['CorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo']):
+        mask = masks[i]
+        if sum(mask)>0:
+            names = names + [cond_name]
+            cond_onset = start_time[mask].reshape(numpy.count_nonzero(mask), 1)
+            onsets = onsets + [cond_onset]
+            cond_duration = duration[mask].reshape(numpy.count_nonzero(mask), 1)
+            durations = durations + [cond_duration]
+#     names = numpy.asarray(['CorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo'], dtype=numpy.object)
+#     onsets = numpy.zeros((len(masks),), dtype=numpy.object)
+#     durations = numpy.zeros((len(masks),), dtype=numpy.object)
     # onsets and durations have to be reshaped from 1-d numpy arrays to Nx1 arrays so when written
     # by scipy.io.savemat, the correct cell array is created in matlab
-    for i, mask in enumerate(masks):
-        onsets[i] = start_time[mask].reshape(numpy.count_nonzero(mask), 1)
-        durations[i] = duration[mask].reshape(numpy.count_nonzero(mask), 1)
+    #if a mask has no true values then it's effectively empty.
+#     for i, mask in enumerate(masks):
+#         onsets[i] = start_time[mask].reshape(numpy.count_nonzero(mask), 1)
+#         durations[i] = duration[mask].reshape(numpy.count_nonzero(mask), 1)
 
-    conditions = {'names': names,
+    conditions = {'names': numpy.asarray(names,dtype=numpy.object),
                   'onsets': onsets,
                   'durations': durations}
     return conditions
 
 
 def write_betaseries(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
-    path = Path(input_dir) / 'betaseries'
+    #path = Path(input_dir) / 'betaseries'
+    path = Path('betaseries')
     path.mkdir(parents=True, exist_ok=True)
     file_name = f'DEV{subject_id}_{wave}_SST1.mat'
 
@@ -139,11 +153,13 @@ def write_betaseries(input_dir: Union[PathLike, str], subject_id: str, wave: str
 
 
 def write_conditions(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
-    path = Path(input_dir) / 'conditions'
+    #path = Path(input_dir) / 'conditions'
+    path = Path('conditions')
     path.mkdir(parents=True, exist_ok=True)
     file_name = f'DEV{subject_id}_{wave}_SST1.mat'
 
     scipy.io.savemat(str(path / file_name), trials)
+    print('created file at ' + str(path / file_name))
 
 
 def write_bids_events(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
@@ -203,7 +219,7 @@ def write_events_description(path: Path,
 def main(input_dir: str, bids_dir: str = None):
 
     print(input_dir)
-	
+
     files = list(Path(input_dir).glob('DEV*.mat'))
     files.sort()
     pattern = 'DEV(\\d{3})_run(\\d{1})_.*.mat'
@@ -239,6 +255,7 @@ def main(input_dir: str, bids_dir: str = None):
                       f'({subject_id}, {COUNT_NULL}, {numpy.count_nonzero(masks[3])})')
 
             if bids_dir:
+                print("creating bids events")
                 trial_type = numpy.empty_like(trial_number, dtype=numpy.object)
                 trial_type_names = ['correct-go', 'correct-stop', 'failed-stop', 'null', 'failed-go']
                 for mask, name in zip(masks, trial_type_names):
@@ -246,6 +263,7 @@ def main(input_dir: str, bids_dir: str = None):
                 write_bids_events(bids_dir, subject_id, wave_number,
                                   numpy.stack((trial_start_time, trial_duration, trial_type), axis=1))
             else:
+                print("creating betaseries and conditions")
                 trials = create_trials(trial_number, trial_start_time, trial_duration)
 
                 # Create paths and file names
@@ -253,6 +271,8 @@ def main(input_dir: str, bids_dir: str = None):
 
                 conditions = create_conditions(trial_start_time, trial_duration, masks)
                 write_conditions(input_dir, subject_id, wave_number, conditions)
+        else:
+            print("match not found for " + str(f.name))
 
 
 if __name__ == "__main__":
