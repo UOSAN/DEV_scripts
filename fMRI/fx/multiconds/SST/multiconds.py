@@ -109,10 +109,6 @@ def create_pes_masks_from_masks(condition_masks: List) -> List:
     null_trials = condition_masks[3]
     go_fail = condition_masks[4]
     
-    raise Exception("change this to only use SUCCESSFUL goes not failed goes.")
-
-    #go = condition==GO_TRIAL
-
     #marks if each trial is a (successful or failed) go that follows a failed stop
     #we shift by 2, not 1, because we ignore the "NULL TRIAL" that occurs reliably every second trial
     go_success_following_failed_stop = numpy.append([False, False], (go_success[2:] & no_go_fail[:(len(no_go_fail)-2)]))
