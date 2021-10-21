@@ -100,7 +100,7 @@ def create_masks(condition: numpy.ndarray, response: numpy.ndarray) -> List:
     return list((go_success, no_go_success, no_go_fail, null_trials, go_fail))
 
 
-def create_pes_masks_from_masks(condition_masks: List) -> List:
+def create_posterror_masks_from_masks(condition_masks: List) -> List:
     """Create masks of post-error slowing conditions, derived from the original set of masks"""
 
     go_success = condition_masks[0]
@@ -171,10 +171,10 @@ def create_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, masks:
                   'durations': durations}
     return conditions
 
-def create_pes_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, pes_masks: List):
+def create_posterror_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, posterror_masks: List):
     condition_labels =['CorrectGoFollowingCorrectStop', 'CorrectGoFollowingFailedStop',
                            'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo']
-    return(create_conditions(start_time,duration,pes_masks,condition_labels=condition_labels))
+    return(create_conditions(start_time,duration,posterror_masks,condition_labels=condition_labels))
 
 
 def write_betaseries(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
@@ -282,8 +282,8 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None):
             print_mask_signature(masks)
 
             #create masks for the post-error slowing
-            pes_masks = create_pes_masks_from_masks(masks)
-            print_mask_signature(pes_masks)
+            posterror_masks = create_posterror_masks_from_masks(masks)
+            print_mask_signature(posterror_masks)
 
             # Perform some quality checking on the numbers of responses (should be 256),
             # the number of null trials (should be 128),
@@ -319,8 +319,8 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None):
                 conditions = create_conditions(trial_start_time, trial_duration, masks)
                 write_beta_data(input_dir, 'conditions', subject_id, wave_number, conditions)
 
-                pes_conditions = create_pes_conditions(trial_start_time, trial_duration, pes_masks)
-                write_beta_data(input_dir, 'pes_conditions', subject_id, wave_number, pes_conditions)
+                posterror_conditions = create_posterror_conditions(trial_start_time, trial_duration, posterror_masks)
+                write_beta_data(input_dir, 'posterror_conditions', subject_id, wave_number, posterror_conditions)
                 print("written data for subject " + str(subject_id))
         else:
             print("match not found for " + str(f.name))
