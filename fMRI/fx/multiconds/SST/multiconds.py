@@ -142,12 +142,13 @@ def create_trials(trial_number: numpy.ndarray, trial_start_time: numpy.ndarray, 
     return trials
 
 
-def create_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, masks: List):
+def create_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, masks: List,
+                      condition_labels: List = ['CorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo']):
     #redesign 2021-10 BJS which only adds conditions with a non-zero amount of trials.
     names = []
     onsets = []
     durations = []
-    for i, cond_name in enumerate(['CorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo']):
+    for i, cond_name in enumerate(condition_labels):
         mask = masks[i]
         if sum(mask)>0:
             names = names + [cond_name]
@@ -171,20 +172,9 @@ def create_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, masks:
     return conditions
 
 def create_pes_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, pes_masks: List):
-    names = numpy.asarray(['CorrectGoFollowingCorrectStop', 'CorrectGoFollowingFailedStop',
-                           'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo'], dtype=numpy.object)
-    onsets = numpy.zeros((len(pes_masks),), dtype=numpy.object)
-    durations = numpy.zeros((len(pes_masks),), dtype=numpy.object)
-    # onsets and durations have to be reshaped from 1-d numpy arrays to Nx1 arrays so when written
-    # by scipy.io.savemat, the correct cell array is created in matlab
-    for i, mask in enumerate(pes_masks):
-        onsets[i] = start_time[mask].reshape(numpy.count_nonzero(mask), 1)
-        durations[i] = duration[mask].reshape(numpy.count_nonzero(mask), 1)
-
-    conditions = {'names': names,
-                  'onsets': onsets,
-                  'durations': durations}
-    return conditions
+    condition_labels =['CorrectGoFollowingCorrectStop', 'CorrectGoFollowingFailedStop',
+                           'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo']
+    return(create_conditions(start_time,duration,pes_masks,condition_labels=condition_labels))
 
 
 def write_betaseries(input_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
@@ -197,7 +187,8 @@ def write_betaseries(input_dir: Union[PathLike, str], subject_id: str, wave: str
 
 
 def write_beta_data(input_dir: Union[PathLike, str], subfolder, subject_id: str, wave: str, trials):
-    path = Path(input_dir) / subfolder
+#    path = Path(input_dir) / subfolder
+    path = Path(subfolder)
     path.mkdir(parents=True, exist_ok=True)
     file_name = f'DEV{subject_id}_{wave}_SST1.mat'
 
