@@ -7,7 +7,7 @@ STUDY=DEV
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_conditions_w1_007_test.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_conditions_w1_from_spm_test_007.m
 # Which SID should be replaced?
 REPLACESID=004
 

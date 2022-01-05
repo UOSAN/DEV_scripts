@@ -74,3 +74,368 @@ Then use this URL to access Jupyter (NOT the one in the log below):
 [I 09:57:52.154 NotebookApp] 302 GET / (172.20.13.244) 0.830000ms
 [W 09:57:52.711 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220105095717 (172.20.13.244) 17.350000ms referer=http://localhost:13206/notebooks/SST/load_multisubject_brain_data_sst_w1-conditions.ipynb
 CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[W 10:06:09.244 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.271 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.352 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.367 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.397 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.423 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.459 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.483 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.556 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.571 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.862 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:09.878 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.004 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.016 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.063 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.072 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.088 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.103 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.125 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.141 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.185 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.194 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.374 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:10.384 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:06:12.239 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 10:06:16.696 NotebookApp] Kernel started: 319d831c-e56e-47df-b983-1a44ee5eaddf, name: conda-env-.conda-neuralsignature-py
+[W 10:06:17.100 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220105095717 (172.20.13.244) 4.550000ms referer=http://localhost:13206/notebooks/SST/SST_individual_discriminability_pipeline.ipynb
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 10:22:14.228 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 10:22:14.231 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 10:24:14.892 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 10:24:14.894 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 10:40:14.943 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 10:40:14.953 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[W 10:41:03.476 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:03.513 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:03.594 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:03.609 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:03.639 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:03.665 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:03.703 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:03.729 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:03.812 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:03.826 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.055 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.067 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.185 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.199 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.266 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.276 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.294 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.310 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.335 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.352 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.396 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.403 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.551 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:04.559 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 10:41:22.044 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 10:41:25.804 NotebookApp] Kernel started: b164c9e2-dcdd-4261-90b4-025b4f28bfce, name: conda-env-.conda-neuralsignature-py
+[W 10:41:26.452 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220105095717 (172.20.13.244) 6.570000ms referer=http://localhost:13206/notebooks/SST/load_multisubject_brain_data_sst_w1.ipynb
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 10:51:26.161 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 10:51:26.163 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 10:51:52.513 NotebookApp] Kernel interrupted: b164c9e2-dcdd-4261-90b4-025b4f28bfce
+[I 10:53:26.777 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 10:53:26.790 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 10:54:14.282 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 10:54:14.284 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 10:55:27.248 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 10:55:27.260 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 10:56:14.250 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 10:56:14.252 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 10:58:07.778 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 10:58:07.778 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 10:58:14.253 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 10:58:14.254 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 11:00:14.250 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:00:14.265 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 11:00:14.853 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:00:14.853 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:02:07.781 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:02:07.792 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:02:14.247 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:02:14.248 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 11:03:08.451 NotebookApp] Kernel interrupted: 319d831c-e56e-47df-b983-1a44ee5eaddf
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/sklearn/svm/_base.py:985: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  warnings.warn("Liblinear failed to converge, increase "
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/sklearn/svm/_base.py:985: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  warnings.warn("Liblinear failed to converge, increase "
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/sklearn/svm/_base.py:985: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  warnings.warn("Liblinear failed to converge, increase "
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/sklearn/svm/_base.py:985: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  warnings.warn("Liblinear failed to converge, increase "
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/sklearn/svm/_base.py:985: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  warnings.warn("Liblinear failed to converge, increase "
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/sklearn/svm/_base.py:985: ConvergenceWarning: Liblinear failed to converge, increase the number of iterations.
+  warnings.warn("Liblinear failed to converge, increase "
+[I 11:04:07.775 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:04:07.776 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:04:14.259 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:04:14.261 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[W 11:05:10.818 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:10.862 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:10.939 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:10.953 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:10.982 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.006 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.043 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.067 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.143 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.157 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.422 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.433 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.548 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.561 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.611 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.620 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.638 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.653 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.677 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.693 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.741 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.750 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.917 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:11.925 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:05:21.382 NotebookApp] Notebook SST/PES-RTFS-ml.ipynb is not trusted
+[I 11:05:27.058 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:05:27.060 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:05:27.991 NotebookApp] Kernel started: c55298c5-da54-4cc0-abd5-08b8c6d1dd49, name: conda-env-.conda-neuralsignature-py
+[W 11:05:28.573 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220105095717 (172.20.13.244) 6.830000ms referer=http://localhost:13206/notebooks/SST/PES-RTFS-ml.ipynb
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 11:06:14.856 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:06:14.858 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 11:07:26.936 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:07:26.937 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:09:26.685 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:09:26.686 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:11:58.793 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:11:58.794 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:12:53.899 NotebookApp] Kernel interrupted: 319d831c-e56e-47df-b983-1a44ee5eaddf
+[I 11:13:27.244 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:13:27.259 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:13:29.966 NotebookApp] Kernel interrupted: 319d831c-e56e-47df-b983-1a44ee5eaddf
+[I 11:13:47.912 NotebookApp] Kernel interrupted: 319d831c-e56e-47df-b983-1a44ee5eaddf
+[I 11:14:14.270 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:14:14.272 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 11:14:34.090 NotebookApp] KernelRestarter: restarting kernel (1/5), keep random ports
+kernel 8cae0248-5702-4e33-acca-e64f4d1fb8aa restarted
+[I 11:14:37.802 NotebookApp] KernelRestarter: restarting kernel (1/5), keep random ports
+kernel b164c9e2-dcdd-4261-90b4-025b4f28bfce restarted
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/joblib/externals/loky/backend/resource_tracker.py:318: UserWarning: resource_tracker: There appear to be 6 leaked semlock objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/joblib/externals/loky/backend/resource_tracker.py:318: UserWarning: resource_tracker: There appear to be 5 leaked folder objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[I 11:14:55.694 NotebookApp] KernelRestarter: restarting kernel (1/5), keep random ports
+kernel 319d831c-e56e-47df-b983-1a44ee5eaddf restarted
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 11:15:11.094 NotebookApp] Starting buffering for 319d831c-e56e-47df-b983-1a44ee5eaddf:ae0661708f07432ca35a0becdabd5eee
+[I 11:15:11.418 NotebookApp] Kernel restarted: 319d831c-e56e-47df-b983-1a44ee5eaddf
+[I 11:15:11.916 NotebookApp] Restoring connection for 319d831c-e56e-47df-b983-1a44ee5eaddf:ae0661708f07432ca35a0becdabd5eee
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 11:15:13.175 NotebookApp] Replaying 3 buffered messages
+[I 11:15:27.439 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:15:27.441 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:16:14.676 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:16:14.678 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 11:16:57.696 NotebookApp] Starting buffering for 8cae0248-5702-4e33-acca-e64f4d1fb8aa:46918380c65f4b02811edaa97fcb9a30
+[I 11:16:58.015 NotebookApp] Kernel restarted: 8cae0248-5702-4e33-acca-e64f4d1fb8aa
+[I 11:16:58.506 NotebookApp] Restoring connection for 8cae0248-5702-4e33-acca-e64f4d1fb8aa:46918380c65f4b02811edaa97fcb9a30
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 11:16:59.730 NotebookApp] Replaying 3 buffered messages
+[I 11:17:50.444 NotebookApp] Starting buffering for b164c9e2-dcdd-4261-90b4-025b4f28bfce:74701b6afc6d45a38fee136cd79962d9
+[I 11:17:50.775 NotebookApp] Kernel restarted: b164c9e2-dcdd-4261-90b4-025b4f28bfce
+[I 11:17:51.262 NotebookApp] Restoring connection for b164c9e2-dcdd-4261-90b4-025b4f28bfce:74701b6afc6d45a38fee136cd79962d9
+[I 11:17:52.349 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-conditions.ipynb
+[W 11:17:52.350 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1-conditions.ipynb is not trusted
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[W 11:17:55.775 NotebookApp] Nudge: attempt 10 on kernel b164c9e2-dcdd-4261-90b4-025b4f28bfce
+[I 11:17:58.344 NotebookApp] Starting buffering for 8cae0248-5702-4e33-acca-e64f4d1fb8aa:46918380c65f4b02811edaa97fcb9a30
+[I 11:17:58.351 NotebookApp] Kernel shutdown: 8cae0248-5702-4e33-acca-e64f4d1fb8aa
+[W 11:17:59.032 NotebookApp] Got events for closed stream None
+[W 11:17:59.032 NotebookApp] Got events for closed stream None
+[I 11:17:59.033 NotebookApp] Replaying 3 buffered messages
+[I 11:19:26.697 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:19:26.698 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:21:26.712 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:21:26.713 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:22:14.274 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:22:14.276 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 11:23:26.707 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:23:26.736 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:24:14.293 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:24:14.296 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 11:24:18.270 NotebookApp] Kernel interrupted: 319d831c-e56e-47df-b983-1a44ee5eaddf
+[I 11:25:26.057 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:25:26.059 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:26:15.015 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:26:15.018 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/joblib/externals/loky/backend/resource_tracker.py:318: UserWarning: resource_tracker: There appear to be 6 leaked semlock objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/joblib/externals/loky/backend/resource_tracker.py:318: UserWarning: resource_tracker: There appear to be 1 leaked folder objects to clean up at shutdown
+  warnings.warn('resource_tracker: There appear to be %d '
+[I 11:26:44.448 NotebookApp] KernelRestarter: restarting kernel (1/5), keep random ports
+kernel 319d831c-e56e-47df-b983-1a44ee5eaddf restarted
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 11:26:56.775 NotebookApp] KernelRestarter: restarting kernel (1/5), keep random ports
+kernel b164c9e2-dcdd-4261-90b4-025b4f28bfce restarted
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 11:27:26.712 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:27:26.713 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:28:14.745 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[W 11:28:14.748 NotebookApp] Notebook SST/SST_individual_discriminability_pipeline.ipynb is not trusted
+[I 11:29:08.694 NotebookApp] 301 GET /static/favicons/favicon.ico (172.20.13.244) 8.630000ms
+[W 2022-01-05 11:29:18.301 LabApp] Could not determine jupyterlab build status without nodejs
+[W 11:29:19.732 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:19.772 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:19.852 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:19.866 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:19.894 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:19.918 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:19.954 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:19.978 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.053 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.067 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.353 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.364 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.454 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.495 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.512 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.536 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.576 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.714 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.832 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.842 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.882 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.889 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.902 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.914 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.932 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.944 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.981 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:20.988 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:21.135 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:21.143 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:21.212 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:21.244 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:21.257 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:21.276 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:21.305 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:21.410 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 11:29:24.376 NotebookApp] Notebook SST/PES-RTFS-analyze-results.ipynb is not trusted
+[W 11:29:25.293 NotebookApp] Notebook SST/PES-RTFS-analyze-wholebrain.ipynb is not trusted
+[W 11:29:26.260 NotebookApp] Notebook SST/pes-additional-areas.ipynb is not trusted
+[W 11:29:26.901 NotebookApp] Notebook SST/PES-RTFS-ml.ipynb is not trusted
+[W 11:29:27.020 NotebookApp] Notebook measure_performance_within_subject.ipynb is not trusted
+[W 11:29:27.134 NotebookApp] Notebook measure_performance_within_subject_run.ipynb is not trusted
+[W 11:29:31.005 NotebookApp] Notebook measure_results_simple.ipynb is not trusted
+[W 11:29:32.094 NotebookApp] Notebook one_subject_nilearn_and_nltools.ipynb is not trusted
+[I 11:29:45.127 NotebookApp] Kernel started: bd6de0c8-9ea0-47ad-9262-da09254d29d5, name: conda-env-.conda-neuralsignature-py
+[I 11:29:45.163 NotebookApp] Kernel started: f4113f3d-5cc5-4a86-9ece-eb0aa34f50d6, name: conda-env-.conda-neuralsignature-py
+[I 11:29:45.185 NotebookApp] Kernel started: 66e9f6f9-0547-485a-9014-6e40ee502364, name: conda-env-.conda-neuralsignature-py
+[I 11:29:45.855 NotebookApp] Kernel started: 67997737-4481-4acb-b2d0-e675e738623d, name: conda-env-.conda-neuralsignature-py
+[I 11:29:45.880 NotebookApp] Kernel started: c0da7bf5-4cfa-41a2-9171-278fb25cd431, name: conda-env-.conda-neuralsignature-py
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 11:29:52.311 NotebookApp] Kernel started: c8a90fb6-9a28-4f76-9139-80e3e70945c4, name: conda-env-.conda-neuralsignature-py
+[I 11:29:52.856 NotebookApp] Kernel started: 58a573a6-b34d-4034-ba18-b7e4bd2a205c, name: conda-env-.conda-neuralsignature-py
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 11:29:54.844 NotebookApp] 301 GET /static/favicons/favicon-busy-1.ico (172.20.13.244) 0.710000ms
+[I 11:30:39.767 NotebookApp] Starting buffering for 67997737-4481-4acb-b2d0-e675e738623d:7dd88c79-565a-48b5-a6e7-3d54610f1864
+[I 11:30:41.695 NotebookApp] Starting buffering for bd6de0c8-9ea0-47ad-9262-da09254d29d5:c957b79c-77de-4b55-ab4d-0fbb64c5c30a
+[I 11:30:42.423 NotebookApp] Starting buffering for f4113f3d-5cc5-4a86-9ece-eb0aa34f50d6:040f2ae5-c248-43b5-8bf2-e305d915118a
+[I 11:30:42.919 NotebookApp] Starting buffering for 66e9f6f9-0547-485a-9014-6e40ee502364:0b6ba428-55b2-444b-9103-ca677950e951
+[I 11:30:43.499 NotebookApp] Starting buffering for c0da7bf5-4cfa-41a2-9171-278fb25cd431:04926428-de1e-4919-b82e-dc3a092a47df
+[I 11:30:52.085 NotebookApp] Creating new notebook in 
+[I 11:30:54.078 NotebookApp] Kernel started: efd49286-62a3-4697-933a-db392bed5648, name: conda-env-.conda-neuralsignature-py
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 11:31:04.865 NotebookApp] Kernel shutdown: efd49286-62a3-4697-933a-db392bed5648
+[W 11:31:05.169 NotebookApp] zmq message arrived on closed channel
+[W 11:31:05.171 NotebookApp] zmq message arrived on closed channel
+[W 11:31:05.186 NotebookApp] zmq message arrived on closed channel
+[W 11:31:05.615 NotebookApp] delete /Untitled.ipynb
+[E 11:31:05.642 NotebookApp] Uncaught exception DELETE /api/contents/Untitled.ipynb?1641411074129 (172.20.13.244)
+    HTTPServerRequest(protocol='http', host='localhost:13206', method='DELETE', uri='/api/contents/Untitled.ipynb?1641411074129', version='HTTP/1.1', remote_ip='172.20.13.244')
+    Traceback (most recent call last):
+      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/tornado/web.py", line 1704, in _execute
+        result = await result
+      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/tornado/gen.py", line 234, in wrapper
+        yielded = ctx_run(next, result)
+      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/notebook/services/contents/handlers.py", line 237, in delete
+        yield maybe_future(cm.delete(path))
+      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/notebook/services/contents/manager.py", line 279, in delete
+        self.delete_file(path)
+      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/notebook/services/contents/filemanager.py", line 533, in delete_file
+        send2trash(os_path)
+      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/send2trash/plat_other.py", line 192, in send2trash
+        trash_move(path_b, dest_trash, topdir)
+      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/send2trash/plat_other.py", line 103, in trash_move
+        os.rename(src, op.join(filespath, destname))
+    OSError: [Errno 18] Invalid cross-device link: b'/gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/ml/Untitled.ipynb' -> b'/home/bsmith16/.local/share/Trash/files/Untitled.ipynb'
+[W 11:31:05.740 NotebookApp] Unhandled error
+[E 11:31:05.741 NotebookApp] {
+      "Host": "localhost:13206",
+      "Connection": "keep-alive",
+      "Sec-Ch-Ua": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Google Chrome\";v=\"96\"",
+      "X-Xsrftoken": "2|670fd1d7|7f2e2ad9a56713b5f5ce4f215decd05e|1641321169",
+      "Sec-Ch-Ua-Mobile": "?0",
+      "Content-Type": "application/json",
+      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36",
+      "Sec-Ch-Ua-Platform": "\"macOS\"",
+      "Accept": "*/*",
+      "Origin": "http://localhost:13206",
+      "Sec-Fetch-Site": "same-origin",
+      "Sec-Fetch-Mode": "cors",
+      "Sec-Fetch-Dest": "empty",
+      "Referer": "http://localhost:13206/lab",
+      "Accept-Encoding": "gzip, deflate, br",
+      "Accept-Language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,en-GB;q=0.6",
+      "Cookie": "Pycharm-4a7a3900=bd725323-a1db-4f92-9c12-6f68f08e4373; username-localhost-46153=\"2|1:0|10:1638902655|24:username-localhost-46153|44:ZmU5MTA3NDU1MDllNGFiYzhiNmVlZWQwZjVjYmRhMzQ=|561737073210dcc2851b8ac8839146f43505609775e483983581892f147a23d5\"; username-localhost-58490=\"2|1:0|10:1638918232|24:username-localhost-58490|44:YjY0MmFlYmY0ZTA4NDNiMTk1NTVlMzQzZjZiNzlmZjU=|5f4fb53cad22a2c993b597d3d221da4fb1a9078bb7b8493e0afc84808174b3a3\"; username-localhost-50338=\"2|1:0|10:1638992492|24:username-localhost-50338|44:YjA2MGQwYjcyNzllNDU1Yzg5MzY0NTM3OTQ2ODliYzc=|52aeab3250b15d7ea141ee7485c9ee8b1717d4aa30526f4b473e41bf75c477b7\"; username-localhost-32246=\"2|1:0|10:1639007429|24:username-localhost-32246|44:ODdlZDdlZmFhY2VjNDhjNGE3MWJiNjc4ZTQxOTU3MjE=|de66682f801c0a0a4aed1d58ba68d376b190c751687a049730b3043bbbd72584\"; username-localhost-47972=\"2|1:0|10:1639075671|24:username-localhost-47972|44:ZjI5YmRlYTAwZjIwNGI0MGI2YzEyOTc0YjNlZTg4MDk=|5eabcc805a2b483b86cb39be15907453ef4011499421fa9b94f213c215191881\"; username-localhost-36760=\"2|1:0|10:1639098123|24:username-localhost-36760|44:NTJiODdhY2QwYzc4NDczMGEyNTAxZmFlMjdlZWJjZmM=|85a3bdf164bdfae76407bb5f8a47cf53b39dc1df1f1dfcff07e015f015ca47c1\"; username-localhost-14834=\"2|1:0|10:1640641166|24:username-localhost-14834|44:ZTBkMDQzNjU0MTgyNDQwYjgyOWZjNjczODYyMzkwZmI=|8aeb298902c8f23bdd96283936e8634c7669d914cd10e94618990c7a8ba18164\"; username-localhost-57178=\"2|1:0|10:1640719089|24:username-localhost-57178|44:NDEzZmUxYTc1Y2I3NGNhOGFkYTc5OTEyOWY2YzI4NDM=|b78ebe5c99c200e20fc76a9de6942067364d0d6a3789a8469c89fced1f43ae79\"; username-localhost-48148=\"2|1:0|10:1640740689|24:username-localhost-48148|44:YjE3ZDlmOGNlNmY0NGMxZThjZDRhNjBlZTVkOTQ5MDY=|92e054ccf158d20021d9a026fbeade0b9de811d95b964e2f7281aa7246d8d7de\"; username-localhost-35650=\"2|1:0|10:1640742964|24:username-localhost-35650|44:MmM0ODMzZGExNjFhNDQwMzg2YWU0MzZkMzNiN2I2ZTY=|451154b2621478b5142feef0ddbbda1dc02419bca045734b7d7ba6c08f19a8d7\"; username-localhost-37494=\"2|1:0|10:1640889981|24:username-localhost-37494|44:ZWQ4YThhNGI2MGM4NDdjMmIxZGUwOTRjMGE3NTZlZmE=|c511b3bdb6c7adcbe26c125f6e0bda6e7c96a766c17bb39a22c7c72104ff3e40\"; username-localhost-24952=\"2|1:0|10:1640904420|24:username-localhost-24952|44:YzhiMTVkYjU2MTFkNDA2MmJlNTQ0MDllM2E4MTQxYzg=|3965033501eaf966968cdbc5107b71f49a360f1cb405d5b43858dff1952fa5db\"; username-localhost-61555=\"2|1:0|10:1640915653|24:username-localhost-61555|44:YjhkODVjOGRhNDhhNGRlZjgyMjVlNjdiMzRiZGM5MDE=|092c897bb388443e97aae4f0432aaae06c5c961dfe52fb0cca4d9c5d9b11c4fc\"; username-localhost-11537=\"2|1:0|10:1641237580|24:username-localhost-11537|44:NDM4MmFiZGQ0OGU0NDI4ZWJlYjViMDIzMzE1ZWNjOTA=|fbdd90e0d11c20b4947a20bca6a15afaaf552562f8c1ad64b7427d38b181c83c\"; username-localhost-22872=\"2|1:0|10:1641252030|24:username-localhost-22872|44:MGNkYmViMzFhZDAzNDI3YTk2YWU5YjY4MjkwMzk1MDI=|51310e70ddf4e28c186ffac8384d316cc29cb7c1cf32ebd12fb817b5ac62324f\"; _xsrf=2|670fd1d7|7f2e2ad9a56713b5f5ce4f215decd05e|1641321169; username-localhost-61318=\"2|1:0|10:1641321178|24:username-localhost-61318|44:YTRkNmZhZTJhNmVkNGY4OWE2M2Q1MDY1MjZmNTk3MmM=|11ac3e830f326837776eebb2026db0bca3625a3ab401cc23ac937d6a44c3b9e2\"; username-localhost-26424=\"2|1:0|10:1641335767|24:username-localhost-26424|44:NTk0MDA4YmIxOTRhNGMxOTlhOTc1NTg4YTNmYzA0Njk=|714171255d83b3fd819de9ee0223481b8503ceaad4f340cfdd6bade18d6c7864\"; username-localhost-52313=\"2|1:0|10:1641350245|24:username-localhost-52313|44:MjkyYzZjZWI2MDM1NDhmZGFhZDRmZmQzNjFiODU2NWI=|a7a435f327d3be7b6ae7555f34f17fe69c91cfc3096d8ce932c6c6caffddfdf0\"; username-localhost-13206=\"2|1:0|10:1641405462|24:username-localhost-13206|44:ZjE4MTk1YWM2NzM3NDAwNGJjMGYyZTQ4NDM4OWYyMDA=|41da91cad4f8e5a167905af6154ba5f83381eca36d9cdc1a00268b40cb4f98a9\""
+    }
+[E 11:31:05.742 NotebookApp] 500 DELETE /api/contents/Untitled.ipynb?1641411074129 (172.20.13.244) 127.230000ms referer=http://localhost:13206/lab
+[I 11:31:13.234 NotebookApp] Creating new file in 
+[I 11:33:14.458 NotebookApp] Saving file at /load_multisubject_brain_data_sst_w1_84subjs_correct_cond.py
+[I 11:33:22.837 NotebookApp] Saving file at /load_multisubject_brain_data_sst_w1_84subjs_correct_cond.py
+[I 11:33:26.086 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:33:26.087 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:43:27.209 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1.ipynb
+[W 11:43:27.211 NotebookApp] Notebook SST/load_multisubject_brain_data_sst_w1.ipynb is not trusted
+[I 11:46:41.146 NotebookApp] Saving file at /load_multisubject_brain_data_sst_w1_84subjs_correct_cond.py
+[I 11:47:59.065 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1_84subjs_correct_cond.py
+[I 11:48:18.165 NotebookApp] Starting buffering for b164c9e2-dcdd-4261-90b4-025b4f28bfce:74701b6afc6d45a38fee136cd79962d9
+[I 11:48:18.170 NotebookApp] Kernel shutdown: b164c9e2-dcdd-4261-90b4-025b4f28bfce
+[I 11:48:30.711 NotebookApp] Starting buffering for 319d831c-e56e-47df-b983-1a44ee5eaddf:ae0661708f07432ca35a0becdabd5eee
+[I 11:48:31.036 NotebookApp] Kernel restarted: 319d831c-e56e-47df-b983-1a44ee5eaddf
+[I 11:48:31.533 NotebookApp] Restoring connection for 319d831c-e56e-47df-b983-1a44ee5eaddf:ae0661708f07432ca35a0becdabd5eee
+[I 11:48:33.563 NotebookApp] Starting buffering for c55298c5-da54-4cc0-abd5-08b8c6d1dd49:636c5fe2dc6e4cd18641a2c10ea96d6e
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[W 11:48:36.046 NotebookApp] Nudge: attempt 10 on kernel 319d831c-e56e-47df-b983-1a44ee5eaddf
+[I 11:48:40.395 NotebookApp] Replaying 3 buffered messages
+[I 11:48:46.779 NotebookApp] Kernel shutdown: 67997737-4481-4acb-b2d0-e675e738623d
+[I 11:48:47.084 NotebookApp] Kernel shutdown: c8a90fb6-9a28-4f76-9139-80e3e70945c4
+[I 11:48:47.406 NotebookApp] Kernel shutdown: c0da7bf5-4cfa-41a2-9171-278fb25cd431
+[I 11:48:47.711 NotebookApp] Kernel shutdown: c55298c5-da54-4cc0-abd5-08b8c6d1dd49
+[I 11:49:24.623 NotebookApp] Kernel interrupted: 319d831c-e56e-47df-b983-1a44ee5eaddf
+[I 11:50:15.067 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 11:52:15.050 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 11:57:07.876 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 11:58:53.911 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 12:02:15.473 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 12:05:08.361 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 12:07:08.159 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 12:08:55.235 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 12:10:15.224 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 12:14:15.329 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 12:15:30.658 NotebookApp] Creating new file in /SST
+[I 12:16:14.932 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
+[I 12:17:31.654 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1_84subjs_correct_cond.sh
+[I 12:18:15.032 NotebookApp] Saving file at /SST/SST_individual_discriminability_pipeline.ipynb
