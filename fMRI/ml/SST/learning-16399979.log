@@ -1,0 +1,20 @@
+10/14/21 19:38:18
+running python script rsa_within_subject.py
+python initialized for apply_loocv_and_save
+16
+checked for intersection and no intersection between the brain data and the subjects was found.
+there were 15 subjects overlapping between the subjects marked for train data and the training dump file itself.
+anterior MPFC
+DEV005, ...DEV006, ...class_combo  correct-go  correct-go, correct-stop  ...  statistic    pvalue
+similarity     0.045976                  0.054992  ...  -2.990026  0.002809
+similarity     0.097568                  0.103251  ...  -1.664142  0.096136
+
+[2 rows x 5 columns]
+Fusiform/parahippocampus
+DEV005, ...DEV006, ...class_combo  correct-go  correct-go, correct-stop  ...  statistic    pvalue
+similarity     0.045807                  0.055736  ...  -3.050152  0.002304
+similarity     0.076183                  0.075689  ...   0.355321  0.722361
+
+[2 rows x 5 columns]
+finished running script rsa_within_subject.py
+10/14/21 19:39:29

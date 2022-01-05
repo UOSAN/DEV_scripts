@@ -14,6 +14,8 @@ from nilearn.decoding import DecoderRegressor,Decoder
 from pympler.asizeof import asizeof
 import gc #garbage collection
 import pickle
+from copy import deepcopy
+
 
 class BehavioralDataNotFoundForBrainDataException(Exception):
     """Behavioral data could not be matched to a subject."""
@@ -318,10 +320,60 @@ def get_event_related_Brain_Data_for_all_subs_all_runs_fast(subj_list, wave,all_
     
     return(all_bd)
 
+import numpy as np
+import pandas as pd
+import re
+import glob
+import os
+import scipy.io
+import nltools as nlt
+import nilearn as nil
+import nibabel as nib
+import sys
+import warnings
+from sklearn.model_selection import KFold,GroupKFold,LeaveOneOut
+from nilearn.decoding import DecoderRegressor,Decoder
+from pympler.asizeof import asizeof
+import gc #garbage collection
+import pickle
+
+
+import nltools as nlt
+
+def Brain_Data_max(x):
+    """ Sum over voxels.
+    modified from nltools Brain_Data.sum
+    you need that
+    """
+
+    out = deepcopy(x)
+    if len(x.shape()) > 1:
+        out.data = np.max(out.data, axis=0)
+        out.X = pd.DataFrame()
+        out.Y = pd.DataFrame()
+    else:
+        out = np.max(x.data)
+    return out
+
+def get_pfc_image_filepaths(data_path):
+    mask_files=glob.glob(data_path + "masks/prefrontal_cortex/*.nii.gz")
+    return(mask_files)
+
+def create_mask_from_images(image_filepath_list,threshold=0):
+    mask_set = nlt.Brain_Data(image_filepath_list)
+    mask_aggregate = Brain_Data_max(mask_set).to_nifti()
+    mask_binarized = nil.image.new_img_like(mask_aggregate,(mask_aggregate.get_fdata()>threshold).astype(float))
+
+    return(mask_binarized)
+
+
+
 def get_Brain_Data_betas_for_sub(
     sub_label,
     behavdesign,
-    betaseries_path='/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave1/betaseries/'
+    betaseries_path='/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave1/betaseries/',
+    events_in_design = 64,
+    mask = None
 ):
     """
     Collect a bunch of beta files for specified subjects based on a behavioral design file
@@ -333,8 +385,8 @@ def get_Brain_Data_betas_for_sub(
     if (len(subj_behav_design)==0):
         raise BehavioralDataNotFoundForBrainDataException(
             "Found no behavioral data for subject " + sub_label + ". Please ensure the data exists - it is probably missing from the source.")
-    elif len(subj_behav_design)!=64:
-        raise Exception("For "+sub_label+", expected 64 beta events but found " + str(len(subj_behav_design)))
+    elif len(subj_behav_design)!=events_in_design:
+        raise Exception("For "+sub_label+", expected " +str(events_in_design) + " beta events but found " + str(len(subj_behav_design)))
 
     
     subject_dir = (
@@ -356,17 +408,44 @@ def get_Brain_Data_betas_for_sub(
             print('.',end='')
         else:
             print(betafilepath)
-            raise Exception("beta " + betafile + ' does not exist')
+            raise Exception("beta " + betafile + ' does not exist at ')
 
     print("...verified that all expected betas exist! Processing...",flush=True,end='')
-
+    
+    create_temp_mask = False
+    if mask=="beta":
+        create_temp_mask= True
+    if create_temp_mask:
+        print("setting the mask to the first image in the series " + subj_behav_design.beta.iloc[0])
+        tmp_mask_path = (
+            betaseries_path + 
+            'temp_mask_get_Brain_Data_betas_for_sub_' + sub_label +
+            '.nii'
+        )
+        with warnings.catch_warnings(record=True) as w:
+            subj_first_img = nil.image.load_img(subject_dir + subj_behav_design.beta.iloc[0])
+            #load the first image to be a mask
+            subj_mask = nil.masking.compute_brain_mask(subj_first_img)
+            nib.save(subj_mask,tmp_mask_path)
+        
+        for wi in w:
+            if wi.message.args[0]!='Resampling binary images with continuous or linear interpolation. This might lead to unexpected results. You might consider using nearest interpolation instead.':
+                warnings.warn(wi.message,type(wi))
+            else:
+                print("During mask creation, received error 'Resampling binary images with continuous or linear interpolation.'. This is normal.")
+        
+        mask = tmp_mask_path
+        print("temp mask created.")
+        
+    print("loading files. This step may take some time...")
 
 
     #import them, but catch a very specific warning and don't show it because it gets annoying
     #https://docs.python.org/3/library/warnings.html
     with warnings.catch_warnings(record=True) as w:
         subj_data = nlt.Brain_Data([subject_dir + b for b in subj_behav_design.beta],
-                                  X=subj_behav_design)
+                                  mask=mask)
+        subj_data.X = subj_behav_design
     na_inf_warn_count=0
     for wi in w:
         if wi.message.args[0]!='NaNs or infinite values are present in the data passed to resample. This is a bad thing as they make resampling ill-defined and much slower.':
@@ -379,7 +458,15 @@ def get_Brain_Data_betas_for_sub(
              'NaNs or infinite values are present in the data passed to resample. This is a bad thing as they make resampling ill-defined and much slower.')
         
     print('...imported data.')
+    
+    if create_temp_mask:
+        os.remove(tmp_mask_path)
+        print("temp mask deleted")
+    
+
     return(subj_data)
+
+
 
 
 def check_BD_against_test_train_set(brain_data_series,test_train_set):
@@ -408,11 +495,14 @@ def check_BD_against_test_train_set(brain_data_series,test_train_set):
             
 def cv_train_test_sets(
     trainset_X, trainset_y, trainset_groups,
-    regressors = None,
+
+    decoders = None,
     testset_X = None,testset_y = None, testset_groups = None,
     param_grid=None,
     cpus_to_use=-2,
-    cv = None):
+    cv = None,
+    regressors = None
+    ):
     """
     uses a division of 'trainset' and 'testset' to allow different values to be trained and tested 
     in KFold Cross Validation. All the values are used for training and testing, but we use different ones.
@@ -426,11 +516,13 @@ def cv_train_test_sets(
     cv: a Grouped cross-validator
     group_list: name of the groups
     """
+    if regressors is not None:
+        raise Exception("cv_train_test_sets 'regressors' argument is deprecated. Use 'decoders' instead. ")
     if cv is None:
         cv=KFold(n_splits=5)
 
-    if param_grid is not None and regressors is not None:
-        raise Exception('values for param_grid and regressors both passed, but param_grid is ignored if regressors is passed. choose one.')
+    if param_grid is not None and decoders is not None:
+        raise Exception('values for param_grid and decoders both passed, but param_grid is ignored if decoders is passed. choose one.')
 
     #if the groups we're using are actually the same.
     if (testset_X is None) and (testset_y is None):
@@ -450,12 +542,12 @@ def cv_train_test_sets(
     groups_array = np.array(list(set(testset_groups)))
     assert(set(trainset_groups)==set(testset_groups))
 
-    #the CV that the inner Regressor uses
+    #the CV that the inner decoder uses
     cv_inner = GroupKFold(3)
-    if regressors is None:
-        regressors = [DecoderRegressor(standardize= True,param_grid=param_grid,cv=cv_inner,scoring="r2",
+    if decoders is None:
+        decoders = [DecoderRegressor(standardize= True,param_grid=param_grid,cv=cv_inner,scoring="r2",
                                       n_jobs=cpus_to_use)]
-        print('using default regressor',end='. ')
+        print('using default decoder, DecoderRegressor',end='. ')
 
     #we actually use KFold on the group names themselves, then filter across that
     #that's equivalent to doing a GroupedKFold on the data.
@@ -500,20 +592,20 @@ def cv_train_test_sets(
         #print(test_X.shape,end='. ')
 
 
-        print("regressing...",end='. ')
+        print("fitting...",end='. ')
         print(asizeof_fmt(train_X),end='. ')
 
         val_scores = []
-        #iterate through regressor objects.
-        #this is my way of doing cross-validation across different regressors...
+        #iterate through decoder objects.
+        #this is my way of doing cross-validation across different decoders...
         hyper_scores = []
         train_results = {}
         inner_cv_results = {}
-        for r_i, reg in enumerate(regressors):
+        for r_i, reg in enumerate(decoders):
             cur_r_results = {}
-            print('trying regressor ' + str(r_i+1) + ' of ' + str(len(regressors)),end='. ')
+            print('trying decoder ' + str(r_i+1) + ' of ' + str(len(decoders)),end='. ')
             #if there is nested CV within this function the best hyper-paramters are already being chosen
-            #we need only to finish the job by identifying the best overall regressor, as the final hyper-parameter
+            #we need only to finish the job by identifying the best overall decoder, as the final hyper-parameter
             reg.fit(y=train_y,X=train_X,groups=train_groups)
             print("predicting",end='. ')
             #hyper_score = reg.score(train_X,train_y)
@@ -533,16 +625,16 @@ def cv_train_test_sets(
         #identify which was the best
         #print(hyper_scores)
         #print(np.where([h==np.max(hyper_scores) for h in hyper_scores])[0][0])
-        best_hyper_regressor = regressors[np.where([h==np.max(hyper_scores) for h in hyper_scores])[0][0]]
+        best_hyper_decoder = decoders[np.where([h==np.max(hyper_scores) for h in hyper_scores])[0][0]]
 
-        #print(best_hyper_regressor)
+        #print(best_hyper_decoder)
 
         #now run JUST that one on this fold.
 
 
         #now predict on our test split
-        test_score = best_hyper_regressor.score(test_X,test_y)
-        test_y_pred = best_hyper_regressor.predict(test_X)
+        test_score = best_hyper_decoder.score(test_X,test_y)
+        test_y_pred = best_hyper_decoder.predict(test_X)
         fold_test_rawdata = pd.DataFrame({
             'y_obs':test_y,
             'y_pred':test_y_pred,
@@ -683,3 +775,145 @@ def save_grouped_Brain_Data_archive_from_raw(Brain_Data_filepath):
     
     with open(filepath_out, 'wb') as pkl_file:
         pickle.dump(bd_grouped,pkl_file)
+
+        
+## get a list of the subject folders
+## iterate through them
+## pass in a design matrix appropriate for that subject (pretty much just subject ID and then name of condition)
+## append
+
+def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../data/', 
+                                    conditions_to_include=None,
+                                    condition_count_required=None,
+                                    supplementary_df = None,
+                                         out_file_suffix =''):
+    ## get a list of the subject folders
+    sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/'
+    first_level_path = sst_wt_repo + first_level_fileid + "/"
+    print(first_level_path)
+    subj_count = len(subjs)
+    ## iterate through them
+    subjs.sort()
+    bd_dict={}
+    #get the brain data from the beta files
+    for sl in subjs:
+        print(sl)
+        
+        #get the design data
+        
+        #load the matrix associated with this file
+        sl_mat = scipy.io.loadmat(
+            first_level_path + 'sub-' + sl +'/SPM.mat',
+            simplify_cells=True            
+        )
+
+        #convert from an SPM.mat file into a dataframe list of the betas
+        beta_dict_list = []
+        mat_betas = sl_mat['SPM']['Vbeta']
+        for beta_i in range(len(mat_betas)):
+            beta = mat_betas[beta_i]
+            b_description = beta['descrip']
+            condition_label = re.search('Sn\(1\)\s(.*)\*bf\(1\)',b_description)
+            if (condition_label is not None):
+                beta_dict_list = beta_dict_list + [{
+                    'condition_index':beta_i,
+                    'condition_label':condition_label.group(1),
+                    'raw_beta_description':beta['descrip'],
+                    'beta':beta['fname']
+                }]
+        #    print(condition_label)
+        beta_df = pd.DataFrame(beta_dict_list)
+
+        #fill in the details related to the subject
+        beta_df['subject']=sl
+        beta_df['wave']=1
+        
+        if conditions_to_include is not None:
+            #cut down conditions to just those specified
+            #print(beta_df.condition_label)
+            beta_df = beta_df.loc[beta_df.condition_label.isin(conditions_to_include),]
+            #print(beta_df.condition_label)
+
+        if condition_count_required is not None:
+            if beta_df.shape[0]<condition_count_required:
+                print("not enough conditions for subject "+ sl + ". Skipping this subject.")
+                continue
+        
+        
+        try: 
+            bd = get_Brain_Data_betas_for_sub(
+                sl, beta_df,
+                betaseries_path = first_level_path,
+                events_in_design=beta_df.shape[0],
+                mask = "beta" # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
+            )
+            bd_dict[sl]=bd
+        except BehavioralDataNotFoundForBrainDataException:
+            print("couldn't get data for subject " + sl + " because there was no matching behavioral data")
+
+    #now append into a concatenated brain data file
+    Brain_Data_allsubs = list(bd_dict.values())[0]
+    for i in range(1,len(bd_dict.values())):
+        print(i)
+        val_to_append = list(bd_dict.values())[i]
+        Brain_Data_allsubs= Brain_Data_allsubs.append(val_to_append)
+        
+    if supplementary_df is not None:
+        Brain_Data_allsubs.X = pd.merge(Brain_Data_allsubs.X,supplementary_df,how='left',on=['subject','wave'])
+
+    #dump
+    out_filepath = (
+        out_folder + 'Brain_Data_' +
+        #'betaseries_' +
+        first_level_fileid + '_' + str(subj_count) + 'subs' + out_file_suffix + '.pkl'
+    )
+    print(out_filepath)
+
+    with open(out_filepath, 'wb') as pkl_file:
+        pickle.dump(Brain_Data_allsubs,pkl_file)
+
+        
+def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_design,out_folder = '../data/',
+                                         out_file_suffix =''):
+    sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/'
+    first_level_path = sst_wt_repo + first_level_fileid + "/"
+    print(first_level_path)
+    subj_count = len(subjs)
+    
+    subjs.sort()
+    bd_dict={}
+    #get the brain data from the beta files
+    for sl in subjs:
+        print(sl)
+        
+        try: 
+            
+            bd = get_Brain_Data_betas_for_sub(
+                sl, behavioral_design,
+                betaseries_path = first_level_path,
+                events_in_design=behavioral_design[behavioral_design.subject==sl].shape[0],
+                mask = "beta" # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
+            )
+            bd_dict[sl]=bd
+        except BehavioralDataNotFoundForBrainDataException:
+            print("couldn't get data for subject " + sl + " because there was no matching behavioral data")
+
+
+    #now append into a concatenated brain data file
+    Brain_Data_allsubs = list(bd_dict.values())[0]
+    for i in range(1,len(bd_dict.values())):
+        print(i)
+        val_to_append = list(bd_dict.values())[i]
+        Brain_Data_allsubs= Brain_Data_allsubs.append(val_to_append)
+
+    #dump
+    out_filepath = (
+        out_folder + 'Brain_Data_' +
+        #'betaseries_' +
+        first_level_fileid + '_' + str(subj_count) + 'subs' + out_file_suffix + '.pkl'
+    )
+    print(out_filepath)
+
+    with open(out_filepath, 'wb') as pkl_file:
+        pickle.dump(Brain_Data_allsubs,pkl_file)
+        

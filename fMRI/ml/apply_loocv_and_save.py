@@ -18,6 +18,7 @@ from dev_wtp_io_utils import cv_train_test_sets, asizeof_fmt
 from sklearn.model_selection import KFold,GroupKFold,LeaveOneOut, LeaveOneGroupOut
 import os, warnings
 import pickle
+from nilearn.decoding import DecoderRegressor, Decoder
 
 cpus_available = int(os.getenv('CPUS_PER_TASK'))
 #custom thing I have set in my jupyter notebook task.
@@ -30,7 +31,8 @@ def apply_loocv_and_save(
     train_test_markers_filepath = "../data/train_test_markers_20210601T183243.csv",
     subjs_to_use = None, #set this to get a subset, otherwise use all of them.
     response_transform_func = None,
-    mask=None
+    mask=None,
+    decoderConstructor=DecoderRegressor
     ):
     
 
@@ -50,10 +52,15 @@ def apply_loocv_and_save(
     first_subs_nifti_groups = preprocessed_data['groups']
 
     print("starting LeaveOneOut")
-    from nilearn.decoding import DecoderRegressor
+
     cv_inner = GroupKFold(3)
-    dRegressor = DecoderRegressor(
-        standardize= True,cv=cv_inner,scoring="r2",
+    
+#     if mask is not None:
+#         from nilearn import plotting
+#         plotting.plot_img(mask)
+
+    decoder = decoderConstructor(
+        standardize= True,cv=cv_inner,
         mask=mask,
         n_jobs=cpus_to_use)
     
@@ -75,7 +82,7 @@ def apply_loocv_and_save(
         trainset_X=first_subs_nifti,
         trainset_y=first_subs_nifti_Y,
         trainset_groups=first_subs_nifti_groups,
-        regressors=[dRegressor],
+        decoders=[decoder],
         cv=cv_outer,
         cpus_to_use=cpus_available
 
@@ -85,10 +92,13 @@ def apply_loocv_and_save(
     print(np.mean(test_scores_same[0]))
     
     print('running one more time on whole dataset for beta map')
-    regress_result = dRegressor.fit(
+    regress_result = decoder.fit(
     y=first_subs_nifti_Y,X=first_subs_nifti,groups=first_subs_nifti_groups)
 
-    weight_img = dRegressor.coef_img_['beta']
+    if type(decoder)==DecoderRegressor:
+        weight_img = decoder.coef_img_['beta']
+    else:
+        weight_img = decoder.coef_img_
 
     print('finished learning')
 
@@ -142,8 +152,10 @@ def apply_single_fit_and_save(
     train_score = dRegressor.score(train_X,train_y)
     train_y_pred = dRegressor.predict(train_X)
 
-    weight_img = dRegressor.coef_img_['beta']
-
+    if type(dRegressor)==DecoderRegressor:
+        weight_img = dRegressor.coef_img_['beta']
+    else:
+        weight_img = dRegressor.coef_img_
     print('finished learning')
 
     with open(results_filepath, 'wb') as handle:
@@ -162,7 +174,8 @@ def apply_single_fit_and_save(
 def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pkl',
     train_test_markers_filepath = "../data/train_test_markers_20210601T183243.csv",
     subjs_to_use = None, #set this to get a subset, otherwise use all of them.
-    response_transform_func = None
+    response_transform_func = None,
+    clean = "standardize"
 ):
 
 
@@ -177,6 +190,7 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
     #################################################
     #######PRE-PROCESS
 
+
     
     if response_transform_func is None:
         Brain_Data_allsubs.Y = Brain_Data_allsubs.X['response'].copy()
@@ -184,16 +198,16 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
         Brain_Data_allsubs.Y = response_transform_func(Brain_Data_allsubs.X)
     
         
-    print(Brain_Data_allsubs.Y.value_counts())
+    #print(Brain_Data_allsubs.Y.value_counts())
     Brain_Data_allsubs.Y[Brain_Data_allsubs.Y=='NULL']=None
-    print(Brain_Data_allsubs.Y.value_counts())
+    #print(Brain_Data_allsubs.Y.value_counts())
     
 
     import sys
     for name, size in sorted(((name, sys.getsizeof(value)) for name, value in locals().items()),
                              key= lambda x: -x[1])[:10]:
         print(name + ': ' + str(size))
-    print(Brain_Data_allsubs.Y.isnull().value_counts())
+    #print(Brain_Data_allsubs.Y.isnull().value_counts())
     Brain_Data_allsubs_nn = Brain_Data_allsubs[Brain_Data_allsubs.Y.isnull()==False]
     print(len(Brain_Data_allsubs_nn))
     print(len(Brain_Data_allsubs))
@@ -210,8 +224,8 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
     
     #################################################
     #######GET SUB-SET
-    print(asizeof_fmt(Brain_Data_allsubs))
-    print(asizeof_fmt(Brain_Data_allsubs_nn)) 
+    #print(asizeof_fmt(Brain_Data_allsubs))
+    #print(asizeof_fmt(Brain_Data_allsubs_nn)) 
 
     
     del Brain_Data_allsubs
@@ -225,7 +239,7 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
         first_subs_nifti_Y = all_subs_nn_nifti_Y
         first_subs_nifti_groups = all_subs_nn_nifti_groups
         first_subs_nifti_metadata = all_subs_nn_nifti_metadata
-    else:
+    elif type(subjs_to_use)==int:
         print("using " +  str(subjs_to_use) + " subjects")
         sample_subject_items = np.unique(all_subs_nn_nifti_groups)[0:subjs_to_use] #get all of them
         sample_subject_vector = [i for i, x in enumerate(all_subs_nn_nifti_groups) if x in sample_subject_items]
@@ -234,8 +248,17 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
         first_subs_nifti_Y = all_subs_nn_nifti_Y[sample_subject_vector]
         first_subs_nifti_groups = all_subs_nn_nifti_groups[sample_subject_vector]
         first_subs_nifti_metadata = all_subs_nn_nifti_metadata.loc[sample_subject_vector,:]
+    else: #named subjects, assume subjs_to_use is iterable
+        sample_subject_vector = [i for i, x in enumerate(all_subs_nn_nifti_groups) if x in subjs_to_use]
 
-    first_subs_nifti = nil.image.clean_img(first_subs_nifti,detrend=False,standardize=True)
+        first_subs_nifti = nib.funcs.concat_images([all_subs_nn_nifti.slicer[...,s] for s in sample_subject_vector])
+        first_subs_nifti_Y = all_subs_nn_nifti_Y[sample_subject_vector]
+        first_subs_nifti_groups = all_subs_nn_nifti_groups[sample_subject_vector]
+        first_subs_nifti_metadata = all_subs_nn_nifti_metadata.loc[sample_subject_vector,:]
+        
+
+    if clean=="standardize":
+        first_subs_nifti = nil.image.clean_img(first_subs_nifti,detrend=False,standardize=True)
 
     return(
         {
