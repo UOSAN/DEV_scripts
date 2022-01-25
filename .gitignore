@@ -15,8 +15,8 @@ fMRI/ppc/smooth/.ipynb_checkpoints/*
 fMRI/ml/log-archive/*
 fMRI/ml/*.log
 fMRI/ml/*.err
-#fMRI/ml/SST/*.log
-#fMRI/ml/SST/*.err
+fMRI/ml/SST/*.log
+fMRI/ml/SST/*.err
 fMRI/ml/__pycache__/*
 fMRI/ml/__pycache__
 fMRI/ml/nilearn_cache/*
