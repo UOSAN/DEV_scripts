@@ -19,11 +19,19 @@ from sklearn.model_selection import KFold,GroupKFold,LeaveOneOut, LeaveOneGroupO
 import os, warnings
 import pickle
 from nilearn.decoding import DecoderRegressor, Decoder
+import multiprocessing
+import math
 
-cpus_available = int(os.getenv('CPUS_PER_TASK'))
+cpus_available = multiprocessing.cpu_count()
+
+cpus_to_use = min(cpus_available-1,math.floor(0.9*cpus_available))
+print("cpus available; cpus to use:")
+print(cpus_available, cpus_to_use)
+
+#cpus_available = multiprocessing.cpu_count()
 #custom thing I have set in my jupyter notebook task.
 print(cpus_available)
-cpus_to_use = cpus_available-1
+
 
 def apply_loocv_and_save(
     results_filepath,
@@ -32,11 +40,15 @@ def apply_loocv_and_save(
     subjs_to_use = None, #set this to get a subset, otherwise use all of them.
     response_transform_func = None,
     mask=None,
-    decoderConstructor=DecoderRegressor
+    decoderConstructor=DecoderRegressor,
+    clean="standardize",
+    decoder_standardize=True
     ):
     
 
-    preprocessed_data = load_and_preprocess(brain_data_filepath,train_test_markers_filepath,subjs_to_use,response_transform_func)
+    preprocessed_data = load_and_preprocess(
+        brain_data_filepath,train_test_markers_filepath,
+        subjs_to_use,response_transform_func,clean=clean)
     
 #     return(
 #         {
@@ -60,9 +72,12 @@ def apply_loocv_and_save(
 #         plotting.plot_img(mask)
 
     decoder = decoderConstructor(
-        standardize= True,cv=cv_inner,
+        standardize= decoder_standardize,cv=cv_inner,
         mask=mask,
         n_jobs=cpus_to_use)
+    
+    print("new decoder parameters:")
+    print(decoder.get_params())
     
     #in this design, we're actually dealing with groups
     #we select group IDs and then grab the subjects

@@ -50,7 +50,7 @@ def outlier_detection_carling(data_series_raw,show_plot=False):
     k=(17.63*n-23.64)/(7.74*n-3.71)
     kIQR = k*IQR
     
-    print(M,kIQR, M-kIQR, M+kIQR)
+    if show_plot: print(M,kIQR, M-kIQR, M+kIQR)
     outlier = (data_series_notna < M-kIQR) | (data_series_notna > M+kIQR)
 
     outlier_indices = outlier.index[outlier]
@@ -64,8 +64,12 @@ def outlier_detection_carling(data_series_raw,show_plot=False):
     data_series_full.iloc[outlier_indices] = np.nan
     if show_plot:
 
-        plt.plot(merged_data_series.iloc[non_outlier_indices].index,merged_data_series.iloc[non_outlier_indices].value,label='non-outliers',marker='.',linestyle='')
-        plt.plot(merged_data_series.iloc[outlier_indices].index,merged_data_series.iloc[outlier_indices].value,label='outliers',marker='.',linestyle='')
+        plt.plot(
+            merged_data_series.iloc[non_outlier_indices].index,merged_data_series.iloc[non_outlier_indices].value,
+            label='non-outliers',marker='.',linestyle='')
+        
+        plt.plot(merged_data_series.iloc[outlier_indices].index, 
+                     merged_data_series.iloc[outlier_indices].value, label='outliers', marker='.', linestyle='')
         plt.legend()
         plt.show()
         
@@ -127,7 +131,7 @@ def repeated_outlier_removal(data,method,show_plot):
         prev_size = new_size
         data_to_process = method(data_to_process,show_plot=show_plot)
         new_size = np.sum(np.isnan(data_to_process)==False)
-        print(str(prev_size) + " , " + str(new_size))
+        if show_plot: print(str(prev_size) + " , " + str(new_size))
 
     return(data_to_process)
 
@@ -140,7 +144,7 @@ def remove_selected_outliers_rtfs_study(ind_div_combined,show_plot=False):
     
     return(ind_div_combined)
     
-def remove_selected_outliers(ind_div_combined,outliers_to_remove,show_plot=False):
+def remove_selected_outliers_range(ind_div_combined,outliers_to_remove,show_plot=False):
     
     for cname in outliers_to_remove:
         display(Markdown("#### " + cname))
@@ -153,6 +157,15 @@ def remove_selected_outliers(ind_div_combined,outliers_to_remove,show_plot=False
         carling_iterative = repeated_outlier_removal(ind_div_combined[cname],outlier_detection_carling,show_plot)
         
         display(HTML('3sd iterative'))
+        sd_3_iterative = repeated_outlier_removal(ind_div_combined[cname],outlier_detection_median_sd,show_plot)
+        
+        ind_div_combined[cname] = sd_3_iterative
+    
+    return(ind_div_combined)
+
+def remove_selected_outliers(ind_div_combined,outliers_to_remove,show_plot=False):
+    
+    for cname in outliers_to_remove:
         sd_3_iterative = repeated_outlier_removal(ind_div_combined[cname],outlier_detection_median_sd,show_plot)
         
         ind_div_combined[cname] = sd_3_iterative
@@ -227,6 +240,8 @@ def get_ind_div_for_pes_combined(bd,ml_data_folderpath):
 
     pes_data = pd.read_csv(ml_data_folderpath + "/post_error_slowing.csv",index_col=0)
     pepc_contrast_data = pd.read_csv(ml_data_folderpath + "/post_error_slowing_simple_approach.csv",index_col=0)
+    print(pes_data.columns)
+    print(pepc_contrast_data.columns)
 
     individual_differences = pd.read_csv(ml_data_folderpath + "/"+ data_by_ppt_name)
     individual_differences = individual_differences.rename(columns={'SID':'subject'})
@@ -235,21 +250,26 @@ def get_ind_div_for_pes_combined(bd,ml_data_folderpath):
 
     individual_differences = pd.merge(individual_differences,pes_data,how='outer',left_on='subject',right_on='subid')
     individual_differences = pd.merge(individual_differences,pepc_contrast_data,how='outer',left_on='subject',right_on='subid')
+    
+    if (type(bd)==pd.DataFrame):
+        bd = bd.rename(columns={'subid':'subject'})
+        ind_div_combined = bd.merge(individual_differences,left_on='subject',right_on='subject',how='left')
+    else:
+        #brain data is unprocessed; process it
+        subject_pc_neural_performance = bd.X.loc[bd.X.condition_label=='CorrectGoFollowingCorrectStop',['subject','PostError_similarity','PostCorrect_similarity']]
+        subject_pe_neural_performance = bd.X.loc[bd.X.condition_label=='CorrectGoFollowingFailedStop',['subject','PostError_similarity','PostCorrect_similarity']]
 
-    subject_pc_neural_performance = bd.X.loc[bd.X.condition_label=='CorrectGoFollowingCorrectStop',['subject','PostError_similarity','PostCorrect_similarity']]
-    subject_pe_neural_performance = bd.X.loc[bd.X.condition_label=='CorrectGoFollowingFailedStop',['subject','PostError_similarity','PostCorrect_similarity']]
+        subject_pc_neural_performance.columns = ['PC_trials_' + col for col in subject_pc_neural_performance.columns]
+        subject_pe_neural_performance.columns = ['PE_trials_' + col for col in subject_pe_neural_performance.columns]
+        subject_neural_performance = subject_pc_neural_performance.merge(subject_pe_neural_performance,left_on='PC_trials_subject',right_on='PE_trials_subject',how='outer')
+        subject_neural_performance =subject_neural_performance.rename(columns = {'PC_trials_subject':'subject'})
 
-    subject_pc_neural_performance.columns = ['PC_trials_' + col for col in subject_pc_neural_performance.columns]
-    subject_pe_neural_performance.columns = ['PE_trials_' + col for col in subject_pe_neural_performance.columns]
-    subject_neural_performance = subject_pc_neural_performance.merge(subject_pe_neural_performance,left_on='PC_trials_subject',right_on='PE_trials_subject',how='outer')
-    subject_neural_performance =subject_neural_performance.rename(columns = {'PC_trials_subject':'subject'})
-
-    ind_div_combined = subject_neural_performance.merge(individual_differences,left_on='subject',right_on='subject',how='left')
+        ind_div_combined = subject_neural_performance.merge(
+            individual_differences,left_on='subject',right_on='subject',how='left')
     
     #remove outliers
     
     return(ind_div_combined)
-
 
 
 
@@ -287,4 +307,15 @@ def visualize_corr(neural_var,correlate,data):
     cplot = pyplot.scatter(cor2way_df[neural_var],cor2way_df[correlate])
     cplot.axes.set_xlabel(neural_var)
     cplot.axes.set_ylabel(correlate)
+    pyplot.show()
+    
+def visualize_series_corr(series1,series2):
+    display(HTML(series1.name))
+    pearson_result = pearsonr(series1,series2)
+    display(HTML("r=" + format(pearson_result[0],".2f") +"; p-value=" + format(pearson_result[1],".4f")))
+    spearman_result = spearmanr(series1,series2)
+    display(HTML("rho=" + format(spearman_result[0],".2f") +"; p-value=" + format(spearman_result[1],".4f")))
+    cplot = pyplot.scatter(series1,series2)
+    cplot.axes.set_xlabel(series1.name)
+    cplot.axes.set_ylabel(series2.name)
     pyplot.show()

@@ -21,7 +21,7 @@ echo "$(date +"%D %T")"
 echo "running python script $1"
 
 
-python $1                        # run your actual program
+python $1 $2                        # run your actual program
 
 echo "finished running script $1"
 echo "$(date +"%D %T")"

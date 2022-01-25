@@ -1,0 +1,191 @@
+01/19/22 18:54:27
+running python script ml-ns_on_self_report_batch.py with arguments -m
+arg pass maskpath is: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/response_inhibition_related/negative emotions_association-test_z_FDR_0.01.nii.gz
+regression_var is: TESQ_E_suppression
+sourcepath is: /SST/Brain_Data_conditions_84subs_correct_stop_w_supplementary.pkl
+outpath is: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/SST/regress_sr_TESQ_E_suppression/correct_stop/regress_sr_TESQ_E_suppression_84subs_negative emotions_association-test_z_FDR_0.pkl
+python initialized for apply_loocv_and_save
+40 36
+40
+arg pass maskpath is: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/response_inhibition_related/negative emotions_association-test_z_FDR_0.01.nii.gz
+regression_var is: TESQ_E_suppression
+sourcepath is: /SST/Brain_Data_conditions_84subs_correct_stop_w_supplementary.pkl
+outpath is: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/SST/regress_sr_TESQ_E_suppression/correct_stop/regress_sr_TESQ_E_suppression_84subs_negative emotions_association-test_z_FDR_0.pkl
+<IPython.core.display.Markdown object>
+checked for intersection and no intersection between the brain data and the subjects was found.
+there were 55 subjects overlapping between the subjects marked for train data and the training dump file itself.
+test_train_set: 9549
+brain_data_filepath: 168
+pkl_file: 168
+train_test_markers_filepath: 141
+response_transform_func: 136
+sys: 72
+clean: 60
+Brain_Data_allsubs: 48
+subjs_to_use: 16
+75
+81
+starting LeaveOneOut
+finished preprocessing
+Groups are the same.
+fold 1 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV055']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.712459575978853
+fold 2 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV197']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.22541715623988878
+fold 3 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV097']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.2068317018734653
+fold 4 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV018']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.458667071067106
+fold 5 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV048']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.8130258469765437
+fold 6 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV062']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.719628372847204
+fold 7 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV157']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.6777554876303764
+fold 8 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV013']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.2761015094783072
+fold 9 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV217']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.4973417826288165
+fold 10 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV011']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.6417154575243407
+fold 11 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV086']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.337246207881865
+fold 12 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV186']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.624790907286373
+fold 13 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV071']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.326273116720829
+fold 14 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV215']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.8500311711820157
+fold 15 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV023']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.7698988573131214
+fold 16 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV169']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.931951616754219
+fold 17 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV050']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.327051116314486
+fold 18 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV014']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.9984509497737992
+fold 19 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV171']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.8340898488380084
+fold 20 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV105']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -6.523526550983604
+fold 21 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV035']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.9681110895743377
+fold 22 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV049']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -6.8751983998904524
+fold 23 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV079']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.2213408786959814
+fold 24 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV064']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.3286123768315914
+fold 25 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV047']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.8551309191942345
+fold 26 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV158']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.1092607705149184
+fold 27 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV173']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.64019550048355
+fold 28 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV006']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.3918433295669459
+fold 29 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV077']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.3377398511025405
+fold 30 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV083']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.116013984075929
+fold 31 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV041']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.6728319319496521
+fold 32 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV010']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.3684445926413886
+fold 33 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV024']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.847556188905326
+fold 34 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV076']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.238084170372188
+fold 35 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV040']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.0120739537703844
+fold 36 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV084']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.12453928086367405
+fold 37 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV087']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.4296955180014734
+fold 38 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV058']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.8563239000974843
+fold 39 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV067']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.7707545926639146
+fold 40 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV028']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.04198477448608
+fold 41 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV026']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.6275237235911995
+fold 42 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV060']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.5796418568955266
+fold 43 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV085']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -5.072581299433507
+fold 44 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV135']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.427431691979576
+fold 45 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV021']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.6297318622764045
+fold 46 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV073']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.950538721146156
+fold 47 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV206']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.6307248845615323
+fold 48 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV141']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.2556826570459432
+fold 49 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV005']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.9696968566800575
+fold 50 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV019']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.4547862060586114
+fold 51 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV056']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -5.3408640797808555
+fold 52 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV059']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.5245773976059844
+fold 53 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV068']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.9090508672287543
+fold 54 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV164']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.5772188218892946
+fold 55 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV039']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.4462278915493272
+fold 56 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV042']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.6833753781056604
+fold 57 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV216']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.9172612781012939
+fold 58 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV052']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.8204170631705807
+fold 59 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV069']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.249523504695789
+fold 60 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV053']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.573828353282945
+fold 61 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV029']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.40865356173391554
+fold 62 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV027']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.8359458390351655
+fold 63 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV015']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.5421784091456683
+fold 64 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV057']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.5169790613882768
+fold 65 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV107']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -3.25654741766491
+fold 66 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV017']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.2000511055711662
+fold 67 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV020']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.199590512477915
+fold 68 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV159']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.0981431119265874
+fold 69 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV036']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.31902657800959666
+fold 70 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV074']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.9477114078661177
+fold 71 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV051']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -2.1517176129342914
+fold 72 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV046']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.6123052160958444
+fold 73 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV043']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -1.4653897732694183
+fold 74 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV145']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -0.7793101568633531
+fold 75 of 75
+In order to test on a training group of 74 items, holding out the following subjects:['DEV022']. prepping fold data.... fitting.... 610.9 MiB. trying decoder 1 of 1. predicting. test score was:. -4.623985355622548
+-2.712459575978853
+-2.712459575978853
+running one more time on whole dataset for beta map
+finished learning
+saved.
+/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/SST/regress_sr_TESQ_E_suppression/correct_stop/regress_sr_TESQ_E_suppression_84subs_negative emotions_association-test_z_FDR_0.pkl
+<IPython.core.display.HTML object>
+<IPython.core.display.HTML object>
+<IPython.core.display.HTML object>
+finished running script ml-ns_on_self_report_batch.py
+01/19/22 19:17:03

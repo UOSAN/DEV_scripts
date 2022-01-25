@@ -1,0 +1,5 @@
+01/19/22 17:38:20
+running python script ml-ns_on_self_report_batch.py with arguments  -m "/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/response_inhibition_related/harvardoxford/harvardoxford-cortical_prob_Superior Frontal Gyrus.nii.gz" -t 30 -r TESQ_E_sum -s /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/SST/Brain_Data_conditions_84subs_correct_go_w_supplementary.pkl -o /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/SST/regress_sr_TESQ_E_sum/correct_go/regress_sr_TESQ_E_sum_84subs_harvardoxford-cortical_prob_Superior Frontal Gyrus.pkl
+
+finished running script ml-ns_on_self_report_batch.py
+01/19/22 17:38:20

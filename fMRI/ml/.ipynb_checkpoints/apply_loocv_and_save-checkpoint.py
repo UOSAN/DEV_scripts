@@ -19,11 +19,19 @@ from sklearn.model_selection import KFold,GroupKFold,LeaveOneOut, LeaveOneGroupO
 import os, warnings
 import pickle
 from nilearn.decoding import DecoderRegressor, Decoder
+import multiprocessing
+import math
 
-cpus_available = int(os.getenv('CPUS_PER_TASK'))
+cpus_available = multiprocessing.cpu_count()
+
+cpus_to_use = min(cpus_available-1,math.floor(0.9*cpus_available))
+print("cpus available; cpus to use:")
+print(cpus_available, cpus_to_use)
+
+#cpus_available = multiprocessing.cpu_count()
 #custom thing I have set in my jupyter notebook task.
 print(cpus_available)
-cpus_to_use = cpus_available-1
+
 
 def apply_loocv_and_save(
     results_filepath,
@@ -63,6 +71,9 @@ def apply_loocv_and_save(
         standardize= True,cv=cv_inner,
         mask=mask,
         n_jobs=cpus_to_use)
+    
+    print("new decoder parameters:")
+    print(decoder.get_params())
     
     #in this design, we're actually dealing with groups
     #we select group IDs and then grab the subjects
@@ -174,7 +185,8 @@ def apply_single_fit_and_save(
 def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pkl',
     train_test_markers_filepath = "../data/train_test_markers_20210601T183243.csv",
     subjs_to_use = None, #set this to get a subset, otherwise use all of them.
-    response_transform_func = None
+    response_transform_func = None,
+    clean = "standardize"
 ):
 
 
@@ -238,7 +250,7 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
         first_subs_nifti_Y = all_subs_nn_nifti_Y
         first_subs_nifti_groups = all_subs_nn_nifti_groups
         first_subs_nifti_metadata = all_subs_nn_nifti_metadata
-    else:
+    elif type(subjs_to_use)==int:
         print("using " +  str(subjs_to_use) + " subjects")
         sample_subject_items = np.unique(all_subs_nn_nifti_groups)[0:subjs_to_use] #get all of them
         sample_subject_vector = [i for i, x in enumerate(all_subs_nn_nifti_groups) if x in sample_subject_items]
@@ -247,8 +259,17 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
         first_subs_nifti_Y = all_subs_nn_nifti_Y[sample_subject_vector]
         first_subs_nifti_groups = all_subs_nn_nifti_groups[sample_subject_vector]
         first_subs_nifti_metadata = all_subs_nn_nifti_metadata.loc[sample_subject_vector,:]
+    else: #named subjects, assume subjs_to_use is iterable
+        sample_subject_vector = [i for i, x in enumerate(all_subs_nn_nifti_groups) if x in subjs_to_use]
 
-    first_subs_nifti = nil.image.clean_img(first_subs_nifti,detrend=False,standardize=True)
+        first_subs_nifti = nib.funcs.concat_images([all_subs_nn_nifti.slicer[...,s] for s in sample_subject_vector])
+        first_subs_nifti_Y = all_subs_nn_nifti_Y[sample_subject_vector]
+        first_subs_nifti_groups = all_subs_nn_nifti_groups[sample_subject_vector]
+        first_subs_nifti_metadata = all_subs_nn_nifti_metadata.loc[sample_subject_vector,:]
+        
+
+    if clean=="standardize":
+        first_subs_nifti = nil.image.clean_img(first_subs_nifti,detrend=False,standardize=True)
 
     return(
         {

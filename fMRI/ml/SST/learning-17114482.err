@@ -1,0 +1,8 @@
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+/gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/ml/apply_loocv_and_save.py:213: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  Brain_Data_allsubs.Y[Brain_Data_allsubs.Y=='NULL']=None
+slurmstepd: error: *** JOB 17114482 ON n222 CANCELLED AT 2022-01-20T11:43:50 ***

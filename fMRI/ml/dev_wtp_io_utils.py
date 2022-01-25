@@ -347,13 +347,16 @@ def Brain_Data_max(x):
     """
 
     out = deepcopy(x)
+    print(x.shape())
+    print(len(x.shape()))
     if len(x.shape()) > 1:
         out.data = np.max(out.data, axis=0)
         out.X = pd.DataFrame()
         out.Y = pd.DataFrame()
     else:
-        out = np.max(x.data)
+        raise Exception("this function wasn't designed to handle just one image, and there's no point in calling it because it sums over multiple images.")
     return out
+
 
 def get_pfc_image_filepaths(data_path):
     mask_files=glob.glob(data_path + "masks/prefrontal_cortex/*.nii.gz")
@@ -361,19 +364,46 @@ def get_pfc_image_filepaths(data_path):
 
 def create_mask_from_images(image_filepath_list,threshold=0):
     mask_set = nlt.Brain_Data(image_filepath_list)
-    mask_aggregate = Brain_Data_max(mask_set).to_nifti()
+    if len(mask_set.shape())>1:
+        mask_aggregate = Brain_Data_max(mask_set).to_nifti()
+    else:
+        mask_aggregate = mask_set.to_nifti()
     mask_binarized = nil.image.new_img_like(mask_aggregate,(mask_aggregate.get_fdata()>threshold).astype(float))
 
     return(mask_binarized)
 
+def spatially_concatenate_nifti_series(bd_nifti,zscore = False):
+    bd_fdata = bd_nifti.get_fdata()
 
+    img_count = bd_fdata.shape[3]
+    bd_array = [bd_fdata[:,:,:,i] for i in range(img_count)]
+    if zscore:
+        bd_array_zscored = [(e-np.mean(e))/np.std(e) for e in bd_array]
+    else:
+        bd_array_zscored = bd_array
+    bd_reshaped = np.concatenate(bd_array_zscored,axis=0)
+    concatenated = nil.image.new_img_like(bd_nifti,bd_reshaped)
+    return(concatenated)
+
+def spatially_concatenate_repeated_image(bd_nifti,repetitions,zscore=False):
+    bd_fdata = bd_nifti.get_fdata()
+    if zscore:
+        bd_fdata_zscored = (bd_fdata-np.mean(bd_fdata))/np.std(bd_fdata)
+    else:
+        bd_fdata_zscored = bd_fdata
+    bd_array = [bd_fdata_zscored]*repetitions
+    bd_reshaped = np.concatenate(bd_array,axis=0)
+    concatenated = nil.image.new_img_like(bd_nifti,bd_reshaped)
+
+    return(concatenated)
 
 def get_Brain_Data_betas_for_sub(
     sub_label,
     behavdesign,
     betaseries_path='/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave1/betaseries/',
     events_in_design = 64,
-    mask = None
+    mask = None,
+    spatially_concatenate=False
 ):
     """
     Collect a bunch of beta files for specified subjects based on a behavioral design file
@@ -408,20 +438,22 @@ def get_Brain_Data_betas_for_sub(
             print('.',end='')
         else:
             print(betafilepath)
-            raise Exception("beta " + betafile + ' does not exist at ')
+            raise Exception("beta " + betafile + ' does not exist at ' + betafilepath)
 
     print("...verified that all expected betas exist! Processing...",flush=True,end='')
     
     create_temp_mask = False
     if mask=="beta":
         create_temp_mask= True
-    if create_temp_mask:
+
+    tmp_mask_path = (
+        betaseries_path + 
+        'temp_mask_get_Brain_Data_betas_for_sub_' + sub_label +
+        '.nii'
+    )
+    if create_temp_mask & (mask=="beta"):
         print("setting the mask to the first image in the series " + subj_behav_design.beta.iloc[0])
-        tmp_mask_path = (
-            betaseries_path + 
-            'temp_mask_get_Brain_Data_betas_for_sub_' + sub_label +
-            '.nii'
-        )
+
         with warnings.catch_warnings(record=True) as w:
             subj_first_img = nil.image.load_img(subject_dir + subj_behav_design.beta.iloc[0])
             #load the first image to be a mask
@@ -445,6 +477,36 @@ def get_Brain_Data_betas_for_sub(
     with warnings.catch_warnings(record=True) as w:
         subj_data = nlt.Brain_Data([subject_dir + b for b in subj_behav_design.beta],
                                   mask=mask)
+        print("converting to nifti and fdata")
+        t1= subj_data.to_nifti().get_fdata()
+
+        #now we concatenate
+        if spatially_concatenate:
+            #need to clean first because we're combining and won't get another chance to standardize across a subject's betas
+            #bd_nifti = nil.image.clean_img(subj_data.to_nifti(),detrend=False,standardize=True)
+            subj_data_nifti = subj_data.to_nifti()
+            sd_n_spatial_concat = spatially_concatenate_nifti_series(subj_data_nifti,zscore=False)
+            if mask is not None:
+                #raise Exception("masks not currently supported for spatially concatenated images")
+                create_temp_mask=True
+                mask_nib = nib.load(mask)
+                mask_nib_bin = nil.masking.compute_brain_mask(mask_nib)
+                mask_reshaped = spatially_concatenate_repeated_image(mask_nib_bin,subj_data_nifti.shape[3],zscore=False)
+                nib.save(mask_reshaped,tmp_mask_path)
+                print(tmp_mask_path)
+                mask = tmp_mask_path
+                
+            subj_data = nlt.Brain_Data(sd_n_spatial_concat
+                                      ,mask=mask
+                                      )
+            
+            subj_behav_design.drop([
+                'condition_index', 'condition_label',
+                    'raw_beta_description', 'beta'],axis=1,inplace=True)
+            subj_behav_design.drop_duplicates(inplace=True)
+            
+            
+        print(subj_behav_design)
         subj_data.X = subj_behav_design
     na_inf_warn_count=0
     for wi in w:
@@ -465,8 +527,6 @@ def get_Brain_Data_betas_for_sub(
     
 
     return(subj_data)
-
-
 
 
 def check_BD_against_test_train_set(brain_data_series,test_train_set):
@@ -545,7 +605,7 @@ def cv_train_test_sets(
     #the CV that the inner decoder uses
     cv_inner = GroupKFold(3)
     if decoders is None:
-        decoders = [DecoderRegressor(standardize= True,param_grid=param_grid,cv=cv_inner,scoring="r2",
+        decoders = [DecoderRegressor(standardize= False,param_grid=param_grid,cv=cv_inner,scoring="r2",
                                       n_jobs=cpus_to_use)]
         print('using default decoder, DecoderRegressor',end='. ')
 
@@ -786,7 +846,9 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
                                     conditions_to_include=None,
                                     condition_count_required=None,
                                     supplementary_df = None,
-                                         out_file_suffix =''):
+                                         out_file_suffix ='',
+                                    concatenate_condition_labels=False
+                                   ):
     ## get a list of the subject folders
     sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/'
     first_level_path = sst_wt_repo + first_level_fileid + "/"
@@ -830,9 +892,9 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
         
         if conditions_to_include is not None:
             #cut down conditions to just those specified
-            #print(beta_df.condition_label)
-            beta_df = beta_df.loc[beta_df.condition_label.isin(conditions_to_include),]
-            #print(beta_df.condition_label)
+            #also ensures that the beta_df is in the ORDER SPECIFIED in conditions_to_include
+            #beta_df = beta_df.loc[beta_df.condition_label.isin(conditions_to_include),]
+            beta_df = pd.concat([beta_df.loc[beta_df.condition_label==cti,] for cti in conditions_to_include])
 
         if condition_count_required is not None:
             if beta_df.shape[0]<condition_count_required:
@@ -841,16 +903,22 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
         
         
         try: 
+            print(beta_df)
             bd = get_Brain_Data_betas_for_sub(
                 sl, beta_df,
                 betaseries_path = first_level_path,
                 events_in_design=beta_df.shape[0],
+                spatially_concatenate = concatenate_condition_labels,
                 mask = "beta" # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
             )
+            
+            
             bd_dict[sl]=bd
         except BehavioralDataNotFoundForBrainDataException:
             print("couldn't get data for subject " + sl + " because there was no matching behavioral data")
-
+    
+            
+    
     #now append into a concatenated brain data file
     Brain_Data_allsubs = list(bd_dict.values())[0]
     for i in range(1,len(bd_dict.values())):

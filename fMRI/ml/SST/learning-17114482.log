@@ -1,0 +1,26 @@
+01/20/22 11:36:20
+running python script TESQ-ml-ns_on_self_report_tesq-e-3.py
+python initialized for apply_loocv_and_save
+cpus available; cpus to use:
+40 36
+40
+checked for intersection and no intersection between the brain data and the subjects was found.
+there were 58 subjects overlapping between the subjects marked for train data and the training dump file itself.
+test_train_set: 9549
+pkl_file: 168
+brain_data_filepath: 166
+train_test_markers_filepath: 141
+response_transform_func: 136
+sys: 72
+clean: 60
+Brain_Data_allsubs: 48
+subjs_to_use: 16
+78
+84
+starting LeaveOneOut
+new decoder parameters:
+{'cv': GroupKFold(n_splits=3), 'estimator': 'svr', 'high_pass': None, 'low_pass': None, 'mask': None, 'mask_strategy': 'background', 'memory': None, 'memory_level': 0, 'n_jobs': 36, 'param_grid': None, 'scoring': 'neg_mean_absolute_error', 'screening_percentile': 20, 'smoothing_fwhm': None, 'standardize': True, 't_r': None, 'target_affine': None, 'target_shape': None, 'verbose': 0}
+finished preprocessing
+Groups are the same.
+fold 1 of 78
+In order to test on a training group of 77 items, holding out the following subjects:['DEV041']. prepping fold data.... fitting.... 635.7 MiB. trying decoder 1 of 1. 

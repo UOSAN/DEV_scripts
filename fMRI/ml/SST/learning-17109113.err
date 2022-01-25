@@ -1,0 +1,4 @@
+usage: ml-ns_on_self_report_batch.py [-h] [-m MASKPATH] [-t MASKTHRESHOLD]
+                                     [-r REGRESSIONVAR] [-s SOURCEPATH]
+                                     [-o OUTPATH]
+ml-ns_on_self_report_batch.py: error: unrecognized arguments: Frontal Gyrus.nii.gz Frontal Gyrus.pkl
