@@ -79,7 +79,8 @@ def do_complete_sr_regression_analysis_for_mask(
 #            subjs_to_use = 20,
             decoderConstructor = decoderConstructor,
             response_transform_func=sr_regressor_trans_func,
-            mask=mask_img, clean="standardize"
+            mask=mask_img, clean=False,
+        decoder_standardize=False
         )
     print(results_filepath)
     results=pickle.load(open(results_filepath,'rb'))
@@ -119,19 +120,19 @@ for self_report_regression_var in ['TESQ_E_sum', 'TESQ_E_distraction','TESQ_E_su
     regression_output_folderpath = ml_data_folderpath + "/SST/regress_sr_" + self_report_regression_var
     if os.path.exists(regression_output_folderpath)==False:
         os.mkdir(regression_output_folderpath)
-    for source_dataset_name in ['correct_stop','correct_go']:
+    for source_dataset_name in ['correct_stop_w_supplementary','correct_go_w_supplementary','correct_cond_spatially_concatenated']:
         source_output_folderpath = regression_output_folderpath + "/" + source_dataset_name
         if os.path.exists(source_output_folderpath)==False:
             os.mkdir(source_output_folderpath)
         results_filepath=(
             source_output_folderpath + 
-            "/regress_sr_" + self_report_regression_var + "_84subs_" + 
+            "/regress_sr_no_zscore" + self_report_regression_var + "_84subs_" + 
             "wholebrain" + ".pkl"
         )
         do_complete_sr_regression_analysis_for_mask(
             self_report_regression_var = self_report_regression_var,
             results_filepath = results_filepath,
-            source_dataset_relpath = '/SST/Brain_Data_conditions_84subs_' + source_dataset_name + '_w_supplementary.pkl'
+            source_dataset_relpath = '/SST/Brain_Data_conditions_84subs_' + source_dataset_name + '.pkl'
         )
             
 
