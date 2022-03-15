@@ -2,233 +2,131 @@
 
 For MacOS or Linux, use this command to create SSH tunnel:
 
-    ssh -N -L localhost:52727:n137:59138 bsmith16@talapas-ln2.uoregon.edu
+    ssh -N -L localhost:54360:n137:32824 bsmith16@talapas-ln2.uoregon.edu
 
 Or try this if that doesn't work:
 
-    ssh -N -L localhost:52727:n137:59138 bsmith16@talapas-ln2.uoregon.edu
+    ssh -N -L localhost:54360:n137:32824 bsmith16@talapas-ln2.uoregon.edu
 
 For Windows/MobaXterm, use this info:
 
-    Forwarded port: 52727
+    Forwarded port: 54360
     Remote server: n137
-    Remote port: 59138
+    Remote port: 32824
     SSH server: talapas-ln2.uoregon.edu
     SSH login: bsmith16
     SSH port: 22
 
 Then use this URL to access Jupyter (NOT the one in the log below):
 
-    http://localhost:52727
+    http://localhost:54360
 
 ##########################################################
-[I 17:23:25.669 NotebookApp] [nb_conda_kernels] enabled, 13 kernels found
-[W 17:23:30.768 NotebookApp] WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.
-[I 17:23:31.019 NotebookApp] [jupyter_nbextensions_configurator] enabled 0.4.1
+[I 12:05:46.646 NotebookApp] [nb_conda_kernels] enabled, 13 kernels found
+[W 12:05:51.868 NotebookApp] WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.
+[I 12:05:52.165 NotebookApp] [jupyter_nbextensions_configurator] enabled 0.4.1
 /home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyter_server/transutils.py:13: FutureWarning: The alias `_()` will be deprecated. Use `_i18n()` instead.
   warnings.warn(warn_msg, FutureWarning)
-[W 2022-03-01 17:23:34.596 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
-[W 2022-03-01 17:23:34.603 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-03-01 17:23:34.604 LabApp] 'port_retries' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-03-01 17:23:34.604 LabApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-03-01 17:23:34.604 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-03-01 17:23:34.604 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-03-01 17:23:34.604 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-03-01 17:23:34.604 LabApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-03-01 17:23:34.606 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
-[I 2022-03-01 17:23:34.625 LabApp] JupyterLab extension loaded from /home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyterlab
-[I 2022-03-01 17:23:34.625 LabApp] JupyterLab application directory is /gpfs/home/bsmith16/.conda/envs/jupyter_base_env/share/jupyter/lab
-[I 17:23:34.642 NotebookApp] Will shut down after 600 seconds with no kernels or terminals.
-[I 17:23:34.643 NotebookApp] Serving notebooks from local directory: /gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/ml
-[I 17:23:34.643 NotebookApp] Jupyter Notebook 6.3.0 is running at:
-[I 17:23:34.643 NotebookApp] http://n137:59138/
-[I 17:23:34.643 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
-[I 17:23:35.441 NotebookApp] 302 GET /tree/SST (172.20.13.244) 2.900000ms
-[I 17:23:46.001 NotebookApp] 302 POST /login?next=%2Ftree%2FSST (172.20.13.244) 3.200000ms
-[W 17:24:05.482 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:05.524 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:05.607 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:05.622 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:05.680 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:05.705 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:05.741 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:05.766 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:05.842 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:05.903 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.198 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.209 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.318 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.330 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.379 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.388 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.404 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.419 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.442 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.458 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.503 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.511 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.692 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:06.700 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:08.716 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:08.738 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:08.818 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:08.833 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:08.861 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:08.887 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:08.924 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:08.950 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.027 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.041 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.288 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.299 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.417 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.430 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.482 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.492 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.509 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.527 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.552 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.568 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.617 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.627 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.789 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:09.797 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 17:24:20.673 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[W 17:24:21.011 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:24:29.468 NotebookApp] Kernel started: 1b3b5e07-2790-4ffd-b54c-218e8580165f, name: conda-env-.conda-py3_mvpa-py
-[W 17:24:29.513 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220301172325 (172.20.13.244) 30.940000ms referer=http://localhost:52727/notebooks/SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[I 17:24:29.536 NotebookApp] Kernel started: afa8c775-594d-4a78-baa0-e3fd623ba9e6, name: conda-env-.conda-py3_mvpa-py
-[W 17:24:30.218 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220301172325 (172.20.13.244) 5.150000ms referer=http://localhost:52727/notebooks/SST/mvpa_all-load_masked_from_betas-validation.ipynb
+[W 2022-03-14 12:05:54.932 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
+[W 2022-03-14 12:05:54.939 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-03-14 12:05:54.939 LabApp] 'port_retries' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-03-14 12:05:54.939 LabApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-03-14 12:05:54.939 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-03-14 12:05:54.939 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-03-14 12:05:54.940 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-03-14 12:05:54.940 LabApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-03-14 12:05:54.941 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
+[I 2022-03-14 12:05:54.960 LabApp] JupyterLab extension loaded from /home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyterlab
+[I 2022-03-14 12:05:54.960 LabApp] JupyterLab application directory is /gpfs/home/bsmith16/.conda/envs/jupyter_base_env/share/jupyter/lab
+[I 12:05:54.977 NotebookApp] Will shut down after 600 seconds with no kernels or terminals.
+[I 12:05:54.978 NotebookApp] Serving notebooks from local directory: /gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/ml
+[I 12:05:54.979 NotebookApp] Jupyter Notebook 6.3.0 is running at:
+[I 12:05:54.979 NotebookApp] http://n137:32824/
+[I 12:05:54.979 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 12:05:55.031 NotebookApp] 302 GET / (172.20.13.244) 1.610000ms
+[I 12:05:55.226 NotebookApp] 302 GET /tree? (172.20.13.244) 2.190000ms
+[I 12:06:02.084 NotebookApp] 302 POST /login?next=%2Ftree%3F (172.20.13.244) 3.120000ms
+[W 12:07:29.708 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:29.753 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:29.837 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:29.852 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:29.904 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:29.930 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:29.970 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:29.997 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.084 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.162 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.471 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.487 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.662 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.682 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.735 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.745 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.762 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.778 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.801 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.817 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.865 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:30.874 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:31.068 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:31.078 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 12:07:39.960 NotebookApp] Notebook SST/mvpa-all-ml-ns_on_nogo_go-v5-analysis_test1_2.ipynb is not trusted
+[W 12:07:41.852 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220314120546 (172.20.13.244) 20.230000ms referer=http://localhost:54360/notebooks/SST/mvpa-all-ml-ns_on_nogo_go-v5-analysis_test1_2.ipynb
+[I 12:07:51.323 NotebookApp] Kernel started: b249acb4-fb82-41a8-aeae-ce9f99463621, name: conda-env-.conda-py3_mvpa-py
 CONDA_PREFIX=/home/bsmith16/.conda/envs/py3_mvpa
+[I 14:28:04.052 NotebookApp] Starting buffering for b249acb4-fb82-41a8-aeae-ce9f99463621:387784909ef6486a81c225cd5d74e504
+[W 14:30:32.144 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.182 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.262 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.277 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.306 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.332 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.370 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.396 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.474 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.489 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.732 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.744 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.862 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.875 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.932 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.942 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.960 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:32.977 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.002 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.018 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.069 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.078 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.231 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.239 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.420 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.430 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.468 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.475 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.489 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.501 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.519 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.531 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.568 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.575 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.723 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.731 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.817 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.826 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.865 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.872 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.885 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.897 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.915 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.927 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.963 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:33.970 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:34.117 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:34.125 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 14:30:53.404 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
+[W 14:30:54.218 NotebookApp] Notebook SST/mvpa-all-ml-ns_on_nogo_go-v5-analysis_test1_2.ipynb is not trusted
+[W 14:31:01.577 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220314120546 (172.20.13.244) 6.720000ms referer=http://localhost:54360/notebooks/SST/mvpa-all-ml-ns_on_nogo_go-v5-analysis_test1_2.ipynb
+[I 14:31:04.334 NotebookApp] Kernel started: 63d66d0d-8e5d-472b-82e3-f0a400698e4c, name: conda-env-.conda-py3_mvpa-py
+[W 14:31:05.282 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220314120546 (172.20.13.244) 4.430000ms referer=http://localhost:54360/notebooks/SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
 CONDA_PREFIX=/home/bsmith16/.conda/envs/py3_mvpa
-[I 17:26:31.903 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:26:31.907 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:26:34.576 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:26:34.578 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:28:35.849 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:28:35.852 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:28:40.106 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:28:40.108 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:30:31.025 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:30:31.028 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:30:34.450 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:30:34.453 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:32:32.780 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:32:32.787 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:32:36.738 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:32:36.741 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:34:46.533 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:34:46.535 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:34:46.870 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:34:46.871 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:36:44.448 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:36:44.450 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:36:48.160 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:36:48.165 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:38:43.949 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:38:43.951 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:38:45.041 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:38:45.042 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:40:31.086 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:40:31.089 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:40:44.557 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:40:44.560 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:42:30.364 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:42:30.366 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:42:51.972 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:42:51.975 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:44:30.991 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:44:30.994 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:44:52.931 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:44:52.935 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:46:47.615 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:46:47.618 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:46:49.819 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:46:49.822 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:48:50.520 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:48:50.552 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:48:51.115 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:48:51.117 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:50:47.222 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:50:47.225 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:50:48.921 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:50:48.923 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:52:46.639 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:52:46.642 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:52:47.690 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:52:47.692 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:54:45.334 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:54:45.337 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:54:47.127 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:54:47.129 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:56:46.536 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:56:46.539 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:56:48.464 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:56:48.467 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 17:58:45.115 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 17:58:45.117 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 17:58:47.402 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 17:58:47.409 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:00:46.200 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:00:46.218 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:00:48.394 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:00:48.397 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:02:46.337 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:02:46.339 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:02:47.793 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:02:47.795 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:04:46.346 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:04:46.349 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:04:46.921 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:04:46.922 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:06:28.143 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:06:28.148 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:06:31.769 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:06:31.773 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:08:28.352 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:08:28.369 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:08:31.507 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:08:31.509 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:10:29.179 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:10:29.194 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:10:31.863 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:10:31.865 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:12:30.102 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:12:30.120 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:12:35.040 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:12:35.042 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:14:30.083 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:14:30.087 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:14:35.751 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:14:35.754 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:15:12.205 NotebookApp] Kernel interrupted: 1b3b5e07-2790-4ffd-b54c-218e8580165f
-[I 18:16:32.664 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:16:32.668 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:16:37.324 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:16:37.326 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:18:31.977 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:18:31.986 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:18:35.888 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:18:35.890 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:20:30.240 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:20:30.244 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:20:35.218 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:20:35.220 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:22:30.812 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:22:30.837 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:22:34.736 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:22:34.738 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:24:30.543 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:24:30.583 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:24:45.171 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:24:45.173 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:26:31.737 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:26:31.741 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:26:49.550 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:26:49.552 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:28:31.215 NotebookApp] Saving file at /SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb
-[W 18:28:31.219 NotebookApp] Notebook SST/mvpa_all-ml-ns_on_nogo_go-v5-analysis_test1-validation_set.ipynb is not trusted
-[I 18:28:48.462 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:28:48.464 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
-[I 18:30:32.242 NotebookApp] Saving file at /SST/mvpa_all-load_masked_from_betas-validation.ipynb
-[W 18:30:32.245 NotebookApp] Notebook SST/mvpa_all-load_masked_from_betas-validation.ipynb is not trusted
+slurmstepd: error: *** JOB 17986773 ON n137 CANCELLED AT 2022-03-14T16:05:45 DUE TO TIME LIMIT ***
