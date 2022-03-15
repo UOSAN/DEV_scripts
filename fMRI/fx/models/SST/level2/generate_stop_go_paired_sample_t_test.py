@@ -9,7 +9,7 @@ dev_scripts_path = '/Users/benjaminsmith/Google Drive/oregon/preprocessing/DEV_s
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 
 train_betas_with_data = get_data_for_confirmed_train_subjs(
-    beta_glob="/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/posterror_conditions/sub-DEV*/beta_000[1-2].nii",
+    beta_glob="/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_000[1-2].nii",
     nonbids_data_path=nonbids_data_path,
     ml_data_folderpath=ml_data_folderpath,
     ml_scripting_path=ml_scripting_path
@@ -38,9 +38,3 @@ for s_i, s in enumerate(subject_list):
         print("\t" + beta_path_match)
     print("};")
 
-
-
-
-#OK SO WE HAVE GOT THESE, BUT WE REALLY NEED SOMETHING DIFFERENT, BECAUSE WE'RE NOT JUST GRABBING BETA_0002S. WE'RE GRABBING
-#BETA_0001.NII AND BETA_0002.NII
-#HOWEVER WE STILL PROBABLY WANNA MERGE IN INDIVIDUAL DIFFERNCES FOR MORE ANALYSES.
