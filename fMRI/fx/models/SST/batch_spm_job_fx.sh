@@ -21,7 +21,7 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_betaseries_w1.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_betaseries_w1_w_contrasts.m
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh

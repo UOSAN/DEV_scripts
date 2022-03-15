@@ -46,6 +46,7 @@ def read_data(file: Path):
 
     column 0 - trial number
     column 2 - trial type. 0=Go, 1=NoGo, 2=null trial (there are 96 Go, 32 NoGo, 128 null)
+    column 3(?) - arrow presented
     column 6 - subject response (keycode). 0=no response.
     The participant is supposed to respond with left or right hand depending on the stimulus presented.
     Keycodes 91=left, 94=right correspond to (3, 6) buttons on button box in MRI,
@@ -64,6 +65,8 @@ def read_data(file: Path):
     trial_number = response_data[:, 0]
     go_no_go_condition = response_data[:, 2]
 
+    arrow_presented = response_data[:, 3]
+
     subject_response = response_data[:, 6]
     reaction_time = response_data[:, 8]
 
@@ -76,7 +79,7 @@ def read_data(file: Path):
     # so replace the trial duration with the participant reaction time.
     numpy.copyto(trial_duration, reaction_time, where=go_success)
 
-    return trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time
+    return trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time, arrow_presented
 
 
 def create_masks(condition: numpy.ndarray, response: numpy.ndarray) -> List:
@@ -128,13 +131,14 @@ def create_posterror_masks_from_masks(condition_masks: List) -> List:
                  other_successful_go, no_go_success, no_go_fail, null_trials, go_fail
                 ))
 
-def create_trials(trial_number: numpy.ndarray, trial_start_time: numpy.ndarray, trial_duration: numpy.ndarray):
+def create_trials(trial_number: numpy.ndarray, trial_start_time: numpy.ndarray, trial_duration: numpy.ndarray,subject_response:numpy.ndarray):
     # Output names (trial number or condition name (GoFail, GoSuccess, NoGoFail, NoGoSuccess)),
     # onsets (when the thing started),
     # durations (how long the thing lasted)
     names = numpy.asarray(trial_number, dtype=numpy.object)
     onsets = numpy.asarray(trial_start_time, dtype=numpy.object)
     durations = numpy.asarray(trial_duration, dtype=numpy.object)
+    raw_response = numpy.asarray(subject_response, dtype=numpy.object)
 
     trials = {'names': names,
               'onsets': onsets,
@@ -211,9 +215,9 @@ def write_bids_events(input_dir: Union[PathLike, str], subject_id: str, wave: st
         numpy.savetxt(str(path / file_name),
                       trials,
                       delimiter='\t',
-                      header='onset\tduration\ttrial_type',
+                      header='onset\tduration\ttrial_type\tpresented\tresponse',
                       comments='',
-                      fmt=['%10.5f', '%10.5f', '%s'])
+                      fmt=['%10.5f', '%10.5f', '%s','%10.5f','%s'])
 
         file_name = Path(f'sub-{STUDY_ID}{subject_id}_ses-wave{wave}_task-SST_acq-1_events.json')
         write_events_description(path, file_name)
@@ -243,6 +247,14 @@ def write_events_description(path: Path,
                 "failed-stop": "No-go or stop trial, incorrect response",
                 "null": "Null trial where cue stimulus is presented for duration"
             }
+        },
+        "presented": {
+            "LongName": "presented arrow to the subject",
+            "Description": "arrow presetned to the subject; 0=left, 1=right, 2=null"
+        },
+        "response": {
+            "LongName": "preprocessed categorization of the subject response.",
+            "Description": "subject response"
         }
     }
     with open(str(path / file_name), 'w') as f:
@@ -252,6 +264,83 @@ def write_events_description(path: Path,
 def print_mask_signature(masks):
     print([str(numpy.sum(m)) + ' True of ' + (str(len(m))) for m in masks])
     print(numpy.sum([numpy.sum(m) for m in masks]))
+
+# takes a raw ascii response and returns a left or right keypress if the keypress can be categorized as either of those
+# otherwise it returns an 'invalid response' signal, distinct from other responses
+def clean_response_data(raw_response: numpy.ndarray, arrow_presented: numpy.ndarray):
+    # The participant is supposed to respond with left or right hand depending on the stimulus presented.
+    # Keycodes 91=left, 94=right correspond to (3, 6) buttons on button box in MRI,
+    # but there are some other keypress pairs that are common:
+    # (21, 15) correspond to ('r', 'l') keys on keyboard
+    # (197, 198) correspond to ('<', '>') keys on keyboard
+    # (92, 93) correspond to (4, 5) buttons on button box in MRI
+    # (90, 94) correspond to (2, 6) buttons on button box in MRI
+    # (94, 95) correspond to (6, 7) buttons on button box in MRI (which are on the same hand)
+    # this is really best done considering a list of responses.
+
+    #we get a tally, we consider that the most common two items are left and right,
+    # and then see if they fit any of the pairs we recognize. if we don't the whole dataset might be off.
+    item_responses = numpy.unique(raw_response[raw_response!=0], return_counts=True)
+
+    item_order = (-item_responses[1]).argsort()
+    most_common_two_responses = numpy.take(item_responses[0],item_order)[0:2]
+
+    labelled_responses = [None] * len(raw_response)
+    # BUTTON_BOX_2 = 90
+    # BUTTON_BOX_3 = 91
+    # BUTTON_BOX_4 = 92
+    # BUTTON_BOX_5 = 93
+    # BUTTON_BOX_6 = 94
+    # BUTTON_BOX_7 = 95
+    # R_KEY = 21
+    # L_KEY = 15
+    # LESS_THAN_KEY = 197
+    # GREATER_THAN_KEY = 198
+
+    #try to identify the code the subject has used.
+    # if set(most_common_two_responses)==set([BUTTON_BOX_3,BUTTON_BOX_6]):
+    #     # left_code = BUTTON_BOX_3
+    #     # right_code = BUTTON_BOX_6
+    #     print(item_responses)
+    # elif set(most_common_two_responses)==set([BUTTON_BOX_3,BUTTON_BOX_6]):
+    # else:
+    #     print("couldn't identify button pair")
+    print(item_responses)
+    print("most common responses: ")
+    print(most_common_two_responses)
+    import pandas as pd
+
+    counts = pd.DataFrame({
+        'presented':arrow_presented,
+        'pressed':raw_response
+    }
+    ).groupby(['presented','pressed']).aggregate(len)
+
+    left_responses = [91,197,15,92] #also include:90? 94
+    right_responses = [94,198,21,93] #also include: 95 (vs. 94)
+    for i in range(len(raw_response)):
+        #special case where most common items were 94 and 95, 94 should be mapped to left and 95 should be mapped to right
+        if set(most_common_two_responses)==set([94,95]):
+            if raw_response[i]==94:
+                labelled_responses[i] = 'left'
+            elif raw_response[i]==95:
+                labelled_responses[i] = 'right'
+            next
+        #otherwise we carry on to the normal labelling
+        if raw_response[i] in left_responses: labelled_responses[i]='left'
+        elif raw_response[i] in right_responses: labelled_responses[i] = 'right'
+        elif raw_response[i]==0:
+            pass
+        else:
+            print("raw response unidentified")
+            print(raw_response[i])
+            labelled_responses[i] = 'invalid'
+
+
+    return(labelled_responses)
+
+
+
 
 
 def main(input_dir: str, bids_dir: str = None, file_limit=None):
@@ -274,7 +363,7 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None):
             print(f.name)
 
             # Read data out of the .mat file
-            trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time = \
+            trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time, arrow_presented = \
                 read_data(f)
 
             # Create masks for the various conditions
@@ -301,17 +390,22 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None):
                 print(f'Wrong number of null trials : (subject, expected, actual) '
                       f'({subject_id}, {COUNT_NULL}, {numpy.count_nonzero(masks[3])})')
 
-            if bids_dir: #create MAT files storing behavioral information
+            #preprocess subject responses for attention check
+            cleaned_subject_response = clean_response_data(subject_response, arrow_presented)
+
+            if bids_dir: #create MAT files storing behavioral information in bids format
                 print("creating bids events")
                 trial_type = numpy.empty_like(trial_number, dtype=numpy.object)
                 trial_type_names = ['correct-go', 'correct-stop', 'failed-stop', 'null', 'failed-go']
                 for mask, name in zip(masks, trial_type_names):
                     numpy.putmask(trial_type, mask, name)
                 write_bids_events(bids_dir, subject_id, wave_number,
-                                  numpy.stack((trial_start_time, trial_duration, trial_type), axis=1))
+                                  numpy.stack(
+                                      (trial_start_time, trial_duration, trial_type, arrow_presented, cleaned_subject_response), axis=1))
             else:
-                print("creating betaseries and conditions")#create onset files for SPM first-level analysis
-                trials = create_trials(trial_number, trial_start_time, trial_duration)
+                print("creating betaseries and conditions")
+                	#create onset files for SPM first-level analysis
+                trials = create_trials(trial_number, trial_start_time, trial_duration, subject_response)
 
                 # Create paths and file names
                 write_betaseries(input_dir, subject_id, wave_number, trials)
