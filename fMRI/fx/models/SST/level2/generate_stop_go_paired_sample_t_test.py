@@ -5,7 +5,7 @@ from level2_utils import *
 # paths
 nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
-dev_scripts_path = '/Users/benjaminsmith/Google Drive/oregon/preprocessing/DEV_scripts'
+dev_scripts_path = '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts'
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 
 train_betas_with_data = get_data_for_confirmed_train_subjs(
