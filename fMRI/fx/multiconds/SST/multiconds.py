@@ -451,4 +451,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    raise Exception("Deprecated this version of multiconds. use multiconds full duration instead.")
+
     main(args.input_dir, args.bids_dir)
