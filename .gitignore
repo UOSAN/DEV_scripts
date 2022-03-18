@@ -8,6 +8,8 @@ fMRI/ppc/smooth/sid_batches/*.mat
 fMRI/fx/models/*/sid_batches/fx_betaseries*/*.mat
 fMRI/fx/models/output/
 fMRI/fx/models/output*/*
+fMRI/fx/models/*/level2/*/beta*.nii
+fMRI/fx/models/*/level2/*/*/beta*.nii
 fMRI/ppc/output/
 fMRI/ppc/smooth/output/
 fMRI/ppc/smooth/sid_batches/*/*.mat

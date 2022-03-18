@@ -32,3 +32,4 @@ matlabbatch{3}.spm.stats.fmri_spec.cvi = 'FAST';
 matlabbatch{4}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File', substruct('.','val', '{}',{3}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{4}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{4}.spm.stats.fmri_est.method.Classical = 1;
+
