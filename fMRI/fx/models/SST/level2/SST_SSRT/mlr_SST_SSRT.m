@@ -3,83 +3,85 @@
 % spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
-matlabbatch{1}.spm.stats.factorial_design.dir = {'/Users/benjaminsmith/Google Drive/oregon/preprocessing/DEV_scripts/fMRI/fx/models/SST/level2'};
+matlabbatch{1}.spm.stats.factorial_design.dir = {'/Users/bensmith/Documents/code/DEV_scripts/fMRI/fx/models/SST/level2/SST_SSRT/'};
+matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(1).cname = 'SST_SSRT';
+matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(1).iCC = 1;
 matlabbatch{1}.spm.stats.factorial_design.des.mreg.scans = {
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV005/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV006/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV009/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV010/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV011/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV012/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV013/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV014/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV015/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV016/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV017/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV018/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV019/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV020/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV021/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV022/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV023/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV024/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV025/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV026/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV027/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV028/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV029/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV030/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV034/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV035/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV036/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV039/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV040/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV041/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV042/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV043/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV046/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV047/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV048/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV049/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV050/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV051/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV052/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV053/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV055/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV056/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV057/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV058/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV059/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV060/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV062/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV064/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV067/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV068/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV071/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV073/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV074/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV076/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV077/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV079/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV083/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV084/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV085/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV086/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV087/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV089/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV097/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV105/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV107/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV135/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV141/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV145/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV157/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV158/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV159/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV164/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV169/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV171/beta_0002.nii,1'
-'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV173/beta_0002.nii,1'};
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV005/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV006/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV009/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV010/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV011/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV012/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV013/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV014/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV015/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV016/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV017/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV018/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV019/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV020/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV021/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV022/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV023/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV024/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV025/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV026/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV027/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV028/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV029/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV030/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV034/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV035/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV036/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV039/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV040/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV041/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV042/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV043/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV046/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV047/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV048/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV049/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV050/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV051/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV052/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV053/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV055/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV056/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV057/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV058/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV059/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV060/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV062/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV064/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV067/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV068/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV071/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV073/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV074/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV076/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV077/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV079/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV083/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV084/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV085/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV086/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV087/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV089/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV097/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV105/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV107/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV135/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV141/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV145/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV157/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV158/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV159/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV164/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV169/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV171/beta_0002.nii,1'
+'/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV173/beta_0002.nii,1'};
 matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(1).c = [386.743402
 385.519463
 493.708792
@@ -155,8 +157,8 @@ matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(1).c = [386.743402
 327.3553785
 352.806942
 234.564744];
-matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(1).cname = 'SST_SSRT';
-matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(1).iCC = 1;
+matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(2).cname = 'age365';
+matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(2).iCC = 1;
 matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(2).c = [24.23561644
 60.32328767
 37.73972603
@@ -232,8 +234,8 @@ matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(2).c = [24.23561644
 35.05479452
 56.92328767
 38.64109589];
-matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(2).cname = 'age365';
-matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(2).iCC = 1;
+matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(3).cname = 'birthsex';
+matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(3).iCC = 1;
 matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(3).c = [1
 1
 1
@@ -309,8 +311,6 @@ matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(3).c = [1
 1
 2
 1];
-matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(3).cname = 'birthsex';
-matlabbatch{1}.spm.stats.factorial_design.des.mreg.mcov(3).iCC = 1;
 matlabbatch{1}.spm.stats.factorial_design.des.mreg.incint = 1;
 matlabbatch{1}.spm.stats.factorial_design.cov = struct('c', {}, 'cname', {}, 'iCFI', {}, 'iCC', {});
 matlabbatch{1}.spm.stats.factorial_design.multi_cov = struct('files', {}, 'iCFI', {}, 'iCC', {});

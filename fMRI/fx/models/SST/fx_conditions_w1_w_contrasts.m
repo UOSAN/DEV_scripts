@@ -36,5 +36,11 @@ matlabbatch{5}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
 matlabbatch{5}.spm.stats.con.consess{2}.tcon.name = 'CG>CS';
 matlabbatch{5}.spm.stats.con.consess{2}.tcon.weights = [1 -1];
 matlabbatch{5}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
+matlabbatch{5}.spm.stats.con.consess{3}.tcon.name = 'CS>FS';
+matlabbatch{5}.spm.stats.con.consess{3}.tcon.weights = [0 1 -1];
+matlabbatch{5}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
+matlabbatch{5}.spm.stats.con.consess{4}.tcon.name = 'FS>CS';
+matlabbatch{5}.spm.stats.con.consess{4}.tcon.weights = [0 -1 1];
+matlabbatch{5}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
 %we can add additional contrasts to this file if necessary.
 matlabbatch{5}.spm.stats.con.delete = 0;
