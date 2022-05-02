@@ -1,11 +1,13 @@
 import argparse
 import json
 import re
+import warnings
 from os import PathLike
 from pathlib import Path
 from typing import Union, List
 
 import numpy
+import pandas as pd
 import scipy.io
 
 # Define some constants interpret the behavioral data
@@ -123,7 +125,7 @@ def create_posterror_masks_from_masks(condition_masks: List) -> List:
 
     # create one beta for all the other SuccessGo trials
     other_successful_go = go_success & (go_success_following_successful_stop == False) & (
-                go_success_following_failed_stop == False)
+            go_success_following_failed_stop == False)
     # then just pass on the other masks as returned from create_masks
 
     # other_failed_go = go_fail & (go_following_successful_stop==False) & (go_following_failed_stop==False)
@@ -165,6 +167,11 @@ def create_conditions(start_time: numpy.ndarray, duration: numpy.ndarray, masks:
             onsets = onsets + [cond_onset]
             cond_duration = duration[mask].reshape(numpy.count_nonzero(mask), 1)
             durations = durations + [cond_duration]
+
+        else:
+            warnings.warn(
+                "condition " + cond_name + " has no actual trials for current subject. Depending on the condition, some analyses may assume the condition exists so this may present a problem.")
+            # raise Exception()
     #     names = numpy.asarray(['CorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo'], dtype=numpy.object)
     #     onsets = numpy.zeros((len(masks),), dtype=numpy.object)
     #     durations = numpy.zeros((len(masks),), dtype=numpy.object)
@@ -189,7 +196,7 @@ def create_posterror_conditions(start_time: numpy.ndarray, duration: numpy.ndarr
 
 def write_betaseries(output_dir: Union[PathLike, str], subject_id: str, wave: str, trials):
     path = Path(output_dir) / 'betaseries'
-    #path = Path('betaseries')
+    # path = Path('betaseries')
     path.mkdir(parents=True, exist_ok=True)
     file_name = f'DEV{subject_id}_{wave}_SST1.mat'
 
@@ -198,7 +205,7 @@ def write_betaseries(output_dir: Union[PathLike, str], subject_id: str, wave: st
 
 def write_beta_data(output_dir: Union[PathLike, str], subfolder, subject_id: str, wave: str, trials):
     path = Path(output_dir) / subfolder
-    #path = Path(subfolder)
+    # path = Path(subfolder)
     path.mkdir(parents=True, exist_ok=True)
     file_name = f'DEV{subject_id}_{wave}_SST1.mat'
 
@@ -271,7 +278,7 @@ def write_events_description(path: Path,
 # for debugging, can help to summarize what's inside the mask.
 def print_mask_signature(masks):
     print([str(numpy.sum(m)) + ' True of ' + (str(len(m))) for m in masks])
-    print(numpy.sum([numpy.sum(m) for m in masks]))
+    # print(numpy.sum([numpy.sum(m) for m in masks]))
 
 
 # takes a raw ascii response and returns a left or right keypress if the keypress can be categorized as either of those
@@ -314,10 +321,9 @@ def clean_response_data(raw_response: numpy.ndarray, arrow_presented: numpy.ndar
     # elif set(most_common_two_responses)==set([BUTTON_BOX_3,BUTTON_BOX_6]):
     # else:
     #     print("couldn't identify button pair")
-    print(item_responses)
-    print("most common responses: ")
-    print(most_common_two_responses)
-    import pandas as pd
+    # print(item_responses)
+    # print("most common responses: ")
+    # print(most_common_two_responses)
 
     counts = pd.DataFrame({
         'presented': arrow_presented,
@@ -348,6 +354,44 @@ def clean_response_data(raw_response: numpy.ndarray, arrow_presented: numpy.ndar
             labelled_responses[i] = 'invalid'
 
     return (labelled_responses)
+
+
+def save_varying_condition_list(output_folder: str, subfolder: str, file_condition_dict: dict,
+                                target_conditions: List):
+    # for the purposes of the post-error analysis, we need to put these into two groups:
+    # runs that contain both 'CorrectGoFollowingCorrectStop' and 'CorrectGoFollowingFailedStop'; and runs that do not contain either.
+    # that should be straightforward enough...we might also want to do this separately for each wave.
+
+    complete_list_by_wave = {}
+    for sub, wave in file_condition_dict:
+        s_w_cond_list = file_condition_dict[(sub, wave)]
+        #print(s_w_cond_list)
+        target_condition_count = len(
+            set(target_conditions).intersection(set(s_w_cond_list))
+        )
+        if wave not in complete_list_by_wave.keys():
+            complete_list_by_wave[wave] = {}
+            complete_list_by_wave[wave]['complete'] = []
+            complete_list_by_wave[wave]['missing'] = []
+
+        if target_condition_count == 2:
+            complete_list_by_wave[wave]['complete'].append(sub)
+        else:
+            complete_list_by_wave[wave]['missing'].append(sub)
+
+    # now save the lists
+    for wave in complete_list_by_wave.keys():
+        for condition_class in complete_list_by_wave[wave]:
+            condition_complete_folder = Path(output_folder) / subfolder
+            condition_complete_folder.mkdir(parents=True, exist_ok=True)
+            condition_complete_filepath = str(condition_complete_folder / (condition_class + "_" + str(wave) + ".txt"))
+            subject_count = len(complete_list_by_wave[wave][condition_class])
+            print("writing " + condition_complete_filepath + " with " + str(subject_count) + " subjects.")
+            # path = Path(subfolder)
+
+            with open(condition_complete_filepath, 'w') as filehandle:
+                for listitem in complete_list_by_wave[wave][condition_class]:
+                    filehandle.write('DEV%s\n' % listitem)
 
 
 def main(input_dir: str, bids_dir: str = None, file_limit=None,
@@ -447,7 +491,6 @@ if __name__ == "__main__":
                         help='absolute path to your top level bids folder.',
                         dest='bids_dir'
                         )
-
 
     args = parser.parse_args()
 
