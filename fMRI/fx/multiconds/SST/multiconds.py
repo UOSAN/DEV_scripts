@@ -408,6 +408,9 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
     if file_limit is not None:
         files = files[0:file_limit]
 
+    file_condition_index = {}
+    file_condition_index['conditions'] = {}
+
     for f in files:
         match = re.search(pattern, str(f.name))
         if match:
@@ -423,8 +426,8 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
             print_mask_signature(masks)
 
             # create masks for the post-error slowing
-            posterror_masks = create_posterror_masks_from_masks(masks)
-            print_mask_signature(posterror_masks)
+            # posterror_masks = create_posterror_masks_from_masks(masks)
+            # print_mask_signature(posterror_masks)
 
             # Perform some quality checking on the numbers of responses (should be 256),
             # the number of null trials (should be 128),
@@ -466,11 +469,23 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 conditions = create_conditions(trial_start_time, trial_duration, masks)
                 write_beta_data(output_folder, 'conditions', subject_id, wave_number, conditions)
 
-                posterror_conditions = create_posterror_conditions(trial_start_time, trial_duration, posterror_masks)
-                write_beta_data(output_folder, 'posterror_conditions', subject_id, wave_number, posterror_conditions)
+                file_condition_index['conditions'][(subject_id, wave_number)] = conditions['names']
+
+
+
+                # posterror_conditions = create_posterror_conditions(trial_start_time, trial_duration, posterror_masks)
+                # write_beta_data(output_folder, 'posterror_conditions', subject_id, wave_number, posterror_conditions)
                 print("written data for subject " + str(subject_id))
         else:
             print("match not found for " + str(f.name))
+
+
+    save_varying_condition_list(output_folder=output_folder,
+                                subfolder="conditions",
+                                file_condition_dict=file_condition_index['conditions'],
+                                target_conditions=['CorrectGo',
+                                                   'CorrectStop'])
+
 
 
 if __name__ == "__main__":

@@ -74,7 +74,7 @@ for SUB in $SUBJLIST; do
 		 	${SHELL_SCRIPT}
 	 	sleep .25
     else
-    	echo "warning for subject $SUB: not in contrast or not contrast list. first-level analysis WITHOUT contrast will be done using $SCRIPT_NO_CONTRASTS."
+    	echo "warning for subject $SUB: not in contrast or not contrast list. first-level analysis WITHOUT contrast will be attempted using $SCRIPT_NO_CONTRASTS."
     	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT_NO_CONTRASTS,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
 		 	--job-name=${RESULTS_INFIX} \
 		 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}.log \
