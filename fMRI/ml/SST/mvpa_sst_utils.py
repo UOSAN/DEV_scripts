@@ -160,6 +160,28 @@ def do_LinearSVC(train_X,train_y,test_X,test_y):
     predict_y = sklearn_clf.predict(test_X)
     return(predict_y,predict_y_prob,sklearn_clf)
 
+def do_LinearSVC_proba(train_X,train_y,test_X,test_y,svc_kernel='linear'):
+    sklearn_clf = SVC(kernel=svc_kernel,probability=True)
+
+    #create the classifier with a probability function
+    #https://mmuratarat.github.io/2019-10-12/probabilistic-output-of-svm#:~:text=SVMs%20don't%20output%20probabilities,the%20output%20to%20class%20probabilities.&text=For%20many%20problems%2C%20it%20is,of%20certainty%20about%20the%20answer.
+    #we don't need this I'm doing my own probability estimate
+    #hmmm, is this why the model is performing so well? the tuning?
+    #sklearn_clf = CalibratedClassifierCV(clf_svc)
+    #train
+    sklearn_clf.fit(train_X, train_y)
+
+    #get the _probability_ we fall into each class
+    predict_y_prob = sklearn_clf.predict_proba(test_X)
+    predict_y = sklearn_clf.predict(test_X)
+    return(predict_y,predict_y_prob,sklearn_clf)
+
+def do_LinearSVC_proba_poly(train_X,train_y,test_X,test_y):
+    return(do_LinearSVC_proba(train_X,train_y,test_X,test_y,svc_kernel='poly'))
+
+def do_LinearSVC_proba_sigmoid(train_X,train_y,test_X,test_y):
+    return(do_LinearSVC_proba(train_X,train_y,test_X,test_y,svc_kernel='sigmoid'))
+
 
 
 def do_SVC(train_X,train_y,test_X,test_y):

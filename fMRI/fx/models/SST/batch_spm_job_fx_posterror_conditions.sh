@@ -24,7 +24,7 @@ SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 TASK=SST
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/$TASK/fx_posterror_conditions_w1.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/$TASK/fx_posterror_conditions_w1_w_contrasts.m
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
