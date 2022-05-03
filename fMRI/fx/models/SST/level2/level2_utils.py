@@ -24,7 +24,7 @@ def get_contrasts_for_betas(
         #                   ][0]
 
         for c_i, contrast in enumerate(subj_l1_mat_config['SPM']['xCon']):
-            #print(str(c_i) + ": " + contrast['name'] + " " + contrast['Vspm']['fname'])
+            print(str(c_i) + ": " + contrast['name'] + " " + contrast['Vspm']['fname'])
             betas.loc[beta_i, 'contrast_' + contrast['name'] + "_fname"] =contrast['Vspm']['fname']
 
         # if contrast_index is None:

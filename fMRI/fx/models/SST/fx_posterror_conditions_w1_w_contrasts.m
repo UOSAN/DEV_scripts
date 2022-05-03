@@ -34,10 +34,10 @@ matlabbatch{4}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{4}.spm.stats.fmri_est.method.Classical = 1;
 matlabbatch{5}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{5}.spm.stats.con.consess{1}.tcon.name = 'CorrectGoFollowing(CS>FS)';
-matlabbatch{5}.spm.stats.con.consess{1}.tcon.weights = [1 1];
+matlabbatch{5}.spm.stats.con.consess{1}.tcon.weights = [1 -1];
 matlabbatch{5}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
-matlabbatch{5}.spm.stats.con.consess{2}.tcon.name = 'CorrectGoFollowing(CS>FS)';
-matlabbatch{5}.spm.stats.con.consess{2}.tcon.weights = [1 -1];
+matlabbatch{5}.spm.stats.con.consess{2}.tcon.name = 'CorrectGoFollowing(FS>CS)';
+matlabbatch{5}.spm.stats.con.consess{2}.tcon.weights = [-1 1];
 matlabbatch{5}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
 %we can add additional contrasts to this file if necessary.
 matlabbatch{5}.spm.stats.con.delete = 0;
