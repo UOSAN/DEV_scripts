@@ -24,10 +24,6 @@ fMRI/ml/SST/*.err
 fMRI/ml/__pycache__/*
 fMRI/ml/nilearn_cache/*
 fMRI/ml/nilearn_cache
-fMRI/fx/models/SST/level2/__pycache__
-fMRI/fx/models/SST/level2/__pycache__/
-fMRI/fx/models/SST/level2/__pycache__/*
-fMRI/fx/models/SST/level2/__pycache__/*.pyc
 
 org/bidsQC/bidsQC/logs_bidsQC/
 org/bidsQC/conversion/logs_dcm2bids/*
