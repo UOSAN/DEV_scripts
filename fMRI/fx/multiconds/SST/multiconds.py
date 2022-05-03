@@ -469,7 +469,7 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 conditions = create_conditions(trial_start_time, trial_duration, masks)
                 write_beta_data(output_folder, 'conditions', subject_id, wave_number, conditions)
 
-                file_condition_index['conditions'][(subject_id, wave_number)] = conditions['names']
+                # file_condition_index['conditions'][(subject_id, wave_number)] = conditions['names']
 
 
 
@@ -479,12 +479,12 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
         else:
             print("match not found for " + str(f.name))
 
-
-    save_varying_condition_list(output_folder=output_folder,
-                                subfolder="conditions",
-                                file_condition_dict=file_condition_index['conditions'],
-                                target_conditions=['CorrectGo',
-                                                   'CorrectStop'])
+    #removed because there are multiple sets of target conditions, and in the end I decided to deal with the variance in contrasts a different way.
+    # save_varying_condition_list(output_folder=output_folder,
+    #                             subfolder="conditions",
+    #                             file_condition_dict=file_condition_index['conditions'],
+    #                             target_conditions=['CorrectGo',
+    #                                                'CorrectStop'])
 
 
 
