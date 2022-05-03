@@ -1,3 +1,5 @@
+__pycache__/*
+*/__pycache__/*
 .DS_Store
 .ipynb_checkpoints/*
 .ipynb_checkpoints
@@ -20,9 +22,12 @@ fMRI/ml/*.err
 fMRI/ml/SST/*.log
 fMRI/ml/SST/*.err
 fMRI/ml/__pycache__/*
-fMRI/ml/__pycache__
 fMRI/ml/nilearn_cache/*
 fMRI/ml/nilearn_cache
+fMRI/fx/models/SST/level2/__pycache__
+fMRI/fx/models/SST/level2/__pycache__/
+fMRI/fx/models/SST/level2/__pycache__/*
+fMRI/fx/models/SST/level2/__pycache__/*.pyc
 
 org/bidsQC/bidsQC/logs_bidsQC/
 org/bidsQC/conversion/logs_dcm2bids/*
