@@ -3,7 +3,7 @@
 % spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
-matlabbatch{1}.spm.stats.factorial_design.dir = {'/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/correctgo_following_failed_and_correct_stop/CGFollowing(FS-CS)'};
+matlabbatch{1}.spm.stats.factorial_design.dir = {'/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/correctgo_following_failed_and_correct_stop/attempt2/CGFollowing(FS-CS)'};
 matlabbatch{1}.spm.stats.factorial_design.des.t1.scans = {
 '/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/posterror_conditions/sub-DEV005/spmT_0001.nii,1'
 '/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/posterror_conditions/sub-DEV006/spmT_0001.nii,1'
