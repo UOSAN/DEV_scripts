@@ -21,7 +21,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
 
 betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 
-for contrast_name in ['CS>CG','CG>CS','CS>FS','FS>CS']:
+for contrast_name in ['CorrectGoFollowing(CS>FS)','CorrectGoFollowing(FS>CS)']:
     contrast_colname = 'contrast_' + contrast_name + '_fname'
     print(contrast_name)
     if contrast_colname in betas_with_contrasts.columns:

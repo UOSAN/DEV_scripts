@@ -10,7 +10,10 @@ def get_contrasts_for_betas(
 ):
     betas['spm_l2_targeted_contrast_filepath'] = None
 
+    betas.reset_index(inplace=True,drop=True)
+
     for beta_i, beta_folderpath in enumerate(betas.spm_l2_path):
+        print(beta_folderpath)
         # load the mat file associated with the current run
         subj_l1_mat_config = scipy.io.loadmat(str(
             beta_folderpath + '/SPM.mat'), appendmat=False, simplify_cells=True, variable_names='SPM')
