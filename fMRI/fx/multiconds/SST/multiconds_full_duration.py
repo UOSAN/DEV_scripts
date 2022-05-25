@@ -31,5 +31,7 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
+    print(args.input_dir)
+
     #we don't do BIDs here because BIDs, by convention, uses RT for duration.
     main(args.input_dir, bids_dir=None, use_rt_for_go_success_trials=False, output_folder= args.output_dir)

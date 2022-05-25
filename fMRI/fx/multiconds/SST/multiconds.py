@@ -410,6 +410,8 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
 
     file_condition_index = {}
     file_condition_index['conditions'] = {}
+    multicond_df_list = []
+
 
     for f in files:
         match = re.search(pattern, str(f.name))
@@ -463,6 +465,18 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 # create onset files for SPM first-level analysis
                 trials = create_trials(trial_number, trial_start_time, trial_duration, subject_response)
 
+                trial_df_row = pd.DataFrame({
+                    'subject_id':subject_id,
+                    'wave_number':wave_number,
+                    'trial_number': trial_number, 
+                    'go_no_go_condition': go_no_go_condition, 
+                    'subject_response': subject_response, 
+                    'reaction_time': reaction_time,
+                    'trial_duration': trial_duration, 
+                    'trial_start_time': trial_start_time, 
+                    'arrow_presented': arrow_presented})
+
+                multicond_df_list = multicond_df_list + [trial_df_row]
                 # Create paths and file names
                 write_betaseries(output_folder, subject_id, wave_number, trials)
 
@@ -478,6 +492,10 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 print("written data for subject " + str(subject_id))
         else:
             print("match not found for " + str(f.name))
+
+    multicond_df = pd.concat(multicond_df_list)
+    multicond_df.to_csv(output_folder + "_multicond_out.csv")
+    
 
     #removed because there are multiple sets of target conditions, and in the end I decided to deal with the variance in contrasts a different way.
     # save_varying_condition_list(output_folder=output_folder,

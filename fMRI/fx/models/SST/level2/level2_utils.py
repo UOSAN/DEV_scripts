@@ -3,7 +3,14 @@ import os
 from glob import glob
 import re
 import scipy.io
+import yaml
+import socket
 
+
+def read_yaml_for_host(file_path):
+    hostname = socket.gethostname()
+    with open(file_path, "r") as f:
+        return yaml.safe_load(f)[hostname]
 
 def get_contrasts_for_betas(
         betas
