@@ -2,17 +2,22 @@ import pandas as pd
 import os
 from glob import glob
 from level2_utils import get_data_for_confirmed_train_subjs
-beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
+
+
+
+
+config_data = read_yaml_for_host("l2_config.yml")
+beta_paths = glob(config_data['sst_wave1_path'] + 'conditions/sub-DEV*/beta_0002.nii')
 
 #beta_df['spm_l2_path_description'] =beta_df.beta_filepath
 #paths
-nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
+nonbids_data_path = config_data['nonbids_data_path']
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
-dev_scripts_path ='/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts'
+dev_scripts_path = config_data['dev_scripts_path']
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 
 train_betas_with_data = get_data_for_confirmed_train_subjs(
-    beta_glob = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii",
+    beta_glob = config_data['sst_wave1_path'] + "conditions/sub-DEV*/beta_0002.nii",
     nonbids_data_path = nonbids_data_path,
     ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = ml_scripting_path
@@ -47,7 +52,9 @@ for pv in primary_vars:
     pv_table = train_betas_with_data.loc[:,[pv,'age365','birthsex','spm_l2_path_description']]
     row_is_full = pv_table.isna().any(axis=1)==False
     pv_table_complete = pv_table.loc[row_is_full,:]
-    pv_table_complete.to_csv(nonbids_data_path+ '/fMRI/fx/models/SST/level2' + "/" + pv + "_vars.csv")
+    csv_output_path =nonbids_data_path+ 'fMRI/fx/models/SST/level2' + "/" + pv + "_vars.csv"
+    print(csv_output_path)
+    pv_table_complete.to_csv(csv_output_path)
 
 
 
