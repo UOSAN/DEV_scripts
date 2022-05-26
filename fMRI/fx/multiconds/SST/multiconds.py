@@ -105,7 +105,7 @@ def create_masks(condition: np.ndarray, response: np.ndarray) -> List:
 
     return list((go_success, no_go_success, no_go_fail, null_trials, go_fail))
 
-def get_pes(condition_masks: List,reaction_time:np.ndarray):
+def get_pss(condition_masks: List,posterror_masks_dict: List,reaction_time:np.ndarray):
     go_success = condition_masks[0]
     no_go_success = condition_masks[1]
     no_go_fail = condition_masks[2]
@@ -113,11 +113,11 @@ def get_pes(condition_masks: List,reaction_time:np.ndarray):
     #for each of those, check if we have both a pre-trial correct go an a post-trial correct go
     #if we do, compute the difference and return that
     #otherwise the result is null
-    def get_pes_for_stop_trials(stop_trials):
+    def get_pss_for_stop_trials(stop_trials):
         #we need the position of each stop trial, then look ahead and behind
         #next
-        #pes = np.empty(len(stop_trials),dtype=float)
-        pes = []
+        #pss = np.empty(len(stop_trials),dtype=float)
+        pss = []
         for i in range(0,len(stop_trials)):
             is_stop_trial = stop_trials[i]
             #if it's stop trial we gotta return either None or a value
@@ -136,45 +136,32 @@ def get_pes(condition_masks: List,reaction_time:np.ndarray):
                         baseline = reaction_time[i - 4]
                     else:
                         baseline = np.nan
-                    pes_i = reaction_time[i + 2] - baseline
+                    pss_i = reaction_time[i + 2] - baseline
                 else:
-                    pes_i = np.nan
-                pes = pes + [pes_i]
+                    pss_i = np.nan
+                pss = pss + [pss_i]
 
-        return(pes)
+        return(pss)
 
-    no_go_success_pes = get_pes_for_stop_trials(no_go_success)
-    no_go_fail_pes = get_pes_for_stop_trials(no_go_fail)
+    no_go_success_pss = get_pss_for_stop_trials(no_go_success)
+    no_go_fail_pss = get_pss_for_stop_trials(no_go_fail)
 
+    pss_by_trial = np.array([np.nan]*len(reaction_time))
+    pss_by_trial[no_go_success] = no_go_success_pss
+    pss_by_trial[no_go_fail] = no_go_fail_pss
+    
     return({
-        'no_go_success_pes':no_go_success_pes,
-        'no_go_fail_pes':no_go_fail_pes
+        'by_poststop_trial_type':{
+            'CorrectGoFollowingCorrectStop': pss_by_trial[list(posterror_masks_dict['CorrectGoFollowingCorrectStop'][2:]) + [False, False]],
+            'CorrectGoFollowingFailedStop': pss_by_trial[list(posterror_masks_dict['CorrectGoFollowingFailedStop'][2:]) + [False, False]],
+        },
+        'by_stop_trialtype':{
+            'no_go_success_pss':no_go_success_pss,
+            'no_go_fail_pss':no_go_fail_pss},
+        'by_trial': pss_by_trial
+        }
+        )
 
-    })
-
-
-
-
-# def get_pes(condition_masks: List,posterror_conditions:List, reaction_times: np.ndarray):
-#     #first do create_preerror_masks_from_masks like create_posterror_masks_from_masks
-#     go_success = condition_masks[0]
-#     no_go_success = condition_masks[1]
-#     no_go_fail = condition_masks[2]
-#     null_trials = condition_masks[3]
-#     go_fail = condition_masks[4]
-#
-#     # marks if each trial is a (successful or failed) go that follows a failed stop
-#     # we shift by 2, not 1, because we ignore the "NULL TRIAL" that occurs reliably every second trial
-#     go_success_preceding_failed_stop = np.append((go_success[2:] & no_go_fail[:(len(no_go_fail) - 2)])
-#                                                     ,[False, False])
-#     # marks if each trial is a (successful or failed) go that follows a successful stop
-#     go_success_preceding_successful_stop = np.append((go_success[2:] & no_go_success[:(len(no_go_success) - 2)]),
-#                                                         [False, False])
-#
-#     #then grab the RTs and compare.
-#     reaction_times
-#
-#
 
 def create_posterror_masks_from_masks(condition_masks: List) -> List:
     """Create masks of post-error slowing conditions, derived from the original set of masks"""
@@ -202,9 +189,15 @@ def create_posterror_masks_from_masks(condition_masks: List) -> List:
 
     # ['GoFollowingCorrectStop', 'GoFollowingFailedStop',
     # 'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'OtherFailedGo'
-    return list((go_success_following_successful_stop, go_success_following_failed_stop,
-                 other_successful_go, no_go_success, no_go_fail, null_trials, go_fail
-                 ))
+    return ({
+        'CorrectGoFollowingCorrectStop': go_success_following_successful_stop,
+        'CorrectGoFollowingFailedStop': go_success_following_failed_stop,
+        'OtherCorrectGo': other_successful_go, 
+        'CorrectStop': no_go_success,
+        'FailedStop': no_go_fail,
+        'Cue': null_trials, 
+        'OtherFailedGo': go_fail
+    })
 
 
 def create_trials(trial_number: np.ndarray, trial_start_time: np.ndarray, trial_duration: np.ndarray,
