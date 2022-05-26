@@ -13,100 +13,69 @@ from multiconds import *
 
 def create_pes_parametric_modulator_struct(pes_list,posterror_masks,posterror_conditions):
     posterror_names = posterror_conditions['names']
-    duration_array = None
     pmod_list = []
-    # pmod_dict = {}
-    # for k in ['name','param','poly']:
-    #     pmod_dict[k] = []
-    
-    for condition_i, condition_name in enumerate(posterror_names):
-        condition_mask = posterror_masks[condition_i]
-        #look up to see if we should include this regressor at all; it should
-        if sum(condition_mask)>0:
-            # print(str(condition_i) + ": " + posterror_names[condition_i])
-            # print(len(condition_mask))
+
+    def create_pes_parametric_modulator_struct(mod_values,condition_name):
+        if np.any(mod_values is not None):
             #condition_column = condition_mask*reaction_time
             #I'm unsure we should be mean-centering by condition here rather than across all reaction times, but it seems probably the right thing to do?
-            condition_column = reaction_time[condition_mask]-np.mean(reaction_time[condition_mask])
-            # print(condition_column)
+
+            #because we don't have a PES for every value
+            #hmmm, what were we doing before? in the "rt" version, there wasn't a post-error reaction time for every single thing
+            #I think we were doing reaction times of post-error values...which makes sense.
+            #need to think carefully, then:
+            #(1) how do we arrange the conditions so that we can do the parametric modulation, and
+                    # we might be able to keep the conditions the same, and just set blank parametric mod trials to 0, following the mean-centering
+                    # I think that makes sense?
+                    # maybe not perfect but perhaps close enough
+                    # actually, think that moving the trials into another condition within the task is not really going to help us explain the variance any better.
+            #(2) are we meaning to pick the failed stop trials, the correct stop trials, or the trials immediately following them?
+                # it is the trials immediately following them. need to make sure that's what we're doing.
+            condition_column = mod_values - np.nanmean([m for m in mod_values])
+            condition_column[np.isnan(condition_column)]=0
             if condition_column is None:
-                continue
+                return None
             else:
-                # print("duration_rray:")
-                # print(duration_array.shape)
-                # print(condition_column.shape)
                 #TO DO; SEE: https://stackoverflow.com/questions/19797822/creating-matlab-cell-arrays-in-python
                 #THINK THAT IS THE SOLUTION.
                 condition_column_npt = np.empty(1,dtype='O')
                 condition_column_npt[0] = condition_column
-                #condition_column_npt[0] ``= np.array([condition_column],dtype='O').T
-                #condition_column_npt = np.array(np.array(condition_column).T,dtype=object)
-                #rt_array = np.append(condition_column_npt, axis=1)
 
-            #name_list = name_list + [posterror_names[condition_i]]
-            # pmod_item = {
-            #     'name':posterror_names[condition_i],
-            #     'param':condition_column_npt,
-            #     'poly':[]
-            # }
-            caps=re.findall("[A-Z]",posterror_names[condition_i])
-            abbreviation="".join(caps).lower()
+            caps = re.findall("[A-Z]",condition_name)
+            abbreviation = "".join(caps).lower()
             abbreviation = abbreviation[0].upper() + abbreviation[1:]
             pmod_item = (
                 abbreviation + "RT",
                 condition_column_npt,
                 [1.0]
             )
-            # pmod_dict['name'] = pmod_dict['name'] + [posterror_names[condition_i]]
-            # pmod_dict['param'] = pmod_dict['param'] + [condition_column]
-            # pmod_dict['poly'] = pmod_dict['poly'] + [fromarrays([[]])]
-            # pmod_item = [
-            #     posterror_names[condition_i],
-            #     condition_column_npt,
-            #     []
-            # ]
-            pmod_list = pmod_list + [pmod_item]
+
+            return(pmod_item)
+            #pmod_list = pmod_list + [pmod_item]
         else:
             #raise Exception("need to verify the next level is prepped to deal with some subjects having a missing regressor.")
             warnings.warn(
                 "need to verify the next level is prepped to deal with some subjects having a missing regressor for condition " + condition_name + ".")
+            return(None)
+
+    pmod_list = pmod_list + [create_pes_parametric_modulator_struct(pes_list['no_go_success_pes'],'CorrectGoFollowingCorrectStop')]
+    pmod_list = pmod_list + [create_pes_parametric_modulator_struct(pes_list['no_go_success_pes'], 'CorrectGoFollowingFailedStop')]
+    #this only works if these items are at the start of the list. if they aren't, we have a problem to deal with.
+    if 'CorrectGoFollowingCorrectStop' in posterror_names and posterror_names[0]!='CorrectGoFollowingCorrectStop':
+        raise Exception('CorrectGoFollowingCorrectStop not where expected.')
+    if 'CorrectGoFollowingFailedStop' in posterror_names and 'CorrectGoFollowingFailedStop' not in posterror_names[0:2]:
+        raise Exception('CorrectGoFollowingFailedStop not where expected.')
+
+    pmod_list = [pmod for pmod in pmod_list if pmod_list is not None]
 
     if len(pmod_list)==0:
         return({}) #return nothing because there doesn't appear to be any params to pass
-    #pmod_rec_array = fromarrays(pmod_list,names=['name','param','poly'])
-    # testrec = fromarrays([['hi', 'hello'], [np.array(2),np.array(1)],[3,30.]], names=['name', 'param','poly'])
-    # testrec = fromarrays([
-    #     ['hi', 'hello'], 
-    #     [fromarrays([1,2]),fromarrays([1,2])]#,
-    #     #[fromarrays([[]]),fromarrays([[]])]
-    #     ], names=['name', 'param'])
-    # scipy.io.savemat("testmat.mat",{'var1':testrec})
 
-    # testrec = fromarrays([
-    #     ['hi', 'hello'], 
-    #     [([1,2]),fromarrays([1,2])]#,
-    #     #[fromarrays([[]]),fromarrays([[]])]
-    #     ], names=['name', 'param'])
-    # scipy.io.savemat("testmat.mat",{'var1':testrec})
-    # x = np.array([('Rex', 9, [],[1,2,3]), ('Fido', 3, [],[10,20,30])],
-    #          dtype=[('name', '<U255'), ('age', 'int'), ('weight_measure', 'float',(0,)),('myarr','int',(3,))])
-    # #pmod_list = list(pmod_dict.values())
-    #param_max_len = max([p[1][0].shape[0] for p in pmod_list])
-    #param_max_len = max([len(p[1]) for p in pmod_list])
-    # pmod_array = np.array(
-    #     pmod_list,
-    #     dtype=([('name','<U255'),('param','float',(1,param_max_len)),('poly','float',(0,))])
-    # )
     pmod_array = np.array(
         pmod_list,
         dtype=([('name','object',(1,)),('param','O',(1,)),('poly','object',(1,))])
     )
-    # scipy.io.savemat("testmat.mat",{'var2':pmod_array})
-    # example_pmod_from_matlab = scipy.io.loadmat("/Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/example_pmod.mat")
-    # example_pmod_from_matlab['pmod_spm_aim']['param'].shape
-    # example_pmod_from_matlab['pmod_spm_aim']['param'][0,1].shape
-    # example_pmod_from_matlab['pmod_spm_aim']['param'][0,1][0].shape
-    # example_pmod_from_matlab['pmod_spm_aim']['param'][0,1][0][0].shape
+
     
     #return({'R':duration_array,'names':name_list})
     #above design was passing duration as a [multiple] regressor, when in fact, we need it as a parametric modulator.
@@ -217,8 +186,8 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 #look up the previous go trial
                 #look up the next
 
-                posterror_reaction_times = create_rt_parametric_modulator_struct(
-                    reaction_time,posterror_masks,posterror_conditions)
+                posterror_reaction_times = create_pes_parametric_modulator_struct(
+                    pes,posterror_masks,posterror_conditions)
 
                 posterror_conditions.update(posterror_reaction_times)
 

@@ -211,7 +211,11 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
 
                 posterror_conditions = create_posterror_conditions(
                     trial_start_time, trial_duration, posterror_masks)
-                
+
+                pes = get_pes(masks,reaction_time)
+                #identify each error event
+                #look up the previous go trial
+                #look up the next
 
                 posterror_reaction_times = create_rt_parametric_modulator_struct(
                     reaction_time,posterror_masks,posterror_conditions)
