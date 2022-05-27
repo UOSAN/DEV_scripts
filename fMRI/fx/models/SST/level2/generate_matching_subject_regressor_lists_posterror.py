@@ -12,6 +12,7 @@ config_data = read_yaml_for_host("l2_config.yml")
 #paths
 nonbids_data_path = config_data['nonbids_data_path']
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
+dropbox_datapath = config_data['dropbox_datapath']
 dev_scripts_path = config_data['dev_scripts_path']
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 
@@ -21,7 +22,7 @@ ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 train_betas_with_data = get_data_for_confirmed_train_subjs(
     beta_glob = config_data['sst_wave1_path'] + "posterror_conditions/sub-DEV*/spmT_0002.nii",
     nonbids_data_path = nonbids_data_path,
-    ml_data_folderpath = ml_data_folderpath,
+    dropbox_datapath= dropbox_datapath,
     ml_scripting_path = ml_scripting_path
 )
 

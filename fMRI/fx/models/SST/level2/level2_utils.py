@@ -51,8 +51,9 @@ def get_contrasts_for_betas(
 def get_data_for_confirmed_train_subjs(
         beta_glob,
         nonbids_data_path,
-        ml_data_folderpath,
-        ml_scripting_path):
+        dropbox_datapath,
+        ml_scripting_path
+        ):
     beta_paths = glob(
         beta_glob)
     scan_list = ["'" + bp + ",1'" for bp in beta_paths]
@@ -72,7 +73,7 @@ def get_data_for_confirmed_train_subjs(
 
     # get just the test subjects
     test_train_df_raw = pd.read_csv(nonbids_data_path + "fMRI/ml/train_test_markers_20211027T173724.csv")
-    data_by_ppt = pd.read_csv(ml_data_folderpath + "/data_by_ppt_2022_02_26.csv")
+    data_by_ppt = pd.read_csv(dropbox_datapath + "/data_by_ppt.csv")
     include_exclude_list = pd.read_csv(ml_scripting_path + "/nsc_subject_exclusions.csv")
     test_train_df_raw = test_train_df_raw.merge(include_exclude_list[include_exclude_list.Task == 'SST'],
                                                 left_on='sub_label', right_on='SubjectId', how='left')

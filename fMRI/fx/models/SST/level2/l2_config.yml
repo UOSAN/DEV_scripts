@@ -2,5 +2,6 @@ UO-2010763:
   sst_wave1_path:  /Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/
   nonbids_data_path: /Users/bensmith/Documents/data/DEV/nonbids_data/
   dev_scripts_path: '/Users/bensmith/Documents/code/DEV_scripts'
+  dropbox_datapath: /Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
 other: 
   dev_scripts_path: '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts'
