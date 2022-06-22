@@ -1,6 +1,0 @@
-/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/datasets/__init__.py:87: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
-  warn("Fetchers from the nilearn.datasets module will be "
-Traceback (most recent call last):
-  File "ns_6s_sst_run.py", line 13, in <module>
-    brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_' + dataset_name + '_6subs.pkl'
-NameError: name 'ml_data_folderpath' is not defined
