@@ -41,8 +41,8 @@ done
 
 ```{r}
 #update each of these
-dicom_filename <-"dicoms_cleaned_20210908.csv"
-redcap_filename <- "DEV-Sessions_DATA_2021-09-08_1937.csv"
+dicom_filename <-"dicoms_cleaned_20220622.csv"
+redcap_filename <- "DEV-Sessions_DATA_2022-06-22_1635.csv"
 ```
 
 
