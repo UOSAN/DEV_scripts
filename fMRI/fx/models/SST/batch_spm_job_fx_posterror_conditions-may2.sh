@@ -28,7 +28,7 @@ SUBJ_TO_CONTRAST=`cat ${SCRIPTS_DIR}/fMRI/fx/multiconds/$TASK/full_duration/post
 SUBJ_NO_CONTRAST=`cat ${SCRIPTS_DIR}/fMRI/fx/multiconds/$TASK/full_duration/posterror_conditions/missing_1.txt`
 
 # Set MATLAB script path
-SCRIPT_W_CONTRASTS=${SCRIPTS_DIR}/fMRI/fx/models/$TASK/fx_posterror_conditions_w1_w_contrasts.m
+SCRIPT_W_CONTRASTS=${SCRIPTS_DIR}/fMRI/fx/models/$TASK/fx_posterror_conditions_w1_w_contrasts_may2.m
 SCRIPT_NO_CONTRASTS=${SCRIPTS_DIR}/fMRI/fx/models/$TASK/fx_posterror_conditions_w1.m
 
 
