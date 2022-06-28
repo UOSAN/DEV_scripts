@@ -8,7 +8,7 @@
 inputDir = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/WTP/output';
 runNames = {'run1', 'run2', 'run3', 'run4'};
 waveNames = {'1', '2'};
-writeDir = '~/Google Drive/oregon/preprocessing/DEV_scripts/fMRI/fx/multiconds/WTP/conditions';
+writeDir = '~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/WTP/conditions';
 studyName = 'DEV';
 filePattern = 'DEV.';
 rowNum = -1;
