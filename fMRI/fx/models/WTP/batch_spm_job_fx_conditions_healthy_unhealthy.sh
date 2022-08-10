@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=`cat subject_list.txt`
+SUBJLIST=`cat subject_list_20220622.txt`
 
 # Which SID should be replaced?
 REPLACESID=001
@@ -21,7 +21,7 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_conditions_healthy_unhealthy.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_conditions_healthy_unhealthy_w1.m
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
