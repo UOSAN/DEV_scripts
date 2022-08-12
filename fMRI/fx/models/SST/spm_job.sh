@@ -22,8 +22,10 @@ fi
 echo -------------------------------------------------------------------------------
 echo "${SUB}"
 echo "Running ${SCRIPT}"
+echo "Running ${SCRIPT}"
 echo "(replaces id is $REPLACESID)"
 echo -------------------------------------------------------------------------------
 
 module load matlab
+matlab -nosplash -nodisplay -nodesktop ${ADDITIONALOPTIONS} -r "clear; addpath('$SPM_PATH'); spm_jobman('initcfg'); sub='$SUB'; script_file='$SCRIPT'; replacesid='$REPLACESID'; run('make_sid_matlabbatch.m'); spm_jobman('run',matlabbatch); exit"
 matlab -nosplash -nodisplay -nodesktop ${ADDITIONALOPTIONS} -r "clear; addpath('$SPM_PATH'); spm_jobman('initcfg'); sub='$SUB'; script_file='$SCRIPT'; replacesid='$REPLACESID'; run('make_sid_matlabbatch.m'); spm_jobman('run',matlabbatch); exit"
