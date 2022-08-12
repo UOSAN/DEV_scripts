@@ -27,7 +27,7 @@ library(tidyverse)
 
 # load data
 ```{r}
-motion = read.csv("~/Documents/code/sanlab/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
+motion = read.csv("/Users/deniciaaragon/Desktop/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
 ```
 
 # summarize by task
