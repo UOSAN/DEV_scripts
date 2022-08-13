@@ -5,10 +5,8 @@ STUDY=DEV
 
 # Set scripts directory path
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
-SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_conditions_w1.m
 SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_conditions_w1.m
 # Which SID should be replaced?
 REPLACESID=004
@@ -37,10 +35,8 @@ fi
 echo -------------------------------------------------------------------------------
 echo "${SUB}"
 echo "Running ${SCRIPT}"
-echo "Running ${SCRIPT}"
 echo "spmpath is $SPM_PATH"
 echo -------------------------------------------------------------------------------
 
 module load matlab
-matlab -nosplash -nodisplay -nodesktop ${ADDITIONALOPTIONS} -r "clear; addpath('$SPM_PATH'); spm_jobman('initcfg'); sub='$SUB'; script_file='$SCRIPT'; disp('script file:'); disp(script_file); replacesid='$REPLACESID'; run('make_sid_matlabbatch.m'); spm_jobman('run',matlabbatch); exit"
 matlab -nosplash -nodisplay -nodesktop ${ADDITIONALOPTIONS} -r "clear; addpath('$SPM_PATH'); spm_jobman('initcfg'); sub='$SUB'; script_file='$SCRIPT'; disp('script file:'); disp(script_file); replacesid='$REPLACESID'; run('make_sid_matlabbatch.m'); spm_jobman('run',matlabbatch); exit"
