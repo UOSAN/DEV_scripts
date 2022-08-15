@@ -43,7 +43,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
 # (c) covariates
 # with no missing data.
 
-primary_vars = ['SST_PostErrorSlowW1_median']
+primary_vars = ['SST_PostErrorSlowW1_median','SST_PostErrorSlowW1_mean']
 
 for pv in primary_vars:
     #os.mkdir(nonbids_data_path + '/fMRI/fx/models/SST/level2' + "/" + pv + "_vars")
