@@ -4,7 +4,8 @@
 % D.Cos 10/2018
 
 %% Load data and intialize variables
-inputDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/WTP/output';
+%inputDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/WTP/output';
+inputDir = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/WTP/output';
 runNames = {'run1', 'run2', 'run3', 'run4'};
 waveNames = {'1', '2'};
 writeDir = '~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/WTP/betaseries';
