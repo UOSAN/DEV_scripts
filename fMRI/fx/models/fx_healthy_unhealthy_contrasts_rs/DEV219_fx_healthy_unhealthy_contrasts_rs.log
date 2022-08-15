@@ -1,0 +1,121 @@
+-------------------------------------------------------------------------------
+DEV219
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/fx_healthy_unhealthy_contrasts_rs.m
+-------------------------------------------------------------------------------
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+making batch...
+making batch...
+001
+219
+001
+219
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV219_fx_healthy_unhealthy_contrasts_rs.mat
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV219_fx_healthy_unhealthy_contrasts_rs.mat
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'fMRI model specification'
+Running 'fMRI model specification'
+[Warning: Directory already exists.] 
+[> In spm_run_fmri_spec (line 24)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+Failed  'fMRI model specification'
+Failed  'fMRI model specification'
+Error using load
+Unable to read file '/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/rp_txt/rp_DEV219_1_WTP_2.txt'. No such file or directory.
+In file "/gpfs/projects/sanlab/shared/spm12/config/spm_run_fmri_spec.m" (v6562), function "spm_run_fmri_spec" at line 298.
+
+Error using load
+Unable to read file '/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/rp_txt/rp_DEV219_1_WTP_2.txt'. No such file or directory.
+In file "/gpfs/projects/sanlab/shared/spm12/config/spm_run_fmri_spec.m" (v6562), function "spm_run_fmri_spec" at line 298.
+
+No executable modules, but still unresolved dependencies or incomplete module inputs.
+No executable modules, but still unresolved dependencies or incomplete module inputs.
+The following modules did not run:
+Failed: fMRI model specification
+Skipped: Model estimation
+Skipped: Contrast Manager
+
+The following modules did not run:
+Failed: fMRI model specification
+Skipped: Model estimation
+Skipped: Contrast Manager
+
+{Error using MATLABbatch system
+Job execution failed. The full log of this run can be found in MATLAB command
+window, starting with the lines (look for the line showing the exact #job as
+displayed in this error message)
+------------------
+Running job #1
+------------------
+} 
+{Error using MATLABbatch system
+Job execution failed. The full log of this run can be found in MATLAB command
+window, starting with the lines (look for the line showing the exact #job as
+displayed in this error message)
+------------------
+Running job #1
+------------------
+} 

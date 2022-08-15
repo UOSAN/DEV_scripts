@@ -1,0 +1,60 @@
+running
+  '/usr/lib64/R/bin/R --slave --no-restore --file=auto_motion_fmriprep.R'
+
+Loading required package: tidyverse
+── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+✔ ggplot2 3.3.5     ✔ purrr   0.3.4
+✔ tibble  3.1.4     ✔ dplyr   1.0.7
+✔ tidyr   1.1.3     ✔ stringr 1.4.0
+✔ readr   2.0.1     ✔ forcats 0.5.1
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+Loading required package: caret
+Loading required package: lattice
+
+Attaching package: ‘caret’
+
+The following object is masked from ‘package:purrr’:
+
+    lift
+
+Loading required package: randomForest
+randomForest 4.6-14
+Type rfNews() to see new features/changes/bug fixes.
+
+Attaching package: ‘randomForest’
+
+The following object is masked from ‘package:dplyr’:
+
+    combine
+
+The following object is masked from ‘package:ggplot2’:
+
+    margin
+
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [1] "removing 0 rows relate to the following run"
+# A tibble: 1 × 4
+  subjectID  wave task    run
+  <chr>     <int> <chr> <int>
+1 DEV221        1 SST       1
+Error: Assigned data `predict(mlModel, dataset)` must be compatible with existing data.
+✖ Existing data has 709907 rows.
+✖ Assigned data has 709904 rows.
+ℹ Only vectors of size 1 are recycled.
+Backtrace:
+     █
+  1. ├─base::`$<-`(...)
+  2. ├─tibble:::`$<-.tbl_df`(...)
+  3. │ └─tibble:::tbl_subassign(...)
+  4. │   └─tibble:::vectbl_recycle_rhs_rows(...)
+  5. │     ├─base::withCallingHandlers(...)
+  6. │     └─vctrs::vec_recycle(value[[j]], nrow)
+  7. ├─vctrs:::stop_recycle_incompatible_size(...)
+  8. │ └─vctrs:::stop_vctrs(...)
+  9. │   └─rlang::abort(message, class = c(class, "vctrs_error"), ...)
+ 10. │     └─rlang:::signal_abort(cnd)
+ 11. │       └─base::signalCondition(cnd)
+ 12. └─(function (cnd) ...
+Execution halted
+srun: error: n222: task 0: Exited with exit code 1

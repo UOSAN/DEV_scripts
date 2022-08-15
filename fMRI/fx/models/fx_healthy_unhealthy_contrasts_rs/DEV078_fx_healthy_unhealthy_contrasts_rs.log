@@ -1,0 +1,147 @@
+-------------------------------------------------------------------------------
+DEV078
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/fx_healthy_unhealthy_contrasts_rs.m
+-------------------------------------------------------------------------------
+                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  11/12                            :                  ...processingChunk  12/12                            :                  ...processing
+Temporal non-sphericity (223503 voxels) :             ...ReML estimation
+  ReML Block 1                
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+  ReML Iteration 1                      :        ...3.321671e+01 [+4.25]
+  ReML Iteration 2                      :        ...1.594320e+01 [+4.50]
+  ReML Iteration 3                      :        ...1.921172e+00 [+4.75]
+  ReML Iteration 4                      :        ...8.081105e-01 [+5.00]
+  ReML Iteration 5                      :        ...1.565728e+00 [+4.00]
+  ReML Iteration 6                      :        ...8.057146e-01 [+4.25]
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+  ReML Iteration 7                      :        ...1.465010e+00 [+3.25]
+  ReML Iteration 8                      :        ...7.630579e-01 [+3.50]
+  ReML Iteration 9                      :        ...9.691110e-01 [+2.50]
+  ReML Iteration 10                     :        ...5.162655e-01 [+2.75]
+  ReML Iteration 11                     :        ...5.152638e-01 [+3.00]
+  ReML Iteration 12                     :        ...2.893163e-01 [+3.25]
+  ReML Iteration 13                     :        ...2.811325e-01 [+3.50]
+  ReML Iteration 14                     :        ...1.670535e-01 [+3.75]
+  ReML Iteration 15                     :        ...1.599799e-01 [+4.00]
+  ReML Iteration 16                     :        ...1.010427e-01 [+4.25]
+  ReML Iteration 17                     :        ...9.845785e-02 [+4.50]
+  ReML Iteration 1                      :        ...3.321634e+01 [+2.25]
+  ReML Iteration 2                      :        ...6.010149e-01 [-4.50]
+  ReML Iteration 3                      :        ...9.418856e-02 [-4.25]
+  ReML Block 2                
+  ReML Iteration 1                      :        ...2.681626e+01 [+4.25]
+  ReML Iteration 2                      :        ...9.911756e-01 [+4.50]
+  ReML Iteration 3                      :        ...1.047547e-01 [+4.75]
+  ReML Iteration 4                      :        ...2.703593e-02 [+5.00]
+  ReML Iteration 1                      :        ...2.681418e+01 [+2.25]
+  ReML Iteration 2                      :        ...7.029918e-01 [+2.50]
+  ReML Iteration 3                      :        ...3.966809e-02 [+0.75]
+  ReML Block 3                
+  ReML Iteration 1                      :        ...1.927600e+01 [+4.25]
+  ReML Iteration 1                      :        ...1.926835e+01 [+2.75]
+  ReML Iteration 2                      :        ...2.228605e+01 [-6.25]
+  ReML Iteration 3                      :        ...9.039009e-01 [-7.00]
+  ReML Iteration 4                      :        ...7.705617e-02 [-6.75]
+  ReML Block 4                
+  ReML Iteration 1                      :        ...1.785389e+01 [+4.25]
+  ReML Iteration 2                      :        ...1.415123e+00 [+4.50]
+  ReML Iteration 3                      :        ...1.164598e-01 [+4.75]
+  ReML Iteration 4                      :        ...4.397014e-02 [+5.00]
+  ReML Iteration 1                      :        ...1.781653e+01 [+2.25]
+  ReML Iteration 2                      :        ...9.821504e-01 [-4.50]
+  ReML Iteration 3                      :        ...2.577416e-01 [-4.25]
+  ReML Iteration 4                      :        ...1.451552e-01 [-4.00]
+  ReML Iteration 5                      :        ...7.554262e-02 [-3.75]
+
+SPM12: spm_spm (v6842)                             15:44:23 - 10/08/2022
+========================================================================
+Chunk   1/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   3/12                            :                  ...processing                       ...doneChunk   4/12                            :                  ...processingmaking batch...
+001
+078
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV078_fx_healthy_unhealthy_contrasts_rs.mat
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Expand image frames'
+Done    'Expand image frames'
+                       ...doneChunk   5/12                            :                  ...processingRunning 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'fMRI model specification'
+                       ...doneChunk   6/12                            :                  ...processing[Warning: dialog is no longer supported when MATLAB is started with the
+-nodisplay or -noFigureWindows option or there is no display. For more
+information, see "Changes to -nodisplay and -noFigureWindows Startup Options"
+in the MATLAB Release Notes. To view the release note in your system browser,
+run web('www.mathworks.com/help/matlab/release-notes.html#br5ktrh-3',
+'-browser')] 
+[> In warnfiguredialog (line 21)
+  In dialog (line 39)
+  In questdlg (line 163)
+  In spm_input (line 1040)
+  In spm_run_fmri_spec (line 34)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+[Warning: uiwait is no longer supported when MATLAB is started with the
+-nodisplay or -noFigureWindows option or there is no display. For more
+information, see "Changes to -nodisplay and -noFigureWindows Startup Options"
+in the MATLAB Release Notes. To view the release note in your system browser,
+run web('www.mathworks.com/help/matlab/release-notes.html#br5ktrh-3',
+'-browser')] 
+[> In warnfiguredialog (line 21)
+  In uiwait (line 40)
+  In questdlg (line 428)
+  In spm_input (line 1040)
+  In spm_run_fmri_spec (line 34)
+  In cfg_run_cm (line 29)
+  In cfg_util>local_runcj (line 1688)
+  In cfg_util (line 959)
+  In spm_jobman>fill_run_job (line 458)
+  In spm_jobman (line 247)] 
+                       ...doneChunk   7/12                            :                  ...processing                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  11/12                            :                  ...processing                       ...doneChunk  12/12                            :                  ...processing                       ...done
+Spatial non-sphericity (over scans)     :      ...estimating derivatives ...writing resels/voxel image                       ...done
+Saving SPM.mat                          :                     ...writing                       ...done
+Completed                               :          15:45:08 - 10/08/2022
+Done
+Done    'Model estimation'
+Running 'Contrast Manager'
+
+SPM12: spm_contrasts.m                             15:45:08 - 10/08/2022
+========================================================================
+Contrasts folder                        :                   ./sub-DEV078
+Deleting contrasts                      :                        ...done
+	contrast image  1               :                   ...computing       ...written con_0001.nii
+	spm{T} image  1                 :                   ...computing      ...written spmT_0001.nii
+	contrast image  2               :                   ...computing       ...written con_0002.nii
+	spm{T} image  2                 :                   ...computing      ...written spmT_0002.nii
+	contrast image  3               :                   ...computing       ...written con_0003.nii
+	spm{T} image  3                 :                   ...computing      ...written spmT_0003.nii
+	contrast image  4               :                   ...computing       ...written con_0004.nii
+	spm{T} image  4                 :                   ...computing      ...written spmT_0004.nii
+Completed                               :          15:45:09 - 10/08/2022
+Done    'Contrast Manager'
+Done
+
+slurmstepd: error: *** JOB 21956685 ON n034 CANCELLED AT 2022-08-10T15:54:25 DUE TO TIME LIMIT ***

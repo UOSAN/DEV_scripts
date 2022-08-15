@@ -1,0 +1,114 @@
+-------------------------------------------------------------------------------
+DEV072
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/fx_healthy_unhealthy_contrasts_rs.m
+-------------------------------------------------------------------------------
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+ 
+To get started, type doc.
+To get started, type doc.
+For product information, visit www.mathworks.com.
+For product information, visit www.mathworks.com.
+ 
+ 
+making batch...
+001
+072
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV072_fx_healthy_unhealthy_contrasts_rs.mat
+making batch...
+001
+072
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV072_fx_healthy_unhealthy_contrasts_rs.mat
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'fMRI model specification'
+Running 'fMRI model specification'
+Failed  'fMRI model specification'
+Error using spm_run_fmri_spec (line 143)
+Cannot load /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/WTP/conditions_healthy_unhealthy/DEV072_1_WTP1.mat
+In file "/gpfs/projects/sanlab/shared/spm12/config/spm_run_fmri_spec.m" (v6562), function "spm_run_fmri_spec" at line 143.
+
+No executable modules, but still unresolved dependencies or incomplete module inputs.
+The following modules did not run:
+Failed: fMRI model specification
+Skipped: Model estimation
+Skipped: Contrast Manager
+
+{Error using MATLABbatch system
+Job execution failed. The full log of this run can be found in MATLAB command
+window, starting with the lines (look for the line showing the exact #job as
+displayed in this error message)
+------------------
+Running job #1
+------------------
+} 
+Failed  'fMRI model specification'
+Error using spm_run_fmri_spec (line 143)
+Cannot load /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/WTP/conditions_healthy_unhealthy/DEV072_1_WTP1.mat
+In file "/gpfs/projects/sanlab/shared/spm12/config/spm_run_fmri_spec.m" (v6562), function "spm_run_fmri_spec" at line 143.
+
+No executable modules, but still unresolved dependencies or incomplete module inputs.
+The following modules did not run:
+Failed: fMRI model specification
+Skipped: Model estimation
+Skipped: Contrast Manager
+
+{Error using MATLABbatch system
+Job execution failed. The full log of this run can be found in MATLAB command
+window, starting with the lines (look for the line showing the exact #job as
+displayed in this error message)
+------------------
+Running job #1
+------------------
+} 

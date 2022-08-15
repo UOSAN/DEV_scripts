@@ -1,0 +1,218 @@
+-------------------------------------------------------------------------------
+DEV074
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/fx_healthy_unhealthy_contrasts_rs.m
+-------------------------------------------------------------------------------
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+making batch...
+making batch...
+001
+001
+074
+074
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV074_fx_healthy_unhealthy_contrasts_rs.mat
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV074_fx_healthy_unhealthy_contrasts_rs.mat
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'fMRI model specification'
+Running 'fMRI model specification'
+
+SPM12: spm_fMRI_design (v5183)                     15:43:39 - 10/08/2022
+========================================================================
+
+SPM12: spm_fMRI_design (v5183)                     15:43:39 - 10/08/2022
+========================================================================
+Saving fMRI design                      : Saving fMRI design                      :               ...SPM.mat saved
+              ...SPM.mat saved
+
+SPM12: spm_fmri_spm_ui (v6088)                     15:43:39 - 10/08/2022
+========================================================================
+
+SPM12: spm_fmri_spm_ui (v6088)                     15:43:39 - 10/08/2022
+========================================================================
+Mapping files                           : Mapping files                           :                        ...done
+Calculating globals                     :                        ...done
+Calculating globals                     :                        ...done
+                       ...done
+Saving SPM configuration                : Saving SPM configuration                :               ...SPM.mat saved
+Saving SPM configuration                :               ...SPM.mat saved
+Saving SPM configuration                :               ...SPM.mat saved
+Completed                               :          15:43:58 - 10/08/2022
+Done    'fMRI model specification'
+              ...SPM.mat saved
+Completed                               :          15:43:58 - 10/08/2022
+Done    'fMRI model specification'
+Running 'Model estimation'
+Running 'Model estimation'
+
+SPM12: spm_spm (v6842)                             15:43:58 - 10/08/2022
+========================================================================
+
+SPM12: spm_spm (v6842)                             15:43:58 - 10/08/2022
+========================================================================
+
+SPM12: spm_est_non_sphericity (v6913)              15:43:59 - 10/08/2022
+========================================================================
+
+SPM12: spm_est_non_sphericity (v6913)              15:44:00 - 10/08/2022
+========================================================================
+Chunk   1/12                            :                  ...processingChunk   1/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   3/12                            :                  ...processing                       ...doneChunk   3/12                            :                  ...processing                       ...doneChunk   4/12                            :                  ...processing                       ...doneChunk   4/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...doneChunk   7/12                            :                  ...processing                       ...doneChunk   7/12                            :                  ...processing                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  11/12                            :                  ...processingChunk  12/12                            :                  ...processing
+Temporal non-sphericity (70338 voxels)  :             ...ReML estimation
+  ReML Block 1                
+                       ...doneChunk  11/12                            :                  ...processingChunk  12/12                            :                  ...processing
+Temporal non-sphericity (70338 voxels)  :             ...ReML estimation
+  ReML Block 1                
+  ReML Iteration 1                      :        ...2.675888e+01 [+4.25]
+  ReML Iteration 2                      :        ...6.629496e-02 [+4.50]
+  ReML Iteration 1                      :        ...2.675888e+01 [+4.25]
+  ReML Iteration 2                      :        ...6.629496e-02 [+4.50]
+  ReML Iteration 1                      :        ...2.675822e+01 [+2.25]
+  ReML Iteration 1                      :        ...2.675822e+01 [+2.25]
+  ReML Iteration 2                      :        ...9.003004e-02 [-2.50]
+  ReML Block 2                
+  ReML Iteration 2                      :        ...9.003004e-02 [-2.50]
+  ReML Iteration 1                      :        ...2.590531e+01 [+4.25]
+  ReML Block 2                
+  ReML Iteration 2                      :        ...9.947340e-02 [+4.50]
+  ReML Iteration 1                      :        ...2.590531e+01 [+4.25]
+  ReML Iteration 1                      :        ...2.590328e+01 [+2.25]
+  ReML Iteration 2                      :        ...9.947340e-02 [+4.50]
+  ReML Iteration 2                      :        ...5.410147e-02 [+1.50]
+  ReML Block 3                
+  ReML Iteration 1                      :        ...2.590328e+01 [+2.25]
+  ReML Iteration 2                      :        ...5.410147e-02 [+1.50]
+  ReML Block 3                
+  ReML Iteration 1                      :        ...2.546399e+01 [+4.25]
+  ReML Iteration 2                      :        ...7.169820e-02 [+4.50]
+  ReML Iteration 1                      :        ...2.546399e+01 [+4.25]
+  ReML Iteration 1                      :        ...2.546386e+01 [+2.25]
+  ReML Iteration 2                      :        ...7.169820e-02 [+4.50]
+  ReML Iteration 2                      :        ...3.822650e-02 [-4.50]
+  ReML Iteration 1                      :        ...2.546386e+01 [+2.25]
+  ReML Block 4                
+  ReML Iteration 2                      :        ...3.822650e-02 [-4.50]
+  ReML Block 4                
+  ReML Iteration 1                      :        ...2.626451e+01 [+4.25]
+  ReML Iteration 1                      :        ...2.626451e+01 [+4.25]
+  ReML Iteration 2                      :        ...1.315225e-01 [+4.50]
+  ReML Iteration 3                      :        ...2.025207e-02 [+4.75]
+  ReML Iteration 2                      :        ...1.315225e-01 [+4.50]
+  ReML Iteration 1                      :        ...2.626060e+01 [+2.25]
+  ReML Iteration 3                      :        ...2.025207e-02 [+4.75]
+  ReML Iteration 2                      :        ...2.487355e-01 [-5.50]
+  ReML Iteration 1                      :        ...2.626060e+01 [+2.25]
+  ReML Iteration 3                      :        ...8.384254e-03 [-13.25]
+
+SPM12: spm_spm (v6842)                             15:44:14 - 10/08/2022
+========================================================================
+  ReML Iteration 2                      :        ...2.487355e-01 [-5.50]
+  ReML Iteration 3                      :        ...8.384254e-03 [-13.25]
+
+SPM12: spm_spm (v6842)                             15:44:14 - 10/08/2022
+========================================================================
+Chunk   1/12                            :                  ...processingChunk   1/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...done                       ...doneChunk   3/12                            :                  ...processingChunk   3/12                            :                  ...processing                       ...done                       ...doneChunk   4/12                            :                  ...processingChunk   4/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...done                       ...doneChunk   7/12                            :                  ...processingChunk   7/12                            :                  ...processing                       ...done                       ...doneChunk   8/12                            :                  ...processingChunk   8/12                            :                  ...processing                       ...done                       ...doneChunk   9/12                            :                  ...processingChunk   9/12                            :                  ...processing                       ...done                       ...doneChunk  10/12                            :                  ...processingChunk  10/12                            :                  ...processing                       ...done                       ...doneChunk  11/12                            :                  ...processingChunk  11/12                            :                  ...processing                       ...doneChunk  12/12                            :                  ...processing                       ...doneChunk  12/12                            :                  ...processing                       ...done                       ...done
+
+Spatial non-sphericity (over scans)     :      ...estimating derivativesSpatial non-sphericity (over scans)     :      ...estimating derivatives ...writing resels/voxel image ...writing resels/voxel image                       ...done
+                       ...done
+Saving SPM.mat                          :                     ...writingSaving SPM.mat                          :                     ...writing                       ...done
+Completed                               :          15:44:56 - 10/08/2022
+Done
+Done    'Model estimation'
+Running 'Contrast Manager'
+
+SPM12: spm_contrasts.m                             15:44:56 - 10/08/2022
+========================================================================
+Contrasts folder                        :                   ./sub-DEV074
+                       ...done
+Completed                               :          15:44:56 - 10/08/2022
+Done
+Done    'Model estimation'
+Deleting contrasts                      :                        ...done
+Running 'Contrast Manager'
+
+SPM12: spm_contrasts.m                             15:44:56 - 10/08/2022
+========================================================================
+Contrasts folder                        :                   ./sub-DEV074
+Deleting contrasts                      :                        ...done
+	contrast image  1               :                   ...computing	contrast image  1               :                   ...computing       ...written con_0001.nii
+	spm{T} image  1                 :                   ...computing       ...written con_0001.nii
+	spm{T} image  1                 :                   ...computing      ...written spmT_0001.nii
+      ...written spmT_0001.nii
+	contrast image  2               :                   ...computing	contrast image  2               :                   ...computing       ...written con_0002.nii
+	spm{T} image  2                 :                   ...computing       ...written con_0002.nii
+	spm{T} image  2                 :                   ...computing      ...written spmT_0002.nii
+      ...written spmT_0002.nii
+	contrast image  3               :                   ...computing       ...written con_0003.nii
+	spm{T} image  3                 :                   ...computing	contrast image  3               :                   ...computing      ...written spmT_0003.nii
+       ...written con_0003.nii
+	spm{T} image  3                 :                   ...computing      ...written spmT_0003.nii
+	contrast image  4               :                   ...computing	contrast image  4               :                   ...computing       ...written con_0004.nii
+	spm{T} image  4                 :                   ...computing       ...written con_0004.nii
+	spm{T} image  4                 :                   ...computing      ...written spmT_0004.nii
+      ...written spmT_0004.nii
+Completed                               :          15:44:58 - 10/08/2022
+Done    'Contrast Manager'
+Done
+
+Completed                               :          15:44:58 - 10/08/2022
+Done    'Contrast Manager'
+Done
+

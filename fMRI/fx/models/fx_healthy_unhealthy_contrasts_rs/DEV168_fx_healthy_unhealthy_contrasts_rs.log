@@ -1,0 +1,112 @@
+-------------------------------------------------------------------------------
+DEV168
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/fx_healthy_unhealthy_contrasts_rs.m
+-------------------------------------------------------------------------------
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+making batch...
+001
+168
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV168_fx_healthy_unhealthy_contrasts_rs.mat
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'fMRI model specification'
+
+SPM12: spm_fMRI_design (v5183)                     15:45:37 - 10/08/2022
+========================================================================
+Saving fMRI design                      :               ...SPM.mat saved
+
+SPM12: spm_fmri_spm_ui (v6088)                     15:45:38 - 10/08/2022
+========================================================================
+Mapping files                           :                        ...done
+Calculating globals                     :                        ...done
+Saving SPM configuration                :               ...SPM.mat saved
+Saving SPM configuration                :               ...SPM.mat saved
+Completed                               :          15:46:06 - 10/08/2022
+Done    'fMRI model specification'
+Running 'Model estimation'
+
+SPM12: spm_spm (v6842)                             15:46:07 - 10/08/2022
+========================================================================
+
+SPM12: spm_est_non_sphericity (v6913)              15:46:08 - 10/08/2022
+========================================================================
+Chunk   1/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   3/12                            :                  ...processing                       ...doneChunk   4/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...doneChunk   7/12                            :                  ...processing                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  11/12                            :                  ...processingChunk  12/12                            :                  ...processing
+Temporal non-sphericity (129030 voxels) :             ...ReML estimation
+  ReML Block 1                
+  ReML Iteration 1                      :        ...2.428545e+01 [+4.25]
+  ReML Iteration 2                      :        ...4.291086e-01 [+4.50]
+  ReML Iteration 3                      :        ...1.713204e-02 [+4.75]
+  ReML Iteration 1                      :        ...2.432397e+01 [+2.25]
+  ReML Iteration 2                      :        ...7.186588e-02 [+1.50]
+  ReML Block 2                
+  ReML Iteration 1                      :        ...2.584524e+01 [+4.25]
+  ReML Iteration 2                      :        ...8.528587e-02 [+4.50]
+  ReML Iteration 1                      :        ...2.584442e+01 [+2.25]
+  ReML Iteration 2                      :        ...4.679483e-02 [-2.50]
+  ReML Block 3                
+  ReML Iteration 1                      :        ...2.519332e+01 [+4.25]
+  ReML Iteration 2                      :        ...1.749794e-01 [+4.50]
+  ReML Iteration 3                      :        ...8.141888e-03 [+4.75]
+  ReML Iteration 1                      :        ...2.519277e+01 [+2.25]
+  ReML Iteration 2                      :        ...4.415512e-02 [-5.50]
+  ReML Block 4                
+  ReML Iteration 1                      :        ...2.634319e+01 [+4.25]
+  ReML Iteration 2                      :        ...1.109563e+00 [+4.50]
+  ReML Iteration 3                      :        ...4.598942e-02 [+4.75]
+  ReML Iteration 1                      :        ...2.638525e+01 [+2.25]
+  ReML Iteration 2                      :        ...8.646914e-02 [-1.50]
+
+SPM12: spm_spm (v6842)                             15:46:24 - 10/08/2022
+========================================================================
+Chunk   1/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   3/12                            :                  ...processing                       ...doneChunk   4/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...doneChunk   7/12                            :                  ...processing                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  11/12                            :                  ...processing                       ...doneChunk  12/12                            :                  ...processing                       ...done
+Spatial non-sphericity (over scans)     :      ...estimating derivatives ...writing resels/voxel image                       ...done
+Saving SPM.mat                          :                     ...writing                       ...done
+Completed                               :          15:47:00 - 10/08/2022
+Done
+Done    'Model estimation'
+Running 'Contrast Manager'
+
+SPM12: spm_contrasts.m                             15:47:00 - 10/08/2022
+========================================================================
+Contrasts folder                        :                   ./sub-DEV168
+Deleting contrasts                      :                        ...done
+	contrast image  1               :                   ...computing       ...written con_0001.nii
+	spm{T} image  1                 :                   ...computing      ...written spmT_0001.nii
+	contrast image  2               :                   ...computing       ...written con_0002.nii
+	spm{T} image  2                 :                   ...computing      ...written spmT_0002.nii
+	contrast image  3               :                   ...computing       ...written con_0003.nii
+	spm{T} image  3                 :                   ...computing      ...written spmT_0003.nii
+	contrast image  4               :                   ...computing       ...written con_0004.nii
+	spm{T} image  4                 :                   ...computing      ...written spmT_0004.nii
+Completed                               :          15:47:02 - 10/08/2022
+Done    'Contrast Manager'
+Done
+

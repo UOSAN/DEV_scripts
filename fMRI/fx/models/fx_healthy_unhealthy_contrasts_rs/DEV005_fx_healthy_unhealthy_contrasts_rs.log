@@ -1,0 +1,181 @@
+-------------------------------------------------------------------------------
+DEV005
+Running /projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/fx_healthy_unhealthy_contrasts_rs.m
+-------------------------------------------------------------------------------
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2018 The MathWorks, Inc.
+                   R2018b (9.5.0.944444) 64-bit (glnxa64)
+                              August 28, 2018
+
+ 
+To get started, type doc.
+For product information, visit www.mathworks.com.
+ 
+making batch...
+001
+005
+making batch...
+001
+005
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV005_fx_healthy_unhealthy_contrasts_rs.mat
+/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/WTP/sid_batches/fx_healthy_unhealthy_contrasts_rs/DEV005_fx_healthy_unhealthy_contrasts_rs.mat
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+
+
+------------------------------------------------------------------------
+Running job #1
+------------------------------------------------------------------------
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'Expand image frames'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'File Selector (Batch Mode)'
+Running 'File Selector (Batch Mode)'
+Done    'Expand image frames'
+Done    'File Selector (Batch Mode)'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'Expand image frames'
+Done    'Expand image frames'
+Running 'fMRI model specification'
+Running 'fMRI model specification'
+
+SPM12: spm_fMRI_design (v5183)                     15:42:36 - 10/08/2022
+========================================================================
+
+SPM12: spm_fMRI_design (v5183)                     15:42:36 - 10/08/2022
+========================================================================
+Saving fMRI design                      :               ...SPM.mat saved
+
+SPM12: spm_fmri_spm_ui (v6088)                     15:42:36 - 10/08/2022
+========================================================================
+Mapping files                           : Saving fMRI design                      :               ...SPM.mat saved
+
+SPM12: spm_fmri_spm_ui (v6088)                     15:42:36 - 10/08/2022
+========================================================================
+Mapping files                           :                        ...done
+Calculating globals                     :                        ...done
+Calculating globals                     :                        ...done
+                       ...done
+Saving SPM configuration                :               ...SPM.mat saved
+Saving SPM configuration                :               ...SPM.mat saved
+Completed                               :          15:42:52 - 10/08/2022
+Done    'fMRI model specification'
+Running 'Model estimation'
+Saving SPM configuration                : Failed  'Model estimation'
+Error using load
+Cannot read file /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV005/SPM.mat.
+In file "/gpfs/projects/sanlab/shared/spm12/config/spm_run_fmri_est.m" (v5809), function "spm_run_fmri_est" at line 18.
+
+No executable modules, but still unresolved dependencies or incomplete module inputs.
+The following modules did not run:
+Failed: Model estimation
+Skipped: Contrast Manager
+
+{Error using MATLABbatch system
+Job execution failed. The full log of this run can be found in MATLAB command
+window, starting with the lines (look for the line showing the exact #job as
+displayed in this error message)
+------------------
+Running job #1
+------------------
+} 
+              ...SPM.mat saved
+Saving SPM configuration                :               ...SPM.mat saved
+Completed                               :          15:42:52 - 10/08/2022
+Done    'fMRI model specification'
+Running 'Model estimation'
+
+SPM12: spm_spm (v6842)                             15:42:53 - 10/08/2022
+========================================================================
+
+SPM12: spm_est_non_sphericity (v6913)              15:42:55 - 10/08/2022
+========================================================================
+Chunk   1/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   3/12                            :                  ...processing                       ...doneChunk   4/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...doneChunk   7/12                            :                  ...processing                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  11/12                            :                  ...processingChunk  12/12                            :                  ...processing
+Temporal non-sphericity (195534 voxels) :             ...ReML estimation
+  ReML Block 1                
+  ReML Iteration 1                      :        ...2.205166e+01 [+4.25]
+  ReML Iteration 2                      :        ...5.929661e-01 [+4.50]
+  ReML Iteration 3                      :        ...7.046283e-02 [+4.75]
+  ReML Iteration 1                      :        ...2.207196e+01 [+2.25]
+  ReML Iteration 2                      :        ...7.582014e-02 [-5.50]
+  ReML Block 2                
+  ReML Iteration 1                      :        ...2.765118e+01 [+4.25]
+  ReML Iteration 2                      :        ...7.618988e-02 [+4.50]
+  ReML Iteration 1                      :        ...2.765077e+01 [+2.25]
+  ReML Iteration 2                      :        ...4.313327e-02 [+2.50]
+  ReML Block 3                
+  ReML Iteration 1                      :        ...2.670119e+01 [+4.25]
+  ReML Iteration 2                      :        ...9.192858e-02 [+4.50]
+  ReML Iteration 1                      :        ...2.669964e+01 [+2.25]
+  ReML Iteration 2                      :        ...1.364461e-01 [+1.50]
+  ReML Iteration 3                      :        ...1.542228e-02 [-1.25]
+  ReML Block 4                
+  ReML Iteration 1                      :        ...2.528466e+01 [+4.25]
+  ReML Iteration 2                      :        ...2.713139e-01 [+4.50]
+  ReML Iteration 3                      :        ...2.515789e-02 [+4.75]
+  ReML Iteration 1                      :        ...2.528686e+01 [+2.25]
+  ReML Iteration 2                      :        ...1.311608e-01 [+2.50]
+  ReML Iteration 3                      :        ...6.939036e-03 [-0.25]
+
+SPM12: spm_spm (v6842)                             15:43:07 - 10/08/2022
+========================================================================
+Chunk   1/12                            :                  ...processing                       ...doneChunk   2/12                            :                  ...processing                       ...doneChunk   3/12                            :                  ...processing                       ...doneChunk   4/12                            :                  ...processing                       ...doneChunk   5/12                            :                  ...processing                       ...doneChunk   6/12                            :                  ...processing                       ...doneChunk   7/12                            :                  ...processing                       ...doneChunk   8/12                            :                  ...processing                       ...doneChunk   9/12                            :                  ...processing                       ...doneChunk  10/12                            :                  ...processing                       ...doneChunk  11/12                            :                  ...processing                       ...doneChunk  12/12                            :                  ...processing                       ...done
+Spatial non-sphericity (over scans)     :      ...estimating derivatives ...writing resels/voxel image                       ...done
+Saving SPM.mat                          :                     ...writing                       ...done
+Completed                               :          15:43:42 - 10/08/2022
+Done
+Done    'Model estimation'
+Running 'Contrast Manager'
+
+SPM12: spm_contrasts.m                             15:43:42 - 10/08/2022
+========================================================================
+Contrasts folder                        :                   ./sub-DEV005
+Deleting contrasts                      :                        ...done
+	contrast image  1               :                   ...computing       ...written con_0001.nii
+	spm{T} image  1                 :                   ...computing      ...written spmT_0001.nii
+	contrast image  2               :                   ...computing       ...written con_0002.nii
+	spm{T} image  2                 :                   ...computing      ...written spmT_0002.nii
+	contrast image  3               :                   ...computing       ...written con_0003.nii
+	spm{T} image  3                 :                   ...computing      ...written spmT_0003.nii
+	contrast image  4               :                   ...computing       ...written con_0004.nii
+	spm{T} image  4                 :                   ...computing      ...written spmT_0004.nii
+Completed                               :          15:43:44 - 10/08/2022
+Done    'Contrast Manager'
+Done
+
