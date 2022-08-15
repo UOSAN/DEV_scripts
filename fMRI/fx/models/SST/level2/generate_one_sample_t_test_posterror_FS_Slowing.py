@@ -15,7 +15,7 @@ ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 train_betas_with_data = get_data_for_confirmed_train_subjs(
     beta_glob = nonbids_data_path + "fMRI/fx/models/SST/wave1/posterror_conditions_w_pss/sub-DEV*/",
     nonbids_data_path = nonbids_data_path,
-    ml_data_folderpath = ml_data_folderpath,
+    dropbox_datapath = ml_data_folderpath,
     ml_scripting_path = ml_scripting_path
 )
 

@@ -46,4 +46,3 @@ rsfMRI/baseline_analysis/subject_correlation/concatenate/DEV*.csv
 rsfMRI/baseline_analysis/subject_connectivity/DEV*.csv
 .Rproj.user
 fMRI/fx/motion/auto-motion-fmriprep/confounds_loaded_state.RData
-.vscode
