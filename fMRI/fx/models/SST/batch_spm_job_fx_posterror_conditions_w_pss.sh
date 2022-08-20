@@ -24,8 +24,8 @@ SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 TASK=SST
 
 #GET SUBJECTS FILTER FOR SUBJECTS TO CONTRAST AND SUBJECTS TO NOT CONTRAST
-SUBJ_TO_CONTRAST=`cat ${SCRIPTS_DIR}/fMRI/fx/multiconds/$TASK/full_duration/posterror_conditions/complete_1.txt`
-SUBJ_NO_CONTRAST=`cat ${SCRIPTS_DIR}/fMRI/fx/multiconds/$TASK/full_duration/posterror_conditions/missing_1.txt`
+SUBJ_TO_CONTRAST=`cat ${SCRIPTS_DIR}/fMRI/fx/multiconds/$TASK/full_duration/posterror_conditions_w_pss/complete_1.txt`
+SUBJ_NO_CONTRAST=`cat ${SCRIPTS_DIR}/fMRI/fx/multiconds/$TASK/full_duration/posterror_conditions_w_pss/missing_1.txt`
 
 # Set MATLAB script path
 SCRIPT_W_CONTRASTS=${SCRIPTS_DIR}/fMRI/fx/models/$TASK/fx_posterror_conditions_w1_w_pss.m
