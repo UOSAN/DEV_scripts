@@ -215,6 +215,8 @@ if (writeRP) {
     arrange(subjectID, wave, task, run, volume) %>%
     group_by(subjectID, wave, task, run) %>%
     do({
+      cat(.[1:ncol(rps)])
+      cat("\n")
       fname = file.path(rpDir, paste('rp_', .$subjectID[[1]], '_', .$wave[[1]], '_', .$task[[1]], '_', .$run[[1]], '.txt', sep = ''))
       write.table(
         .[,-c(1:5)],
