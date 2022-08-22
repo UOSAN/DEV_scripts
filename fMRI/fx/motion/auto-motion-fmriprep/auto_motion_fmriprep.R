@@ -43,6 +43,17 @@ cat("config loaded.\n")
 fileList = list.files(confoundDir, pattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_"), recursive = TRUE)
 
 cat("files listed.\n")
+#check there aren't duplicates. This can happpen if e.g., someone has added archives of files within this directory. this shouldn't really happen.
+filenameList=basename(fileList)
+if (max(table(filenameList)>1)){
+  print("duplicate filenames found. here is a list of the duplicates:")
+  duplicated_filename_count<-table(filenameList)
+  duplicated_filenames = names(duplicated_filename_count)[duplicated_filename_count>1]
+  print(fileList[filenameList %in% duplicated_filenames])
+  print("The suggested fix for this error is to examine where the duplicates are, identify the redundant files, and then remove them.")
+  stop("unique TSV confound files expected, but duplicates found.")
+}
+
 
 for (file_i in 1:length(fileList)) {
   file=fileList[file_i]
