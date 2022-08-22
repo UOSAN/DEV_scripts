@@ -33,28 +33,18 @@ The following object is masked from ‘package:ggplot2’:
 
     margin
 
-. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [1] "removing 0 rows relate to the following run"
+loading config...config loaded.
+files listed.
+. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . [1] 1
+[1] "removing 3 rows relate to the following run"
 # A tibble: 1 × 4
   subjectID  wave task    run
   <chr>     <int> <chr> <int>
 1 DEV221        1 SST       1
-Error: Assigned data `predict(mlModel, dataset)` must be compatible with existing data.
-✖ Existing data has 709907 rows.
-✖ Assigned data has 709904 rows.
-ℹ Only vectors of size 1 are recycled.
-Backtrace:
-     █
-  1. ├─base::`$<-`(...)
-  2. ├─tibble:::`$<-.tbl_df`(...)
-  3. │ └─tibble:::tbl_subassign(...)
-  4. │   └─tibble:::vectbl_recycle_rhs_rows(...)
-  5. │     ├─base::withCallingHandlers(...)
-  6. │     └─vctrs::vec_recycle(value[[j]], nrow)
-  7. ├─vctrs:::stop_recycle_incompatible_size(...)
-  8. │ └─vctrs:::stop_vctrs(...)
-  9. │   └─rlang::abort(message, class = c(class, "vctrs_error"), ...)
- 10. │     └─rlang:::signal_abort(cnd)
- 11. │       └─base::signalCondition(cnd)
- 12. └─(function (cnd) ...
-Execution halted
-srun: error: n222: task 0: Exited with exit code 1
+`summarise()` has grouped output by 'subjectID', 'wave', 'task'. You can override using the `.groups` argument.
+`summarise()` has grouped output by 'subjectID', 'wave'. You can override using the `.groups` argument.
+Note: Using an external vector in selections is ambiguous.
+ℹ Use `all_of(figIndicators)` instead of `figIndicators` to silence this message.
+ℹ See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
+This message is displayed once per session.
+[1] TRUE

@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --time 0-0:10:00
+#SBATCH --partition=short
 #--------------------------------------------------------------
 # This script:
 #	* Creates a batch job for $SUB

@@ -24,6 +24,8 @@ if (!require(tidyverse)) {
 required_packages <- c('tidyverse','caret','randomForest')
 for (package in required_packages){
   if (!require(package,character.only = TRUE)) {
+    cat(paste0("installing ",package,"\n"))
+    flush.console()
     install.packages(package, repos = osuRepo)
   }
 }
@@ -32,16 +34,20 @@ for (package in required_packages){
 #------------------------------------------------------
 # source the config file
 #------------------------------------------------------
+cat("loading config...")
 source('config.R')
-
+cat("config loaded.\n")
 #------------------------------------------------------
 # load confound files
 #------------------------------------------------------
 fileList = list.files(confoundDir, pattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_"), recursive = TRUE)
 
+cat("files listed.\n")
+
 for (file_i in 1:length(fileList)) {
   file=fileList[file_i]
   if(file_i%%10==0){
+  #if(file_i==0){
     cat(". ")
     flush.console()
   }
@@ -92,19 +98,21 @@ row_has_na_val <- rowSums(is.na(dataset[,check_cols]))>0
 rows_with_na_vals<-dataset[row_has_na_val,]
 
 runs_to_remove <- unique(rows_with_na_vals[c("subjectID","wave","task","run")])
-
+if (nrow(runs_to_remove)>0){
+print(nrow(runs_to_remove))
 for (r in 1:nrow(runs_to_remove)){
   
-  rows_to_remove_for_run <- (dataset$subjectID==runs_to_remove[r,"subjectID"] & 
-          dataset$wave==runs_to_remove[r,"wave"] & 
-          dataset$task==runs_to_remove[r,"task"] & 
-          dataset$run==runs_to_remove[r,"run"])
+  rows_to_remove_for_run <- (dataset$subjectID==runs_to_remove[[r,"subjectID"]] & 
+          dataset$wave==runs_to_remove[[r,"wave"]] & 
+          dataset$task==runs_to_remove[[r,"task"]] & 
+          dataset$run==runs_to_remove[[r,"run"]])
   
   print(paste0("removing ",sum(rows_to_remove_for_run)," rows relate to the following run"))
   print(runs_to_remove[r,])
   
   dataset <- dataset[!rows_to_remove_for_run,]
   
+}
 }
 #add the current image state for debugging
 state_filename <- "confounds_loaded_state.RData"
