@@ -43,6 +43,16 @@ cat("config loaded.\n")
 fileList = list.files(confoundDir, pattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_"), recursive = TRUE)
 
 cat("files listed.\n")
+#check there aren't duplicates. This can happpen if e.g., someone has added archives of files within this directory. this shouldn't really happen.
+filenameList=basename(fileList)
+if (max(table(filenameList)>1)){
+  print("duplicate filenames found. here is a list of the duplicates:")
+  duplicated_filename_count<-table(filenameList)
+  duplicated_filenames = names(duplicated_filename_count)[duplicated_filename_count>1]
+  print(fileList[filenameList %in% duplicated_filenames])
+  stop("unique TSV confound files expected, but duplicates found.")
+}
+
 
 for (file_i in 1:length(fileList)) {
   file=fileList[file_i]
@@ -54,6 +64,8 @@ for (file_i in 1:length(fileList)) {
     cat(". ")
     flush.console()
   }
+  cat(file)
+  cat("\n")
   
   # if the merged dataset doesn't exist, create it
   if (!exists('dataset')) {
@@ -215,8 +227,8 @@ if (writeRP) {
     arrange(subjectID, wave, task, run, volume) %>%
     group_by(subjectID, wave, task, run) %>%
     do({
-      cat(.[1:ncol(rps)])
-      cat("\n")
+      print(.[1:ncol(rps)])
+      #cat("\n")
       fname = file.path(rpDir, paste('rp_', .$subjectID[[1]], '_', .$wave[[1]], '_', .$task[[1]], '_', .$run[[1]], '.txt', sep = ''))
       write.table(
         .[,-c(1:5)],
