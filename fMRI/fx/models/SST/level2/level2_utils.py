@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import os
 from glob import glob
 import re
@@ -72,7 +73,8 @@ def get_data_for_confirmed_train_subjs(
     # beta_df['spm_l2_path_description'] =beta_df.beta_filepath
 
     # get just the test subjects
-    test_train_df_raw = pd.read_csv(nonbids_data_path + "fMRI/ml/train_test_markers_20211027T173724.csv")
+    #test_train_df_raw = pd.read_csv(nonbids_data_path + "fMRI/ml/train_test_markers_20211027T173724.csv")
+    test_train_df_raw = pd.read_csv(nonbids_data_path + "fMRI/ml/train_test_markers_20220818T144138.csv")
     data_by_ppt = pd.read_csv(dropbox_datapath + "/data_by_ppt.csv")
     include_exclude_list = pd.read_csv(ml_scripting_path + "/nsc_subject_exclusions.csv")
     test_train_df_raw = test_train_df_raw.merge(include_exclude_list[include_exclude_list.Task == 'SST'],
@@ -82,13 +84,18 @@ def get_data_for_confirmed_train_subjs(
 
     exclude_subjects = ['DEV061', 'DEV185', 'DEV187', 'DEV189', 'DEV190', 'DEV192', 'DEV198', 'DEV203', 'DEV220',
                         'DEV221']
+    #also want to exclude subjects whose data was marked questionable in Redcap/Teams
+    data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
+    data_quality_sst = data_quality.loc[data_quality.SST.isna()==False,]
+    usable_dev_ids = data_quality_sst.dev_id[data_quality_sst.SST=="No reported problems"]
     train_subjs = test_train_df.loc[
-        test_train_df.SplitGroup == 'Train', 'sub_label'].tolist()  # only get the train subjects; ignore those previously marked hold-out
+        test_train_df.SplitGroup_75_25 == 'Train', 'sub_label'].tolist()  # only get the train subjects; ignore those previously marked hold-out
 
-    # now merge the train list with the beta list and the data list
+    # now merge the train list with the beta list, the data list, and the useable subject list
     train_betas = beta_df[(beta_df.subject_id.isin(train_subjs))].reset_index(inplace=False, drop=True)
     train_betas_with_data = train_betas.merge(data_by_ppt, left_on='subject_id', right_on='SID')
+    useable_train_betas_with_data = train_betas_with_data.loc[train_betas_with_data.subject_id.isin(usable_dev_ids),]
 
-    train_betas_with_data.sort_values('subject_id', inplace=True)
+    useable_train_betas_with_data.sort_values('subject_id', inplace=True)
 
-    return train_betas_with_data
+    return useable_train_betas_with_data

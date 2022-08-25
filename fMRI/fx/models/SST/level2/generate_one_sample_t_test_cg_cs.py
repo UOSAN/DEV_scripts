@@ -8,6 +8,7 @@ from level2_utils import *
 #beta_df['spm_l2_path_description'] =beta_df.beta_filepath
 #paths
 nonbids_data_path = "/Users/bensmith/Documents/data/DEV/nonbids_data/"
+dropbox_data_path = "/Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data"
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
 dev_scripts_path ='/Users/bensmith/Documents/code/DEV_scripts'
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
@@ -15,8 +16,9 @@ ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 train_betas_with_data = get_data_for_confirmed_train_subjs(
     beta_glob = nonbids_data_path + "fMRI/fx/models/SST/wave1/conditions/sub-DEV*/",
     nonbids_data_path = nonbids_data_path,
-    ml_data_folderpath = ml_data_folderpath,
-    ml_scripting_path = ml_scripting_path
+    #ml_data_folderpath = ml_data_folderpath,
+    ml_scripting_path = ml_scripting_path,
+    dropbox_datapath=dropbox_data_path
 )
 
 betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)

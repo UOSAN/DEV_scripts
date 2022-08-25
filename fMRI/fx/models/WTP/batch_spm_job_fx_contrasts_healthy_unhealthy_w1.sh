@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=`cat subject_list_20220622.txt`
+SUBJLIST=`cat subject_list_wave1_20220622.txt`
 
 # Which SID should be replaced?
 REPLACESID=001
@@ -30,7 +30,7 @@ SHELL_SCRIPT=spm_job.sh
 RESULTS_INFIX=fx_healthy_unhealthy_contrasts_rs
 
 # Set output dir and make it if it doesn't exist
-OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/fx_healthy_unhealthy_contrasts_rs
+OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_${RESULTS_INFIX}
 
 if [ ! -d ${OUTPUTDIR} ]; then
 	mkdir -p ${OUTPUTDIR}
@@ -52,6 +52,7 @@ for SUB in $SUBJLIST; do
 	 	--cpus-per-task=${cpuspertask} \
 	 	--mem-per-cpu=${mempercpu} \
 	 	--account=sanlab \
+                --time=30:00 \
 	 	${SHELL_SCRIPT}
  	sleep .25
 done

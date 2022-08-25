@@ -9,13 +9,14 @@ from level2_utils import *
 #paths
 nonbids_data_path = "/Users/bensmith/Documents/data/DEV/nonbids_data/"
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
+dropbox_data_path = "/Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data"
 dev_scripts_path ='/Users/bensmith/Documents/code/DEV_scripts'
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 
 train_betas_with_data = get_data_for_confirmed_train_subjs(
     beta_glob = nonbids_data_path + "fMRI/fx/models/SST/wave1/posterror_conditions_w_pss/sub-DEV*/",
     nonbids_data_path = nonbids_data_path,
-    dropbox_datapath = ml_data_folderpath,
+    dropbox_datapath = dropbox_data_path,
     ml_scripting_path = ml_scripting_path
 )
 
