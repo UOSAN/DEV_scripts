@@ -2,15 +2,14 @@ TASK_TO_CHECK=SST
 
 echo "Running a check to identify missing files for task $TASK_TO_CHECK"
 echo ""
+
+echo "this file was designed to be run from the directly of a first-level output file"
+echo "it identifies specifically why NIFTI files that were expected in this first-level run were not found"
 grep -Hl "Item 'NIfTI file(s)', field 'val': Number of matching files (0) less than required (1)" *.log | grep -Po "DEV\d*" > dev_missing_nii_files.txt
 
 DEV_MISSING_FILES=`cat dev_missing_nii_files.txt`
 
-
-
 # Create and execute batch job
-
-
 
 
 
