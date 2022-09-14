@@ -4,7 +4,6 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
-
         {
             "name": "Python: Current File",
             "type": "python",
@@ -12,10 +11,24 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "justMyCode": true,
-            "argsExpansion": "none",
             "args":[
-                "--input", "/Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/SST_DEV/output"
-                "--output", "full_duration/"
+                "--input",
+                "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/SST_DEV/output""--output",
+                "full_duration/"
+            ]
+        },
+        {
+            "name": "Python Run With Full Duration Arguments",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "argsExpansion": "none",
+            "args": [
+                "--input",
+                "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/SST_DEV/output""--output",
+                "full_duration/"
             ]
         }
     ]
