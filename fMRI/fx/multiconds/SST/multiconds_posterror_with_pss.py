@@ -189,11 +189,11 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 posterror_conditions = create_posterror_conditions(
                     trial_start_time, trial_duration, posterror_masks)
 
+                if include_rt_pmod:
+                    posterror_reaction_times = create_pss_parametric_modulator_struct(
+                        pss_set['by_poststop_trial_type'],posterror_masks_dict,posterror_conditions)
 
-                posterror_reaction_times = create_pss_parametric_modulator_struct(
-                    pss_set['by_poststop_trial_type'],posterror_masks_dict,posterror_conditions)
-
-                posterror_conditions.update(posterror_reaction_times)
+                    posterror_conditions.update(posterror_reaction_times)
 
                 write_beta_data(output_folder, folder_id, subject_id, wave_number, posterror_conditions)
 
