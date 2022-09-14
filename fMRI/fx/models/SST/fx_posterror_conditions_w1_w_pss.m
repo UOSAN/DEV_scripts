@@ -49,10 +49,10 @@ matlabbatch{5}.spm.stats.con.consess{6}.tcon.name = 'SlowingCGFollowing(FSandCS)
 matlabbatch{5}.spm.stats.con.consess{6}.tcon.weights = [0 1.0 0 1.0];
 matlabbatch{5}.spm.stats.con.consess{6}.tcon.sessrep = 'none';
 matlabbatch{5}.spm.stats.con.consess{7}.tcon.name = 'CS>FS(PrecedingCorrectGo)';
-matlabbatch{5}.spm.stats.con.consess{7}.tcon.weights = [0 0 0 0 0 -1 1];
+matlabbatch{5}.spm.stats.con.consess{7}.tcon.weights = [0 0 0 0 0 1 -1];
 matlabbatch{5}.spm.stats.con.consess{7}.tcon.sessrep = 'none';
 matlabbatch{5}.spm.stats.con.consess{8}.tcon.name = 'FS>CS(PrecedingCorrectGo)';
-matlabbatch{5}.spm.stats.con.consess{8}.tcon.weights = [0 0 0 0 0 1 -1];
+matlabbatch{5}.spm.stats.con.consess{8}.tcon.weights = [0 0 0 0 0 -1 1];
 matlabbatch{5}.spm.stats.con.consess{8}.tcon.sessrep = 'none';
 %we can add additional contrasts to this file if necessary.
 matlabbatch{5}.spm.stats.con.delete = 0;
