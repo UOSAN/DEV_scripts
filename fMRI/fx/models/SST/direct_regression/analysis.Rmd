@@ -125,16 +125,16 @@ ggplot(df_offset_long,
 
 ```
 
-
+now by ROI with facets for condition:
 
 ```{r}
 roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
 df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
 ggplot(df_offset_long,
-       aes(x=offset_start, y=value,color=condition))+
+       aes(x=offset_start, y=value,color=ROI))+
   geom_vline(xintercept = 0,linetype="dashed")+
   geom_line()+
-  facet_wrap(~ROI)
+  facet_wrap(~condition)
   
   #geom_point()+
   #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
@@ -142,4 +142,5 @@ ggplot(df_offset_long,
   
 
 ```
+
 
