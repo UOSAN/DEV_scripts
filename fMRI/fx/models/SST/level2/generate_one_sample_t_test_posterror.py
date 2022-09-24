@@ -7,21 +7,26 @@ from level2_utils import *
 
 #beta_df['spm_l2_path_description'] =beta_df.beta_filepath
 #paths
-nonbids_data_path = "/Users/bensmith/Documents/data/DEV/nonbids_data/"
+nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
+dropbox_data_path = "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data"
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
-dev_scripts_path ='/Users/bensmith/Documents/code/DEV_scripts'
+dev_scripts_path ='/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts'
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 
+first_level_path = nonbids_data_path + "fMRI/fx/models/SST/wave1/posterror_conditions_w_pss/sub-DEV*/"
+
 train_betas_with_data = get_data_for_confirmed_train_subjs(
-    beta_glob = nonbids_data_path + "fMRI/fx/models/SST/wave1/posterror_conditions/sub-DEV*/",
+    beta_glob = first_level_path,
     nonbids_data_path = nonbids_data_path,
-    ml_data_folderpath = ml_data_folderpath,
-    ml_scripting_path = ml_scripting_path
+    #ml_data_folderpath = ml_data_folderpath,
+    ml_scripting_path = ml_scripting_path,
+    dropbox_datapath=dropbox_data_path
 )
+
 
 betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 
-for contrast_name in ['CorrectGoFollowing(CS>FS)','CorrectGoFollowing(FS>CS)']:
+for contrast_name in ['CorrectGoFollowing(CS>FS)','CorrectGoFollowing(FS>CS)','CS>FS(PrecedingCorrectGo)','FS>CS(PrecedingCorrectGo)']:
     contrast_colname = 'contrast_' + contrast_name + '_fname'
     print(contrast_name)
     if contrast_colname in betas_with_contrasts.columns:

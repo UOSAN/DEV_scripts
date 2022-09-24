@@ -7,7 +7,7 @@ from level2_utils import *
 
 #beta_df['spm_l2_path_description'] =beta_df.beta_filepath
 #paths
-nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/nonbids_data/"
+nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
 dropbox_data_path = "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data"
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
 dev_scripts_path ='/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts'

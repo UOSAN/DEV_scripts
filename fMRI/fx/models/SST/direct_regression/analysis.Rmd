@@ -1,0 +1,145 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+```
+
+```{r}
+dropbbox_dir <- config::get("dev_analysis_data_dir")
+
+```
+
+```{r}
+time_points <- readr::read_csv(paste0(dropbbox_dir,"SST_roi_by_time_point.csv"))
+```
+
+```{r}
+time_points
+```
+
+Now let's see if we can graph putamen...
+```{r}
+library(ggplot2)
+ggplot(time_points,
+       aes(x=offset, y=`harvardoxford-subcortical_prob_Left Putamen`))+
+  geom_point()+
+  geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  scale_y_continuous(limits=c(-2.5,2.5))+
+  facet_wrap(~condition)
+  
+```
+
+```{r}
+sd()
+```
+
+
+we could also subtract the average per TRIAL. Best we subtract the average across all of the offsets. it's a bit arbitrary to use the average over all the areas; the idea is just to get a consistent amount of average.
+
+```{r}
+roi_cols <- c(
+   "harvardoxford-subcortical_prob_Left Putamen",    "harvardoxford-subcortical_prob_Right Accumbens",
+ "harvardoxford-subcortical_prob_Right Putamen",   "harvardoxford-subcortical_prob_Left Accumbens" ,
+ "harvardoxford-subcortical_prob_Left Caudate" ,   "harvardoxford-subcortical_prob_Right Caudate"  
+)
+time_points$tr_roi_mean <- rowMeans(time_points[,roi_cols])
+time_points<- 
+  time_points %>% group_by(subid,wave, trial_n) %>%
+  mutate(trial_mean_across_rois = mean(tr_roi_mean))
+
+#now mean-center the ROIs
+time_points_c<-time_points
+for (roi_col in roi_cols){
+  time_points_c[,roi_col]<-time_points_c[,roi_col]-time_points_c$trial_mean_across_rois
+}
+```
+
+```{r}
+sd(time_points$`harvardoxford-subcortical_prob_Left Putamen`)
+sd(time_points_c$`harvardoxford-subcortical_prob_Left Putamen`)
+```
+
+```{r}
+library(ggplot2)
+ggplot(time_points_c,
+       aes(x=offset, y=`harvardoxford-subcortical_prob_Left Putamen`,group=interaction(trial_n,subid,wave)))+
+  geom_line(alpha=0.2)+
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  scale_y_continuous(limits=c(-2.5,2.5))+
+  facet_wrap(~condition)
+  
+```
+
+Now let's try just graphing the moving average...
+
+```{r}
+library(tidyverse)
+
+#get the range of offsets
+min_offset<-round(min(time_points_c$offset))
+max_offset <- round(max(time_points_c$offset))
+
+seq_size <- 0.1
+offset_size<-1
+offset_times <- seq(min_offset,max_offset-max(offset_size,seq_size),seq_size)
+
+dt_list<-list()
+for (cond in unique(time_points_c$condition)){
+  print(cond)
+  for (ot_i in offset_times){
+  #<-offset_times[[20]]
+
+  tp_at_offset <- time_points_c %>% filter(offset>=ot_i & offset<(ot_i+offset_size) & condition==cond)
+  numeric_cols <- colnames(tp_at_offset)[sapply(tp_at_offset,class)=="numeric"]
+  tp_at_offset_m <- data.frame(t(colMeans(tp_at_offset[,numeric_cols])))
+  tp_at_offset_m$offset_start<-ot_i
+  tp_at_offset_m$condition<-cond
+  dt_list<-append(dt_list,list(tp_at_offset_m))
+
+}
+
+}
+
+df_offset<-data.frame(data.table::rbindlist(dt_list))
+
+
+```
+
+
+```{r}
+roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
+df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
+ggplot(df_offset_long,
+       aes(x=offset_start, y=value,color=condition))+
+  geom_vline(xintercept = 0,linetype="dashed")+
+  geom_line()+
+  facet_wrap(~ROI)
+  
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  #scale_y_continuous(limits=c(-2.5,2.5))
+  
+
+```
+
+
+
+```{r}
+roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
+df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
+ggplot(df_offset_long,
+       aes(x=offset_start, y=value,color=condition))+
+  geom_vline(xintercept = 0,linetype="dashed")+
+  geom_line()+
+  facet_wrap(~ROI)
+  
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  #scale_y_continuous(limits=c(-2.5,2.5))
+  
+
+```
+
