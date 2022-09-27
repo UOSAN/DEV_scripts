@@ -3,6 +3,7 @@ title: "R Notebook"
 output: html_notebook
 ---
 ```{r}
+library(tidyverse)
 Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
 ```
 
@@ -22,18 +23,15 @@ time_points
 Now let's see if we can graph putamen...
 ```{r}
 library(ggplot2)
-ggplot(time_points,
-       aes(x=offset, y=`harvardoxford-subcortical_prob_Left Putamen`))+
-  geom_point()+
-  geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
-  scale_y_continuous(limits=c(-2.5,2.5))+
-  facet_wrap(~condition)
+# ggplot(time_points,
+#        aes(x=offset, y=`harvardoxford-subcortical_prob_Left Putamen`))+
+#   geom_point()+
+#   geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+#   scale_y_continuous(limits=c(-2.5,2.5))+
+#   facet_wrap(~condition)
   
 ```
 
-```{r}
-sd()
-```
 
 
 we could also subtract the average per TRIAL. Best we subtract the average across all of the offsets. it's a bit arbitrary to use the average over all the areas; the idea is just to get a consistent amount of average.
@@ -47,7 +45,7 @@ roi_cols <- c(
 time_points$tr_roi_mean <- rowMeans(time_points[,roi_cols])
 time_points<- 
   time_points %>% group_by(subid,wave, trial_n) %>%
-  mutate(trial_mean_across_rois = mean(tr_roi_mean))
+  mutate(trial_mean_across_rois = mean(tr_roi_mean, na.rm = TRUE))
 
 #now mean-center the ROIs
 time_points_c<-time_points
@@ -94,7 +92,7 @@ for (cond in unique(time_points_c$condition)){
 
   tp_at_offset <- time_points_c %>% filter(offset>=ot_i & offset<(ot_i+offset_size) & condition==cond)
   numeric_cols <- colnames(tp_at_offset)[sapply(tp_at_offset,class)=="numeric"]
-  tp_at_offset_m <- data.frame(t(colMeans(tp_at_offset[,numeric_cols])))
+  tp_at_offset_m <- data.frame(t(colMeans(tp_at_offset[,numeric_cols],na.rm=TRUE)))
   tp_at_offset_m$offset_start<-ot_i
   tp_at_offset_m$condition<-cond
   dt_list<-append(dt_list,list(tp_at_offset_m))
@@ -112,7 +110,7 @@ df_offset<-data.frame(data.table::rbindlist(dt_list))
 ```{r}
 roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
 df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
-ggplot(df_offset_long,
+ggplot(df_offset_long %>% filter(condition!="FailedGo"),
        aes(x=offset_start, y=value,color=condition))+
   geom_vline(xintercept = 0,linetype="dashed")+
   geom_line()+
@@ -133,8 +131,8 @@ df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_t
 ggplot(df_offset_long,
        aes(x=offset_start, y=value,color=ROI))+
   geom_vline(xintercept = 0,linetype="dashed")+
-  geom_line()+
-  facet_wrap(~condition)
+  geom_line(alpha=0.5)+
+  facet_wrap(~condition,scales = "free")
   
   #geom_point()+
   #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
