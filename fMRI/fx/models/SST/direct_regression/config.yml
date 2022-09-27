@@ -22,3 +22,8 @@ n137:
   fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/
   nii_raw_path: sub-DEV*/ses-wave1/func/s6_sub-DEV*_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
   mask_location: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/
+n222:
+  dropbox_data_dir: /gpfs/projects/sanlab/bsmith16/data
+  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/
+  nii_raw_path: sub-DEV*/ses-wave1/func/s6_sub-DEV*_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+  mask_location: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/
