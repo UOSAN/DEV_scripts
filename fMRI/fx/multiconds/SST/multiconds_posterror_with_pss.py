@@ -89,9 +89,10 @@ def create_pss_parametric_modulator_struct(pss_list:List,posterror_masks_dict : 
 
 def main(input_dir: str, bids_dir: str = None, file_limit=None,
          use_rt_for_go_success_trials=True,
+         include_rt_pmod=True,
+         folder_id='posterror_conditions_w_pss',
          output_folder=""):
     print(input_dir)
-    folder_id = 'posterror_conditions_w_pss'
 
     files = list(Path(input_dir).glob('DEV*.mat'))
     files.sort()
@@ -188,11 +189,11 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 posterror_conditions = create_posterror_conditions(
                     trial_start_time, trial_duration, posterror_masks)
 
+                if include_rt_pmod:
+                    posterror_reaction_times = create_pss_parametric_modulator_struct(
+                        pss_set['by_poststop_trial_type'],posterror_masks_dict,posterror_conditions)
 
-                posterror_reaction_times = create_pss_parametric_modulator_struct(
-                    pss_set['by_poststop_trial_type'],posterror_masks_dict,posterror_conditions)
-
-                posterror_conditions.update(posterror_reaction_times)
+                    posterror_conditions.update(posterror_reaction_times)
 
                 write_beta_data(output_folder, folder_id, subject_id, wave_number, posterror_conditions)
 
@@ -242,4 +243,8 @@ if __name__ == "__main__":
     
 
     #we don't do BIDs here because BIDs, by convention, uses RT for duration.
-    main(args.input_dir, bids_dir=None, use_rt_for_go_success_trials=False, output_folder= args.output_dir)
+    main(args.input_dir, bids_dir=None, use_rt_for_go_success_trials=False,
+          include_rt_pmod=False, folder_id='posterror_conditions', output_folder=args.output_dir)
+    main(args.input_dir, bids_dir=None, use_rt_for_go_success_trials=False,
+         include_rt_pmod=True, folder_id='posterror_conditions_w_pss', output_folder= args.output_dir)
+

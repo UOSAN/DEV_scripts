@@ -176,9 +176,18 @@ def create_posterror_masks_from_masks(condition_masks: List) -> List:
     # we shift by 2, not 1, because we ignore the "NULL TRIAL" that occurs reliably every second trial
     go_success_following_failed_stop = np.append([False, False],
                                                     (go_success[2:] & no_go_fail[:(len(no_go_fail) - 2)]))
+    failed_stop_preceding_go_success = np.append(   (go_success[2:] & no_go_fail[:(len(no_go_fail) - 2)]),
+                                                [False, False])
+
     # marks if each trial is a (successful or failed) go that follows a successful stop
     go_success_following_successful_stop = np.append([False, False],
                                                         (go_success[2:] & no_go_success[:(len(no_go_success) - 2)]))
+    successful_stop_preceding_go_success = np.append(   (go_success[2:] & no_go_success[:(len(no_go_success) - 2)]),
+                                                [False, False])
+
+    no_go_fail_other = no_go_fail & (failed_stop_preceding_go_success==False)
+    no_go_success_other = no_go_success & (successful_stop_preceding_go_success==False)
+    
 
     # create one beta for all the other SuccessGo trials
     other_successful_go = go_success & (go_success_following_successful_stop == False) & (
@@ -193,8 +202,10 @@ def create_posterror_masks_from_masks(condition_masks: List) -> List:
         'CorrectGoFollowingCorrectStop': go_success_following_successful_stop,
         'CorrectGoFollowingFailedStop': go_success_following_failed_stop,
         'OtherCorrectGo': other_successful_go, 
-        'CorrectStop': no_go_success,
-        'FailedStop': no_go_fail,
+        'CorrectStopPrecedingCorrectGo': successful_stop_preceding_go_success,
+        'FailedStopPrecedingCorrectGo': failed_stop_preceding_go_success,
+        'OtherCorrectStop': no_go_success_other,
+        'OtherFailedStop': no_go_fail_other,
         'Cue': null_trials, 
         'OtherFailedGo': go_fail
     })
@@ -253,7 +264,7 @@ def create_conditions(start_time: np.ndarray, duration: np.ndarray, masks: List,
 
 def create_posterror_conditions(start_time: np.ndarray, duration: np.ndarray, posterror_masks: List):
     condition_labels = ['CorrectGoFollowingCorrectStop', 'CorrectGoFollowingFailedStop',
-                        'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'FailedGo']
+                        'OtherCorrectGo', 'CorrectStopPrecedingCorrectGo', 'FailedStopPrecedingCorrectGo', 'CorrectStopOther', 'FailedStopOther', 'Cue', 'FailedGo']
     return (create_conditions(start_time, duration, posterror_masks, condition_labels=condition_labels))
 
 

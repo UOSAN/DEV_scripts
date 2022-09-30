@@ -5,12 +5,12 @@
 
 %% Load data and intialize variables
 %inputDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ROC/output';
-inputDir = '/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/ROC/output';
+inputDir = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/ROC/output';
 runNames = {'run1', 'run2', 'run3', 'run4'};
 waveNames = {'1', '2'};
 
 %writeDir = '~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
-writeDir = '～/Google Drive/oregon/preprocessing/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
+writeDir = '~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
 studyName = 'DEV';
 filePattern = 'run'; 
 nTrials = 20;
@@ -41,8 +41,11 @@ for i = 1:numel(subjectID)
         files = dir(fullfile(inputDir, sprintf('%s_%s_*%s*.mat', sub, wave, filePattern)));
 
         % warn if there are not the correct number of files
-        if numel(files) ~= length(runNames)
-            warning('Incorrect number of files. Subject %s has %d files for wave %s.', sub, numel(files), wave)
+        if numel(files) > length(runNames)
+            warning('Excess of files. Subject %s has %d files for wave %s. Expected %d. If there are duplicate files the last one will be selected.', sub, numel(files), wave,length(runNames))
+        end
+        if numel(files) < length(runNames)
+            warning('Run files missing. Subject %s has %d files for wave %s. Expected %d', sub, numel(files), wave,length(runNames))
         end
 
         % log missing trial info

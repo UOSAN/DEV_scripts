@@ -45,8 +45,8 @@ errorlog = os.path.join(logdir, "errorlog_dcm2bids" + datetime.now().strftime("%
 
 
 # Source the subject list (needs to be in your current working directory)
-subjectlist = "new_subject_list.txt"
-
-
+#subjectlist = "new_subject_list.txt"
+#subjectlist = "subject_list_test_dev188.txt"
+subjectlist = "subject_list_fix_bidsQC_errors.txt"
 # Run on local machine (run_local = True) or high performance cluster with slurm (run_local = False)
 run_local = False

@@ -7,10 +7,10 @@ from level2_utils import *
 
 #beta_df['spm_l2_path_description'] =beta_df.beta_filepath
 #paths
-nonbids_data_path = "/Users/bensmith/Documents/data/DEV/nonbids_data/"
-dropbox_data_path = "/Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data"
+nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
+dropbox_data_path = "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data"
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
-dev_scripts_path ='/Users/bensmith/Documents/code/DEV_scripts'
+dev_scripts_path ='/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts'
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 
 train_betas_with_data = get_data_for_confirmed_train_subjs(

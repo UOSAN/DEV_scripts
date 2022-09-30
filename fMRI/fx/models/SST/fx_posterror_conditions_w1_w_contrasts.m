@@ -39,5 +39,11 @@ matlabbatch{5}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
 matlabbatch{5}.spm.stats.con.consess{2}.tcon.name = 'CorrectGoFollowing(FS>CS)';
 matlabbatch{5}.spm.stats.con.consess{2}.tcon.weights = [-1 1];
 matlabbatch{5}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
+matlabbatch{5}.spm.stats.con.consess{3}.tcon.name = 'CS>FS(PrecedingCorrectGo)';
+matlabbatch{5}.spm.stats.con.consess{3}.tcon.weights = [0 0 0 1 -1];
+matlabbatch{5}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
+matlabbatch{5}.spm.stats.con.consess{4}.tcon.name = 'FS>CS(PrecedingCorrectGo)';
+matlabbatch{5}.spm.stats.con.consess{4}.tcon.weights = [0 0 0 -1 1];
+matlabbatch{5}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
 %we can add additional contrasts to this file if necessary.
 matlabbatch{5}.spm.stats.con.delete = 0;

@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=`cat subject_list_20220622.txt`
+SUBJLIST=`cat subject_list_wave1_20220622.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV004
@@ -61,6 +61,7 @@ for SUB in $SUBJLIST; do
 		 	--cpus-per-task=${cpuspertask} \
 		 	--mem-per-cpu=${mempercpu} \
 		 	--account=sanlab \
+                        --time=30:00 \
 		 	${SHELL_SCRIPT}
 	 	sleep .25
     elif [[ " ${SUBJ_NO_CONTRAST[*]} " =~ "${SUB}" ]]; then
@@ -71,6 +72,7 @@ for SUB in $SUBJLIST; do
 		 	--cpus-per-task=${cpuspertask} \
 		 	--mem-per-cpu=${mempercpu} \
 		 	--account=sanlab \
+                        --time=30:00 \
 		 	${SHELL_SCRIPT}
 	 	sleep .25
     else
@@ -81,6 +83,7 @@ for SUB in $SUBJLIST; do
 		 	--cpus-per-task=${cpuspertask} \
 		 	--mem-per-cpu=${mempercpu} \
 		 	--account=sanlab \
+                        --time=30:00 \
 		 	${SHELL_SCRIPT}
 	 	sleep .25
 	fi

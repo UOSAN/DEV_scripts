@@ -9,6 +9,7 @@ import numpy
 import scipy.io
 from multiconds import *
 
+raise Exception("I believe this is deprecated; it seems to implement posterror_with_durations by another way, but incomplete.")
 def create_duration_multiple_regressor_df(reaction_time,posterror_masks,posterror_conditions):
     posterror_names = posterror_conditions['names']
     duration_array = None

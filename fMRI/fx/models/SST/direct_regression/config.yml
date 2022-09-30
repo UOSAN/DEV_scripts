@@ -1,0 +1,30 @@
+default:
+  dropbox_data_dir: /gpfs/projects/sanlab/bsmith16/data
+  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/
+  nii_raw_path: sub-DEV*/ses-wave1/func/s6_sub-DEV*_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+  mask_location: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/
+UO-2010763:
+  rubric_dir: /Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/DEV_scoring_rubrics
+  dropbox_path: /Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab
+  input_mat_path: /Users/bensmith/Documents/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions
+  dev_scripts_path: /Users/bensmith/Documents/code/DEV_scripts/
+Benjamins-MacBook-Pro-2.local:
+  dev_scripts_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/
+  rural_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
+  rubric_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/DEV_scoring_rubrics
+  dev_analysis_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
+  input_mat_path: /Users/benjaminsmith/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions
+  dropbox_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
+  fmriprep_dir: /Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/fmriprep/
+  nii_raw_path: sub-DEV*/ses-wave1/func/s6_sub-DEV*_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+  mask_location: /Users/benjaminsmith/Google Drive/oregon/data/DEV/brainmaps/
+n137:
+  dropbox_data_dir: /gpfs/projects/sanlab/bsmith16/data
+  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/
+  nii_raw_path: sub-DEV*/ses-wave1/func/s6_sub-DEV*_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+  mask_location: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/
+n222:
+  dropbox_data_dir: /gpfs/projects/sanlab/bsmith16/data
+  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/
+  nii_raw_path: sub-DEV*/ses-wave1/func/s6_sub-DEV*_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+  mask_location: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/
