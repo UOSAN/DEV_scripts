@@ -1,0 +1,1285 @@
+%-----------------------------------------------------------------------
+% Job saved on 26-Sep-2022 14:52:06 by cfg_util (rev $Rev: 7345 $)
+% spm SPM - SPM12 (7771)
+% cfg_basicio BasicIO - Unknown
+%-----------------------------------------------------------------------
+matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave1/func/'};
+matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV001_ses-wave1_task-WTP_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii';
+matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
+matlabbatch{2}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave1/func/'};
+matlabbatch{2}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV001_ses-wave1_task-WTP_acq-2_bold_space-MNI152NLin2009cAsym_preproc.nii';
+matlabbatch{2}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
+matlabbatch{3}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave1/func/'};
+matlabbatch{3}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV001_ses-wave1_task-WTP_acq-3_bold_space-MNI152NLin2009cAsym_preproc.nii';
+matlabbatch{3}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
+matlabbatch{4}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave1/func/'};
+matlabbatch{4}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV001_ses-wave1_task-WTP_acq-4_bold_space-MNI152NLin2009cAsym_preproc.nii';
+matlabbatch{4}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
+matlabbatch{5}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV001_ses-wave1_task-WTP_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{5}.spm.util.exp_frames.frames = Inf;
+matlabbatch{6}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV001_ses-wave1_task-WTP_acq-2_bold_space-MNI152NLin2009cAsym_preproc.nii)', substruct('.','val', '{}',{2}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{6}.spm.util.exp_frames.frames = Inf;
+matlabbatch{7}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV001_ses-wave1_task-WTP_acq-3_bold_space-MNI152NLin2009cAsym_preproc.nii)', substruct('.','val', '{}',{3}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{7}.spm.util.exp_frames.frames = Inf;
+matlabbatch{8}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV001_ses-wave1_task-WTP_acq-4_bold_space-MNI152NLin2009cAsym_preproc.nii)', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{8}.spm.util.exp_frames.frames = Inf;
+matlabbatch{9}.spm.stats.fmri_spec.dir = {'/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV001'};
+matlabbatch{9}.spm.stats.fmri_spec.timing.units = 'secs';
+matlabbatch{9}.spm.stats.fmri_spec.timing.RT = 2;
+matlabbatch{9}.spm.stats.fmri_spec.timing.fmri_t = 72;
+matlabbatch{9}.spm.stats.fmri_spec.timing.fmri_t0 = 36;
+matlabbatch{9}.spm.stats.fmri_spec.sess(1).scans(1) = cfg_dep('Expand image frames: Expanded filename list.', substruct('.','val', '{}',{5}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{9}.spm.stats.fmri_spec.sess(1).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
+matlabbatch{9}.spm.stats.fmri_spec.sess(1).multi = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/WTP/conditions_healthy_unhealthy/DEV001_1_WTP1.mat'};
+matlabbatch{9}.spm.stats.fmri_spec.sess(1).regress = struct('name', {}, 'val', {});
+matlabbatch{9}.spm.stats.fmri_spec.sess(1).multi_reg = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/rp_txt/rp_DEV001_1_WTP_1.txt'};
+matlabbatch{9}.spm.stats.fmri_spec.sess(1).hpf = 128;
+matlabbatch{9}.spm.stats.fmri_spec.sess(2).scans(1) = cfg_dep('Expand image frames: Expanded filename list.', substruct('.','val', '{}',{6}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{9}.spm.stats.fmri_spec.sess(2).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
+matlabbatch{9}.spm.stats.fmri_spec.sess(2).multi = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/WTP/conditions_healthy_unhealthy/DEV001_1_WTP2.mat'};
+matlabbatch{9}.spm.stats.fmri_spec.sess(2).regress = struct('name', {}, 'val', {});
+matlabbatch{9}.spm.stats.fmri_spec.sess(2).multi_reg = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/rp_txt/rp_DEV001_1_WTP_2.txt'};
+matlabbatch{9}.spm.stats.fmri_spec.sess(2).hpf = 128;
+matlabbatch{9}.spm.stats.fmri_spec.sess(3).scans(1) = cfg_dep('Expand image frames: Expanded filename list.', substruct('.','val', '{}',{7}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{9}.spm.stats.fmri_spec.sess(3).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
+matlabbatch{9}.spm.stats.fmri_spec.sess(3).multi = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/WTP/conditions_healthy_unhealthy/DEV001_1_WTP3.mat'};
+matlabbatch{9}.spm.stats.fmri_spec.sess(3).regress = struct('name', {}, 'val', {});
+matlabbatch{9}.spm.stats.fmri_spec.sess(3).multi_reg = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/rp_txt/rp_DEV001_1_WTP_3.txt'};
+matlabbatch{9}.spm.stats.fmri_spec.sess(3).hpf = 128;
+matlabbatch{9}.spm.stats.fmri_spec.sess(4).scans(1) = cfg_dep('Expand image frames: Expanded filename list.', substruct('.','val', '{}',{8}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{9}.spm.stats.fmri_spec.sess(4).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
+matlabbatch{9}.spm.stats.fmri_spec.sess(4).multi = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/WTP/conditions_healthy_unhealthy/DEV001_1_WTP4.mat'};
+matlabbatch{9}.spm.stats.fmri_spec.sess(4).regress = struct('name', {}, 'val', {});
+matlabbatch{9}.spm.stats.fmri_spec.sess(4).multi_reg = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/rp_txt/rp_DEV001_1_WTP_4.txt'};
+matlabbatch{9}.spm.stats.fmri_spec.sess(4).hpf = 128;
+matlabbatch{9}.spm.stats.fmri_spec.fact = struct('name', {}, 'levels', {});
+matlabbatch{9}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0];
+matlabbatch{9}.spm.stats.fmri_spec.volt = 1;
+matlabbatch{9}.spm.stats.fmri_spec.global = 'None';
+matlabbatch{9}.spm.stats.fmri_spec.mthresh = -Inf;
+matlabbatch{9}.spm.stats.fmri_spec.mask = {'/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii,1'};
+matlabbatch{9}.spm.stats.fmri_spec.cvi = 'FAST';
+matlabbatch{10}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File', substruct('.','val', '{}',{9}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{10}.spm.stats.fmri_est.write_residuals = 0;
+matlabbatch{10}.spm.stats.fmri_est.method.Classical = 1;
+matlabbatch{11}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{10}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{11}.spm.stats.con.consess{1}.tcon.name = 'healthy-unhealthy';
+matlabbatch{11}.spm.stats.con.consess{1}.tcon.weights = [1 -1 0 0 0 0 0];
+matlabbatch{11}.spm.stats.con.consess{1}.tcon.sessrep = 'replsc';
+matlabbatch{11}.spm.stats.con.consess{2}.tcon.name = 'task - baseline';
+matlabbatch{11}.spm.stats.con.consess{2}.tcon.weights = [1 1 0 0 0 0 0];
+matlabbatch{11}.spm.stats.con.consess{2}.tcon.sessrep = 'replsc';
+matlabbatch{11}.spm.stats.con.consess{3}.tcon.name = 'unhealhty - baseline';
+matlabbatch{11}.spm.stats.con.consess{3}.tcon.weights = [0 1 0 0 0 0 0];
+matlabbatch{11}.spm.stats.con.consess{3}.tcon.sessrep = 'replsc';
+matlabbatch{11}.spm.stats.con.consess{4}.tcon.name = 'healthy - baseline';
+matlabbatch{11}.spm.stats.con.consess{4}.tcon.weights = [1 0 0 0 0 0 0];
+matlabbatch{11}.spm.stats.con.consess{4}.tcon.sessrep = 'replsc';
+matlabbatch{11}.spm.stats.con.delete = 1;
+matlabbatch{12}.spm.stats.factorial_design.dir = {'/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy'};
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.scans = {
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV018/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV021/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV024/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV027/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV040/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV042/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV044/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV046/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV049/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV050/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV051/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV052/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV053/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV055/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV056/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV057/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV058/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV059/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV060/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV061/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV062/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV064/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV065/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV066/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV069/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV070/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV071/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV073/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV074/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV075/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV076/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV077/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV079/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV083/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV084/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV086/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV087/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV088/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV089/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV090/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV091/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV093/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV094/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV096/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV097/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV099/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV100/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV102/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV103/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV107/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV108/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV110/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV112/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV113/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV116/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV119/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV120/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV121/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV122/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV127/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV133/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV135/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV137/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV138/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV141/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV144/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV145/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV147/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV154/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV155/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV156/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV157/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV158/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV159/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV161/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV167/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV177/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV178/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV179/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV182/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV186/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV187/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV191/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV196/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV197/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV198/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV199/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV201/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV203/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV204/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV205/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV206/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV208/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV209/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV210/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV211/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV215/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV216/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV220/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV222/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV223/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV225/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV228/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV230/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV231/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV232/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV233/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV235/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV236/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV237/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV238/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV239/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV240/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV241/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV243/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV244/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV246/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV247/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV249/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV250/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV251/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV254/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV255/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV256/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV257/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV258/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV260/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV261/spmT_0003.nii'
+                                                             '/Users/denicia/DEV_local/nonbids_data_local/fMRI/fx/models/WTP/wave1/conditions_healthy_unhealthy/sub-DEV262/spmT_0003.nii'
+                                                             };
+%%
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(1).c = [2
+                                                                 0
+                                                                 2
+                                                                 0
+                                                                 3
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 9
+                                                                 1
+                                                                 3
+                                                                 0
+                                                                 2
+                                                                 3
+                                                                 6
+                                                                 1
+                                                                 0
+                                                                 1
+                                                                 1
+                                                                 3
+                                                                 6
+                                                                 1
+                                                                 2
+                                                                 3
+                                                                 5
+                                                                 1
+                                                                 8
+                                                                 1
+                                                                 0
+                                                                 0
+                                                                 6
+                                                                 1
+                                                                 2
+                                                                 3
+                                                                 3
+                                                                 2
+                                                                 5
+                                                                 1
+                                                                 4
+                                                                 0
+                                                                 6
+                                                                 1
+                                                                 3
+                                                                 1
+                                                                 1
+                                                                 0
+                                                                 0
+                                                                 2
+                                                                 5
+                                                                 0
+                                                                 2
+                                                                 5
+                                                                 5
+                                                                 5
+                                                                 2
+                                                                 1
+                                                                 0
+                                                                 5
+                                                                 7
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 0
+                                                                 3
+                                                                 5
+                                                                 4
+                                                                 5
+                                                                 4
+                                                                 6
+                                                                 1
+                                                                 1
+                                                                 4
+                                                                 2
+                                                                 2
+                                                                 2
+                                                                 2
+                                                                 0
+                                                                 1
+                                                                 3
+                                                                 6
+                                                                 4
+                                                                 3
+                                                                 3
+                                                                 4
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 0
+                                                                 2
+                                                                 5
+                                                                 1
+                                                                 0
+                                                                 7
+                                                                 0
+                                                                 0
+                                                                 1
+                                                                 2
+                                                                 0
+                                                                 0
+                                                                 9
+                                                                 7
+                                                                 0
+                                                                 2
+                                                                 5
+                                                                 3
+                                                                 1
+                                                                 1
+                                                                 0
+                                                                 6
+                                                                 4
+                                                                 0
+                                                                 0
+                                                                 6
+                                                                 0
+                                                                 3
+                                                                 5
+                                                                 4
+                                                                 1
+                                                                 0
+                                                                 4
+                                                                 0
+                                                                 2
+                                                                 0
+                                                                 0
+                                                                 0
+                                                                 4
+                                                                 6
+                                                                 4
+                                                                 1];
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(1).cname = 'aces_tot';
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(1).iCC = 5;
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(2).c = [21
+                                                                 30
+                                                                 34
+                                                                 60
+                                                                 60
+                                                                 50
+                                                                 57
+                                                                 44
+                                                                 58
+                                                                 40
+                                                                 30
+                                                                 30
+                                                                 33
+                                                                 51
+                                                                 26
+                                                                 31
+                                                                 57
+                                                                 20
+                                                                 49
+                                                                 23
+                                                                 32
+                                                                 32
+                                                                 41
+                                                                 18
+                                                                 35
+                                                                 42
+                                                                 30
+                                                                 47
+                                                                 32
+                                                                 19
+                                                                 29
+                                                                 32
+                                                                 24
+                                                                 20
+                                                                 30
+                                                                 39
+                                                                 43
+                                                                 28
+                                                                 28
+                                                                 21
+                                                                 22
+                                                                 36
+                                                                 53
+                                                                 19
+                                                                 21
+                                                                 40
+                                                                 28
+                                                                 29
+                                                                 34
+                                                                 26
+                                                                 36
+                                                                 19
+                                                                 30
+                                                                 98
+                                                                 33
+                                                                 28
+                                                                 37
+                                                                 26
+                                                                 30
+                                                                 26
+                                                                 53
+                                                                 49
+                                                                 23
+                                                                 43
+                                                                 32
+                                                                 24
+                                                                 37
+                                                                 37
+                                                                 46
+                                                                 20
+                                                                 57
+                                                                 29
+                                                                 28
+                                                                 33
+                                                                 44
+                                                                 45
+                                                                 47
+                                                                 26
+                                                                 32
+                                                                 30
+                                                                 53
+                                                                 51
+                                                                 52
+                                                                 30
+                                                                 31
+                                                                 50
+                                                                 37
+                                                                 37
+                                                                 57
+                                                                 28
+                                                                 51
+                                                                 48
+                                                                 40
+                                                                 36
+                                                                 56
+                                                                 42
+                                                                 41
+                                                                 27
+                                                                 40
+                                                                 49
+                                                                 25
+                                                                 45
+                                                                 54
+                                                                 32
+                                                                 36
+                                                                 36
+                                                                 19
+                                                                 28
+                                                                 38
+                                                                 33
+                                                                 57
+                                                                 46
+                                                                 53
+                                                                 29
+                                                                 34
+                                                                 29
+                                                                 26
+                                                                 41
+                                                                 35
+                                                                 47
+                                                                 33
+                                                                 54
+                                                                 31
+                                                                 49
+                                                                 33
+                                                                 35
+                                                                 58
+                                                                 25
+                                                                 51];
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(2).cname = 'age';
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(2).iCC = 1;
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(3).c = [7
+                                                                 1
+                                                                 8
+                                                                 2
+                                                                 8
+                                                                 9
+                                                                 6
+                                                                 5
+                                                                 4
+                                                                 3
+                                                                 4
+                                                                 8
+                                                                 4
+                                                                 6
+                                                                 5
+                                                                 9
+                                                                 4
+                                                                 4
+                                                                 6
+                                                                 3
+                                                                 4
+                                                                 8
+                                                                 5
+                                                                 4
+                                                                 6
+                                                                 9
+                                                                 6
+                                                                 8
+                                                                 7
+                                                                 8
+                                                                 6
+                                                                 9
+                                                                 8
+                                                                 11
+                                                                 6
+                                                                 4
+                                                                 8
+                                                                 7
+                                                                 13
+                                                                 8
+                                                                 3
+                                                                 8
+                                                                 6
+                                                                 8
+                                                                 4
+                                                                 8
+                                                                 6
+                                                                 5
+                                                                 5
+                                                                 8
+                                                                 5
+                                                                 6
+                                                                 8
+                                                                 4
+                                                                 4
+                                                                 5
+                                                                 6
+                                                                 9
+                                                                 6
+                                                                 8
+                                                                 6
+                                                                 9
+                                                                 8
+                                                                 3
+                                                                 4
+                                                                 8
+                                                                 4
+                                                                 11
+                                                                 4
+                                                                 8
+                                                                 7
+                                                                 13
+                                                                 11
+                                                                 5
+                                                                 4
+                                                                 9
+                                                                 9
+                                                                 8
+                                                                 11
+                                                                 3
+                                                                 8
+                                                                 4
+                                                                 4
+                                                                 11
+                                                                 8
+                                                                 4
+                                                                 8
+                                                                 9
+                                                                 8
+                                                                 7
+                                                                 9
+                                                                 5
+                                                                 2
+                                                                 9
+                                                                 8
+                                                                 3
+                                                                 9
+                                                                 7
+                                                                 8
+                                                                 5
+                                                                 1
+                                                                 9
+                                                                 8
+                                                                 6
+                                                                 10
+                                                                 5
+                                                                 3
+                                                                 9
+                                                                 8
+                                                                 10
+                                                                 6
+                                                                 8
+                                                                 7
+                                                                 7
+                                                                 11
+                                                                 7
+                                                                 8
+                                                                 13
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 6
+                                                                 7
+                                                                 4
+                                                                 7
+                                                                 6
+                                                                 4
+                                                                 4
+                                                                 5];
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(3).cname = 'father_edu';
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(3).iCC = 5;
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(4).c = [5
+                                                                 4
+                                                                 8
+                                                                 5
+                                                                 8
+                                                                 9
+                                                                 5
+                                                                 4
+                                                                 5
+                                                                 4
+                                                                 4
+                                                                 5
+                                                                 4
+                                                                 5
+                                                                 5
+                                                                 4
+                                                                 4
+                                                                 4
+                                                                 6
+                                                                 4
+                                                                 4
+                                                                 9
+                                                                 5
+                                                                 6
+                                                                 5
+                                                                 7
+                                                                 7
+                                                                 8
+                                                                 4
+                                                                 5
+                                                                 2
+                                                                 9
+                                                                 7
+                                                                 8
+                                                                 4
+                                                                 4
+                                                                 4
+                                                                 4
+                                                                 4
+                                                                 8
+                                                                 4
+                                                                 5
+                                                                 4
+                                                                 8
+                                                                 4
+                                                                 8
+                                                                 5
+                                                                 5
+                                                                 7
+                                                                 9
+                                                                 5
+                                                                 4
+                                                                 8
+                                                                 4
+                                                                 4
+                                                                 5
+                                                                 5
+                                                                 8
+                                                                 4
+                                                                 9
+                                                                 8
+                                                                 9
+                                                                 9
+                                                                 6
+                                                                 4
+                                                                 9
+                                                                 4
+                                                                 8
+                                                                 4
+                                                                 5
+                                                                 8
+                                                                 5
+                                                                 8
+                                                                 4
+                                                                 4
+                                                                 9
+                                                                 4
+                                                                 8
+                                                                 5
+                                                                 5
+                                                                 5
+                                                                 6
+                                                                 4
+                                                                 7
+                                                                 8
+                                                                 4
+                                                                 9
+                                                                 9
+                                                                 8
+                                                                 7
+                                                                 8
+                                                                 5
+                                                                 3
+                                                                 10
+                                                                 8
+                                                                 2
+                                                                 8
+                                                                 8
+                                                                 9
+                                                                 6
+                                                                 1
+                                                                 9
+                                                                 4
+                                                                 4
+                                                                 4
+                                                                 8
+                                                                 7
+                                                                 8
+                                                                 8
+                                                                 10
+                                                                 6
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 6
+                                                                 9
+                                                                 7
+                                                                 7
+                                                                 5
+                                                                 7
+                                                                 8
+                                                                 6
+                                                                 6
+                                                                 4
+                                                                 5
+                                                                 4];
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(4).cname = 'mother_edu';
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(4).iCC = 5;
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(5).c = [1
+                                                                 1
+                                                                 5
+                                                                 5
+                                                                 5
+                                                                 5
+                                                                 5
+                                                                 3
+                                                                 1
+                                                                 3
+                                                                 3
+                                                                 1
+                                                                 4
+                                                                 5
+                                                                 1
+                                                                 5
+                                                                 5
+                                                                 1
+                                                                 3
+                                                                 1
+                                                                 3
+                                                                 3
+                                                                 3
+                                                                 1
+                                                                 2
+                                                                 4
+                                                                 7
+                                                                 4
+                                                                 3
+                                                                 6
+                                                                 2
+                                                                 3
+                                                                 3
+                                                                 4
+                                                                 2
+                                                                 2
+                                                                 3
+                                                                 4
+                                                                 3
+                                                                 4
+                                                                 2
+                                                                 4
+                                                                 4
+                                                                 3
+                                                                 3
+                                                                 3
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 3
+                                                                 1
+                                                                 1
+                                                                 4
+                                                                 3
+                                                                 2
+                                                                 5
+                                                                 1
+                                                                 2
+                                                                 3
+                                                                 4
+                                                                 3
+                                                                 1
+                                                                 2
+                                                                 5
+                                                                 1
+                                                                 3
+                                                                 3
+                                                                 2
+                                                                 4
+                                                                 3
+                                                                 1
+                                                                 1
+                                                                 3
+                                                                 5
+                                                                 1
+                                                                 2
+                                                                 3
+                                                                 1
+                                                                 5
+                                                                 3
+                                                                 3
+                                                                 4
+                                                                 3
+                                                                 5
+                                                                 5
+                                                                 4
+                                                                 3
+                                                                 2
+                                                                 4
+                                                                 5
+                                                                 5
+                                                                 3
+                                                                 5
+                                                                 3
+                                                                 5
+                                                                 2
+                                                                 5
+                                                                 4
+                                                                 2
+                                                                 2
+                                                                 5
+                                                                 5
+                                                                 2
+                                                                 4
+                                                                 5
+                                                                 2
+                                                                 6
+                                                                 5
+                                                                 2
+                                                                 5
+                                                                 5
+                                                                 2
+                                                                 4
+                                                                 3
+                                                                 1
+                                                                 2
+                                                                 4
+                                                                 2
+                                                                 5
+                                                                 3
+                                                                 5
+                                                                 2
+                                                                 5
+                                                                 1
+                                                                 1
+                                                                 5
+                                                                 1
+                                                                 5];
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(5).cname = 'tot_h_income';
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(5).iCC = 5;
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(6).c = [1
+                                                                 8
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 7
+                                                                 1
+                                                                 1
+                                                                 7
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 3
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 7
+                                                                 4
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 4
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 6
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 7
+                                                                 1
+                                                                 7
+                                                                 1
+                                                                 1
+                                                                 4
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 7
+                                                                 1
+                                                                 7
+                                                                 7
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 4
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 4
+                                                                 1
+                                                                 7
+                                                                 3
+                                                                 7
+                                                                 1
+                                                                 7
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 7
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 7
+                                                                 4
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 4
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 7
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 7
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 4
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 4
+                                                                 1];
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(6).cname = 'ethnicity';
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(6).iCC = 5;
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(7).c = [5
+                                                                 4
+                                                                 10
+                                                                 11
+                                                                 11
+                                                                 11
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 4
+                                                                 9
+                                                                 9
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 8
+                                                                 9
+                                                                 7
+                                                                 5
+                                                                 5
+                                                                 8
+                                                                 8
+                                                                 11
+                                                                 5
+                                                                 7
+                                                                 11
+                                                                 7
+                                                                 8
+                                                                 7
+                                                                 5
+                                                                 7
+                                                                 5
+                                                                 8
+                                                                 5
+                                                                 8
+                                                                 8
+                                                                 8
+                                                                 5
+                                                                 7
+                                                                 5
+                                                                 5
+                                                                 8
+                                                                 8
+                                                                 5
+                                                                 4
+                                                                 8
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 8
+                                                                 5
+                                                                 5
+                                                                 7
+                                                                 10
+                                                                 8
+                                                                 8
+                                                                 11
+                                                                 8
+                                                                 8
+                                                                 9
+                                                                 11
+                                                                 7
+                                                                 8
+                                                                 6
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 9
+                                                                 8
+                                                                 4
+                                                                 4
+                                                                 7
+                                                                 5
+                                                                 8
+                                                                 8
+                                                                 7
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 8
+                                                                 5
+                                                                 8
+                                                                 9
+                                                                 8
+                                                                 9
+                                                                 5
+                                                                 10
+                                                                 9
+                                                                 11
+                                                                 7
+                                                                 9
+                                                                 8
+                                                                 8
+                                                                 8
+                                                                 8
+                                                                 9
+                                                                 9
+                                                                 8
+                                                                 9
+                                                                 7
+                                                                 9
+                                                                 8
+                                                                 8
+                                                                 8
+                                                                 8
+                                                                 8
+                                                                 5
+                                                                 9
+                                                                 8
+                                                                 8
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 8
+                                                                 9
+                                                                 8
+                                                                 5
+                                                                 8
+                                                                 7
+                                                                 8
+                                                                 8
+                                                                 9
+                                                                 8
+                                                                 10
+                                                                 7
+                                                                 8
+                                                                 9
+                                                                 9
+                                                                 8];
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(7).cname = 'edu';
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(7).iCC = 5;
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(8).c = [1
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 2
+                                                                 2
+                                                                 1
+                                                                 2
+                                                                 1
+                                                                 1
+                                                                 1];
+%%
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(8).cname = 'sex_bio';
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.mcov(8).iCC = 5;
+matlabbatch{12}.spm.stats.factorial_design.des.mreg.incint = 1;
+matlabbatch{12}.spm.stats.factorial_design.cov = struct('c', {}, 'cname', {}, 'iCFI', {}, 'iCC', {});
+matlabbatch{12}.spm.stats.factorial_design.multi_cov = struct('files', {}, 'iCFI', {}, 'iCC', {});
+matlabbatch{12}.spm.stats.factorial_design.masking.tm.tm_none = 1;
+matlabbatch{12}.spm.stats.factorial_design.masking.im = 1;
+matlabbatch{12}.spm.stats.factorial_design.masking.em = {''};
+matlabbatch{12}.spm.stats.factorial_design.globalc.g_omit = 1;
+matlabbatch{12}.spm.stats.factorial_design.globalm.gmsca.gmsca_no = 1;
+matlabbatch{12}.spm.stats.factorial_design.globalm.glonorm = 1;

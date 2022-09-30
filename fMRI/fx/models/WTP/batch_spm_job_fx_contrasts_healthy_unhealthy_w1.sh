@@ -30,7 +30,11 @@ SHELL_SCRIPT=spm_job.sh
 RESULTS_INFIX=fx_healthy_unhealthy_contrasts_rs
 
 # Set output dir and make it if it doesn't exist
+<<<<<<< HEAD
+OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_healthy_unhealthy_contrasts_rs
+=======
 OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_${RESULTS_INFIX}
+>>>>>>> 3b82b18ca13ec193e63fbc225c6e38231405f27a
 
 if [ ! -d ${OUTPUTDIR} ]; then
 	mkdir -p ${OUTPUTDIR}
