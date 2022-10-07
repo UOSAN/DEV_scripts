@@ -122,14 +122,17 @@ def get_all_subj_df(roi_data, sst_all_behavioral_data):
         print(s)
         for wave in roi_data[s].keys():
             run_length = roi_data[s][wave].shape[0]
-            print(s +', ' + wave + ':' + str(run_length), sep="; ")
+
             rt_time_list = [x*2.0 for x in range(run_length)]
             #now we have a list of the the RTs
             #we have actual data at each data point
             #we need to get the RTs related to each particular trial.
             run_behavioral_data = sst_all_behavioral_data[(sst_all_behavioral_data.subid==s) & (sst_all_behavioral_data.waveid==int(wave))]
-
+            behav_data_row_count = run_behavioral_data.shape[0]
             run_trial_df_list = []
+            print(s +', ' + wave + ': ' + str(run_length) + ", behav_data: " + str(behav_data_row_count), sep="; ")
+            if behav_data_row_count==0:
+                continue
             for i, trial in run_behavioral_data.iterrows():
                 #print(i)
                 t_class_type_reveal_onset = trial['class_type_reveal_onset']
@@ -163,7 +166,3 @@ def get_all_subj_df(roi_data, sst_all_behavioral_data):
     all_subj_df = pd.concat(all_subj_df_list)
 
     return(all_subj_df)
-        
-
-
-
