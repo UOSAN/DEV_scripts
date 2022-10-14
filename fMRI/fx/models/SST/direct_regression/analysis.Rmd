@@ -96,8 +96,13 @@ for (cond in unique(time_points_c$condition)){
   tp_at_offset_m$offset_start<-ot_i
   tp_at_offset_m$condition<-cond
   dt_list<-append(dt_list,list(tp_at_offset_m))
+  if((which(ot_i==offset_times)%%20)==0){
+    cat(". ")
+  }
+  
 
-}
+  }
+  print("")
 
 }
 
@@ -108,13 +113,35 @@ df_offset<-data.frame(data.table::rbindlist(dt_list))
 
 
 ```{r}
+
+
 roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
-df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
-ggplot(df_offset_long %>% filter(condition!="FailedGo"),
+subj_count <- length(unique(time_points_c$subid))
+df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI_fullname",values_to="value")
+df_offset_long$ROI<-stringr::str_extract_all(df_offset_long$ROI_fullname,pattern = "(?<=harvardoxford\\.subcortical_prob_)(.*)") %>% sub("\\."," ",.)
+
+unique_rois<-sort(unique(df_offset_long$ROI))
+unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\s)(.*)"))]
+
+df_offset_long$ROI<-factor(df_offset_long$ROI,levels = unique_rois_ordered, ordered=TRUE)
+
+ggplot_time_points_extras <- list(
+  geom_vline(xintercept = 0,linetype="dashed"),
+  labs(
+    x="time from tone sound or expected time of tone (s)",
+    y="mean BOLD activity (no HRF convolution)",
+    title="Stop Signal Task Activity",
+    subtitle=paste0("Across ", as.character(subj_count)," subjects with 255 trials each"),
+    caption="0 point is the moment of tone sound (Stop trials)\n or expected tone sound based on prior trial (Go trials)\n HRF convolution not applied\n1 s moving averages")
+  )
+
+
+  
+ggplot(df_offset_long,
        aes(x=offset_start, y=value,color=condition))+
-  geom_vline(xintercept = 0,linetype="dashed")+
   geom_line()+
-  facet_wrap(~ROI)
+  facet_wrap(~ROI,ncol = 2)+
+  ggplot_time_points_extras
   
   #geom_point()+
   #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
@@ -126,19 +153,27 @@ ggplot(df_offset_long %>% filter(condition!="FailedGo"),
 now by ROI with facets for condition:
 
 ```{r}
-roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
-df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
+# roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
+# df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
 ggplot(df_offset_long,
        aes(x=offset_start, y=value,color=ROI))+
-  geom_vline(xintercept = 0,linetype="dashed")+
-  geom_line(alpha=0.5)+
-  facet_wrap(~condition,scales = "free")
+  facet_wrap(~condition)+
+  geom_line(size=1,alpha=0.5)+
+  scale_color_viridis_d(option = "C")+
+  ggplot_time_points_extras
   
   #geom_point()+
   #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
   #scale_y_continuous(limits=c(-2.5,2.5))
   
 
+```
+## CS-FS
+
+Let's now try to contrast these time series to see what the CS-FS looks like. This will be interesting because it's similar to the simple GLM result I got earlier that set me down the path of trying to analyze this.
+
+```{r}
+df_offset_long
 ```
 
 

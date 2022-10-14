@@ -33,7 +33,8 @@ print(config)
 dropbox_data_dir = config['dropbox_data_dir']
 fmriprep_dir = config['fmriprep_dir']
 nii_raw_path = config['nii_raw_path']
-mask_location = config['mask_location'] + 'striatum/'
+mask_location = config['mask_location'] + 'failure_related/'
+mask_location = config['mask_location'] + 'failure_related/harvardoxford/'
 
 
 glob_path = fmriprep_dir + nii_raw_path
