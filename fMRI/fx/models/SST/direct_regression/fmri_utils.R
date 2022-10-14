@@ -1,4 +1,5 @@
 
+#implemented based on nistats.hemodynamic_models.spm_hrf
 get_hrf <- function(tr, oversampling = 50, time_length = 32, onset = 0,
                 delay = 6, undershoot = 16, dispersion = 1,
                 u_dispersion = 1, ratio = 0.167) {
