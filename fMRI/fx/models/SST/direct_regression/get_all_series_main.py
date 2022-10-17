@@ -62,7 +62,7 @@ mask_df = pd.DataFrame({
 
 #mark the number of seconds each scan takes.
 #TR = 2.0
-roi_data = get_roi_data(nii_raw_files[0:4],mask_df)
+roi_data = get_roi_data(nii_raw_files,mask_df)
 
 
 for s in roi_data.keys():
