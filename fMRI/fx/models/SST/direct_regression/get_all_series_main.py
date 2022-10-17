@@ -33,17 +33,24 @@ print(config)
 dropbox_data_dir = config['dropbox_data_dir']
 fmriprep_dir = config['fmriprep_dir']
 nii_raw_path = config['nii_raw_path']
-mask_location = config['mask_location'] + 'failure_related/'
-mask_location = config['mask_location'] + 'failure_related/harvardoxford/'
 
-
+#get the list of raw nii files
 glob_path = fmriprep_dir + nii_raw_path
 print("looking up " + glob_path)
 nii_raw_files = glob.glob(glob_path)
 
-#get masks
+#get the masks
+mask_locations = [
+    config['mask_location'] + 'failure_related/',
+    config['mask_location'] + 'failure_related/harvardoxford/',
+    config['mask_location'] + 'striatum/'
+]
+mask_paths = []
+for mask_location in mask_locations:
+    mask_paths_i = glob.glob(mask_location+"*.nii.gz")
+    mask_paths= mask_paths + mask_paths_i
 
-mask_paths = glob.glob(mask_location+"*.nii.gz")
+
 mask_labels = [re.match(".*/(.*)\.nii\.gz",mp)[1] for mp in mask_paths]
 
 mask_df = pd.DataFrame({
