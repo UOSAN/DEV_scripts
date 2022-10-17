@@ -18,7 +18,7 @@ dropbbox_dir <- config::get("dev_analysis_data_dir")
 
 
 ```{r}
-time_points <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point_striatum.csv"))
+time_points <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point.csv"))
 ```
 
 ```{r}
