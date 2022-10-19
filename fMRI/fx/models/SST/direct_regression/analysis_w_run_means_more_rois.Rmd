@@ -21,12 +21,6 @@ dropbbox_dir <- config::get("dev_analysis_data_dir")
 time_points <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point.csv"))
 ```
 
-```{r}
-time_points
-
-
-
-```
 
 Now let's see if we can graph putamen...
 ```{r}
@@ -45,11 +39,7 @@ library(ggplot2)
 we could also subtract the average per TRIAL. Best we subtract the average across all of the offsets. it's a bit arbitrary to use the average over all the areas; the idea is just to get a consistent amount of average.
 
 ```{r}
-roi_cols <- c(
-   "harvardoxford-subcortical_prob_Left Putamen",    "harvardoxford-subcortical_prob_Right Accumbens",
- "harvardoxford-subcortical_prob_Right Putamen",   "harvardoxford-subcortical_prob_Left Accumbens" ,
- "harvardoxford-subcortical_prob_Left Caudate" ,   "harvardoxford-subcortical_prob_Right Caudate"  
-)
+roi_cols <- colnames(time_points)[grepl("harvardoxford",colnames(time_points))]
 time_points$tr_roi_mean <- rowMeans(time_points[,roi_cols])
 time_points<- 
   time_points %>% group_by(subid,wave) %>%
@@ -212,7 +202,7 @@ next_trial_gradient <- data.frame("tp"=gradient_range,"pct_in_range"=in_range_by
 roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
 subj_count <- length(unique(time_points_c$subid))
 df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI_fullname",values_to="value")
-df_offset_long$ROI<-stringr::str_extract_all(df_offset_long$ROI_fullname,pattern = "(?<=harvardoxford\\.subcortical_prob_)(.*)") %>% sub("\\."," ",.)
+df_offset_long$ROI<-stringr::str_extract_all(df_offset_long$ROI_fullname,pattern = "(?<=harvardoxford\\..{0,3}cortical_prob_)(.*)") %>% sub("\\."," ",.)
 
 unique_rois<-sort(unique(df_offset_long$ROI))
 unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\s)(.*)"))]
@@ -399,24 +389,24 @@ df_offset_run_buckets<-data.frame(data.table::rbindlist(dt_list))
 
 
 
-
-
 ```{r}
 roi_cols <- colnames(df_offset_run_buckets)[grepl("harvardoxford",colnames(df_offset_run_buckets))]
 df_offset_long<-df_offset_run_buckets %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
 
-unique_rois<-sort(unique(df_offset_long$ROI))
-unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\.)([A-Za-z]*)$"))]
 
-df_offset_long$ROI<-factor(df_offset_long$ROI,levels = unique_rois_ordered, ordered=TRUE)
 df_offset_long <- df_offset_long[!is.nan(df_offset_long$tr), ]
 df_offset_long$trial_bucket<-factor(df_offset_long$trial_bucket, levels=c("early","mid","late"))
+df_offset_long$ROI_label<-df_offset_long$ROI %>% as.character %>% stringr::str_extract_all(pattern = "(?<=harvardoxford\\..{0,3}cortical_prob_)(.*)") %>% unlist
+unique_rois<-sort(unique(df_offset_long$ROI_label))
+unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\.)([A-Za-z]*)$"))]
+
+df_offset_long$ROI_label<-factor(df_offset_long$ROI_label,levels = unique_rois_ordered, ordered=TRUE)
 
 
 for (c_i in unique(df_offset_long$condition)){
   c_plot <- ggplot(df_offset_long  %>% filter(condition==c_i),#filter(condition==c_i),
          aes(x=offset_start, y=value,color=trial_bucket,group=trial_bucket))+
-    facet_wrap(~ROI)+
+    facet_wrap(~ROI_label,ncol = 4)+
     #geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
     annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
     geom_line(size=1,alpha=0.5)+
@@ -444,15 +434,13 @@ next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
 
 for (c_i in unique(df_offset_long$condition)){
   c_plot <- ggplot(df_offset_long %>% filter(condition==c_i & trial_bucket!=""),
-       aes(x=offset_start, y=value,color=ROI))+
+       aes(x=offset_start, y=value,color=ROI_label))+
   facet_wrap(~trial_bucket,nrow = 1)+
-  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent",show.legend=FALSE)+
   annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
   geom_line(size=1,alpha=0.5)+
-  
   scale_color_viridis_d(option = "C")+
   coord_cartesian(ylim=c(-0.5,0.5))+
-    
   ggplot_time_points_extras+
       labs(
       title="Stop Signal Task Activity",
@@ -463,9 +451,59 @@ for (c_i in unique(df_offset_long$condition)){
 }
 
 ```
+
+Can we contrast CS and FS in the way we did above?
+
+
+
+```{r}
+
+trial_tps_compare_conditions<-df_offset_long %>% pivot_wider(id_cols=c(ROI_label,offset_start,trial_bucket),names_from = "condition",values_from="value")
+trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectStop-trial_tps_compare_conditions$FailedStop
+```
+
+
+
+```{r}
+
+  c_plot <- ggplot(trial_tps_compare_conditions %>% filter(trial_bucket!=""),
+       aes(x=offset_start, y=CS_minus_FS,color=ROI_label))+
+  facet_wrap(~trial_bucket,nrow = 1)+
+  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent",show.legend=FALSE)+
+  annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  geom_line(size=1,alpha=0.5)+
+  scale_color_viridis_d(option = "C")+
+  coord_cartesian(ylim=c(-0.5,0.5))+
+  ggplot_time_points_extras+
+      labs(
+      title="Stop Signal Task Activity",
+      subtitle=paste0(c_i),
+      y="CS-FS BOLD activity difference")+
+    theme(legend.position = "bottom")
+print(c_plot)
+
+# 
+# ggplot(trial_tps_compare_conditions,
+#        aes(x=offset_start, y=CS_minus_FS,color=ROI))+
+#   #geom_tile(data = next_trial_gradient, aes(x=tp,alpha=pct_in_range,y=0),fill="#000000",color="transparent")+
+#   geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+#   #annotate("text",x=4,y=0.25,label="Subsequent Go Trial\nTime Range",size=2)+
+#   annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+#   scale_alpha_continuous(name="Subsequent go trial range", range=c(0,0.7),labels=scales::percent_format())+
+#   geom_line(size=1,alpha=0.5)+
+#   scale_color_viridis_d(option = "C")+
+#   ggplot_time_points_extras+
+#   coord_cartesian(ylim=c(-0.1,0.25))+
+#   labs(y="CS-FS BOLD activity difference")
+  
+```
+
+
+
 There are a different distribution of the number of trials for each condition, but not in a way that clearly could produce the discrepancy I'm observing above.
 ```{r}
 time_points_c %>% filter(trial_bucket!="") %>% group_by(condition,trial_bucket) %>% summarize(trial_count=n())
 ```
+
 
 
