@@ -407,3 +407,8 @@ anova(model_random_effects3_no_fixed, model_random_effects3)
 ```
 
 Well, that would confirm it--we have fixed effects (and therefore an effect _across_ subjects) but not within subjects.
+
+I think we could look at other areas, but maybe what I most want to do is move to getting all of the data.
+
+It is probably important we look across all data. I am having real trouble disambiguating particular areas that register this signal we're trying to measure.
+
