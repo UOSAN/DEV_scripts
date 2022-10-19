@@ -41,7 +41,7 @@ nii_raw_files = glob.glob(glob_path)
 
 #get the masks
 mask_locations = [
-    config['mask_location'] + 'failure_related/',
+    #config['mask_location'] + 'failure_related/',
     config['mask_location'] + 'failure_related/harvardoxford/',
     config['mask_location'] + 'striatum/'
 ]
