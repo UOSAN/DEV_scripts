@@ -17,7 +17,7 @@ library(tidyverse)
 # load and tidy data
 ```{r}
 setwd("../../../")
-all = read.csv("org/dicom_check/dicoms_cleaned_20220622.csv", header = FALSE) %>%
+all = read.csv("org/dicom_check/dicoms_cleaned_20221021.csv", header = FALSE) %>%
   rename("folder" = V1) %>%
   filter(!folder == "DEV_20171214")
 
@@ -29,10 +29,11 @@ full_list = all %>%
     folder == "DEV0903_20190607_090700" ~ "DEV093",
     folder == "DEV_20210714_173417" ~ "DEV205",
     folder == "DEV_20210608_170401" ~ "DEV198",
+    folder == "DEV310`_20220911_120849" ~ "DEV310",
     TRUE ~ subjectID
   )) %>%
   group_by(subjectID) %>%
-  mutate(wave = sprintf("wave%s",row_number())) 
+  mutate(wave = sprintf("wave%s",row_number())) #surely this needs to be arranged in a certain way
 ```
 
 Exclude entries that we have determined not to process...
@@ -43,7 +44,7 @@ exclusions = c(
     "DEV068_20181128_101017",
    "DEV073_20190312_085608",
     "DEV084_20190314_165822",
-    "159_20200126_115140"
+    "159_20200126_115140" # not sure why this one is excluded.
 )
 
 full_list = full_list %>%

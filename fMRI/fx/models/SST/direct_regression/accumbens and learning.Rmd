@@ -410,5 +410,4 @@ Well, that would confirm it--we have fixed effects (and therefore an effect _acr
 
 I think we could look at other areas, but maybe what I most want to do is move to getting all of the data.
 
-It is probably important we look across all data. I am having real trouble disambiguating particular areas that register this signal we're trying to measure.
-
+It is probably important we look across all data. I am having real trouble disambiguating particular areas that register this signal we're trying to measure. So let's get that wave 1 complete...

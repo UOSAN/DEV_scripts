@@ -1,6 +1,6 @@
 ---
 title: "DEV dicom check"
-author: "Dani Cosme, Ben Smith"
+author: "Dani Cosme"
 date: "`r Sys.Date()`"
 output:
   html_document:
@@ -13,10 +13,9 @@ output:
       smooth_scroll: TRUE
     df_print: paged
 ---
-depending on environment, may need to run something like: `setwd("org/dicom_check/")`
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE)
-
 ```
 
 # load packages
@@ -26,36 +25,14 @@ library(lubridate)
 ```
 
 # load data
-* First download the "sessions" data report from redcap and drop in the `dicom_check` folder
-* Then create a new `dicoms.csv` file by printing the file list from talapas using the script:
-
-
-```
-cd /projects/lcni/dcm/sanlab/Berkman/DEV/; 
-rm /projects/sanlab/shared/DEV/DEV_scripts/org/dicom_check/dicoms.csv;
-for i in $(ls -d *); 
-  do echo $i >> /projects/sanlab/shared/DEV/DEV_scripts/org/dicom_check/dicoms.csv; 
-done
-```
-
-* Then you'll want to clean it up--creating it as a new dicoms_cleaned file and then entering info below.
-* I think that's just a manual process based on information here.
-
-```{r}
-#update each of these
-dicom_filename <-"dicoms.csv"
-redcap_filename <- "DEV-Sessions_DATA_2022-10-19_2234.csv"
-```
-
-
-
+* First download the "session" data report from redcap and drop in the `dicom_check` folder
+* Then create a new `dicoms.csv` file by printing the file list from talapas (e.g. via `cd /projects/lcni/dcm/sanlab/Berkman/DEV/; for i in $(ls -d *); do echo $i >> /projects/sanlab/shared/DEV/DEV_scripts/org/dicom_check/dicoms.csv; done`)
 ```{r}
 # dicom info
-dicoms = read.csv(dicom_filename, header = FALSE) %>%
+dicoms = read.csv("dicoms.csv", header = FALSE) %>%
   rename("folder" = V1)
-
 # redcap session info
-redcap_sessions = read.csv(redcap_filename, na.strings = c("")) %>%
+redcap_sessions = read.csv("DEV2_DATA_2019-11-06_1835.csv", na.strings = c("")) %>%
   rename("subjectID" = dev_id) %>%
   select(-redcap_event_name) %>%
   group_by(subjectID) %>%
@@ -90,7 +67,6 @@ redcap_sessions %>%
   filter(!is.na(date)) %>%
   group_by(session) %>%
   summarize(n = n())
-
 # dicom info
 dicoms_tidy %>%
   group_by(sessionNum) %>%
@@ -101,31 +77,18 @@ dicoms_tidy %>%
 * DEV_20171214 = test subject, not in the study
 * DEV0903_20190607_090700 = DEV093
 * TEST999_20180219_170145 = test sub
-* "DEV310`_20220911_120849" should be "DEV310_20220911_120849". Added a line in make_conversion_list.Rmd
 ```{r}
 dicoms_tidy %>%
   filter(!grepl("DEV[0-9]{3}$", subjectID))
-
 ```
-Anomalies I still want to figure out:
-
-159_20200126_115140 is anomalous. It seems to be slightly distinct from DEV159_20200126_115140
 
 
 # verify sessions
 Check if there are too many sessions or if the session dates are incorrect
-
-Columns `dicom_date_*` are derived from the dicom folder timestamps.
-
-Columns `redcap_date_*` are derived from the redcap sessions.
-
-These should match perfectly.
-
 ```{r}
 (merged = dicoms_tidy %>%
    arrange(datetime) %>%
    group_by(subjectID) %>%
-  #select(-sessionNum) %>%  #added by Ben. sessionNum is creating duplicate rows that we don't need
    mutate(dicom_date = sprintf("dicom_date_%d", row_number())) %>%
    arrange(subjectID) %>%
    select(-datetime) %>%
@@ -136,30 +99,25 @@ These should match perfectly.
    full_join(., redcap_sessions) %>%
    ungroup() %>%
    filter(!(is.na(dicom_date_1)) & !subjectID == "EST999"))
-
-merged_unique = merged %>%
+merged_check = merged %>%
   select(-c(folder, sessionNum)) %>%
-  unique()
-  
-merged_check = merged_unique %>%
+  unique() %>%
   mutate(correct_dicom_date_1 = ifelse(dicom_date_1 == redcap_date_1, 1, 0),
          correct_dicom_date_2 = ifelse(dicom_date_2 == redcap_date_2, 1, 0),
          check_missing1 = ifelse((is.na(redcap_date_1) & !is.na(dicom_date_1)) | (!is.na(redcap_date_1) & is.na(dicom_date_1)), 1, 0),
          check_missing2 = ifelse((is.na(redcap_date_2) & !is.na(dicom_date_2)) | (!is.na(redcap_date_2) & is.na(dicom_date_2)), 1, 0),
          check_order = ifelse(dicom_date_1 == redcap_date_2 | dicom_date_2 == redcap_date_1, 1, 0), #| session3 == redcap_date_2 | session4 == redcap_date_2
-         duration = ifelse(!is.na(dicom_date_2), dicom_date_2 - dicom_date_1, NA))
+         duration = ifelse(!is.na(dicom_date_2), dicom_date_2 - dicom_date_1, NA)) 
 merged_check %>%
   filter(!correct_dicom_date_1 == 1 | !correct_dicom_date_2 == 1 | duration < 24) %>% #!is.na(session3) | !is.na(session4) |
   select(subjectID, correct_dicom_date_1, correct_dicom_date_2, check_missing1, check_missing2, check_order, duration, redcap_date_1, dicom_date_1, redcap_date_2, dicom_date_2) #session3, session4
-
 ```
 
-##Duplicates
+Duplicates
 ```{r}
 (duplicates = dicoms_tidy %>%
   arrange(datetime) %>%
   left_join(., merged) %>%
-  #left_join(., merged_unique) %>%
   mutate(correct_dicom_date_1 = ifelse(dicom_date_1 == redcap_date_1, 1, 0),
          correct_dicom_date_2 = ifelse(dicom_date_2 == redcap_date_2, 1, 0),
          check_order = ifelse(dicom_date_1 == redcap_date_2 | dicom_date_2 == redcap_date_1 , 1, 0), #| session3 == redcap_date_2 | session4 == redcap_date_2
@@ -167,62 +125,42 @@ merged_check %>%
   select(folder, subjectID, datetime, correct_dicom_date_1, correct_dicom_date_2, check_order, duration, redcap_date_1, dicom_date_1, redcap_date_2, dicom_date_2) %>% #, session3, session4
   filter(datetime %in% dicoms_tidy[duplicated(dicoms_tidy$datetime),]$datetime))
 ```
-I don't really understand what this list is supposed to do. It prints everything.
 
-##Wrong dicom_date_1 date
+Wrong dicom_date_1 date
 * DEV032 = wrong date in redcap
 ```{r}
 merged_check %>%
-  #filter(!subjectID %in% duplicates$subjectID) %>%
-  filter(!(correct_dicom_date_1 == 1))
+  filter(!subjectID %in% duplicates$subjectID) %>%
+  filter(!correct_dicom_date_1 == 1)
 ```
 
-##Wrong dicom_date_2 date
+Wrong dicom_date_2 date
 * DEV038 = wrong date in redcap
 * DEV126 = wrong date in redcap
 ```{r}
 merged_check %>%
-  #filter(!subjectID %in% duplicates$subjectID) %>%
-  filter(!(correct_dicom_date_2 == 1))
+  filter(!subjectID %in% duplicates$subjectID) %>%
+  filter(!correct_dicom_date_2 == 1)
 ```
 
-##Missing dicom_date_1 or redcap_date_1 date
-
+Missing dicom_date_1 date
 * DEV007 = pilot sub that was deleted from redcap
 * DEV0903 = DEV093
 ```{r}
 merged_check %>%
-  #filter(!subjectID %in% duplicates$subjectID) %>%
+  filter(!subjectID %in% duplicates$subjectID) %>%
   filter(check_missing1 == 1)
 ```
-DEV227 seems to be missing in redcap
-##Missing dicom_date_2 or redcap_date_2 date
 
+Missing dicom_date_2 date
 * DEV0903 = DEV093
-
 ```{r}
 merged_check %>%
-  #filter(!subjectID %in% duplicates$subjectID) %>%
+  filter(!subjectID %in% duplicates$subjectID) %>%
   filter(check_missing2 == 1)
 ```
-(DEV310 appearing in this list is OK. the DICOM date is missing because the file is named wrong. We rename it in make_conversion_list).
 
-## Missing Redcap data
-There may or may not also be messy redcap data, but we're not too worried about that, because we'll get the data coming through to fMRIPrep anyway...
-
-```{r}
-merged_check %>%
-  #filter(!subjectID %in% duplicates$subjectID) %>%
-  filter(
-    ((!is.na(dicom_date_1) & is.na(redcap_date_1)) |
-      (!is.na(dicom_date_2) & is.na(redcap_date_2)))# &
-      #dicom_date_1!=dicom_date_2
-  )
-```
-so all the missing redcap data is due to duplicates OK.
-
-## Get subjects who have been run on dates associated with messed up files
-
+Subs run on dates with messed up files
 ```{r}
 dates_1 = merged_check %>%
   filter(!correct_dicom_date_1 == 1 | check_missing1 == 1 | check_order == 1 | duration < 24) %>%
@@ -232,7 +170,6 @@ dates_1 = merged_check %>%
   select(date) %>%
   unique() %>%
   filter(!is.na(date))
-
 dates_2 = merged_check %>%
   filter(!correct_dicom_date_2 == 1 | check_missing2 == 1 | duration < 24) %>%
   filter(!subjectID %in% duplicates$subjectID) %>%
@@ -241,11 +178,7 @@ dates_2 = merged_check %>%
   select(date) %>%
   unique() %>%
   filter(!is.na(date))
-```
-
-##session 1 errors
-
-```{r}
+# session 1 errors
 dicoms_tidy %>%
   filter(date %in% dates_1$date) %>%
   arrange(datetime) %>%
@@ -253,16 +186,7 @@ dicoms_tidy %>%
   mutate(check = ifelse(dicom_date_1 != redcap_date_1, 1, 0),
          duration = ifelse(!is.na(dicom_date_2), dicom_date_2 - dicom_date_1, NA)) %>%
   select(folder, subjectID, sessionNum, datetime, check, duration, redcap_date_1, dicom_date_1, redcap_date_2, dicom_date_2)
-
-
-```
-DEV297 appears here because there are only 22 days rather than the normal minimum 24 days between sessions. Otherwise all else is fine.
-
-##session 2 errors
-
-```{r}
-
-
+# session 2 errors
 dicoms_tidy %>%
   filter(date %in% dates_2$date) %>%
   arrange(datetime) %>%
@@ -272,35 +196,13 @@ dicoms_tidy %>%
   select(folder, subjectID, sessionNum, datetime, check, duration, redcap_date_1, dicom_date_1, redcap_date_2, dicom_date_2)
 ```
 
-DEV300 appears in this list because it has a scan date the same as DEV297. Otherwise, no problems here.
-
-# Further investigation
-
-two DICOM folders missing subject IDs:
- - DEV_20210608_170401
- - DEV_20210714_173417
- 
-```{r}
-dates_from_dicoms_with_sid_missing <- as.Date(c("2021-06-08","2021-07-14"))
-
-redcap_sessions %>% filter(redcap_date_1 %in% dates_from_dicoms_with_sid_missing | redcap_date_2 %in% dates_from_dicoms_with_sid_missing)
-```
- 
- - DEV198 appears to be DEV_20210608_170401
- - DEV205 apepars to be DEV_20210714_173417
- 
-Both of these are remapped in make_conversion_list.
-
 # Issue breakdown (log of issues fixed)
-
-Don't forget to ensure that new_subject_list.txt, when it has been generated, excludes all the folders as below that it should be excluding.
 **Remove**  
 DEV018_20181025_190858  
 DEV012_20190111_090124  
 DEV068_20181128_101017  
 DEV073_20190312_085608  
-DEV084_20190314_165822
-159_20200126_115140 (this is the same as DEV159_20200126_115140; Paul & Ben both inspected on 2021-03-24)
+DEV084_20190314_165822  
   
 **Merge**  
 DEV012_20180806_173955 and DEV012_20180806_181546 into DEV012_20180806_173955  
@@ -315,35 +217,6 @@ DEV029 missing session 1 (2018-08-08) --> found in wrong folder
 DEV063 missing session 1 (2018-12-07) --> found in wrong folder
 DEV126 missing session 1 (2019-07-17) --> dates confirmed on calpendo; wrong folder??  
   
-**Rename/remap**  
-
-Input DICOM folders are not renamed. The subject IDs are manually remapped in make_conversion_list.Rmd. Not sure what happens after that...maybe nothing.
-
+**Rename**  
 DEv025_20180827_163615 --> DEV025_20180827_163615  
 DEV0903_20190607_090700 --> DEV093_20190607_090700
-DEV_20210714_173417 --> DEV205_20210714_173417
-DEV_20210608_170401 --> DEV198_20210608_170401
-DEV310`_20220911_120849 --> DEV310_20220911_120849
-
-# Outstanding potentially unresolved issues
-
- - DEV167 has a session duration that is only 21 days between wave 1 and 2.
- - Dani's script notes that DEV 166 was on the same day
- - We're ignoring redcap dates 3 and subsequent. Not sure if this is OK or not.
-
-**Files manually excluded from before August 2019**
-
-phantom_20181211_112538
-Phantom^of
-the
-opera_20180430_110701
-TEST999_20180219_170145
-test
-dev_20180219_155612
-Wwe_20180131_135555
-
-**files manually excluded since August 2019**
-
- - 159_20200126_115140
- - Matlabtest_20191023_154406
- - matlabtest2_20191025_121247
