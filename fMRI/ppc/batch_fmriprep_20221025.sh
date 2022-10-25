@@ -19,7 +19,7 @@ fi
 
 
 # Set subject list
-subject_list=`cat new_subject_list_20221020.txt` 
+subject_list=`cat new_subject_list_20221025.txt` 
 
 queue_count=3
 # Loop through subjects and run job_mriqc
