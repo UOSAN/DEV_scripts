@@ -28,7 +28,7 @@ previous_jobs=(0 0 0)
 for subject in $subject_list; do
 
   let subj_count++
-  let subj_count=($JOBID % $queue_count) #mod the subject count
+  let subj_count=($subj_count % $queue_count) #mod the subject count
   
   dcmfolder=`echo $subject|awk '{print $1}' FS=","`
     #this is obsolete
@@ -38,7 +38,8 @@ for subject in $subject_list; do
 	
 	#now we will put this batch file in one of three queues, to avoid using too many 
 	#computational resources
-	SBATCH_OUT=$(sbatch --dependency=singleton,$previous_jobs[$subj_count] --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
+	echo ${previous_jobs[$subj_count]}
+	SBATCH_OUT=$(sbatch --dependency=singleton,${previous_jobs[$subj_count]} --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
 		   --job-name fmriprep_${subid} \
 		   --partition=ctn \
 		   --cpus-per-task=8 \
