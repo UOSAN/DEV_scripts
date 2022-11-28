@@ -2,195 +2,152 @@
 
 For MacOS or Linux, use this command to create SSH tunnel:
 
-    ssh -N -L localhost:24332:n137:32012 bsmith16@talapas-ln2.uoregon.edu
+    ssh -N -L localhost:24151:n137:52969 bsmith16@talapas-ln2.uoregon.edu
 
 Or try this if that doesn't work:
 
-    ssh -N -L localhost:24332:n137:32012 bsmith16@talapas-ln2.uoregon.edu
+    ssh -N -L localhost:24151:n137:52969 bsmith16@talapas-ln2.uoregon.edu
 
 For Windows/MobaXterm, use this info:
 
-    Forwarded port: 24332
+    Forwarded port: 24151
     Remote server: n137
-    Remote port: 32012
+    Remote port: 52969
     SSH server: talapas-ln2.uoregon.edu
     SSH login: bsmith16
     SSH port: 22
 
 Then use this URL to access Jupyter (NOT the one in the log below):
 
-    http://localhost:24332
+    http://localhost:24151
 
 ##########################################################
-[I 16:10:07.481 NotebookApp] [nb_conda_kernels] enabled, 13 kernels found
-[W 16:10:16.300 NotebookApp] WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.
-[I 16:10:16.673 NotebookApp] [jupyter_nbextensions_configurator] enabled 0.4.1
+[I 13:23:48.033 NotebookApp] [nb_conda_kernels] enabled, 13 kernels found
+[W 13:23:51.169 NotebookApp] WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.
+[I 13:23:51.413 NotebookApp] [jupyter_nbextensions_configurator] enabled 0.4.1
 /home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyter_server/transutils.py:13: FutureWarning: The alias `_()` will be deprecated. Use `_i18n()` instead.
   warnings.warn(warn_msg, FutureWarning)
-[W 2022-09-26 16:10:21.211 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
-[W 2022-09-26 16:10:21.218 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-09-26 16:10:21.218 LabApp] 'port_retries' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-09-26 16:10:21.218 LabApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-09-26 16:10:21.218 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-09-26 16:10:21.219 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-09-26 16:10:21.219 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-09-26 16:10:21.219 LabApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
-[W 2022-09-26 16:10:21.221 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
-[I 2022-09-26 16:10:21.239 LabApp] JupyterLab extension loaded from /home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyterlab
-[I 2022-09-26 16:10:21.240 LabApp] JupyterLab application directory is /gpfs/home/bsmith16/.conda/envs/jupyter_base_env/share/jupyter/lab
-[I 16:10:21.256 NotebookApp] Will shut down after 600 seconds with no kernels or terminals.
-[I 16:10:21.257 NotebookApp] Serving notebooks from local directory: /gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/SST/direct_regression
-[I 16:10:21.257 NotebookApp] Jupyter Notebook 6.3.0 is running at:
-[I 16:10:21.257 NotebookApp] http://n137:32012/
-[I 16:10:21.258 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
-[I 16:10:21.294 NotebookApp] 302 GET / (172.20.13.244) 1.580000ms
-[I 16:10:21.992 NotebookApp] 302 GET /tree? (172.20.13.244) 1.440000ms
-[I 16:10:30.079 NotebookApp] 302 POST /login?next=%2Ftree%3F (172.20.13.244) 2.310000ms
-[W 16:11:35.247 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:35.287 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:35.372 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:35.387 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:35.439 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:35.466 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:35.505 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:35.532 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:35.614 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:35.631 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.006 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.023 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.158 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.172 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.227 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.237 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.255 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.272 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.297 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.315 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.365 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.375 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.580 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[W 16:11:36.589 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
-[I 16:11:45.981 NotebookApp] Kernel started: 662683a3-d5bc-4418-bd40-2f36809d39a3, name: conda-env-.conda-neuralsignature-py
-[W 16:11:46.537 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20220926161007 (172.20.13.244) 19.720000ms referer=http://localhost:24332/notebooks/get_all_series_notebook.ipynb
+[W 2022-11-17 13:23:53.041 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
+[W 2022-11-17 13:23:53.048 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-11-17 13:23:53.049 LabApp] 'port_retries' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-11-17 13:23:53.049 LabApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-11-17 13:23:53.049 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-11-17 13:23:53.049 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-11-17 13:23:53.049 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-11-17 13:23:53.049 LabApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2022-11-17 13:23:53.051 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
+[I 2022-11-17 13:23:53.070 LabApp] JupyterLab extension loaded from /home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyterlab
+[I 2022-11-17 13:23:53.070 LabApp] JupyterLab application directory is /gpfs/projects/sanlab/bsmith16/.conda/envs/jupyter_base_env/share/jupyter/lab
+[I 13:23:53.087 NotebookApp] Will shut down after 600 seconds with no kernels or terminals.
+[I 13:23:53.088 NotebookApp] Serving notebooks from local directory: /gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/SST/direct_regression
+[I 13:23:53.088 NotebookApp] Jupyter Notebook 6.3.0 is running at:
+[I 13:23:53.088 NotebookApp] http://n137:52969/
+[I 13:23:53.088 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 13:23:56.150 NotebookApp] 302 GET / (172.20.13.244) 1.270000ms
+[I 13:23:56.163 NotebookApp] 302 GET /tree? (172.20.13.244) 1.360000ms
+[I 13:24:00.841 NotebookApp] 302 POST /login?next=%2Ftree%3F (172.20.13.244) 2.500000ms
+[W 13:24:43.357 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:43.401 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:43.491 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:43.507 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:43.567 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:43.594 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:43.635 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:43.662 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:43.747 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:43.812 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.124 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.137 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.264 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.278 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.336 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.346 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.366 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.383 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.410 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.428 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.481 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.491 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.662 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:44.671 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:24:45.795 NotebookApp] Notebook get_all_series_notebook.ipynb is not trusted
+[I 13:24:46.360 NotebookApp] Kernel started: deeb6999-f716-4366-ba7e-acb39ff3d3e9, name: python3
+[W 13:24:46.397 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20221117132348 (172.20.13.244) 18.820000ms referer=http://localhost:24151/notebooks/get_all_series_notebook.ipynb
+[I 13:26:46.371 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[W 13:26:46.374 NotebookApp] Notebook get_all_series_notebook.ipynb is not trusted
+[W 13:38:21.193 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.215 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.300 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.316 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.346 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.372 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.413 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.439 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.519 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.533 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.748 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.759 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.883 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.897 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.953 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.963 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:21.983 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:22.000 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:22.026 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:22.040 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:22.080 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:22.087 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:22.241 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:22.249 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 13:38:29.734 NotebookApp] Notebook get_all_series_demo.ipynb is not trusted
+[W 13:38:29.895 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20221117132348 (172.20.13.244) 3.840000ms referer=http://localhost:24151/notebooks/get_all_series_demo.ipynb
+[I 13:38:30.278 NotebookApp] Kernel started: 0977e9be-fdc4-425e-8822-24751578334d, name: python3
+[I 13:40:30.379 NotebookApp] Saving file at /get_all_series_demo.ipynb
+[W 13:40:30.380 NotebookApp] Notebook get_all_series_demo.ipynb is not trusted
+[I 13:42:41.059 NotebookApp] Starting buffering for deeb6999-f716-4366-ba7e-acb39ff3d3e9:dbbdbce52a4d4193924c6fc7c58aa245
+[I 13:42:42.232 NotebookApp] Kernel shutdown: deeb6999-f716-4366-ba7e-acb39ff3d3e9
+[I 13:42:42.685 NotebookApp] Kernel started: 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430, name: conda-env-.conda-neuralsignature-py
 CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
-[I 16:13:47.272 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:17:19.959 NotebookApp] Kernel interrupted: 662683a3-d5bc-4418-bd40-2f36809d39a3
-[I 16:17:46.796 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:19:46.598 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:20:29.670 NotebookApp] Kernel interrupted: 662683a3-d5bc-4418-bd40-2f36809d39a3
-[I 16:21:04.111 NotebookApp] Saving file at /get_all_series.py
-[I 16:21:16.074 NotebookApp] Kernel interrupted: 662683a3-d5bc-4418-bd40-2f36809d39a3
-[I 16:21:18.796 NotebookApp] Starting buffering for 662683a3-d5bc-4418-bd40-2f36809d39a3:15f81812fd08498d876e05540187094b
-[I 16:21:19.515 NotebookApp] Kernel restarted: 662683a3-d5bc-4418-bd40-2f36809d39a3
-[I 16:21:20.921 NotebookApp] Restoring connection for 662683a3-d5bc-4418-bd40-2f36809d39a3:15f81812fd08498d876e05540187094b
-[W 16:21:25.434 NotebookApp] Nudge: attempt 10 on kernel 662683a3-d5bc-4418-bd40-2f36809d39a3
+[I 13:42:46.348 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[W 13:42:46.351 NotebookApp] Notebook get_all_series_notebook.ipynb is not trusted
+[I 13:44:46.361 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 13:49:16.360 NotebookApp] Saving file at /config.yml
+[I 13:49:29.570 NotebookApp] Starting buffering for 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430:dbbdbce52a4d4193924c6fc7c58aa245
+[I 13:49:30.194 NotebookApp] Kernel restarted: 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430
+[I 13:49:30.245 NotebookApp] Restoring connection for 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430:dbbdbce52a4d4193924c6fc7c58aa245
+[W 13:49:34.766 NotebookApp] Nudge: attempt 10 on kernel 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430
 CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
-[W 16:21:30.446 NotebookApp] Nudge: attempt 20 on kernel 662683a3-d5bc-4418-bd40-2f36809d39a3
-[W 16:21:35.459 NotebookApp] Nudge: attempt 30 on kernel 662683a3-d5bc-4418-bd40-2f36809d39a3
-[I 16:21:38.380 NotebookApp] Replaying 3 buffered messages
-[I 16:21:46.632 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:23:46.848 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:47:14.244 NotebookApp] Starting buffering for 662683a3-d5bc-4418-bd40-2f36809d39a3:15f81812fd08498d876e05540187094b
-[I 16:47:15.770 NotebookApp] Kernel restarted: 662683a3-d5bc-4418-bd40-2f36809d39a3
-[I 16:47:17.438 NotebookApp] Restoring connection for 662683a3-d5bc-4418-bd40-2f36809d39a3:15f81812fd08498d876e05540187094b
-[W 16:47:21.953 NotebookApp] Nudge: attempt 10 on kernel 662683a3-d5bc-4418-bd40-2f36809d39a3
+[W 13:49:39.781 NotebookApp] Nudge: attempt 20 on kernel 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430
+[I 13:49:42.282 NotebookApp] Replaying 3 buffered messages
+[I 13:50:36.670 NotebookApp] Starting buffering for 0977e9be-fdc4-425e-8822-24751578334d:acd5560f4be84257b4843a450e217156
+[I 13:50:46.366 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 13:52:01.708 NotebookApp] Saving file at /config.yml
+[I 13:52:07.912 NotebookApp] Starting buffering for 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430:dbbdbce52a4d4193924c6fc7c58aa245
+[I 13:52:08.538 NotebookApp] Kernel restarted: 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430
+[I 13:52:08.574 NotebookApp] Restoring connection for 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430:dbbdbce52a4d4193924c6fc7c58aa245
 CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
-[W 16:47:26.966 NotebookApp] Nudge: attempt 20 on kernel 662683a3-d5bc-4418-bd40-2f36809d39a3
-[I 16:47:31.851 NotebookApp] Replaying 3 buffered messages
-[I 16:47:46.626 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:49:50.802 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:51:47.526 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:53:47.570 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:55:48.372 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:57:49.595 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 16:59:46.928 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:01:48.968 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:03:46.576 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:05:49.589 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:07:48.542 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:09:47.954 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:11:47.512 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:13:46.852 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:15:47.180 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:17:48.394 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:19:47.474 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:21:48.103 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:23:47.707 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:25:47.942 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:27:48.235 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:29:48.140 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:31:56.399 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:33:50.591 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:35:51.638 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:37:53.403 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:39:50.487 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:41:48.992 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:43:53.865 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:45:49.491 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:47:48.463 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:49:48.643 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:51:50.714 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:53:50.017 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:55:53.537 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:57:48.866 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 17:59:48.022 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 18:01:48.017 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 18:03:55.232 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 18:05:50.176 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 18:07:56.287 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 18:09:49.536 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 18:11:51.901 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 18:13:49.987 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 18:15:32.003 NotebookApp] Kernel interrupted: 662683a3-d5bc-4418-bd40-2f36809d39a3
-[I 18:16:02.597 NotebookApp] Creating new file in 
-[I 18:16:04.699 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[E 18:17:12.938 NotebookApp] Uncaught exception PATCH /api/contents/untitled.txt (172.20.13.244)
-    HTTPServerRequest(protocol='http', host='localhost:24332', method='PATCH', uri='/api/contents/untitled.txt', version='HTTP/1.1', remote_ip='172.20.13.244')
-    Traceback (most recent call last):
-      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/tornado/web.py", line 1704, in _execute
-        result = await result
-      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/tornado/gen.py", line 234, in wrapper
-        yielded = ctx_run(next, result)
-      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/notebook/services/contents/handlers.py", line 125, in patch
-        model = yield maybe_future(cm.update(model, path))
-      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/notebook/services/contents/manager.py", line 296, in update
-        self.rename(path, new_path)
-      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/notebook/services/contents/manager.py", line 284, in rename
-        self.rename_file(old_path, new_path)
-      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/notebook/services/contents/filemanager.py", line 565, in rename_file
-        if os.path.exists(new_os_path) and not samefile(old_os_path, new_os_path):
-      File "/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/genericpath.py", line 100, in samefile
-        s1 = os.stat(f1)
-    FileNotFoundError: [Errno 2] No such file or directory: '/gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/SST/direct_regression/untitled.txt'
-[W 18:17:13.059 NotebookApp] Unhandled error
-[E 18:17:13.060 NotebookApp] {
-      "Host": "localhost:24332",
-      "Connection": "keep-alive",
-      "Content-Length": "30",
-      "Sec-Ch-Ua": "\"Google Chrome\";v=\"105\", \"Not)A;Brand\";v=\"8\", \"Chromium\";v=\"105\"",
-      "Sec-Ch-Ua-Mobile": "?0",
-      "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36",
-      "Content-Type": "application/json",
-      "Accept": "application/json, text/javascript, */*; q=0.01",
-      "X-Requested-With": "XMLHttpRequest",
-      "X-Xsrftoken": "2|2d012cd3|cadd05851baffa3c7c278b171e0f2e7e|1663715476",
-      "Sec-Ch-Ua-Platform": "\"macOS\"",
-      "Origin": "http://localhost:24332",
-      "Sec-Fetch-Site": "same-origin",
-      "Sec-Fetch-Mode": "cors",
-      "Sec-Fetch-Dest": "empty",
-      "Referer": "http://localhost:24332/edit/untitled.txt",
-      "Accept-Encoding": "gzip, deflate, br",
-      "Accept-Language": "en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7,en-GB;q=0.6",
-      "Cookie": "username-localhost-8888=\"2|1:0|10:1662930529|23:username-localhost-8888|44:Zjg3NmJjY2EyNzZiNDgwMjk4OGYzMDYxZTQ3NjA5NjQ=|bea013c7e6ed2f932a60f0cf9a3f0072df91961793ae6b841f6550a5d68b3d88\"; username-localhost-8889=\"2|1:0|10:1663715476|23:username-localhost-8889|44:ZDQzOWExMGEzM2MxNDRkZGE0YTU4ZmZlN2M2YjgwMDY=|e94a4133a86bd7ae6d02f13ec4563afb0f5f42289fb822d23cb42e0cb682156c\"; _xsrf=2|2d012cd3|cadd05851baffa3c7c278b171e0f2e7e|1663715476; username-localhost-20709=\"2|1:0|10:1663993268|24:username-localhost-20709|44:YWYzNGJmYjExOGYxNDQ4ZWIwZTQzMjE2YWVhMWFkYTc=|3b31666df44f42a249c6f1cab63cee73dd3f8c95e9049d3e0a6f4a81dc67712d\"; username-localhost-27689=\"2|1:0|10:1664075828|24:username-localhost-27689|44:OTliNjljYmE0MGUwNDY5ZTgzOWE3YzFkODAxMmI2MDY=|d6dfb9d5c569743dc81362853efe5c7087af6c36065b6ea37127e3e5e2fec4ba\"; username-localhost-24332=\"2|1:0|10:1664233830|24:username-localhost-24332|44:OGNjMjllYjc1MzYzNGE3MDlhMDU0ZDkzYzY3Nzg3MGQ=|436552ce8b16e740201fa6ab486dd420d5b9a253e7b497f1c76f3205f444a4a9\""
-    }
-[E 18:17:13.060 NotebookApp] 500 PATCH /api/contents/untitled.txt (172.20.13.244) 123.440000ms referer=http://localhost:24332/edit/untitled.txt
-[I 18:18:54.043 NotebookApp] Saving file at /get_all_series_notebook.ipynb
-[I 18:19:04.055 NotebookApp] Saving file at /get_all_series_main.py
-[I 18:19:12.066 NotebookApp] Saving file at /get_all_series_main.py
-[I 18:21:52.977 NotebookApp] Saving file at /get_all_series_main.py
-[I 18:22:30.541 NotebookApp] Saving file at /get_all_series_main.py
-[I 18:23:04.240 NotebookApp] Saving file at /config.yml
-[I 18:24:42.812 NotebookApp] Creating new file in 
-[W 18:26:47.440 NotebookApp] WebSocket ping timeout after 119319 ms.
-[I 18:26:52.444 NotebookApp] Starting buffering for 662683a3-d5bc-4418-bd40-2f36809d39a3:15f81812fd08498d876e05540187094b
+[W 13:52:13.088 NotebookApp] Nudge: attempt 10 on kernel 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430
+[I 13:52:14.067 NotebookApp] Replaying 3 buffered messages
+[I 13:52:46.322 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 13:53:19.152 NotebookApp] Saving file at /config.yml
+[I 13:53:28.348 NotebookApp] Starting buffering for 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430:dbbdbce52a4d4193924c6fc7c58aa245
+[I 13:53:28.976 NotebookApp] Kernel restarted: 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430
+[I 13:53:29.090 NotebookApp] Restoring connection for 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430:dbbdbce52a4d4193924c6fc7c58aa245
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 13:53:32.487 NotebookApp] Replaying 3 buffered messages
+[I 13:54:25.481 NotebookApp] Kernel interrupted: 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430
+[I 13:54:46.330 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 13:56:46.324 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 13:58:46.327 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 14:00:46.324 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 14:02:46.364 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 14:04:46.340 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 14:10:48.403 NotebookApp] Saving file at /get_all_series_notebook.ipynb
+[I 14:33:53.940 NotebookApp] Kernel shutdown: 0977e9be-fdc4-425e-8822-24751578334d
+[I 14:33:54.250 NotebookApp] Kernel shutdown: 7b1e32bf-1db7-48a0-b3ab-8ed8c5db5430
+[W 14:33:55.292 NotebookApp] 404 DELETE /api/sessions/9f24bd0b-7e2a-48c9-b275-762e21c6708c (172.20.13.244): Session not found: session_id='9f24bd0b-7e2a-48c9-b275-762e21c6708c'
+[W 14:33:55.293 NotebookApp] Session not found: session_id='9f24bd0b-7e2a-48c9-b275-762e21c6708c'
+[W 14:33:55.293 NotebookApp] 404 DELETE /api/sessions/9f24bd0b-7e2a-48c9-b275-762e21c6708c (172.20.13.244) 2.190000ms referer=http://localhost:24151/notebooks/get_all_series_notebook.ipynb
+[I 14:44:53.133 NotebookApp] No kernels or terminals for 657 seconds; shutting down.
+[I 14:44:53.136 NotebookApp] Shutting down 0 kernels
+[I 14:44:53.137 NotebookApp] Shutting down 0 terminals

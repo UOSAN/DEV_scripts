@@ -21,10 +21,10 @@ fi
 # Set subject list
 subject_list=`cat new_subject_list_20221025.txt` 
 
-queue_count=3
+queue_count=4
 # Loop through subjects and run job_mriqc
 let subj_count=0
-previous_jobs=(0 0 0)
+previous_jobs=(0 0 0 0)
 for subject in $subject_list; do
 
   let subj_count++
@@ -40,11 +40,12 @@ for subject in $subject_list; do
 	#computational resources
 	echo ${previous_jobs[$subj_count]}
 	if [ ${previous_jobs[$subj_count]} -eq 0 ]; then
-		let job_depend=singleton
-	elif
-		let job_depend=singleton,${previous_jobs[$subj_count]}
+		job_depend="singleton"
+	else
+		job_depend="singleton,${previous_jobs[$subj_count]}"
 	fi
-	echo $job_depend
+
+	echo "$job_depend"
 	SBATCH_OUT=$(sbatch --dependency=${job_depend} --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
 		   --job-name fmriprep_${subid} \
 		   --partition=ctn \
@@ -54,8 +55,7 @@ for subject in $subject_list; do
 		   -o "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_output.txt \
 		   -e "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_error.txt \
 		   --account=sanlab \
-		   hw.sh)
-		   #job_fmriprep.sh)
+		   job_fmriprep.sh)
 	echo $SBATCH_OUT
 	#get the jobID for this item
 	JOBID=${SBATCH_OUT##* }
