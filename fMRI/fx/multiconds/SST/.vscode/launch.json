@@ -27,8 +27,26 @@
             "argsExpansion": "none",
             "args": [
                 "--input",
-                "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/SST_DEV/output""--output",
+                "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/SST_DEV/output",
+                "--output",
                 "full_duration/"
+            ]
+        },
+        {
+            "name": "Python Run Full Duration, WithSupplement",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": true,
+            "argsExpansion": "none",
+            "args": [
+                "--input",
+                "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/SST_DEV/output",
+                "--output",
+                "full_duration/",
+                "--supplemental",
+                "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/sst_behavioral_data_all_with_analysis.csv"
             ]
         }
     ]
