@@ -14,6 +14,9 @@ fMRI/fx/models/output/
 fMRI/fx/models/output*/*
 fMRI/fx/models/*/level2/*/beta*.nii
 fMRI/fx/models/*/level2/*/*/beta*.nii
+fMRI/fx/multiconds/*/__pycache__
+fMRI/fx/multiconds/SST/__pycache__/*
+
 fMRI/ppc/output/
 fMRI/ppc/smooth/output/
 fMRI/ppc/smooth/sid_batches/*/*.mat
@@ -47,4 +50,5 @@ fMRI/fx/models/output_ns/*
 rsfMRI/baseline_analysis/subject_correlation/concatenate/DEV*.csv
 rsfMRI/baseline_analysis/subject_connectivity/DEV*.csv
 .Rproj.user
+fMRI/fx/models/SST/direct_regression/*.RData
 fMRI/fx/motion/auto-motion-fmriprep/confounds_loaded_state.RData

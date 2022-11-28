@@ -120,23 +120,33 @@ sst_all_data_filepath <- paste0(dropbox_file_dir,"sst_behavioral_data_all.csv")
 
 sst_all_data_raw <- readr::read_csv(sst_all_data_filepath)
 sst_all_data<-clean_sst_data(sst_all_data_raw)
-sst_all_data <- get_sst_post_pre(sst_all_data)
+sst_all_data <- get_expected_tone_time(sst_all_data)
+
+sst_all_data<-calculate_response_latency(sst_all_data)
+sst_all_data<-calculate_rpe(sst_all_data)
+
+sst_all_data %>% select(
+  subid, waveid, runid, reaction_time_clean,last_reaction_time,next_reaction_time,leading_rt,lagging_rt, SSD_recorded,condition, last_tone_delay, trials_since_last_SSD,last_correct_go) %>%
+  View()
+
 ```
+
+
+
+
+
 
 
 
 ```{r}
 post_pre_rt_data <- sst_all_data%>% 
-  filter(condition!="Cue") %>%
-  select(trial_n,reaction_time,subid,waveid,runid,condition,post_pre_rt_change)
+  filter(condition!="Cue")# %>%
+  #select(trial_n,reaction_time,subid,waveid,runid,condition,post_pre_rt_change)
 ```
 
 
-## Merge the datasets
+## Prepare neural data
 
-```{r}
-
-```
 
 
 ```{r}
@@ -149,10 +159,26 @@ FS_summary_data_delat <- FS_summary_data %>%
   summarize(peak=mean(peak),
             trough=mean(trough),
             response_amplitude=mean(response_amplitude))
+
+```
+
+
+## Merge the datasets
+
+
+
+```{r}
+
+
 FS_summary_data_delat <- merge(FS_summary_data_delat,post_pre_rt_data,by.x = c("subid","wave","trial_n"),by.y=c("subid","waveid","trial_n"),all.x = TRUE)
-  
+
   
 FS_summary_data_accumbens <- FS_summary_data_delat %>% filter(ROI_delateralized=="Accumbens") %>% select(-ROI_delateralized)
+
+FS_neural_behav_data_not_na<-FS_summary_data_accumbens[
+  rowSums(is.na(FS_summary_data_accumbens[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(FS_summary_data_accumbens$response_amplitude) & is.finite(FS_summary_data_accumbens$post_pre_rt_change) #no infinite values
+    ,]
 
 ```
 
@@ -160,10 +186,7 @@ FS_summary_data_accumbens <- FS_summary_data_delat %>% filter(ROI_delateralized=
 #now test. let's trun across all at first....
 
 ```{r}
-FS_neural_behav_data_not_na<-FS_summary_data_accumbens[
-  rowSums(is.na(FS_summary_data_accumbens[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
-    is.finite(FS_summary_data_accumbens$response_amplitude) & is.finite(FS_summary_data_accumbens$post_pre_rt_change) #no infinite values
-    ,]
+
 cor.test(FS_neural_behav_data_not_na$response_amplitude,FS_neural_behav_data_not_na$post_pre_rt_change)
 cor.test(FS_neural_behav_data_not_na$peak,FS_neural_behav_data_not_na$post_pre_rt_change)
 cor.test(FS_neural_behav_data_not_na$peak,FS_neural_behav_data_not_na$reaction_time)
@@ -320,7 +343,7 @@ If we do a multi-level model, with response amplitude as a within-group slope, w
 
 library(lme4)
 
-FS_neural_behav_FOC <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Frontal Orbital Cortex" & trial_n>196)
+FS_neural_behav_FOC <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Frontal Orbital Cortex")
 
 model_random_effects <- lme4::lmer(
    post_pre_rt_change ~ trial_n + response_amplitude + (1+ response_amplitude | subid),
@@ -411,3 +434,575 @@ Well, that would confirm it--we have fixed effects (and therefore an effect _acr
 I think we could look at other areas, but maybe what I most want to do is move to getting all of the data.
 
 It is probably important we look across all data. I am having real trouble disambiguating particular areas that register this signal we're trying to measure. So let's get that wave 1 complete...
+
+
+# Further measures of expected tone time
+
+
+```{r}
+colnames(sst_all_data)
+```
+
+
+How can we *simply* estimate when the participant's expected tone would be on each trial? There are a couple of answers
+
+```{r}
+#using the last tone delay
+sst_all_data %>% select(trial_n,condition, reaction_time_clean, SSD_recorded, last_tone_delay, trials_since_last_SSD) %>% filter(condition!="Cue")
+
+#when was the last time they reacted
+sst_all_data %>% select(trial_n,condition, reaction_time_clean, last_correct_go) %>% filter(condition!="Cue")
+
+
+
+```
+
+
+We need to distinguish between RPE, reward prediction error, and learning adjustment. The learning adjustment is the RPE multiplied by the learning rate.
+
+
+Learning adjustment can be measured by the following, the RT change in response to the trial:
+
+```{r}
+sst_all_data %>% select(trial_n,condition, reaction_time_clean, leading_rt, lagging_rt, post_pre_rt_change, post_current_rt_change) %>% filter(condition!="Cue")
+
+```
+
+We've got two measures here:
+
+ - post - pre RT change
+ - post - current RT change
+ 
+One compares $t_{+1}$  with $t_{-1}$. The other compares $t$ with $t_{+1}$. The advantage of the former is strictly comparing like with like--usually it's comparing two CorrectGo trials with each other. The latter method has the advantage of only taking change in response to the very last trial, excluding change that might occur in response to the $t-1$th trial.
+
+Are there other ways we should be calculating RPE? Specifically--should I try to leverage the other definitions of RPE? 
+
+There are some things that 
+ - Difference between RT and (tone plus response latency). i.e., participant should have waited until at least the tone sounds, plus a specific lag. This gives RPE directly. However, it's a bit difficult to calculate because we don't know the response latency.
+ - Difference between tone and previous tone the subject has heard. This would be RPE if the subject only uses difference in tones as an indication.
+ - 
+
+## Define the response latency for each subject...
+
+Lots of ways to calculate response latency, but we can try it as the subject's fastest 10% or so of trials....
+
+We've already cleaned out RTs that seem to be abnormally small, so what we have here is the remainder. What do they look like?
+```{r}
+#moved this to the start.
+# response_latency_means <- sst_all_data %>% group_by(subid, waveid,runid) %>% filter(condition!="Cue" & reaction_time!=0) %>%
+#   summarise(rt_quant_5 = quantile(reaction_time,0.05,na.rm=TRUE),
+#             rt_quant_10 = quantile(reaction_time,0.1,na.rm=TRUE),
+#             rt_quant_20 = quantile(reaction_time,0.2,na.rm=TRUE),
+#             rt_quant_50 = quantile(reaction_time,0.5,na.rm=TRUE),
+#             rt_quant_90 = quantile(reaction_time,0.9,na.rm=TRUE),
+#             rt_sample = n()
+#             ) %>% 
+#   mutate(quant_50_minus_10 = (rt_quant_50 - rt_quant_10),
+#          response_latency_10=rt_quant_10
+#          )
+# 
+# 
+# sst_all_data <- sst_all_data %>% merge(response_latency_means %>% select(subid,waveid,runid,response_latency_10),all.x = TRUE)
+```
+
+## Calculate the RPE 
+
+Now what?
+
+```{r}
+
+
+sst_all_data %>% select(trial_n,condition, reaction_time_clean, SSD_recorded, last_tone_delay, trials_since_last_SSD, RPE_SSD_based, RPE_SSD_RT_diff) %>% filter(condition!="Cue")
+
+```
+
+So using `RPE_SSD_RT_diff` doesn't really work because subjects do not typically wait until the tone would have occured, then intiate response...
+...although---they _often_ do...
+But I think we will have a pretty severe bias if we ever tried to _compare_ the two definitions of RPE, so we can't do that.
+
+
+```{r}
+hist(sst_all_data$RPE_SSD_RT_diff)
+```
+
+But now, we have a pretty good idea of the value of RPE_1, RPE_2, PE change (which is RPE*learning rate), and the new signal, and a couple of post minus pre values. Let's see how they relate to striatal and other activity, first in a pairs plot.
+
+## Correlating broader behavioral measure set with neural measures
+
+```{r}
+# 
+# 
+# FS_summary_data_delat <- merge(FS_summary_data_delat,sst_all_data,by.x = c("subid","wave","trial_n"),by.y=c("subid","waveid","trial_n"),all.x = TRUE)
+#   
+#   
+FS_summary_data_accumbens <- FS_summary_data_delat %>% filter(ROI_delateralized=="Accumbens") %>% select(-ROI_delateralized)
+
+FS_neural_behav_data_not_na<-FS_summary_data_accumbens[
+  rowSums(is.na(FS_summary_data_accumbens[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(FS_summary_data_accumbens$response_amplitude) & is.finite(FS_summary_data_accumbens$post_pre_rt_change) #no infinite values
+    ,]
+
+```
+
+```{r,fig.width=9}
+
+#cor.test(FS_neural_behav_data_not_na$reaction_time_clean,FS_neural_behav_data_not_na$peak)
+corrplot::corrplot(
+  cor(
+  FS_neural_behav_data_not_na %>% select(
+    #neural measures
+    peak,trough,response_amplitude,
+    #basic measures
+    reaction_time,reaction_time_clean, 
+    #other stuff
+    leading_rt, lagging_rt,
+    #measures of expected tone time before the trial
+    last_tone_delay,last_correct_go, response_initiation_time,
+    #measures of new expected tone time
+    SSD_recorded,lagging_rt,
+    #measures of change in expected tone time
+    post_current_rt_change, post_pre_rt_change,
+    #measures of RPE
+    RPE_SSD_based, RPE_SSD_RT_diff),use="pairwise.complete.obs"
+  ),
+  method="number",type="upper",diag=FALSE,
+  tl.srt = 50,number.cex=0.6,bg="black"
+)
+```
+
+Not wonderful results, really...that trough seems to be responsive to the stop signal delay, the RT changes, and the RPE when based on the SSD (but that's probably just the SSD difference)
+
+Next steps might be to...
+
+ - try more regions
+ - try a mixed effects model
+ 
+ 
+I am getting very close to needing to apply a formal stan model.
+
+
+
+
+```{r}
+
+FS_summary_data_FOC <- FS_summary_data_delat %>% filter(ROI_delateralized=="Frontal Orbital Cortex") %>% select(-ROI_delateralized)
+
+FS_neural_behav_data_not_na<-FS_summary_data_FOC[
+  rowSums(is.na(FS_summary_data_accumbens[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(FS_summary_data_accumbens$response_amplitude) & is.finite(FS_summary_data_accumbens$post_pre_rt_change) #no infinite values
+    ,]
+
+```
+
+
+
+```{r,fig.width=9}
+
+#cor.test(FS_neural_behav_data_not_na$reaction_time_clean,FS_neural_behav_data_not_na$peak)
+corrplot::corrplot(
+  cor(
+  FS_neural_behav_data_not_na %>% select(
+    trial_n,
+    #neural measures
+    peak,trough,response_amplitude,
+    #basic measures
+    reaction_time,reaction_time_clean, 
+    #other stuff
+    leading_rt, lagging_rt,
+    #measures of expected tone time before the trial
+    last_tone_delay,last_correct_go, response_initiation_time,
+    #measures of new expected tone time
+    SSD_recorded,lagging_rt,
+    #measures of change in expected tone time
+    post_current_rt_change, post_pre_rt_change,
+    #measures of RPE
+    RPE_SSD_based, RPE_SSD_RT_diff),use="pairwise.complete.obs"
+  ),
+  method="number",type="upper",diag=FALSE,
+  tl.srt = 50,number.cex=0.6,bg="black"
+)
+```
+
+
+
+
+
+```{r}
+
+library(lme4)
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ post_pre_rt_change+RPE_SSD_based +last_tone_delay+ (1+ post_pre_rt_change | subid),
+  FS_summary_data_FOC
+  )
+summary(model_random_effects)
+
+
+```
+
+
+
+
+
+```{r}
+
+library(lme4)
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ post_current_rt_change+RPE_SSD_based +last_tone_delay+ (1+ post_current_rt_change | subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_random_effects)
+
+
+```
+
+
+
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt + reaction_time_clean + leading_rt+(1 | subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+```
+
+Seems like, once you take into account the leading RT, i.e., the reaction time occuring _after_ the current trial, there is no significant effect of other items
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt + leading_rt+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt + leading_rt+RPE_SSD_based+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt + leading_rt+RPE_SSD_RT_diff+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt + leading_rt+RPE_SSD_RT_diff+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt + leading_rt+post_pre_rt_change+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+Of coures that's rank deficient, because `post_pre_rt_change` is just hte difference of leading and lagging rt.
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt + leading_rt+post_current_rt_change+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+And post_current_rt_change is just the difference between leading and current rt; current rt was already found to not be relevant. This falsifies any hypothesis of any kind of learning signal.
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ post_current_rt_change+(1 + post_current_rt_change| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ reaction_time_clean + leading_rt+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ last_tone_delay + lagging_rt + leading_rt+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ last_correct_go + lagging_rt + leading_rt+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt + leading_rt+response_latency_10+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+So, for this particular brain region, the evidence is that the effect is really related to the leading RT. Including the lagging RT seems to strengthen the effect found, which does suggest some sort of learning signal--but it's not RPE, because my RPE measures don't show a significant correlation. It unrelated to the amount the participant _should_ adjust by, and seems more related to the amount they _do_ adjust by. Unless my RPE measure is bad. The `RPE_SSD_RT_diff` measure is probably not reliable, because it relies on us accurately estimating the response latency, which I don't think we've done. `RPE_SSD_based` is more accurate, though it relies on the last stop signal delay, which could be quite a long time ago, and it's possible participants have gathered more information about the trial in general.
+
+So--we might have some EV change; not sure we can estimate learning rate if we don't have a reliable estimate of the reward prediction error.
+
+We might theorize a simpler model, such as--participants are simply invariant to the amount of time elapsed, and response amplitude is just a function of whether there's an error or not.
+
+I think the next step is to examine these results across a wider set of areas.
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ post_pre_rt_change+(1 + post_pre_rt_change| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ leading_rt+lagging_rt+(1 + post_pre_rt_change| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ next_ +lagging_rt+(1 + post_pre_rt_change| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+```{r}
+library(lme4)
+FS_neural_behav_data_not_na$trials_from_end<-FS_neural_behav_data_not_na$trial_n-225
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ leading_rt+lagging_rt+leading_rt:trials_from_end+lagging_rt:trials_from_end+(1 + post_pre_rt_change| subid),
+  FS_neural_behav_data_not_na %>% filter(trial_n>128)
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
+
+```{r}
+library(lme4)
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ post_current_rt_change+(1 + post_current_rt_change| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+```
+
+What is puzzling is that the post - current effect is a lot _weaker_.
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt +last_correct_go+ reaction_time_clean+leading_rt+response_latency_10+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+```
+
+## Primitives
+
+```{r}
+library(lme4)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ lagging_rt + last_tone_delay+SSD_recorded+ reaction_time_clean+leading_rt+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+```
+
+
+
+### break them down.
+
+```{r}
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ last_reaction_time + last_tone_delay+SSD_recorded+ reaction_time_clean+next_reaction_time+(1 + leading_rt| subid),
+  FS_neural_behav_data_not_na
+  )
+summary(model_fixed_effects)
+
+
+
+
+```
