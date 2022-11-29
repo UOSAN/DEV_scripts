@@ -8,6 +8,8 @@
 # get this from a value passed in
 SCRIPT_NAME=$0
 
+echo "${SCRIPT_NAME}"
+
 ## Set your study
 STUDY=DEV
 
