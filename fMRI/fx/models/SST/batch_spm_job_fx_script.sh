@@ -6,13 +6,9 @@
 #--------------------------------------------------------------
 
 # get this from a value passed in
-SCRIPT_NAME=$0
+SCRIPT_NAME=$1
 
-
-
-
-
-echo '${SCRIPT_NAME}'
+echo ${SCRIPT_NAME}
 
 ## Set your study
 STUDY=DEV
