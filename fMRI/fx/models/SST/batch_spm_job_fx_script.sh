@@ -5,6 +5,9 @@
 # D.Cos 2018.11.06
 #--------------------------------------------------------------
 
+# get this from a value passed in
+SCRIPT_NAME=$0
+
 ## Set your study
 STUDY=DEV
 
@@ -24,7 +27,7 @@ SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 TASK=SST
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_conditions.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/${SCRIPT_NAME}
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
@@ -53,6 +56,7 @@ for SUB in $SUBJLIST; do
 	 	--cpus-per-task=${cpuspertask} \
 	 	--mem-per-cpu=${mempercpu} \
 	 	--account=sanlab \
+        --time=30:00 \
 	 	${SHELL_SCRIPT}
  	sleep .25
 done

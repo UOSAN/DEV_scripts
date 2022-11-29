@@ -443,7 +443,8 @@ def save_varying_condition_list(output_folder: str, subfolder: str, file_conditi
     for sub, wave in file_condition_dict:
         s_w_cond_list = file_condition_dict[(sub, wave)]
         #print(s_w_cond_list)
-        target_condition_count = len(
+        target_condition_count = len(set(target_conditions))
+        target_conditions_present_count = len(
             set(target_conditions).intersection(set(s_w_cond_list))
         )
         if wave not in complete_list_by_wave.keys():
@@ -451,10 +452,12 @@ def save_varying_condition_list(output_folder: str, subfolder: str, file_conditi
             complete_list_by_wave[wave]['complete'] = []
             complete_list_by_wave[wave]['missing'] = []
 
-        if target_condition_count == 2:
+        if target_conditions_present_count == target_condition_count:
             complete_list_by_wave[wave]['complete'].append(sub)
-        else:
+        elif target_conditions_present_count < target_condition_count:
             complete_list_by_wave[wave]['missing'].append(sub)
+        else:
+            raise Exception("more conditions present in data than in target conditions")
 
     # now save the lists
     for wave in complete_list_by_wave.keys():
