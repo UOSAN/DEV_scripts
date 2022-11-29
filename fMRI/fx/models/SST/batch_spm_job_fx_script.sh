@@ -52,7 +52,7 @@ mempercpu=8G
 # Create and execute batch job
 for SUB in $SUBJLIST; do
 	echo $SUB
- 	sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
+ 	echo sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
 	 	--job-name=${RESULTS_INFIX} \
 	 	-o ${OUTPUTDIR}/${SUB}_${RESULTS_INFIX}.log \
 	 	--cpus-per-task=${cpuspertask} \
