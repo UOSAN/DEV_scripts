@@ -5,7 +5,6 @@
 %-----------------------------------------------------------------------
 disp('this is line 6. there seems to be a problem somewhere in this file but who knows where')
 disp('this is the 7th line. there seems to be a problem somewhere in this file but who knows where')
-disp('is it really line 11?')
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV004/ses-wave1/func/'};
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii';
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
