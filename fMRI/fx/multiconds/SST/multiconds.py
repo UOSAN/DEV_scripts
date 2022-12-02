@@ -1,4 +1,5 @@
 import argparse
+from collections import OrderedDict
 import json
 import re
 import warnings
@@ -40,6 +41,7 @@ COUNT_NULL = 128
 COUNT_RESPONSE = 256
 
 STUDY_ID = 'DEV'
+
 
 
 def read_data(file: Path, use_rt_for_go_success_trials=True):
@@ -198,7 +200,10 @@ def create_posterror_masks_from_masks(condition_masks: List) -> List:
 
     # ['GoFollowingCorrectStop', 'GoFollowingFailedStop',
     # 'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'OtherFailedGo'
-    return ({
+    #Why you should use an OrderedDict even though dicts are ordered in python 3.6+
+    #TLDR: can't guarantee someone will run this in 3.6+ and it's not worth the risk
+    #https://gandenberger.org/2018/03/10/ordered-dicts-vs-ordereddict/
+    return (OrderedDict({
         'CorrectGoFollowingCorrectStop': go_success_following_successful_stop,
         'CorrectGoFollowingFailedStop': go_success_following_failed_stop,
         'OtherCorrectGo': other_successful_go, 
@@ -207,6 +212,66 @@ def create_posterror_masks_from_masks(condition_masks: List) -> List:
         'OtherCorrectStop': no_go_success_other,
         'OtherFailedStop': no_go_fail_other,
         'Cue': null_trials, 
+        'OtherFailedGo': go_fail
+    }))
+
+
+def create_posterror_cue_masks_from_masks(condition_masks: List) -> List:
+    """
+    Create masks of post-error slowing conditions, derived from the original set of masks
+    Also includes classifying cue trials into post-error and non-post-error
+    """
+
+    go_success = condition_masks[0]
+    no_go_success = condition_masks[1]
+    no_go_fail = condition_masks[2]
+    null_trials = condition_masks[3]
+    go_fail = condition_masks[4]
+
+    # marks if each trial is a (successful or failed) go that follows a failed stop
+    # we shift by 2, not 1, because we ignore the "NULL TRIAL" that occurs reliably every second trial
+    go_success_following_failed_stop = np.append([False, False],
+                                                    (go_success[2:] & no_go_fail[:(len(no_go_fail) - 2)]))
+    failed_stop_preceding_go_success = np.append(   (go_success[2:] & no_go_fail[:(len(no_go_fail) - 2)]),
+                                                [False, False])
+
+    # marks if each trial is a (successful or failed) go that follows a successful stop
+    go_success_following_successful_stop = np.append([False, False],
+                                                        (go_success[2:] & no_go_success[:(len(no_go_success) - 2)]))
+    successful_stop_preceding_go_success = np.append(   (go_success[2:] & no_go_success[:(len(no_go_success) - 2)]),
+                                                [False, False])
+
+    no_go_fail_other = no_go_fail & (failed_stop_preceding_go_success==False)
+    no_go_success_other = no_go_success & (successful_stop_preceding_go_success==False)
+
+    #mark cues into following failed stop, following successful stop, and other
+    cue_following_failed_stop = np.append(
+        [False],(null_trials[1:] & no_go_fail[:(len(no_go_fail) - 1)])) 
+    cue_following_successful_stop = np.append(
+        [False],(null_trials[1:] & no_go_success[:(len(no_go_success) - 1)]))
+    cue_other = null_trials & (cue_following_failed_stop==False) & (cue_following_successful_stop==False)   
+    
+
+    # create one beta for all the other SuccessGo trials
+    other_successful_go = go_success & (go_success_following_successful_stop == False) & (
+            go_success_following_failed_stop == False)
+    # then just pass on the other masks as returned from create_masks
+
+    # other_failed_go = go_fail & (go_following_successful_stop==False) & (go_following_failed_stop==False)
+
+    # ['GoFollowingCorrectStop', 'GoFollowingFailedStop',
+    # 'OtherCorrectGo', 'CorrectStop', 'FailedStop', 'Cue', 'OtherFailedGo'
+    return ({
+        'CorrectGoFollowingCorrectStop': go_success_following_successful_stop,
+        'CorrectGoFollowingFailedStop': go_success_following_failed_stop,
+        'OtherCorrectGo': other_successful_go, 
+        'CorrectStopPrecedingCorrectGo': successful_stop_preceding_go_success,
+        'FailedStopPrecedingCorrectGo': failed_stop_preceding_go_success,
+        'OtherCorrectStop': no_go_success_other,
+        'OtherFailedStop': no_go_fail_other,
+        'CueFollowingCorrectStop': cue_following_successful_stop,
+        'CueFollowingFailedStop': cue_following_failed_stop,
+        'OtherCue': cue_other,
         'OtherFailedGo': go_fail
     })
 
