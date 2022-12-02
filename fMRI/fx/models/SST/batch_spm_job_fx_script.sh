@@ -17,7 +17,7 @@ STUDY=DEV
 SUBJLIST=`cat subject_list_single_col_wave1.txt`
 
 # Which SID should be replaced?
-REPLACESID=004
+REPLACESID=DEV004
 
 # SPM Path
 SPM_PATH=/projects/sanlab/shared/spm12
