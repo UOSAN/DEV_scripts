@@ -37,7 +37,6 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
     preprocessed_behavioral_data.sort_values(['subid','waveid','trial_n'],inplace=True)
     #drop sub 999 because it's test data and causes errors at this stage.
     preprocessed_behavioral_data = preprocessed_behavioral_data.loc[preprocessed_behavioral_data.subid!=999,:]
-    
 
     for f in files:
         match = re.search(pattern, str(f.name))
@@ -68,7 +67,7 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
 
             # create masks for the post-error slowing
             posterror_masks_dict = create_posterror_cue_masks_from_masks(masks)
-            posterror_masks = list(posterror_masks_dict.values())
+            #posterror_masks = list(posterror_masks_dict.values())
             print_mask_signature(posterror_masks_dict)
 
             # Perform some quality checking on the numbers of responses (should be 256),
@@ -102,6 +101,8 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                                        cleaned_subject_response), axis=1))
             else:
                 print("creating betaseries and conditions")
+                # if subject_id=="017":
+                #     print("DEV017")
                 # create onset files for SPM first-level analysis
                 #trials = create_trials(trial_number, trial_start_time, trial_duration, subject_response)
 
@@ -136,7 +137,11 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 modulator_var[np.isnan(modulator_var)] = 0.0
 
                 modulator_struct = create_parametric_modulator_struct(
-                    modulator_var,posterror_masks,conditions,modulator_suffix='post_pre_drt')
+                    modulator_var,
+                    #just get the conditions that we actually have for this subject :-)
+                    [posterror_masks_dict[pem_k] for pem_k in posterror_masks_dict if pem_k in conditions['names']],
+                    conditions,
+                    modulator_suffix='post_pre_drt')
 
                 conditions.update(modulator_struct)
 

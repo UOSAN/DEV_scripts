@@ -63,6 +63,7 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 read_data(f, use_rt_for_go_success_trials=use_rt_for_go_success_trials)
 
             # Create masks for the various conditions
+            #create masks uses a hard-coded list of conditions, so we need not that next to it.
             masks = create_masks(go_no_go_condition, subject_response)
             mask_names = ['correct-go', 'correct-stop', 'failed-stop', 'null', 'failed-go']
             print_mask_signature(masks)
@@ -134,8 +135,20 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 modulator_var = matching_preprocessed_behavioral_data['next_last_rt_change'].values
                 modulator_var[np.isnan(modulator_var)] = 0.0
 
+                if len(masks)!=len(conditions['names']):
+                    print('masks and conditions do not match')
+                    #print(masks)
+                    #print(conditions['names'])
+                    print([sum(ms) for ms in masks])
+                    print("that's the match")
+                    #continue
+                
                 modulator_struct = create_parametric_modulator_struct(
-                    modulator_var,masks,conditions,modulator_suffix='post_pre_drt')
+                    modulator_var,
+                    [ms for ms in masks if sum(ms)>0],
+                    conditions,
+                    modulator_suffix='post_pre_drt'
+                    )
 
                 conditions.update(modulator_struct)
 

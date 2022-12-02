@@ -215,7 +215,6 @@ def create_posterror_masks_from_masks(condition_masks: List) -> List:
         'OtherFailedGo': go_fail
     }))
 
-
 def create_posterror_cue_masks_from_masks(condition_masks: List) -> List:
     """
     Create masks of post-error slowing conditions, derived from the original set of masks
@@ -416,7 +415,7 @@ def write_events_description(path: Path,
 
 # for debugging, can help to summarize what's inside the mask.
 def print_mask_signature(masks):
-    if type(masks) is dict:
+    if type(masks) is dict or type(masks) is OrderedDict:
         print([k + ':'+ str(np.sum(masks[k])) + ' True of ' + (str(len(masks[k]))) for k in masks])
     else:
         print([str(np.sum(m)) + ' True of ' + (str(len(m))) for m in masks])

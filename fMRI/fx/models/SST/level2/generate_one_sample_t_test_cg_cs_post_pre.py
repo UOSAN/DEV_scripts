@@ -24,10 +24,10 @@ sst_level_2_path = config_data['sst_level_2_path']
 template_filepath = config_data['spm_l2_script_template_filepath']
 spm_path = config_data['spm_path']
 
-analysis_name = 'cg_cs_post_pre'
+analysis_name = 'posterror_cues'
 
 train_betas_with_data = get_data_for_confirmed_train_subjs(
-    beta_glob = nonbids_data_path + "fMRI/fx/models/SST/wave1/conditions_w_post_pre/sub-DEV*/",
+    beta_glob = nonbids_data_path + "fMRI/fx/models/SST/wave1/" + analysis_name + "/sub-DEV*/",
     nonbids_data_path = nonbids_data_path,
     #ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = ml_scripting_path,
@@ -35,21 +35,49 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     exclude_test_subjs=False
 )
 
-betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
+betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data[0:30])
+
+
 
 
 beta_name_list = [
-    'beta_CorrectGo',
-    'beta_CorrectGoxCgpost_pre_drt',
-    'beta_CorrectStop',
-    'beta_CorrectStopxCspost_pre_drt',
-    'beta_FailedStop',
-    'beta_FailedStopxFspost_pre_drt',
-    'beta_CuexCpost_pre_drt'
+    # 'CorrectGoFollowingCorrectStop',
+    # 'CorrectGoFollowingCorrectStopxCgfcspost_pre_drt',
+    # 'CorrectGoFollowingFailedStop',
+    # 'CorrectGoFollowingFailedStopxCgffspost_pre_drt',
+    # 'CorrectGoFollowingFailedStopxOcgpost_pre_drt',
+    # 'OtherCorrectGo',
+    # 'OtherCorrectGoxOcgpost_pre_drt',
+    # 'OtherCorrectGoxFspcgpost_pre_drt',
+
+    # 'CorrectStopPrecedingCorrectGo',
+    # 'CorrectStopPrecedingCorrectGoxCspcgpost_pre_drt',
+    # 'OtherCorrectStop',
+    # 'OtherCorrectStopxOcspost_pre_drt',
+    
+    # 'FailedStopPrecedingCorrectGo',
+    # 'FailedStopPrecedingCorrectGoxFspcgpost_pre_drt',
+    # 'FailedStopPrecedingCorrectGoxCffspost_pre_drt'
+    # 'OtherFailedStop',
+    # 'OtherFailedStopxOfspost_pre_drt',
+    # 'OtherFailedStopxCfcspost_pre_drt',
+
+    # 'OtherFailedGo',
+    # 'OtherFailedGoxOfgpost_pre_drt',
+    
+    # 'CueFollowingCorrectStop',
+    'CueFollowingCorrectStopxCfcspost_pre_drt',
+    'CueFollowingCorrectStopxCffspost_pre_drt',
+    # 'CueFollowingFailedStop',
+    'CueFollowingFailedStopxCffspost_pre_drt'
+    # 'CueFollowingFailedStopxOcpost_pre_drt'
+    # 'OtherCue',
+    # 'OtherCuexOcpost_pre_drt',
+    # 'OtherCuexOfgpost_pre_drt'
     ]
 
 iterate_over_l1_images_and_run_l2_scripts(beta_name_list, betas_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
-col_function=lambda img_name: img_name + "_fname"
+col_function=lambda img_name: "beta_" + img_name + "_fname"
 )
 
 

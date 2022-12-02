@@ -209,16 +209,20 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
 
                 multicond_df_list = multicond_df_list + [trial_df_row]
 
-                posterror_conditions = create_posterror_conditions(
-                    trial_start_time, trial_duration, posterror_masks)
+                # posterror_conditions = create_posterror_conditions(
+                #     trial_start_time, trial_duration, posterror_masks.values())
+                posterror_conditions = create_conditions(
+                    trial_start_time, trial_duration, list(posterror_masks.values()),
+                    condition_labels=list(posterror_masks.keys())
+                )
 
-                pes = get_pes(masks,reaction_time)
+                #pes = get_pes(masks,reaction_time)
                 #identify each error event
                 #look up the previous go trial
                 #look up the next
 
                 posterror_reaction_times = create_rt_parametric_modulator_struct(
-                    reaction_time,posterror_masks,posterror_conditions)
+                    reaction_time,list(posterror_masks.values()),posterror_conditions)
 
                 posterror_conditions.update(posterror_reaction_times)
 

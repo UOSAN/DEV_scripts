@@ -15,9 +15,9 @@ def create_parametric_modulator_struct(modulator_var, masks, conditions,modulato
     condition_names = conditions['names']
     duration_array = None
     pmod_list = []
-    # pmod_dict = {}
-    # for k in ['name','param','poly']:
-    #     pmod_dict[k] = []
+    #this code will assume that there are the same number of conditions as masks.
+    #if there aren't, there's probably an error!
+    assert len(condition_names)==len(masks)
 
     for condition_i, condition_name in enumerate(condition_names):
         condition_mask = masks[condition_i]
