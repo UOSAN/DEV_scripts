@@ -30,7 +30,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
 )
 
 
-betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data[0:15])
+betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 
 contrast_name_list = ['CorrectGoFollowing(CS>FS)','CorrectGoFollowing(FS>CS)','CS>FS(PrecedingCorrectGo)','FS>CS(PrecedingCorrectGo)']
 # for contrast_name in ['CorrectGoFollowing(CS>FS)','CorrectGoFollowing(FS>CS)','CS>FS(PrecedingCorrectGo)','FS>CS(PrecedingCorrectGo)']:

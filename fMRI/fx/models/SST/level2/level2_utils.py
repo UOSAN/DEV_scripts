@@ -1,3 +1,4 @@
+import datetime
 import pandas as pd
 import numpy as np
 import os
@@ -20,6 +21,7 @@ def get_contrasts_for_betas(
     betas['spm_l2_targeted_contrast_filepath'] = None
 
     betas.reset_index(inplace=True,drop=True)
+
 
     for beta_i, beta_folderpath in enumerate(betas.spm_l2_path):
         print(beta_folderpath)
@@ -185,6 +187,9 @@ def iterate_over_l1_images_and_run_l2_scripts(
     l1_image_name_list, l1_images_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
     col_function = lambda img_name: 'contrast_' + img_name + '_fname'
      ):
+    # pull date in format YYYYMMDD
+    date_label = datetime.datetime.now().strftime("%Y%m%d")
+
     for l1_image_name in l1_image_name_list:
         colname = col_function(l1_image_name)
         print(l1_image_name)
@@ -196,11 +201,12 @@ def iterate_over_l1_images_and_run_l2_scripts(
                     tmap_spm_command = "'" + tmap_filepath + ",1'"
                     print(tmap_spm_command)
                     img_filepath_list += tmap_spm_command + "\n"
-            output_folderpath=sst_level_2_path + analysis_name + "/" + l1_image_name
+            output_folderpath=sst_level_2_path + analysis_name + "_" + date_label + "/" + l1_image_name
             output_filepath =output_folderpath + "/" + l1_image_name + "_one_sample_design_estimate.m"
             create_spm_l2_script(template_filepath, replacement_map = {
                     'OUTDIR': output_folderpath,
-                    'img_filepath_list': img_filepath_list
+                    'img_filepath_list': img_filepath_list,
+                    '(MAIN HEADER)': l1_image_name
                     },
                 output_filepath = output_filepath
                 )

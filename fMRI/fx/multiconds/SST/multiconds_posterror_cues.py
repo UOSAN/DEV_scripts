@@ -101,8 +101,8 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                                        cleaned_subject_response), axis=1))
             else:
                 print("creating betaseries and conditions")
-                # if subject_id=="017":
-                #     print("DEV017")
+                if subject_id=="017":
+                    print("DEV017")
                 # create onset files for SPM first-level analysis
                 #trials = create_trials(trial_number, trial_start_time, trial_duration, subject_response)
 
