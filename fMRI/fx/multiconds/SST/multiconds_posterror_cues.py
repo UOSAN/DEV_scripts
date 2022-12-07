@@ -14,9 +14,11 @@ from multiconds_utils import *
 def main(input_dir: str, bids_dir: str = None, file_limit=None,
          use_rt_for_go_success_trials=True,
          output_folder="",
-         preprocessed_data_filepath: str = None):
+         preprocessed_data_filepath: str = None,
+         folder_id: str = 'posterror_cues',
+         include_parametric_modulators: bool = True
+         ):
     print(input_dir)
-    folder_id = 'posterror_cues'
 
     files = list(Path(input_dir).glob('DEV*.mat'))
     files.sort()
@@ -129,21 +131,22 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 # posterror_conditions = create_posterror_conditions(
                 #     trial_start_time, trial_duration, posterror_masks)
 
-                # pes = get_pes(masks,reaction_time)
-                #identify each error event
-                #look up the previous go trial
-                #look up the next
-                modulator_var = matching_preprocessed_behavioral_data['next_last_rt_change'].values
-                modulator_var[np.isnan(modulator_var)] = 0.0
+                if include_parametric_modulators:
+                    # pes = get_pes(masks,reaction_time)
+                    #identify each error event
+                    #look up the previous go trial
+                    #look up the next
+                    modulator_var = matching_preprocessed_behavioral_data['next_last_rt_change'].values
+                    modulator_var[np.isnan(modulator_var)] = 0.0
 
-                modulator_struct = create_parametric_modulator_struct(
-                    modulator_var,
-                    #just get the conditions that we actually have for this subject :-)
-                    [posterror_masks_dict[pem_k] for pem_k in posterror_masks_dict if pem_k in conditions['names']],
-                    conditions,
-                    modulator_suffix='post_pre_drt')
+                    modulator_struct = create_parametric_modulator_struct(
+                        modulator_var,
+                        #just get the conditions that we actually have for this subject :-)
+                        [posterror_masks_dict[pem_k] for pem_k in posterror_masks_dict if pem_k in conditions['names']],
+                        conditions,
+                        modulator_suffix='post_pre_drt')
 
-                conditions.update(modulator_struct)
+                    conditions.update(modulator_struct)
 
                 write_beta_data(output_folder, folder_id, subject_id, wave_number, conditions)
 
@@ -201,5 +204,14 @@ if __name__ == "__main__":
     bids_dir=None, 
     use_rt_for_go_success_trials=False, 
     output_folder= args.output_dir,
-    preprocessed_data_filepath = args.supplemental_data
-    )
+    preprocessed_data_filepath = args.supplemental_data,
+    folder_id='posterror_cues_with_drt',
+    include_parametric_modulators=True)
+    
+    main(args.input_dir, 
+    bids_dir=None, 
+    use_rt_for_go_success_trials=False, 
+    output_folder= args.output_dir,
+    preprocessed_data_filepath = args.supplemental_data,
+    folder_id='posterror_cues_no_rt',
+    include_parametric_modulators=False)

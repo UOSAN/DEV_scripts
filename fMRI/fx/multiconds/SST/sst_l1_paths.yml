@@ -1,0 +1,4 @@
+Benjamins-MacBook-Pro-2.local:
+  dropbox_datapath: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
+  supplemental_data_path: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/sst_behavioral_data_all_with_analysis.csv
+  sst_raw_data_path: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/SST_DEV/output

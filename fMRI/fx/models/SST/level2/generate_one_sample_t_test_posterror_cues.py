@@ -38,14 +38,14 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
 betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 
 
-
+print(betas_with_paths.columns)
 
 beta_name_list = [
-    # 'CorrectGoFollowingCorrectStop',
-    # 'CorrectGoFollowingCorrectStopxCgfcspost_pre_drt',
-    # 'CorrectGoFollowingFailedStop',
-    # 'CorrectGoFollowingFailedStopxCgffspost_pre_drt',
-    # 'CorrectGoFollowingFailedStopxOcgpost_pre_drt',
+    'CorrectGoFollowingCorrectStop',
+    'CorrectGoFollowingCorrectStopxCgfcspost_pre_drt',
+    'CorrectGoFollowingFailedStop',
+    'CorrectGoFollowingFailedStopxCgffspost_pre_drt',
+    'CorrectGoFollowingFailedStopxOcgpost_pre_drt',
     # 'OtherCorrectGo',
     # 'OtherCorrectGoxOcgpost_pre_drt',
     # 'OtherCorrectGoxFspcgpost_pre_drt',
@@ -65,10 +65,9 @@ beta_name_list = [
     # 'OtherFailedGo',
     # 'OtherFailedGoxOfgpost_pre_drt',
     
-    # 'CueFollowingCorrectStop',
+    'CueFollowingCorrectStop',
     'CueFollowingCorrectStopxCfcspost_pre_drt',
-    'CueFollowingCorrectStopxCffspost_pre_drt',
-    # 'CueFollowingFailedStop',
+    'CueFollowingFailedStop',
     'CueFollowingFailedStopxCffspost_pre_drt'
     # 'CueFollowingFailedStopxOcpost_pre_drt'
     # 'OtherCue',
@@ -76,6 +75,7 @@ beta_name_list = [
     # 'OtherCuexOfgpost_pre_drt'
     ]
 
-iterate_over_l1_images_and_run_l2_scripts(beta_name_list, betas_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
-col_function=lambda img_name: "beta_" + img_name + "_fname"
+iterate_over_l1_images_and_run_l2_scripts(
+    beta_name_list, betas_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
+    col_function=lambda img_name: "beta_" + img_name + "_fname"
 )
