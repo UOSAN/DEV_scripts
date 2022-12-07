@@ -35,7 +35,24 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     exclude_test_subjs=False
 )
 
+betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
+
+
+print(betas_with_contrasts.columns)
+contrast_name_list = [
+    'CueFollowing(CS>FS)',
+    'CueFollowing(FS>CS)'
+    #we can't contrast CG and CS because
+    #we haven't prepared t-maps properly
+    #considering that some cue items will be missing and the betas won't be in the same order
+]
+
+iterate_over_l1_images_and_run_l2_scripts(
+    contrast_name_list, betas_with_contrasts, analysis_name, sst_level_2_path, template_filepath, spm_path,
+    col_function=lambda img_name: "contrast_" + img_name + "_fname"
+)
+
 
 
 print(betas_with_paths.columns)
@@ -51,3 +68,4 @@ iterate_over_l1_images_and_run_l2_scripts(
     beta_name_list, betas_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
     col_function=lambda img_name: "beta_" + img_name + "_fname"
 )
+
