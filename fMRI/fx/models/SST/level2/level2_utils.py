@@ -168,7 +168,8 @@ def create_spm_l2_script(template_filepath, replacement_map, output_filepath):
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     else:
-        print("output directory already exists")
+        print("output directory " + output_dir + "already exists")
+        
         raise Exception("output directory already exists. Please delete it and try again.")
 
     with open(output_filepath, 'w') as output_file:

@@ -26,11 +26,12 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     nonbids_data_path = nonbids_data_path,
     #ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = ml_scripting_path,
-    dropbox_datapath=dropbox_data_path
+    dropbox_datapath=dropbox_data_path,
+    exclude_test_subjs=True
 )
 
 
-betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data[0:20])
+betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 
 contrast_name_list = ['CorrectGoFollowing(CS>FS)','CorrectGoFollowing(FS>CS)','CS>FS(PrecedingCorrectGo)','FS>CS(PrecedingCorrectGo)']
 # for contrast_name in ['CorrectGoFollowing(CS>FS)','CorrectGoFollowing(FS>CS)','CS>FS(PrecedingCorrectGo)','FS>CS(PrecedingCorrectGo)']:
