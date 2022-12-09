@@ -70,9 +70,25 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
             print_mask_signature(masks)
 
             # create masks for the post-error slowing
-            posterror_masks_dict = create_posterror_masks_from_masks(masks)
+            posterror_masks_dict_default_order = create_posterror_masks_from_masks(masks)
+            #change the order of the masks dict to put masks with keys including "FailedStop" first
+            failedstop_condition_list = [pcn for pcn in posterror_masks_dict_default_order.keys() if re.match(".*FailedStop.*",pcn) is not None]
+            #create new ordered dict with keys from is_failedstop_condition first, then the rest.
+            posterror_masks_dict = OrderedDict()
+            for key in failedstop_condition_list:
+                posterror_masks_dict[key] = posterror_masks_dict_default_order[key]
+            #make a copy of posterror_masks_dict for modulators
+            posterror_masks_dict_modulators = posterror_masks_dict.copy()
+            for key in posterror_masks_dict_default_order.keys():
+                if key not in failedstop_condition_list:
+                    posterror_masks_dict[key] = posterror_masks_dict_default_order[key]
+            
+
             posterror_masks = list(posterror_masks_dict.values())
             print_mask_signature(posterror_masks)
+
+            
+            
 
             # Perform some quality checking on the numbers of responses (should be 256),
             # the number of null trials (should be 128),
@@ -127,6 +143,12 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 multicond_df_list = multicond_df_list + [trial_df_row]
 
                 posterror_conditions = create_conditions(trial_start_time, trial_duration, list(posterror_masks_dict.values()), list(posterror_masks_dict.keys()))
+                modulator_condition_names_vec = [(n in failedstop_condition_list) for n in posterror_conditions['names']]
+                posterror_conditions_for_modulators = {
+                    'names':[n for n in posterror_conditions['names'] if n in failedstop_condition_list],
+                    'onsets':[o for n, o in zip(posterror_conditions['names'],posterror_conditions['onsets']) if n in failedstop_condition_list],
+                    'durations':[d for n, d in zip(posterror_conditions['names'],posterror_conditions['durations']) if n in failedstop_condition_list]
+                }
 
                 if len(masks)!=len(posterror_conditions['names']):
                     print('masks and conditions do not match')
@@ -138,25 +160,13 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 
                 if include_parametric_modulators:
                     modulator_var = matching_preprocessed_behavioral_data['post_current_rt_change'].values
-                    #print(matching_preprocessed_behavioral_data.groupby('condition')['post_current_rt_change'].agg(lambda x: x.isna().sum()/len(x)))
-                    #because most of the values for most conditions are NA, we will only apply the RT change to the FailedStop condition
-                    failed_stop_condition_bool = [re.match(".*FailedStop.*",pcn) is not None for pcn in posterror_conditions['names']]
-                    #get indices of true values from failed_stop_condition_bool
-                    
 
-
-
-                    failed_stop_condition_names = posterror_conditions['names'][failed_stop_condition_bool]
-
-                    modulator_var[np.isnan(modulator_var)] = 0.0
-
-                    #so I think wer'e gonna try just passing in FailedStop as the only condition
+                    #only because we put the FailedStop conditions first, we can simply ignore the others.
                     modulator_struct = create_parametric_modulator_struct(
                         modulator_var,
-                        [posterror_masks_dict[pem_k] for pem_k in posterror_masks_dict if pem_k in posterror_conditions['names']],
-                        posterror_conditions,
-                        modulator_suffix='_post_current_drt',
-                        modulators_to_include=failed_stop_condition_names)
+                        [posterror_masks_dict_modulators[pem_k] for pem_k in posterror_masks_dict_modulators if ((pem_k in posterror_conditions_for_modulators['names'] ))],
+                        posterror_conditions_for_modulators,
+                        modulator_suffix='_post_current_drt')
 
                     posterror_conditions.update(modulator_struct)
 

@@ -1,0 +1,478 @@
+---
+title: "accumbens_and_learning"
+author: "Ben Smith"
+date: "2022-10-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We've noticed an accumbens signal that has a particularly pronounced CS-FS difference among late trials.
+
+That led us to ask: is it correlated with reaction time; specifically, 
+
+1) is accumbens BOLD CS-FS contrast at tone+5 s (which reacts negatively) negatively related to longer reaction times in subsequent trials, and 
+2) is accumbens bold CS-FS contrast at tone+9 (which reacts positively) positively related to longer reaction times in subsequent trials?
+
+We are really mostly interested in FS so at the trial level we'd do
+
+1) is accumbens BOLD FS contrast at tone+5 s (which reacts positively) positively related to longer reaction times in subsequent trials, and 
+2) is accumbens bold FS contrast at tone+9 (which reacts negatively) negatively related to longer reaction times in subsequent trials?
+
+
+```{r}
+library(tidyverse)
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+print(Sys.info()["nodename"])
+
+```
+
+```{r}
+dropbbox_dir <- config::get("dev_analysis_data_dir")
+
+```
+
+
+
+```{r}
+time_points <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point.csv"))
+```
+
+So how do we design this experiment; what are we correlating over, exactly? Some designs are:
+
+1. Across subject, so:
+  a. apply the script I have created on late trials to get average measurements every 10 s--maybe the last half or third of the task, not just the last few, but do this at a per subject level
+  b. take the MAXIMUM accumbens activity at the 1-9 s range across trials for each subject (to get the peak), and the MINIMUM accumbens activity at the 4-12 s range (to get the trough)
+  c. correlate across subject average reaction times, or post-pre change in reaction times
+
+2. Within subject, so:
+  a. get peak and trough accumbens signal for each FS trial in the last third of the task. Perhaps use the difference between the peak and trough as your measure. Though we're really now kind of getting a crude HRF...the advantage of this measure is we aren't bound to a particular shape of it, which is probably useful.
+  b. get (i) reaction time and (ii) post-pre difference for subsequent go trial
+  c. correlate the difference of peak and trough gathered in (a) with the two measures in (b). Summarize in two ways:
+    i. get average correlations within-subject, then average across subjects as a crude multi-level model to test across subject
+    ii. apply a true multi-level model
+    
+We'll want to re-use existing pre-post data.
+
+So--this will yield quite different data to the data we used previously!
+
+
+```{r}
+roi_cols <- colnames(time_points)[grepl("harvardoxford",colnames(time_points))]
+time_points$tr_roi_mean <- rowMeans(time_points[,roi_cols])
+time_points<- 
+  time_points %>% group_by(subid,wave) %>%
+  mutate(run_mean_across_rois = mean(tr_roi_mean, na.rm = TRUE))
+
+#now mean-center the ROIs
+time_points_c<-time_points
+for (roi_col in roi_cols){
+  time_points_c[,roi_col]<-time_points_c[,roi_col]-time_points_c$run_mean_across_rois
+}
+
+roi_cols <- colnames(time_points_c)[grepl("harvardoxford",colnames(time_points_c))]
+new_roi_cols <- roi_cols %>% stringr::str_extract_all(pattern = "(?<=harvardoxford-.{0,3}cortical_prob_)(.*)") %>% unlist
+colnames(time_points_c)[grepl("harvardoxford",colnames(time_points_c))] <- new_roi_cols
+
+```
+
+We need to group by subject, wave, and trial, select just the FailedStop trials, and just the high trial numbers, then get the min and max accumbens activity. We could even do a long transform across the ROIs, then also group by ROI and get the min and max for ROIs
+
+So let's first long transform the ROIs
+```{r}
+
+tpc_long<-time_points_c %>% pivot_longer(cols=all_of(new_roi_cols),names_to="ROI",values_to="value")
+
+```
+
+
+Now do the grouping and summarizing.
+
+We define a peak period and trough period based on the previously observed shape of the accumbens response in the FS trial. This will put a peak around 2-6 seconds and a trough around 7-10 seconds. These values were chosen subjectively to try to encompass the peak and trough allowing for as much variability as possible without grabbing unrelated data from other time points. With a TR of 2.0 we should always have one or two images to grab from within these ranges, too.
+
+```{r}
+
+summary_data <- tpc_long %>% 
+  filter(condition %in% c("CorrectStop", "FailedStop")
+         
+         ) %>% 
+  group_by(subid,wave,trial_n,ROI) %>%
+  #these are different to the FS analyses, because we have a different shape in the exploratory analysis
+  #So we're targeting a different effect.
+  summarise(
+    peak=max(value[offset>=0.0 & offset <=10.0],na.rm = TRUE),
+    trough = min(value[offset>=0.0 & offset <=10.0],na.rm = TRUE)
+            )
+
+summary_data$response_amplitude <-summary_data$peak-summary_data$trough
+
+ggplot(summary_data,aes(response_amplitude,group=ROI,color=ROI))+geom_density(adjust=0.5)
+```
+
+OK. So now, let's try to merge in that with post-pre RTs. Where do we get those from?
+
+
+## get the SST Post-pre data
+
+```{r}
+source(paste0(config::get("ben_dev_data_analysis"),"SST_processing.R"))
+
+dropbox_file_dir = config::get("dev_analysis_data_dir")
+sst_all_data_filepath <- paste0(dropbox_file_dir,"sst_behavioral_data_all.csv")
+
+sst_all_data_raw <- readr::read_csv(sst_all_data_filepath)
+sst_all_data<-clean_sst_data(sst_all_data_raw)
+sst_all_data <- get_expected_tone_time(sst_all_data)
+
+sst_all_data<-calculate_response_latency(sst_all_data)
+sst_all_data<-calculate_rpe(sst_all_data)
+
+sst_all_data %>% select(
+  subid, waveid, runid, reaction_time_clean,last_reaction_time,next_reaction_time,leading_rt,lagging_rt, SSD_recorded,condition, last_tone_delay, trials_since_last_SSD,last_correct_go) %>%
+  View()
+
+```
+
+
+
+
+
+
+
+
+```{r}
+post_pre_rt_data <- sst_all_data%>% 
+  filter(condition!="Cue")# %>%
+  #select(trial_n,reaction_time,subid,waveid,runid,condition,post_pre_rt_change)
+```
+
+
+## Prepare neural data
+
+
+
+```{r}
+summary_data$ROI_delateralized <-  summary_data$ROI %>% str_replace_all("(Left|Right)\\s","")
+
+
+summary_data_delat <- summary_data %>% 
+  #filter(ROI %in% c("Left Accumbens","Right Accumbens")) %>% 
+  group_by(subid,wave,trial_n, ROI_delateralized) %>%
+  summarize(peak=mean(peak),
+            trough=mean(trough),
+            response_amplitude=mean(response_amplitude))
+
+```
+
+
+## Merge the datasets
+
+
+
+```{r}
+
+
+summary_data_delat <- merge(summary_data_delat,post_pre_rt_data,by.x = c("subid","wave","trial_n"),by.y=c("subid","waveid","trial_n"),all.x = TRUE)
+
+  
+summary_data_accumbens <- summary_data_delat %>% filter(ROI_delateralized=="Accumbens") %>% select(-ROI_delateralized)
+
+neural_behav_data_not_na<-summary_data_accumbens[
+  rowSums(is.na(summary_data_accumbens[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(summary_data_accumbens$response_amplitude) & is.finite(summary_data_accumbens$post_pre_rt_change) #no infinite values
+    ,]
+
+```
+
+
+#now test. let's trun across all at first....
+
+```{r}
+
+cor.test(neural_behav_data_not_na$response_amplitude,neural_behav_data_not_na$post_pre_rt_change)
+cor.test(neural_behav_data_not_na$peak,neural_behav_data_not_na$post_pre_rt_change)
+cor.test(neural_behav_data_not_na$peak,neural_behav_data_not_na$reaction_time)
+cor_val<-cor.test(neural_behav_data_not_na$trough,neural_behav_data_not_na$post_pre_rt_change)
+print(cor_val)
+```
+
+
+
+```{r}
+by_subj_raw <- neural_behav_data_not_na %>% group_by(subid) %>%
+  mutate(trial_count=n())
+by_subj <- by_subj_raw %>% filter(trial_count >2) %>%
+  summarize(peak_cor_est = cor.test(peak,post_pre_rt_change)$estimate,
+            amplitude_cor_est = cor.test(response_amplitude,post_pre_rt_change)$estimate,
+            mean_post_pre_rt_change=mean(post_pre_rt_change),
+            mean_peak=mean(peak),
+            mean_amplitude=mean(response_amplitude)
+            )
+
+t.test(by_subj$peak_cor_est)
+t.test(by_subj$amplitude_cor_est)
+
+
+```
+OK. So our "amplitude" measure correlates within subjects (p<0.05), when measuring the correlations within subject and then taking the average.
+
+Would strengthen the data
+
+```{r}
+hist(by_subj$peak_cor_est,breaks=40)
+```
+```{r}
+hist(by_subj$mean_post_pre_rt_change)
+hist(by_subj$mean_peak)
+```
+
+
+```{r}
+cor.test(by_subj$mean_post_pre_rt_change,by_subj$mean_peak)
+
+cor.test(by_subj$mean_post_pre_rt_change,by_subj$mean_amplitude)
+```
+
+
+```{r}
+cor.test(by_subj$mean_post_pre_rt_change,by_subj$mean_peak,method="spearman")
+```
+
+Not significant within subjects, either. OK. We can do a multi-level model but I don't think we're quite capable of pulling this out.
+
+
+If you take away the accumbens selection, you do get some significant results, but these are taking false precision...
+
+## Now do items other than accumbens.
+
+
+
+```{r}
+
+neural_behav_data_not_na<-summary_data_delat[
+  rowSums(is.na(summary_data_delat[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(summary_data_delat$response_amplitude) & is.finite(summary_data_delat$post_pre_rt_change) #no infinite values
+    ,]
+```
+
+
+```{r}
+
+by_subj_raw <- neural_behav_data_not_na %>% group_by(ROI_delateralized, subid) %>%
+  mutate(trial_count=n())
+by_subj <- by_subj_raw %>% group_by(ROI_delateralized, subid) %>% filter(trial_count >2) %>%
+  summarize(peak_cor_est = cor.test(peak,post_pre_rt_change)$estimate,
+            amplitude_cor_est = cor.test(response_amplitude,post_pre_rt_change)$estimate,
+            mean_post_pre_rt_change=mean(post_pre_rt_change),
+            mean_peak=mean(peak),
+            mean_amplitude=mean(response_amplitude)
+            ) 
+
+```
+
+Per subject:
+
+```{r}
+
+
+for (roi_i in unique(by_subj$ROI_delateralized)){
+  cat("\n")
+  cat(roi_i)
+  cat("\n")
+  print(t.test(by_subj %>% filter(ROI_delateralized==roi_i) %>% .$peak_cor_est))
+  print(t.test(by_subj %>% filter(ROI_delateralized==roi_i) %>% .$amplitude_cor_est))
+  cat("---\n")
+}
+
+
+```
+
+Look
+### across subjects
+
+```{r}
+
+
+for (roi_i in unique(by_subj$ROI_delateralized)){
+  cat("\n")
+  cat(roi_i)
+  cat("\n")
+  by_subj_i <- by_subj %>% filter(ROI_delateralized==roi_i)
+  
+  print(cor.test(by_subj_i$mean_post_pre_rt_change,by_subj_i$mean_peak))
+
+  print(cor.test(by_subj_i$mean_post_pre_rt_change,by_subj_i$mean_amplitude))
+  print(cor.test(by_subj_i$mean_post_pre_rt_change,by_subj_i$mean_peak,method="spearman"))
+  
+  cat("---\n")
+}
+
+```
+
+
+# At just the early trials
+
+
+```{r}
+
+summary_data <- tpc_long %>% 
+  filter(condition=="CorrectStop" & trial_n<128
+         
+         ) %>% 
+  group_by(subid,wave,trial_n,ROI) %>%
+  #these are different to the FS analyses, because we have a different shape in the exploratory analysis
+  #So we're targeting a different effect.
+  summarise(
+    peak=max(value[offset>=2.0 & offset <=10.0],na.rm = TRUE),
+    trough = min(value[offset>=0.0 & offset <=6.0],na.rm = TRUE)
+            )
+
+summary_data$response_amplitude <-summary_data$peak-summary_data$trough
+
+ggplot(summary_data,aes(response_amplitude,group=ROI,color=ROI))+geom_density(adjust=0.5)
+```
+
+OK. So now, let's try to merge in that with post-pre RTs. Where do we get those from?
+
+
+## get the SST Post-pre data
+
+```{r}
+source(paste0(config::get("ben_dev_data_analysis"),"SST_processing.R"))
+
+dropbox_file_dir = config::get("dev_analysis_data_dir")
+sst_all_data_filepath <- paste0(dropbox_file_dir,"sst_behavioral_data_all.csv")
+
+sst_all_data_raw <- readr::read_csv(sst_all_data_filepath)
+sst_all_data<-clean_sst_data(sst_all_data_raw)
+sst_all_data <- get_expected_tone_time(sst_all_data)
+
+sst_all_data<-calculate_response_latency(sst_all_data)
+sst_all_data<-calculate_rpe(sst_all_data)
+
+sst_all_data %>% select(
+  subid, waveid, runid, reaction_time_clean,last_reaction_time,next_reaction_time,leading_rt,lagging_rt, SSD_recorded,condition, last_tone_delay, trials_since_last_SSD,last_correct_go) %>%
+  View()
+
+```
+
+
+
+
+
+
+
+
+```{r}
+post_pre_rt_data <- sst_all_data%>% 
+  filter(condition!="Cue")# %>%
+  #select(trial_n,reaction_time,subid,waveid,runid,condition,post_pre_rt_change)
+```
+
+
+## Prepare neural data
+
+
+
+```{r}
+summary_data$ROI_delateralized <-  summary_data$ROI %>% str_replace_all("(Left|Right)\\s","")
+
+
+summary_data_delat <- summary_data %>% 
+  #filter(ROI %in% c("Left Accumbens","Right Accumbens")) %>% 
+  group_by(subid,wave,trial_n, ROI_delateralized) %>%
+  summarize(peak=mean(peak),
+            trough=mean(trough),
+            response_amplitude=mean(response_amplitude))
+
+```
+
+
+## Merge the datasets
+
+
+
+```{r}
+
+
+summary_data_delat <- merge(summary_data_delat,post_pre_rt_data,by.x = c("subid","wave","trial_n"),by.y=c("subid","waveid","trial_n"),all.x = TRUE)
+
+  
+summary_data_accumbens <- summary_data_delat %>% filter(ROI_delateralized=="Accumbens") %>% select(-ROI_delateralized)
+
+neural_behav_data_not_na<-summary_data_accumbens[
+  rowSums(is.na(summary_data_accumbens[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(summary_data_accumbens$response_amplitude) & is.finite(summary_data_accumbens$post_pre_rt_change) #no infinite values
+    ,]
+
+```
+
+
+## Now do items other than accumbens.
+
+
+
+```{r}
+
+neural_behav_data_not_na<-summary_data_delat[
+  rowSums(is.na(summary_data_delat[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(summary_data_delat$response_amplitude) & is.finite(summary_data_delat$post_pre_rt_change) #no infinite values
+    ,]
+```
+
+
+```{r}
+
+by_subj_raw <- neural_behav_data_not_na %>% group_by(ROI_delateralized, subid) %>%
+  mutate(trial_count=n())
+by_subj <- by_subj_raw %>% group_by(ROI_delateralized, subid) %>% filter(trial_count >2) %>%
+  summarize(peak_cor_est = cor.test(peak,post_pre_rt_change)$estimate,
+            amplitude_cor_est = cor.test(response_amplitude,post_pre_rt_change)$estimate,
+            mean_post_pre_rt_change=mean(post_pre_rt_change),
+            mean_peak=mean(peak),
+            mean_amplitude=mean(response_amplitude)
+            ) 
+
+```
+
+Per subject:
+
+```{r}
+
+
+for (roi_i in unique(by_subj$ROI_delateralized)){
+  cat("\n")
+  cat(roi_i)
+  cat("\n")
+  print(t.test(by_subj %>% filter(ROI_delateralized==roi_i) %>% .$peak_cor_est))
+  print(t.test(by_subj %>% filter(ROI_delateralized==roi_i) %>% .$amplitude_cor_est))
+  cat("---\n")
+}
+
+
+```
+
+Look
+### across subjects
+
+```{r}
+
+
+for (roi_i in unique(by_subj$ROI_delateralized)){
+  cat("\n")
+  cat(roi_i)
+  cat("\n")
+  by_subj_i <- by_subj %>% filter(ROI_delateralized==roi_i)
+  
+  print(cor.test(by_subj_i$mean_post_pre_rt_change,by_subj_i$mean_peak))
+
+  print(cor.test(by_subj_i$mean_post_pre_rt_change,by_subj_i$mean_amplitude))
+  print(cor.test(by_subj_i$mean_post_pre_rt_change,by_subj_i$mean_peak,method="spearman"))
+  
+  cat("---\n")
+}
+
+```
+

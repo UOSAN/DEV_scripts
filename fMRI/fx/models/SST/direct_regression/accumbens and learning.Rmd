@@ -373,9 +373,24 @@ If the random effects model is more predictive than the fixed effects model, we 
 anova(model_fixed_effects,model_random_effects)
 ```
 
-OK, no significant. That suggests that there is no within-subject effect, but there is a between-subject effect.
+OK, no significant.
+
+
+```{r}
+model_random_only <- lme4::lmer(
+   post_pre_rt_change ~ trial_n + (1 + response_amplitude | subid),
+  FS_neural_behav_FOC
+  )
+summary(model_random_only)
+
+anova(model_random_only,model_random_effects)
+
+
+```
 
 One difference is that the earlier estimate looked at just the last portion of the task whereas we're now, in the multi-level model, analyzing all of it.
+
+
 
 
 ```{r}
