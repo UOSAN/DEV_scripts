@@ -160,6 +160,7 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                 
                 if include_parametric_modulators:
                     modulator_var = matching_preprocessed_behavioral_data['post_current_rt_change'].values
+                    modulator_var[np.isnan(modulator_var)] = 0.0
 
                     #only because we put the FailedStop conditions first, we can simply ignore the others.
                     modulator_struct = create_parametric_modulator_struct(

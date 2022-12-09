@@ -28,6 +28,7 @@ modulators_to_include=None):
             #now perhaps the condition exists but we don't want to include it as a parametric modulator. In that case we have to add an empty array to the pmod_list
             if modulators_to_include is not None:
                 if condition_name not in modulators_to_include:
+                    raise Exception("this might work in theory but hasn't been tested. be aware of that.")
                     pmod_list = pmod_list + [(
                         np.empty((1, 0), dtype=np.float64), 
                         np.empty((1, 0), dtype=np.float64), 
@@ -51,8 +52,8 @@ modulators_to_include=None):
                 condition_column_npt = np.empty(1, dtype='O')
                 condition_column_npt[0] = condition_column
             
-            poly_val = np.empty(1, dtype='O')
-            poly_val[0] = [1.0]
+            # poly_val = np.empty(1, dtype='O')
+            # poly_val[0] = [1.0]
 
 
             caps = re.findall("[A-Z]", condition_names[condition_i])
@@ -61,7 +62,7 @@ modulators_to_include=None):
             pmod_item = (
                 abbreviation + modulator_suffix,
                 condition_column_npt,
-                poly_val#[1.0]
+                [1.0]
             )
 
 
