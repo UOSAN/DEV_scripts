@@ -76,15 +76,15 @@ modulators_to_include=None):
         return ({})  # return nothing because there doesn't appear to be any params to pass
 
 
-    # pmod_array = np.array(
-    #     pmod_list,
-    #     dtype=([('name', 'object', (1,)), ('param', 'O', (1,)), ('poly', 'object', (1,))])
-    # )
-    
     pmod_array = np.array(
         pmod_list,
-        dtype=([('name', 'O'), ('param', 'O'), ('poly', 'O')])
+        dtype=([('name', 'object', (1,)), ('param', 'O', (1,)), ('poly', 'object', (1,))])
     )
+    
+    # pmod_array = np.array(
+    #     pmod_list,
+    #     dtype=([('name', 'O'), ('param', 'O'), ('poly', 'O')])
+    # )
 
 
     return ({
