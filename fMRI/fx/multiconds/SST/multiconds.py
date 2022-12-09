@@ -350,6 +350,7 @@ def write_beta_data(output_dir: Union[PathLike, str], subfolder, subject_id: str
     file_name = f'DEV{subject_id}_{wave}_SST1.mat'
 
     scipy.io.savemat(str(path / file_name), trials)
+    
     print('created file at ' + str(path / file_name))
 
 

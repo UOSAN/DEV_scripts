@@ -11,7 +11,8 @@ import numpy as np
 import pandas as pd
 import scipy.io
 
-def create_parametric_modulator_struct(modulator_var, masks, conditions,modulator_suffix='MOD'):
+def create_parametric_modulator_struct(modulator_var, masks, conditions,modulator_suffix='MOD',
+modulators_to_include=None):
     condition_names = conditions['names']
     duration_array = None
     pmod_list = []
@@ -23,6 +24,16 @@ def create_parametric_modulator_struct(modulator_var, masks, conditions,modulato
         condition_mask = masks[condition_i]
         # look up to see if we should include this regressor at all; it should
         if sum(condition_mask) > 0:
+
+            #now perhaps the condition exists but we don't want to include it as a parametric modulator. In that case we have to add an empty array to the pmod_list
+            if modulators_to_include is not None:
+                if condition_name not in modulators_to_include:
+                    pmod_list = pmod_list + [(
+                        np.empty((1, 0), dtype=np.float64), 
+                        np.empty((1, 0), dtype=np.float64), 
+                        np.empty((1, 0), dtype=np.float64)
+                        )]
+                    continue
             # print(str(condition_i) + ": " + posterror_names[condition_i])
             # print(len(condition_mask))
             # condition_column = condition_mask*reaction_time
@@ -39,6 +50,9 @@ def create_parametric_modulator_struct(modulator_var, masks, conditions,modulato
                 # THINK THAT IS THE SOLUTION.
                 condition_column_npt = np.empty(1, dtype='O')
                 condition_column_npt[0] = condition_column
+            
+            poly_val = np.empty(1, dtype='O')
+            poly_val[0] = [1.0]
 
 
             caps = re.findall("[A-Z]", condition_names[condition_i])
@@ -47,7 +61,7 @@ def create_parametric_modulator_struct(modulator_var, masks, conditions,modulato
             pmod_item = (
                 abbreviation + modulator_suffix,
                 condition_column_npt,
-                [1.0]
+                poly_val#[1.0]
             )
 
 
@@ -61,9 +75,14 @@ def create_parametric_modulator_struct(modulator_var, masks, conditions,modulato
         return ({})  # return nothing because there doesn't appear to be any params to pass
 
 
+    # pmod_array = np.array(
+    #     pmod_list,
+    #     dtype=([('name', 'object', (1,)), ('param', 'O', (1,)), ('poly', 'object', (1,))])
+    # )
+    
     pmod_array = np.array(
         pmod_list,
-        dtype=([('name', 'object', (1,)), ('param', 'O', (1,)), ('poly', 'object', (1,))])
+        dtype=([('name', 'O'), ('param', 'O'), ('poly', 'O')])
     )
 
 

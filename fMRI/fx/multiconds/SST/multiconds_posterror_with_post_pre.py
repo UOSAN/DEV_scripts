@@ -149,7 +149,7 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                         #just get the conditions that we actually have for this subject :-)
                         [posterror_masks_dict[pem_k] for pem_k in posterror_masks_dict if pem_k in posterror_conditions['names']],
                         posterror_conditions,
-                        modulator_suffix='_post_pre_drt')
+                        modulator_suffix='_post_current_drt')
 
                     posterror_conditions.update(modulator_struct)
 
