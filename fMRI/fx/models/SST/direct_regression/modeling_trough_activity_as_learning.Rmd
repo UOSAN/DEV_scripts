@@ -327,7 +327,7 @@ for (roi_i in unique(FS_by_subj$ROI_delateralized)){
 ```
 
 Look
-### across subjects
+## across subjects
 
 ```{r}
 
@@ -423,11 +423,14 @@ t.test(FS_by_subj %>% filter(ROI_delateralized=="Putamen") %>% .$amplitude_cor_e
 
 
 ```{r}
+library(ggpubr)
 library(ggrepel)
 ggplot(FS_by_subj %>% filter(ROI_delateralized=="Putamen"),
        aes(x=mean_amplitude,y=mean_post_pre_rt_change,
-           label=subid,color=mean_trough_offset))+geom_point(binwidth=0.2)+geom_text(size=3,nudge_x=0.1)
-  labs(title="Across-subject correlation of subject-mean Putamen amplitude\nby subject-mean post-pre RT change")
+           label=subid,color=mean_trough_offset))+geom_point(binwidth=0.2)+#geom_text(size=3,nudge_x=0.1)
+  labs(title="Across-subject correlation of subject-mean Putamen amplitude\nby subject-mean post-pre RT change")+
+  geom_hline(yintercept = 0,linetype="dashed")+geom_vline(xintercept = 0,linetype="dashed")+
+  geom_smooth(method='lm')
 
   
 cor.test(FS_by_subj_i %>% filter(ROI_delateralized=="Putamen") %>% .$mean_post_pre_rt_change,
