@@ -29,6 +29,7 @@ matlabbatch{3}.spm.stats.fmri_spec.cvi = 'FAST';
 matlabbatch{4}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File', substruct('.','val', '{}',{3}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{4}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{4}.spm.stats.fmri_est.method.Classical = 1;
+matlabbatch{5}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{5}.spm.stats.con.consess{1}.tcon.name = 'CueFollowing(CS>FS)';
 matlabbatch{5}.spm.stats.con.consess{1}.tcon.weights = [1 -1];
 matlabbatch{5}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
