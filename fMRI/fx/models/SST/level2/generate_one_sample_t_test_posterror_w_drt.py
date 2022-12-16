@@ -26,7 +26,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
 )
 
 
-betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data[0:10])
+betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 
 print(betas_with_paths.columns)
 

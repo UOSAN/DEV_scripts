@@ -476,3 +476,20 @@ for (roi_i in unique(by_subj$ROI_delateralized)){
 
 ```
 
+
+
+```{r}
+
+
+library(lme4)
+
+neural_behav_FOC <- neural_behav_data_not_na %>% filter(ROI_delateralized=="Frontal Orbital Cortex")
+
+model_random_effects <- lme4::lmer(
+   post_pre_rt_change ~ trial_n + response_amplitude + (1+ response_amplitude | subid),
+  neural_behav_FOC
+  )
+summary(model_random_effects)
+
+
+```

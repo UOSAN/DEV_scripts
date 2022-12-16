@@ -59,8 +59,16 @@ def get_roi_data(nii_raw_files, mask_df):
             #active_mask = nilearn.masking.compute_brain_mask(m_set['mask_path'])
             mask_raw = nil.image.load_img(m_set['mask_path'])
             mask_in_subj_space = nil.image.resample_img(mask_raw, target_affine=active_img_cleaned.affine,target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
-            mask_binarized = nil.image.binarize_img(mask_in_subj_space,threshold=50)
-            active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_binarized)
+            #work out whether the mask is already binarized
+            mask_raw_data = mask_raw.get_fdata()
+            if len(np.unique(mask_raw_data))==2:
+                print("mask is already binarized; skipping binarization step")
+                active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_in_subj_space)
+            else:
+                
+                mask_binarized = nil.image.binarize_img(mask_in_subj_space,threshold=50)
+                active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_binarized)
+
             activity_vector = active_img_masked.mean(axis=1)
             run_df[m_set['mask_label']]=activity_vector
             print("created an activity vector for this mask with the following length: " + str(len(activity_vector)))

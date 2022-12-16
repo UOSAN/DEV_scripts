@@ -264,9 +264,11 @@ FS_by_subj_raw <- FS_neural_behav_data_not_na %>% group_by(ROI_delateralized, su
   mutate(trial_count=n())
 FS_by_subj <- FS_by_subj_raw %>% group_by(ROI_delateralized, subid) %>% filter(trial_count >2) %>%
   summarize(peak_cor_est = cor.test(peak,post_pre_rt_change)$estimate,
+            trough_cor_est = cor.test(trough,post_pre_rt_change)$estimate,
             amplitude_cor_est = cor.test(response_amplitude,post_pre_rt_change)$estimate,
             mean_post_pre_rt_change=mean(post_pre_rt_change),
             mean_peak=mean(peak),
+            mean_trough=mean(trough),
             mean_amplitude=mean(response_amplitude)
             ) 
 
@@ -282,6 +284,7 @@ for (roi_i in unique(FS_by_subj$ROI_delateralized)){
   cat(roi_i)
   cat("\n")
   print(t.test(FS_by_subj %>% filter(ROI_delateralized==roi_i) %>% .$peak_cor_est))
+  print(t.test(FS_by_subj %>% filter(ROI_delateralized==roi_i) %>% .$trough_cor_est))
   print(t.test(FS_by_subj %>% filter(ROI_delateralized==roi_i) %>% .$amplitude_cor_est))
   cat("---\n")
 }
@@ -302,7 +305,7 @@ for (roi_i in unique(FS_by_subj$ROI_delateralized)){
   FS_by_subj_i <- FS_by_subj %>% filter(ROI_delateralized==roi_i)
   
   print(cor.test(FS_by_subj_i$mean_post_pre_rt_change,FS_by_subj_i$mean_peak))
-
+  print(cor.test(FS_by_subj_i$mean_post_pre_rt_change,FS_by_subj_i$mean_trough))
   print(cor.test(FS_by_subj_i$mean_post_pre_rt_change,FS_by_subj_i$mean_amplitude))
   print(cor.test(FS_by_subj_i$mean_post_pre_rt_change,FS_by_subj_i$mean_peak,method="spearman"))
   
@@ -340,6 +343,24 @@ t.test(FS_by_subj %>% filter(ROI_delateralized=="Frontal Orbital Cortex") %>% .$
 So we seem to have a within-subject effect, generalizable across subjects.
 
 If we do a multi-level model, with response amplitude as a within-group slope, we need to be able to measure whether the estimate of that within-group slope differs from zero. If we add it as a random effect, I don't think we can do that...?
+
+
+
+```{r}
+
+
+library(lme4)
+
+FS_neural_behav_FOC <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Frontal Orbital Cortex")
+
+model_random_effects <- lme4::lmer(
+   post_pre_rt_change ~ trial_n + response_amplitude + (1+ response_amplitude | subid),
+  FS_neural_behav_FOC
+  )
+summary(model_random_effects)
+
+
+```
 
 
 ```{r}

@@ -42,16 +42,18 @@ nii_raw_files = glob.glob(glob_path)
 #get the masks
 mask_locations = [
     #config['mask_location'] + 'failure_related/',
+    config['mask_location'] + 'sst_functional/',
     config['mask_location'] + 'failure_related/harvardoxford/',
     config['mask_location'] + 'striatum/'
+    
 ]
 mask_paths = []
 for mask_location in mask_locations:
-    mask_paths_i = glob.glob(mask_location+"*.nii.gz")
+    mask_paths_i = glob.glob(mask_location+"*.nii*")
     mask_paths= mask_paths + mask_paths_i
 
 
-mask_labels = [re.match(".*/(.*)\.nii\.gz",mp)[1] for mp in mask_paths]
+mask_labels = [re.match(".*/(.*)\.nii(\.gz)?",mp)[1] for mp in mask_paths]
 
 mask_df = pd.DataFrame({
     'mask_label':mask_labels,
