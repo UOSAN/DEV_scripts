@@ -1,0 +1,47 @@
+---
+title: "version_tracking"
+author: "Ben Smith"
+date: "2022-12-19"
+output: html_document
+---
+
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+print(Sys.info()["nodename"])
+
+dropbbox_dir <- config::get("dev_analysis_data_dir")
+
+
+```
+
+
+
+```{r}
+time_points_2022_10 <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point_oct.csv"))
+
+time_points_2022_12 <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point_2022-12-16.csv"))
+```
+
+
+
+
+```{r}
+
+setdiff(unique(time_points_2022_10$subid),unique(time_points_2022_12$subid))
+setdiff(unique(time_points_2022_12$subid),unique(time_points_2022_10$subid))
+
+
+
+```
+
+
+
+
+
+

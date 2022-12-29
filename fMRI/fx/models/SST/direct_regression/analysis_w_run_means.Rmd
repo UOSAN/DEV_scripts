@@ -226,7 +226,7 @@ ggplot_time_points_extras <- list(
     x="time from tone sound or expected time of tone (s)",
     y="mean BOLD activity (no HRF convolution)",
     title="Stop Signal Task Activity",
-    subtitle=paste0("Across ", as.character(subj_count)," subjects with 255 trials each"),
+    subtitle=paste0("Across ", as.character(subj_count)," subjects with 128 trials each"),
     caption="0 point is the moment of tone sound (Stop trials)\n or expected tone sound based on prior trial (Go trials)\n HRF convolution not applied\n1 s moving averages")
   )
 
@@ -274,6 +274,8 @@ ggplot(df_offset_long,
   
 
 ```
+
+
 ## CS-FS
 
 Let's now try to contrast these time series to see what the CS-FS looks like. This will be interesting because it's similar to the simple GLM result I got earlier that set me down the path of trying to analyze this.

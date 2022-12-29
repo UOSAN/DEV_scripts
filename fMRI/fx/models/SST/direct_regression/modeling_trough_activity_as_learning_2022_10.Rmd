@@ -1,0 +1,1113 @@
+---
+title: "accumbens_and_learning"
+author: "Ben Smith"
+date: "2022-10-18"
+output:
+  html_document:
+      code_folding: show
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+We've noticed an accumbens signal that has a particularly pronounced CS-FS difference among late trials.
+
+That led us to ask: is it correlated with reaction time; specifically, 
+
+1) is accumbens BOLD CS-FS contrast at tone+5 s (which reacts negatively) negatively related to longer reaction times in subsequent trials, and 
+2) is accumbens bold CS-FS contrast at tone+9 (which reacts positively) positively related to longer reaction times in subsequent trials?
+
+We are really mostly interested in FS so at the trial level we'd do
+
+1) is accumbens BOLD FS contrast at tone+5 s (which reacts positively) positively related to longer reaction times in subsequent trials, and 
+2) is accumbens bold FS contrast at tone+9 (which reacts negatively) negatively related to longer reaction times in subsequent trials?
+
+
+```{r}
+library(tidyverse)
+library(ggpubr)
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+print(Sys.info()["nodename"])
+
+```
+
+```{r}
+dropbbox_dir <- config::get("dev_analysis_data_dir")
+
+```
+
+
+
+```{r}
+time_points <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point_oct.csv"))
+```
+
+So how do we design this experiment; what are we correlating over, exactly? Some designs are:
+
+1. Across subject, so:
+  a. apply the script I have created on late trials to get average measurements every 10 s--maybe the last half or third of the task, not just the last few, but do this at a per subject level
+  b. take the MAXIMUM accumbens activity at the 1-9 s range across trials for each subject (to get the peak), and the MINIMUM accumbens activity at the 4-12 s range (to get the trough)
+  c. correlate across subject average reaction times, or post-pre change in reaction times
+
+2. Within subject, so:
+  a. get peak and trough accumbens signal for each FS trial in the last third of the task. Perhaps use the difference between the peak and trough as your measure. Though we're really now kind of getting a crude HRF...the advantage of this measure is we aren't bound to a particular shape of it, which is probably useful.
+  b. get (i) reaction time and (ii) post-pre difference for subsequent go trial
+  c. correlate the difference of peak and trough gathered in (a) with the two measures in (b). Summarize in two ways:
+    i. get average correlations within-subject, then average across subjects as a crude multi-level model to test across subject
+    ii. apply a true multi-level model
+    
+We'll want to re-use existing pre-post data.
+
+So--this will yield quite different data to the data we used previously!
+
+
+```{r}
+roi_cols <- colnames(time_points)[grepl("harvardoxford",colnames(time_points))]
+time_points$tr_roi_mean <- rowMeans(time_points[,roi_cols])
+time_points<- 
+  time_points %>% group_by(subid,wave) %>%
+  mutate(run_mean_across_rois = mean(tr_roi_mean, na.rm = TRUE))
+
+#now mean-center the ROIs
+time_points_c<-time_points
+for (roi_col in roi_cols){
+  time_points_c[,roi_col]<-time_points_c[,roi_col]-time_points_c$run_mean_across_rois
+}
+
+#roi_cols <- colnames(time_points_c)[grepl("harvardoxford",colnames(time_points_c))]
+#roi_cols_all <- colnames(time_points_c)#[grepl("((?<=harvardoxford-.{0,3}cortical_prob_)(.*))|(CueFollowing\\(CS\\>FS\\).*)",colnames(time_points_c),perl=TRUE)]
+roi_detect_pattern<-"((?<=harvardoxford-.{0,3}cortical_prob_)(.*))|(CueFollowing\\(CS\\>FS\\).*)"
+
+roi_cols_vec <- colnames(time_points_c) %>% stringr::str_detect(pattern = roi_detect_pattern)
+new_roi_cols <- colnames(time_points_c) %>% stringr::str_extract_all(pattern = roi_detect_pattern) %>% unlist
+unique(new_roi_cols)
+colnames(time_points_c)[roi_cols_vec] <- new_roi_cols
+
+```
+
+We need to group by subject, wave, and trial, select just the FailedStop trials, and just the high trial numbers, then get the min and max accumbens activity. We could even do a long transform across the ROIs, then also group by ROI and get the min and max for ROIs
+
+So let's first long transform the ROIs
+```{r}
+
+tpc_long<-time_points_c %>% pivot_longer(cols=all_of(new_roi_cols),names_to="ROI",values_to="value")
+
+```
+
+
+Now do the grouping and summarizing.
+
+We define a peak period and trough period based on the previously observed shape of the accumbens response in the FS trial. This will put a peak around 2-6 seconds and a trough around 7-10 seconds. These values were chosen subjectively to try to encompass the peak and trough allowing for as much variability as possible without grabbing unrelated data from other time points. With a TR of 2.0 we should always have one or two images to grab from within these ranges, too.
+
+```{r}
+
+FS_summary_data <- tpc_long %>% 
+  filter(condition=="FailedStop") %>% 
+  group_by(subid,wave,trial_n,ROI) %>%
+  summarise(
+    peak=max(value[offset>=2.0 & offset <=8.0],na.rm = TRUE),
+    trough = min(value[offset>=0.0 & offset <=5.0],na.rm = TRUE),
+    peak_time = offset[offset>=2.0 & offset <=8.0][value[offset>=2.0 & offset <=8.0]==max(value[offset>=2.0 & offset <=8.0],na.rm = TRUE)],
+    trough_time = offset[offset>=0.0 & offset <=5.0][value[offset>=0.0 & offset <=5.0]==min(value[offset>=0.0 & offset <=5.0],na.rm = TRUE)]
+  )
+  
+
+FS_summary_data$response_amplitude <-FS_summary_data$peak-FS_summary_data$trough
+
+ggplot(FS_summary_data,aes(response_amplitude,group=ROI,color=ROI))+geom_density(adjust=0.5)
+```
+
+OK. So now, let's try to merge in that with post-pre RTs. Where do we get those from?
+
+
+## get the SST Post-pre data
+
+```{r}
+source(paste0(config::get("ben_dev_data_analysis"),"SST_processing.R"))
+
+dropbox_file_dir = config::get("dev_analysis_data_dir")
+sst_all_data_filepath <- paste0(dropbox_file_dir,"sst_behavioral_data_all.csv")
+
+sst_all_data_raw <- readr::read_csv(sst_all_data_filepath)
+sst_all_data<-clean_sst_data(sst_all_data_raw)
+sst_all_data <- get_expected_tone_time(sst_all_data)
+
+sst_all_data<-calculate_response_latency(sst_all_data)
+sst_all_data<-calculate_rpe(sst_all_data)
+
+
+# sst_all_data %>% select(
+#   subid, waveid, runid, reaction_time_clean, SSD_recorded,condition, last_tone_delay, trials_since_last_SSD,last_correct_go)# %>%
+#   #View()
+
+```
+
+
+
+
+
+
+```{r}
+readr::write_csv(sst_all_data,file=paste0(dropbox_file_dir,"sst_behavioral_data_all_with_analysis.csv"))
+```
+
+
+
+
+```{r}
+post_pre_rt_data <- sst_all_data%>% 
+  filter(condition!="Cue") #%>%
+  #select(trial_n,reaction_time,subid,waveid,runid,condition,post_pre_rt_change)
+```
+
+
+## Prepare neural data
+
+
+
+```{r}
+FS_summary_data$ROI_delateralized <-  FS_summary_data$ROI %>% str_replace_all("(Left|Right)\\s","")
+
+
+FS_summary_data_delat <- FS_summary_data %>% 
+  #filter(ROI %in% c("Left Accumbens","Right Accumbens")) %>% 
+  group_by(subid,wave,trial_n, ROI_delateralized) %>%
+  summarize(peak=mean(peak),
+            trough=mean(trough),
+            peak_time=mean(peak_time),
+            trough_time=mean(trough_time),
+            response_amplitude=mean(response_amplitude))
+
+```
+
+
+## Merge the datasets
+
+
+
+```{r}
+
+
+FS_summary_data_delat_pp <- merge(FS_summary_data_delat,post_pre_rt_data,by.x = c("subid","wave","trial_n"),by.y=c("subid","waveid","trial_n"),all.x = TRUE)
+  
+FS_summary_data_delat_pp$trial_n_c<-128-FS_summary_data_delat_pp$trial_n
+  
+FS_summary_data_accumbens <- FS_summary_data_delat_pp %>% filter(ROI_delateralized=="Accumbens") %>% select(-ROI_delateralized)
+
+
+
+FS_neural_behav_data_not_na<-FS_summary_data_accumbens[
+  rowSums(is.na(FS_summary_data_accumbens[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(FS_summary_data_accumbens$response_amplitude) & is.finite(FS_summary_data_accumbens$post_pre_rt_change) #no infinite values
+    ,]
+
+```
+
+
+#now test. let's trun across all at first....
+
+```{r}
+
+cor.test(FS_neural_behav_data_not_na$response_amplitude,FS_neural_behav_data_not_na$post_pre_rt_change)
+cor.test(FS_neural_behav_data_not_na$peak,FS_neural_behav_data_not_na$post_pre_rt_change)
+cor.test(FS_neural_behav_data_not_na$peak,FS_neural_behav_data_not_na$reaction_time)
+cor_val<-cor.test(FS_neural_behav_data_not_na$trough,FS_neural_behav_data_not_na$post_pre_rt_change)
+print(cor_val)
+
+```
+
+
+```{r}
+FS_by_subj_raw <- FS_neural_behav_data_not_na %>% group_by(subid) %>%
+  mutate(trial_count=n())
+FS_by_subj <- FS_by_subj_raw %>% filter(trial_count >2) %>%
+  summarize(peak_cor_est = cor.test(peak,post_pre_rt_change)$estimate,
+            amplitude_cor_est = cor.test(response_amplitude,post_pre_rt_change)$estimate,
+            mean_post_pre_rt_change=mean(post_pre_rt_change),
+            mean_post_current_rt_change=mean(post_current_rt_change),
+            mean_peak=mean(peak),
+            mean_trough=mean(trough),
+            mean_amplitude=mean(response_amplitude),
+            trial_count=n()
+            )
+
+t.test(FS_by_subj$peak_cor_est)
+t.test(FS_by_subj$amplitude_cor_est)
+
+
+```
+OK. So our "amplitude" measure correlates within subjects (p<0.05), when measuring the correlations within subject and then taking the average.
+
+Would strengthen the data
+
+```{r}
+hist(FS_by_subj$peak_cor_est,breaks=40)
+```
+```{r}
+hist(FS_by_subj$mean_post_pre_rt_change)
+hist(FS_by_subj$mean_peak)
+```
+
+
+```{r}
+
+cor.test(FS_by_subj$mean_post_pre_rt_change,FS_by_subj$mean_trough)
+
+cor.test(FS_by_subj$mean_post_pre_rt_change,FS_by_subj$mean_peak)
+
+cor.test(FS_by_subj$mean_post_pre_rt_change,FS_by_subj$mean_amplitude)
+```
+
+
+```{r}
+cor.test(FS_by_subj$mean_post_pre_rt_change,FS_by_subj$mean_peak,method="spearman")
+```
+
+Not significant within subjects, either. OK. We can do a multi-level model but I don't think we're quite capable of pulling this out.
+
+
+If you take away the accumbens selection, you do get some significant results, but these are taking false precision...
+
+## Between subjects
+
+
+
+```{r}
+
+FS_neural_behav_data_not_na<-FS_summary_data_delat_pp[
+  rowSums(is.na(FS_summary_data_delat_pp[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(FS_summary_data_delat_pp$response_amplitude) & is.finite(FS_summary_data_delat_pp$post_pre_rt_change) #no infinite values
+    ,]
+```
+
+
+```{r}
+
+full_run_data <- sst_all_data %>% group_by(subid,waveid,runid) %>%
+  summarize(mean_SSD_all_stop_trials=mean(SSD_recorded[SSD_recorded!=0]))
+
+FS_by_subj_raw <- FS_neural_behav_data_not_na %>% group_by(ROI_delateralized, subid) %>%
+  mutate(trial_count=n())
+FS_by_subj <- FS_by_subj_raw %>% group_by(ROI_delateralized, subid,trial_count) %>% filter(trial_count >2) %>%
+  summarize(peak_cor_est = cor.test(peak,post_pre_rt_change)$estimate,
+            trough_cor_est = cor.test(trough,post_pre_rt_change)$estimate,
+            amplitude_cor_est = cor.test(response_amplitude,post_pre_rt_change)$estimate,
+            mean_post_pre_rt_change=mean(post_pre_rt_change),
+            mean_post_current_rt_change=mean(post_current_rt_change),
+            mean_post_rt=mean(next_reaction_time),
+            mean_peak=mean(peak),
+            mean_trough=mean(trough),
+            mean_amplitude=mean(response_amplitude),
+            mean_peak_offset=mean(peak_time),
+            mean_trough_offset=mean(trough_time),
+            
+            ) 
+FS_by_subj<-merge(FS_by_subj,
+                  full_run_data %>% filter(runid==1 & waveid==1),
+                  by='subid',how='left'
+                  )
+
+FS_neural_behav_data_not_na <- merge(
+  FS_neural_behav_data_not_na,
+  full_run_data %>% filter(runid==1 & waveid==1),
+                  by='subid',how='left'
+                  )
+
+```
+
+Per subject:
+
+```{r}
+
+roi_within_subj_list<-list()
+
+for (roi_i in unique(FS_by_subj$ROI_delateralized)){
+  # cat("\n")
+  # cat(roi_i)
+  # cat("\n")
+  peak<-t.test(FS_by_subj %>% filter(ROI_delateralized==roi_i) %>% .$peak_cor_est)
+  trough<-t.test(FS_by_subj %>% filter(ROI_delateralized==roi_i) %>% .$trough_cor_est)
+  amplitude<-t.test(FS_by_subj %>% filter(ROI_delateralized==roi_i) %>% .$amplitude_cor_est)
+  # print(peak)
+  # print(trough)
+  # print(amplitude)
+  
+  roi_within_subj_row<-data.frame("roi"=roi_i,"measure"="peak","t"=peak[[1]],"estimate"=peak$estimate, "pvalue"=peak$p.value)
+  roi_within_subj_list<-append(roi_within_subj_list,list(roi_within_subj_row))
+  roi_within_subj_row<-data.frame("roi"=roi_i,"measure"="trough","t"=trough[[1]],"estimate"=trough$estimate, "pvalue"=trough$p.value)
+  roi_within_subj_list<-append(roi_within_subj_list,list(roi_within_subj_row))
+  roi_within_subj_row<-data.frame("roi"=roi_i,"measure"="amplitude","t"=amplitude[[1]],"estimate"=amplitude$estimate, "pvalue"=amplitude$p.value)
+  roi_within_subj_list<-append(roi_within_subj_list,list(roi_within_subj_row))
+  # cat("---\n")
+}
+print("example:")
+cat(roi_i)
+cat("\n")
+print(peak)
+  print(trough)
+  print(amplitude)
+  cat("---\n")
+roi_within_subj_df <- do.call(rbind,roi_within_subj_list)
+
+library(stats)
+roi_within_subj_df$pvalue_fdr_adjust<-p.adjust(roi_within_subj_df$pvalue,method="fdr")
+roi_within_subj_df <- roi_within_subj_df %>% mutate(signif=ifelse(pvalue_fdr_adjust<0.05,"*",""))
+
+print("summary:")
+print(roi_within_subj_df)
+```
+
+Look
+## across subjects
+
+```{r}
+
+
+roi_inddiv_list<-list()
+for (roi_i in unique(FS_by_subj$ROI_delateralized)){
+  cat("\n")
+  cat(roi_i)
+  cat("\n")
+  FS_by_subj_i <- FS_by_subj %>% filter(ROI_delateralized==roi_i)
+  
+  peak<-cor.test(FS_by_subj_i$mean_post_pre_rt_change,FS_by_subj_i$mean_peak)
+  trough<-cor.test(FS_by_subj_i$mean_post_pre_rt_change,FS_by_subj_i$mean_trough)
+  amplitude<-cor.test(FS_by_subj_i$mean_post_pre_rt_change,FS_by_subj_i$mean_amplitude)
+  #roi_inddiv_row<-data.frame("roi"=character(0),"measure"=character(0),"value"=numeric(0))
+  roi_inddiv_row<-data.frame("roi"=roi_i,"measure"="peak","value"=peak[[1]],"estimate"=peak$estimate,"pvalue"=peak$p.value)
+  roi_inddiv_list<-append(roi_inddiv_list,list(roi_inddiv_row))
+  roi_inddiv_row<-data.frame("roi"=roi_i,"measure"="trough","value"=trough[[1]],"estimate"=trough$estimate,"pvalue"=trough$p.value)
+  roi_inddiv_list<-append(roi_inddiv_list,list(roi_inddiv_row))
+  roi_inddiv_row<-data.frame("roi"=roi_i,"measure"="amplitude","value"=amplitude[[1]],"estimate"=amplitude$estimate,"pvalue"=amplitude$p.value)
+  roi_inddiv_list<-append(roi_inddiv_list,list(roi_inddiv_row))
+  # print(peak)
+  # print(trough)
+  # print(amplitude)
+  # cat("---\n")
+}
+
+print("example of full analyses for last ROI")
+cat(roi_i)
+  cat("\n")
+print(peak)
+print(trough)
+print(amplitude)
+cat("---\n")
+print("summary")
+roi_inddiv_df <- do.call(rbind,roi_inddiv_list)
+
+library(stats)
+roi_inddiv_df$pvalue_fdr_adjust<-p.adjust(roi_inddiv_df$pvalue,method="fdr")
+roi_inddiv_df <- roi_inddiv_df %>% mutate(signif=ifelse(pvalue_fdr_adjust<0.05,"*",""))
+
+print(roi_inddiv_df)
+```
+
+# between-subjects correlations post_current and rt
+
+```{r}
+
+
+roi_inddiv_list<-list()
+#for (roi_i in unique(FS_by_subj$ROI_delateralized)){
+roi_i<-"Putamen"
+  cat("\n")
+  cat(roi_i)
+  cat("\n")
+  FS_by_subj_i <- FS_by_subj %>% filter(ROI_delateralized==roi_i)
+  
+  peak<-cor.test(FS_by_subj_i$mean_post_current_rt_change,FS_by_subj_i$mean_peak)
+  trough<-cor.test(FS_by_subj_i$mean_post_current_rt_change,FS_by_subj_i$mean_trough)
+  amplitude<-cor.test(FS_by_subj_i$mean_post_current_rt_change,FS_by_subj_i$mean_amplitude)
+  
+  print(peak)
+  print(trough)
+  print(amplitude)
+  cat("---\n")
+  FS_by_subj_i <- FS_by_subj %>% filter(ROI_delateralized==roi_i)
+  
+  peak<-cor.test(FS_by_subj_i$mean_post_rt,FS_by_subj_i$mean_peak)
+  trough<-cor.test(FS_by_subj_i$mean_post_rt,FS_by_subj_i$mean_trough)
+  amplitude<-cor.test(FS_by_subj_i$mean_post_rt,FS_by_subj_i$mean_amplitude)
+  print(peak)
+  print(trough)
+  print(amplitude)
+  cat("---\n")
+```
+
+
+## Putamen
+
+*Now* we see putamen activity.
+
+```{r}
+.05/0.002951 #putamen, amplitude,
+.05/0.007484 #putamen, trough
+```
+
+This result would withstand 17 multiple comparisons; considering the theoretical validty of the finding I think that is good enough.
+
+Only trouble is that it wasn't really of theoretical interest from the start.
+
+I'm also wary that I ahve tried to interpret strongly "significant results" using this sort of fishing method before and it didn't end up working.
+
+Anyway--let's graph, then multi-level model.
+
+```{r}
+ggplot(FS_by_subj %>% filter(ROI_delateralized=="Putamen"),
+       aes(amplitude_cor_est))+geom_histogram(binwidth=0.2)+
+  labs(y="subjects",x="Within-subject Putamen amplitude by post-pre RT change correlation")+
+  geom_vline(xintercept = 0)
+
+t.test(FS_by_subj %>% filter(ROI_delateralized=="Putamen") %>% .$amplitude_cor_est)
+```
+
+
+
+```{r, fig.width=9,fig.height=4.5}
+#library(ggpubr)
+library(ggrepel)
+ggplot(FS_by_subj %>% filter(ROI_delateralized=="Putamen"),
+       aes(x=mean_amplitude,y=mean_post_pre_rt_change))+geom_point(binwidth=0.2)+#geom_text(size=3,nudge_x=0.1)
+  labs(title="Across-subject correlation of subject-mean Putamen amplitude\nby subject-mean post-pre RT change",x="Mean amplitude",y="Mean post - pre RT change\n(post error slowing)")+
+  geom_hline(yintercept = 0,linetype="dashed")+geom_vline(xintercept = 0,linetype="dashed")+
+  geom_smooth(method='lm')+
+  stat_cor(label.x = 1.4, label.y = 0.20,r.digits=3,p.digits=1) +
+  stat_regline_equation(label.x=1.4,label.y=0.17)
+  
+
+  
+cor.test(FS_by_subj_i %>% filter(ROI_delateralized=="Putamen") %>% .$mean_post_pre_rt_change,
+         FS_by_subj_i %>% filter(ROI_delateralized=="Putamen") %>% .$mean_amplitude)
+
+cor.test(FS_by_subj_i %>% filter(ROI_delateralized=="Putamen") %>% .$mean_post_pre_rt_change,
+         FS_by_subj_i %>% filter(ROI_delateralized=="Putamen") %>% .$mean_amplitude,
+         method="spearman")
+
+#what if we remove the outliers altogether?
+FS_by_subj_i_no_outliers <-FS_by_subj_i%>% filter(ROI_delateralized=="Putamen" & mean_amplitude<0.9)
+cor.test(FS_by_subj_i_no_outliers$mean_post_pre_rt_change,FS_by_subj_i_no_outliers$mean_amplitude)
+
+#it does seem to be driven by a few anomalous subjects. who the fuck are they and how do we describe them?
+```
+OK, it looks like an across-subject effect, and driven mainly by a few subjects.
+
+This would explain why we don't see the effect within-subject.
+
+### can we explain why we're seeing those outliers?
+
+#### trial count
+
+```{r}
+
+trial_count = sst_all_data %>% 
+  filter(condition!="Cue") %>% 
+  group_by(subid,runid,waveid) %>%
+  summarize(trial_count=n())
+  
+table(trial_count$trial_count)
+time_points %>% group_by(subid, wave) %>% summarize(max_tr=max(tr)) %>% .$max_tr %>% table
+
+#no, can't be explained by short runs. almost all subjects have the same number of trials in the behavioral data and the same number of TRs in the neural data
+
+```
+
+#### mean delay of the trough from the stop signal?
+```{r}
+summary(lm(mean_amplitude~mean_post_pre_rt_change,FS_by_subj %>% filter(ROI_delateralized=="Putamen")))  
+summary(lm(mean_amplitude~mean_post_pre_rt_change+mean_trough_offset,FS_by_subj %>% filter(ROI_delateralized=="Putamen")))
+
+ggplot(FS_by_subj %>% filter(ROI_delateralized=="Putamen"),
+       aes(x=mean_trough,y=mean_trough_offset,
+           label=subid,color=mean_post_pre_rt_change))+geom_point(binwidth=0.2)+geom_text(size=3,nudge_x=0.1)
+  labs(title="Across-subject correlation of subject-mean Putamen amplitude\nby subject-mean post-pre RT change")
+
+
+```
+That's interesting, but it doesn't really explain away the amplitude by RT change relationship.
+
+#### What about subject SSD?
+Due to the ladder, the shorter the mean SSD, the btter that participant has performed.
+
+
+```{r}
+
+summary(lm(mean_amplitude~mean_post_pre_rt_change,FS_by_subj %>% filter(ROI_delateralized=="Putamen")))  
+summary(lm(mean_amplitude~mean_post_pre_rt_change+mean_SSD_all_stop_trials,FS_by_subj %>% filter(ROI_delateralized=="Putamen")))
+
+ggplot(FS_by_subj %>% filter(ROI_delateralized=="Putamen"),
+       aes(x=mean_amplitude,y=mean_post_pre_rt_change,
+           label=subid,color=mean_SSD_all_stop_trials))+geom_point(binwidth=0.2)+geom_text(size=3,nudge_x=0.1)
+  labs(title="Across-subject correlation of subject-mean Putamen amplitude\nby subject-mean post-pre RT change")
+  
+#not related to performance!
+```
+
+
+
+## Modeling effects
+
+
+If we do a multi-level model, with response amplitude as a within-group slope, we need to be able to measure whether the estimate of that within-group slope differs from zero. If we add it as a random effect, I don't think we can do that...?
+
+
+
+```{r}
+
+
+library(lme4)
+#FS_neural_behav_data_not_na$trial_n_c<-128-FS_neural_behav_data_not_na$trial_n
+FS_neural_behav_p <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Putamen")
+
+model_random_effects <- lme4::lmer(
+   post_pre_rt_change ~ trial_n_c +I(trial_n_c^2) + response_amplitude + (1+ response_amplitude | subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+```
+
+That's a strongly significant fixed effect, and applies **across** individuals.
+
+```{r}
+
+model_fixed_effects <- lme4::lmer(
+   post_pre_rt_change ~ trial_n_c +I(trial_n_c^2) + response_amplitude + (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+```
+
+
+If the random effects model is more predictive than the fixed effects model, we have significant random effects, too.
+
+```{r}
+anova(model_fixed_effects,model_random_effects)
+```
+
+OK, that's discouraging. So we can't show that the random effects model performs superior to the fixed effects model.
+
+```{r}
+
+model_random_only <- lme4::lmer(
+   post_pre_rt_change ~ trial_n_c +I(trial_n_c^2) + (1 + response_amplitude | subid),
+  FS_neural_behav_p
+  )
+summary(model_random_only)
+
+
+anova(model_random_only,model_random_effects)
+
+```
+### Include trough offset
+
+```{r}
+
+
+library(lme4)
+#FS_neural_behav_data_not_na$trial_n_c<-128-FS_neural_behav_data_not_na$trial_n
+FS_neural_behav_p <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Putamen")
+
+model_random_effects <- lme4::lmer(
+   post_pre_rt_change ~ trial_n_c +I(trial_n_c^2) + response_amplitude +trough_time + (1+ response_amplitude+ trough_time | subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+
+model_fixed_effects <- lme4::lmer(
+   post_pre_rt_change ~ trial_n_c +I(trial_n_c^2) + response_amplitude+trough_time + (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+# Exploring different behavioral componetns of the measure
+
+
+## First repeat the analysis above, but modeling brain activity rather than behavioral activity
+
+
+```{r}
+FS_neural_behav_data_not_na$trial_n_c<-128-FS_neural_behav_data_not_na$trial_n
+
+library(lme4)
+
+FS_neural_behav_p <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Putamen")
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c +I(trial_n_c^2) + post_pre_rt_change + (1+ post_pre_rt_change | subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+```
+
+
+```{r}
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c +I(trial_n_c^2)+ post_pre_rt_change + (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+```
+
+
+
+```{r}
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+OK, how on earth do I interpret that? Quite possibly just that trial_n_c is functioning differently here.
+
+## repeat without the quadratic trial count because it no longer seems to be helping.
+
+
+```{r}
+FS_neural_behav_data_not_na$trial_n_c<-128-FS_neural_behav_data_not_na$trial_n
+
+library(lme4)
+
+FS_neural_behav_p <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Putamen")
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c+ post_pre_rt_change + (1+ post_pre_rt_change | subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+```
+
+
+```{r}
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c+ post_pre_rt_change + (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+```
+
+
+
+```{r}
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+
+## Now separate out post and previous RT
+
+
+
+```{r}
+#FS_neural_behav_data_not_na$trial_n_c<-128-FS_neural_behav_data_not_na$trial_n
+
+library(lme4)
+
+#FS_neural_behav_p <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Putamen")
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + last_reaction_time+ next_reaction_time + (1+ last_reaction_time+ next_reaction_time | subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + last_reaction_time+ next_reaction_time + (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+```{r}
+#FS_neural_behav_data_not_na$trial_n_c<-128-FS_neural_behav_data_not_na$trial_n
+
+library(lme4)
+
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + last_reaction_time+ next_reaction_time + reaction_time+ (1+ last_reaction_time+ next_reaction_time | subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + last_reaction_time+ next_reaction_time + reaction_time+ (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+##OK. Now try something related to SSD.
+
+
+
+
+```{r}
+#FS_neural_behav_data_not_na$trial_n_c<-128-FS_neural_behav_data_not_na$trial_n
+
+library(lme4)
+
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + RPE_SSD_based+ (1+ RPE_SSD_based | subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + RPE_SSD_based+ (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+
+
+## try next_last instead of post_pre
+
+
+This is different because if there are two FS in a row it will go to the _next_ item. Although not sure if it makes a difference in practice unless we refilter the NA values.
+
+
+```{r}
+FS_neural_behav_data_not_na<-FS_summary_data_delat_pp[
+  rowSums(is.na(FS_summary_data_delat_pp[,c("response_amplitude","next_last_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(FS_summary_data_delat_pp$response_amplitude) & is.finite(FS_summary_data_delat_pp$next_last_rt_change) #no infinite values
+    ,]
+
+FS_neural_behav_p <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Putamen")
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + next_last_rt_change + (1+ next_last_rt_change| subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + next_last_rt_change + (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+## accumbens
+
+Almost seems to be a within-subject effect of this one now.
+
+
+```{r}
+FS_neural_behav_a <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="Accumbens")
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + I(trial_n_c^2) + next_last_rt_change + (1+ next_last_rt_change| subid),
+  FS_neural_behav_a
+  )
+summary(model_random_effects)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c + I(trial_n_c^2) + next_last_rt_change + (1 | subid),
+  FS_neural_behav_a
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+## Interaction with trial number
+
+
+
+```{r}
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c*next_last_rt_change + (1+ next_last_rt_change| subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c*next_last_rt_change + (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+
+```{r}
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c*next_last_rt_change +I(trial_n_c^2) + (1+ next_last_rt_change| subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c*next_last_rt_change +I(trial_n_c^2) + (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+Now there...does seem to be a significant within-subject effect as well as significant between-subject effect?
+
+In any event this maybe suggests we need to break it up and look at the right part of the early/mid/late set.
+
+```{r}
+
+model_random_effects_early <- lme4::lmer(
+   response_amplitude ~ next_last_rt_change + (1+ next_last_rt_change| subid),
+  FS_neural_behav_p %>% filter(trial_n<85)
+  )
+summary(model_random_effects_early)
+
+
+model_random_effects_mid <- lme4::lmer(
+   response_amplitude ~ next_last_rt_change + (1+ next_last_rt_change| subid),
+  FS_neural_behav_p %>% filter(trial_n>=85 & trial_n<171)
+  )
+summary(model_random_effects_mid)
+
+
+model_random_effects_late <- lme4::lmer(
+   response_amplitude ~ next_last_rt_change + (1+ next_last_rt_change| subid),
+  FS_neural_behav_p %>% filter(trial_n>=171)
+  )
+summary(model_random_effects_late)
+
+```
+
+nope. weird. maybe we just need the power of the full series?
+
+
+## What if we throw in SSD?
+
+
+
+
+```{r}
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c*next_last_rt_change +I(trial_n_c^2) + trials_since_last_SSD + (1+ next_last_rt_change| subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c*next_last_rt_change +I(trial_n_c^2) +trials_since_last_SSD+ (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+
+
+
+```{r}
+
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c*next_last_rt_change + SSD_recorded + (1+ next_last_rt_change| subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c*next_last_rt_change  +SSD_recorded+ (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+
+Nope.
+
+## Try post-current
+
+
+
+```{r}
+table(is.na(FS_neural_behav_p$post_current_rt_change),is.na(FS_neural_behav_p$next_last_rt_change))
+
+model_random_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c+post_current_rt_change  + (1+ post_current_rt_change| subid),
+  FS_neural_behav_p
+  )
+summary(model_random_effects)
+
+
+
+model_fixed_effects <- lme4::lmer(
+   response_amplitude ~ trial_n_c+post_current_rt_change+ (1 | subid),
+  FS_neural_behav_p
+  )
+summary(model_fixed_effects)
+
+
+anova(model_fixed_effects,model_random_effects)
+```
+
+Alright--incredible how absolutely negligible that is.
+
+
+## Summary
+
+So--
+
+(1) We have a between-subject/individual differences effect linking putamen activity and response time change, but it may be driven by a few subjects.
+
+(2) That shows up really clearly in an anova model comparing a fixed-effects model with a mixed-effects model including a subject effect for response time change--but ONLY if you make neural activity the DV, and this may be related to the interaction with trial. Also, to estimate the direction of that effect you need to add an _extra_ subject-level regressor, I guess, and I'm not sure how to add that?
+
+(2) We can also see a _moderate_ (p~=0.01) within-subject effect of next_last_rt_change and response amplitude, but mainly only if we include a trial interaction. It is _not significant_ if you don't include the interaction effect, and I think putting in an interaction term when the main effect wasn't significant is questionable.
+
+(3) Dividing the data into early/mid/late buckets didn't show much more for within-subjects effects.
+
+(4) Accumbens shows roughly the same pattern: probably a between-subjects effect, but no within-subject effect.
+
+(5) It's unfortunate that we didn't get an SPM parametric modulator effect because that would absolutely confirm what we're seeing; perhaps I should consider adding trial_n as a modulator, and take anotehr look to make sure everything was done right. originally.
+
+This was with only half the data! (the first wave) and perhaps there's an opportunity to test whether we think it'll show up more strongly in the second wave.
+
+## How does it relate to literature?
+
+Also I worry if we have been scooped...12 years ago...by: https://www.sciencedirect.com/science/article/pii/S1053811910009146
+
+Interesting:
+
+> Imaging error detection is a challenge because the deactivation to errors is very brief (~ 100 ms) (Ljungberg et al., 1991), whereas fMRI measures a prolonged (~ 20 s) response with a temporal resolution of seconds.
+
+
+Theyv'e used the same HRF approach I have, but, arguably less sophisticated.
+
+> Post-error slowing significantly (α < 0.05, corrected) deactivated the predicted structures, which were used to generate ROI estimates of activity changes across the other phases of the task
+
+It is not clear whether they are talking about a parametric modulator that actually quantified the amount of slowing, or whether they're just referring to a time period during which post-error slowing occured.
+
+Seems that they are confident about the within-trial effect?
+
+> The main findings were that error detection deactivated the midbrain in the vicinity of dorsal substantia nigra, dorsal striatum and ventral bank of the ACC.
+
+OK, but that's not making a statement about the degree of slowing...
+ 
+> Error trials that led to greater slowing...
+
+hmmm, how do they link those trials 
+
+> deactivated structures that modulate dopamine output (Elben and Graybiel, 1995) and encode error magnitude (Menon et al., 2007, Murray et al., 2008, Tobler et al., 2007)
+
+That seems to relate to degree of slowing via a median split? Unclear
+
+Those citations:
+
+> M. Menon, J. Jensen, I. Vitcu, A. Graff-Guerrero, A. Crawley, M.A. Smith, S. Kapur
+> Temporal difference modeling of the blood-oxygen level dependent response during aversive conditioning in humans: effects of dopaminergic modulation
+> Biol. Psychiatry, 62 (7) (2007), pp. 765-772
+
+> G.K. Murray, P.R. Corlett, L. Clark, M. Pessiglione, A.D. Blackwell, G. Honey, P.B. Jones, E.T. Bullmore, T.W. Robbins, P.C. Fletcher
+> Substantia nigra/ventral tegmental reward prediction error disruption in psychosis
+> Mol. Psychiatry, 13 (3) (2008), pp. 267-276
+> 239
+
+> P.N. Tobler, P.C. Fletcher, E.T. Bullmore, W. Schultz
+> Learning-related human brain activations reflecting individual finances
+> Neuron, 54 (1) (2007), pp. 167-175
+
+I think--just justify their claim about which areas "modulate dopamine output" and "encode error magnitude".
+
+> Ventral striatum deactivated bilaterally (Fig. 3b) in locations that vary in activity with the magnitude of errors (Murray et al., 2008, O'Doherty et al., 2003).
+
+OK so they're relying on someone else to make that connection..
+
+I am unsure whether they correlated with actual slowing; I don't think they did but I'm not sure.
+
+Does suggest we need to break up ACC a bit to analyze properly.
+
+# Striatal cluster
+
+The preliminary analysis suggests this should be significant both within and across individuals. Let's see!
+
+First let's see if we should use the trial regressor.
+
+```{r}
+
+
+model_full_effects <- lme4::lmer(
+   peak ~ trial_n_c +I(trial_n_c^2) + post_pre_rt_change + (1+ post_pre_rt_change | subid),
+  FS_neural_behav_p
+  )
+summary(model_full_effects)
+
+
+```
+
+Debatable. Let's leave it out for this one.
+
+

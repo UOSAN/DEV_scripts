@@ -216,7 +216,7 @@ ggplot_time_points_extras <- list(
     x="time from tone sound or expected time of tone (s)",
     y="mean BOLD activity (no HRF convolution)",
     title="Stop Signal Task Activity",
-    subtitle=paste0("Across ", as.character(subj_count)," subjects with 255 trials each"),
+    subtitle=paste0("Across ", as.character(subj_count)," subjects with 128 trials each"),
     caption="0 point is the moment of tone sound (Stop trials)\n or expected tone sound based on prior trial (Go trials)\n HRF convolution not applied\n1 s moving averages")
   )
 
@@ -236,6 +236,8 @@ ggplot(df_offset_long,
 ```
 
 now by ROI with facets for condition:
+
+
 
 ```{r}
 # roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
@@ -264,6 +266,57 @@ ggplot(df_offset_long,
   
 
 ```
+## Just stop trials, divided separately
+
+
+```{r}
+
+get_roi_good_names <- function(roi_fullname_col){
+  
+  roi_organized<-stringr::str_extract_all(unlist(roi_fullname_col),pattern = "(?<=harvardoxford\\.(sub)?cortical_prob_)(.*)") %>% sub("\\.\\.",", ",.) %>% gsub("\\."," ",.)
+  #print(roi_organized)
+  unique_rois<-sort(unique(roi_organized))
+  unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\s)(.*)"))]
+  print(unique_rois)
+  roi_factor_col<-factor(roi_organized,levels = unique_rois_ordered, ordered=TRUE)
+  return(roi_factor_col)
+}
+
+```
+
+
+```{r}
+# roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
+df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
+
+df_offset_long$ROI<-get_roi_good_names(df_offset_long$ROI)
+df_offset_long$ROI_bilat <- sub("(Left )|(Right )","",df_offset_long$ROI)
+
+next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
+
+ggplot(df_offset_long %>% filter(condition %in% c("FailedStop","CorrectStop")),
+       aes(x=offset_start, y=value,color=ROI_bilat,group=ROI))+
+  facet_wrap(~condition,nrow = 2)+
+  #geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  #annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  geom_line(size=1,alpha=0.7)+
+  
+  scale_color_viridis_d(option = "C")+
+  coord_cartesian(ylim=c(-0.15,0.2))+
+  guides(alpha="none",color=guide_legend(title="ROI"))+
+  #guides(alpha="none",color=guide_legend(title="ROI",nrow = 2))+
+  ggplot_time_points_extras#+
+  #theme(legend.position = "bottom")
+  
+
+#ggplot(df_offset_long,aes(x=offset_start, y=value,color=ROI,group=intersect(ROI,condition)))+geom_line()
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  #scale_y_continuous(limits=c(-2.5,2.5))
+  
+
+```
+
 ## CS-FS
 
 Let's now try to contrast these time series to see what the CS-FS looks like. This will be interesting because it's similar to the simple GLM result I got earlier that set me down the path of trying to analyze this.
@@ -276,7 +329,7 @@ trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectSt
 
 
 ```{r}
-next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
+
 ggplot(trial_tps_compare_conditions,
        aes(x=offset_start, y=CS_minus_FS,color=ROI))+
   #geom_tile(data = next_trial_gradient, aes(x=tp,alpha=pct_in_range,y=0),fill="#000000",color="transparent")+
