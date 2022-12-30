@@ -10,3 +10,5 @@ Benjamins-MacBook-Pro-2.local:
 dyn-10-109-32-78.wless.uoregon.edu:
   nonbids_data_path: /gpfs/projects/sanlab/shared/DEV/nonbids_data/
   ml_data_folderpath: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml
+n138:
+  nonbids_data_path:  /gpfs/projects/sanlab/shared/DEV/nonbids_data/

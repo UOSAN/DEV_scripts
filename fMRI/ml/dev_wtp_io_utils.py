@@ -403,6 +403,7 @@ def get_Brain_Data_betas_for_sub(
     betaseries_path='/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave1/betaseries/',
     events_in_design = 64,
     mask = None,
+    mask_threshold=0.5,
     spatially_concatenate=False
 ):
     """
@@ -451,23 +452,37 @@ def get_Brain_Data_betas_for_sub(
         'temp_mask_get_Brain_Data_betas_for_sub_' + sub_label +
         '.nii'
     )
-    if create_temp_mask & (mask=="beta"):
-        print("setting the mask to the first image in the series " + subj_behav_design.beta.iloc[0])
 
-        with warnings.catch_warnings(record=True) as w:
-            subj_first_img = nil.image.load_img(subject_dir + subj_behav_design.beta.iloc[0])
-            #load the first image to be a mask
-            subj_mask = nil.masking.compute_brain_mask(subj_first_img)
-            nib.save(subj_mask,tmp_mask_path)
+    #we're always going to use the subject first image as a mask
+    #then, if another mask has been passed in to this function, we use the combo of those
+    print("retrieving a mask from the first image in the series " + subj_behav_design.beta.iloc[0])
+
+    with warnings.catch_warnings(record=True) as w:
+        subj_first_img = nil.image.load_img(subject_dir + subj_behav_design.beta.iloc[0])
+        #load the first image to be a mask
+        if mask_threshold is None: mask_threshold=0
+        subj_mask = nil.masking.compute_brain_mask(subj_first_img,mask_threshold)
         
-        for wi in w:
-            if wi.message.args[0]!='Resampling binary images with continuous or linear interpolation. This might lead to unexpected results. You might consider using nearest interpolation instead.':
-                warnings.warn(wi.message,type(wi))
-            else:
-                print("During mask creation, received error 'Resampling binary images with continuous or linear interpolation.'. This is normal.")
+        if mask!="beta":
+            external_mask = nil.image.load_img(mask)
         
-        mask = tmp_mask_path
-        print("temp mask created.")
+            #now combine the two masks
+            external_mask_resampled = nil.image.resample_to_img(external_mask, subj_first_img)
+            external_mask_bin = nil.image.math_img("img>0.0",img=external_mask_resampled)
+            final_mask = nil.masking.intersect_masks([subj_mask,external_mask_bin])
+        else:
+            final_mask=subj_mask
+        
+        nib.save(final_mask,tmp_mask_path)
+
+    for wi in w:
+        if wi.message.args[0]!='Resampling binary images with continuous or linear interpolation. This might lead to unexpected results. You might consider using nearest interpolation instead.':
+            warnings.warn(wi.message,type(wi))
+        else:
+            print("During mask creation, received error 'Resampling binary images with continuous or linear interpolation.'. This is normal.")
+
+    mask = tmp_mask_path
+    print("temp mask created.")
         
     print("loading files. This step may take some time...")
 
@@ -942,7 +957,7 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
 
         
 def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_design,out_folder = '../data/',
-                                         out_file_suffix =''):
+                                         out_file_suffix ='', mask = "beta",mask_threshold=None):
     sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/'
     first_level_path = sst_wt_repo + first_level_fileid + "/"
     print(first_level_path)
@@ -960,7 +975,8 @@ def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_d
                 sl, behavioral_design,
                 betaseries_path = first_level_path,
                 events_in_design=behavioral_design[behavioral_design.subject==sl].shape[0],
-                mask = "beta" # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
+                mask = mask, # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
+                mask_threshold=mask_threshold
             )
             bd_dict[sl]=bd
         except BehavioralDataNotFoundForBrainDataException:
