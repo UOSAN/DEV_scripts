@@ -465,14 +465,16 @@ def get_Brain_Data_betas_for_sub(
         
         if mask!="beta":
             external_mask = nil.image.load_img(mask)
-        
+
             #now combine the two masks
             external_mask_resampled = nil.image.resample_to_img(external_mask, subj_first_img)
-            external_mask_bin = nil.image.math_img("img>0.0",img=external_mask_resampled)
+            external_mask_bin = nil.image.math_img("np.round(img,3)>0.1",img=external_mask_resampled)
             final_mask = nil.masking.intersect_masks([subj_mask,external_mask_bin])
+            print("...using a combined mask of the first image and the passed in mask",flush=True,end='')
         else:
             final_mask=subj_mask
-        
+        #nib.save(external_mask_bin,'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/betaseries/temp_mask_get_Brain_Data_betas_for_sub_DEV005_bin.nii')
+        #nib.save(external_mask_resampled,'/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/betaseries/temp_mask_get_Brain_Data_betas_for_sub_DEV005_resampled.nii')
         nib.save(final_mask,tmp_mask_path)
 
     for wi in w:
@@ -957,8 +959,9 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
 
         
 def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_design,out_folder = '../data/',
-                                         out_file_suffix ='', mask = "beta",mask_threshold=None):
-    sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/'
+        out_file_suffix ='', mask = "beta",mask_threshold=None,
+        sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/'
+                                         ):
     first_level_path = sst_wt_repo + first_level_fileid + "/"
     print(first_level_path)
     subj_count = len(subjs)
