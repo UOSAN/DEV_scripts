@@ -9,7 +9,7 @@ from glob import glob
 import yaml
 import socket
 from visualization import visualize_corr
-import mvpa2
+#import mvpa2
 import math
 
 import sys
@@ -20,12 +20,12 @@ from outlier_detection import *
 from IPython.core.display import display, HTML, Markdown
 
 from sklearn.svm import SVC
-from mvpa2.measures.base import CrossValidation
-from mvpa2.clfs.meta import NFoldPartitioner
-from mvpa2.clfs.svm import LinearCSVMC
+# from mvpa2.measures.base import CrossValidation
+# from mvpa2.clfs.meta import NFoldPartitioner
+# from mvpa2.clfs.svm import LinearCSVMC
 from sklearn.calibration import CalibratedClassifierCV
 
-from mvpa2.datasets.mri import fmri_dataset
+# from mvpa2.datasets.mri import fmri_dataset
 
 class BehavioralDataNotFoundForBrainDataException(Exception):
     """Behavioral data could not be matched to a subject."""
@@ -34,7 +34,7 @@ class BehavioralDataNotFoundForBrainDataException(Exception):
 from nilearn.masking import unmask
 
 
-from mvpa2.mappers.flatten import mask_mapper
+# from mvpa2.mappers.flatten import mask_mapper
 import nibabel as nib
 
 
@@ -44,11 +44,6 @@ sys.path.append(os.path.abspath("../../ml/"))
 from sklearn.linear_model import Ridge
 
 #import regex package
-
-def read_yaml_for_host(file_path):
-    hostname = socket.gethostname()
-    with open(file_path, "r") as f:
-        return yaml.safe_load(f)[hostname]
 
 def do_Ridge(train_X,train_y,test_X,test_y):
     sklearn_reg = Ridge()

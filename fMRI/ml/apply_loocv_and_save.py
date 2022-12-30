@@ -247,6 +247,7 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
     del Brain_Data_allsubs_nn
     #del Brain_Data_allsubs_grouped
     gc.collect()
+    print("cleaning memory")
 
     
     if subjs_to_use is None:
@@ -271,8 +272,9 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
         first_subs_nifti_groups = all_subs_nn_nifti_groups[sample_subject_vector]
         first_subs_nifti_metadata = all_subs_nn_nifti_metadata.loc[sample_subject_vector,:]
         
-
+    #hmm, shouldn't this occu on a per subject basis?
     if clean=="standardize":
+        print('cleaning image')
         first_subs_nifti = nil.image.clean_img(first_subs_nifti,detrend=False,standardize=True)
 
     return(

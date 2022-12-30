@@ -8,9 +8,11 @@ import re
 import sys
 import warnings
 import pickle
-from mvpa2.datasets.mri import fmri_dataset, map2nifti
-from mvpa2 import *
-import mvpa2.datasets 
+#deprecated mvpa2 because it hasn't been updated in4-5 years and doesn't work with python 3
+#and we don't need it!
+# from mvpa2.datasets.mri import fmri_dataset, map2nifti
+# from mvpa2 import *
+# import mvpa2.datasets 
 import nibabel as nib
 import numpy as np
 import nibabel as nib
