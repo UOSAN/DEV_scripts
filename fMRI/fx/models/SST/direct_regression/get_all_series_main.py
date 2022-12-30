@@ -91,6 +91,10 @@ with open(dropbox_data_dir + '/roi_data_raw.pkl', 'wb') as handle:
     
 #from get_all_series import get_all_subj_df
 all_subj_df = get_all_subj_df(roi_data, sst_all_behavioral_data)
+
+#count the number of subjects in all_subj_df
+all_subj_df.subid.nunique()
+
 #all_subj_df.groupby(['trial_n','subid','wave']).offset.count()
 all_subj_df.to_csv(dropbox_data_dir + '/SST_roi_by_time_point.csv')
 

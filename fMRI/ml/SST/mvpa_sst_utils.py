@@ -2,11 +2,21 @@ import pandas as pd
 import numpy as np
 import scipy.io
 import re
-import sys
 import warnings
 import pickle
+import datetime
+from glob import glob
+import yaml
+import socket
+from visualization import visualize_corr
+import mvpa2
+import math
 
-import pickle
+import sys
+import os
+from outlier_detection import *
+
+
 from IPython.core.display import display, HTML, Markdown
 
 from sklearn.svm import SVC
@@ -23,21 +33,22 @@ class BehavioralDataNotFoundForBrainDataException(Exception):
 
 from nilearn.masking import unmask
 
-from visualization import visualize_corr
-import mvpa2
-import math
-
-import sys
-import os
 
 from mvpa2.mappers.flatten import mask_mapper
 import nibabel as nib
 
-from outlier_detection import *
+
 
 sys.path.append(os.path.abspath("../../ml/"))
 
 from sklearn.linear_model import Ridge
+
+#import regex package
+
+def read_yaml_for_host(file_path):
+    hostname = socket.gethostname()
+    with open(file_path, "r") as f:
+        return yaml.safe_load(f)[hostname]
 
 def do_Ridge(train_X,train_y,test_X,test_y):
     sklearn_reg = Ridge()
