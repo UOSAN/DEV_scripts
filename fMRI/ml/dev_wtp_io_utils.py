@@ -467,7 +467,7 @@ def get_Brain_Data_betas_for_sub(
             external_mask = nil.image.load_img(mask)
 
             #now combine the two masks
-            external_mask_resampled = nil.image.resample_to_img(external_mask, subj_first_img)
+            external_mask_resampled = nil.image.resample_to_img(external_mask, subj_first_img,interpolation='nearest')
             external_mask_bin = nil.image.math_img("np.round(img,3)>0.1",img=external_mask_resampled)
             final_mask = nil.masking.intersect_masks([subj_mask,external_mask_bin])
             print("...using a combined mask of the first image and the passed in mask",flush=True,end='')
@@ -746,7 +746,6 @@ def cv_train_test_sets(
 #         "See https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.PredefinedSplit.html")
 
     return(test_scores,results,results_by_trainset_item)
-
 
 
 def asizeof_fmt(obj, suffix='B'):
