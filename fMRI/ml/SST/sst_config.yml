@@ -12,5 +12,5 @@ dyn-10-109-32-78.wless.uoregon.edu:
   ml_data_folderpath: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml
 n138:
   nonbids_data_path:  /gpfs/projects/sanlab/shared/DEV/nonbids_data/
-n137:
+n222:
   nonbids_data_path:  /gpfs/projects/sanlab/shared/DEV/nonbids_data/
