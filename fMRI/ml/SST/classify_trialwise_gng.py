@@ -39,6 +39,7 @@ def trialtype_resp_trans_func(X):
 def main(normalize=True):
 
     brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_40subs_correct_cond.pkl'
+    #brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_15subs_correct_cond.pkl'
     print(brain_data_filepath)
     warnings.warn("not sure if this file holds up--it was created in 2021; need to see if it's still valid")
     train_test_markers_filepath = ml_data_folderpath + "/train_test_markers_20220818T144138.csv"
@@ -96,14 +97,14 @@ def main(normalize=True):
 
 
     #pd.DataFrame({'obs':trainset_y,'pred':final_prediction}).value_counts()
-    #get precision and recall
+    #get precision and recallg
     print("precision, recall, f1, support:")
-    print(precision_recall_fscore_support(all_subjects['y'],final_prediction,average='macro'))
+    print(precision_recall_fscore_support(all_subjects['y_int'],final_prediction,average='macro'))
 
     #get roc_auc
     from sklearn.metrics import roc_auc_score
     print("roc_auc:")
-    print(roc_auc_score(all_subjects['y'],final_prediction))
+    print(roc_auc_score(all_subjects['y_int'],final_prediction))
 
 if __name__ == "__main__":
     main()
