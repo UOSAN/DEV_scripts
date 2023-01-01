@@ -36,9 +36,10 @@ ml_data_folderpath = nonbids_data_path + "fMRI/ml"
 def trialtype_resp_trans_func(X):
     return(X.trial_type)
 
-def main():
+def main(normalize=True):
 
-    brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_30subs_correct_cond_pfc.pkl'
+    brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_40subs_correct_cond.pkl'
+    print(brain_data_filepath)
     warnings.warn("not sure if this file holds up--it was created in 2021; need to see if it's still valid")
     train_test_markers_filepath = ml_data_folderpath + "/train_test_markers_20220818T144138.csv"
 
@@ -74,29 +75,35 @@ def main():
         'results':cv_results[1],
         'results_by_trainset_item':cv_results[2],
     }
-    #get precision and recall
-    print(precision_recall_fscore_support(
-        cv_results_dict['results_by_trainset_item']['y'],
-    cv_results_dict['results_by_trainset_item']['y_pred'].astype(int),average='macro'))
+    
 
     #get roc_auc
     from sklearn.metrics import roc_auc_score
+    print("cross-validated performance")
+    #get precision and recall
+    print("precision, recall, f1, support:")
+    print(precision_recall_fscore_support(
+        cv_results_dict['results_by_trainset_item']['y'],
+    cv_results_dict['results_by_trainset_item']['y_pred'].astype(int),average='macro'))
+    print("roc_auc:")
     print(roc_auc_score(
         cv_results_dict['results_by_trainset_item']['y'],
         cv_results_dict['results_by_trainset_item']['y_pred']))
 
+    print("-----\n\n")
+    print("training performance (overfit):")
     final_prediction = dec_main.predict(all_subjects['X'])
 
 
-    pd.DataFrame({'obs':trainset_y,'pred':final_prediction}).value_counts()
+    #pd.DataFrame({'obs':trainset_y,'pred':final_prediction}).value_counts()
     #get precision and recall
     print("precision, recall, f1, support:")
-    print(precision_recall_fscore_support(trainset_y,final_prediction,average='macro'))
+    print(precision_recall_fscore_support(all_subjects['y'],final_prediction,average='macro'))
 
     #get roc_auc
     from sklearn.metrics import roc_auc_score
     print("roc_auc:")
-    print(roc_auc_score(trainset_y,final_prediction))
+    print(roc_auc_score(all_subjects['y'],final_prediction))
 
 if __name__ == "__main__":
     main()
