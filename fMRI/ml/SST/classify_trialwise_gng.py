@@ -39,8 +39,9 @@ def trialtype_resp_trans_func(X):
 
 def main(normalize_across_features=True):
 
-    brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_40subs_correct_cond.pkl'
+    #brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_40subs_correct_cond.pkl'
     #brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_15subs_correct_cond.pkl'
+    brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_30subs_correct_cond_pfc.pkl'
     print(brain_data_filepath)
     warnings.warn("not sure if this file holds up--it was created in 2021; need to see if it's still valid")
     train_test_markers_filepath = ml_data_folderpath + "/train_test_markers_20220818T144138.csv"
@@ -59,6 +60,7 @@ def main(normalize_across_features=True):
         img_std_signal = all_subjects['X'].get_fdata().std(axis=(0,1,2))
 
         print("creating new arrays...")
+
         series_avg_signal_ndarray =  np.array([np.tile(x,all_subjects['X'].shape[0:3]) for x in img_avg_signal])
         #rotate the array so that the last axis is time
         series_avg_signal_ndarray = np.moveaxis(series_avg_signal_ndarray,0,-1)
@@ -77,7 +79,7 @@ def main(normalize_across_features=True):
 
         print("doing the math...")
         #do the math
-        all_subjects=nl.image.math_img("(img-avg)/std", img=all_subjects['X'], avg=avg_img, std=std_img)
+        all_subjects['X']=nl.image.math_img("(img-avg)/std", img=all_subjects['X'], avg=avg_img, std=std_img)
         #remove unneeded files
         print('removing unneeded files...')
         del avg_img
