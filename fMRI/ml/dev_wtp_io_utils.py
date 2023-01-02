@@ -404,7 +404,8 @@ def get_Brain_Data_betas_for_sub(
     events_in_design = 64,
     mask = None,
     mask_threshold=0.5,
-    spatially_concatenate=False
+    spatially_concatenate=False,
+    standardize_by_condition=False
 ):
     """
     Collect a bunch of beta files for specified subjects based on a behavioral design file
@@ -522,7 +523,45 @@ def get_Brain_Data_betas_for_sub(
                     'raw_beta_description', 'beta'],axis=1,inplace=True)
             subj_behav_design.drop_duplicates(inplace=True)
             
-            
+        #if we want to simply standardize across the betaseries, we do that here
+
+        #if we want to standardize weighted by trials that's a bit more complicated
+        #simplest way is to get means and stds for each condition, then mean across each of those to get the group mean and std
+        # then we can standardize by that
+        if standardize_by_condition:
+            print(np.mean(subj_data.mean().data, where=np.isnan(subj_data.mean().data)==False))
+            print(np.mean(subj_data.std().data, where=np.isnan(subj_data.mean().data)==False))
+            mean_for_condition_dict = {}
+            sd_for_condition_dict={}
+
+            for condition in  subj_behav_design.trial_type.unique():
+                #print(condition)
+                #get the index of each image in this condition
+                condition_bool = subj_behav_design.trial_type==condition
+
+                #get mean and SD for images in condition
+                condition_mean = subj_data[condition_bool].mean()
+                condition_sd = subj_data[condition_bool].std()
+                mean_for_condition_dict[condition]=condition_mean
+                sd_for_condition_dict[condition]=condition_sd
+            #now we have the mean and SD for each condition, we can get the mean and SD across conditions
+            #concatenate teh Brain_Data objects for each condition
+            condition_means = nlt.Brain_Data(list(mean_for_condition_dict.values()))
+            condition_stds = nlt.Brain_Data(list(sd_for_condition_dict.values()))
+            #get the mean for the series weighted by conditions
+            series_weighted_mean = condition_means.mean()
+            series_weighted_sd = condition_stds.mean() 
+                #this is not SD, strictly speaking; 
+                # it ignores deviation between conditions, 
+                # but exaggerates deviation within conditions because it uses a smaller n
+            #now we can standardize by that
+            subj_data = (subj_data - nlt.Brain_Data([series_weighted_mean]*len(subj_data)))/nlt.Brain_Data([series_weighted_sd]*len(subj_data))
+            #check that it now has mean 0 and SD 1
+            print(np.mean(subj_data.mean().data, where=np.isnan(subj_data.mean().data)==False))
+            print(np.mean(subj_data.std().data, where=np.isnan(subj_data.mean().data)==False))
+            #display subj_data
+            subj_data[0].plot()
+
         print(subj_behav_design)
         subj_data.X = subj_behav_design
     na_inf_warn_count=0
@@ -863,8 +902,8 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
                                     condition_count_required=None,
                                     supplementary_df = None,
                                          out_file_suffix ='',
-                                    concatenate_condition_labels=False
-                                   ):
+                                    concatenate_condition_labels=False,
+                                    subj_brain_data_args = {}):
     ## get a list of the subject folders
     sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/'
     first_level_path = sst_wt_repo + first_level_fileid + "/"
@@ -925,7 +964,8 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
                 betaseries_path = first_level_path,
                 events_in_design=beta_df.shape[0],
                 spatially_concatenate = concatenate_condition_labels,
-                mask = "beta" # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
+                mask = "beta", # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
+                **subj_brain_data_args
             )
             
             
@@ -957,9 +997,11 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
         pickle.dump(Brain_Data_allsubs,pkl_file)
 
         
-def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_design,out_folder = '../data/',
-        out_file_suffix ='', mask = "beta",mask_threshold=None,
-        sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/'
+def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_design,
+        out_folder = '../data/',
+        out_file_suffix ='', #mask = "beta",#mask_threshold=None,
+        sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/',
+        subj_brain_data_args = {}
                                          ):
     first_level_path = sst_wt_repo + first_level_fileid + "/"
     print(first_level_path)
@@ -977,8 +1019,9 @@ def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_d
                 sl, behavioral_design,
                 betaseries_path = first_level_path,
                 events_in_design=behavioral_design[behavioral_design.subject==sl].shape[0],
-                mask = mask, # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
-                mask_threshold=mask_threshold
+                #mask = mask, # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
+                #mask_threshold=mask_threshold,
+                **subj_brain_data_args
             )
             bd_dict[sl]=bd
         except BehavioralDataNotFoundForBrainDataException:
