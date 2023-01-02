@@ -77,7 +77,7 @@ def main(normalize_across_features=True):
 
         print("doing the math...")
         #do the math
-        all_subjects=nl.image.math_img("(img-avg)/std", img=all_subject['X'], avg=avg_img, std=std_img)
+        all_subjects=nl.image.math_img("(img-avg)/std", img=all_subjects['X'], avg=avg_img, std=std_img)
         #remove unneeded files
         print('removing unneeded files...')
         del avg_img
