@@ -3,7 +3,7 @@ import yaml
 
 def read_yaml_for_host(file_path):
     hostname = socket.gethostname()
-    yaml_full = yaml.safe_load(f)
+    yaml_full = yaml.safe_load(file_path)
     if hostname in yaml_full:
         yaml_host = yaml_full[hostname]
     else:
