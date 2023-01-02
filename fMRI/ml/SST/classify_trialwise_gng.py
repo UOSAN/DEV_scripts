@@ -55,29 +55,29 @@ def main(normalize_across_features=True):
     if normalize_across_features:
         print("normalizing across features...")
         #get average signal across first 3 axes of the array
-        img_avg_signal = all_subjects.get_fdata().mean(axis=(0,1,2))
-        img_std_signal = all_subjects.get_fdata().std(axis=(0,1,2))
+        img_avg_signal = all_subjects['X'].get_fdata().mean(axis=(0,1,2))
+        img_std_signal = all_subjects['X'].get_fdata().std(axis=(0,1,2))
 
         print("creating new arrays...")
-        series_avg_signal_ndarray =  np.array([np.tile(x,all_subjects.shape[0:3]) for x in img_avg_signal])
+        series_avg_signal_ndarray =  np.array([np.tile(x,all_subjects['X'].shape[0:3]) for x in img_avg_signal])
         #rotate the array so that the last axis is time
         series_avg_signal_ndarray = np.moveaxis(series_avg_signal_ndarray,0,-1)
         #series_avg_signal_ndarray.shape
 
 
-        series_std_signal_ndarray =  np.array([np.tile(x,all_subjects.shape[0:3]) for x in img_std_signal])
+        series_std_signal_ndarray =  np.array([np.tile(x,all_subjects['X'].shape[0:3]) for x in img_std_signal])
         #rotate the array so that the last axis is time
         series_std_signal_ndarray = np.moveaxis(series_std_signal_ndarray,0,-1)
         #series_std_signal_ndarray.shape
 
         print("creating nifti images...")
         #now create nifti images out of them
-        avg_img = nl.image.new_img_like(all_subjects.slicer[:,:,:,0], series_avg_signal_ndarray)
-        std_img = nl.image.new_img_like(all_subjects.slicer[:,:,:,0], series_std_signal_ndarray)
+        avg_img = nl.image.new_img_like(all_subjects['X'].slicer[:,:,:,0], series_avg_signal_ndarray)
+        std_img = nl.image.new_img_like(all_subjects['X'].slicer[:,:,:,0], series_std_signal_ndarray)
 
         print("doing the math...")
         #do the math
-        all_subjects=nl.image.math_img("(img-avg)/std", img=all_subjects, avg=avg_img, std=std_img)
+        all_subjects=nl.image.math_img("(img-avg)/std", img=all_subject['X'], avg=avg_img, std=std_img)
         #remove unneeded files
         print('removing unneeded files...')
         del avg_img
