@@ -1,0 +1,3 @@
+from classify_trialwise_gng import main
+
+main(normalize_across_features=True,screening_percentile=1)

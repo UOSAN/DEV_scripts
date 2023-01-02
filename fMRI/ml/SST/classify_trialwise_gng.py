@@ -45,7 +45,7 @@ def trialtype_resp_trans_func(X):
 
 
 
-def main(normalize_across_features=True):
+def main(normalize_across_features=True,screening_percentile=5):
 
     #brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_40subs_correct_cond.pkl'
     #brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_15subs_correct_cond.pkl'
@@ -111,11 +111,11 @@ def main(normalize_across_features=True):
 
 
     ### TRAINING
-    print('screening percentile of 5')
+    print('screening percentile of ' + str(screening_percentile) + ' will be used for feature selection')
 
     dec_main = Decoder(
         standardize=True,cv=GroupKFold(3),scoring='roc_auc',n_jobs=cpus_to_use,mask=mask_nifti,
-        screening_percentile=5 #this is the feature selection parameter
+        screening_percentile=screening_percentile #this is the feature selection parameter
         )
     cv_results = cv_train_test_sets(
         trainset_X = all_subjects['X'],
