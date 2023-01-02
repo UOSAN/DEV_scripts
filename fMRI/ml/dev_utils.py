@@ -1,9 +1,15 @@
 import socket
+import os
 import yaml
 
 def read_yaml_for_host(file_path):
     hostname = socket.gethostname()
-    yaml_full = yaml.safe_load(file_path)
+    #print full current working directory
+    #print("current working directory: " + os.getcwd())
+    #read yaml file
+    with open(file_path, 'r') as f:
+        yaml_full = yaml.safe_load(f)
+    
     if hostname in yaml_full:
         yaml_host = yaml_full[hostname]
     else:

@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 
 
+sys.path.append(os.path.abspath("../ml/"))
 sys.path.append(os.path.abspath("../../ml/"))
 from apply_loocv_and_save import load_and_preprocess
 from dev_utils import read_yaml_for_host
