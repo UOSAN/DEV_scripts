@@ -118,11 +118,26 @@ def main(normalize_across_features=True,screening_percentile=5):
         standardize=True,cv=GroupKFold(3),scoring='roc_auc',n_jobs=cpus_to_use,mask=mask_nifti,
         screening_percentile=screening_percentile #this is the feature selection parameter
         )
+    dec_logistic = Decoder(
+        standardize=True,cv=GroupKFold(3),scoring='roc_auc',n_jobs=cpus_to_use,mask=mask_nifti,
+        screening_percentile=screening_percentile #this is the feature selection parameter
+        )
+    dec_main_sm8 = Decoder(
+        standardize=True,cv=GroupKFold(3),scoring='roc_auc',n_jobs=cpus_to_use,mask=mask_nifti,
+        screening_percentile=screening_percentile, #this is the feature selection parameter
+        smoothing_fwhm=8
+        )
+    dec_logistic_sm8 = Decoder(
+        standardize=True,cv=GroupKFold(3),scoring='roc_auc',n_jobs=cpus_to_use,mask=mask_nifti,
+        screening_percentile=screening_percentile, #this is the feature selection parameter
+        smoothing_fwhm=8
+        )
+        
     cv_results = cv_train_test_sets(
         trainset_X = all_subjects['X'],
         trainset_y = all_subjects['y_int'],
         trainset_groups = all_subjects['metadata']['subject'],
-        decoders = [dec_main],
+        decoders = [dec_main, dec_logistic, dec_main_sm8, dec_logistic_sm8],
         cv=KFold(n_splits=3) # we use KFold, not GroupKfold, because it's splitting on Group anyway
         )
 
