@@ -25,9 +25,14 @@ cpus_to_use = min(cpus_available-1,math.floor(0.9*cpus_available))
 print(cpus_to_use)
 
 
+
+
 from sklearn.metrics import precision_recall_fscore_support
 from dev_wtp_io_utils import cv_train_test_sets, asizeof_fmt
 from nilearn.decoding import DecoderRegressor,Decoder
+
+from sklearn.feature_selection import SelectPercentile,f_classif
+
 
 nonbids_data_path = config_data['nonbids_data_path']
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
@@ -36,6 +41,9 @@ ml_data_folderpath = nonbids_data_path + "fMRI/ml"
 
 def trialtype_resp_trans_func(X):
     return(X.trial_type)
+
+
+
 
 def main(normalize_across_features=True):
 
@@ -88,6 +96,10 @@ def main(normalize_across_features=True):
         del series_std_signal_ndarray
         gc.collect()
 
+    #feature selection already happens in the Decoder object so we don't need to do this; just 
+    #need to tap in to the decoder parameter for feature selection
+    #SelectPercentile(f_classif,percentile=5).fit_transform(all_subjects['X'],all_subjects['y'])
+
 
     warnings.warn("the data hasn't been cleaned at any point. the fMRIPrep cleaning pipeline has been applied; nothing else has been.")
 
@@ -100,7 +112,10 @@ def main(normalize_across_features=True):
 
     ### TRAINING
 
-    dec_main = Decoder(standardize=True,cv=GroupKFold(3),scoring='roc_auc',n_jobs=cpus_to_use,mask=mask_nifti)
+    dec_main = Decoder(
+        standardize=True,cv=GroupKFold(3),scoring='roc_auc',n_jobs=cpus_to_use,mask=mask_nifti,
+        screening_percentile=5 #this is the feature selection parameter
+        )
     cv_results = cv_train_test_sets(
         trainset_X = all_subjects['X'],
         trainset_y = all_subjects['y_int'],
