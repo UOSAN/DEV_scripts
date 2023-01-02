@@ -111,6 +111,7 @@ def main(normalize_across_features=True):
 
 
     ### TRAINING
+    print('screening percentile of 5')
 
     dec_main = Decoder(
         standardize=True,cv=GroupKFold(3),scoring='roc_auc',n_jobs=cpus_to_use,mask=mask_nifti,
