@@ -534,7 +534,7 @@ def get_Brain_Data_betas_for_sub(
             mean_for_condition_dict = {}
             sd_for_condition_dict={}
 
-            for condition in  subj_behav_design.trial_type.unique():
+            for condition in subj_behav_design.trial_type.unique():
                 #print(condition)
                 #get the index of each image in this condition
                 condition_bool = subj_behav_design.trial_type==condition
@@ -546,11 +546,15 @@ def get_Brain_Data_betas_for_sub(
                 sd_for_condition_dict[condition]=condition_sd
             #now we have the mean and SD for each condition, we can get the mean and SD across conditions
             #concatenate teh Brain_Data objects for each condition
-            condition_means = nlt.Brain_Data(list(mean_for_condition_dict.values()))
-            condition_stds = nlt.Brain_Data(list(sd_for_condition_dict.values()))
-            #get the mean for the series weighted by conditions
-            series_weighted_mean = condition_means.mean()
-            series_weighted_sd = condition_stds.mean() 
+            if (len(mean_for_condition_dict)>1):
+                condition_means = nlt.Brain_Data(list(mean_for_condition_dict.values()))
+                condition_stds = nlt.Brain_Data(list(sd_for_condition_dict.values()))
+                #get the mean for the series weighted by conditions
+                series_weighted_mean = condition_means.mean()
+                series_weighted_sd = condition_stds.mean() 
+            else:
+                series_weighted_mean = list(mean_for_condition_dict.values())[0]
+                series_weighted_sd = list(sd_for_condition_dict.values())[0]
                 #this is not SD, strictly speaking; 
                 # it ignores deviation between conditions, 
                 # but exaggerates deviation within conditions because it uses a smaller n
