@@ -529,8 +529,8 @@ def get_Brain_Data_betas_for_sub(
         #simplest way is to get means and stds for each condition, then mean across each of those to get the group mean and std
         # then we can standardize by that
         if standardize_by_condition:
-            print(np.mean(subj_data.mean().data, where=np.isnan(subj_data.mean().data)==False))
-            print(np.mean(subj_data.std().data, where=np.isnan(subj_data.mean().data)==False))
+            print(np.mean(subj_data.mean().data[np.isnan(subj_data.mean().data)==False]))
+            print(np.mean(subj_data.std().data[np.isnan(subj_data.mean().data)==False]))
             mean_for_condition_dict = {}
             sd_for_condition_dict={}
 
@@ -557,10 +557,10 @@ def get_Brain_Data_betas_for_sub(
             #now we can standardize by that
             subj_data = (subj_data - nlt.Brain_Data([series_weighted_mean]*len(subj_data)))/nlt.Brain_Data([series_weighted_sd]*len(subj_data))
             #check that it now has mean 0 and SD 1
-            print(np.mean(subj_data.mean().data, where=np.isnan(subj_data.mean().data)==False))
-            print(np.mean(subj_data.std().data, where=np.isnan(subj_data.mean().data)==False))
+            print(np.mean(subj_data.mean().data[np.isnan(subj_data.mean().data)==False]))
+            print(np.mean(subj_data.std().data[np.isnan(subj_data.mean().data)==False]))
             #display subj_data
-            subj_data[0].plot()
+            #subj_data[0].plot()
 
         print(subj_behav_design)
         subj_data.X = subj_behav_design
