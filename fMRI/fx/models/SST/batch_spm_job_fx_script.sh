@@ -35,7 +35,7 @@ SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/${SCRIPT_NAME}
 SHELL_SCRIPT=spm_job.sh
 
 # RRV the results files
-RESULTS_INFIX=fx_conditions
+RESULTS_INFIX=fx
 
 # Set output dir and make it if it doesn't exist
 OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_${TASK}_${RESULTS_INFIX}
