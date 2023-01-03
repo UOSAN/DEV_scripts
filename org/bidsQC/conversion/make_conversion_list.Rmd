@@ -91,6 +91,19 @@ full_list %>%
   write.table(
     paste0("org/bidsQC/conversion/new_subject_list_single_col_",w,".txt"),
     sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+}
+
+
+
+```
+
+
+```{r}
+
+setwd("../../../")
+
+for(w in unique(full_list$wave)){
+  #this code is untested! we need output files with just the subject names in them. this is what these do.
 
 full_list %>%
   filter(!is.na(subjectID)) %>%
