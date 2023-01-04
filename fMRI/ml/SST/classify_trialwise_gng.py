@@ -8,7 +8,7 @@ import numpy as np
 sys.path.append(os.path.abspath("../ml/"))
 sys.path.append(os.path.abspath("../../ml/"))
 from apply_loocv_and_save import load_and_preprocess
-from dev_utils import read_yaml_for_host
+from dev_utils import read_yaml_for_host, get_2DX_from_4DX, get_4DX_from_2DX
 import warnings
 
 

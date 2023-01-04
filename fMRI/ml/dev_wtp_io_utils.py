@@ -10,6 +10,7 @@ import nibabel as nib
 import sys
 import warnings
 from sklearn.model_selection import KFold,GroupKFold,LeaveOneOut
+from sklearn.svm import LinearSVC
 from nilearn.decoding import DecoderRegressor,Decoder
 from pympler.asizeof import asizeof
 import gc #garbage collection
@@ -697,16 +698,20 @@ def cv_train_test_sets(
         #print('selecting training data',end='. ')
         train_selector = [i for i, x in enumerate(trainset_groups) if x in train_group_items]
         train_y = trainset_y[train_selector]
-        train_X = nib.funcs.concat_images([trainset_X.slicer[...,s] for s in train_selector])
+        if type(trainset_X)==np.ndarray:
+            train_X = trainset_X[train_selector,:]
+        else:
+            train_X = nib.funcs.concat_images([trainset_X.slicer[...,s] for s in train_selector])
         train_groups = trainset_groups[train_selector]
-        #print(train_X.shape,end='. ')
-        #print(asizeof_fmt(train_X),end='. ')
 
         #select testing data from the individual values
         #print('selecting test data',end='. ')
         test_selector = [i for i, x in enumerate(testset_groups) if x in test_group_items]
         test_y = testset_y[test_selector]
-        test_X = nib.funcs.concat_images([testset_X.slicer[...,s] for s in test_selector])
+        if type(testset_X)==np.ndarray:
+            test_X = testset_X[test_selector,:]
+        else:
+            test_X = nib.funcs.concat_images([testset_X.slicer[...,s] for s in test_selector])
         test_groups = testset_groups[test_selector]
         #print(asizeof_fmt(test_X),end='. ')
         #print(test_X.shape,end='. ')

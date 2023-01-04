@@ -28,6 +28,7 @@ class EstimatorWithPreprocessor(BaseEstimator):
             self.preprocessor = preprocessor
         else:
             raise ValueError("You must specify either a preprocessor class or a preprocessor instance")
+        self.cv_scores_ = None
 
 
     def fit(self, y, X, groups):
@@ -46,7 +47,9 @@ class EstimatorWithPreprocessor(BaseEstimator):
         self.preprocessor.fit(X=X, y=y)
         X_pp = self.preprocessor.transform(X)
         
-        self.estimator.fit(X=X_pp, y=y, groups=groups)
+        print("unable to use 'groups' passed to this item.")
+        self.estimator.fit(X=X_pp, y=y)
+        self.cv_scores_ = self.estimator.cv_scores_
         
 
     def score(self, X, y):
@@ -86,3 +89,9 @@ class EstimatorWithPreprocessor(BaseEstimator):
         X_pp = self.preprocessor.transform(X)
         # Make predictions on the data here
         return(self.estimator.score(X_pp))
+
+
+    #cv_scores attribute
+    @property
+    def cv_scores_(self):
+        return(self.estimator.cv_scores_)
