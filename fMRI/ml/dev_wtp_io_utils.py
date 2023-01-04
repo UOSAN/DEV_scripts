@@ -602,12 +602,38 @@ def check_BD_against_test_train_set(brain_data_series,test_train_set):
     train_data_intersection = train_subs_set.intersection(brain_data_subs)
 
     if len(holdout_data_intersection)>0:
-        del Brain_Data_allsubs
+        #del Brain_Data_allsubs
         raise Exception("The brain data contains a subject marked for holdout. Do not process!")
     else:
         print("checked for intersection and no intersection between the brain data and the subjects was found.")
         if len(train_data_intersection)==0:
-            del Brain_Data_allsubs
+            #del Brain_Data_allsubs
+            raise Exception("the brain data doesn't contain any of the train data. something is wrong.")
+        else:
+            print("there were " + str(len(train_data_intersection)) + " subjects overlapping between the subjects marked for train data and the training dump file itself.")
+
+
+def check_BD_against_test_train_col(brain_data_series,test_train_set, test_train_col):
+
+
+    brain_data_subs=brain_data_series.X.subject.unique()
+
+    
+
+    holdout_subs_set = set(test_train_set[test_train_col=="Holdout"].sub_label)
+    train_subs_set = set(test_train_set[test_train_col=="Train"].sub_label)
+    holdout_data_intersection = holdout_subs_set.intersection(brain_data_subs)
+    train_data_intersection = train_subs_set.intersection(brain_data_subs)
+
+    if len(holdout_data_intersection)>0:
+        #del Brain_Data_allsubs
+        print("holdout subjects:")
+        print(holdout_data_intersection)
+        raise Exception("The brain data contains a subject marked for holdout. Do not process!")
+    else:
+        print("checked for intersection and no intersection between the brain data and the subjects was found.")
+        if len(train_data_intersection)==0:
+            #del Brain_Data_allsubs
             raise Exception("the brain data doesn't contain any of the train data. something is wrong.")
         else:
             print("there were " + str(len(train_data_intersection)) + " subjects overlapping between the subjects marked for train data and the training dump file itself.")

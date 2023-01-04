@@ -200,7 +200,7 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
     with open(brain_data_filepath, 'rb') as pkl_file:
         Brain_Data_allsubs = pickle.load(pkl_file)
     
-    dev_wtp_io_utils.check_BD_against_test_train_set(Brain_Data_allsubs,test_train_set)
+    dev_wtp_io_utils.check_BD_against_test_train_col(Brain_Data_allsubs,test_train_set, test_train_set.SplitGroup_75_25)
     
     #################################################
     #######PRE-PROCESS

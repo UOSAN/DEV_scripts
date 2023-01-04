@@ -82,14 +82,16 @@ def features_norm(all_subjects):
 
 
 
-def main(normalize_across_features=True,screening_percentile=5):
+def main(normalize_across_features=True,screening_percentile=5,
+         bd_filename='Brain_Data_betaseries_30subs_correct_cond_pfc_condstd.pkl'):
 
     #brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_40subs_correct_cond.pkl'
     #brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_15subs_correct_cond.pkl'
-    brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_30subs_correct_cond_pfc_condstd.pkl'
+    #brain_data_filepath = ml_data_folderpath + '/SST/Brain_Data_betaseries_30subs_correct_cond_pfc_condstd.pkl'
+    brain_data_filepath = ml_data_folderpath + '/SST/' + bd_filename
     print(brain_data_filepath)
     warnings.warn("not sure if this file holds up--it was created in 2021; need to see if it's still valid")
-    train_test_markers_filepath = ml_data_folderpath + "/train_test_markers_20220818T144138.csv"
+    train_test_markers_filepath = ml_data_folderpath + "/train_test_markers_20230102T164214.csv"
 
     all_subjects = load_and_preprocess(
         brain_data_filepath,
