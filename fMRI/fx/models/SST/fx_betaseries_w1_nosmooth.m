@@ -5,11 +5,16 @@
 %-----------------------------------------------------------------------
 %s6_sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
 %s6_sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
-
-matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV004/ses-wave1/func/'};
-matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 'sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii';
+%need to unzip the file to prep for SPM
+%because SPM can't read nii.gz files.
+source_dir='/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV004/ses-wave1/func/';
+file_target='sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii';
+gunzip([source_dir,file_target]);
+%now setup the matlabbatch
+matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {source_dir};
+matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = file_target;
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
-matlabbatch{2}.spm.util.exp_frames.files = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{2}.spm.util.exp_frames.files = cfg_dep(['File Selector (Batch Mode): Selected Files (',file_target,')'], substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{2}.spm.util.exp_frames.frames = Inf;
 matlabbatch{3}.spm.stats.fmri_spec.dir = {'/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/betaseries_nos/sub-DEV004'};
 matlabbatch{3}.spm.stats.fmri_spec.timing.units = 'secs';
