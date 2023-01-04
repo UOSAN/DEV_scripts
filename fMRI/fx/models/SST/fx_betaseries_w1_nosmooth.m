@@ -9,7 +9,7 @@
 %because SPM can't read nii.gz files.
 source_dir='/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV004/ses-wave1/func/';
 file_target='sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii';
-gunzip([source_dir,file_target]);
+gunzip([source_dir,file_target,'.gz']);
 %now setup the matlabbatch
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {source_dir};
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = file_target;
