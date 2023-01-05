@@ -21,6 +21,7 @@ import pickle
 from nilearn.decoding import DecoderRegressor, Decoder
 import multiprocessing
 import math
+import sys
 
 cpus_available = multiprocessing.cpu_count()
 
@@ -193,37 +194,11 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
     clean = "standardize"
 ):
 
-
-
-    test_train_set = pd.read_csv(train_test_markers_filepath)
-
-    with open(brain_data_filepath, 'rb') as pkl_file:
-        Brain_Data_allsubs = pickle.load(pkl_file)
-    
-    dev_wtp_io_utils.check_BD_against_test_train_col(Brain_Data_allsubs,test_train_set, test_train_set.SplitGroup_75_25)
-    
-    #################################################
-    #######PRE-PROCESS
-
-
-    
-    if response_transform_func is None:
-        Brain_Data_allsubs.Y = Brain_Data_allsubs.X['response'].copy()
-    else:
-        Brain_Data_allsubs.Y = response_transform_func(Brain_Data_allsubs.X)
-    
-        
-    #print(Brain_Data_allsubs.Y.value_counts())
-    Brain_Data_allsubs.Y[Brain_Data_allsubs.Y=='NULL']=None
-    #print(Brain_Data_allsubs.Y.value_counts())
-    
-
-    import sys
-    for name, size in sorted(((name, sys.getsizeof(value)) for name, value in locals().items()),
-                             key= lambda x: -x[1])[:10]:
-        print(name + ': ' + str(size))
-    #print(Brain_Data_allsubs.Y.isnull().value_counts())
-    Brain_Data_allsubs_nn = Brain_Data_allsubs[Brain_Data_allsubs.Y.isnull()==False]
+    Brain_Data_allsubs_nn = load_and_preprocess_Brain_Data(
+        brain_data_filepath,
+        train_test_markers_filepath,
+        response_transform_func
+    )
     print(len(Brain_Data_allsubs_nn))
     print(len(Brain_Data_allsubs))
 
@@ -287,4 +262,46 @@ def load_and_preprocess(brain_data_filepath = '../data/Brain_Data_2sns_60subs.pk
     )
 
     
+    
+def load_and_preprocess_Brain_Data(
+    brain_data_filepath = '../data/Brain_Data_2sns_60subs.pkl',
+    train_test_markers_filepath = "../data/train_test_markers_20210601T183243.csv",
+    response_transform_func = None
+):
+    test_train_set = pd.read_csv(train_test_markers_filepath)
+
+    with open(brain_data_filepath, 'rb') as pkl_file:
+        Brain_Data_allsubs = pickle.load(pkl_file)
+    
+    dev_wtp_io_utils.check_BD_against_test_train_col(Brain_Data_allsubs,test_train_set, test_train_set.SplitGroup_75_25)
+    
+    #################################################
+    #######PRE-PROCESS
+
+
+    
+    if response_transform_func is None:
+        Brain_Data_allsubs.Y = Brain_Data_allsubs.X['response'].copy()
+    else:
+        Brain_Data_allsubs.Y = response_transform_func(Brain_Data_allsubs.X)
+    
+        
+    #print(Brain_Data_allsubs.Y.value_counts())
+    Brain_Data_allsubs.Y[Brain_Data_allsubs.Y=='NULL']=None
+    #print(Brain_Data_allsubs.Y.value_counts())
+    
+
+
+    for name, size in sorted(((name, sys.getsizeof(value)) for name, value in locals().items()),
+                             key= lambda x: -x[1])[:10]:
+        print(name + ': ' + str(size))
+    #print(Brain_Data_allsubs.Y.isnull().value_counts())
+    Brain_Data_allsubs_nn = Brain_Data_allsubs[Brain_Data_allsubs.Y.isnull()==False]
+    print(len(Brain_Data_allsubs_nn))
+    print(len(Brain_Data_allsubs))
+
+    del Brain_Data_allsubs
+
+
+    return(Brain_Data_allsubs_nn)
     

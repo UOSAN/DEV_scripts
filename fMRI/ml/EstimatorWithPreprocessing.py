@@ -90,8 +90,3 @@ class EstimatorWithPreprocessor(BaseEstimator):
         # Make predictions on the data here
         return(self.estimator.score(X_pp))
 
-
-    #cv_scores attribute
-    @property
-    def cv_scores_(self):
-        return(self.estimator.cv_scores_)

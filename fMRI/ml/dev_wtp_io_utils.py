@@ -16,6 +16,7 @@ from pympler.asizeof import asizeof
 import gc #garbage collection
 import pickle
 from copy import deepcopy
+from dev_utils import get_2DX_from_4DX
 
 
 class BehavioralDataNotFoundForBrainDataException(Exception):
@@ -927,10 +928,13 @@ def save_grouped_Brain_Data_archive_from_raw(Brain_Data_filepath):
         pickle.dump(bd_grouped,pkl_file)
 
         
+
 ## get a list of the subject folders
 ## iterate through them
 ## pass in a design matrix appropriate for that subject (pretty much just subject ID and then name of condition)
 ## append
+
+
 
 def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../data/', 
                                     conditions_to_include=None,
@@ -1031,16 +1035,15 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
     with open(out_filepath, 'wb') as pkl_file:
         pickle.dump(Brain_Data_allsubs,pkl_file)
 
-        
-def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_design,
-        out_folder = '../data/',
-        out_file_suffix ='', #mask = "beta",#mask_threshold=None,
+
+def import_sst_betaseries_w1_subjs(subjs,first_level_fileid, behavioral_design,
         sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/',
         subj_brain_data_args = {}
                                          ):
+
     first_level_path = sst_wt_repo + first_level_fileid + "/"
     print(first_level_path)
-    subj_count = len(subjs)
+    
     
     subjs.sort()
     bd_dict={}
@@ -1070,6 +1073,24 @@ def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_d
         val_to_append = list(bd_dict.values())[i]
         Brain_Data_allsubs= Brain_Data_allsubs.append(val_to_append)
 
+    return(Brain_Data_allsubs)
+
+       
+def import_sst_betaseries_w1_subjs_to_nifti_pkl(subjs,first_level_fileid, behavioral_design,
+        out_folder = '../data/',
+        out_file_suffix ='', #mask = "beta",#mask_threshold=None,
+        sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/',
+        subj_brain_data_args = {}
+                                         ):
+
+    subj_count = len(subjs)
+
+    Brain_Data_allsubs = import_sst_betaseries_w1_subjs(
+        subjs,first_level_fileid, behavioral_design,
+        sst_wt_repo = sst_wt_repo,
+        subj_brain_data_args = subj_brain_data_args
+    )
+
     #dump
     out_filepath = (
         out_folder + 'Brain_Data_' +
@@ -1081,5 +1102,74 @@ def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_d
     with open(out_filepath, 'wb') as pkl_file:
         pickle.dump(Brain_Data_allsubs,pkl_file)
         
+def transform_nifti_img_to_masked_numpy_X(nifti_img,mask_path):
+    mask_nifti = nib.load(mask_path)
+    external_mask = mask_nifti
+    external_mask_resampled = nil.image.resample_to_img(external_mask, nifti_img.slicer[:,:,:,0],interpolation='nearest')
+    external_mask_bin = nil.image.math_img("(np.round(img,3)>0.1).astype(int)",img=external_mask_resampled)
+
+    #convert nifti to 2d numpy array
+    X_2d=get_2DX_from_4DX(nifti_img.get_fdata())
+    #convert mask to 2d numpy array
+    mask_2d = get_2DX_from_4DX(external_mask_bin.get_fdata())
+    #iterate through first dimension of X_2d numpy array and apply mask to each sample
+    X_2d_masked = np.apply_along_axis(lambda sample: sample[mask_2d[0].astype(bool)],1,X_2d)
+    
+
+    #create dictionary storing the necessary information to reconstruct the original nifti image
+    nifti_img_dict = {
+        'pre_reshaped_shape':nifti_img.shape,
+        'affine':nifti_img.affine,
+        'header':nifti_img.header,
+        'first_img':nifti_img.slicer[:,:,:,0]
+        }
+
+    img_dict = {
+        'X_2d_masked':X_2d_masked,
+        'X_metadata':nifti_img_dict
+    }
+    
+    return(img_dict)
 
 
+
+# def import_sst_betaseries_w1_subjs_to_masked_numpy_pkl(subjs,first_level_fileid, behavioral_design,
+#         mask_path,
+#         out_folder = '../data/',
+#         out_file_suffix ='', #mask = "beta",#mask_threshold=None,
+#         sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/',
+#         subj_brain_data_args = {}
+#                                          ):
+
+#     subj_count = len(subjs)
+
+#     Brain_Data_allsubs = import_sst_betaseries_w1_subjs(
+#         subjs,first_level_fileid, behavioral_design,
+#         sst_wt_repo = sst_wt_repo,
+#         subj_brain_data_args = subj_brain_data_args
+#     )
+
+#     ### UP TO HERE. THIS IS WHAT WE NEED TO DO.
+#     ### WILL BE SOMETHING LIKE:
+#     ### (1) Mask with Brain_Data.mask or whatever the term is
+#     ### (2) Verify that has worked.
+#     ### (3) Brain_Data.data to get the raw data to convert to numpy array
+#     ### (4) slice Brain Data first image to get the affine and header info
+#     ### alternatively, we could avoid changing the import script, and
+#     ### and instead, write a new load_and_preprocess script that converst from the brain_data
+#     ### that's probably the better way to do it.
+
+#     img_data_masked = transform_nifti_img_to_masked_numpy_X(Brain_Data_allsubs['X'],mask_path)
+
+
+#     #dump
+#     out_filepath = (
+#         out_folder + 'Brain_Data_' +
+#         #'betaseries_' +
+#         first_level_fileid + '_' + str(subj_count) + 'subs' + out_file_suffix + '.pkl'
+#     )
+#     print(out_filepath)
+
+#     with open(out_filepath, 'wb') as pkl_file:
+#         pickle.dump(Brain_Data_allsubs,pkl_file)
+        
