@@ -64,10 +64,6 @@ def sklearn_nested_cross_validate(X, y, estimator_set, groups=None):
     assert isinstance(y, np.ndarray)
     assert isinstance(groups, np.ndarray)
 
-
-    
-
-
     #create a dataframe to store the results of the inner CV
     #first three columns should be integers; score should be a float
     estimator_performance_df =pd.DataFrame(
