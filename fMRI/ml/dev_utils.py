@@ -90,14 +90,14 @@ def sklearn_nested_cross_validate(X, y, estimator_set, groups=None):
 
         #now do inner CV
         for j, (train_j,validate_j) in enumerate(inner_cv.split(X_train_i,groups=groups_train_i)):
-            print("hyper-parameter search group " + str(j))
+            print("hyper-parameter search group " + str(j) + "; ",end=" ")
         
-            print(len(train_j))
-            print(len(validate_j))
+            #print(len(train_j))
+            #print(len(validate_j))
             #do a grid search using  to find the best parameters for each estimator
 
             for estimator_i, estimator in enumerate(estimator_set):
-                print("estimating...",end="")
+                print("est...",end="")
                 #for now, don't implement the gridsearch because we don't need it; 
                 # I just want to comapre the performance of the different estimators
                 estimator.fit(X_train_i[train_j],y=y_train_i[train_j])
@@ -107,9 +107,11 @@ def sklearn_nested_cross_validate(X, y, estimator_set, groups=None):
                 # get the score of the estimator on the test data
                 inner_score = roc_auc_score(y_train_i[validate_j], inner_y_pred)
                 #print the score for this estimator
-                print("estimator " + str(estimator_i) + "; ROC AUC score: " + str(inner_score))
+                print("est " + str(estimator_i) + "; ROC AUC: " + str(inner_score) + "; ")
                 #add an entry to the dataframe
                 estimator_performance_df.loc[len(estimator_performance_df)] = [i,j,estimator_i,inner_score]
+            
+        print("\n")
 
     #now, we have a list of lists of lists of scores for each estimator
     #we can select the best estimator for each fold from the estimators df

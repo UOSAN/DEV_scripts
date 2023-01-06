@@ -73,40 +73,14 @@ def main(bd_filename):
         response_transform_func = trialtype_resp_trans_func
         #clean=None
         )
-    #filter out any subjects that don't have all the outcome groups
-    # outcome_groups = pd.DataFrame(
-    #     {'outcomes':all_subjects.Y,'subjects':all_subjects.X['subject']}
-    #     ).value_counts()
-    # #identify any subjects with missing outcome groups
-    # missing_outcome_groups = outcome_groups[outcome_groups==0].index.get_level_values('subject').unique()
-    # outcome_groups
-
-    #remove any features that are all NaN
-    not_na_cols=np.isnan(all_subjects.data).all(axis=0)==False
-    cleaned_data=all_subjects.data[:,not_na_cols]
-    all_subjects.data=cleaned_data
-
-    #find out how many nan features there are in each sample
-    nan_features_per_sample = np.isnan(all_subjects.data).sum(axis=1)
-    #find out which subject each of those samples are associated with
-    nan_features_per_sample_subjs = all_subjects.X['subject'].iloc[nan_features_per_sample>0]
-    subjects_with_nan_features = nan_features_per_sample_subjs.unique()
-    print("there are " + str(len(subjects_with_nan_features)) + " subjects with nan features. all the subject data will be removed from the dataset",end="")
-    #remove those subjects from the dataset
-    all_subjects = all_subjects[~all_subjects.X['subject'].isin(subjects_with_nan_features)]
-    #okay, so it's just one subject. so we can remove them, and move on!
-    print("...removed.")
-
-
-
 
     #convert the y array to an integer array representing the string values of the y array
     all_subjects_y_cat = all_subjects.Y.astype('category')
     all_subjects_y_int=all_subjects_y_cat.cat.codes
 
-    #mask_nifti = nib.load(ml_data_folderpath + '/prefrontal_cortex.nii.gz')
+    mask_nifti = nib.load(ml_data_folderpath + '/prefrontal_cortex.nii.gz')
 
-    num_subjs = len(all_subjects.X['subject'].unique())
+    num_subjs = 6
     if num_subjs < len(all_subjects.X['subject'].unique()):
         #select subjs
         subjs = all_subjects.X['subject'].unique()
@@ -116,11 +90,8 @@ def main(bd_filename):
         selected_subjs = all_subjects[selected_rows]
         selected_subjs_y_int = all_subjects_y_int[selected_rows]
     else:
-        print("using all subjects")
         selected_subjs = all_subjects
         selected_subjs_y_int = all_subjects_y_int
-
-        
 
     estimators = [
         LogisticRegression(penalty='l2',solver='liblinear',class_weight='balanced'),
@@ -135,18 +106,27 @@ def main(bd_filename):
             ('estimator', estimator)])
         estimators_with_fs.append(estimator_with_fs)
 
-    cv_result = sklearn_nested_cross_validate(
-        selected_subjs.data,
-        np.array(selected_subjs_y_int),
-        estimators_with_fs,
-        groups=np.array(selected_subjs.X['subject']))
+    for subj in np.unique(selected_subjs.X['subject']):
+        #do classification one subject at a time.
+        this_subj_samples = selected_subjs.X['subject']==subj
+        print(subj)
 
-    
-            
-    print(pd.Series(cv_result['y_predict_final']).value_counts())
-    print(roc_auc_score(selected_subjs_y_int,cv_result['y_predict_final']))
+        #create some pseudogroups, ensuring that each group has some of each outcome type
+        this_subj_y = selected_subjs_y_int[this_subj_samples]
+        group_size = this_subj_y.value_counts().min()
+        #now assign every item in each sample to a number between 1 and group_size
+        #cumulatively number each item type in the sample
+        pseudo_groups = this_subj_y.groupby(this_subj_y).cumcount() % group_size + 1
 
-    return(cv_result)
+
+        cv_result = sklearn_nested_cross_validate(
+            selected_subjs[this_subj_samples].data,
+            np.array(this_subj_y),
+            estimators_with_fs,
+            groups=np.array(pseudo_groups))
+
+        print(pd.Series(cv_result['y_predict_final']).value_counts())
+        print(roc_auc_score(this_subj_y,cv_result['y_predict_final']))
 
         
 if __name__ == "__main__":
