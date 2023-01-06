@@ -1075,8 +1075,8 @@ def import_sst_betaseries_w1_subjs(subjs,first_level_fileid, behavioral_design,
 
     return(Brain_Data_allsubs)
 
-       
-def import_sst_betaseries_w1_subjs_to_nifti_pkl(subjs,first_level_fileid, behavioral_design,
+
+def import_sst_betaseries_w1_subjs_to_pkl(subjs,first_level_fileid, behavioral_design,
         out_folder = '../data/',
         out_file_suffix ='', #mask = "beta",#mask_threshold=None,
         sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/',
