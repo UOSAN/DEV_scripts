@@ -189,3 +189,32 @@ def sklearn_simple_cross_validate(X, y, estimator, groups=None,scoring_function=
 
 
 
+def filter_dev_data(test_train_df_raw, nonbids_data_path,dropbox_datapath):
+    #mark subjects in nsc_subject_exclusions (not sure where this came from)
+    include_exclude_list = pd.read_csv("../nsc_subject_exclusions.csv")
+    #mark subjects with bad data at scan time
+    data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
+    data_quality_sst = data_quality.loc[data_quality.SST.isna()==False,]
+
+    #remove each of hte above categories
+    test_train_df_raw = test_train_df_raw.merge(include_exclude_list[include_exclude_list.Task=='SST'],left_on='sub_label',right_on='SubjectId',how='left')
+    test_train_df_raw.loc[test_train_df_raw.Include.isna(),'Include'] = True
+    test_train_df_raw = test_train_df_raw.merge(data_quality_sst[['dev_id','SST']],left_on='sub_label',right_on='dev_id',how='left')
+    test_train_df = test_train_df_raw[(test_train_df_raw.Include==True) & (test_train_df_raw.SST=="No reported problems")]
+
+    #remove subjects noted with bad or missign data eitehr here or elsewhere
+    exclude_subjects = [
+    'DEV012','DEV018', 'DEV068', 'DEV073','DEV159', #excluded during the conversion process for reasons I'm not sure about
+
+    'DEV061','DEV185','DEV187',
+    'DEV189','DEV190','DEV192',
+    'DEV198','DEV203','DEV220','DEV221']
+    #2022-01-06 added DEV157 because of an error
+    #2023-01-02 to -03 added DEV068, DEV101 because of an error
+
+    #we have data missing fro mthese subjects below. not enstirely sure yet; see 
+    #https://docs.google.com/document/d/1EB0ACA6qhMkDEgv-zqNTepPCe_x41fRQHaeqT47vazM/edit#heading=h.60rb13rlxkrq
+    train_subjs = test_train_df.loc[test_train_df.SplitGroup_75_25=='Train','sub_label'].tolist()#only get the train subjects; ignore those previously marked hold-out
+    train_subjs_selected = [ts for ts in train_subjs if (ts not in exclude_subjects)]
+
+    return(train_subjs_selected)
