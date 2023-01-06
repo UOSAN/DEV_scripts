@@ -404,7 +404,7 @@ def get_Brain_Data_betas_for_sub(
     behavdesign,
     betaseries_path='/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave1/betaseries/',
     events_in_design = 64,
-    mask = None,
+    mask = "beta",
     mask_threshold=0.5,
     spatially_concatenate=False,
     standardize_by_condition=False
@@ -941,10 +941,11 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
                                     condition_count_required=None,
                                     supplementary_df = None,
                                          out_file_suffix ='',
-                                    concatenate_condition_labels=False,
+                                    #concatenate_condition_labels=False, # deprecated, just pass to subj_brain_data_args as "spatially_concatenate"
+                                    sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/',
                                     subj_brain_data_args = {}):
     ## get a list of the subject folders
-    sst_wt_repo = '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/wave1/'
+    
     first_level_path = sst_wt_repo + first_level_fileid + "/"
     print(first_level_path)
     subj_count = len(subjs)
@@ -1002,8 +1003,8 @@ def import_sst_cond_w1_subjs_to_pkl(subjs,first_level_fileid,out_folder = '../da
                 sl, beta_df,
                 betaseries_path = first_level_path,
                 events_in_design=beta_df.shape[0],
-                spatially_concatenate = concatenate_condition_labels,
-                mask = "beta", # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
+                #spatially_concatenate = concatenate_condition_labels,
+                #mask = "beta", # '/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii'
                 **subj_brain_data_args
             )
             
