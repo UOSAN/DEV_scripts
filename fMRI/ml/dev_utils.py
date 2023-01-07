@@ -193,7 +193,11 @@ def filter_dev_data(test_train_df_raw, nonbids_data_path,dropbox_datapath):
     #mark subjects in nsc_subject_exclusions (not sure where this came from)
     include_exclude_list = pd.read_csv("../nsc_subject_exclusions.csv")
     #mark subjects with bad data at scan time
-    data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
+    #check if file exists
+    if os.path.isfile(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx"):
+        data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
+    else:
+        data_quality = pd.read_csv(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.csv")
     data_quality_sst = data_quality.loc[data_quality.SST.isna()==False,]
 
     #remove each of hte above categories
