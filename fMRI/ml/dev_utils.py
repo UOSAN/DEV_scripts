@@ -194,10 +194,10 @@ def filter_dev_data(test_train_df_raw, nonbids_data_path,dropbox_datapath):
     include_exclude_list = pd.read_csv("../nsc_subject_exclusions.csv")
     #mark subjects with bad data at scan time
     #check if file exists
-    if os.path.isfile(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx"):
-        data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
-    else:
-        data_quality = pd.read_csv(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.csv")
+#     if os.path.isfile(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx"):
+#         data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
+#     else:
+    data_quality = pd.read_csv(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.csv")
     data_quality_sst = data_quality.loc[data_quality.SST.isna()==False,]
 
     #remove each of hte above categories
@@ -212,7 +212,8 @@ def filter_dev_data(test_train_df_raw, nonbids_data_path,dropbox_datapath):
 
     'DEV061','DEV185','DEV187',
     'DEV189','DEV190','DEV192',
-    'DEV198','DEV203','DEV220','DEV221']
+    'DEV198','DEV203','DEV220','DEV221',
+    'DEV312']
     #2022-01-06 added DEV157 because of an error
     #2023-01-02 to -03 added DEV068, DEV101 because of an error
 
