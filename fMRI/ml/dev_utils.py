@@ -17,9 +17,10 @@ def read_yaml_for_host(file_path):
         yaml_full = yaml.safe_load(f)
     
     if hostname in yaml_full:
+        print("hostname recognized as " + hostname + ". Using host-specific settings.")
         yaml_host = yaml_full[hostname]
     else:
-        print("yaml file does not contain host-specific settings for this host. Using default settings.")
+        print("yaml file does not contain host-specific settings for this host (" + hostname + "). Using default settings.")
         yaml_host = yaml_full['default']
     
     return(yaml_host)

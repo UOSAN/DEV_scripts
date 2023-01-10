@@ -56,7 +56,7 @@ def trialtype_resp_trans_func(X):
 
 
 
-def main(bd_filename):
+def main(bd_filename, response_transform_function = trialtype_resp_trans_func):
 
 
     brain_data_filepath = ml_data_folderpath + bd_filename
@@ -70,7 +70,7 @@ def main(bd_filename):
         brain_data_filepath,
         train_test_markers_filepath,
         #subjs_to_use = None,
-        response_transform_func = trialtype_resp_trans_func
+        response_transform_func = response_transform_function
         #clean=None
         )
     #filter out any subjects that don't have all the outcome groups
