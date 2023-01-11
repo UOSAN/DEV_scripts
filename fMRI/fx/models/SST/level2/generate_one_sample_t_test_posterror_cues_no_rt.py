@@ -42,7 +42,9 @@ betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 print(betas_with_contrasts.columns)
 contrast_name_list = [
     'CueFollowing(CS>FS)',
-    'CueFollowing(FS>CS)'
+    'CueFollowing(FS>CS)',
+    'CorrectGoFollowing(CS>FS)',
+    'CorrectGoFollowing(FS>CS)'
     #we can't contrast CG and CS because
     #we haven't prepared t-maps properly
     #considering that some cue items will be missing and the betas won't be in the same order
