@@ -47,7 +47,7 @@ for subname in $(ls -d sub*); do
 	for beta in ${betas[@]}; do
 		3dAllineate -source ${subdir}/${beta} -master ${template} -final NN -1Dparam_apply '1D: 12@0'\' -prefix ${subdir}/aligned_${beta}
 		for map in ${maps[@]}; do
-			map_name=$(echo ${map: 79})
+			map_name=$(echo ${map: 55})
 			echo ${SUB} ${beta} ${map_name} `3ddot -dodot ${subdir}/aligned_${beta} ${map}` >> "${output_dir}"/"${SUB}"_dotProducts.txt
 		done
 	done
