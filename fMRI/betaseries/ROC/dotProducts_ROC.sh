@@ -6,8 +6,8 @@
 # Set paths and variables
 # ------------------------------------------------------------------------------------------
 # variables
-maps=$(ls ~/Documents/code/sanlab/NSC_scripts/fMRI/mvpa/neural_signatures/*.nii.gz)
-template=/Users/danicosme/Documents/code/sanlab/NSC_scripts/fMRI/mvpa/neural_signatures/reg_look_train.nii.gz
+maps=$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
+template=/projects/sanlab/shared/DEV/nonbids_data/rois_patterns/craving_regulation_signature.nii
 betasALL=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..47}) $(printf "beta_%04d.nii\n" {55..74}) $(printf "beta_%04d.nii\n" {82..101})`
 betasDEV022=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..47}) $(printf "beta_%04d.nii\n" {55..74}) $(printf "beta_%04d.nii\n" {82..89})`
 betasDEV060=`echo $(printf "beta_%04d.nii\n" {1..19}) $(printf "beta_%04d.nii\n" {27..46}) $(printf "beta_%04d.nii\n" {54..73}) $(printf "beta_%04d.nii\n" {81..100})`
@@ -16,8 +16,8 @@ betasDEV063=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n"
 betasDEV082=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..42}) $(printf "beta_%04d.nii\n" {50..69}) $(printf "beta_%04d.nii\n" {77..96})`
 
 # paths
-image_dir=~/Documents/code/sanlab/DEV_scripts/data/ROC_betaseries
-output_dir=~/Documents/code/sanlab/DEV_scripts/fMRI/betaseries/ROC/dotProducts_ROC
+image_dir=/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/ROC/wave1/betaseries
+output_dir=/projects/sanlab/shared/DEV/DEV_scripts/fMRI/betaseries/ROC/dotProducts_ROC_wave1
 
 if [ ! -d ${output_dir} ]; then
 	mkdir -p ${output_dir}
@@ -47,7 +47,7 @@ for subname in $(ls -d sub*); do
 	for beta in ${betas[@]}; do
 		3dAllineate -source ${subdir}/${beta} -master ${template} -final NN -1Dparam_apply '1D: 12@0'\' -prefix ${subdir}/aligned_${beta}
 		for map in ${maps[@]}; do
-			map_name=$(echo ${map: 79})
+			map_name=$(echo ${map: 55})
 			echo ${SUB} ${beta} ${map_name} `3ddot -dodot ${subdir}/aligned_${beta} ${map}` >> "${output_dir}"/"${SUB}"_dotProducts.txt
 		done
 	done
