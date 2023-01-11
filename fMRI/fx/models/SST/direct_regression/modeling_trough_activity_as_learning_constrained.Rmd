@@ -2,11 +2,16 @@
 title: "learning analysis, new subjects"
 author: "Ben Smith"
 date: "2022-12-19"
-output: html_document
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    code_folding: hide
+    theme: spacelab
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE)
 ```
 
 We've noticed an accumbens signal that has a particularly pronounced CS-FS difference among late trials.
@@ -21,6 +26,7 @@ We are really mostly interested in FS so at the trial level we'd do
 1) is accumbens BOLD FS contrast at tone+5 s (which reacts positively) positively related to longer reaction times in subsequent trials, and 
 2) is accumbens bold FS contrast at tone+9 (which reacts negatively) negatively related to longer reaction times in subsequent trials?
 
+# Prep
 
 ```{r}
 library(tidyverse)
@@ -202,7 +208,7 @@ FS_neural_behav_data_not_na<-FS_summary_data_accumbens[
 
 ```
 
-
+# Single-level tests
 
 ```{r}
 FS_by_subj_raw <- FS_neural_behav_data_not_na %>% group_by(subid) %>%
@@ -308,7 +314,7 @@ FS_neural_behav_data_not_na <- merge(
 
 ```
 
-Per subject:
+## Per subject:
 
 ```{r}
 
@@ -398,7 +404,7 @@ print(roi_inddiv_df)
 ```
 
 
-# Striatal cluster
+# Basic Striatal cluster mixed effects models
 
 The preliminary analysis suggests this should be significant both within and across individuals. Let's see!
 
@@ -462,12 +468,12 @@ anova(model_random_only,model_full_effects)
 By constraining our peak much more relative to the unconstrained peak, we have a much, much stronger effect in the linear model. It oddly doesn't really show up in the pairwise within-subject correlation; in fact, we lose the putamen effect we had previously observed.
 
 
-# Figuring out a pre-trial confound
+## Figuring out a pre-trial confound
 
 There's a possible confound here in that perhaps the pre-trial reaction time is what is actually driving the correlation. To do address this there is a simple check and a more comprehensive check. The simple check is to re-run with pre and post separated. The more comprehensive check is to include both CS and FS.
 
 
-## separate pre and post
+### separate pre and post
 
 
 ```{r}
@@ -535,7 +541,7 @@ anova(model_random_only,model_full_effects)
 
 ```
 
-## includ both CS and FS in the model
+## include all trial types in the model
 
 
 ```{r}
@@ -664,7 +670,7 @@ That looks convincing! Great. So. Is there a way to fit this into a learning mod
 
 If the neural signal is RPE, maybe the next reaction time is the "value". So far, so good.
 
-## Learning the probability of a stop trial
+# Learning the probability of a stop trial
 
 But at the same time, we're also learning the prior probability of a trial being a stop trial.
 
@@ -674,7 +680,7 @@ There are actually several possible intuitive models for this:
 
 (2) "increasing probability" model. The longer we've gone without a stop trial, teh more likely we'll see another one. The simplest way to model this might simply be "number of trials since the last item.
 
-We have doen both of these before, right???
+We have done both of these before, right???
 
 What does that learning look like? It is likely to be a model of the change in RT on each trial
 
@@ -690,7 +696,7 @@ I think it's good to consider these together since they might work against each 
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial + trials_since_last_SSD +(1+ post_pre_rt_change | subid),
+   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post + trials_since_last_SSD +(1+ post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_full_effects)
@@ -705,7 +711,7 @@ OK, so `P_Stop_trial` appears to be relevant, but `trials_since_last_SSD` is not
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial +(1+ post_pre_rt_change | subid),
+   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_full_effects)
@@ -733,7 +739,7 @@ We should examine whether this is anything but subjects getting used to the task
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial +(1+ post_pre_rt_change | subid),
+   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -749,7 +755,7 @@ Gosh that's interesting--it still says significant. So this might say something 
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial +(1+ post_pre_rt_change | subid),
+   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -763,13 +769,13 @@ Let's try it controlling for random effects...
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial +(1+ post_pre_rt_change+P_stop_trial | subid),
+   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change+P_stop_trial_post | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
 
 model_random_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change  +(1+ post_pre_rt_change+P_stop_trial | subid),
+   peak ~ trial_n_n +post_pre_rt_change  +(1+ post_pre_rt_change+P_stop_trial_post | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_random_effects)
@@ -783,14 +789,14 @@ anova(model_random_effects,model_full_effects)
 
 It seems to capture meaningful variance!
 
-
+### Quadratic
 
 
 ```{r}
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial+I(P_stop_trial^2) +(1+ post_pre_rt_change+P_stop_trial | subid),
+   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post+I(P_stop_trial_post^2) +(1+ post_pre_rt_change+P_stop_trial | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -806,6 +812,20 @@ Nothing for the quadratic, though. What about just for the last trial only? I be
 
 
 model_full_effects <- lme4::lmer(
+   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post+(trials_since_last_SSD==1) +(1+ post_pre_rt_change+P_stop_trial_post | subid),
+  FS_neural_behav_p %>% filter(trial_n>50)
+  )
+summary(model_full_effects)
+
+
+```
+
+
+
+```{r}
+
+
+model_full_effects <- lme4::lmer(
    peak ~ trial_n_n +post_pre_rt_change + P_stop_trial+(trials_since_last_SSD==1) +(1+ post_pre_rt_change+P_stop_trial | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
@@ -814,4 +834,177 @@ summary(model_full_effects)
 
 ```
 
-Very impressive! It's the P_stop_trial that makes the difference..
+### Chagne in P_stop_trial
+
+There is probably _change_ in P_stop_trial to consider, too.
+
+First we need to calculate it in the dataset.
+
+```{r}
+
+
+
+
+model_P_stop_trial_post <- lme4::lmer(
+   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change+P_stop_trial_post | subid),
+  FS_neural_behav_p %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_post)
+
+model_P_stop_trial_w_change <- lme4::lmer(
+   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post + P_stop_trial_change +(1+ post_pre_rt_change+P_stop_trial_post + P_stop_trial_change | subid),
+  FS_neural_behav_p %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_w_change)
+
+```
+
+So, if we include the _change_ in probability of stop trial, that post isn't quite significant anymore.
+
+### Conclusion, Stop trial
+
+Including that recent SSD thing does weaken the effect below significance.
+
+
+# Individual subject learning rate
+
+Can we estimate a subject "learning rate"? That would determine how much a subject changes their (1) response time and (2) post-pre RT change. The simplest way is to just, at a subject level, model change in RT as function of the gap. I'm not sure that's quite going to work because probably subjects generally fully update each time.
+
+
+
+First--can we predict the change as a function of P_stop and the peak?
+
+```{r}
+
+
+FS_neural_behav_p$post_pre_rt_change_z<-scale(FS_neural_behav_p$post_pre_rt_change)
+FS_neural_behav_p$P_stop_trial_z<-scale(FS_neural_behav_p$P_stop_trial)
+FS_neural_behav_p$peak_z<-scale(FS_neural_behav_p$peak)
+
+model_full_effects <- lme4::lmer(
+   post_pre_rt_change_z ~ trial_n_n + P_stop_trial_z +peak_z+ (1+ peak_z+P_stop_trial_z | subid),
+  FS_neural_behav_p %>% filter(trial_n>50)
+  )
+summary(model_full_effects)
+
+
+```
+
+
+That's very compelling!
+
+If the two parameters are correlated, perhaps that represents a sort of learning rate?
+
+```{r}
+random_effects = ranef(model_full_effects)$subid
+
+cor.test(random_effects$peak_z,random_effects$P_stop_trial_z)
+
+plot(random_effects$peak_z,random_effects$P_stop_trial_z)
+```
+That's probably more than just a learning rate, that's some kind of banal statistical connection. Still, perhaps learning rate is in there? Could be if we can identify an individual feature.
+
+
+
+
+```{r}
+library(lattice)
+#ranef(model_full_effects)
+str(rr1 <- ranef(model_full_effects))
+dotplot(rr1)  ## default
+qqmath(rr1)
+## specify free scales in order to make Day effects more visible
+dotplot(rr1,scales = list(x = list(relation = 'free')))[["sub_id"]]
+## as.data.frame() provides RE's and conditional standard deviations:
+str(dd <- as.data.frame(rr1))
+if (require(ggplot2)) {
+    ggplot(dd, aes(y=grp,x=condval)) +
+        geom_point() + facet_wrap(~term,scales="free_x") +
+        geom_errorbarh(aes(xmin=condval -2*condsd,
+                           xmax=condval +2*condsd), height=0)
+}
+```
+
+
+```{r}
+data_by_ppt<- readr::read_csv(file = paste0("~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/data_by_ppt.csv"))
+```
+
+OK, so we haven't got anything here to measure learning, so I don't think we do anything with these parameters...
+```{r}
+random_effects$subid<-rownames(random_effects)
+data_by_ppt<-merge(data_by_ppt,random_effects,by.x = "SID",by.y="subid")
+
+#cor.test(data_by_ppt$peak_z,data_by_ppt$BFI_extraversion)
+cor.test(data_by_ppt$BIS_11,data_by_ppt$peak_z)
+cor.test(data_by_ppt$RTFS_f1_minus_f2,data_by_ppt$peak_z)
+```
+
+So what else can we do with this?
+
+We wanted to know if the RT or the peak (not the peak regressor as above) related to RTFS or BIS_11
+
+
+
+```{r}
+fs_by_ppt<-merge(data_by_ppt, FS_by_subj_i,data,by.x = "SID",by.y="subid")
+
+cor.test(fs_by_ppt$mean_post_pre_rt_change,fs_by_ppt$RTFS_f1_minus_f2)
+cor.test(fs_by_ppt$mean_peak, fs_by_ppt$RTFS_f1_minus_f2)
+cor.test(fs_by_ppt$mean_peak, fs_by_ppt$RTFS_f1_minus_f2,method="spearman")
+cor.test(fs_by_ppt$mean_trough, fs_by_ppt$RTFS_f1_minus_f2,method="spearman")
+cor.test(fs_by_ppt$mean_amplitude, fs_by_ppt$RTFS_f1_minus_f2,method="spearman")
+cor.test(fs_by_ppt$mean_peak, fs_by_ppt$BIS_11,method="spearman")
+
+```
+
+This validates that both $P(is stop)$ and the signal time are parameters to learn which striatal activity moderates in both of them.
+
+If striatum responds to both, its activations should be a function of each of them, which we have observed within FS. However, we should also see this affect across all trials, not necessarily moderated by FS, but if FS did moderate it, that might be because striatal activity facilitates learning or updating amongst other parts of the brain. we might expect to see heightened striatal connectivity with other regions during those FS periods--though that's an odd thing to say because the interesting thing is _decreased_ connectivity during the periods of strong updating! 
+
+# All trial types, with P_Stop
+
+
+```{r}
+model_full_effects <- lme4::lmer(
+   peak ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop") + P_stop_trial_change  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_full_effects)
+
+```
+
+That interaction isn't significant--let's take it away
+
+
+```{r}
+model_full_effects <- lme4::lmer(
+   peak ~ trial_n_s+ condition + +P_stop_trial_change+ post_pre_rt_change +  (1 +post_pre_rt_change +  P_stop_trial_change   | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_full_effects)
+
+```
+
+
+
+```{r}
+model_full_effects <- lme4::lmer(
+   peak ~ trial_n_s+ condition + +P_stop_trial_change+ post_pre_rt_change +  (1 +post_pre_rt_change +  P_stop_trial_change   | subid),
+  trial_neural_behav_roi
+  )
+summary(model_full_effects)
+
+```
+We've changed this code to use `P_stop_trial_change` ratehr than `P_stop_trial_post`. `P_stop_trial_change` makes more theoretical sense (since we're trying to measure how much the striatal effect is an update) yet it isn't a significant regressor.
+
+```{r}
+model_full_effects <- lme4::lmer(
+   peak ~ trial_n_s+ condition + +P_stop_trial_change+P_stop_trial_post+ post_pre_rt_change +  (1 +post_pre_rt_change +  P_stop_trial_change +P_stop_trial_post  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_full_effects)
+
+```
+
+
