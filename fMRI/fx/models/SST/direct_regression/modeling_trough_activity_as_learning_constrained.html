@@ -1630,6 +1630,8 @@ and</li>
 <li>is accumbens bold FS contrast at tone+9 (which reacts negatively)
 negatively related to longer reaction times in subsequent trials?</li>
 </ol>
+<div id="prep" class="section level1">
+<h1>Prep</h1>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <pre><code>## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 ## ✔ ggplot2 3.4.0      ✔ purrr   0.3.5 
@@ -1813,6 +1815,10 @@ FS_neural_behav_data_not_na&lt;-FS_summary_data_accumbens[
   rowSums(is.na(FS_summary_data_accumbens[,c(&quot;response_amplitude&quot;,&quot;post_pre_rt_change&quot;)]))==0 &amp; #no NA values in correlation and
     is.finite(FS_summary_data_accumbens$response_amplitude) &amp; is.finite(FS_summary_data_accumbens$post_pre_rt_change) #no infinite values
     ,]</code></pre>
+</div>
+</div>
+<div id="single-level-tests" class="section level1">
+<h1>Single-level tests</h1>
 <pre class="r"><code>FS_by_subj_raw &lt;- FS_neural_behav_data_not_na %&gt;% group_by(subid) %&gt;%
   mutate(trial_count=n())
 FS_by_subj &lt;- FS_by_subj_raw %&gt;% filter(trial_count &gt;2) %&gt;%
@@ -1910,7 +1916,6 @@ taking the average.</p>
 model but I don’t think we’re quite capable of pulling this out.</p>
 <p>If you take away the accumbens selection, you do get some significant
 results, but these are taking false precision…</p>
-</div>
 <div id="between-subjects" class="section level2">
 <h2>Between subjects</h2>
 <pre class="r"><code>trial_neural_behav_data_not_na&lt;-trial_summary_data_delat_pp[
@@ -2198,8 +2203,9 @@ print(roi_inddiv_df)</code></pre>
 ## t16 -0.16729633 0.0088366095       0.014459906      *
 ## t17  0.21498404 0.0007234677       0.003896683      *</code></pre>
 </div>
-<div id="striatal-cluster" class="section level1">
-<h1>Striatal cluster</h1>
+</div>
+<div id="basic-striatal-cluster-mixed-effects-models" class="section level1">
+<h1>Basic Striatal cluster mixed effects models</h1>
 <p>The preliminary analysis suggests this should be significant both
 within and across individuals. Let’s see!</p>
 <p>First let’s see if we should use the trial regressor.</p>
@@ -2404,16 +2410,15 @@ summary(model_random_only)</code></pre>
 peak, we have a much, much stronger effect in the linear model. It oddly
 doesn’t really show up in the pairwise within-subject correlation; in
 fact, we lose the putamen effect we had previously observed.</p>
-</div>
-<div id="figuring-out-a-pre-trial-confound" class="section level1">
-<h1>Figuring out a pre-trial confound</h1>
+<div id="figuring-out-a-pre-trial-confound" class="section level2">
+<h2>Figuring out a pre-trial confound</h2>
 <p>There’s a possible confound here in that perhaps the pre-trial
 reaction time is what is actually driving the correlation. To do address
 this there is a simple check and a more comprehensive check. The simple
 check is to re-run with pre and post separated. The more comprehensive
 check is to include both CS and FS.</p>
-<div id="separate-pre-and-post" class="section level2">
-<h2>separate pre and post</h2>
+<div id="separate-pre-and-post" class="section level3">
+<h3>separate pre and post</h3>
 <pre class="r"><code>#leading is next RT
 #lagging is last RT
 
@@ -2675,6 +2680,7 @@ summary(model_fixed_effects)</code></pre>
 ## model_full_effects   11 6284.5 6355.9 -3131.2   6262.5 23.599  2  7.509e-06 ***
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
 </div>
 <div id="include-all-trial-types-in-the-model" class="section level2">
 <h2>include all trial types in the model</h2>
@@ -3160,8 +3166,9 @@ learning model?</p>
 <p>If the neural signal is RPE, maybe the next reaction time is the
 “value”. So far, so good.</p>
 </div>
-<div id="learning-the-probability-of-a-stop-trial" class="section level2">
-<h2>Learning the probability of a stop trial</h2>
+</div>
+<div id="learning-the-probability-of-a-stop-trial" class="section level1">
+<h1>Learning the probability of a stop trial</h1>
 <p>But at the same time, we’re also learning the prior probability of a
 trial being a stop trial.</p>
 <p>There are actually several possible intuitive models for this:</p>
@@ -3659,8 +3666,8 @@ that post isn’t quite significant anymore.</p>
 significance.</p>
 </div>
 </div>
-<div id="individual-subject-learning-rate" class="section level2">
-<h2>Individual subject learning rate</h2>
+<div id="individual-subject-learning-rate" class="section level1">
+<h1>Individual subject learning rate</h1>
 <p>Can we estimate a subject “learning rate”? That would determine how
 much a subject changes their (1) response time and (2) post-pre RT
 change. The simplest way is to just, at a subject level, model change in
@@ -3888,7 +3895,6 @@ might expect to see heightened striatal connectivity with other regions
 during those FS periods–though that’s an odd thing to say because the
 interesting thing is <em>decreased</em> connectivity during the periods
 of strong updating!</p>
-</div>
 </div>
 <div id="all-trial-types-with-p_stop" class="section level1">
 <h1>All trial types, with P_Stop</h1>

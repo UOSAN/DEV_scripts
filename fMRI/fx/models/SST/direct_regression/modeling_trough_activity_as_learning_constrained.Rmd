@@ -691,6 +691,15 @@ Let's consider some candidate mechanisms
 I think it's good to consider these together since they might work against each other.
 
 
+```{r add_standardized}
+
+FS_neural_behav_p$peak_z<-scale(FS_neural_behav_p$peak)
+FS_neural_behav_p$post_pre_rt_change_z<-scale(FS_neural_behav_p$post_pre_rt_change)
+FS_neural_behav_p$P_stop_trial_change_z<-scale(FS_neural_behav_p$P_stop_trial_change)
+FS_neural_behav_p$P_stop_trial_z<-scale(FS_neural_behav_p$P_stop_trial)
+
+```
+
 
 ```{r}
 
@@ -832,6 +841,7 @@ model_full_effects <- lme4::lmer(
 summary(model_full_effects)
 
 
+
 ```
 
 ### Chagne in P_stop_trial
@@ -857,9 +867,83 @@ model_P_stop_trial_w_change <- lme4::lmer(
   )
 summary(model_P_stop_trial_w_change)
 
+
 ```
 
 So, if we include the _change_ in probability of stop trial, that post isn't quite significant anymore.
+
+### Visualization
+
+```{r}
+library(ggplot2)
+
+
+trial_n_means = (
+  FS_neural_behav_p %>% 
+    filter(trial_n>=50) %>% 
+    group_by(trial_n,P_stop_trial,P_stop_trial_post,P_stop_trial_change) %>% 
+    mutate(m_peak_z=mean(peak_z,na.rm=TRUE))
+)
+
+ggplot(
+  trial_n_means,
+  aes(x=trial_n,y=P_stop_trial,color=m_peak_z)
+  )+
+  geom_point()+
+  geom_vline(xintercept=50)
+
+ggplot(trial_n_means,
+       aes(y=m_peak_z,x=P_stop_trial)
+       )+geom_point()
+
+
+
+cor.test(trial_n_means$P_stop_trial, trial_n_means$m_peak_z)
+
+corrplot::corrplot(
+  cor(trial_n_means[,c("P_stop_trial","P_stop_trial_post","P_stop_trial_change","m_peak_z","trial_n")]),
+  type="upper",
+  method=c("number"),diag=FALSE
+  
+  )
+```
+
+
+
+### P_stop clean model
+
+
+
+```{r}
+FS_neural_behav_p$P_stop_trial_post_z<-scale(FS_neural_behav_p$P_stop_trial_post)
+
+
+model_P_stop_trial <- lme4::lmer(
+   peak_z ~ trial_n_n +post_pre_rt_change_z + P_stop_trial_post_z +(1+ post_pre_rt_change_z + P_stop_trial_post_z | subid),
+  FS_neural_behav_p %>% filter(trial_n>=50)
+  )
+summary(model_P_stop_trial)
+
+model_P_stop_trial_w_no_rt <- lme4::lmer(
+   peak_z ~ trial_n_n + P_stop_trial_post_z +(1+ post_pre_rt_change_z + P_stop_trial_post_z | subid),
+  FS_neural_behav_p %>% filter(trial_n>=50)
+  )
+summary(model_P_stop_trial_w_no_rt)
+
+anova(model_P_stop_trial,model_P_stop_trial_w_no_rt)
+
+model_P_stop_trial_w_no_p_stop_d <- lme4::lmer(
+   peak_z ~ trial_n_n +post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_post_z | subid),
+  FS_neural_behav_p %>% filter(trial_n>=50)
+  )
+summary(model_P_stop_trial_w_no_p_stop_d)
+
+
+anova(model_P_stop_trial, model_P_stop_trial_w_no_p_stop_d)
+
+```
+
+
 
 ### Conclusion, Stop trial
 
@@ -964,6 +1048,12 @@ If striatum responds to both, its activations should be a function of each of th
 
 # All trial types, with P_Stop
 
+I think if you're going to do P_stop
+
+ - P_stop_trial seems mostly irrelevant and P_stop_trial_post is a more relevant measure; P_stop_trial_change is more relevant still.
+ - measuring P_stop_trial rather than P_stop_trial_change doesn't make much sense, but
+ - If you're only measuring FS, neither P_stop_trial_post nor P_stop_trial_change are necessarily going to measure what you think because the data is censored to just FS trials, which are _always_ going to move in a particular direction
+ - so while measuring `P_stop_trial`, it's best to do a model with all kinds of trials
 
 ```{r}
 model_full_effects <- lme4::lmer(
@@ -986,25 +1076,100 @@ summary(model_full_effects)
 
 ```
 
-
+## z-scored
 
 ```{r}
-model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + +P_stop_trial_change+ post_pre_rt_change +  (1 +post_pre_rt_change +  P_stop_trial_change   | subid),
-  trial_neural_behav_roi
-  )
-summary(model_full_effects)
 
+
+trial_neural_behav_roi$peak_z<-scale(trial_neural_behav_roi$peak)
+trial_neural_behav_roi$post_pre_rt_change_z<-scale(trial_neural_behav_roi$post_pre_rt_change)
+trial_neural_behav_roi$P_stop_trial_change_z<-scale(trial_neural_behav_roi$P_stop_trial_change)
+trial_neural_behav_roi$trial_n_z<-scale(trial_neural_behav_roi$trial_n)
 ```
-We've changed this code to use `P_stop_trial_change` ratehr than `P_stop_trial_post`. `P_stop_trial_change` makes more theoretical sense (since we're trying to measure how much the striatal effect is an update) yet it isn't a significant regressor.
 
 ```{r}
-model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + +P_stop_trial_change+P_stop_trial_post+ post_pre_rt_change +  (1 +post_pre_rt_change +  P_stop_trial_change +P_stop_trial_post  | subid),
+model_P_stop_trial_w_change <- lme4::lmer(
+   peak_z ~ trial_n_z +condition + post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
-summary(model_full_effects)
+summary(model_P_stop_trial_w_change)
+
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   peak_z ~ trial_n_z +condition +  P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   peak_z ~ trial_n_z +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 
 ```
 
+
+```{r}
+model_P_stop_trial_w_change <- lme4::lmer(
+   peak_z ~ trial_n_z +condition + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_w_change)
+
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   peak_z ~ trial_n_z +condition +  P_stop_trial_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   peak_z ~ trial_n_z +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+
+```
+
+
+OK. WE don't see an unambiguously significant effect here. I suppose with trial_n_z taking such a strong effect we could try adding a quadratic.
+
+## with trial quadratic
+
+
+```{r}
+model_P_stop_trial_w_change <- lme4::lmer(
+   peak_z ~ trial_n_z+I(trial_n_z^2) +condition + post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_w_change)
+
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   peak_z ~ trial_n_z+I(trial_n_z^2) +condition +  P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   peak_z ~ trial_n_z+I(trial_n_z^2) +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50)
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+```
 
