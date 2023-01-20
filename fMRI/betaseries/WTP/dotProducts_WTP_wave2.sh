@@ -8,11 +8,11 @@
 # variables
 maps=$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
 template=/projects/sanlab/shared/DEV/nonbids_data/rois_patterns/craving_regulation_signature.nii
-betas=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..47}) $(printf "beta_%04d.nii\n" {55..74}) $(printf "beta_%04d.nii\n" {82..101})`
+betas=`echo $(printf "beta_%04d.nii\n" {1..16}) $(printf "beta_%04d.nii\n" {22..37}) $(printf "beta_%04d.nii\n" {43..58}) $(printf "beta_%04d.nii\n" {64..79})`
 
 # paths
-image_dir=/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/ROC/wave2/betaseries
-output_dir=/projects/sanlab/shared/DEV/DEV_scripts/fMRI/betaseries/ROC/dotProducts_ROC_wave2
+image_dir=/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave2/betaseries
+output_dir=/projects/sanlab/shared/DEV/DEV_scripts/fMRI/betaseries/WTP/dotProducts_WTP_wave2
 
 if [ ! -d ${output_dir} ]; then
 	mkdir -p ${output_dir}
@@ -35,6 +35,7 @@ echo ${SUB} ${beta} ${map_name} `3ddot -dodot ${subdir}/aligned_${beta} ${map}` 
 done
 done
 done
+
 
 # Calculate volume mean intensities
 # ------------------------------------------------------------------------------------------
