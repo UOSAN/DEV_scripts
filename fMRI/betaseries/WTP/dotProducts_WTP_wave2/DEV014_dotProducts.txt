@@ -118,3 +118,11 @@ DEV014 beta_0074.nii craving_regulation_signature.nii -12.8399
 DEV014 beta_0074.nii craving_signature_logistic.nii 23.837
 DEV014 beta_0075.nii craving_regulation_signature.nii -7.80574
 DEV014 beta_0075.nii craving_signature_logistic.nii -10.4717
+DEV014 beta_0076.nii craving_regulation_signature.nii -17.5666
+DEV014 beta_0076.nii craving_signature_logistic.nii -19.356
+DEV014 beta_0077.nii craving_regulation_signature.nii -8.81281
+DEV014 beta_0077.nii craving_signature_logistic.nii -5.83658
+DEV014 beta_0078.nii craving_regulation_signature.nii -2.28397
+DEV014 beta_0078.nii craving_signature_logistic.nii 0.264189
+DEV014 beta_0079.nii craving_regulation_signature.nii 1.04254
+DEV014 beta_0079.nii craving_signature_logistic.nii -11.0127
