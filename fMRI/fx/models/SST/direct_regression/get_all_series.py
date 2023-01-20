@@ -96,7 +96,7 @@ def get_moment_trial_type_revealed(trial_type, ssdr,first_tone):
         if trial_type[i]=="Stop":
             expected_tone_time[i] = ssdr[i]
         else:
-            expected_tone_time[i] = expected_tone_time[i-1]
+            expected_tone_time[i] = expected_tone_time[i-1] #this seems wrong!?!? 
     #print(expected_tone_time)
     return(expected_tone_time)
 

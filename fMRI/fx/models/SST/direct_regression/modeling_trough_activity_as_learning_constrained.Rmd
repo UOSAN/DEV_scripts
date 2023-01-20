@@ -211,6 +211,11 @@ FS_neural_behav_data_not_na<-FS_summary_data_accumbens[
 # Single-level tests
 
 ```{r}
+
+```
+
+
+```{r}
 FS_by_subj_raw <- FS_neural_behav_data_not_na %>% group_by(subid) %>%
   mutate(trial_count=n())
 FS_by_subj <- FS_by_subj_raw %>% filter(trial_count >2) %>%
