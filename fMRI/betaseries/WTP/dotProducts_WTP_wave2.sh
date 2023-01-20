@@ -3,6 +3,9 @@
 # This script takes the dot product of template maps and subject beta maps. Output is 
 # saved as a text file in the output directory.
 
+# load afni
+module load afni
+
 # Set paths and variables
 # ------------------------------------------------------------------------------------------
 # variables
