@@ -60,6 +60,20 @@ mask_df = pd.DataFrame({
     'mask_path': mask_paths
 })
 
+
+#get behavioral data
+sst_all_behavioral_data = pd.read_csv(dropbox_data_dir + "/sst_behavioral_data_all.csv")
+
+
+
+sst_all_behavioral_data = get_behavioral_data_with_moment_trial_type_revealed(sst_all_behavioral_data)
+
+#that's the problematic line.
+#It's adding onset, when in fact, if the class_type_reveal is the tone, the tone time we have recorded counts from the arrow_onset, not the trial_onset
+#we need to calcualte the arrow onset
+sst_all_behavioral_data['class_type_reveal_onset'] = sst_all_behavioral_data.class_type_reveal + sst_all_behavioral_data.onset_arrow
+sst_all_behavioral_data.loc[sst_all_behavioral_data.go_no_go_condition_label=='Cue','class_type_reveal_onset']=None
+
 #get ROI data
 
 #mark the number of seconds each scan takes.
@@ -74,14 +88,6 @@ for s in roi_data.keys():
         print(roi_data[s][wave].shape)
         print(roi_data[s][wave].columns)
         
-sst_all_behavioral_data = pd.read_csv(dropbox_data_dir + "/sst_behavioral_data_all.csv")
-
-
-
-sst_all_behavioral_data = get_behavioral_data_with_moment_trial_type_revealed(sst_all_behavioral_data)
-
-sst_all_behavioral_data['class_type_reveal_onset'] = sst_all_behavioral_data.class_type_reveal + sst_all_behavioral_data.onset
-sst_all_behavioral_data.loc[sst_all_behavioral_data.go_no_go_condition_label=='Cue','class_type_reveal_onset']=None
 
 
 import pickle

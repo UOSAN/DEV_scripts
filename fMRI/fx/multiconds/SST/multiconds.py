@@ -87,6 +87,40 @@ def read_data(file: Path, use_rt_for_go_success_trials=True):
     return trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time, arrow_presented
 
 
+def read_all_data(file: Path):
+    #     %%%%%%%%%%%%%% Stimuli and Response on same matsrix, pre-determined
+    # % The first column is trial number;
+    # % The second column is numchunks number (1-NUMCHUNKS);
+    # % The third column is 0 = Go, 1 = NoGo; 2 is null, 3 is notrial (kluge, see opt_stop.m)
+    # % The fourth column is 0=left, 1=right arrow; 2 is null
+    # % The fifth column is ladder number (1-2);
+    # % The sixth column is the value currently in "LadderX", corresponding to SSD
+    # % The seventh column is subject response (no response is 0);
+    # % The eighth column is ladder movement (-1 for down, +1 for up, 0 for N/A)
+    # % The ninth column is their reaction time (sec)
+    # % The tenth column is their actual SSD (for error-check)
+    # % The 11th column is their actual SSD plus time taken to run the command
+    # % The 12th column is absolute time since beginning of task that trial begins
+    # % The 13th column is the time elapsed since the beginning of the block at moment when arrows are shown
+    # % The 14th column is the actual SSD for error check (time from arrow displayed to beep played)
+    # % The 15th column is the duration of the trial from trialcode
+    # % The 16th column is the time_course from trialcode
+    # % The 17th column is the UvH code (0=unhealthy, 1=healthy, 2=null)
+
+    mat_dict = scipy.io.loadmat(str(file), appendmat=False)
+    response_data = pd.DataFrame(mat_dict['Seeker'])
+    #give names to the columns
+    response_data.columns = [
+        'trial_number', 'numchunks', 'go_no_go_condition', 'arrow_presented', 'ladder_number', 
+        'ssd', 'subject_response', 'ladder_movement', 'reaction_time', 
+        'actual_ssd', 'actual_ssd_plus_time', 'absolute_time', 'time_elapsed', 
+        'actual_ssd_error_check', 'trial_duration', 'time_course', 'uvh_code']
+
+    return (response_data)
+
+    
+
+
 def create_masks(condition: np.ndarray, response: np.ndarray) -> List:
     """Create masks of conditions"""
     temp = np.logical_or.reduce((response == NO_RESPONSE, response == RANDOM_3_KEY,
@@ -275,6 +309,112 @@ def create_posterror_cue_masks_from_masks(condition_masks: List) -> List:
         'OtherFailedStop': no_go_fail_other,
         'OtherFailedGo': go_fail
     })
+
+def create_event_conditions(main_dataset: pd.DataFrame, jitter_values: List) -> OrderedDict:
+    
+    """Create an event-related set of conditions"""
+    # temp = np.logical_or.reduce((response == NO_RESPONSE, response == RANDOM_3_KEY,
+    #                                 response == RANDOM_F_KEY, response == RANDOM_U_KEY,
+    #                                 response == RANDOM_UNINTERPRETABLE_KEY))
+    # go_fail = np.logical_and(condition == GO_TRIAL, temp)
+    # go_success = np.logical_and(condition == GO_TRIAL, temp)
+
+    # no_go_fail = np.logical_and(condition == NO_GO_TRIAL, response != NO_RESPONSE)
+    # no_go_success = np.logical_and(condition == NO_GO_TRIAL, response == NO_RESPONSE)
+
+    # null_trials = (condition == NULL_TRIAL)
+    #set up some extra variables we'll need
+
+    #     %%%%%%%%%%%%%% Stimuli and Response on same matsrix, pre-determined
+    # % The first column is trial number;
+    # % The second column is numchunks number (1-NUMCHUNKS);
+    # % The third column is 0 = Go, 1 = NoGo; 2 is null, 3 is notrial (kluge, see opt_stop.m)
+    # % The fourth column is 0=left, 1=right arrow; 2 is null
+    # % The fifth column is ladder number (1-2);
+    # % The sixth column is the value currently in "LadderX", corresponding to SSD
+    # % The seventh column is subject response (no response is 0);
+    # % The eighth column is ladder movement (-1 for down, +1 for up, 0 for N/A)
+    # % The ninth column is their reaction time (sec)
+    # % The tenth column is their actual SSD (for error-check)
+    # % The 11th column is their actual SSD plus time taken to run the command
+    # % The 12th column is absolute time since beginning of task that trial begins
+    # % The 13th column is the time elapsed since the beginning of the block at moment when arrows are shown
+    # % The 14th column is the actual SSD for error check (time from arrow displayed to beep played)
+    # % The 15th column is the duration of the trial from trialcode
+    # % The 16th column is the time_course from trialcode
+    # % The 17th column is the UvH code (0=unhealthy, 1=healthy, 2=null)
+    main_dataset['preceding_go_no_go_condition'] = main_dataset.go_no_go_condition.shift(2, fill_value=0)
+    #main_dataset['preceding_go_no_go_condition'] = main_dataset.go_no_go_condition.shift(2, fill_value=0)
+
+    #combine in the jitter_values
+    jitter_values_df = pd.DataFrame({'trial_number':[t*2+1 for t in range(len(jitter_values))], 'jitter_value':jitter_values})
+    main_dataset = main_dataset.merge(jitter_values_df, on='trial_number', how='left')  
+    main_dataset['OCI'] = 0.5 + main_dataset.jitter_value
+    main_dataset['arrow_start_time_calculated'] = main_dataset['OCI'] + main_dataset['absolute_time']
+    main_dataset['reaction_onset'] = main_dataset['arrow_start_time_calculated'] + main_dataset['reaction_time']
+    main_dataset['tone_onset'] = main_dataset['arrow_start_time_calculated'] + main_dataset['tone_time']
+
+    response = main_dataset.subject_response
+    main_dataset['go_response'] = np.logical_or.reduce((response == BUTTON_BOX_3, response == BUTTON_BOX_6,
+                                    response == BUTTON_BOX_4, response == BUTTON_BOX_5,
+                                    response == R_KEY, response == L_KEY,
+                                    response == LESS_THAN_KEY, response == GREATER_THAN_KEY,
+                                    response == BUTTON_BOX_2, response == BUTTON_BOX_7))
+
+    main_dataset['preceding_go_response'] = main_dataset.go_response.shift(2, fill_value=False)
+
+
+    #for each trial type, create one list of onsets and one list of durations
+
+    #1. trial
+    #we have SEVEN different trial conditions
+    #CS, FS, CGFFS, CGFCS, CGFCG, CGFFG, CGO
+    trial_following_go_onset = main_dataset.loc[main_dataset.preceding_go_no_go_condition==GO_TRIAL]['time_course']
+    trial_following_correct_stop_onset = main_dataset.loc[(main_dataset.preceding_go_no_go_condition==NO_GO_TRIAL) & (main_dataset.preceding_go_response==False)]['time_course']
+    trial_following_failed_stop_onset = main_dataset.loc[(main_dataset.preceding_go_no_go_condition==NO_GO_TRIAL) & (main_dataset.preceding_go_response)]['time_course']
+    trial_other_onset = main_dataset.loc[main_dataset.preceding_go_no_go_condition==NULL_TRIAL]['time_course']
+    trial_following_go_duration = main_dataset.loc[main_dataset.preceding_go_no_go_condition==GO_TRIAL]['trial_duration']
+    trial_following_correct_stop_onset = main_dataset.loc[(main_dataset.preceding_go_no_go_condition==NO_GO_TRIAL) & (main_dataset.preceding_go_response==False)]['trial_duration']
+    trial_following_failed_stop_onset = main_dataset.loc[(main_dataset.preceding_go_no_go_condition==NO_GO_TRIAL) & (main_dataset.preceding_go_response)]['trial_duration']
+    trial_other_duration = main_dataset.loc[main_dataset.preceding_go_no_go_condition==NULL_TRIAL]['trial_duration']
+
+    #2. Response
+    #we have 4 different response conditions
+    # I want to ignore which key they are pressing for now...
+    # We'll just classify them as correct or incorrect
+    response_correct_onset = main_dataset.loc[main_dataset.go_response==True]['time_course'] + main_dataset.loc[main_dataset.go_response==True]['reaction_time']
+
+
+
+    
+    
+
+
+
+    #
+
+    # marks if each trial is a (successful or failed) go that follows a failed stop
+
+    #will need to edit these to not use masks
+    names = []
+    onsets = []
+    durations = []
+    for i, cond_name in enumerate(condition_labels):
+        mask = masks[i]
+        if sum(mask) > 0:
+            names = names + [cond_name]
+            cond_onset = start_time[mask].reshape(np.count_nonzero(mask), 1)
+            onsets = onsets + [cond_onset]
+            cond_duration = duration[mask].reshape(np.count_nonzero(mask), 1)
+            durations = durations + [cond_duration]
+
+    #names is a list of each of the conditions
+    #onsets is a list of the onsets of each kind 
+    conditions = {'names': np.asarray(names, dtype=np.object),
+                  'onsets': onsets,
+                  'durations': durations}
+
+
 
 
 def create_trials(trial_number: np.ndarray, trial_start_time: np.ndarray, trial_duration: np.ndarray,
