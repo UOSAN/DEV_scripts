@@ -1,160 +1,160 @@
-DEV151 beta_0001.nii craving_regulation_signature.nii
-DEV151 beta_0001.nii craving_signature_logistic.nii
-DEV151 beta_0002.nii craving_regulation_signature.nii
-DEV151 beta_0002.nii craving_signature_logistic.nii
-DEV151 beta_0003.nii craving_regulation_signature.nii
-DEV151 beta_0003.nii craving_signature_logistic.nii
-DEV151 beta_0004.nii craving_regulation_signature.nii
-DEV151 beta_0004.nii craving_signature_logistic.nii
-DEV151 beta_0005.nii craving_regulation_signature.nii
-DEV151 beta_0005.nii craving_signature_logistic.nii
-DEV151 beta_0006.nii craving_regulation_signature.nii
-DEV151 beta_0006.nii craving_signature_logistic.nii
-DEV151 beta_0007.nii craving_regulation_signature.nii
-DEV151 beta_0007.nii craving_signature_logistic.nii
-DEV151 beta_0008.nii craving_regulation_signature.nii
-DEV151 beta_0008.nii craving_signature_logistic.nii
-DEV151 beta_0009.nii craving_regulation_signature.nii
-DEV151 beta_0009.nii craving_signature_logistic.nii
-DEV151 beta_0010.nii craving_regulation_signature.nii
-DEV151 beta_0010.nii craving_signature_logistic.nii
-DEV151 beta_0011.nii craving_regulation_signature.nii
-DEV151 beta_0011.nii craving_signature_logistic.nii
-DEV151 beta_0012.nii craving_regulation_signature.nii
-DEV151 beta_0012.nii craving_signature_logistic.nii
-DEV151 beta_0013.nii craving_regulation_signature.nii
-DEV151 beta_0013.nii craving_signature_logistic.nii
-DEV151 beta_0014.nii craving_regulation_signature.nii
-DEV151 beta_0014.nii craving_signature_logistic.nii
-DEV151 beta_0015.nii craving_regulation_signature.nii
-DEV151 beta_0015.nii craving_signature_logistic.nii
-DEV151 beta_0016.nii craving_regulation_signature.nii
-DEV151 beta_0016.nii craving_signature_logistic.nii
-DEV151 beta_0017.nii craving_regulation_signature.nii
-DEV151 beta_0017.nii craving_signature_logistic.nii
-DEV151 beta_0018.nii craving_regulation_signature.nii
-DEV151 beta_0018.nii craving_signature_logistic.nii
-DEV151 beta_0019.nii craving_regulation_signature.nii
-DEV151 beta_0019.nii craving_signature_logistic.nii
-DEV151 beta_0020.nii craving_regulation_signature.nii
-DEV151 beta_0020.nii craving_signature_logistic.nii
-DEV151 beta_0028.nii craving_regulation_signature.nii
-DEV151 beta_0028.nii craving_signature_logistic.nii
-DEV151 beta_0029.nii craving_regulation_signature.nii
-DEV151 beta_0029.nii craving_signature_logistic.nii
-DEV151 beta_0030.nii craving_regulation_signature.nii
-DEV151 beta_0030.nii craving_signature_logistic.nii
-DEV151 beta_0031.nii craving_regulation_signature.nii
-DEV151 beta_0031.nii craving_signature_logistic.nii
-DEV151 beta_0032.nii craving_regulation_signature.nii
-DEV151 beta_0032.nii craving_signature_logistic.nii
-DEV151 beta_0033.nii craving_regulation_signature.nii
-DEV151 beta_0033.nii craving_signature_logistic.nii
-DEV151 beta_0034.nii craving_regulation_signature.nii
-DEV151 beta_0034.nii craving_signature_logistic.nii
-DEV151 beta_0035.nii craving_regulation_signature.nii
-DEV151 beta_0035.nii craving_signature_logistic.nii
-DEV151 beta_0036.nii craving_regulation_signature.nii
-DEV151 beta_0036.nii craving_signature_logistic.nii
-DEV151 beta_0037.nii craving_regulation_signature.nii
-DEV151 beta_0037.nii craving_signature_logistic.nii
-DEV151 beta_0038.nii craving_regulation_signature.nii
-DEV151 beta_0038.nii craving_signature_logistic.nii
-DEV151 beta_0039.nii craving_regulation_signature.nii
-DEV151 beta_0039.nii craving_signature_logistic.nii
-DEV151 beta_0040.nii craving_regulation_signature.nii
-DEV151 beta_0040.nii craving_signature_logistic.nii
-DEV151 beta_0041.nii craving_regulation_signature.nii
-DEV151 beta_0041.nii craving_signature_logistic.nii
-DEV151 beta_0042.nii craving_regulation_signature.nii
-DEV151 beta_0042.nii craving_signature_logistic.nii
-DEV151 beta_0043.nii craving_regulation_signature.nii
-DEV151 beta_0043.nii craving_signature_logistic.nii
-DEV151 beta_0044.nii craving_regulation_signature.nii
-DEV151 beta_0044.nii craving_signature_logistic.nii
-DEV151 beta_0045.nii craving_regulation_signature.nii
-DEV151 beta_0045.nii craving_signature_logistic.nii
-DEV151 beta_0046.nii craving_regulation_signature.nii
-DEV151 beta_0046.nii craving_signature_logistic.nii
-DEV151 beta_0047.nii craving_regulation_signature.nii
-DEV151 beta_0047.nii craving_signature_logistic.nii
-DEV151 beta_0055.nii craving_regulation_signature.nii
-DEV151 beta_0055.nii craving_signature_logistic.nii
-DEV151 beta_0056.nii craving_regulation_signature.nii
-DEV151 beta_0056.nii craving_signature_logistic.nii
-DEV151 beta_0057.nii craving_regulation_signature.nii
-DEV151 beta_0057.nii craving_signature_logistic.nii
-DEV151 beta_0058.nii craving_regulation_signature.nii
-DEV151 beta_0058.nii craving_signature_logistic.nii
-DEV151 beta_0059.nii craving_regulation_signature.nii
-DEV151 beta_0059.nii craving_signature_logistic.nii
-DEV151 beta_0060.nii craving_regulation_signature.nii
-DEV151 beta_0060.nii craving_signature_logistic.nii
-DEV151 beta_0061.nii craving_regulation_signature.nii
-DEV151 beta_0061.nii craving_signature_logistic.nii
-DEV151 beta_0062.nii craving_regulation_signature.nii
-DEV151 beta_0062.nii craving_signature_logistic.nii
-DEV151 beta_0063.nii craving_regulation_signature.nii
-DEV151 beta_0063.nii craving_signature_logistic.nii
-DEV151 beta_0064.nii craving_regulation_signature.nii
-DEV151 beta_0064.nii craving_signature_logistic.nii
-DEV151 beta_0065.nii craving_regulation_signature.nii
-DEV151 beta_0065.nii craving_signature_logistic.nii
-DEV151 beta_0066.nii craving_regulation_signature.nii
-DEV151 beta_0066.nii craving_signature_logistic.nii
-DEV151 beta_0067.nii craving_regulation_signature.nii
-DEV151 beta_0067.nii craving_signature_logistic.nii
-DEV151 beta_0068.nii craving_regulation_signature.nii
-DEV151 beta_0068.nii craving_signature_logistic.nii
-DEV151 beta_0069.nii craving_regulation_signature.nii
-DEV151 beta_0069.nii craving_signature_logistic.nii
-DEV151 beta_0070.nii craving_regulation_signature.nii
-DEV151 beta_0070.nii craving_signature_logistic.nii
-DEV151 beta_0071.nii craving_regulation_signature.nii
-DEV151 beta_0071.nii craving_signature_logistic.nii
-DEV151 beta_0072.nii craving_regulation_signature.nii
-DEV151 beta_0072.nii craving_signature_logistic.nii
-DEV151 beta_0073.nii craving_regulation_signature.nii
-DEV151 beta_0073.nii craving_signature_logistic.nii
-DEV151 beta_0074.nii craving_regulation_signature.nii
-DEV151 beta_0074.nii craving_signature_logistic.nii
-DEV151 beta_0082.nii craving_regulation_signature.nii
-DEV151 beta_0082.nii craving_signature_logistic.nii
-DEV151 beta_0083.nii craving_regulation_signature.nii
-DEV151 beta_0083.nii craving_signature_logistic.nii
-DEV151 beta_0084.nii craving_regulation_signature.nii
-DEV151 beta_0084.nii craving_signature_logistic.nii
-DEV151 beta_0085.nii craving_regulation_signature.nii
-DEV151 beta_0085.nii craving_signature_logistic.nii
-DEV151 beta_0086.nii craving_regulation_signature.nii
-DEV151 beta_0086.nii craving_signature_logistic.nii
-DEV151 beta_0087.nii craving_regulation_signature.nii
-DEV151 beta_0087.nii craving_signature_logistic.nii
-DEV151 beta_0088.nii craving_regulation_signature.nii
-DEV151 beta_0088.nii craving_signature_logistic.nii
-DEV151 beta_0089.nii craving_regulation_signature.nii
-DEV151 beta_0089.nii craving_signature_logistic.nii
-DEV151 beta_0090.nii craving_regulation_signature.nii
-DEV151 beta_0090.nii craving_signature_logistic.nii
-DEV151 beta_0091.nii craving_regulation_signature.nii
-DEV151 beta_0091.nii craving_signature_logistic.nii
-DEV151 beta_0092.nii craving_regulation_signature.nii
-DEV151 beta_0092.nii craving_signature_logistic.nii
-DEV151 beta_0093.nii craving_regulation_signature.nii
-DEV151 beta_0093.nii craving_signature_logistic.nii
-DEV151 beta_0094.nii craving_regulation_signature.nii
-DEV151 beta_0094.nii craving_signature_logistic.nii
-DEV151 beta_0095.nii craving_regulation_signature.nii
-DEV151 beta_0095.nii craving_signature_logistic.nii
-DEV151 beta_0096.nii craving_regulation_signature.nii
-DEV151 beta_0096.nii craving_signature_logistic.nii
-DEV151 beta_0097.nii craving_regulation_signature.nii
-DEV151 beta_0097.nii craving_signature_logistic.nii
-DEV151 beta_0098.nii craving_regulation_signature.nii
-DEV151 beta_0098.nii craving_signature_logistic.nii
-DEV151 beta_0099.nii craving_regulation_signature.nii
-DEV151 beta_0099.nii craving_signature_logistic.nii
-DEV151 beta_0100.nii craving_regulation_signature.nii
-DEV151 beta_0100.nii craving_signature_logistic.nii
-DEV151 beta_0101.nii craving_regulation_signature.nii
-DEV151 beta_0101.nii craving_signature_logistic.nii
+DEV151 beta_0001.nii craving_regulation_signature.nii 3.50911
+DEV151 beta_0001.nii craving_signature_logistic.nii 20.0609
+DEV151 beta_0002.nii craving_regulation_signature.nii -0.931824
+DEV151 beta_0002.nii craving_signature_logistic.nii -4.95708
+DEV151 beta_0003.nii craving_regulation_signature.nii 5.77399
+DEV151 beta_0003.nii craving_signature_logistic.nii -1.12661
+DEV151 beta_0004.nii craving_regulation_signature.nii 9.18878
+DEV151 beta_0004.nii craving_signature_logistic.nii -10.2254
+DEV151 beta_0005.nii craving_regulation_signature.nii 9.17054
+DEV151 beta_0005.nii craving_signature_logistic.nii 0.507284
+DEV151 beta_0006.nii craving_regulation_signature.nii -14.3292
+DEV151 beta_0006.nii craving_signature_logistic.nii 11.5673
+DEV151 beta_0007.nii craving_regulation_signature.nii -7.62806
+DEV151 beta_0007.nii craving_signature_logistic.nii 7.1053
+DEV151 beta_0008.nii craving_regulation_signature.nii 2.19349
+DEV151 beta_0008.nii craving_signature_logistic.nii 22.172
+DEV151 beta_0009.nii craving_regulation_signature.nii -7.0652
+DEV151 beta_0009.nii craving_signature_logistic.nii 0.530067
+DEV151 beta_0010.nii craving_regulation_signature.nii -4.50377
+DEV151 beta_0010.nii craving_signature_logistic.nii -9.43766
+DEV151 beta_0011.nii craving_regulation_signature.nii 19.3683
+DEV151 beta_0011.nii craving_signature_logistic.nii 10.5743
+DEV151 beta_0012.nii craving_regulation_signature.nii -5.24845
+DEV151 beta_0012.nii craving_signature_logistic.nii 18.4709
+DEV151 beta_0013.nii craving_regulation_signature.nii -2.53067
+DEV151 beta_0013.nii craving_signature_logistic.nii 14.2848
+DEV151 beta_0014.nii craving_regulation_signature.nii 9.31461
+DEV151 beta_0014.nii craving_signature_logistic.nii 17.3013
+DEV151 beta_0015.nii craving_regulation_signature.nii 8.68378
+DEV151 beta_0015.nii craving_signature_logistic.nii 2.73151
+DEV151 beta_0016.nii craving_regulation_signature.nii -7.1181
+DEV151 beta_0016.nii craving_signature_logistic.nii 19.3413
+DEV151 beta_0017.nii craving_regulation_signature.nii 22.6402
+DEV151 beta_0017.nii craving_signature_logistic.nii 6.11972
+DEV151 beta_0018.nii craving_regulation_signature.nii -14.4696
+DEV151 beta_0018.nii craving_signature_logistic.nii 2.25034
+DEV151 beta_0019.nii craving_regulation_signature.nii 9.32764
+DEV151 beta_0019.nii craving_signature_logistic.nii -3.66673
+DEV151 beta_0020.nii craving_regulation_signature.nii 4.53791
+DEV151 beta_0020.nii craving_signature_logistic.nii 2.46625
+DEV151 beta_0028.nii craving_regulation_signature.nii -2.35351
+DEV151 beta_0028.nii craving_signature_logistic.nii 7.14045
+DEV151 beta_0029.nii craving_regulation_signature.nii -0.739635
+DEV151 beta_0029.nii craving_signature_logistic.nii 7.05196
+DEV151 beta_0030.nii craving_regulation_signature.nii 0.414078
+DEV151 beta_0030.nii craving_signature_logistic.nii 40.7254
+DEV151 beta_0031.nii craving_regulation_signature.nii -10.0052
+DEV151 beta_0031.nii craving_signature_logistic.nii 2.92488
+DEV151 beta_0032.nii craving_regulation_signature.nii 8.52939
+DEV151 beta_0032.nii craving_signature_logistic.nii 0.406429
+DEV151 beta_0033.nii craving_regulation_signature.nii 8.73816
+DEV151 beta_0033.nii craving_signature_logistic.nii 0.713
+DEV151 beta_0034.nii craving_regulation_signature.nii 2.79294
+DEV151 beta_0034.nii craving_signature_logistic.nii 27.2297
+DEV151 beta_0035.nii craving_regulation_signature.nii 9.28895
+DEV151 beta_0035.nii craving_signature_logistic.nii 11.5788
+DEV151 beta_0036.nii craving_regulation_signature.nii -15.8405
+DEV151 beta_0036.nii craving_signature_logistic.nii -2.19919
+DEV151 beta_0037.nii craving_regulation_signature.nii -10.9275
+DEV151 beta_0037.nii craving_signature_logistic.nii 1.91267
+DEV151 beta_0038.nii craving_regulation_signature.nii -6.08024
+DEV151 beta_0038.nii craving_signature_logistic.nii -1.90015
+DEV151 beta_0039.nii craving_regulation_signature.nii -11.0047
+DEV151 beta_0039.nii craving_signature_logistic.nii -0.678493
+DEV151 beta_0040.nii craving_regulation_signature.nii 7.29205
+DEV151 beta_0040.nii craving_signature_logistic.nii -3.99489
+DEV151 beta_0041.nii craving_regulation_signature.nii -10.7881
+DEV151 beta_0041.nii craving_signature_logistic.nii 6.45515
+DEV151 beta_0042.nii craving_regulation_signature.nii -12.299
+DEV151 beta_0042.nii craving_signature_logistic.nii 8.59908
+DEV151 beta_0043.nii craving_regulation_signature.nii 1.36757
+DEV151 beta_0043.nii craving_signature_logistic.nii -10.9007
+DEV151 beta_0044.nii craving_regulation_signature.nii -10.2262
+DEV151 beta_0044.nii craving_signature_logistic.nii 9.5463
+DEV151 beta_0045.nii craving_regulation_signature.nii -9.00096
+DEV151 beta_0045.nii craving_signature_logistic.nii 2.844
+DEV151 beta_0046.nii craving_regulation_signature.nii -1.35622
+DEV151 beta_0046.nii craving_signature_logistic.nii 3.73656
+DEV151 beta_0047.nii craving_regulation_signature.nii -4.66721
+DEV151 beta_0047.nii craving_signature_logistic.nii 18.9965
+DEV151 beta_0055.nii craving_regulation_signature.nii 15.7957
+DEV151 beta_0055.nii craving_signature_logistic.nii 10.8771
+DEV151 beta_0056.nii craving_regulation_signature.nii -2.17908
+DEV151 beta_0056.nii craving_signature_logistic.nii -11.3958
+DEV151 beta_0057.nii craving_regulation_signature.nii -12.5572
+DEV151 beta_0057.nii craving_signature_logistic.nii -8.78484
+DEV151 beta_0058.nii craving_regulation_signature.nii -7.71705
+DEV151 beta_0058.nii craving_signature_logistic.nii -13.268
+DEV151 beta_0059.nii craving_regulation_signature.nii 0.043296
+DEV151 beta_0059.nii craving_signature_logistic.nii -11.8639
+DEV151 beta_0060.nii craving_regulation_signature.nii -6.48111
+DEV151 beta_0060.nii craving_signature_logistic.nii 3.46718
+DEV151 beta_0061.nii craving_regulation_signature.nii -8.11092
+DEV151 beta_0061.nii craving_signature_logistic.nii 2.67101
+DEV151 beta_0062.nii craving_regulation_signature.nii 5.69566
+DEV151 beta_0062.nii craving_signature_logistic.nii 23.8089
+DEV151 beta_0063.nii craving_regulation_signature.nii 4.27691
+DEV151 beta_0063.nii craving_signature_logistic.nii 7.18226
+DEV151 beta_0064.nii craving_regulation_signature.nii 12.2728
+DEV151 beta_0064.nii craving_signature_logistic.nii -6.83208
+DEV151 beta_0065.nii craving_regulation_signature.nii -12.5318
+DEV151 beta_0065.nii craving_signature_logistic.nii 3.89832
+DEV151 beta_0066.nii craving_regulation_signature.nii -6.50332
+DEV151 beta_0066.nii craving_signature_logistic.nii 16.3864
+DEV151 beta_0067.nii craving_regulation_signature.nii -3.80799
+DEV151 beta_0067.nii craving_signature_logistic.nii 5.40697
+DEV151 beta_0068.nii craving_regulation_signature.nii 4.31269
+DEV151 beta_0068.nii craving_signature_logistic.nii 0.863186
+DEV151 beta_0069.nii craving_regulation_signature.nii 6.22319
+DEV151 beta_0069.nii craving_signature_logistic.nii 8.54303
+DEV151 beta_0070.nii craving_regulation_signature.nii 8.03464
+DEV151 beta_0070.nii craving_signature_logistic.nii 3.13052
+DEV151 beta_0071.nii craving_regulation_signature.nii 10.4001
+DEV151 beta_0071.nii craving_signature_logistic.nii -7.25915
+DEV151 beta_0072.nii craving_regulation_signature.nii -2.76118
+DEV151 beta_0072.nii craving_signature_logistic.nii -8.1307
+DEV151 beta_0073.nii craving_regulation_signature.nii 5.78917
+DEV151 beta_0073.nii craving_signature_logistic.nii -1.05476
+DEV151 beta_0074.nii craving_regulation_signature.nii -9.71571
+DEV151 beta_0074.nii craving_signature_logistic.nii -12.8186
+DEV151 beta_0082.nii craving_regulation_signature.nii -7.30025
+DEV151 beta_0082.nii craving_signature_logistic.nii -12.1155
+DEV151 beta_0083.nii craving_regulation_signature.nii 5.62325
+DEV151 beta_0083.nii craving_signature_logistic.nii -21.5359
+DEV151 beta_0084.nii craving_regulation_signature.nii 5.41501
+DEV151 beta_0084.nii craving_signature_logistic.nii 8.29144
+DEV151 beta_0085.nii craving_regulation_signature.nii 2.00625
+DEV151 beta_0085.nii craving_signature_logistic.nii -21.3931
+DEV151 beta_0086.nii craving_regulation_signature.nii 7.55316
+DEV151 beta_0086.nii craving_signature_logistic.nii -32.9158
+DEV151 beta_0087.nii craving_regulation_signature.nii 1.06369
+DEV151 beta_0087.nii craving_signature_logistic.nii -8.46499
+DEV151 beta_0088.nii craving_regulation_signature.nii 8.36884
+DEV151 beta_0088.nii craving_signature_logistic.nii -0.28734
+DEV151 beta_0089.nii craving_regulation_signature.nii 8.47027
+DEV151 beta_0089.nii craving_signature_logistic.nii 15.7734
+DEV151 beta_0090.nii craving_regulation_signature.nii 11.0496
+DEV151 beta_0090.nii craving_signature_logistic.nii -6.2693
+DEV151 beta_0091.nii craving_regulation_signature.nii -0.358424
+DEV151 beta_0091.nii craving_signature_logistic.nii -13.2561
+DEV151 beta_0092.nii craving_regulation_signature.nii 18.8905
+DEV151 beta_0092.nii craving_signature_logistic.nii -14.6037
+DEV151 beta_0093.nii craving_regulation_signature.nii -21.264
+DEV151 beta_0093.nii craving_signature_logistic.nii -17.2673
+DEV151 beta_0094.nii craving_regulation_signature.nii -6.75961
+DEV151 beta_0094.nii craving_signature_logistic.nii -5.68976
+DEV151 beta_0095.nii craving_regulation_signature.nii -9.2682
+DEV151 beta_0095.nii craving_signature_logistic.nii 14.7192
+DEV151 beta_0096.nii craving_regulation_signature.nii -10.6441
+DEV151 beta_0096.nii craving_signature_logistic.nii -4.67781
+DEV151 beta_0097.nii craving_regulation_signature.nii -1.14091
+DEV151 beta_0097.nii craving_signature_logistic.nii 16.1145
+DEV151 beta_0098.nii craving_regulation_signature.nii -11.7404
+DEV151 beta_0098.nii craving_signature_logistic.nii 12.7484
+DEV151 beta_0099.nii craving_regulation_signature.nii -7.687
+DEV151 beta_0099.nii craving_signature_logistic.nii 8.7768
+DEV151 beta_0100.nii craving_regulation_signature.nii -6.79926
+DEV151 beta_0100.nii craving_signature_logistic.nii 8.45849
+DEV151 beta_0101.nii craving_regulation_signature.nii -4.82428
+DEV151 beta_0101.nii craving_signature_logistic.nii -6.5409

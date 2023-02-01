@@ -1,0 +1,67 @@
+---
+title: "Check ROC trials"
+author: "Dani Cosme"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    df_print: paged
+    highlight: tango
+    theme: united
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+options(scipen = 999)
+```
+
+# load packages
+```{r}
+library(tidyverse)
+```
+
+# load data
+```{r}
+data = read.csv("../../../fMRI/fx/multiconds/ROC/betaseries/trials.csv")
+```
+
+# check missing trials
+```{r}
+data %>%
+  filter(!(is.na(run1) & is.na(run2) & is.na(run3) & is.na(run4))) %>%
+  filter(!(run1 == 20 & run2 == 20 & run3 == 20 & run4 == 20))
+```
+
+# check missing runs {.tabset}
+## wave1
+```{r}
+missing_wave1 = data %>%
+  filter(!(is.na(run1) & is.na(run2) & is.na(run3) & is.na(run4))) %>%
+  gather(run, n, -subjectID, -wave) %>%
+  filter(is.na(n)) %>%
+  filter(wave == 1)
+
+data %>%
+  filter(!(is.na(run1) & is.na(run2) & is.na(run3) & is.na(run4))) %>%
+  filter(wave == 1 & subjectID %in% missing_wave1$subjectID)
+```
+
+## wave2
+```{r}
+missing_wave2 = data %>%
+  filter(!(is.na(run1) & is.na(run2) & is.na(run3) & is.na(run4))) %>%
+  gather(run, n, -subjectID, -wave) %>%
+  filter(is.na(n)) %>%
+  filter(wave == 2)
+
+data %>%
+  filter(!(is.na(run1) & is.na(run2) & is.na(run3) & is.na(run4))) %>%
+  filter(wave == 2 & subjectID %in% missing_wave2$subjectID)
+```
+
