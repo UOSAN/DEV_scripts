@@ -19,8 +19,8 @@ library(tidyverse)
 setwd("../../../")
 all = read.csv("org/dicom_check/dicoms_cleaned_20221021.csv", header = FALSE) %>%
   rename("folder" = V1) %>%
-  filter(!folder == "DEV_20171214") %>%
-  mutate(folder=toupper(folder))
+  filter(!folder == "DEV_20171214")# %>%
+  #mutate(folder=toupper(folder))
 
 completed = read.csv("org/bidsQC/conversion/subject_list.txt", header = FALSE)
 
@@ -30,7 +30,8 @@ completed = read.csv("org/bidsQC/conversion/subject_list.txt", header = FALSE)
 #DEV227_20220331_130219
 #DEV277_20220505_121019
 full_list = all %>%
-  extract(folder, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
+  mutate(folder_upper = toupper(folder)) %>%
+  extract(folder_upper, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
   mutate(subjectID = case_when(
     folder == "DEV0903_20190607_090700" ~ "DEV093",
     folder == "DEV_20210714_173417" ~ "DEV205",
