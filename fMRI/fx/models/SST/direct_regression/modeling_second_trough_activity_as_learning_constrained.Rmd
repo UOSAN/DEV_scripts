@@ -110,9 +110,9 @@ trial_summary_data <- tpc_long %>%
   group_by(subid,wave,trial_n,ROI, condition) %>%
   summarise(
     peak=max(value[offset>=1.0 & offset <=5.0],na.rm = TRUE),
-    trough = min(value[offset>=0.0 & offset <=5.0],na.rm = TRUE),
+    trough = min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE),
     peak_time = offset[offset>=1.0 & offset <=5.0][value[offset>=1.0 & offset <=5.0]==max(value[offset>=1.0 & offset <=5.0],na.rm = TRUE)],
-    trough_time = offset[offset>=0.0 & offset <=5.0][value[offset>=0.0 & offset <=5.0]==min(value[offset>=0.0 & offset <=5.0],na.rm = TRUE)]
+    trough_time = offset[offset>=4.0 & offset <=11.0][value[offset>=4.0 & offset <=11.0]==min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE)]
   )
   
 
@@ -1032,6 +1032,7 @@ cor.test(data_by_ppt$RTFS_f1_minus_f2,data_by_ppt$peak_z)
 So what else can we do with this?
 
 We wanted to know if the RT or the peak (not the peak regressor as above) related to RTFS or BIS_11
+
 
 
 ```{r}

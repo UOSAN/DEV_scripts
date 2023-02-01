@@ -87,7 +87,7 @@ def read_data(file: Path, use_rt_for_go_success_trials=True):
     return trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time, arrow_presented
 
 
-def read_all_data(file: Path):
+def read_all_data(file: Path, jitter_values: pd.Series):
     #     %%%%%%%%%%%%%% Stimuli and Response on same matsrix, pre-determined
     # % The first column is trial number;
     # % The second column is numchunks number (1-NUMCHUNKS);
@@ -98,12 +98,17 @@ def read_all_data(file: Path):
     # % The seventh column is subject response (no response is 0);
     # % The eighth column is ladder movement (-1 for down, +1 for up, 0 for N/A)
     # % The ninth column is their reaction time (sec)
+    # reaction time is counted from the start of the arrow presentation, not the start of the trial
     # % The tenth column is their actual SSD (for error-check)
     # % The 11th column is their actual SSD plus time taken to run the command
-    # % The 12th column is absolute time since beginning of task that trial begins
+    # % The 12th column is absolute time since beginning of task that trial begins. 
+    #  That 12th column is set after the food draw event, but AFTER it is set, there is a waiting period, "OCI", before the arrow is drawn
+    #   OCI is set in the "jitter" file with an extra 0.5 added. I don't think we actually record this anywhere, so 
+    #   consulting that jitter file is the only way I can see to get the actual time of the arrow draw.
     # % The 13th column is the time elapsed since the beginning of the block at moment when arrows are shown
     # % The 14th column is the actual SSD for error check (time from arrow displayed to beep played)
     # % The 15th column is the duration of the trial from trialcode
+    # the trial will end as the subject presses a button
     # % The 16th column is the time_course from trialcode
     # % The 17th column is the UvH code (0=unhealthy, 1=healthy, 2=null)
 
@@ -115,6 +120,17 @@ def read_all_data(file: Path):
         'ssd', 'subject_response', 'ladder_movement', 'reaction_time', 
         'actual_ssd', 'actual_ssd_plus_time', 'absolute_time', 'time_elapsed', 
         'actual_ssd_error_check', 'trial_duration', 'time_course', 'uvh_code']
+
+    #these are additional pieces of information to clarify how this data is processed.
+    #combine in the jitter_values
+    jitter_values_df = pd.DataFrame({'trial_number':[t*2+1 for t in range(len(jitter_values))], 'jitter_value':jitter_values})
+    response_data = response_data.merge(jitter_values_df, on='trial_number', how='left')  
+    response_data['OCI'] = 0.5 + response_data.jitter_value
+    response_data['arrow_start_time_calculated'] = response_data['OCI'] + response_data['absolute_time']
+    response_data['reaction_onset'] = response_data['arrow_start_time_calculated'] + response_data['reaction_time']
+    has_tone = response_data['actual_ssd_error_check'] > 0
+    response_data.loc[has_tone,'tone_onset'] = response_data.loc[has_tone,'arrow_start_time_calculated'] + response_data.loc[has_tone,'actual_ssd_error_check']
+    response_data['trial_end']=response_data['time_course']+response_data['trial_duration']
 
     return (response_data)
 
@@ -346,13 +362,7 @@ def create_event_conditions(main_dataset: pd.DataFrame, jitter_values: List) -> 
     main_dataset['preceding_go_no_go_condition'] = main_dataset.go_no_go_condition.shift(2, fill_value=0)
     #main_dataset['preceding_go_no_go_condition'] = main_dataset.go_no_go_condition.shift(2, fill_value=0)
 
-    #combine in the jitter_values
-    jitter_values_df = pd.DataFrame({'trial_number':[t*2+1 for t in range(len(jitter_values))], 'jitter_value':jitter_values})
-    main_dataset = main_dataset.merge(jitter_values_df, on='trial_number', how='left')  
-    main_dataset['OCI'] = 0.5 + main_dataset.jitter_value
-    main_dataset['arrow_start_time_calculated'] = main_dataset['OCI'] + main_dataset['absolute_time']
-    main_dataset['reaction_onset'] = main_dataset['arrow_start_time_calculated'] + main_dataset['reaction_time']
-    main_dataset['tone_onset'] = main_dataset['arrow_start_time_calculated'] + main_dataset['tone_time']
+    
 
     response = main_dataset.subject_response
     main_dataset['go_response'] = np.logical_or.reduce((response == BUTTON_BOX_3, response == BUTTON_BOX_6,
@@ -379,19 +389,12 @@ def create_event_conditions(main_dataset: pd.DataFrame, jitter_values: List) -> 
     trial_other_duration = main_dataset.loc[main_dataset.preceding_go_no_go_condition==NULL_TRIAL]['trial_duration']
 
     #2. Response
-    #we have 4 different response conditions
     # I want to ignore which key they are pressing for now...
+    #we have 2 different response conditions, ignoring which key they are pressing
     # We'll just classify them as correct or incorrect
     response_correct_onset = main_dataset.loc[main_dataset.go_response==True]['time_course'] + main_dataset.loc[main_dataset.go_response==True]['reaction_time']
+    response_incorrect_onset = main_dataset.loc[main_dataset.go_response==True]['time_course'] + main_dataset.loc[main_dataset.go_response==True]['reaction_time']
 
-
-
-    
-    
-
-
-
-    #
 
     # marks if each trial is a (successful or failed) go that follows a failed stop
 

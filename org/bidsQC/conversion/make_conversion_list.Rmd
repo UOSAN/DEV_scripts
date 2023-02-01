@@ -19,7 +19,8 @@ library(tidyverse)
 setwd("../../../")
 all = read.csv("org/dicom_check/dicoms_cleaned_20221021.csv", header = FALSE) %>%
   rename("folder" = V1) %>%
-  filter(!folder == "DEV_20171214")
+  filter(!folder == "DEV_20171214") %>%
+  mutate(folder=toupper(folder))
 
 completed = read.csv("org/bidsQC/conversion/subject_list.txt", header = FALSE)
 

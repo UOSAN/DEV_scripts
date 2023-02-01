@@ -64,7 +64,7 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
             ]
 
             # Read data out of the .mat file
-            all_data = read_all_data(f)
+            all_data = read_all_data(f, jitter_values)
 
             # Create masks for the various conditions
             # we will need most of the data to do this, including times of:
