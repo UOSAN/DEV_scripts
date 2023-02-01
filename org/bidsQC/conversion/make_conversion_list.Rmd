@@ -30,7 +30,7 @@ completed = read.csv("org/bidsQC/conversion/subject_list.txt", header = FALSE)
 #DEV227_20220331_130219
 #DEV277_20220505_121019
 full_list = all %>%
-  mutate(folder_upper = toupper(folder)) %>%
+  mutate(folder_upper = toupper(folder)) %>% #need to do the _extract_ case-invariant, but still retain the case-sensitive folder names
   extract(folder_upper, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
   mutate(subjectID = case_when(
     folder == "DEV0903_20190607_090700" ~ "DEV093",
@@ -77,10 +77,12 @@ full_list %>%
 ```{r}
 setwd("../../../")
 full_list %>%
+  select(-folder_upper) %>%
   filter(!folder %in% completed$V1) %>%
   write.table("org/bidsQC/conversion/new_subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
 
 full_list %>%
+  select(-folder_upper) %>%
   write.table("org/bidsQC/conversion/subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
 ```
 # write subject-only lists
