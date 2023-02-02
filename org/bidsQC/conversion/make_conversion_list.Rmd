@@ -17,7 +17,7 @@ library(tidyverse)
 # load and tidy data
 ```{r}
 setwd("../../../")
-all = read.csv("org/dicom_check/dicoms_cleaned_20221021.csv", header = FALSE) %>%
+all = read.csv("org/dicom_check/dicoms_cleaned_20230202.csv", header = FALSE) %>%
   rename("folder" = V1) %>%
   filter(!folder == "DEV_20171214")# %>%
   #mutate(folder=toupper(folder))

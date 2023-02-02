@@ -112,6 +112,10 @@ Anomalies I still want to figure out:
 
 159_20200126_115140 is anomalous. It seems to be slightly distinct from DEV159_20200126_115140
 
+```{r}
+readr::write_csv(dicoms_tidy[,1],"dicoms_cleaned_20230202.csv",col_names = FALSE)
+```
+
 
 # verify sessions
 Check if there are too many sessions or if the session dates are incorrect
