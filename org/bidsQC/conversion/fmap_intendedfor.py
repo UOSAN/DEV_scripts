@@ -70,11 +70,12 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
     for fmap_json in fmap_jsons:
         json_path = os.path.join(fmap_dir_path, fmap_json)
         print(json_path)
-        
-        with open(json_path) as target_json:
+        with open(json_path) as target_json_text:
             #now target_json as plain text
             #open a file and read as plain text
-            print(target_json.read())
+            print(target_json_text.read())
+        
+        with open(json_path) as target_json:
 
             #now load it as a json file
             json_file = json.load(target_json)
