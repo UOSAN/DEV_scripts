@@ -126,3 +126,67 @@ DEV082 beta_0078.nii craving_regulation_signature.nii
 DEV082 beta_0078.nii craving_signature_logistic.nii
 DEV082 beta_0079.nii craving_regulation_signature.nii
 DEV082 beta_0079.nii craving_signature_logistic.nii
+DEV082 beta_0001.nii nsc_koban_2mm.nii 2.87368
+DEV082 beta_0002.nii nsc_koban_2mm.nii -8.44194
+DEV082 beta_0003.nii nsc_koban_2mm.nii 1.88243
+DEV082 beta_0004.nii nsc_koban_2mm.nii -5.16758
+DEV082 beta_0005.nii nsc_koban_2mm.nii -11.207
+DEV082 beta_0006.nii nsc_koban_2mm.nii -9.90736
+DEV082 beta_0007.nii nsc_koban_2mm.nii 6.9735
+DEV082 beta_0008.nii nsc_koban_2mm.nii 4.7464
+DEV082 beta_0009.nii nsc_koban_2mm.nii -1.61314
+DEV082 beta_0010.nii nsc_koban_2mm.nii 11.1898
+DEV082 beta_0011.nii nsc_koban_2mm.nii -0.0388219
+DEV082 beta_0012.nii nsc_koban_2mm.nii -7.86571
+DEV082 beta_0013.nii nsc_koban_2mm.nii -3.98428
+DEV082 beta_0014.nii nsc_koban_2mm.nii 3.21436
+DEV082 beta_0015.nii nsc_koban_2mm.nii 4.18897
+DEV082 beta_0016.nii nsc_koban_2mm.nii 9.29604
+DEV082 beta_0022.nii nsc_koban_2mm.nii -9.84294
+DEV082 beta_0023.nii nsc_koban_2mm.nii 0.827113
+DEV082 beta_0024.nii nsc_koban_2mm.nii -5.16395
+DEV082 beta_0025.nii nsc_koban_2mm.nii -2.99343
+DEV082 beta_0026.nii nsc_koban_2mm.nii 5.05156
+DEV082 beta_0027.nii nsc_koban_2mm.nii -1.653
+DEV082 beta_0028.nii nsc_koban_2mm.nii -0.201958
+DEV082 beta_0029.nii nsc_koban_2mm.nii 3.59249
+DEV082 beta_0030.nii nsc_koban_2mm.nii 13.8011
+DEV082 beta_0031.nii nsc_koban_2mm.nii 8.74196
+DEV082 beta_0032.nii nsc_koban_2mm.nii 17.6205
+DEV082 beta_0033.nii nsc_koban_2mm.nii 3.34821
+DEV082 beta_0034.nii nsc_koban_2mm.nii 12.2231
+DEV082 beta_0035.nii nsc_koban_2mm.nii 1.07551
+DEV082 beta_0036.nii nsc_koban_2mm.nii -0.854424
+DEV082 beta_0037.nii nsc_koban_2mm.nii 1.30293
+DEV082 beta_0043.nii nsc_koban_2mm.nii -15.601
+DEV082 beta_0044.nii nsc_koban_2mm.nii -3.69478
+DEV082 beta_0045.nii nsc_koban_2mm.nii -12.0229
+DEV082 beta_0046.nii nsc_koban_2mm.nii -4.16814
+DEV082 beta_0047.nii nsc_koban_2mm.nii -16.7007
+DEV082 beta_0048.nii nsc_koban_2mm.nii -2.84491
+DEV082 beta_0049.nii nsc_koban_2mm.nii -4.31514
+DEV082 beta_0050.nii nsc_koban_2mm.nii 6.63138
+DEV082 beta_0051.nii nsc_koban_2mm.nii 12.5158
+DEV082 beta_0052.nii nsc_koban_2mm.nii 4.98347
+DEV082 beta_0053.nii nsc_koban_2mm.nii 4.67383
+DEV082 beta_0054.nii nsc_koban_2mm.nii 0.858654
+DEV082 beta_0055.nii nsc_koban_2mm.nii 10.7564
+DEV082 beta_0056.nii nsc_koban_2mm.nii 1.86681
+DEV082 beta_0057.nii nsc_koban_2mm.nii -1.47666
+DEV082 beta_0058.nii nsc_koban_2mm.nii -2.88927
+DEV082 beta_0064.nii nsc_koban_2mm.nii 939.987
+DEV082 beta_0065.nii nsc_koban_2mm.nii 902.757
+DEV082 beta_0066.nii nsc_koban_2mm.nii 849.518
+DEV082 beta_0067.nii nsc_koban_2mm.nii
+DEV082 beta_0068.nii nsc_koban_2mm.nii
+DEV082 beta_0069.nii nsc_koban_2mm.nii
+DEV082 beta_0070.nii nsc_koban_2mm.nii
+DEV082 beta_0071.nii nsc_koban_2mm.nii
+DEV082 beta_0072.nii nsc_koban_2mm.nii
+DEV082 beta_0073.nii nsc_koban_2mm.nii
+DEV082 beta_0074.nii nsc_koban_2mm.nii
+DEV082 beta_0075.nii nsc_koban_2mm.nii
+DEV082 beta_0076.nii nsc_koban_2mm.nii
+DEV082 beta_0077.nii nsc_koban_2mm.nii
+DEV082 beta_0078.nii nsc_koban_2mm.nii
+DEV082 beta_0079.nii nsc_koban_2mm.nii
