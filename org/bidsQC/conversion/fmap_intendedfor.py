@@ -69,13 +69,20 @@ def get_fmap_jsons(fmap_dir_path):
 def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:str, echo_time1:str, echo_time2:str):
     for fmap_json in fmap_jsons:
         json_path = os.path.join(fmap_dir_path, fmap_json)
-        print(json_path)
-        with open(json_path) as target_json_text:
-            #now target_json as plain text
-            #open a file and read as plain text
-            print(target_json_text.read())
+        # print(json_path)
+        # with open(json_path) as target_json_text:
+        #     #now target_json as plain text
+        #     #open a file and read as plain text
+        #     print(target_json_text.read())
+        if os.path.getsize(json_path) == 0:
+            print("couldn't write data to the following json file because it was empty:")
+            print(json_path)
+            continue
         
         with open(json_path) as target_json:
+            #check the size of the file
+            
+
 
             #now load it as a json file
             json_file = json.load(target_json)
