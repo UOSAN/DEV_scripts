@@ -332,6 +332,7 @@ def fix_files(sequence_fullpath: str, file_group: str, expected_numfiles: int, e
     @type timepoint:                        string
     @param timepoint:                       Name of timepoint
     """
+    print(sequence_fullpath)
     print("filegroup: %s, expected_numfiles: %s, extension: %s" % (file_group, str(expected_numfiles), extension))
     sequence_files = os.listdir(sequence_fullpath)
     found_files = [file for file in sequence_files if file_group in file and file.endswith(extension)]
