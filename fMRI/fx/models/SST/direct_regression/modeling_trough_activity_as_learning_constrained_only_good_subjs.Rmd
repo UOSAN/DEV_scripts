@@ -110,9 +110,9 @@ trial_summary_data <- tpc_long %>%
   group_by(subid,wave,trial_n,ROI, condition) %>%
   summarise(
     peak=max(value[offset>=1.0 & offset <=5.0],na.rm = TRUE),
-    trough = min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE),
+    trough = min(value[offset>=0.0 & offset <=5.0],na.rm = TRUE),
     peak_time = offset[offset>=1.0 & offset <=5.0][value[offset>=1.0 & offset <=5.0]==max(value[offset>=1.0 & offset <=5.0],na.rm = TRUE)],
-    trough_time = offset[offset>=4.0 & offset <=11.0][value[offset>=4.0 & offset <=11.0]==min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE)]
+    trough_time = offset[offset>=0.0 & offset <=5.0][value[offset>=0.0 & offset <=5.0]==min(value[offset>=0.0 & offset <=5.0],na.rm = TRUE)]
   )
   
 
@@ -139,10 +139,25 @@ sst_all_data <- get_expected_tone_time(sst_all_data)
 sst_all_data<-calculate_response_latency(sst_all_data)
 sst_all_data<-calculate_rpe(sst_all_data)
 
+#calculate proportion of stop trials that were correct. ideally should be 50/50 but let's check it.
+sst_all_data<-get_more_sst_stats(sst_all_data)
 
+#remove subjects with two many incorrect trials--theyre' probably not paying attention
+hist(sst_all_data$stop_prop_correct)
+
+sst_all_data <- sst_all_data %>% filter(stop_prop_correct>0.3)
+
+#sst_all_data %>% select(subid, waveid, runid,condition,stop_prop_correct,nth_reaction_time,ssrt_d1)
 # sst_all_data %>% select(
 #   subid, waveid, runid, reaction_time_clean, SSD_recorded,condition, last_tone_delay, trials_since_last_SSD,last_correct_go)# %>%
 #   #View()
+
+full_run_data <- sst_all_data %>% group_by(subid,waveid,runid) %>%
+  summarize(mean_SSD_all_stop_trials=mean(SSD_recorded[SSD_recorded!=0]),
+            mean_ssrt_0 = mean(ssrt_0[condition=="CorrectStop" & !is.na(ssrt_0)]),
+            stop_prop_correct = sum(condition=="CorrectStop")/sum(condition %in% c("CorrectStop","FailedStop"))
+            
+            )
 
 ```
 
@@ -208,11 +223,10 @@ FS_neural_behav_data_not_na<-FS_summary_data_accumbens[
 
 ```
 
+
+
 # Single-level tests
 
-```{r}
-
-```
 
 
 ```{r}
@@ -286,9 +300,6 @@ FS_neural_behav_data_not_na<-trial_neural_behav_data_not_na[trial_neural_behav_d
 
 
 ```{r}
-
-full_run_data <- sst_all_data %>% group_by(subid,waveid,runid) %>%
-  summarize(mean_SSD_all_stop_trials=mean(SSD_recorded[SSD_recorded!=0]))
 
 FS_by_subj_raw <- FS_neural_behav_data_not_na %>% group_by(ROI_delateralized, subid) %>%
   mutate(trial_count=n())
@@ -849,7 +860,7 @@ summary(model_full_effects)
 
 ```
 
-### Change in P_stop_trial
+### Chagne in P_stop_trial
 
 There is probably _change_ in P_stop_trial to consider, too.
 
@@ -1029,10 +1040,169 @@ cor.test(data_by_ppt$BIS_11,data_by_ppt$peak_z)
 cor.test(data_by_ppt$RTFS_f1_minus_f2,data_by_ppt$peak_z)
 ```
 
+## Other ways to measure responsiveness
+
+Perhaps there are other ways to measure responsiveness to the probability of a stop trial. For instance, within subject, we can measure the relationship of peak activity to the change in informativeness probability of a stop trial. Then, maybe across subjects, the strength of that relationship correlates with overall performance in the task.
+
+How do we quantify overall task performance? Proportion of trials correct is more or less controlled, so we'd want to look at the ladder delay at the end of the task. Shorter is better performing. But probably overall percentage correct is also good.
+
+We most need stop-signal reaction time, which I can't calculate simply--needs a horse-race model to estimate.
+
+```{r}
+# FS_neural_behav_p %>% 
+#   group_by(subid,wave,runid) %>%
+#   summarise(cor_P_stop_trial_change_peak=
+#                 (sum(((is.na(P_stop_trial_change) | is.na(P_stop_trial_change))==FALSE))>2))
+peak_p_stop_change_cor_w1 <- FS_neural_behav_p %>% 
+  group_by(subid,waveid,runid) %>%
+  filter(wave==1) %>%
+  filter((sum(((is.na(P_stop_trial_change) | is.na(P_stop_trial_change))==FALSE))>2)) %>%
+  summarise(cor_P_stop_trial_change_peak=
+              case_when(
+                (sum(((is.na(P_stop_trial_change) | is.na(P_stop_trial_change))==FALSE))>2) ~ cor.test(peak,P_stop_trial_change)$estimate,
+            TRUE~ as.numeric(NA)
+              ),
+            mean_ssrt_0=mean(mean_ssrt_0,na.rm=TRUE)
+  )
+
+
+cor.test(
+  peak_p_stop_change_cor_w1$cor_P_stop_trial_change_peak,
+  peak_p_stop_change_cor_w1$mean_ssrt_0
+)
+  
+  
+              
+```
+I don't place much stock in this resulbe cause P_stop_trial_change is correlated with simple trial number, r=0.91, so it mostly measure trial number.
+
+
+
+predict: as trials get longer, a new stop trial is more of a surprise, so if peak measures update, this correlation should be positive, and subjects with a good (short) SSRT might have larger correlations.
+```{r}
+#
+peak_p_stop_change_cor_w1 <- FS_neural_behav_p %>% 
+  group_by(subid,waveid,runid) %>%
+  filter(wave==1) %>%
+  filter((sum(((is.na(trials_since_last_SSD) | is.na(trials_since_last_SSD))==FALSE))>2)) %>%
+  summarise(cor_P_stop_trials_since_last_ssd=
+              case_when(
+                (sum(((is.na(trials_since_last_SSD) | is.na(trials_since_last_SSD))==FALSE))>2) ~ cor.test(peak,trials_since_last_SSD)$estimate,
+            TRUE~ as.numeric(NA)
+              ),
+            mean_ssrt_0=mean(mean_ssrt_0,na.rm=TRUE)
+  )
+
+
+cor.test(
+  peak_p_stop_change_cor_w1$cor_P_stop_trials_since_last_ssd,
+  peak_p_stop_change_cor_w1$mean_ssrt_0
+)
+  
+  
+              
+```
+
+How about the same thing but for post-pre?
+```{r}
+
+cor_within_subjs <- FS_neural_behav_p %>% 
+  group_by(subid,waveid,runid) %>%
+  filter(wave==1) %>%
+  filter((sum(((is.na(post_pre_rt_change) | is.na(post_pre_rt_change))==FALSE))>2)) %>%
+  summarise(cor_neural_post_pre_rt_change=
+              case_when(
+                (sum(((is.na(post_pre_rt_change) | is.na(post_pre_rt_change))==FALSE))>2) ~ cor.test(peak,post_pre_rt_change)$estimate,
+            TRUE~ as.numeric(NA)
+              ),
+            mean_ssrt_0=mean(mean_ssrt_0,na.rm=TRUE)
+  )
+
+
+cor.test(
+  cor_within_subjs$cor_neural_post_pre_rt_change,
+  cor_within_subjs$mean_ssrt_0
+)
+
+plot(cor_within_subjs$cor_neural_post_pre_rt_change,
+  cor_within_subjs$mean_ssrt_0)
+t.test(cor_within_subjs$cor_neural_post_pre_rt_change)
+hist(cor_within_subjs$cor_neural_post_pre_rt_change)
+              
+```
+Nothing at all there. two possible problems:
+
+(1) Does our SSRT measure really indicate good performance?
+
+(2) Perhaps trials since last SSD or Change in P Stop Trial don't really measure an indication of how much a subject will update when they see another stop trial. What would?
+
+
+### Basic two-way relationships
+
+Let's look at basic two-way relationships--how much does SSRT correlate with peak or the behavioral measures?
+
+```{r, fig.width=5}
+
+
+#important to only use subjects with reasonably good proportion correct
+#we want:
+indiv_summary <- merge(
+#mean peak, trough, and amplitude for FS trials
+  fs_by_ppt %>% select(SID, mean_peak, mean_trough, mean_amplitude),
+#between-subject performance measure: mean SSRT (my calculation), SSRT (MATLAB generated)
+  data_by_ppt %>% select(SID, SST_SSRT, SST_SSRTquant),by="SID"
+) %>%
+  merge(full_run_data %>% ungroup() %>% filter(runid==1 & waveid==1) %>% select(subid, mean_ssrt_0, stop_prop_correct),
+        by.x = "SID",by.y="subid") %>% 
+#behavioral measures: 
+# - of RT change: post-pre RT
+  merge(fs_by_ppt %>% select(SID, mean_post_pre_rt_change),
+        by="SID") %>%
+# - of probability of stop trial: p_stop trial, p_stop_trial_change, trials_since_last_SSD
+#these are not subject behavior; they're information ABOUT the task, so they are not going to make any sense for individual differences.
+#only way you can do it is the way I've already done; look at how linked they are to some other thing, such as subject behavior.
+  merge(data_by_ppt %>% select(SID, P_stop_trial_z), by="SID")
+indiv_summary_selected <- indiv_summary %>% filter(stop_prop_correct >0.3)
+corrmat<-cor(indiv_summary_selected%>%select(-SID) ,use = "pairwise.complete.obs")
+corrmat_of_interest<-corrmat
+related_constructs<-corrmat
+for (i in 1:nrow(corrmat)){
+  for (j in 1:ncol(corrmat)){
+    if((i==j) | (i>j)){
+      corrmat_of_interest[i,j]<-NA
+      related_constructs[i, j]<-NA
+    }
+    if(
+      ((i %in% 1:3) & (j %in% 1:3)) |
+      ((i %in% 4:7) & (j %in% 4:7)) | 
+      ((i %in% 8:9) & (j %in% 8:9))
+    ){
+      corrmat_of_interest[i,j]<-NA
+    }else{
+      related_constructs[i, j]<-NA
+    }
+  }
+}
+
+corrplot::corrplot(corrmat_of_interest, method = "number")
+corrplot::corrplot(related_constructs, method = "number")
+
+cor.test(indiv_summary_selected$mean_peak,indiv_summary_selected$mean_ssrt_0)
+cor.test(indiv_summary_selected$mean_amplitude,indiv_summary_selected$mean_post_pre_rt_change)
+```
+OK, so we have tried this. I can confirm that my measure of SSRT is very close to the measure in MATLAB. I have also filtered by proportion correct to only get subjects whose proportions correct were _reasonably_ well-balanced.
+
+(1) subject-average neural signal during FS are not related to performance (SSRT), learning SSDs, or learning P(Stop).
+(2) Performance is not related to learning SSDs or learning P(Stop).
+(3) post-pre RT change is VERY related to P(Stop).
+
+So we need to leave this. I don't think we can validate that any of these learning signals seem to relate to performance.
+
+##RTFS or BIS_11
+
 So what else can we do with this?
 
 We wanted to know if the RT or the peak (not the peak regressor as above) related to RTFS or BIS_11
-
 
 
 ```{r}
@@ -1056,6 +1226,10 @@ cor.test(fs_by_ppt$mean_peak, fs_by_ppt$BIS_11,method="spearman")
 This validates that both $P(is stop)$ and the signal time are parameters to learn which striatal activity moderates in both of them.
 
 If striatum responds to both, its activations should be a function of each of them, which we have observed within FS. However, we should also see this affect across all trials, not necessarily moderated by FS, but if FS did moderate it, that might be because striatal activity facilitates learning or updating amongst other parts of the brain. we might expect to see heightened striatal connectivity with other regions during those FS periods--though that's an odd thing to say because the interesting thing is _decreased_ connectivity during the periods of strong updating! 
+
+
+## Performance links
+
 
 # All trial types, with P_Stop
 
