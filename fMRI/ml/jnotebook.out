@@ -164,3 +164,77 @@ CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
 [I 16:21:34.398 NotebookApp] Kernel interrupted: 82148d89-41be-49fe-9330-05f72ddd9f5d
 [I 16:21:50.641 NotebookApp] Starting buffering for b75cc96f-67b8-44c0-931d-939a8d315a3f:c843c52b2fdc4c00ad301183ec5a7606
 [I 16:23:19.640 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[W 16:24:04.048 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.073 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.157 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.172 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.202 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.228 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.268 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.289 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.356 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.368 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.635 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.649 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.791 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.803 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.847 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.855 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.871 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.884 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.904 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.917 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.958 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:04.966 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:05.130 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:05.139 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:24:09.157 NotebookApp] Notebook try_out_sklearn_classifier.ipynb is not trusted
+[W 16:24:09.371 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20230109154551 (172.20.13.244) 5.860000ms referer=http://localhost:10094/notebooks/try_out_sklearn_classifier.ipynb
+[I 16:24:37.923 NotebookApp] Starting buffering for b75cc96f-67b8-44c0-931d-939a8d315a3f:0d3005f5cab045358c2848d42af6974e
+[I 16:24:37.930 NotebookApp] Kernel shutdown: b75cc96f-67b8-44c0-931d-939a8d315a3f
+[I 16:24:38.276 NotebookApp] Kernel started: 6e23c225-0868-4a89-b387-8a0b077778ba, name: conda-env-.conda-neuralsignature-py
+CONDA_PREFIX=/home/bsmith16/.conda/envs/neuralsignature
+[I 16:26:09.378 NotebookApp] Saving file at /try_out_sklearn_classifier.ipynb
+[W 16:26:09.380 NotebookApp] Notebook try_out_sklearn_classifier.ipynb is not trusted
+[I 16:28:09.379 NotebookApp] Saving file at /try_out_sklearn_classifier.ipynb
+[W 16:28:09.380 NotebookApp] Notebook try_out_sklearn_classifier.ipynb is not trusted
+[I 16:30:09.926 NotebookApp] Saving file at /try_out_sklearn_classifier.ipynb
+[W 16:30:09.927 NotebookApp] Notebook try_out_sklearn_classifier.ipynb is not trusted
+[I 16:31:21.188 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:32:09.389 NotebookApp] Saving file at /try_out_sklearn_classifier.ipynb
+[W 16:32:09.389 NotebookApp] Notebook try_out_sklearn_classifier.ipynb is not trusted
+[I 16:33:18.604 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:34:10.980 NotebookApp] Saving file at /try_out_sklearn_classifier.ipynb
+[W 16:34:10.981 NotebookApp] Notebook try_out_sklearn_classifier.ipynb is not trusted
+[I 16:35:16.204 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:36:20.080 NotebookApp] Saving file at /try_out_sklearn_classifier.ipynb
+[W 16:36:20.081 NotebookApp] Notebook try_out_sklearn_classifier.ipynb is not trusted
+[I 16:37:16.127 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:39:16.102 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:41:18.857 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:43:20.629 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:45:17.601 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:47:16.110 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:49:30.201 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:54:34.704 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 16:59:24.657 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 17:04:14.672 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 17:09:04.693 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 17:13:55.797 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 17:18:46.644 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 17:23:36.436 NotebookApp] Saving file at /SST/load_multisubject_brain_data_sst_w1-betas.ipynb
+[I 17:27:18.420 NotebookApp] Starting buffering for 82148d89-41be-49fe-9330-05f72ddd9f5d:3bcc797ea1204a94bca1dd3c58a28121
+[I 17:27:18.421 NotebookApp] Starting buffering for 6e23c225-0868-4a89-b387-8a0b077778ba:0d3005f5cab045358c2848d42af6974e
+[I 17:27:32.233 NotebookApp] Restoring connection for 82148d89-41be-49fe-9330-05f72ddd9f5d:3bcc797ea1204a94bca1dd3c58a28121
+[I 17:27:32.234 NotebookApp] Replaying 5 buffered messages
+[I 17:27:32.292 NotebookApp] Restoring connection for 6e23c225-0868-4a89-b387-8a0b077778ba:0d3005f5cab045358c2848d42af6974e
+[I 17:27:53.578 NotebookApp] Starting buffering for 82148d89-41be-49fe-9330-05f72ddd9f5d:3bcc797ea1204a94bca1dd3c58a28121
+[I 17:27:53.579 NotebookApp] Starting buffering for 6e23c225-0868-4a89-b387-8a0b077778ba:0d3005f5cab045358c2848d42af6974e
+[I 17:27:56.424 NotebookApp] Restoring connection for 6e23c225-0868-4a89-b387-8a0b077778ba:0d3005f5cab045358c2848d42af6974e
+[I 17:27:56.478 NotebookApp] Restoring connection for 82148d89-41be-49fe-9330-05f72ddd9f5d:3bcc797ea1204a94bca1dd3c58a28121
+[I 17:27:56.478 NotebookApp] Replaying 1 buffered messages
+[W 17:29:26.425 NotebookApp] WebSocket ping timeout after 90001 ms.
+[W 17:29:26.479 NotebookApp] WebSocket ping timeout after 90001 ms.
+[I 17:29:31.427 NotebookApp] Starting buffering for 6e23c225-0868-4a89-b387-8a0b077778ba:0d3005f5cab045358c2848d42af6974e
+[I 17:29:31.481 NotebookApp] Starting buffering for 82148d89-41be-49fe-9330-05f72ddd9f5d:3bcc797ea1204a94bca1dd3c58a28121
+slurmstepd: error: *** JOB 23320353 ON n137 CANCELLED AT 2023-01-09T19:45:38 DUE TO TIME LIMIT ***

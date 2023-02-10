@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=`cat test_subject_list.txt` #`cat subject_list.txt`
+SUBJLIST=`cat subject_list_wave2.txt` #`cat subject_list.txt`
 
 # Which SID should be replaced?
 REPLACESID=001
@@ -21,13 +21,13 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_betaseries_wave1.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_betaseries_wave2.m
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
 
 # RRV the results files
-RESULTS_INFIX=fx_betaseries_wave1
+RESULTS_INFIX=fx_betaseries_wave2
 
 # Set output dir and make it if it doesn't exist
 OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output
@@ -52,6 +52,7 @@ for SUB in $SUBJLIST; do
 	 	--cpus-per-task=${cpuspertask} \
 	 	--mem-per-cpu=${mempercpu} \
 	 	--account=sanlab \
+		--partition=ctn,short \
 	 	${SHELL_SCRIPT}
  	sleep .25
 done
