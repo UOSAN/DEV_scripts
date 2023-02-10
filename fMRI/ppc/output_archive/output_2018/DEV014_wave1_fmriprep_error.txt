@@ -1,0 +1,84 @@
+Traceback (most recent call last):
+  File "/opt/conda/bin/fmriprep", line 8, in <module>
+    sys.exit(main())
+  File "/opt/conda/lib/python3.9/site-packages/fmriprep/cli/run.py", line 42, in main
+    parse_args()
+  File "/opt/conda/lib/python3.9/site-packages/fmriprep/cli/parser.py", line 680, in parse_args
+    opts = parser.parse_args(args, namespace)
+  File "/opt/conda/lib/python3.9/argparse.py", line 1824, in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+  File "/opt/conda/lib/python3.9/argparse.py", line 1857, in parse_known_args
+    namespace, args = self._parse_known_args(args, namespace)
+  File "/opt/conda/lib/python3.9/argparse.py", line 2066, in _parse_known_args
+    start_index = consume_optional(start_index)
+  File "/opt/conda/lib/python3.9/argparse.py", line 2006, in consume_optional
+    take_action(action, args, option_string)
+  File "/opt/conda/lib/python3.9/argparse.py", line 1934, in take_action
+    action(self, namespace, argument_values, option_string)
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 708, in __call__
+    for sp in Reference.from_string(val):
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 336, in from_string
+    return [cls(_args[0], s) for s in allspecs]
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 336, in <listcomp>
+    return [cls(_args[0], s) for s in allspecs]
+  File "<attrs generated init niworkflows.utils.spaces.Reference>", line 11, in __init__
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 246, in _check_name
+    raise ValueError(
+ValueError: space identifier "template" is invalid.
+Valid identifiers are: Fischer344, MNI152Lin, MNI152NLin2009aAsym, MNI152NLin2009aSym, MNI152NLin2009bAsym, MNI152NLin2009bSym, MNI152NLin2009cAsym, MNI152NLin2009cSym, MNI152NLin6Asym, MNI152NLin6Sym, MNI305, MNIColin27, MNIInfant, MNIPediatricAsym, MouseIn, NKI, NMT31Sym, OASIS30ANTs, PNC, RESILIENT, UNCInfant, VALiDATe29, WHS, fsLR, fsaverage, T1w, T2w, anat, fsnative, func, run, sbref, session, individual, dwi
+Traceback (most recent call last):
+  File "/opt/conda/bin/fmriprep", line 8, in <module>
+    sys.exit(main())
+  File "/opt/conda/lib/python3.9/site-packages/fmriprep/cli/run.py", line 42, in main
+    parse_args()
+  File "/opt/conda/lib/python3.9/site-packages/fmriprep/cli/parser.py", line 680, in parse_args
+    opts = parser.parse_args(args, namespace)
+  File "/opt/conda/lib/python3.9/argparse.py", line 1824, in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+  File "/opt/conda/lib/python3.9/argparse.py", line 1857, in parse_known_args
+    namespace, args = self._parse_known_args(args, namespace)
+  File "/opt/conda/lib/python3.9/argparse.py", line 2066, in _parse_known_args
+    start_index = consume_optional(start_index)
+  File "/opt/conda/lib/python3.9/argparse.py", line 2006, in consume_optional
+    take_action(action, args, option_string)
+  File "/opt/conda/lib/python3.9/argparse.py", line 1934, in take_action
+    action(self, namespace, argument_values, option_string)
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 708, in __call__
+    for sp in Reference.from_string(val):
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 336, in from_string
+    return [cls(_args[0], s) for s in allspecs]
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 336, in <listcomp>
+    return [cls(_args[0], s) for s in allspecs]
+  File "<attrs generated init niworkflows.utils.spaces.Reference>", line 11, in __init__
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 246, in _check_name
+    raise ValueError(
+ValueError: space identifier "template" is invalid.
+Valid identifiers are: Fischer344, MNI152Lin, MNI152NLin2009aAsym, MNI152NLin2009aSym, MNI152NLin2009bAsym, MNI152NLin2009bSym, MNI152NLin2009cAsym, MNI152NLin2009cSym, MNI152NLin6Asym, MNI152NLin6Sym, MNI305, MNIColin27, MNIInfant, MNIPediatricAsym, MouseIn, NKI, NMT31Sym, OASIS30ANTs, PNC, RESILIENT, UNCInfant, VALiDATe29, WHS, fsLR, fsaverage, T1w, T2w, anat, fsnative, func, run, sbref, session, individual, dwi
+Traceback (most recent call last):
+  File "/opt/conda/bin/fmriprep", line 8, in <module>
+    sys.exit(main())
+  File "/opt/conda/lib/python3.9/site-packages/fmriprep/cli/run.py", line 42, in main
+    parse_args()
+  File "/opt/conda/lib/python3.9/site-packages/fmriprep/cli/parser.py", line 680, in parse_args
+    opts = parser.parse_args(args, namespace)
+  File "/opt/conda/lib/python3.9/argparse.py", line 1824, in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+  File "/opt/conda/lib/python3.9/argparse.py", line 1857, in parse_known_args
+    namespace, args = self._parse_known_args(args, namespace)
+  File "/opt/conda/lib/python3.9/argparse.py", line 2066, in _parse_known_args
+    start_index = consume_optional(start_index)
+  File "/opt/conda/lib/python3.9/argparse.py", line 2006, in consume_optional
+    take_action(action, args, option_string)
+  File "/opt/conda/lib/python3.9/argparse.py", line 1934, in take_action
+    action(self, namespace, argument_values, option_string)
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 708, in __call__
+    for sp in Reference.from_string(val):
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 336, in from_string
+    return [cls(_args[0], s) for s in allspecs]
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 336, in <listcomp>
+    return [cls(_args[0], s) for s in allspecs]
+  File "<attrs generated init niworkflows.utils.spaces.Reference>", line 11, in __init__
+  File "/opt/conda/lib/python3.9/site-packages/niworkflows/utils/spaces.py", line 246, in _check_name
+    raise ValueError(
+ValueError: space identifier "template" is invalid.
+Valid identifiers are: Fischer344, MNI152Lin, MNI152NLin2009aAsym, MNI152NLin2009aSym, MNI152NLin2009bAsym, MNI152NLin2009bSym, MNI152NLin2009cAsym, MNI152NLin2009cSym, MNI152NLin6Asym, MNI152NLin6Sym, MNI305, MNIColin27, MNIInfant, MNIPediatricAsym, MouseIn, NKI, NMT31Sym, OASIS30ANTs, PNC, RESILIENT, UNCInfant, VALiDATe29, WHS, fsLR, fsaverage, T1w, T2w, anat, fsnative, func, run, sbref, session, individual, dwi

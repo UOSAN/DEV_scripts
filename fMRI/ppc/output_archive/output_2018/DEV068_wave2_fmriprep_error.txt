@@ -1,0 +1,87 @@
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+pandoc-citeproc: reference afni not found
+[WARNING] This document format requires a nonempty <title> element.
+  Please specify either 'title' or 'pagetitle' in the metadata.
+  Falling back to 'CITATION'
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/site-packages/bids/grabbids/bids_layout.py:116: UserWarning: 'dataset_description.json' file is missing from project root. You may want to set the root path to a valid BIDS project.
+  warnings.warn("'dataset_description.json' file is missing from "
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+Traceback (most recent call last):
+  File "/usr/local/miniconda/bin/fmriprep", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/cli/run.py", line 342, in main
+    fmriprep_wf.run(**plugin_settings)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/workflows.py", line 594, in run
+    self._write_report_info(self.base_dir, self.name, execgraph)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/workflows.py", line 650, in _write_report_info
+    save_json(graph_file, json_dict)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 608, in save_json
+    json.dump(data, fp, sort_keys=True, indent=4)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/simplejson/__init__.py", line 279, in dump
+    fp.write(chunk)
+OSError: [Errno 28] No space left on device
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+pandoc-citeproc: reference afni not found
+[WARNING] This document format requires a nonempty <title> element.
+  Please specify either 'title' or 'pagetitle' in the metadata.
+  Falling back to 'CITATION'
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/site-packages/bids/grabbids/bids_layout.py:116: UserWarning: 'dataset_description.json' file is missing from project root. You may want to set the root path to a valid BIDS project.
+  warnings.warn("'dataset_description.json' file is missing from "
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+Traceback (most recent call last):
+  File "/usr/local/miniconda/bin/fmriprep", line 11, in <module>
+    sys.exit(main())
+  File "/usr/local/miniconda/lib/python3.6/site-packages/fmriprep/cli/run.py", line 342, in main
+    fmriprep_wf.run(**plugin_settings)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/workflows.py", line 594, in run
+    self._write_report_info(self.base_dir, self.name, execgraph)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/pipeline/engine/workflows.py", line 650, in _write_report_info
+    save_json(graph_file, json_dict)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/nipype/utils/filemanip.py", line 608, in save_json
+    json.dump(data, fp, sort_keys=True, indent=4)
+  File "/usr/local/miniconda/lib/python3.6/site-packages/simplejson/__init__.py", line 279, in dump
+    fp.write(chunk)
+OSError: [Errno 28] No space left on device
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+pandoc-citeproc: reference afni not found
+[WARNING] This document format requires a nonempty <title> element.
+  Please specify either 'title' or 'pagetitle' in the metadata.
+  Falling back to 'CITATION'
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/site-packages/bids/grabbids/bids_layout.py:116: UserWarning: 'dataset_description.json' file is missing from project root. You may want to set the root path to a valid BIDS project.
+  warnings.warn("'dataset_description.json' file is missing from "
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
+  return f(*args, **kwds)
+Errors occurred while generating reports for participants: DEV068 (8).

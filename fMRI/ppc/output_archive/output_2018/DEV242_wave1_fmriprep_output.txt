@@ -1,0 +1,57 @@
+
+fMRIprep on DEV242_wave1
+
+Container: /projects/sanlab/shared/containers/fmriprep-latest-2018-09-05.simg
+
+Subject directory: /projects/sanlab/shared/DEV/bids_data
+
+Starting on: ROC
+
+
+230202-05:29:29,322 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV242'].
+      * Run identifier: 20230202-052929_dd312f47-c262-4098-ba56-fe7b938e2821.
+    
+
+
+
+done
+
+-----------------------
+
+Starting on: WTP
+
+
+230202-05:30:03,556 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV242'].
+      * Run identifier: 20230202-053003_0c61b30f-1ad4-40a5-bf57-5891c96a2839.
+    
+
+
+
+done
+
+-----------------------
+
+Starting on: SST
+
+
+230202-05:30:39,772 nipype.workflow IMPORTANT:
+	 
+    Running fMRIPREP version 1.1.4:
+      * BIDS dataset path: /projects/sanlab/shared/DEV/bids_data.
+      * Participant list: ['DEV242'].
+      * Run identifier: 20230202-053039_2e58fc75-f3f6-4cf9-98e7-45434b984d0d.
+    
+
+
+
+done
+
+-----------------------
