@@ -56,7 +56,7 @@ for subject in $subject_list; do
 		   -o "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_output.txt \
 		   -e "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_error.txt \
 		   --account=sanlab \
-		   job_fmriprep.sh)
+		   job_fmriprep_2022.sh)
 	echo $SBATCH_OUT
 	#get the jobID for this item
 	JOBID=${SBATCH_OUT##* }
