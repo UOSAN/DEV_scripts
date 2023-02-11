@@ -20,7 +20,7 @@ def main():
                 func_niftis_partialpath = get_funcdir_niftis(func_dir_path, timepoint)
                 if os.path.isdir(fmap_dir_path):
                     fmap_jsons = get_fmap_jsons(fmap_dir_path)
-                    write_to_json(func_niftis_partialpath, fmap_jsons, fmap_dir_path, echo_time1, echo_time2, func_dir_path=func_dir_path)
+                    write_to_json(func_niftis_partialpath, fmap_jsons, fmap_dir_path, echo_time1, echo_time2, subjectdir)
             else:
                 continue
 
@@ -66,7 +66,7 @@ def get_fmap_jsons(fmap_dir_path):
     fmap_jsons = [f for f in os.listdir(fmap_dir_path) if f.endswith('.json')]
     return fmap_jsons
 
-def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:str, echo_time1:str, echo_time2:str, func_dir_path:str):
+def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:str, echo_time1:str, echo_time2:str, subjectdir:str):
     for fmap_json in fmap_jsons:
 
         json_path = os.path.join(fmap_dir_path, fmap_json)
@@ -103,7 +103,7 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
     for nii_partialpath in func_niftis_partialpath:
         json_partialpath = nii_partialpath.replace('.nii.gz', '.json')
         print(json_partialpath)
-        json_path = os.path.join(func_dir_path, json_partialpath)
+        json_path = os.path.join(subjectdir, json_partialpath)
         with open(json_path) as target_json:
             json_file = json.load(target_json)
             #now add the taskname if this is a task json.
