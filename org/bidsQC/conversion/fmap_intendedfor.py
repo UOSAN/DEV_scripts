@@ -16,11 +16,12 @@ def main():
         for timepoint in timepoints:
             func_dir_path = os.path.join(bidsdir, subjectdir, timepoint, 'func')
             fmap_dir_path = os.path.join(bidsdir, subjectdir, timepoint, 'fmap')
+            subj_dir_path = os.path.join(bidsdir, subjectdir)
             if os.path.isdir(func_dir_path):
                 func_niftis_partialpath = get_funcdir_niftis(func_dir_path, timepoint)
                 if os.path.isdir(fmap_dir_path):
                     fmap_jsons = get_fmap_jsons(fmap_dir_path)
-                    write_to_json(func_niftis_partialpath, fmap_jsons, fmap_dir_path, echo_time1, echo_time2, subjectdir)
+                    write_to_json(func_niftis_partialpath, fmap_jsons, fmap_dir_path, echo_time1, echo_time2, subj_dir_path)
             else:
                 continue
 
