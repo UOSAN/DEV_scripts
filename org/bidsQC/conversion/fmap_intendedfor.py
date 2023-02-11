@@ -68,6 +68,8 @@ def get_fmap_jsons(fmap_dir_path):
 
 def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:str, echo_time1:str, echo_time2:str):
     for fmap_json in fmap_jsons:
+        print(fmap_json)
+        print(json_path)
         json_path = os.path.join(fmap_dir_path, fmap_json)
         # print(json_path)
         # with open(json_path) as target_json_text:
