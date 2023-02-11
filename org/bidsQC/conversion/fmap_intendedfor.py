@@ -100,10 +100,11 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
 
     task_file_list=['task-' + t for t in ['ROC','WTP','SST','rest']]
     # now update the func niftis with tasknames
-    for func_path in func_niftis_partialpath:
-        func_json_path = func_path.replace('.nii.gz', '.json')
-        print(func_json_path)
-        with open(func_json_path) as target_json:
+    for nii_partialpath in func_niftis_partialpath:
+        json_partialpath = nii_partialpath.replace('.nii.gz', '.json')
+        print(json_partialpath)
+        json_path = os.path.join(fmap_dir_path, json_partialpath)
+        with open(json_path) as target_json:
             json_file = json.load(target_json)
             #now add the taskname if this is a task json.
             
