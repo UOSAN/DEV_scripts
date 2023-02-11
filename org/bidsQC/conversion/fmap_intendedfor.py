@@ -90,6 +90,15 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
             if include_echo_time:
                 json_file['EchoTime1'] = echo_time1
                 json_file['EchoTime2'] = echo_time2
+
+            #now add the taskname if this is a task json.
+        task_file_list=['task-' + t for t in ['ROC','WTP','SST','rest']]
+        #for each task type, check if this json filename has the task in the name, and if it does, add the 'TaskName' attribute to the json_file
+        for task_type in task_file_list:
+            #check whether task_type is in json_path filename, excluding the path
+            if task_type in json_path.split('/')[-1]:
+                json_file['TaskName'] = task_type
+
         with open(json_path, 'w') as target_json:
             json.dump(json_file, target_json, indent=4)
     print("written")
