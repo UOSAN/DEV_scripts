@@ -97,8 +97,10 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
         task_file_list=['task-' + t for t in ['ROC','WTP','SST','rest']]
         #for each task type, check if this json filename has the task in the name, and if it does, add the 'TaskName' attribute to the json_file
         for task_type in task_file_list:
+            print(task_type)
             #check whether task_type is in json_path filename, excluding the path
             if task_type in json_path.split('/')[-1]:
+                print('updating json file with task name ' + task_type)
                 json_file['TaskName'] = task_type
 
         with open(json_path, 'w') as target_json:
