@@ -81,8 +81,8 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
             print(json_path)
             continue
 
-        print(fmap_json)
-        print(json_path)
+        #print(fmap_json)
+        #print(json_path)
         
         with open(json_path) as target_json:
             #check the size of the file
@@ -99,22 +99,24 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
         with open(json_path, 'w') as target_json:
             json.dump(json_file, target_json, indent=4)
 
-    task_file_list=['task-' + t for t in ['ROC','WTP','SST','rest']]
+    task_file_list=['ROC','WTP','SST','rest']
     # now update the func niftis with tasknames
     for nii_partialpath in func_niftis_partialpath:
         json_partialpath = nii_partialpath.replace('.nii.gz', '.json')
-        print(json_partialpath)
+        #print(json_partialpath)
         json_path = os.path.join(subjectdir, json_partialpath)
         with open(json_path) as target_json:
             json_file = json.load(target_json)
             #now add the taskname if this is a task json.
             
             #for each task type, check if this json filename has the task in the name, and if it does, add the 'TaskName' attribute to the json_file
+            
             for task_type in task_file_list:
+                task_type_str = 'task-' + task_type
                 print(task_type)
                 #check whether task_type is in json_path filename, excluding the path
-                if task_type in json_path.split('/')[-1]:
-                    print('updating json file with task name ' + task_type)
+                if task_type_str in json_path.split('/')[-1]:
+                    #print('updating json file with task name ' + task_type)
                     json_file['TaskName'] = task_type
 
         with open(json_path, 'w') as target_json:
