@@ -202,8 +202,6 @@ trial_summary_data_delat <- trial_summary_data %>%
 
 ## Merge the datasets
 
-
-
 ```{r}
 
 
@@ -223,11 +221,7 @@ FS_neural_behav_data_not_na<-FS_summary_data_accumbens[
 
 ```
 
-
-
 # Single-level tests
-
-
 
 ```{r}
 FS_by_subj_raw <- FS_neural_behav_data_not_na %>% group_by(subid) %>%
