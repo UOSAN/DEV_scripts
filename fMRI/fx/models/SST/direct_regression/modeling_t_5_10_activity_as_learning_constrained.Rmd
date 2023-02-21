@@ -142,6 +142,13 @@ sst_all_data <- get_expected_tone_time(sst_all_data)
 sst_all_data<-calculate_response_latency(sst_all_data)
 sst_all_data<-calculate_rpe(sst_all_data)
 
+sst_all_data<-get_more_sst_stats(sst_all_data)
+
+#remove subjects with two many incorrect trials--theyre' probably not paying attention
+hist(sst_all_data$stop_prop_correct)
+
+sst_all_data <- sst_all_data %>% filter(stop_prop_correct>0.2 & stop_prop_correct<0.8)
+
 
 # sst_all_data %>% select(
 #   subid, waveid, runid, reaction_time_clean, SSD_recorded,condition, last_tone_delay, trials_since_last_SSD,last_correct_go)# %>%
@@ -238,7 +245,6 @@ trial_neural_behav_roi$med_post_trial_z<-scale(trial_neural_behav_roi$med_post_t
 
 ```
 
-
 # Basic Striatal cluster mixed effects models
 
 
@@ -312,6 +318,7 @@ model_P_stop_trial_w_change <- lme4::lmer(
   )
 summary(model_P_stop_trial_w_change)
 
+#ignoring post_pre_rt_change_z
 model_P_stop_trial_w_change_no_rt <- lme4::lmer(
    med_post_trial_z ~ trial_n_z +condition +  P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
@@ -320,6 +327,7 @@ summary(model_P_stop_trial_w_change_no_rt)
 
 anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
 
+#ignoring P_stop_trial_change_z
 model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
    med_post_trial_z ~ trial_n_z +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
@@ -389,5 +397,185 @@ summary(model_P_stop_trial_w_change_no_p_stop_d)
 
 anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 
+```
+# Looking at CS and FS trials separately.
+
+A valid question is: does this particular signal track pre-post RT change, just considering CS and FS individually?
+
+This builds evidence that this activity both tracks an RPE signal, and distinct from the peak at t_0_5, which seems to only track pre-post RT change when it comes to FailedStop trials.
+
+# Just CS Trials
+
+```{r}
+
+model_P_stop_trial_w_change <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop"))
+  )
+summary(model_P_stop_trial_w_change)
+
+#ignoring post_pre_rt_change_z
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z  + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop"))
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+#ignoring P_stop_trial_change_z
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop"))
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+```
+
+
+
+
+# Just FS Trials
+
+```{r}
+
+model_P_stop_trial_w_change <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change)
+
+#ignoring post_pre_rt_change_z
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z  + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+#ignoring P_stop_trial_change_z
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+```
+
+For comparison--if we use trough (it should generally be a trough for FS) do we still see the effect?
+
+
+
+```{r}
+
+
+model_P_stop_trial_w_change <- lme4::lmer(
+   trough ~ trial_n_z + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change)
+
+#ignoring post_pre_rt_change_z
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   trough ~ trial_n_z  + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+#ignoring P_stop_trial_change_z
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   trough ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+# Between-subjects measures
+
+
+## Between subjects
+
+```{r}
+
+trial_neural_behav_data_not_na$trial_n_n<-scale(trial_neural_behav_data_not_na$trial_n_c)
+
+
+FS_neural_behav_data_not_na<-trial_neural_behav_data_not_na[trial_neural_behav_data_not_na$condition=="FailedStop",]
+```
+
+
+```{r}
+activity_by_subj <- trial_neural_behav_data_not_na %>% filter(condition %in% c("CorrectStop","FailedStop")) %>%
+ group_by(subid,wave,runid,ROI_delateralized,condition) %>%
+  summarize(mean_med_post_stop_signal=mean(med_post_trial),
+            mean_post_pre_rt = mean(post_pre_rt_change)
+            ) %>%
+  tidyr::pivot_wider(names_from="condition", values_from=c("mean_med_post_stop_signal","mean_post_pre_rt")) %>%
+  mutate(
+    "post_stop_signal_CSMinusFS"=mean_med_post_stop_signal_CorrectStop-mean_med_post_stop_signal_FailedStop,
+    "post_pre_rt_CSMinusFS"=mean_post_pre_rt_CorrectStop-mean_post_pre_rt_FailedStop
+         )
+
+# get subject-level FS>CS contrast for the relevant region
+```
+
+
+```{r}
+behav_by_subj <- sst_all_data %>% group_by(subid, waveid, runid) %>%
+  summarize(mean_ssrt_0=mean(mean_ssrt_0,na.rm=TRUE))
+by_subj <- merge(behav_by_subj,activity_by_subj, byx=c("subid","wavid","runid","subid","waveid","runid"))
+by_subj_striatum<-by_subj %>% filter(ROI_delateralized=="CueFollowing(CS>FS)striatal_cluster_combined")
+
+by_subj_striatum_no_outliers <- by_subj_striatum %>% filter(mean_ssrt_0>-0.2)
+
+#does the size of the gap between signal for a subject indicate how much they're able to adjust in response to stimuli?
+cor.test(by_subj_striatum_no_outliers$post_pre_rt_CSMinusFS,by_subj_striatum_no_outliers$post_stop_signal_CSMinusFS)
+#no.
+
+#but does the size of that gap indicate their SSRT?
+cor.test(by_subj_striatum_no_outliers$mean_ssrt_0,by_subj_striatum_no_outliers$post_stop_signal_CSMinusFS) # a good start
+#no, not remotely, once we remove the subjects who don't seem to be paying attention
+
+plot(by_subj_striatum$mean_ssrt_0,by_subj_striatum$post_stop_signal_CSMinusFS)
+plot(by_subj_striatum$mean_ssrt_0,by_subj_striatum$post_stop_signal_CSMinusFS)
+
+```
+
+
+
+
+# Graph it
+
+```{r}
+selected_points <- trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+ggplot(
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop")),
+       aes(x=med_post_trial_z,y=post_pre_rt_change_z,color=condition)
+       )+geom_point(alpha=0.05)
+
+cor.test(selected_points$med_post_trial_z,selected_points$post_pre_rt_change_z)
 ```
 
