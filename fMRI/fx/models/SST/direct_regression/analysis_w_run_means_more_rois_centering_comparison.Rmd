@@ -1,0 +1,75 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(tidyverse)
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+print(Sys.info()["nodename"])
+
+```
+
+```{r}
+dropbbox_dir <- config::get("dev_analysis_data_dir")
+
+```
+
+
+
+```{r}
+time_points <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point.csv"))
+```
+
+
+Now let's see if we can graph putamen...
+```{r}
+library(ggplot2)
+# ggplot(time_points,
+#        aes(x=offset, y=`harvardoxford-subcortical_prob_Left Putamen`))+
+#   geom_point()+
+#   geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+#   scale_y_continuous(limits=c(-2.5,2.5))+
+#   facet_wrap(~condition)
+  
+```
+
+```{r}
+roi_cols <- colnames(time_points)[grepl("harvardoxford",colnames(time_points))]
+```
+
+
+We're going to mean-center within each area, not across time points, because going across all areas seems arbitrary (mabye if it was across teh wohle brain, but not across each area).
+
+```{r}
+
+#time_points$tr_roi_mean <- rowMeans(time_points[,roi_cols])
+# time_points<- 
+#   time_points %>% group_by(subid,wave) %>%
+#   mutate(run_mean_across_rois = mean(tr_roi_mean, na.rm = TRUE))
+
+#now mean-center the ROIs, just by subtracting each time series' own mean.
+time_points_ind_center<-time_points
+for (roi_col in roi_cols){
+  time_points_ind_center[,roi_col]<-time_points_ind_center[,roi_col]-mean(unlist(time_points_ind_center[,roi_col]),na.rm = TRUE)
+}
+```
+
+
+
+```{r}
+
+time_points$tr_roi_mean <- rowMeans(time_points[,roi_cols])
+time_points<- 
+  time_points %>% group_by(subid,wave) %>%
+  mutate(run_mean_across_rois = mean(tr_roi_mean, na.rm = TRUE))
+
+#now mean-center the ROIs
+time_points_c<-time_points
+for (roi_col in roi_cols){
+  time_points_c[,roi_col]<-time_points_c[,roi_col]-time_points_c$run_mean_across_rois
+}
+```
+

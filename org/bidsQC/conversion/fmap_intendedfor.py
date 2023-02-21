@@ -16,11 +16,12 @@ def main():
         for timepoint in timepoints:
             func_dir_path = os.path.join(bidsdir, subjectdir, timepoint, 'func')
             fmap_dir_path = os.path.join(bidsdir, subjectdir, timepoint, 'fmap')
+            subj_dir_path = os.path.join(bidsdir, subjectdir)
             if os.path.isdir(func_dir_path):
                 func_niftis_partialpath = get_funcdir_niftis(func_dir_path, timepoint)
                 if os.path.isdir(fmap_dir_path):
                     fmap_jsons = get_fmap_jsons(fmap_dir_path)
-                    write_to_json(func_niftis_partialpath, fmap_jsons, fmap_dir_path, echo_time1, echo_time2)
+                    write_to_json(func_niftis_partialpath, fmap_jsons, fmap_dir_path, echo_time1, echo_time2, subj_dir_path)
             else:
                 continue
 
@@ -66,8 +67,9 @@ def get_fmap_jsons(fmap_dir_path):
     fmap_jsons = [f for f in os.listdir(fmap_dir_path) if f.endswith('.json')]
     return fmap_jsons
 
-def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:str, echo_time1:str, echo_time2:str):
+def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:str, echo_time1:str, echo_time2:str, subjectdir:str):
     for fmap_json in fmap_jsons:
+
         json_path = os.path.join(fmap_dir_path, fmap_json)
         # print(json_path)
         # with open(json_path) as target_json_text:
@@ -78,6 +80,9 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
             print("couldn't write data to the following json file because it was empty:")
             print(json_path)
             continue
+
+        #print(fmap_json)
+        #print(json_path)
         
         with open(json_path) as target_json:
             #check the size of the file
@@ -90,7 +95,33 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
             if include_echo_time:
                 json_file['EchoTime1'] = echo_time1
                 json_file['EchoTime2'] = echo_time2
+
         with open(json_path, 'w') as target_json:
             json.dump(json_file, target_json, indent=4)
-    print("written")
+
+    task_file_list=['ROC','WTP','SST','rest']
+    # now update the func niftis with tasknames
+    for nii_partialpath in func_niftis_partialpath:
+        json_partialpath = nii_partialpath.replace('.nii.gz', '.json')
+        #print(json_partialpath)
+        json_path = os.path.join(subjectdir, json_partialpath)
+        with open(json_path) as target_json:
+            json_file = json.load(target_json)
+            #now add the taskname if this is a task json.
+            
+            #for each task type, check if this json filename has the task in the name, and if it does, add the 'TaskName' attribute to the json_file
+            
+            for task_type in task_file_list:
+                task_type_str = 'task-' + task_type
+                #print(task_type)
+                #check whether task_type is in json_path filename, excluding the path
+                if task_type_str in json_path.split('/')[-1]:
+                    #print('updating json file with task name ' + task_type)
+                    json_file['TaskName'] = task_type
+
+        with open(json_path, 'w') as target_json:
+            json.dump(json_file, target_json, indent=4)
+
+
+    print(". ", end="")
 main()

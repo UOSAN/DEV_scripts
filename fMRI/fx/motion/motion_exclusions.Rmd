@@ -27,7 +27,8 @@ library(tidyverse)
 
 # load data
 ```{r}
-motion = read.csv("/Users/deniciaaragon/Desktop/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
+#motion = read.csv("~/Users/deniciaaragon/Desktop/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
+motion = read.csv("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
 ```
 
 # summarize by task
@@ -67,4 +68,77 @@ motion %>%
   mutate(n = n()) %>%
   filter(n == 1)
 ```
+
+
+# SST
+```{r}
+motion %>%
+  filter(percent > 10 & wave == 1 & task == "SST") %>%
+  group_by(subjectID, task) %>%
+  summarize(n = n()) %>%
+  arrange(desc(n))
+
+motion %>%
+  filter(percent > 10 & wave == 1 & task == "SST") %>%
+  group_by(subjectID, task) %>%
+  mutate(n = n()) %>%
+  filter(n == 1)
+```
+
+# Visualization
+
+```{r}
+library(ggplot2)
+
+ggplot(motion,aes(x=nVols,color=task,group=task))+geom_density()
+
+ggplot(motion,aes(x=task,color=nVols,group=task))+geom_bar(stat="count")
+
+
+motion$nVols_factor<-as.character(motion$nVols )
+motion$nVols_factor[motion$nVols>10]<-">10"
+motion$nVols_factor <- factor(motion$nVols_factor,levels=c(as.character(0:10),">10"))
+
+
+ggplot(motion %>% group_by(task,nVols_factor) %>% summarize(run_count = n())
+       ,aes(x=task,y=run_count,group=nVols_factor,fill=nVols_factor))+geom_bar(stat="identity")
+```
+
+## Across all
+
+```{r}
+motion$excluded_run<-motion$percent>10
+
+motion %>% group_by(subjectID,task) %>%
+  summarize(prop_excluded_runs = sum(excluded_run)/n(),count_excluded_runs = sum(excluded_run)) %>%
+  arrange(-count_excluded_runs)
+```
+
+
+```{r}
+
+motion %>% group_by(subjectID) %>%
+  summarize(prop_excluded_runs = sum(excluded_run)/n(),count_excluded_runs = sum(excluded_run)) %>%
+  arrange(-count_excluded_runs)
+
+
+
+```
+
+
+## do a matrix of ROC, SST, WTP
+
+```{r}
+
+motion_table <- motion %>%
+  mutate(scan= paste0(task, run)) %>%
+  select(-run, -task,-nVols) %>%
+  tidyr::spread(scan,percent) %>% 
+  arrange(wave, subjectID)
+
+
+motion_table %>% readr::write_csv("motion_percent_summary.csv")
+  
+```
+
 

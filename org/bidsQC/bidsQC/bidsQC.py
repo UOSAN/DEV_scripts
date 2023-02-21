@@ -332,10 +332,12 @@ def fix_files(sequence_fullpath: str, file_group: str, expected_numfiles: int, e
     @type timepoint:                        string
     @param timepoint:                       Name of timepoint
     """
+    print(sequence_fullpath)
+    print("filegroup: %s, expected_numfiles: %s, extension: %s" % (file_group, str(expected_numfiles), extension))
     sequence_files = os.listdir(sequence_fullpath)
     found_files = [file for file in sequence_files if file_group in file and file.endswith(extension)]
     if len(found_files) == expected_numfiles:
-        write_to_outputlog("OK: %s has correct number of %s %s files in %s." % (subject, file_group, extension, timepoint))
+        write_to_outputlog("OK: %s has correct number (%s) of %s %s files in %s." % (subject, str(expected_numfiles), file_group, extension, timepoint))
         return
     if len(found_files) < expected_numfiles:
         write_to_errorlog("FILE WARNING! %s MISSING %s %s files in %s." % (subject, file_group, extension, timepoint))

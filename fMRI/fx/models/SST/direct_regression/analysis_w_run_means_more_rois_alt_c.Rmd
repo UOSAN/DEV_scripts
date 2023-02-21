@@ -1,0 +1,564 @@
+---
+title: "R Notebook"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r}
+library(tidyverse)
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+print(Sys.info()["nodename"])
+
+```
+
+```{r}
+dropbbox_dir <- config::get("dev_analysis_data_dir")
+
+```
+
+
+
+```{r}
+time_points <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point.csv"))
+```
+
+
+Now let's see if we can graph putamen...
+```{r}
+library(ggplot2)
+# ggplot(time_points,
+#        aes(x=offset, y=`harvardoxford-subcortical_prob_Left Putamen`))+
+#   geom_point()+
+#   geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+#   scale_y_continuous(limits=c(-2.5,2.5))+
+#   facet_wrap(~condition)
+  
+```
+
+
+
+We're going to mean-center within each area, not across time points, because going across all areas seems arbitrary (mabye if it was across teh wohle brain, but not across each area).
+
+```{r}
+roi_cols <- colnames(time_points)[grepl("harvardoxford",colnames(time_points))]
+#time_points$tr_roi_mean <- rowMeans(time_points[,roi_cols])
+# time_points<- 
+#   time_points %>% group_by(subid,wave) %>%
+#   mutate(run_mean_across_rois = mean(tr_roi_mean, na.rm = TRUE))
+
+#now mean-center the ROIs, just by subtracting each time series' own mean.
+time_points_c<-time_points
+for (roi_col in roi_cols){
+  time_points_c[,roi_col]<-time_points_c[,roi_col]-mean(unlist(time_points_c[,roi_col]),na.rm = TRUE)
+}
+```
+
+```{r}
+sd(time_points$`harvardoxford-subcortical_prob_Left Putamen`)
+sd(time_points_c$`harvardoxford-subcortical_prob_Left Putamen`)
+```
+
+```{r}
+library(ggplot2)
+ggplot(time_points_c,
+       aes(x=offset, y=`harvardoxford-subcortical_prob_Left Putamen`,group=interaction(trial_n,subid,wave)))+
+  geom_line(alpha=0.2)+
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  scale_y_continuous(limits=c(-2.5,2.5))+
+  facet_wrap(~condition)
+  
+```
+
+Now let's try just graphing the moving average...
+
+```{r}
+library(tidyverse)
+
+#get the range of offsets
+min_offset<-round(min(time_points_c$offset))
+max_offset <- round(max(time_points_c$offset))
+
+seq_size <- 0.1
+offset_size<-1
+offset_times <- seq(min_offset,max_offset-max(offset_size,seq_size),seq_size)
+
+dt_list<-list()
+for (cond in unique(time_points_c$condition)){
+  print(cond)
+  for (ot_i in offset_times){
+  #<-offset_times[[20]]
+
+  tp_at_offset <- time_points_c %>% filter(offset>=ot_i & offset<(ot_i+offset_size) & condition==cond)
+  numeric_cols <- colnames(tp_at_offset)[sapply(tp_at_offset,class)=="numeric"]
+  tp_at_offset_m <- data.frame(t(colMeans(tp_at_offset[,numeric_cols],na.rm=TRUE)))
+  tp_at_offset_m$offset_start<-ot_i
+  tp_at_offset_m$condition<-cond
+  dt_list<-append(dt_list,list(tp_at_offset_m))
+  if((which(ot_i==offset_times)%%20)==0){
+    cat(". ")
+  }
+  
+
+  }
+  print("")
+
+}
+
+df_offset<-data.frame(data.table::rbindlist(dt_list))
+
+
+```
+
+# get the delay to next trial
+
+```{r}
+
+behavioral_data_w_tone_data <- readr::read_csv(paste0(dropbbox_dir,"/sst_behavioral_data_all_w_class_type_reveal_onset.csv"))
+
+# I want to know: what is the time delay from the tone sound to the PERIOD of the next trial?
+
+```
+
+
+```{r}
+#so I want to match each trial up with the _next_ trial
+#grab the set of next trials-we want their onset and their duration
+#then match that back onto n+1 of their prior trial
+trial_df <- behavioral_data_w_tone_data %>% filter(condition!="Cue") %>% 
+  arrange(trial_n) %>%
+  group_by(subid,waveid,runid) %>%
+  mutate(next_trial_n = lead(trial_n,1)) %>%
+  ungroup()
+
+
+next_trial_df <- behavioral_data_w_tone_data %>% 
+  filter(condition!="Cue") %>%
+  select(trial_n,condition,onset,trial_duration,subid,waveid,runid)
+
+
+trials_with_next<-merge(
+  trial_df,next_trial_df,
+  by.x = c("subid","waveid","runid", "next_trial_n"),
+  by.y=c("subid","waveid","runid","trial_n"),
+  suffixes = c("","_next"))
+```
+
+
+now, mark for each trial the start and end time point of the next trial, and get measures of how long after each trial the next one appears
+
+```{r}
+trials_with_next$trial_end_next <- trials_with_next$onset_next+trials_with_next$trial_duration_next
+trials_with_next$class_type_reveal_onset_to_next_trial_start<-trials_with_next$onset_next-trials_with_next$class_type_reveal_onset
+trials_with_next$class_type_reveal_onset_to_next_trial_end<-trials_with_next$trial_end_next-trials_with_next$class_type_reveal_onset
+```
+
+```{r}
+hist(trials_with_next$class_type_reveal_onset_to_next_trial_start,breaks = 100)
+median(trials_with_next$class_type_reveal_onset_to_next_trial_start)
+```
+
+
+
+```{r}
+hist(trials_with_next$class_type_reveal_onset_to_next_trial_end,breaks = 100)
+median(trials_with_next$class_type_reveal_onset_to_next_trial_end)
+```
+```{r}
+hist(trials_with_next$class_type_reveal_onset_to_next_trial_start)
+```
+
+```{r}
+next_trial_median <- data.frame(
+  "next_trial_start_median" = median(trials_with_next$class_type_reveal_onset_to_next_trial_start),
+  "next_trial_end_median" = median(trials_with_next$class_type_reveal_onset_to_next_trial_end)
+  )
+
+quantiles <- (1:10)/10
+# next_trial_gradient <- data.frame(
+#   "quantiles" = quantiles,
+#   "next_trial_start" = quantile(trials_with_next$class_type_reveal_onset_to_next_trial_start,(1:10)/10),
+#   "next_trial_end" = quantile(trials_with_next$class_type_reveal_onset_to_next_trial_end,(1:10)/10)
+#   )
+
+gradient_range = seq(floor(min(trials_with_next$class_type_reveal_onset_to_next_trial_start)),ceiling(max(trials_with_next$class_type_reveal_onset_to_next_trial_end)),0.1)
+
+in_range_by_gradient <- sapply(gradient_range,function(tp){
+  time_point_is_after_start <- tp > trials_with_next$class_type_reveal_onset_to_next_trial_start
+  time_point_is_before_end <- tp < trials_with_next$class_type_reveal_onset_to_next_trial_end
+  number_of_trials <- length(trials_with_next$class_type_reveal_onset_to_next_trial_start) 
+  return(sum(time_point_is_after_start & time_point_is_before_end)/number_of_trials)
+})
+
+next_trial_gradient <- data.frame("tp"=gradient_range,"pct_in_range"=in_range_by_gradient)
+```
+
+
+
+# do graphs
+
+```{r}
+
+
+roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
+subj_count <- length(unique(time_points_c$subid))
+df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI_fullname",values_to="value")
+df_offset_long$ROI<-stringr::str_extract_all(df_offset_long$ROI_fullname,pattern = "(?<=harvardoxford\\..{0,3}cortical_prob_)(.*)") %>% sub("\\."," ",.)
+
+unique_rois<-sort(unique(df_offset_long$ROI))
+unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\s)(.*)"))]
+
+df_offset_long$ROI<-factor(df_offset_long$ROI,levels = unique_rois_ordered, ordered=TRUE)
+
+ggplot_time_points_extras <- list(
+  geom_vline(xintercept = 0,linetype="dashed"),
+  geom_hline(yintercept = 0,linetype="dotted"),
+  labs(
+    x="time from tone sound or expected time of tone (s)",
+    y="mean BOLD activity (no HRF convolution)",
+    title="Stop Signal Task Activity",
+    subtitle=paste0("Across ", as.character(subj_count)," subjects with 128 trials each"),
+    caption="0 point is the moment of tone sound (Stop trials)\n or expected tone sound based on prior trial (Go trials)\n HRF convolution not applied\n1 s moving averages")
+  )
+
+
+  
+ggplot(df_offset_long,
+       aes(x=offset_start, y=value,color=condition))+
+  geom_line()+
+  facet_wrap(~ROI,ncol = 2)+
+  ggplot_time_points_extras
+  
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  #scale_y_continuous(limits=c(-2.5,2.5))
+  
+
+```
+
+now by ROI with facets for condition:
+
+
+
+```{r}
+# roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
+df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
+
+unique_rois<-sort(unique(df_offset_long$ROI))
+unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\.)([A-Za-z]*)$"))]
+
+df_offset_long$ROI<-factor(df_offset_long$ROI,levels = unique_rois_ordered, ordered=TRUE)
+
+
+ggplot(df_offset_long,
+       aes(x=offset_start, y=value,color=ROI))+
+  facet_wrap(~condition)+
+  #geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  geom_line(size=1,alpha=0.5)+
+  
+  scale_color_viridis_d(option = "C")+
+  coord_cartesian(ylim=c(-0.1,0.25))+
+  ggplot_time_points_extras
+  
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  #scale_y_continuous(limits=c(-2.5,2.5))
+  
+
+```
+## Just stop trials, divided separately
+
+
+```{r}
+
+get_roi_good_names <- function(roi_fullname_col){
+  
+  roi_organized<-stringr::str_extract_all(unlist(roi_fullname_col),pattern = "(?<=harvardoxford\\.(sub)?cortical_prob_)(.*)") %>% sub("\\.\\.",", ",.) %>% gsub("\\."," ",.)
+  #print(roi_organized)
+  unique_rois<-sort(unique(roi_organized))
+  unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\s)(.*)"))]
+  print(unique_rois)
+  roi_factor_col<-factor(roi_organized,levels = unique_rois_ordered, ordered=TRUE)
+  return(roi_factor_col)
+}
+
+```
+
+
+```{r}
+# roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
+df_offset_long<-df_offset %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
+
+df_offset_long$ROI<-get_roi_good_names(df_offset_long$ROI)
+df_offset_long$ROI_bilat <- sub("(Left )|(Right )","",df_offset_long$ROI)
+
+next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
+
+ggplot(df_offset_long %>% filter(condition %in% c("FailedStop","CorrectStop")),
+       aes(x=offset_start, y=value,color=ROI_bilat,group=ROI))+
+  facet_wrap(~condition,nrow = 2)+
+  #geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  #annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  geom_line(size=1,alpha=0.7)+
+  
+  scale_color_viridis_d(option = "C")+
+  coord_cartesian(ylim=c(-0.15,0.2))+
+  guides(alpha="none",color=guide_legend(title="ROI"))+
+  #guides(alpha="none",color=guide_legend(title="ROI",nrow = 2))+
+  ggplot_time_points_extras#+
+  #theme(legend.position = "bottom")
+  
+
+#ggplot(df_offset_long,aes(x=offset_start, y=value,color=ROI,group=intersect(ROI,condition)))+geom_line()
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  #scale_y_continuous(limits=c(-2.5,2.5))
+  
+
+```
+
+## CS-FS
+
+Let's now try to contrast these time series to see what the CS-FS looks like. This will be interesting because it's similar to the simple GLM result I got earlier that set me down the path of trying to analyze this.
+
+```{r}
+trial_tps_compare_conditions<-df_offset_long %>% pivot_wider(id_cols=c(ROI,offset_start),names_from = "condition",values_from="value")
+trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectStop-trial_tps_compare_conditions$FailedStop
+```
+
+
+
+```{r}
+
+ggplot(trial_tps_compare_conditions,
+       aes(x=offset_start, y=CS_minus_FS,color=ROI))+
+  #geom_tile(data = next_trial_gradient, aes(x=tp,alpha=pct_in_range,y=0),fill="#000000",color="transparent")+
+  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  #annotate("text",x=4,y=0.25,label="Subsequent Go Trial\nTime Range",size=2)+
+  annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  scale_alpha_continuous(name="Subsequent go trial range", range=c(0,0.7),labels=scales::percent_format())+
+  geom_line(size=1,alpha=0.5)+
+  scale_color_viridis_d(option = "C")+
+  ggplot_time_points_extras+
+  coord_cartesian(ylim=c(-0.1,0.25))+
+  labs(y="CS-FS BOLD activity difference")
+  
+```
+
+
+
+Contrast:
+ - FS and CS
+ - Caudate and Putamen
+ - Individual differences in behavioral responsivity to Failed vs correct (in terms of speed-ups/slow-downs), and if this is linked to individual differences in caudate activity 
+ - or equally--we could do this at a trial level.
+
+
+## find a way to compare activity from the start and end. Is there a sort of habituation effect?
+
+Easy way first. Take just CS or FS, then do one graph per ROI, use color with the order of the task.
+
+
+```{r}
+
+roi_cols <- colnames(time_points_c)[grepl("harvardoxford",colnames(time_points_c))]
+
+next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
+
+time_points_long<-time_points_c %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
+
+unique_rois<-sort(unique(time_points_long$ROI))
+unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\.)([A-Za-z]*)$"))]
+
+time_points_long$ROI<-factor(time_points_long$ROI,levels = unique_rois_ordered, ordered=TRUE)
+
+
+for (c_i in unique(time_points_long$condition)){
+  c_plot <- ggplot(time_points_long %>% filter(condition==c_i),
+       aes(x=offset, y=value,color=trial_n))+
+  facet_wrap(~ROI)+
+  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  geom_line(size=1,alpha=0.1)+
+  #scale_color_viridis_d(option = "C")+
+  #coord_cartesian(ylim=c(-0.1,0.25))+
+  ggplot_time_points_extras
+  print(c_plot)
+  
+}
+
+```
+
+That doesn't work. OK, let's try putting the activity into buckets of trials (early, mid, late) then graph for those three groups
+
+
+```{r}
+library(tidyverse)
+
+#get the range of offsets
+min_offset<-round(min(time_points_c$offset))
+max_offset <- round(max(time_points_c$offset))
+
+seq_size <- 0.1
+offset_size<-1
+offset_times <- seq(min_offset,max_offset-max(offset_size,seq_size),seq_size)
+
+dt_list<-list()
+time_points_c$trial_bucket<-""
+time_points_c$trial_bucket[time_points_c$trial_n<=40]<-"early"
+time_points_c$trial_bucket[time_points_c$trial_n%in% seq(139-40,139,2)]<-"mid"
+time_points_c$trial_bucket[time_points_c$trial_n %in% seq(239-40,239,2)]<-"late"
+
+
+
+
+for (cond in unique(time_points_c$condition)){
+  print(cond)
+  for (tb_i in unique(time_points_c$trial_bucket)){
+      
+    for (ot_i in offset_times){
+      
+      
+      tp_at_offset <- time_points_c %>% filter(offset>=ot_i & offset<(ot_i+offset_size) & condition==cond & trial_bucket==tb_i)
+      numeric_cols <- colnames(tp_at_offset)[sapply(tp_at_offset,class)=="numeric"]
+      tp_at_offset_m <- data.frame(t(colMeans(tp_at_offset[,numeric_cols],na.rm=TRUE)))
+      tp_at_offset_m$offset_start<-ot_i
+      tp_at_offset_m$condition<-cond
+      tp_at_offset_m$trial_bucket<-tb_i
+      dt_list<-append(dt_list,list(tp_at_offset_m))
+      if((which(ot_i==offset_times)%%20)==0){
+        cat(". ")
+      }
+    }
+
+  }
+
+}
+
+df_offset_run_buckets<-data.frame(data.table::rbindlist(dt_list))
+
+
+```
+
+
+
+```{r}
+roi_cols <- colnames(df_offset_run_buckets)[grepl("harvardoxford",colnames(df_offset_run_buckets))]
+df_offset_long<-df_offset_run_buckets %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
+
+
+df_offset_long <- df_offset_long[!is.nan(df_offset_long$tr), ]
+df_offset_long$trial_bucket<-factor(df_offset_long$trial_bucket, levels=c("early","mid","late"))
+df_offset_long$ROI_label<-df_offset_long$ROI %>% as.character %>% stringr::str_extract_all(pattern = "(?<=harvardoxford\\..{0,3}cortical_prob_)(.*)") %>% unlist
+unique_rois<-sort(unique(df_offset_long$ROI_label))
+unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\.)([A-Za-z]*)$"))]
+
+df_offset_long$ROI_label<-factor(df_offset_long$ROI_label,levels = unique_rois_ordered, ordered=TRUE)
+
+
+for (c_i in unique(df_offset_long$condition)){
+  c_plot <- ggplot(df_offset_long  %>% filter(condition==c_i),#filter(condition==c_i),
+         aes(x=offset_start, y=value,color=trial_bucket,group=trial_bucket))+
+    facet_wrap(~ROI_label,ncol = 4)+
+    #geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+    annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+    geom_line(size=1,alpha=0.5)+
+    #scale_color_viridis_d(option = "C")+
+    #coord_cartesian(ylim=c(-0.1,0.25))+
+    ggplot_time_points_extras+
+      labs(
+      title="Stop Signal Task Activity",
+      subtitle=paste0(c_i)
+    )
+    
+    
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  #scale_y_continuous(limits=c(-2.5,2.5))
+  print(c_plot)
+}
+
+```
+
+
+
+```{r}
+next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
+
+for (c_i in unique(df_offset_long$condition)){
+  c_plot <- ggplot(df_offset_long %>% filter(condition==c_i & trial_bucket!=""),
+       aes(x=offset_start, y=value,color=ROI_label))+
+  facet_wrap(~trial_bucket,nrow = 1)+
+  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent",show.legend=FALSE)+
+  annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  geom_line(size=1,alpha=0.5)+
+  scale_color_viridis_d(option = "C")+
+  coord_cartesian(ylim=c(-0.5,0.5))+
+  ggplot_time_points_extras+
+      labs(
+      title="Stop Signal Task Activity",
+      subtitle=paste0(c_i)
+    )+theme(legend.position = "bottom")
+  
+  print(c_plot)
+}
+
+```
+
+Can we contrast CS and FS in the way we did above?
+
+
+
+```{r}
+
+trial_tps_compare_conditions<-df_offset_long %>% pivot_wider(id_cols=c(ROI_label,offset_start,trial_bucket),names_from = "condition",values_from="value")
+trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectStop-trial_tps_compare_conditions$FailedStop
+```
+
+
+
+```{r}
+
+  c_plot <- ggplot(trial_tps_compare_conditions %>% filter(trial_bucket!=""),
+       aes(x=offset_start, y=CS_minus_FS,color=ROI_label))+
+  facet_wrap(~trial_bucket,nrow = 1)+
+  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent",show.legend=FALSE)+
+  annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  geom_line(size=1,alpha=0.5)+
+  scale_color_viridis_d(option = "C")+
+  coord_cartesian(ylim=c(-0.5,0.5))+
+  ggplot_time_points_extras+
+      labs(
+      title="Stop Signal Task Activity",
+      subtitle=paste0(c_i),
+      y="CS-FS BOLD activity difference")+
+    theme(legend.position = "bottom")
+print(c_plot)
+
+# 
+# ggplot(trial_tps_compare_conditions,
+#        aes(x=offset_start, y=CS_minus_FS,color=ROI))+
+#   #geom_tile(data = next_trial_gradient, aes(x=tp,alpha=pct_in_range,y=0),fill="#000000",color="transparent")+
+#   geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+#   #annotate("text",x=4,y=0.25,label="Subsequent Go Trial\nTime Range",size=2)+
+#   annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+#   scale_alpha_continuous(name="Subsequent go trial range", range=c(0,0.7),labels=scales::percent_format())+
+#   geom_line(size=1,alpha=0.5)+
+#   scale_color_viridis_d(option = "C")+
+#   ggplot_time_points_extras+
+#   coord_cartesian(ylim=c(-0.1,0.25))+
+#   labs(y="CS-FS BOLD activity difference")
+  
+```
+
+
+
+There are a different distribution of the number of trials for each condition, but not in a way that clearly could produce the discrepancy I'm observing above.
+```{r}
+time_points_c %>% filter(trial_bucket!="") %>% group_by(condition,trial_bucket) %>% summarize(trial_count=n())
+```
+
+
+

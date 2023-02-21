@@ -139,7 +139,10 @@ sst_all_data <- get_expected_tone_time(sst_all_data)
 sst_all_data<-calculate_response_latency(sst_all_data)
 sst_all_data<-calculate_rpe(sst_all_data)
 
+#calculate proportion of stop trials that were correct. ideally should be 50/50 but let's check it.
+sst_all_data<-get_more_sst_stats(sst_all_data)
 
+#sst_all_data %>% select(subid, waveid, runid,condition,stop_prop_correct,nth_reaction_time,ssrt_d1)
 # sst_all_data %>% select(
 #   subid, waveid, runid, reaction_time_clean, SSD_recorded,condition, last_tone_delay, trials_since_last_SSD,last_correct_go)# %>%
 #   #View()
@@ -1028,6 +1031,44 @@ data_by_ppt<-merge(data_by_ppt,random_effects,by.x = "SID",by.y="subid")
 cor.test(data_by_ppt$BIS_11,data_by_ppt$peak_z)
 cor.test(data_by_ppt$RTFS_f1_minus_f2,data_by_ppt$peak_z)
 ```
+
+## otehr ways to measure responsiveness
+
+Perhaps there are other ways to measure responsiveness to the probability of a stop trial. For instance, wtihin subject, we can measure the relationship of peak activity to the change in informativeness probability of a stop trial. Then, maybe across subjects, the strength of that relationship correlates with overall performance in the task.
+
+
+```{r}
+# FS_neural_behav_p %>% 
+#   group_by(subid,wave,runid) %>%
+#   summarise(cor_P_stop_trial_change_peak=
+#                 (sum(((is.na(P_stop_trial_change) | is.na(P_stop_trial_change))==FALSE))>2))
+peak_p_stop_change_cor <- FS_neural_behav_p %>% 
+  group_by(subid,wave,runid) %>%
+  filter((sum(((is.na(P_stop_trial_change) | is.na(P_stop_trial_change))==FALSE))>2)) %>%
+  summarise(cor_P_stop_trial_change_peak=
+              case_when(
+                (sum(((is.na(P_stop_trial_change) | is.na(P_stop_trial_change))==FALSE))>2)~cor.test(peak,P_stop_trial_change)$estimate, #~cor.test(P_stop_trial_change,peak,na.rm=TRUE)$estimate,
+            TRUE~ as.numeric(NA),
+            last_ladder_delay
+              )
+  )
+
+data_by_ppt
+              
+```
+How do we quantify overall task performance? Proportion of trials correct is more or less controlled, so we'd want to look at the ladder delay at the end of the task. Shorter is better performing. But probably overall percentage correct is also good.
+
+We most need stop-signal reaction time, which I can't calculate simply--needs a horse-race model to estimate.
+
+```{r}
+FS_neural_behav_p %>% arrange(subid,wave,runid,trial_n) %>% 
+  select(subid,wave,runid,trial_n,LadderX_SSD_ms)
+
+```
+
+
+
+##RTFS or BIS_11
 
 So what else can we do with this?
 

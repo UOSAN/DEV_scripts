@@ -322,22 +322,27 @@ ggplot(df_offset_long %>% filter(condition %in% c("FailedStop","CorrectStop")),
 Let's now try to contrast these time series to see what the CS-FS looks like. This will be interesting because it's similar to the simple GLM result I got earlier that set me down the path of trying to analyze this.
 
 ```{r}
-trial_tps_compare_conditions<-df_offset_long %>% pivot_wider(id_cols=c(ROI,offset_start),names_from = "condition",values_from="value")
+trial_tps_compare_conditions<-df_offset_long %>% pivot_wider(id_cols=c(ROI, ROI_bilat,offset_start),names_from = "condition",values_from="value")
 trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectStop-trial_tps_compare_conditions$FailedStop
 ```
 
 
 
 ```{r}
+library(directlabels)
 
+labels <- trial_tps_compare_conditions %>% filter(offset_start==7) %>% group_by(ROI_bilat) %>% 
+  slice(1)
 ggplot(trial_tps_compare_conditions,
-       aes(x=offset_start, y=CS_minus_FS,color=ROI))+
+       aes(x=offset_start, y=CS_minus_FS,color=ROI_bilat))+
   #geom_tile(data = next_trial_gradient, aes(x=tp,alpha=pct_in_range,y=0),fill="#000000",color="transparent")+
   geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
   #annotate("text",x=4,y=0.25,label="Subsequent Go Trial\nTime Range",size=2)+
   annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
   scale_alpha_continuous(name="Subsequent go trial range", range=c(0,0.7),labels=scales::percent_format())+
   geom_line(size=1,alpha=0.5)+
+  #geom_dl(aes(label=ROI_bilat,x=7),size=1,method="last.qp")+
+  geom_text(data=labels,mapping= aes(x=offset_start,y=CS_minus_FS,color=ROI_bilat,label=ROI_bilat))+
   scale_color_viridis_d(option = "C")+
   ggplot_time_points_extras+
   coord_cartesian(ylim=c(-0.1,0.25))+
