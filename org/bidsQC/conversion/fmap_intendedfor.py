@@ -113,7 +113,7 @@ def write_to_json(func_niftis_partialpath:list, fmap_jsons:list, fmap_dir_path:s
             
             for task_type in task_file_list:
                 task_type_str = 'task-' + task_type
-                print(task_type)
+                #print(task_type)
                 #check whether task_type is in json_path filename, excluding the path
                 if task_type_str in json_path.split('/')[-1]:
                     #print('updating json file with task name ' + task_type)

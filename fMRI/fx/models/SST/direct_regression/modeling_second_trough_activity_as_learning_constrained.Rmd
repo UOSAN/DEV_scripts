@@ -423,14 +423,14 @@ library(lme4)
 FS_neural_behav_p <- FS_neural_behav_data_not_na %>% filter(ROI_delateralized=="CueFollowing(CS>FS)striatal_cluster_combined")
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_c +I(trial_n_c^2) + post_pre_rt_change + (1+ post_pre_rt_change | subid),
+   trough ~ trial_n_c +I(trial_n_c^2) + post_pre_rt_change + (1+ post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_full_effects)
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_c +post_pre_rt_change + (1+ post_pre_rt_change | subid),
+   trough ~ trial_n_c +post_pre_rt_change + (1+ post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_full_effects)
@@ -447,13 +447,13 @@ here, we clearly need to include the trial, but no evidence for including the qu
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_c +post_pre_rt_change + (1+ post_pre_rt_change | subid),
+   trough ~ trial_n_c +post_pre_rt_change + (1+ post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_full_effects)
 
 model_fixed_effects <- lme4::lmer(
-   peak ~ trial_n_c +post_pre_rt_change + (1 | subid),
+   trough ~ trial_n_c +post_pre_rt_change + (1 | subid),
   FS_neural_behav_p
   )
 summary(model_fixed_effects)
@@ -461,7 +461,7 @@ summary(model_fixed_effects)
 anova(model_fixed_effects,model_full_effects)
 
 model_random_only <- lme4::lmer(
-   peak ~ trial_n_c +(1+ post_pre_rt_change | subid),
+   trough ~ trial_n_c +(1+ post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_random_only)
@@ -487,13 +487,13 @@ There's a possible confound here in that perhaps the pre-trial reaction time is 
 #lagging is last RT
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_c +lagging_rt + leading_rt + (1+ lagging_rt + leading_rt | subid),
+   trough ~ trial_n_c +lagging_rt + leading_rt + (1+ lagging_rt + leading_rt | subid),
   FS_neural_behav_p
   )
 summary(model_full_effects)
 
 model_fixed_effects <- lme4::lmer(
-   peak ~ trial_n_c +lagging_rt + leading_rt + (1 | subid),
+   trough ~ trial_n_c +lagging_rt + leading_rt + (1 | subid),
   FS_neural_behav_p
   )
 summary(model_fixed_effects)
@@ -501,7 +501,7 @@ summary(model_fixed_effects)
 anova(model_fixed_effects,model_full_effects)
 
 model_random_only <- lme4::lmer(
-   peak ~ trial_n_c +(1+ lagging_rt + leading_rt | subid),
+   trough ~ trial_n_c +(1+ lagging_rt + leading_rt | subid),
   FS_neural_behav_p
   )
 summary(model_random_only)
@@ -523,13 +523,13 @@ There is a lagging rt effect, but the leading effect appears to be bigger. what 
 #lagging is last RT
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_c +lagging_rt + post_pre_rt_change + (1+ lagging_rt + post_pre_rt_change | subid),
+   trough ~ trial_n_c +lagging_rt + post_pre_rt_change + (1+ lagging_rt + post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_full_effects)
 
 model_fixed_effects <- lme4::lmer(
-   peak ~ trial_n_c +lagging_rt + post_pre_rt_change + (1 | subid),
+   trough ~ trial_n_c +lagging_rt + post_pre_rt_change + (1 | subid),
   FS_neural_behav_p
   )
 summary(model_fixed_effects)
@@ -537,7 +537,7 @@ summary(model_fixed_effects)
 anova(model_fixed_effects,model_full_effects)
 
 model_random_only <- lme4::lmer(
-   peak ~ trial_n_c +(1+ lagging_rt + post_pre_rt_change | subid),
+   trough ~ trial_n_c +(1+ lagging_rt + post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_random_only)
@@ -571,7 +571,7 @@ trial_neural_behav_roi$condition<-(
 trial_neural_behav_roi$trial_n_s<-scale(trial_neural_behav_roi$trial_n_c)
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")  | subid),
+   trough ~ trial_n_s+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")  | subid),
   trial_neural_behav_roi
   )
 summary(model_full_effects)
@@ -584,7 +584,7 @@ summary(model_full_effects)
 trial_neural_behav_roi$trial_n_s<-scale(trial_neural_behav_roi$trial_n_c)
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+I(trial_n_s^2)+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")  | subid),
+   trough ~ trial_n_s+I(trial_n_s^2)+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")  | subid),
   trial_neural_behav_roi
   )
 summary(model_full_effects)
@@ -604,7 +604,7 @@ Could try adding a few aother values
 trial_neural_behav_roi$trial_n_s<-scale(trial_neural_behav_roi$trial_n_c)
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + SSD_recorded*condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")  | subid),
+   trough ~ trial_n_s+ condition + SSD_recorded*condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")  | subid),
   trial_neural_behav_roi
   )
 summary(model_full_effects)
@@ -619,7 +619,7 @@ We should probably control for SSD at an individual level though.
 trial_neural_behav_roi$trial_n_s<-scale(trial_neural_behav_roi$trial_n_c)
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop") +SSD_recorded | subid),
+   trough ~ trial_n_s+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop") +SSD_recorded | subid),
   trial_neural_behav_roi
   )
 summary(model_full_effects)
@@ -634,7 +634,7 @@ Let's try the next_last instead of post_pre. It includes a slightly wider datase
 trial_neural_behav_roi$trial_n_s<-scale(trial_neural_behav_roi$trial_n_c)
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + next_last_rt_change + next_last_rt_change:(condition=="FailedStop")+ (1 +next_last_rt_change + next_last_rt_change:(condition=="FailedStop") +SSD_recorded | subid),
+   trough ~ trial_n_s+ condition + next_last_rt_change + next_last_rt_change:(condition=="FailedStop")+ (1 +next_last_rt_change + next_last_rt_change:(condition=="FailedStop") +SSD_recorded | subid),
   trial_neural_behav_roi
   )
 summary(model_full_effects)
@@ -646,7 +646,7 @@ Now let's do the anova test.
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop") +SSD_recorded | subid),
+   trough ~ trial_n_s+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop") +SSD_recorded | subid),
   trial_neural_behav_roi
   )
 summary(model_full_effects)
@@ -654,7 +654,7 @@ summary(model_full_effects)
 
 
 model_fixed_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 + (condition=="FailedStop") +SSD_recorded | subid),
+   trough ~ trial_n_s+ condition + post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 + (condition=="FailedStop") +SSD_recorded | subid),
   trial_neural_behav_roi
   )
 summary(model_fixed_effects)
@@ -662,7 +662,7 @@ summary(model_fixed_effects)
 anova(model_fixed_effects,model_full_effects)
 
 model_random_only <- lme4::lmer(
-   peak ~ trial_n_s+ condition + (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop") +SSD_recorded | subid),
+   trough ~ trial_n_s+ condition + (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop") +SSD_recorded | subid),
   trial_neural_behav_roi
   )
 summary(model_random_only)
@@ -699,6 +699,7 @@ I think it's good to consider these together since they might work against each 
 ```{r add_standardized}
 
 FS_neural_behav_p$peak_z<-scale(FS_neural_behav_p$peak)
+FS_neural_behav_p$trough_z<-scale(FS_neural_behav_p$trough)
 FS_neural_behav_p$post_pre_rt_change_z<-scale(FS_neural_behav_p$post_pre_rt_change)
 FS_neural_behav_p$P_stop_trial_change_z<-scale(FS_neural_behav_p$P_stop_trial_change)
 FS_neural_behav_p$P_stop_trial_z<-scale(FS_neural_behav_p$P_stop_trial)
@@ -710,7 +711,7 @@ FS_neural_behav_p$P_stop_trial_z<-scale(FS_neural_behav_p$P_stop_trial)
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post + trials_since_last_SSD +(1+ post_pre_rt_change | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial_post + trials_since_last_SSD +(1+ post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_full_effects)
@@ -725,7 +726,7 @@ OK, so `P_Stop_trial` appears to be relevant, but `trials_since_last_SSD` is not
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change | subid),
   FS_neural_behav_p
   )
 summary(model_full_effects)
@@ -753,7 +754,7 @@ We should examine whether this is anything but subjects getting used to the task
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -769,7 +770,7 @@ Gosh that's interesting--it still says significant. So this might say something 
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -783,13 +784,13 @@ Let's try it controlling for random effects...
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change+P_stop_trial_post | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change+P_stop_trial_post | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
 
 model_random_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change  +(1+ post_pre_rt_change+P_stop_trial_post | subid),
+   trough ~ trial_n_n +post_pre_rt_change  +(1+ post_pre_rt_change+P_stop_trial_post | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_random_effects)
@@ -810,7 +811,7 @@ It seems to capture meaningful variance!
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post+I(P_stop_trial_post^2) +(1+ post_pre_rt_change+P_stop_trial | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial_post+I(P_stop_trial_post^2) +(1+ post_pre_rt_change+P_stop_trial | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -826,7 +827,7 @@ Nothing for the quadratic, though. What about just for the last trial only? I be
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post+(trials_since_last_SSD==1) +(1+ post_pre_rt_change+P_stop_trial_post | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial_post+(trials_since_last_SSD==1) +(1+ post_pre_rt_change+P_stop_trial_post | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -840,7 +841,7 @@ summary(model_full_effects)
 
 
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial+(trials_since_last_SSD==1) +(1+ post_pre_rt_change+P_stop_trial | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial+(trials_since_last_SSD==1) +(1+ post_pre_rt_change+P_stop_trial | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -861,13 +862,13 @@ First we need to calculate it in the dataset.
 
 
 model_P_stop_trial_post <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change+P_stop_trial_post | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial_post +(1+ post_pre_rt_change+P_stop_trial_post | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_post)
 
 model_P_stop_trial_w_change <- lme4::lmer(
-   peak ~ trial_n_n +post_pre_rt_change + P_stop_trial_post + P_stop_trial_change +(1+ post_pre_rt_change+P_stop_trial_post + P_stop_trial_change | subid),
+   trough ~ trial_n_n +post_pre_rt_change + P_stop_trial_post + P_stop_trial_change +(1+ post_pre_rt_change+P_stop_trial_post + P_stop_trial_change | subid),
   FS_neural_behav_p %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change)
@@ -924,13 +925,13 @@ FS_neural_behav_p$P_stop_trial_post_z<-scale(FS_neural_behav_p$P_stop_trial_post
 
 
 model_P_stop_trial <- lme4::lmer(
-   peak_z ~ trial_n_n +post_pre_rt_change_z + P_stop_trial_post_z +(1+ post_pre_rt_change_z + P_stop_trial_post_z | subid),
+   trough_z ~ trial_n_n +post_pre_rt_change_z + P_stop_trial_post_z +(1+ post_pre_rt_change_z + P_stop_trial_post_z | subid),
   FS_neural_behav_p %>% filter(trial_n>=50)
   )
 summary(model_P_stop_trial)
 
 model_P_stop_trial_w_no_rt <- lme4::lmer(
-   peak_z ~ trial_n_n + P_stop_trial_post_z +(1+ post_pre_rt_change_z + P_stop_trial_post_z | subid),
+   trough_z ~ trial_n_n + P_stop_trial_post_z +(1+ post_pre_rt_change_z + P_stop_trial_post_z | subid),
   FS_neural_behav_p %>% filter(trial_n>=50)
   )
 summary(model_P_stop_trial_w_no_rt)
@@ -938,7 +939,7 @@ summary(model_P_stop_trial_w_no_rt)
 anova(model_P_stop_trial,model_P_stop_trial_w_no_rt)
 
 model_P_stop_trial_w_no_p_stop_d <- lme4::lmer(
-   peak_z ~ trial_n_n +post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_post_z | subid),
+   trough_z ~ trial_n_n +post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_post_z | subid),
   FS_neural_behav_p %>% filter(trial_n>=50)
   )
 summary(model_P_stop_trial_w_no_p_stop_d)
@@ -1068,7 +1069,7 @@ I think if you're going to do P_stop
 
 ```{r}
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop") + P_stop_trial_change  | subid),
+   trough ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop")+ (1 +post_pre_rt_change + post_pre_rt_change:(condition=="FailedStop") + P_stop_trial_change  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -1080,7 +1081,7 @@ That interaction isn't significant--let's take it away
 
 ```{r}
 model_full_effects <- lme4::lmer(
-   peak ~ trial_n_s+ condition + +P_stop_trial_change+ post_pre_rt_change +  (1 +post_pre_rt_change +  P_stop_trial_change   | subid),
+   trough ~ trial_n_s+ condition + +P_stop_trial_change+ post_pre_rt_change +  (1 +post_pre_rt_change +  P_stop_trial_change   | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_full_effects)
@@ -1100,13 +1101,13 @@ trial_neural_behav_roi$trial_n_z<-scale(trial_neural_behav_roi$trial_n)
 
 ```{r}
 model_P_stop_trial_w_change <- lme4::lmer(
-   peak_z ~ trial_n_z +condition + post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+   trough_z ~ trial_n_z +condition + post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change)
 
 model_P_stop_trial_w_change_no_rt <- lme4::lmer(
-   peak_z ~ trial_n_z +condition +  P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+   trough_z ~ trial_n_z +condition +  P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change_no_rt)
@@ -1114,7 +1115,7 @@ summary(model_P_stop_trial_w_change_no_rt)
 anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
 
 model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
-   peak_z ~ trial_n_z +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+   trough_z ~ trial_n_z +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change_no_p_stop_d)
@@ -1127,13 +1128,13 @@ anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 
 ```{r}
 model_P_stop_trial_w_change <- lme4::lmer(
-   peak_z ~ trial_n_z +condition + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+   trough_z ~ trial_n_z +condition + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change)
 
 model_P_stop_trial_w_change_no_rt <- lme4::lmer(
-   peak_z ~ trial_n_z +condition +  P_stop_trial_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+   trough_z ~ trial_n_z +condition +  P_stop_trial_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change_no_rt)
@@ -1141,7 +1142,7 @@ summary(model_P_stop_trial_w_change_no_rt)
 anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
 
 model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
-   peak_z ~ trial_n_z +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+   trough_z ~ trial_n_z +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change_no_p_stop_d)
@@ -1160,13 +1161,13 @@ OK. WE don't see an unambiguously significant effect here. I suppose with trial_
 
 ```{r}
 model_P_stop_trial_w_change <- lme4::lmer(
-   peak_z ~ trial_n_z+I(trial_n_z^2) +condition + post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+   trough_z ~ trial_n_z+I(trial_n_z^2) +condition + post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change)
 
 model_P_stop_trial_w_change_no_rt <- lme4::lmer(
-   peak_z ~ trial_n_z+I(trial_n_z^2) +condition +  P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+   trough_z ~ trial_n_z+I(trial_n_z^2) +condition +  P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change_no_rt)
@@ -1174,7 +1175,7 @@ summary(model_P_stop_trial_w_change_no_rt)
 anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
 
 model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
-   peak_z ~ trial_n_z+I(trial_n_z^2) +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
+   trough_z ~ trial_n_z+I(trial_n_z^2) +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z + P_stop_trial_change_z:(condition=="FailedStop") | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
 summary(model_P_stop_trial_w_change_no_p_stop_d)
