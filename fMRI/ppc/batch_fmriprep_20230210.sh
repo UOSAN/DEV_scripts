@@ -6,7 +6,7 @@
 #
 # Set your directories
 
-container=containers/fmriprep-22.1.1.simg
+container=containers/fmriprep-22.1.1
 freesurferlicense=/projects/sanlab/shared/containers/license.txt
 group_dir=/projects/sanlab/shared/ #set path to directory within which study folder lives
 study=DEV
@@ -21,10 +21,10 @@ fi
 # Set subject list
 subject_list=`cat new_subject_list_20230210.txt` 
 
-queue_count=16
+queue_count=12
 # Loop through subjects and run job_mriqc
 let subj_count=0
-previous_jobs=(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0)
+previous_jobs=(0 0 0 0 0 0 0 0 0 0 0 0)
 for subject in $subject_list; do
 
   let subj_count++
@@ -50,8 +50,8 @@ for subject in $subject_list; do
 	SBATCH_OUT=$(sbatch --dependency=${job_depend} --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
 		   --job-name fmriprep_${subid} \
 		   --partition=ctn \
-		   --cpus-per-task=8 \
-		   --time=3-00:00:00 \
+		   --cpus-per-task=4 \
+		   --time=0-24:00:00 \
 		   --mem=16G \
 		   -o "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_output.txt \
 		   -e "${output_dir}"/"${subid}"_"${sessid}"_fmriprep_error.txt \
