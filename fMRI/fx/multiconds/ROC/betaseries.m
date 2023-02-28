@@ -5,13 +5,13 @@
 
 %% Load data and intialize variables
 %inputDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ROC/output';
-%inputDir = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/ROC/output';
-inputDir = '~/Dropbox (University of Oregon)/Berkman Lab/Devaluation/Tasks/ROC/output';
+inputDir = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/ROC/output';
+%inputDir = '~/Dropbox (University of Oregon)/Berkman Lab/Devaluation/Tasks/ROC/output';
 runNames = {'run1', 'run2', 'run3', 'run4'};
 waveNames = {'1', '2'};
 
-writeDir = '~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
-%writeDir = '~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
+%writeDir = '~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
+writeDir = '~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
 studyName = 'DEV';
 filePattern = 'run'; 
 nTrials = 20;
