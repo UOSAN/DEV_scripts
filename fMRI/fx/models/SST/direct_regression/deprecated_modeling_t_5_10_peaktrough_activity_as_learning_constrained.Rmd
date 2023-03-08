@@ -109,19 +109,19 @@ trial_summary_data <- tpc_long %>%
   #filter(condition=="FailedStop") %>% 
   group_by(subid,wave,trial_n,ROI, condition) %>%
   summarise(
-    # peak=max(value[offset>=4.0 & offset <=11.0],na.rm = TRUE),
-    # trough = min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE),
-    # peak_time = offset[offset>=4.0 & offset <=11.0][value[offset>=4.0 & offset <=11.0]==max(value[offset>=4.0 & offset <=11.0],na.rm = TRUE)],
-    # trough_time = offset[offset>=4.0 & offset <=11.0][value[offset>=4.0 & offset <=11.0]==min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE)],
-    med_post_trial = median(value[offset>=1.0 & offset <=5.0],na.rm = TRUE)
+    peak=max(value[offset>=4.0 & offset <=11.0],na.rm = TRUE),
+    trough = min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE),
+    peak_time = offset[offset>=4.0 & offset <=11.0][value[offset>=4.0 & offset <=11.0]==max(value[offset>=4.0 & offset <=11.0],na.rm = TRUE)],
+    trough_time = offset[offset>=4.0 & offset <=11.0][value[offset>=4.0 & offset <=11.0]==min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE)],
+    med_post_trial = median(value[offset>=4.0 & offset <=10.0],na.rm = TRUE)
     
     
   )
   
 
-#trial_summary_data$response_amplitude <-trial_summary_data$peak-trial_summary_data$trough
+trial_summary_data$response_amplitude <-trial_summary_data$peak-trial_summary_data$trough
 
-#ggplot(trial_summary_data %>% filter(condition=="FailedStop"),aes(response_amplitude,group=ROI,color=ROI))+geom_density(adjust=0.5)
+ggplot(trial_summary_data %>% filter(condition=="FailedStop"),aes(response_amplitude,group=ROI,color=ROI))+geom_density(adjust=0.5)
 ```
 
 OK. So now, let's try to merge in that with post-pre RTs. Where do we get those from?
@@ -141,6 +141,13 @@ sst_all_data <- get_expected_tone_time(sst_all_data)
 
 sst_all_data<-calculate_response_latency(sst_all_data)
 sst_all_data<-calculate_rpe(sst_all_data)
+
+sst_all_data<-get_more_sst_stats(sst_all_data)
+
+#remove subjects with two many incorrect trials--theyre' probably not paying attention
+hist(sst_all_data$stop_prop_correct)
+
+sst_all_data <- sst_all_data %>% filter(stop_prop_correct>0.2 & stop_prop_correct<0.8)
 
 
 # sst_all_data %>% select(
@@ -179,12 +186,11 @@ trial_summary_data$ROI_delateralized <-  trial_summary_data$ROI %>% str_replace_
 trial_summary_data_delat <- trial_summary_data %>% 
   #filter(ROI %in% c("Left Accumbens","Right Accumbens")) %>% 
   group_by(subid,wave,trial_n, ROI_delateralized,condition) %>%
-  summarize(
-    # peak=mean(peak),
-    #         trough=mean(trough),
-    #         peak_time=mean(peak_time),
-    #         trough_time=mean(trough_time),
-    #         response_amplitude=mean(response_amplitude),
+  summarize(peak=mean(peak),
+            trough=mean(trough),
+            peak_time=mean(peak_time),
+            trough_time=mean(trough_time),
+            response_amplitude=mean(response_amplitude),
             med_post_trial=mean(med_post_trial)
             )
 
@@ -209,9 +215,8 @@ trial_summary_data_delat_pp$trial_n_c<-128-trial_summary_data_delat_pp$trial_n
 ```{r}
 
 trial_neural_behav_data_not_na<-trial_summary_data_delat_pp[
-  #rowSums(is.na(trial_summary_data_delat_pp[,c("post_pre_rt_change")]))==0 & #no NA values in correlation and
-  is.na(trial_summary_data_delat_pp[,c("post_pre_rt_change")])==FALSE & #no NA values in correlation and
-    is.finite(trial_summary_data_delat_pp$med_post_trial) & is.finite(trial_summary_data_delat_pp$post_pre_rt_change) #no infinite values
+  rowSums(is.na(trial_summary_data_delat_pp[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.finite(trial_summary_data_delat_pp$response_amplitude) & is.finite(trial_summary_data_delat_pp$post_pre_rt_change) #no infinite values
     ,]
 
 trial_neural_behav_data_not_na$trial_n_c<-128-trial_neural_behav_data_not_na$trial_n
@@ -232,14 +237,13 @@ trial_neural_behav_roi$trial_n_s<-scale(trial_neural_behav_roi$trial_n_c)
 ```{r}
 
 
-#trial_neural_behav_roi$peak_z<-scale(trial_neural_behav_roi$peak)
+trial_neural_behav_roi$peak_z<-scale(trial_neural_behav_roi$peak)
 trial_neural_behav_roi$post_pre_rt_change_z<-scale(trial_neural_behav_roi$post_pre_rt_change)
 trial_neural_behav_roi$P_stop_trial_change_z<-scale(trial_neural_behav_roi$P_stop_trial_change)
 trial_neural_behav_roi$trial_n_z<-scale(trial_neural_behav_roi$trial_n)
 trial_neural_behav_roi$med_post_trial_z<-scale(trial_neural_behav_roi$med_post_trial)
 
 ```
-
 
 # Basic Striatal cluster mixed effects models
 
@@ -396,6 +400,9 @@ anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 ```
 # Looking at CS and FS trials separately.
 
+A valid question is: does this particular signal track pre-post RT change, just considering CS and FS individually?
+
+This builds evidence that this activity both tracks an RPE signal, and distinct from the peak at t_0_5, which seems to only track pre-post RT change when it comes to FailedStop trials.
 
 # Just CS Trials
 
@@ -446,7 +453,7 @@ model_P_stop_trial_w_change_no_rt <- lme4::lmer(
    med_post_trial_z ~ trial_n_z  + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
   )
-#summary(model_P_stop_trial_w_change_no_rt)
+summary(model_P_stop_trial_w_change_no_rt)
 
 anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
 
@@ -455,7 +462,41 @@ model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
    med_post_trial_z ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
   )
-#summary(model_P_stop_trial_w_change_no_p_stop_d)
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+```
+
+For comparison--if we use trough (it should generally be a trough for FS) do we still see the effect?
+
+
+
+```{r}
+
+
+model_P_stop_trial_w_change <- lme4::lmer(
+   trough ~ trial_n_z + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change)
+
+#ignoring post_pre_rt_change_z
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   trough ~ trial_n_z  + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+#ignoring P_stop_trial_change_z
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   trough ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
 
 
 anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
@@ -470,4 +511,94 @@ anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 
 
 
+
+
+# Between-subjects measures
+
+
+## Between subjects
+
+```{r}
+
+trial_neural_behav_data_not_na$trial_n_n<-scale(trial_neural_behav_data_not_na$trial_n_c)
+
+
+FS_neural_behav_data_not_na<-trial_neural_behav_data_not_na[trial_neural_behav_data_not_na$condition=="FailedStop",]
+```
+
+
+```{r}
+activity_by_subj <- trial_neural_behav_data_not_na %>% filter(condition %in% c("CorrectStop","FailedStop")) %>%
+ group_by(subid,wave,runid,ROI_delateralized,condition) %>%
+  summarize(mean_med_post_stop_signal=mean(med_post_trial),
+            mean_post_pre_rt = mean(post_pre_rt_change)
+            ) %>%
+  tidyr::pivot_wider(names_from="condition", values_from=c("mean_med_post_stop_signal","mean_post_pre_rt")) %>%
+  mutate(
+    "post_stop_signal_CSMinusFS"=mean_med_post_stop_signal_CorrectStop-mean_med_post_stop_signal_FailedStop,
+    "post_pre_rt_CSMinusFS"=mean_post_pre_rt_CorrectStop-mean_post_pre_rt_FailedStop
+         )
+
+# get subject-level FS>CS contrast for the relevant region
+```
+
+
+```{r}
+behav_by_subj <- sst_all_data %>% group_by(subid, waveid, runid) %>%
+  summarize(mean_ssrt_0=mean(mean_ssrt_0,na.rm=TRUE),
+            stop_prop_correct = mean(stop_prop_correct,na.rm=TRUE)
+            )
+
+
+by_subj <- merge(behav_by_subj,activity_by_subj, byx=c("subid","wavid","runid","subid","waveid","runid"))
+by_subj_striatum<-by_subj %>% filter(ROI_delateralized=="CueFollowing(CS>FS)striatal_cluster_combined")
+
+
+cor.test(by_subj_striatum$mean_ssrt_0,by_subj_striatum$post_stop_signal_CSMinusFS) # a good start
+
+
+by_subj_striatum_no_outliers <- by_subj_striatum %>% filter(mean_ssrt_0>-0.2)
+
+#does the size of the gap between signal for a subject indicate how much they're able to adjust in response to stimuli?
+cor.test(by_subj_striatum_no_outliers$post_pre_rt_CSMinusFS,by_subj_striatum_no_outliers$post_stop_signal_CSMinusFS)
+#no.
+
+#but does the size of that gap indicate their SSRT?
+cor.test(by_subj_striatum_no_outliers$mean_ssrt_0,by_subj_striatum_no_outliers$post_stop_signal_CSMinusFS) # a good start
+#no, not remotely, once we remove the subjects who don't seem to be paying attention
+
+plot(by_subj_striatum$mean_ssrt_0,by_subj_striatum$post_stop_signal_CSMinusFS)
+plot(by_subj_striatum$mean_ssrt_0,by_subj_striatum$post_stop_signal_CSMinusFS)
+
+```
+
+
+What if we did a more extreme outlier cut--only subjects between 0.4 and 0.6 proportion correct? The vast majority are in that range; subjects outside that range haven't been very precisely titrated.
+
+
+```{r}
+by_subj_striatum_no_outliers <- by_subj_striatum %>% filter(mean_ssrt_0>-0.2 & stop_prop_correct>=0.4 & stop_prop_correct<=0.6)
+
+#does the size of the gap between signal for a subject indicate how much they're able to adjust in response to stimuli?
+cor.test(by_subj_striatum_no_outliers$post_pre_rt_CSMinusFS,by_subj_striatum_no_outliers$post_stop_signal_CSMinusFS)
+#no.
+
+#but does the size of that gap indicate their SSRT?
+cor.test(by_subj_striatum_no_outliers$mean_ssrt_0,by_subj_striatum_no_outliers$post_stop_signal_CSMinusFS) # a good start
+#no, not remotely, once we remove the subjects who don't seem to be paying attention
+
+```
+
+
+# Graph it
+
+```{r}
+selected_points <- trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+ggplot(
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop")),
+       aes(x=med_post_trial_z,y=post_pre_rt_change_z,color=condition)
+       )+geom_point(alpha=0.05)
+
+cor.test(selected_points$med_post_trial_z,selected_points$post_pre_rt_change_z)
+```
 
