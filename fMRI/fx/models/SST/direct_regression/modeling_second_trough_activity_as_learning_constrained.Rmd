@@ -110,9 +110,9 @@ trial_summary_data <- tpc_long %>%
   group_by(subid,wave,trial_n,ROI, condition) %>%
   summarise(
     peak=max(value[offset>=1.0 & offset <=5.0],na.rm = TRUE),
-    trough = min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE),
+    trough = min(value[offset>=5.0 & offset <=11.0],na.rm = TRUE),
     peak_time = offset[offset>=1.0 & offset <=5.0][value[offset>=1.0 & offset <=5.0]==max(value[offset>=1.0 & offset <=5.0],na.rm = TRUE)],
-    trough_time = offset[offset>=4.0 & offset <=11.0][value[offset>=4.0 & offset <=11.0]==min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE)]
+    trough_time = offset[offset>=5.0 & offset <=11.0][value[offset>=5.0 & offset <=11.0]==min(value[offset>=5.0 & offset <=11.0],na.rm = TRUE)]
   )
   
 
@@ -139,10 +139,13 @@ sst_all_data <- get_expected_tone_time(sst_all_data)
 sst_all_data<-calculate_response_latency(sst_all_data)
 sst_all_data<-calculate_rpe(sst_all_data)
 
+sst_all_data<-get_more_sst_stats(sst_all_data)
 
-# sst_all_data %>% select(
-#   subid, waveid, runid, reaction_time_clean, SSD_recorded,condition, last_tone_delay, trials_since_last_SSD,last_correct_go)# %>%
-#   #View()
+#remove subjects with two many incorrect trials--theyre' probably not paying attention
+hist(sst_all_data$stop_prop_correct)
+
+#sst_all_data <- sst_all_data %>% filter(stop_prop_correct>0.2 & stop_prop_correct<0.8)
+
 
 ```
 
@@ -1184,4 +1187,5 @@ summary(model_P_stop_trial_w_change_no_p_stop_d)
 anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 
 ```
+
 

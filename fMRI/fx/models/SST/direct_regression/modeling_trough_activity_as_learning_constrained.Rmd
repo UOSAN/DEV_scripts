@@ -1,7 +1,7 @@
 ---
 title: "learning analysis, new subjects"
 author: "Ben Smith"
-date: "2022-12-19"
+date: "2023-03-06"
 output: 
   html_document: 
     toc: true
@@ -1224,3 +1224,134 @@ anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 
 ```
 
+
+# All Stop trials
+
+
+## Together
+
+```{r}
+
+
+trial_neural_behav_roi$peak_z<-scale(trial_neural_behav_roi$peak)
+trial_neural_behav_roi$post_pre_rt_change_z<-scale(trial_neural_behav_roi$post_pre_rt_change)
+trial_neural_behav_roi$P_stop_trial_change_z<-scale(trial_neural_behav_roi$P_stop_trial_change)
+trial_neural_behav_roi$trial_n_z<-scale(trial_neural_behav_roi$trial_n)
+```
+
+
+```{r}
+model_P_stop_trial_w_change <- lme4::lmer(
+   peak_z ~ trial_n_z +condition + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("FailedStop","CorrectStop"))
+  )
+summary(model_P_stop_trial_w_change)
+
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   peak_z ~ trial_n_z +condition +  P_stop_trial_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("FailedStop","CorrectStop"))
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   peak_z ~ trial_n_z +condition +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("FailedStop","CorrectStop"))
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+
+```
+
+## Just CS
+
+
+
+```{r}
+model_P_stop_trial_w_change <- lme4::lmer(
+   peak_z ~ trial_n_z  + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("CorrectStop"))
+  )
+summary(model_P_stop_trial_w_change)
+
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   peak_z ~ trial_n_z  +  P_stop_trial_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("CorrectStop"))
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   peak_z ~ trial_n_z  +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("CorrectStop"))
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+
+```
+
+
+## Just FS
+
+
+
+```{r}
+model_P_stop_trial_w_change <- lme4::lmer(
+   peak_z ~ trial_n_z + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change)
+
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   peak_z ~ trial_n_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   peak_z ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+
+```
+
+
+Why is post_pre_rt_change_z so weak, after showing such strong results above?
+
+```{r}
+
+model_incremental <- lme4::lmer(
+   peak_z ~ trial_n_z + post_pre_rt_change_z +(1+ post_pre_rt_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50) %>% filter(condition %in% c("FailedStop"))
+  )
+summary(model_incremental)
+```
+
+Not really the inclusion of p_stop_trial
+
+```{r}
+
+model_incremental <- lme4::lmer(
+   peak_z ~ trial_n_z + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(condition %in% c("FailedStop"))
+  )
+summary(model_incremental)
+
+```
+
+ahhh---it's because a lot of the work happens in the first few trials. So I should figure out whether eliminating the first 50 trials is something we _ought_ to do or not.

@@ -446,7 +446,7 @@ model_P_stop_trial_w_change_no_rt <- lme4::lmer(
    med_post_trial_z ~ trial_n_z  + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
   )
-summary(model_P_stop_trial_w_change_no_rt)
+#summary(model_P_stop_trial_w_change_no_rt)
 
 anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
 
@@ -455,7 +455,7 @@ model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
    med_post_trial_z ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
   )
-summary(model_P_stop_trial_w_change_no_p_stop_d)
+#summary(model_P_stop_trial_w_change_no_p_stop_d)
 
 
 anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
