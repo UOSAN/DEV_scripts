@@ -1,5 +1,5 @@
 from sklearn.inspection import permutation_importance
-from ml_util import IndependentVarStratifiedKFold
+from ml_util import *
 import numpy as np
 import pandas as pd
 from IPython.display import display, HTML
@@ -13,8 +13,11 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.inspection import permutation_importance
-
+from sklearn.preprocessing import StandardScaler
+from sklearn.feature_selection import SelectKBest, f_regression, RFE
+from sklearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
+
 
 
 def generate_synthetic_dev_outcomes(outcome_measures):
@@ -65,14 +68,14 @@ def generate_synthetic_dev_data(analysis_data_imputed, group_assignments, outcom
     #sample from a normal distribution with mean 0 and std 0.1
     #then add to the predictor value
     #for each group, calculate main effect
-    groups = np.unique(group_assignments)[1:]
-    print(groups)
-    group_main_effects = np.random.normal(0,1,groups.shape[0])
+    active_groups = np.unique(group_assignments)[1:]
+    print(active_groups)
+    group_main_effects = np.random.normal(0,1,active_groups.shape[0])
     print(group_main_effects)
 
 
     #apply the main effect. note that the first group will not have a main effect
-    for i,group in enumerate(groups):
+    for i,group in enumerate(active_groups):
         for om in ['bf_2','cancer_promoting_minus_preventing_FFQ_w2','FFQ_v2_Mean_Energy_w2']:
             om_mean = np.nanmean(outcome_measures[om])
             om_sd = np.nanstd(outcome_measures[om])
@@ -80,8 +83,11 @@ def generate_synthetic_dev_data(analysis_data_imputed, group_assignments, outcom
 
     interaction_effects_list = []
     print(group_assignments)
+    groups = np.unique(group_assignments)
+    print(groups)
+
     #apply the interaction effect
-    for i,group in enumerate(groups):
+    for i,group in enumerate(groups): #all three groups
         print(group)
         #generate interaction effect for group
         #check to see if there are pre-defined interaction effects for this group
@@ -90,7 +96,9 @@ def generate_synthetic_dev_data(analysis_data_imputed, group_assignments, outcom
         elif group in group_interaction_effects.keys():
             predictor_interaction_effects = group_interaction_effects[group]
         else:
-            predictor_interaction_effects = np.random.normal(0,0.5,predictors_normed.shape[1])
+            print("no interaction effects for group: " + str(group) + ". No effects will be included for this group.")
+            predictor_interaction_effects = [0]*predictors_normed.shape[1]
+            continue
 
         #print some of the fake effects we're generating
         effect_summary = pd.DataFrame(
@@ -98,7 +106,8 @@ def generate_synthetic_dev_data(analysis_data_imputed, group_assignments, outcom
             'interaction_effect':predictor_interaction_effects})
         effect_summary['interaction_effect_abs'] = np.abs(effect_summary.interaction_effect)
         effect_summary = effect_summary.sort_values('interaction_effect_abs',ascending=False)
-        print(effect_summary.iloc[0:20,0:2])
+        last_nonzero_effect = np.max(np.where(effect_summary.interaction_effect_abs>0.001))
+        print(effect_summary.iloc[0:min(20,last_nonzero_effect+2),0:2])
         #just add an effect of 1 to the first item only.
         # predictor_interaction_effects = [0]*(predictors_normed.shape[1])
         # predictor_interaction_effects[i] = 0.5
@@ -457,7 +466,13 @@ def impute_data(analysis_data,graph_against_col=None):
             ax.set_xlabel(graph_against_col)
             ax.set_ylabel(col)
             ax.set_title('Imputed ' + col + ' vs outcome')
+            #add a legend
+            ax.legend(['Not Imputed','Imputed'])
             plt.show()
+
+            #only do three columns
+            if i>2:
+                break
 
 
 
@@ -467,5 +482,97 @@ def impute_data(analysis_data,graph_against_col=None):
 
     return(analysis_data_imputed)
 
+
+
+
+def run_full_limited_predictor_analysis(total_predictor_count, outcome_measures, analysis_data_imputed, effect_size, hyperparameter_optimizer,
+                                        custom_interaction_effects=None
+                                        ):
+
+    #set np random seed
+    np.random.seed(3161527)
+
+    group_names = ['ichi','ni','san']
+    #assign each row randomly to a group
+    group_assignments = np.random.choice(group_names,analysis_data_imputed.shape[0])
+    
+
+    #synthetic outcomes
+    outcome_measures = generate_synthetic_dev_outcomes(outcome_measures)
+
+    #create a limited set of predictors
+    analysis_data_smol = analysis_data_imputed.iloc[:,0:total_predictor_count]
+
+    # add synthetic primary and interaction effects
+
+    if custom_interaction_effects is None:
+        #set up the interaction effects
+        #0.08 will give us correlations around 0.3 between the interaction effects and the outcome
+        custom_interaction_effects_g1 = [0]*analysis_data_smol.shape[1]
+        custom_interaction_effects_g1[0] = effect_size
+        custom_interaction_effects_g1[1] = effect_size
+        custom_interaction_effects_g1[2] = -effect_size
+
+        custom_interaction_effects_g2 = [0]*analysis_data_smol.shape[1]
+        custom_interaction_effects_g2[4] = effect_size
+        custom_interaction_effects_g2[5] = effect_size
+        custom_interaction_effects_g2[6] = -effect_size
+
+        custom_interaction_effects = {'ni':custom_interaction_effects_g1,'san':custom_interaction_effects_g2}
+
+
+
+    synthetic_data = generate_synthetic_dev_data(analysis_data_smol, group_assignments,outcome_measures, group_interaction_effects = custom_interaction_effects)
+    interaction_effect_df = synthetic_data['X_weights']
+    outcome_measures = synthetic_data['y']
+
+    # Set up outcome measures and group assignment one-hot
+
+    outcome_measures = calculate_outcome_changes(outcome_measures)
+    group_assignment_onehots = pd.get_dummies(group_assignments).loc[:,['ni','san']]
+
+    predictor_data = set_up_interactions(analysis_data_smol, group_assignment_onehots)
+
+
+    #remove any NA values for this outcome measure in both the predictor data and the outcome data
+    outcome_nas = outcome_measures['d_bf'].isna()
+
+    outcome_measures_nona = outcome_measures.loc[~outcome_nas,:]
+    predictor_data_nona = predictor_data.loc[~outcome_nas,:]
+    group_assignment_onehots_nonan = group_assignment_onehots.loc[~outcome_nas,:]
+    group_assignments_nona = group_assignments[~outcome_nas]
+
+    ### Try out CV with simple gridsearch
+
+    scoring_data = do_scoring_loop(X=predictor_data_nona, y= outcome_measures_nona['d_bf'], 
+                    groups = group_assignments_nona, 
+                    hyperparameter_selection_on_fold=hyperparameter_optimizer,
+                    outer_folds=5)
+
+    scores = scoring_data['scores']
+    best_models = scoring_data['best_models']
+    best_params_df_list = scoring_data['best_params_df_list']
+    raw_cv_results_list = scoring_data['raw_cv_results_list']
+
+    print("scores:")
+    print(scores)
+    overall_score = np.mean(scores)
+    print("overall_score:")
+    print(overall_score)
+
+
+
+    best_model = get_best_model(summarize_overall_df_results(raw_cv_results_list))
+    final_fit = do_final_fit(X=predictor_data_nona, y= outcome_measures_nona['d_bf'], final_model=best_model)
+    final_results = present_model_results(X=predictor_data_nona, final_fit=final_fit, y=outcome_measures_nona['d_bf'])
+
+    #print rows of final_results where feature_name is the list of features to check
+    base_regressors = interaction_effect_df.predictor[interaction_effect_df.interaction_effect!=0]
+    regressors_to_check = [x+y for y in ['','*ni','*san'] for x in base_regressors]
+    final_results['planned_regression'] = final_results['predictor'].isin(regressors_to_check)
+
+    present_results_vs_ground_truth_cors(predictor_data_nona,outcome_measures_nona,group_assignments_nona,final_results,base_regressors)
+
+    return(overall_score)
 
 
