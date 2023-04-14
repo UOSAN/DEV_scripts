@@ -20,7 +20,7 @@ print_and_log("Running modification script at " + str(datetime.datetime.now()))
 #check out the dicom files and see what their units are
 
 # itentify nii.gz files.
-files_to_modify = glob.glob("bids_data/sub-DEV*/ses-wave*/func/sub-DEV*_ses-wave*_bold.nii.gz")
+files_to_modify = glob.glob("../../../bids_data/sub-DEV*/ses-wave*/func/sub-DEV*_ses-wave*_bold.nii.gz")
 files_to_modify.sort()
 for i, fp in enumerate(files_to_modify):
     print_and_log(".", end="")
