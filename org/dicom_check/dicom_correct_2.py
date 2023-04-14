@@ -4,6 +4,7 @@ import os
 import glob
 import datetime
 
+raise Exception("do not use this file. it is deprecated since dicom_correct has been modified.")
 #want to print and log to a log file at the same time.
 #set up a function that will do this
 #pass args and kwargs to the print function
