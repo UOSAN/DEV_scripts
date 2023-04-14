@@ -28,7 +28,7 @@ for i, fp in enumerate(files_to_modify):
     if img.header.get_xyzt_units() != ('mm', 'sec'):
         print_and_log("\n")
         print_and_log(fp + " xytz units are not in mm and sec. Currently units are:")
-        print_and_log(img.header.get_xyzt_units())
+        print_and_log(str(img.header.get_xyzt_units()))
         print_and_log("Modifiying...",end="")
         img.header.set_xyzt_units('mm', 'sec')
         img.to_filename(fp)
