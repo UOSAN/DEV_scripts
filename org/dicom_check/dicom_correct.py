@@ -65,7 +65,7 @@ for row in df_runs.itertuples():
 
         img.affine[:] = img.header.get_base_affine()
         print_and_log("affine set")
-        print_and_log("xyzt_units: " + img.header.get_xyzt_units())
+        print_and_log("xyzt_units: " + str(img.header.get_xyzt_units()))
         #save the file
         img.to_filename(img_filepath)
         #want to somehow do a check as well
