@@ -50,7 +50,7 @@ for subject in $subject_list; do
 	echo "$job_depend"
 	SBATCH_OUT=$(sbatch --dependency=${job_depend} --export ALL,subid=${subid},sessid=${sessid},group_dir=${group_dir},study_dir=${study_dir},study=${study},container=${container},freesurferlicense=${freesurferlicense} \
 		   --job-name fmriprep_${subid} \
-		   --partition=ctn \
+		   --partition=long \
 		   --cpus-per-task=4 \
 		   --time=0-24:00:00 \
 		   --mem=16G \
