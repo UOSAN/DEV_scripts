@@ -31,11 +31,13 @@ for row in df_runs.itertuples():
     runid = row.runid
     
     #get the filepath to the nifti file
-    img_folder = bids_path + f'sub-{subid}/ses-{runid}/func/'
+    img_folder = bids_path + f'sub-{subid}/ses-{runid}/anat/'
 
     #get a list of the nifti files in the folder
     if os.path.exists(img_folder):
-        img_files = [f for f in os.listdir(img_folder) if f.endswith('.nii.gz')]
+        #img_files = [f for f in os.listdir(img_folder) if f.endswith('.nii.gz')]
+        img_files = [f for f in glob.glob(img_folder + "*.nii.gz")]
+#        img_files = [f for f in os.listdir(img_folder) if f.endswith('.nii.gz')]
     else:
         print_and_log(f'No folder found for sub-{subid} run-{runid}')
         continue

@@ -50,10 +50,10 @@ for row in df_runs.itertuples():
         os.makedirs(run_backup_folder)
 
     #loop through the nifti files
-    for img_filepath in img_files:
-        print_and_log(img_filepath)
+    for img_file in img_files:
+        print_and_log(img_file)
         #get the full filepath
-        #img_filepath = os.path.join(img_folder, img_file)
+        img_filepath = os.path.join(img_folder, img_file)
         #make a backup copy of the image
         backup_filepath =img_filepath.replace(bids_path, backup_folder)
         shutil.copy(img_filepath, backup_filepath)
