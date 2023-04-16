@@ -52,11 +52,11 @@ for row in df_runs.itertuples():
 
 
     #make a backup folder
-    backup_folder = img_folder.replace('bids_data/',f'bids_data/derivatives/affine_correction_originals/')
-    for bf in ['func','anat','fmap']:
-        run_backup_folder = backup_folder + f'sub-{subid}/ses-{runid}/' + bf + '/'
-        if not os.path.exists(run_backup_folder):
-            os.makedirs(run_backup_folder)
+    # backup_folder = img_folder.replace('bids_data/',f'bids_data/derivatives/affine_correction_originals/')
+    # for bf in ['func','anat','fmap']:
+    #     run_backup_folder = backup_folder + f'sub-{subid}/ses-{runid}/' + bf + '/'
+    #     if not os.path.exists(run_backup_folder):
+    #         os.makedirs(run_backup_folder)
 
     #loop through the nifti files
     for img_filepath in img_files:
@@ -64,7 +64,9 @@ for row in df_runs.itertuples():
         #get the full filepath
         #img_filepath = os.path.join(img_folder, img_file)
         #make a backup copy of the image
-        backup_filepath =img_filepath.replace(bids_path, backup_folder)
+        backup_filepath =img_filepath.replace('bids_data/', f'bids_data/derivatives/affine_correction_originals/')
+        if not os.path.exists(os.path.dirname(backup_filepath)):
+            os.makedirs(os.path.dirname(backup_filepath))
         shutil.copy(img_filepath, backup_filepath)
         print_and_log("backup of original file saved at "+ backup_filepath)
         #load the nifti file
