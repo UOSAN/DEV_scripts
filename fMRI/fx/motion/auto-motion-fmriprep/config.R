@@ -22,7 +22,7 @@
 # * figDPI = plot resolution in dots per inch
 
 # paths
-confoundDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep'
+confoundDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022'
 summaryDir = '/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary'
 plotDir = '/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/plots'
 rpDir = '/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/rp_txt'

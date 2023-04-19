@@ -143,7 +143,7 @@ setwd("../../../")
 
 full_list %>%
   filter(!is.na(subjectID)) %>%
-  filter(wave==w) %>%
+  filter(wave %in% c("wave1","wave2")) %>%
   select(subjectID) %>%
   unique %>%
   write.table(

@@ -11,7 +11,7 @@ for i = 1:numel(waves)
     fprintf('------------------------------------------------------------------------\n')
 
     % create matlabbatch job
-    matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave%d/func', waveNum)};
+    matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV001/ses-wave%d/func', waveNum)};
     matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = '.*task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii.gz';
     matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
     matlabbatch{2}.cfg_basicio.file_dir.file_ops.cfg_gunzip_files.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (.*task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii.gz)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));

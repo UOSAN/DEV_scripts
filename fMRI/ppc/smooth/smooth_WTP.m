@@ -11,7 +11,7 @@ for i = 1:numel(waves)
     fprintf('------------------------------------------------------------------------\n')
 
     % create matlabbatch job
-    matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave%d/func', waveNum)};
+    matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV001/ses-wave%d/func', waveNum)};
     matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = '.*task-WTP_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii.gz';
     matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
     matlabbatch{2}.cfg_basicio.file_dir.file_ops.cfg_gunzip_files.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (.*task-WTP_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii.gz)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
@@ -24,7 +24,7 @@ for i = 1:numel(waves)
     matlabbatch{4}.spm.spatial.smooth.dtype = 0;
     matlabbatch{4}.spm.spatial.smooth.im = 0;
     matlabbatch{4}.spm.spatial.smooth.prefix = 's6_';
-    matlabbatch{5}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave%d/func', waveNum)};
+    matlabbatch{5}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV001/ses-wave%d/func', waveNum)};
     matlabbatch{5}.cfg_basicio.file_dir.file_ops.file_fplist.filter = '.*task-WTP_acq-2_bold_space-MNI152NLin2009cAsym_preproc.nii.gz';
     matlabbatch{5}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
     matlabbatch{6}.cfg_basicio.file_dir.file_ops.cfg_gunzip_files.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (.*task-WTP_acq-2_bold_space-MNI152NLin2009cAsym_preproc.nii.gz)', substruct('.','val', '{}',{5}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
@@ -37,7 +37,7 @@ for i = 1:numel(waves)
     matlabbatch{8}.spm.spatial.smooth.dtype = 0;
     matlabbatch{8}.spm.spatial.smooth.im = 0;
     matlabbatch{8}.spm.spatial.smooth.prefix = 's6_';
-    matlabbatch{9}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave%d/func', waveNum)};
+    matlabbatch{9}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV001/ses-wave%d/func', waveNum)};
     matlabbatch{9}.cfg_basicio.file_dir.file_ops.file_fplist.filter = '.*task-WTP_acq-3_bold_space-MNI152NLin2009cAsym_preproc.nii.gz';
     matlabbatch{9}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
     matlabbatch{10}.cfg_basicio.file_dir.file_ops.cfg_gunzip_files.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (.*task-WTP_acq-3_bold_space-MNI152NLin2009cAsym_preproc.nii.gz)', substruct('.','val', '{}',{9}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
@@ -50,7 +50,7 @@ for i = 1:numel(waves)
     matlabbatch{12}.spm.spatial.smooth.dtype = 0;
     matlabbatch{12}.spm.spatial.smooth.im = 0;
     matlabbatch{12}.spm.spatial.smooth.prefix = 's6_';
-    matlabbatch{13}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave%d/func', waveNum)};
+    matlabbatch{13}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV001/ses-wave%d/func', waveNum)};
     matlabbatch{13}.cfg_basicio.file_dir.file_ops.file_fplist.filter = '.*task-WTP_acq-4_bold_space-MNI152NLin2009cAsym_preproc.nii.gz';
     matlabbatch{13}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
     matlabbatch{14}.cfg_basicio.file_dir.file_ops.cfg_gunzip_files.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (.*task-WTP_acq-4_bold_space-MNI152NLin2009cAsym_preproc.nii.gz)', substruct('.','val', '{}',{13}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
