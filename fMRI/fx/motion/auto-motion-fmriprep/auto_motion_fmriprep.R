@@ -40,13 +40,14 @@ cat("config loaded.\n")
 #------------------------------------------------------
 # load confound files
 #------------------------------------------------------
-fileList = list.files(confoundDir, pattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_"), recursive = TRUE)
+confond_pattern <- paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_")
+fileList = list.files(confoundDir, pattern = confond_pattern, recursive = TRUE)
 
 cat("files listed.\n")
 #check there aren't duplicates. This can happpen if e.g., someone has added archives of files within this directory. this shouldn't really happen.
 filenameList=basename(fileList)
 if (max(table(filenameList)>1)){
-  print("duplicate filenames found. here is a list of the duplicates:")
+  print(paste0("duplicate filenames found at ", confoundDir, confond_pattern, ". here is a list of the duplicates:"))
   duplicated_filename_count<-table(filenameList)
   duplicated_filenames = names(duplicated_filename_count)[duplicated_filename_count>1]
   print(fileList[filenameList %in% duplicated_filenames])
