@@ -19,12 +19,12 @@
 # * figDPI = plot resolution in dots per inch; define as a number
 
 # paths
-confoundDir = '/data00/projects/MURI/data/BIDS/derivatives'
+confoundDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022'
 outputDir = '/data00/projects/MURI/data/BIDS/derivatives'
 
 # variables
 version = '20.0.6'
-study = 'MURI'
+study = 'DEV'
 ses = FALSE
 noRP = FALSE
 noNames = FALSE
