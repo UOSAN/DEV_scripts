@@ -20,7 +20,7 @@
 
 # paths
 confoundDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022'
-outputDir = '/data00/projects/MURI/data/BIDS/derivatives'
+outputDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/'
 
 # variables
 version = '20.0.6'
