@@ -13,7 +13,11 @@ import re
 def read_yaml_for_host(file_path):
     hostname = socket.gethostname()
     with open(file_path, "r") as f:
-        return yaml.safe_load(f)[hostname]
+        yaml_all = yaml.safe_load(f)
+        if hostname in yaml_all:
+            return yaml_all[hostname]
+        else:
+            return yaml.safe_load(f)['default']
 
 def get_contrasts_for_betas(
         betas
