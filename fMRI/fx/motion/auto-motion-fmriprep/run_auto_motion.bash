@@ -4,7 +4,7 @@
 #SBATCH --output=auto-motion-fmriprep.log
 #SBATCH --cpus-per-task=1
 #SBATCH --ntasks=1
-#SBATCH --mem-per-cpu=1G
+#SBATCH --mem-per-cpu=8G
 #SBATCH --partition=short,fat,long,longfat
 
 module load R gcc
