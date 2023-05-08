@@ -53,7 +53,7 @@ full_list = all %>%
 Exclude entries that we have determined not to process...
 ```{r}
 exclusions = c(
-    "DEV018_20181025_190858", #redcap's first date for session 1 is 10-09-2018, followed by 10-17-2018, 11-21-2018; the latter two have corresponding LCNI scans. So 20181025 is an odd date. but possibly a re-do of 11-21-2018?
+    "DEV018_20181025_190858", #redcap's first date for session 1 is 10-09-2018, followed by 10-17-2018, 11-21-2018; the latter two have corresponding LCNI scans. So 20181025 is an odd date. In fact, it is likely to be a copy of DEV017_20181025_190858 -- note the identical timestamps.
     "DEV012_20190111_090124", #This folder no longer exists! redcap session 0: 2018-05-30, session 1: 2018-06-26, session 2: 2018-08-06. Session 4 is on 01-11-2019.
     
    "DEV073_20190312_085608", # This date doesn't orrespond to a date in redcap. Redcap sessions seem to be 03-05-2019; 03-07-2019; 04-12-2019. 20190312 doesn't match any of these. We have DEV073_20190307_090744 and DEV073_20190412_085554.
