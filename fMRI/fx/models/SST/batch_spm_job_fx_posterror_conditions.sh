@@ -33,7 +33,7 @@ SCRIPT_NO_CONTRASTS=${SCRIPTS_DIR}/fMRI/fx/models/$TASK/fx_posterror_conditions_
 
 
 # Set shell script to execute
-SHELL_SCRIPT=spm_job.sh
+SHELL_SCRIPT=spm_job_ctn.sh
 
 # RRV the results files
 RESULTS_INFIX=fx_posterror_conditions
