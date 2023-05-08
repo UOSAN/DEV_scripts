@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=`cat subject_list_single_col_wave1.txt`
+SUBJLIST=`cat subject_list_single_col_20230210.txt`
 
 # Which SID should be replaced?
 REPLACESID=004
