@@ -7,7 +7,7 @@
 %s6_sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
 disp('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV004/ses-wave1/func/');
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV004/ses-wave1/func/'};
-matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_desc-preproc.nii';
+matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV004_ses-wave1_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii';
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
 matlabbatch{2}.spm.util.exp_frames.files = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV004_ses-wave1_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{2}.spm.util.exp_frames.frames = Inf;
