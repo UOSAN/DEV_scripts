@@ -24,7 +24,7 @@ SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/SST/fx_conditions_w1_w_contrasts.m
 
 # Set shell script to execute
-SHELL_SCRIPT=spm_job.sh
+SHELL_SCRIPT=spm_job_ctn.sh
 
 # RRV the results files
 RESULTS_INFIX=fx_betaseries

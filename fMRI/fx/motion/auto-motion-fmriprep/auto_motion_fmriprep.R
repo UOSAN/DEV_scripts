@@ -63,6 +63,7 @@ if (gsub("\\.", "", version) <= 118) {
   fileList = list.files(confoundDir, pattern = 'bold_confounds.tsv', recursive = TRUE)
   
   for (file in fileList) {
+    print(file)
     tmp = tryCatch(read_tsv(file.path(confoundDir, file)) %>% 
                      mutate(file = ifelse(!grepl("desc", file), gsub("bold", "desc-bold", file), file),
                             file = ifelse(!grepl("ses", file), gsub("task", "ses-1_task", file), file),
@@ -104,7 +105,7 @@ if (gsub("\\.", "", version) <= 118) {
   fileList = list.files(confoundDir, pattern = '.*confounds.*.tsv', recursive = TRUE)
 
   for (file in fileList) {
-
+      print(file)
       tmp = tryCatch(read_tsv(file.path(confoundDir, file)) %>%
                        setNames(snakecase::to_upper_camel_case(names(.))) %>%
                        setNames(gsub("AComp", "aComp", names(.))) %>%
@@ -141,6 +142,12 @@ if (gsub("\\.", "", version) <= 118) {
     }
   }  
 }
+
+# filter to just selected subjects
+filter_list <- c("DEV198")
+print("filtering to the following subjects:")
+print(filter_list)
+dataset <- dataset[dataset$subjectID %in% filter_list,]
 
 #------------------------------------------------------
 # apply classifier

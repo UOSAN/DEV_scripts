@@ -19,7 +19,7 @@
 # * figDPI = plot resolution in dots per inch; define as a number
 
 # paths
-confoundDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022'
+confoundDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV198/'
 outputDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/'
 
 # variables
