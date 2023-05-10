@@ -48,6 +48,9 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
             if subject_id=='999':
                 continue
 
+            if subject_id=='098':
+                print(subject_id)
+
             if int(wave_number)>2:
                 continue
                 #no need to get the third wave data because there is no fMRI data for it.
@@ -200,13 +203,13 @@ if __name__ == "__main__":
     print(args.input_dir)
 
     #we don't do BIDs here because BIDs, by convention, uses RT for duration.
-    main(args.input_dir, 
-    bids_dir=None, 
-    use_rt_for_go_success_trials=False, 
-    output_folder= args.output_dir,
-    preprocessed_data_filepath = args.supplemental_data,
-    folder_id='posterror_cues_with_drt',
-    include_parametric_modulators=True)
+    # main(args.input_dir, 
+    # bids_dir=None, 
+    # use_rt_for_go_success_trials=False, 
+    # output_folder= args.output_dir,
+    # preprocessed_data_filepath = args.supplemental_data,
+    # folder_id='posterror_cues_with_drt',
+    # include_parametric_modulators=True)
     
     main(args.input_dir, 
     bids_dir=None, 
