@@ -78,6 +78,8 @@ if (gsub("\\.", "", version) <= 118) {
   			#so go to the next.
   			next
   			print("file not in filter. skipping.")
+  		}else{
+  			print("file is in filter. processing.")
   		}
   	}
 
