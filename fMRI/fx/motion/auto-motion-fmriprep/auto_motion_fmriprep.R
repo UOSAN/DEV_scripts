@@ -66,22 +66,25 @@ columnNames = c("subjectID", "wave", "task", "run", "volume", "CSF", "WhiteMatte
 fileRegex = '.*func/sub-(.*)_ses-(.*)_task-(.*)_run-(.*)_desc-.*.tsv'
 fileVars = c('subjectID', 'wave', 'task', 'run')
 
+filter_check_func <- function(f){
+  return(any(sapply(filter_list,function(x){grepl(x,f)})))
+}
 if (gsub("\\.", "", version) <= 118) {
   fileList = list.files(confoundDir, pattern = 'bold_confounds.tsv', recursive = TRUE)
   
   for (file in fileList) {
     print(file)
-  	if (exists("filter_list")){
-	  	#we have a filter list; only process this file if it's in the filter list
-  		if (any(sapply(filter_list,function(x){grepl(x,file)}))==FALSE){
-  			#there's a filter list and this file isn't on it.
-  			#so go to the next.
-  			next
-  			print("file not in filter. skipping.")
-  		}else{
-  			print("file is in filter. processing.")
-  		}
-  	}
+    if (exists("filter_list")){
+    	#we have a filter list; only process this file if it's in the filter list
+    	if (filter_check_func(file)==FALSE){
+    		#there's a filter list and this file isn't on it.
+    		#so go to the next.
+    		next
+    		print("file not in filter. skipping.")
+    	}else{
+    		print("file is in filter. processing.")
+    	}
+    }
 
     tmp = tryCatch(read_tsv(file.path(confoundDir, file)) %>% 
                      mutate(file = ifelse(!grepl("desc", file), gsub("bold", "desc-bold", file), file),
@@ -125,6 +128,17 @@ if (gsub("\\.", "", version) <= 118) {
 
   for (file in fileList) {
       print(file)
+      if (exists("filter_list")){
+        #we have a filter list; only process this file if it's in the filter list
+        if (filter_check_func(file)==FALSE){
+          #there's a filter list and this file isn't on it.
+          #so go to the next.
+          next
+          print("file not in filter. skipping.")
+        }else{
+          print("file is in filter. processing.")
+        }
+      }
       tmp = tryCatch(read_tsv(file.path(confoundDir, file)) %>%
                        setNames(snakecase::to_upper_camel_case(names(.))) %>%
                        setNames(gsub("AComp", "aComp", names(.))) %>%
