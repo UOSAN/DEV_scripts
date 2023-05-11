@@ -39,12 +39,9 @@ if (!require(randomForest)) {
 source('config.R')
 
 # filter to just selected subjects
-filter_list <- c("DEV098","DEV125","DEV221")
 if (!is.na(filter_list)){
 	print("filtering to the following subjects:")
 	print(filter_list)
-	
-
 }
 
 

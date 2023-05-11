@@ -35,3 +35,6 @@ figFormat = '.png'
 figHeight = 5.5
 figWidth = 7
 figDPI = 250
+
+#set to NA if you don't want to do any filtering.
+filter_list = c("DEV098","DEV126","DEV221")
