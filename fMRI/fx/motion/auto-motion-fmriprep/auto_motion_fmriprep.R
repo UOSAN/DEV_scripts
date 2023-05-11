@@ -38,6 +38,16 @@ if (!require(randomForest)) {
 #------------------------------------------------------
 source('config.R')
 
+# filter to just selected subjects
+filter_list <- c("DEV098","DEV125","DEV221")
+if (!is.na(filter_list)){
+	print("filtering to the following subjects:")
+	print(filter_list)
+	
+
+}
+
+
 #------------------------------------------------------
 # define output path
 #------------------------------------------------------
@@ -63,6 +73,14 @@ if (gsub("\\.", "", version) <= 118) {
   fileList = list.files(confoundDir, pattern = 'bold_confounds.tsv', recursive = TRUE)
   
   for (file in fileList) {
+  	if (!is.na(filter_list)){
+	  	#we have a filter list; only process this file if it's in the filter list
+  		if (any(sapply(filter_list,function(x){grepl(x,file)}))==FALSE){
+  			#there's a filter list and this file isn't on it.
+  			#so go to the next.
+  			next
+  		}
+  	}
     print(file)
     tmp = tryCatch(read_tsv(file.path(confoundDir, file)) %>% 
                      mutate(file = ifelse(!grepl("desc", file), gsub("bold", "desc-bold", file), file),
@@ -143,11 +161,10 @@ if (gsub("\\.", "", version) <= 118) {
   }  
 }
 
-# filter to just selected subjects
-filter_list <- c("DEV098","DEV125","DEV221")
-print("filtering to the following subjects:")
-print(filter_list)
+# filter if we're doing that.
 dataset <- dataset[dataset$subjectID %in% filter_list,]
+
+
 
 #------------------------------------------------------
 # apply classifier
@@ -164,6 +181,7 @@ dataset$trash = predict(mlModel, dataset)
 dataset = dataset %>%
   mutate(trash = ifelse(trash == "yes", 1, 0),
          trash = ifelse(is.na(trash), 0, trash))
+
 
 #------------------------------------------------------
 # summarize data and write csv files
