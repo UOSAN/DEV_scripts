@@ -144,10 +144,10 @@ if (gsub("\\.", "", version) <= 118) {
 }
 
 # filter to just selected subjects
-#filter_list <- c("DEV198")
-#print("filtering to the following subjects:")
-#print(filter_list)
-#dataset <- dataset[dataset$subjectID %in% filter_list,]
+filter_list <- c("DEV098","DEV125","DEV221")
+print("filtering to the following subjects:")
+print(filter_list)
+dataset <- dataset[dataset$subjectID %in% filter_list,]
 
 #------------------------------------------------------
 # apply classifier
