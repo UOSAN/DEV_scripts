@@ -122,13 +122,24 @@ def get_data_for_confirmed_train_subjs(
     #other data for inclusion
     data_by_ppt = pd.read_csv(dropbox_datapath + "/data_by_ppt.csv")
     include_exclude_list = pd.read_csv(ml_scripting_path + "/nsc_subject_exclusions.csv")
-    #hard-coded excluded subjects
-    exclude_subjects = ['DEV061', 'DEV185', 'DEV187', 'DEV189', 'DEV190', 'DEV192', 'DEV198', 'DEV203', 'DEV220',
-                            'DEV221']
+    
+    
+    # exclude_subjects = ['DEV061', 'DEV185', 'DEV187', 'DEV189', 'DEV190', 'DEV192', 'DEV198', 'DEV203', 'DEV220',
+    #                         'DEV221']
     #also want to exclude subjects whose data was marked questionable in Redcap/Teams
     data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
+    
     data_quality_sst = data_quality.loc[data_quality.SST.isna()==False,]
     usable_dev_ids = data_quality_sst.dev_id[data_quality_sst.SST=="No reported problems"]
+    #hard-coded excluded subjects
+    sst_exclude_list = pd.read_csv(dropbox_datapath + "/SST-wave1-data inclusion - Sheet1.csv")
+    usable_dev_ids = [id for id in usable_dev_ids if id not in sst_exclude_list['DevID'][sst_exclude_list['Final inclusion']=='Exclude'].tolist()]
+    #and exclude subjects excluded by the motion quality process
+    #read the CSV, discarding the first line and using the second as headers
+    motion_exclusions = pd.read_csv(dropbox_datapath + '/DEVQC_all_subjects - All.csv', header=1)
+    motion_exclusions_w1 = motion_exclusions[motion_exclusions['wave']==1]
+    usable_dev_ids = [id for id in usable_dev_ids if id not in motion_exclusions_w1['subjectID'][motion_exclusions_w1['Exclude']=='Exclude'].tolist()]
+    
 
     if exclude_test_subjs:
         # get just the training subjects
