@@ -35,7 +35,7 @@ def get_roi_data(nii_raw_files, mask_df):
         dev_wave = match_data[2]
 
         #print(basename(nii))
-        print(dev_name + ", " + dev_wave)
+        print(dev_name + ", " + dev_wave,flush=True)
 
         active_img = image.load_img(nii)
         active_img_cleaned = nil.image.clean_img(active_img)
