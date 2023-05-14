@@ -131,7 +131,7 @@ def get_all_subj_df(roi_data, sst_all_behavioral_data):
     # tend to think looping through subjects makes more sense.)
     all_subj_df_list = [] 
     for s in roi_data.keys():
-        print(s)
+        print(s,flush=True)
         for wave in roi_data[s].keys():
             run_length = roi_data[s][wave].shape[0]
 
