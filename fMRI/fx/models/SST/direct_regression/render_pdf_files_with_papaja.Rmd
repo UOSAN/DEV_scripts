@@ -1,0 +1,61 @@
+---
+title: "Render PDF tables"
+author: "Ben Smith"
+date: "2023-04-24"
+class: man
+output: 
+  papaja::apa6_pdf:
+    keep_tex: yes
+header-includes   :
+  - \usepackage{setspace}
+  - \doublespacing
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(papaja)
+```
+
+
+
+```{r}
+load("modeling_t_5_10-activity.RData")
+```
+
+
+
+```{r}
+trial_neural_behav_roi_stop<-trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+
+trial_neural_behav_roi_stop<- trial_neural_behav_roi_stop %>% 
+  mutate(P_stop_trial_change_z_stop = (P_stop_trial_change-mean(P_stop_trial_change))/sd(P_stop_trial_change),
+         post_pre_rt_change_z_stop = (post_pre_rt_change_z-mean(post_pre_rt_change_z))/sd(post_pre_rt_change_z)
+         )
+
+model_full_effects_x_zs <- lme4::lmer(
+   med_post_trial ~ trial_n_z+ condition + P_stop_trial_change_z_stop+ post_pre_rt_change_z_stop + (1 +P_stop_trial_change_z_stop  + post_pre_rt_change_z_stop  | subid),
+  trial_neural_behav_roi_stop)
+summary(model_full_effects_x_zs)
+
+
+
+```
+
+
+
+```{r}
+
+
+apa_table = papaja::apa_print(model_full_effects_x_zs)
+apa_table
+
+```
+
+```{r}
+knitr::kable(trial_neural_behav_roi_stop[1:5,1:5])
+```
+
+
+
+

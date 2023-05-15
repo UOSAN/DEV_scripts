@@ -59,7 +59,7 @@ if (max(table(filenameList)>1)){
 for (file_i in 1:length(fileList)) {
   file=fileList[file_i]
   if(file_i%%10==0){
-  #if(file_i==0){
+    #if(file_i==0){
     cat(". ")
     flush.console()
   }
@@ -105,26 +105,29 @@ for (file_i in 1:length(fileList)) {
 
 #remove runs that have NA values for some reason. they will crash the analysis.
 #BJS 2021-10-06
-check_cols <- c("tCompCor00","tCompCor01","tCompCor02","tCompCor03","tCompCor04","tCompCor05","aCompCor00","aCompCor01","aCompCor02","aCompCor03","aCompCor04","aCompCor05")
+check_cols <- c(
+  paste0(paste0(c("t","c","w","a"),"_comp_cor_"),1:99)
+)
+#check_cols <- c("tCompCor00","tCompCor01","tCompCor02","tCompCor03","tCompCor04","tCompCor05","aCompCor00","aCompCor01","aCompCor02","aCompCor03","aCompCor04","aCompCor05")
 row_has_na_val <- rowSums(is.na(dataset[,check_cols]))>0
 rows_with_na_vals<-dataset[row_has_na_val,]
 
 runs_to_remove <- unique(rows_with_na_vals[c("subjectID","wave","task","run")])
 if (nrow(runs_to_remove)>0){
-print(nrow(runs_to_remove))
-for (r in 1:nrow(runs_to_remove)){
-  
-  rows_to_remove_for_run <- (dataset$subjectID==runs_to_remove[[r,"subjectID"]] & 
-          dataset$wave==runs_to_remove[[r,"wave"]] & 
-          dataset$task==runs_to_remove[[r,"task"]] & 
-          dataset$run==runs_to_remove[[r,"run"]])
-  
-  print(paste0("removing ",sum(rows_to_remove_for_run)," rows relate to the following run"))
-  print(runs_to_remove[r,])
-  
-  dataset <- dataset[!rows_to_remove_for_run,]
-  
-}
+  print(nrow(runs_to_remove))
+  for (r in 1:nrow(runs_to_remove)){
+    
+    rows_to_remove_for_run <- (dataset$subjectID==runs_to_remove[[r,"subjectID"]] & 
+                                 dataset$wave==runs_to_remove[[r,"wave"]] & 
+                                 dataset$task==runs_to_remove[[r,"task"]] & 
+                                 dataset$run==runs_to_remove[[r,"run"]])
+    
+    print(paste0("removing ",sum(rows_to_remove_for_run)," rows relate to the following run"))
+    print(runs_to_remove[r,])
+    
+    dataset <- dataset[!rows_to_remove_for_run,]
+    
+  }
 }
 #add the current image state for debugging
 state_filename <- "confounds_loaded_state.RData"
@@ -262,8 +265,8 @@ if (writePlot) {
         facet_grid(indicator ~ ., scales = 'free') +
         scale_color_manual(values = "#E4B80E") +
         labs(title = paste0(.$subjectID[[1]], "  ", .$wave[[1]], "  ", .$task[[1]], "  ", .$run[[1]]),
-          y = "value\n",
-          x = "\nvolume") +
+             y = "value\n",
+             x = "\nvolume") +
         theme_minimal(base_size = 10) +
         theme(legend.position = "none")
       ggsave(plot, file = file.path(plotDir, paste0(.$subjectID[[1]], '_', .$wave[[1]], '_', .$task[[1]], '_', .$run[[1]], figFormat)), height = figHeight, width = figWidth, dpi = figDPI)
