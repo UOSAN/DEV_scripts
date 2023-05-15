@@ -1,0 +1,9 @@
+originalname, replacementname
+med_post_trial_z, Median Activity 4-10 s Post-Stop Signal
+P_stop_trial_change, P(Stop Trial) Change
+P_stop_trial_change_z_stop, Standardized P(Stop Trial) Change
+trial_n_s, Standardized Trial Number
+conditionFailedStop, Stop Failure
+condition, Condition
+post_pre_rt_change_z_stop, Standardized Post-Pre RT Change
+post_pre_rt_change, Post-Pre RT Change

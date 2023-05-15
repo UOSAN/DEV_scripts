@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r}
@@ -577,6 +579,4 @@ There are a different distribution of the number of trials for each condition, b
 ```{r}
 time_points_c %>% filter(trial_bucket!="") %>% group_by(condition,trial_bucket) %>% summarize(trial_count=n())
 ```
-
-
 

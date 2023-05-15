@@ -215,14 +215,14 @@ ggplot_time_points_extras <- list(
   labs(
     x="time from tone sound or expected time of tone (s)",
     y="mean BOLD activity (no HRF convolution)",
-    title="Stop Signal Task Activity",
+    #title="Stop Signal Task Activity",
     subtitle=paste0("Across ", as.character(subj_count)," subjects with 128 trials each"),
     caption="0 point is the moment of tone sound (Stop trials)\n or expected tone sound based on prior trial (Go trials)\n HRF convolution not applied\n1 s moving averages")
   )
 
 df_offset
   
-ggplot(df_offset,
+plot_final<-ggplot(df_offset,
        aes(x=offset_start, y=CueFollowing.CS.FS.striatal_cluster_combined,color=condition))+
   geom_line()+
   #facet_wrap(~ROI,ncol = 2)+
@@ -232,6 +232,15 @@ ggplot(df_offset,
   #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
   #scale_y_continuous(limits=c(-2.5,2.5))
   
+
+```
+
+
+
+```{r}
+
+
+ggsave(plot_final,filename="compare_conditions.pdf",device="pdf",width = 2, height=1,scale=4)
 
 ```
 
@@ -505,6 +514,163 @@ OK, so from this graph it is very clear why, during the subsequent trial, we're 
 <!-- ```{r} -->
 <!-- time_points_c %>% filter(trial_bucket!="") %>% group_by(condition,trial_bucket) %>% summarize(trial_count=n()) -->
 <!-- ``` -->
+
+
+
+# Re-scale the models
+
+
+```{r}
+load("modeling_t_5_10-activity.RData")
+```
+
+
+Looks like below, the `model_full_effects_incc_abs` y variable is corret, buecase the effect for `conditionFailedStop` matches the difference between CS and FS on teh graph.
+
+However, we might want to re-do the model using z-values for P_stop_trial_change and post_pre_rt_change in order to get more realistic values.
+
+
+
+
+```{r}
+summary(model_full_effects_incc_abs)
+summary(model_full_effects_incc)
+```
+
+
+```{r}
+
+
+subj_count <- length(unique(time_points_c$subid))
+ggplot(df_offset,
+       aes(x=offset_start, y=CueFollowing.CS.FS.striatal_cluster_combined,color=condition))+
+  geom_line()+
+  #facet_wrap(~ROI,ncol = 2)+
+  ggplot_time_points_extras
+  
+  model_full_effects_incc_abs
+
+```
+
+
+
+```{r}
+
+model_full_effects_incc <- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+summary(model_full_effects_incc)
+
+
+```
+
+
+```{r}
+
+model_full_effects_abs <- lme4::lmer(
+   med_post_trial ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+summary(model_full_effects_abs)
+```
+
+
+```{r}
+
+model_full_effects_x_zs <- lme4::lmer(
+   med_post_trial ~ trial_n_z+ condition + P_stop_trial_change_z+ post_pre_rt_change_z + (1 +post_pre_rt_change_z  + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+summary(model_full_effects_x_zs)
+```
+
+
+Good start, but something's off with the effect of `P_stop_trial_change_z` relative to `post_pre_rt_change_z`. They are both significant, yet `P_stop_trial_change_z` has a very large effect, and dwarfs the `conditionFailedStop` effect, which seems wrong.
+
+```{r}
+trial_neural_behav_roi_stop<-trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+                                                               
+plot(trial_neural_behav_roi_stop$P_stop_trial_change_z,trial_neural_behav_roi_stop$med_post_trial)
+
+plot(trial_neural_behav_roi_stop$post_pre_rt_change_z,trial_neural_behav_roi_stop$med_post_trial)
+```
+Indeed--`P_stop_trial_change_z` is not really on a normal distribution at least within this sample.
+
+```{r}
+ggplot(trial_neural_behav_roi_stop,aes(post_pre_rt_change_z, med_post_trial_z))
+plot(trial_neural_behav_roi_stop$post_pre_rt_change_z,trial_neural_behav_roi_stop$med_post_trial_z)
+```
+That's because it's set relative to _all_ trials and Stop trials are just a relatively narrow range within that. Shouldn't be too much work to create one that's normed on just the stop trials right?
+
+```{r}
+trial_neural_behav_roi_stop<- trial_neural_behav_roi_stop %>% 
+  mutate(P_stop_trial_change_z_stop = (P_stop_trial_change-mean(P_stop_trial_change))/sd(P_stop_trial_change),
+         post_pre_rt_change_z_stop = (post_pre_rt_change_z-mean(post_pre_rt_change_z))/sd(post_pre_rt_change_z)
+         )
+
+plot(trial_neural_behav_roi_stop$P_stop_trial_change_z_stop,trial_neural_behav_roi_stop$med_post_trial)
+plot(trial_neural_behav_roi_stop$post_pre_rt_change_z_stop,trial_neural_behav_roi_stop$med_post_trial)
+```
+
+
+Alright--now what do we get?
+
+```{r}
+
+model_full_effects_x_zs <- lme4::lmer(
+   med_post_trial ~ trial_n_z+ condition + P_stop_trial_change_z_stop+ post_pre_rt_change_z_stop + (1 +P_stop_trial_change_z_stop  + post_pre_rt_change_z_stop  | subid),
+  trial_neural_behav_roi_stop)
+summary(model_full_effects_x_zs)
+```
+
+
+# Draw estimates on graph
+
+
+```{r}
+
+#the estimates apply to the median value at the x-range 4 to 10, so use that.
+#also label them by condition
+#let's add them to the table as additional lines
+df_betas_wide <- data.frame(
+  "offset_start_begin"=4,
+  "offset_start_end"=10,
+  "beta_name"="test_beta",
+  "condition"="CorrectStop",
+  "CueFollowing.CS.FS.striatal_cluster_combined"=0.1,
+  ind=(nrow(df_offset)+1):(nrow(df_offset)+1)
+)
+
+df_betas <- df_betas_wide %>% tidyr::pivot_longer(cols=c("offset_start_begin","offset_start_end"),
+                                                  names_to="point_type",values_to="offset_start")
+
+
+df_draw <- merge(
+  df_offset %>% mutate("dtype"="bold"),
+  df_betas %>% mutate("dtype"="beta estimate"),
+  by=c(intersect(colnames(df_offset),colnames(df_betas)),"dtype"),all=TRUE
+)
+  
+
+ggplot(df_draw,
+       aes(x=offset_start, y=CueFollowing.CS.FS.striatal_cluster_combined,
+           color=condition,
+           linetype=dtype,
+           group=interaction(condition,dtype)))+
+  geom_line()+
+  #facet_wrap(~ROI,ncol = 2)+
+  ggplot_time_points_extras
+```
+
+OK, looks good, but what are the appropriate points to illustrate what I want to say? 
+
+Maybe arrows pointing to +-1 SD??
+
+
+
+
+
 
 
 
