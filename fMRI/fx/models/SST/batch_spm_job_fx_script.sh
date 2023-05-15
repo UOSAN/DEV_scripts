@@ -14,7 +14,7 @@ echo ${SCRIPT_NAME}
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=`cat subject_list_single_col_wave1.txt`
+SUBJLIST=`cat subject_list_single_col_20230510.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV004

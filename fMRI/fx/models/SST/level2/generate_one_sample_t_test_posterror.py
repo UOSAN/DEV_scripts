@@ -27,7 +27,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     #ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = ml_scripting_path,
     dropbox_datapath=dropbox_data_path,
-    exclude_test_subjs=True
+    exclude_test_subjs=False
 )
 
 

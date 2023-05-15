@@ -35,7 +35,7 @@ def get_roi_data(nii_raw_files, mask_df):
         dev_wave = match_data[2]
 
         #print(basename(nii))
-        print(dev_name + ", " + dev_wave)
+        print(dev_name + ", " + dev_wave,flush=True)
 
         active_img = image.load_img(nii)
         active_img_cleaned = nil.image.clean_img(active_img)
@@ -60,13 +60,17 @@ def get_roi_data(nii_raw_files, mask_df):
             mask_raw = nil.image.load_img(m_set['mask_path'])
             mask_in_subj_space = nil.image.resample_img(mask_raw, target_affine=active_img_cleaned.affine,target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
             #work out whether the mask is already binarized
-            mask_raw_data = mask_raw.get_fdata()
-            if len(np.unique(mask_raw_data))==2:
-                print("mask is already binarized; skipping binarization step")
+            #mask_raw_data = mask_raw.get_fdata()
+            mask_data = mask_in_subj_space.get_fdata()
+            if len(np.unique(mask_data))==2:
+                print("mask " + m_set['mask_label'] + " is already binarized; skipping binarization step")
                 active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_in_subj_space)
-            else:
-                
-                mask_binarized = nil.image.binarize_img(mask_in_subj_space,threshold=50)
+            else:            
+                thresh = (mask_in_subj_space.get_fdata().max()-mask_in_subj_space.get_fdata().min())/2
+                print("binarizing mask with threshold " + str(thresh))
+                mask_binarized = nil.image.binarize_img(mask_in_subj_space,threshold=thresh)
+                mask_binarized_fdata = mask_binarized.get_fdata()
+                print("proportion of image active: " + str(np.sum(mask_binarized_fdata==np.max(mask_binarized_fdata))/np.prod(mask_binarized_fdata.shape)))
                 active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_binarized)
 
             activity_vector = active_img_masked.mean(axis=1)
@@ -127,7 +131,7 @@ def get_all_subj_df(roi_data, sst_all_behavioral_data):
     # tend to think looping through subjects makes more sense.)
     all_subj_df_list = [] 
     for s in roi_data.keys():
-        print(s)
+        print(s,flush=True)
         for wave in roi_data[s].keys():
             run_length = roi_data[s][wave].shape[0]
 

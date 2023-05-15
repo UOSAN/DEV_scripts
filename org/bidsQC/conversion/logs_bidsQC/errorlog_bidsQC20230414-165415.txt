@@ -1,0 +1,4985 @@
+
+--------------------
+sub-DEV001
+--------------------
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV001 ses-wave2 has 2 total sequence directories Expected 3.
+
+FILE WARNING! sub-DEV001 MISSING task-SST_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV001 MISSING task-SST_acq-1 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV004
+--------------------
+
+TIMEPOINT WARNING! sub-DEV004 has 5 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV004
+     File: sub-DEV004_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV004
+     File: sub-DEV004_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV004 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV004 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV004 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV004
+     File: sub-DEV004_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV004
+     File: sub-DEV004_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV005
+--------------------
+
+TIMEPOINT WARNING! sub-DEV005 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV005 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV005
+     File: sub-DEV005_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV005
+     File: sub-DEV005_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV005 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV005
+     File: sub-DEV005_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV005
+     File: sub-DEV005_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV006
+--------------------
+
+TIMEPOINT WARNING! sub-DEV006 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV006 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV006
+     File: sub-DEV006_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV006
+     File: sub-DEV006_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV007
+--------------------
+
+TIMEPOINT WARNING! sub-DEV007 has 1 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-2 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-3 json files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-3 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV007 MISSING task-WTP_acq-4 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV008
+--------------------
+WARNING! Too many json files in sub-DEV008 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV008
+     File: sub-DEV008_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV008
+     File: sub-DEV008_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV008 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV008
+     File: sub-DEV008_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV008
+     File: sub-DEV008_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV009
+--------------------
+
+TIMEPOINT WARNING! sub-DEV009 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV009 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV009
+     File: sub-DEV009_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV009
+     File: sub-DEV009_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV009 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV009
+     File: sub-DEV009_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV009
+     File: sub-DEV009_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV010
+--------------------
+
+TIMEPOINT WARNING! sub-DEV010 has 5 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV010
+     File: sub-DEV010_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV010
+     File: sub-DEV010_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV010 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV010 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV010 ses-wave2 has 2 total sequence directories Expected 3.
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV010
+     File: sub-DEV010_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV010
+     File: sub-DEV010_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV010 MISSING rest_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV010 MISSING rest_acq-1 nii.gz files in ses-wave2.
+FILE WARNING! sub-DEV010 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV010 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV011
+--------------------
+
+TIMEPOINT WARNING! sub-DEV011 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV011 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV011
+     File: sub-DEV011_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV011
+     File: sub-DEV011_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV011 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV011
+     File: sub-DEV011_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV011
+     File: sub-DEV011_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV012
+--------------------
+
+TIMEPOINT WARNING! sub-DEV012 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV012 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV012
+     File: sub-DEV012_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV012
+     File: sub-DEV012_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV012
+     File: sub-DEV012_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV012
+     File: sub-DEV012_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV012 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV012 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV013
+--------------------
+
+TIMEPOINT WARNING! sub-DEV013 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV013 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV013
+     File: sub-DEV013_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV013
+     File: sub-DEV013_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV013 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV013
+     File: sub-DEV013_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV013
+     File: sub-DEV013_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV014
+--------------------
+
+TIMEPOINT WARNING! sub-DEV014 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV014 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV014
+     File: sub-DEV014_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV014
+     File: sub-DEV014_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV014 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV014
+     File: sub-DEV014_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV014
+     File: sub-DEV014_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV015
+--------------------
+
+TIMEPOINT WARNING! sub-DEV015 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV015 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV015
+     File: sub-DEV015_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV015
+     File: sub-DEV015_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV015 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV015
+     File: sub-DEV015_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV015
+     File: sub-DEV015_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV016
+--------------------
+
+TIMEPOINT WARNING! sub-DEV016 has 5 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV016
+     File: sub-DEV016_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV016
+     File: sub-DEV016_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV016 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV016 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV016 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV016
+     File: sub-DEV016_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV016
+     File: sub-DEV016_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV017
+--------------------
+
+TIMEPOINT WARNING! sub-DEV017 has 3 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV017
+     File: sub-DEV017_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV017
+     File: sub-DEV017_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV017 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV017 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV017 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV017
+     File: sub-DEV017_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV017
+     File: sub-DEV017_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV018
+--------------------
+
+TIMEPOINT WARNING! sub-DEV018 has 4 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV018
+     File: sub-DEV018_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV018
+     File: sub-DEV018_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV018 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV018 MISSING rest_acq-1 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV018 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV018
+     File: sub-DEV018_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV018
+     File: sub-DEV018_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV019
+--------------------
+
+TIMEPOINT WARNING! sub-DEV019 has 5 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV019
+     File: sub-DEV019_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV019
+     File: sub-DEV019_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV019 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV019 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV019 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV019
+     File: sub-DEV019_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV019
+     File: sub-DEV019_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV020
+--------------------
+
+TIMEPOINT WARNING! sub-DEV020 has 5 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV020
+     File: sub-DEV020_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV020
+     File: sub-DEV020_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV020 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV020 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+FILE WARNING! sub-DEV020 MISSING task-ROC_acq-3 json files in ses-wave2.
+FILE WARNING! sub-DEV020 MISSING task-ROC_acq-3 nii.gz files in ses-wave2.
+FILE WARNING! sub-DEV020 MISSING task-ROC_acq-4 json files in ses-wave2.
+FILE WARNING! sub-DEV020 MISSING task-ROC_acq-4 nii.gz files in ses-wave2.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV020
+     File: sub-DEV020_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV020
+     File: sub-DEV020_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV021
+--------------------
+
+TIMEPOINT WARNING! sub-DEV021 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV021 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV021
+     File: sub-DEV021_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV021
+     File: sub-DEV021_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV021 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV021
+     File: sub-DEV021_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV021
+     File: sub-DEV021_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV022
+--------------------
+
+TIMEPOINT WARNING! sub-DEV022 has 1 ses-wave directories. Expected 2 
+
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV022 ses-wave1 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV022 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV022
+     File: sub-DEV022_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV022
+     File: sub-DEV022_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV023
+--------------------
+
+TIMEPOINT WARNING! sub-DEV023 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV023 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV023
+     File: sub-DEV023_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV023
+     File: sub-DEV023_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV023 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV023
+     File: sub-DEV023_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV023
+     File: sub-DEV023_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV024
+--------------------
+
+TIMEPOINT WARNING! sub-DEV024 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV024 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV024
+     File: sub-DEV024_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV024
+     File: sub-DEV024_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV024 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV024
+     File: sub-DEV024_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV024
+     File: sub-DEV024_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV025
+--------------------
+
+TIMEPOINT WARNING! sub-DEV025 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV025 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV025
+     File: sub-DEV025_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV025
+     File: sub-DEV025_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV025 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV025
+     File: sub-DEV025_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV025
+     File: sub-DEV025_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV026
+--------------------
+
+TIMEPOINT WARNING! sub-DEV026 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV026 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV026
+     File: sub-DEV026_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV026
+     File: sub-DEV026_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV026 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV026
+     File: sub-DEV026_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV026
+     File: sub-DEV026_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV027
+--------------------
+
+TIMEPOINT WARNING! sub-DEV027 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV027 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV027
+     File: sub-DEV027_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV027
+     File: sub-DEV027_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+FILE WARNING! sub-DEV027 MISSING task-SST_acq-1 nii.gz files in ses-wave2.
+FILE WARNING! sub-DEV027 MISSING rest_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV027 MISSING rest_acq-1 nii.gz files in ses-wave2.
+FILE WARNING! sub-DEV027 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV027 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV028
+--------------------
+
+TIMEPOINT WARNING! sub-DEV028 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV028 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV028
+     File: sub-DEV028_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV028
+     File: sub-DEV028_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV028 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV028
+     File: sub-DEV028_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV028
+     File: sub-DEV028_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV029
+--------------------
+VALUE ERROR in fix_files:
+    Subject: sub-DEV029
+     File: sub-DEV029_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV029
+     File: sub-DEV029_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV029 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV029 MISSING rest_acq-2 nii.gz files in ses-wave1.
+WARNING! Too many json files in sub-DEV029 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV029
+     File: sub-DEV029_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV029
+     File: sub-DEV029_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV030
+--------------------
+
+TIMEPOINT WARNING! sub-DEV030 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV030 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV030
+     File: sub-DEV030_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV030
+     File: sub-DEV030_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV030 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV030
+     File: sub-DEV030_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV030
+     File: sub-DEV030_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV031
+--------------------
+
+TIMEPOINT WARNING! sub-DEV031 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV031 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV031
+     File: sub-DEV031_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV031
+     File: sub-DEV031_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV031 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV031
+     File: sub-DEV031_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV031
+     File: sub-DEV031_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV032
+--------------------
+
+TIMEPOINT WARNING! sub-DEV032 has 1 ses-wave directories. Expected 2 
+
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV032 ses-wave1 has 1 total sequence directories Expected 3.
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV032
+     File: sub-DEV032_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV032
+     File: sub-DEV032_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV032 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV032 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV033
+--------------------
+
+TIMEPOINT WARNING! sub-DEV033 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV033 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV033
+     File: sub-DEV033_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV033
+     File: sub-DEV033_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV033 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV033
+     File: sub-DEV033_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV033
+     File: sub-DEV033_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV034
+--------------------
+
+TIMEPOINT WARNING! sub-DEV034 has 1 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV034
+     File: sub-DEV034_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV034
+     File: sub-DEV034_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV034 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV034 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV035
+--------------------
+
+TIMEPOINT WARNING! sub-DEV035 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV035 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV035
+     File: sub-DEV035_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV035
+     File: sub-DEV035_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV035 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV035
+     File: sub-DEV035_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV035
+     File: sub-DEV035_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV036
+--------------------
+
+TIMEPOINT WARNING! sub-DEV036 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV036 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV036
+     File: sub-DEV036_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV036
+     File: sub-DEV036_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV036 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV036
+     File: sub-DEV036_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV036
+     File: sub-DEV036_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV037
+--------------------
+
+TIMEPOINT WARNING! sub-DEV037 has 1 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV037
+     File: sub-DEV037_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV037
+     File: sub-DEV037_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV037 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV037 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV038
+--------------------
+
+TIMEPOINT WARNING! sub-DEV038 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV038 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV038
+     File: sub-DEV038_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV038
+     File: sub-DEV038_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV038 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV038
+     File: sub-DEV038_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV038
+     File: sub-DEV038_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV039
+--------------------
+
+TIMEPOINT WARNING! sub-DEV039 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV039 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV039
+     File: sub-DEV039_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV039
+     File: sub-DEV039_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV039 ses-wave2 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV039 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV039
+     File: sub-DEV039_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV039
+     File: sub-DEV039_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV040
+--------------------
+
+TIMEPOINT WARNING! sub-DEV040 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV040 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV040
+     File: sub-DEV040_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV040
+     File: sub-DEV040_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV040 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV040
+     File: sub-DEV040_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV040
+     File: sub-DEV040_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV041
+--------------------
+
+TIMEPOINT WARNING! sub-DEV041 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV041 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV041
+     File: sub-DEV041_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV041
+     File: sub-DEV041_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV041 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV041
+     File: sub-DEV041_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV041
+     File: sub-DEV041_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV042
+--------------------
+
+TIMEPOINT WARNING! sub-DEV042 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV042 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV042
+     File: sub-DEV042_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV042
+     File: sub-DEV042_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV042 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV042
+     File: sub-DEV042_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV042
+     File: sub-DEV042_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV043
+--------------------
+
+TIMEPOINT WARNING! sub-DEV043 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV043 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV043
+     File: sub-DEV043_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV043
+     File: sub-DEV043_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV043 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV043
+     File: sub-DEV043_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV043
+     File: sub-DEV043_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV044
+--------------------
+WARNING! Too many json files in sub-DEV044 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV044
+     File: sub-DEV044_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV044
+     File: sub-DEV044_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV044 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV044
+     File: sub-DEV044_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV044
+     File: sub-DEV044_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV045
+--------------------
+
+TIMEPOINT WARNING! sub-DEV045 has 1 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV045
+     File: sub-DEV045_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV045
+     File: sub-DEV045_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV045 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV045 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV045 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV045 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV046
+--------------------
+
+TIMEPOINT WARNING! sub-DEV046 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV046 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV046
+     File: sub-DEV046_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV046
+     File: sub-DEV046_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV046 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV046
+     File: sub-DEV046_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV046
+     File: sub-DEV046_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV047
+--------------------
+
+TIMEPOINT WARNING! sub-DEV047 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV047 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV047
+     File: sub-DEV047_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV047
+     File: sub-DEV047_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV047 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV047
+     File: sub-DEV047_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV047
+     File: sub-DEV047_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV048
+--------------------
+
+TIMEPOINT WARNING! sub-DEV048 has 5 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV048 MISSING task-ROC_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV048 MISSING task-ROC_acq-4 nii.gz files in ses-wave1.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV048
+     File: sub-DEV048_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV048
+     File: sub-DEV048_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV048 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV048 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV048 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV048 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV048
+     File: sub-DEV048_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV048
+     File: sub-DEV048_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV048 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV048 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV049
+--------------------
+
+TIMEPOINT WARNING! sub-DEV049 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV049 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV049
+     File: sub-DEV049_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV049
+     File: sub-DEV049_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV049 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV049
+     File: sub-DEV049_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV049
+     File: sub-DEV049_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV050
+--------------------
+
+TIMEPOINT WARNING! sub-DEV050 has 5 ses-wave directories. Expected 2 
+
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV050 ses-wave1 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV050 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV050
+     File: sub-DEV050_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV050
+     File: sub-DEV050_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV050 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV050
+     File: sub-DEV050_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV050
+     File: sub-DEV050_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV051
+--------------------
+
+TIMEPOINT WARNING! sub-DEV051 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV051 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV051
+     File: sub-DEV051_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV051
+     File: sub-DEV051_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV051 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV051
+     File: sub-DEV051_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV051
+     File: sub-DEV051_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV052
+--------------------
+
+TIMEPOINT WARNING! sub-DEV052 has 5 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV052
+     File: sub-DEV052_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV052
+     File: sub-DEV052_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV052 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV052 MISSING rest_acq-1 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV052 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV052
+     File: sub-DEV052_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV052
+     File: sub-DEV052_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV053
+--------------------
+
+TIMEPOINT WARNING! sub-DEV053 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV053 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV053
+     File: sub-DEV053_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV053
+     File: sub-DEV053_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV053 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV053
+     File: sub-DEV053_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV053
+     File: sub-DEV053_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV054
+--------------------
+
+TIMEPOINT WARNING! sub-DEV054 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV054 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV054
+     File: sub-DEV054_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV054
+     File: sub-DEV054_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV054 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV054
+     File: sub-DEV054_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV054
+     File: sub-DEV054_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV055
+--------------------
+
+TIMEPOINT WARNING! sub-DEV055 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV055 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV055
+     File: sub-DEV055_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV055
+     File: sub-DEV055_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV055 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV055
+     File: sub-DEV055_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV055
+     File: sub-DEV055_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV056
+--------------------
+
+TIMEPOINT WARNING! sub-DEV056 has 5 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV056
+     File: sub-DEV056_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV056
+     File: sub-DEV056_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV056 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV056 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV056 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV056
+     File: sub-DEV056_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV056
+     File: sub-DEV056_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV057
+--------------------
+
+TIMEPOINT WARNING! sub-DEV057 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV057 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV057
+     File: sub-DEV057_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV057
+     File: sub-DEV057_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV057 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV057
+     File: sub-DEV057_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV057
+     File: sub-DEV057_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV058
+--------------------
+
+TIMEPOINT WARNING! sub-DEV058 has 5 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV058
+     File: sub-DEV058_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV058
+     File: sub-DEV058_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV058 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV058 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV058 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV058
+     File: sub-DEV058_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV058
+     File: sub-DEV058_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV059
+--------------------
+
+TIMEPOINT WARNING! sub-DEV059 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV059 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV059
+     File: sub-DEV059_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV059
+     File: sub-DEV059_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV059 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV059
+     File: sub-DEV059_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV059
+     File: sub-DEV059_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV060
+--------------------
+
+TIMEPOINT WARNING! sub-DEV060 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV060 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV060
+     File: sub-DEV060_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV060
+     File: sub-DEV060_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV060 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV060
+     File: sub-DEV060_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV060
+     File: sub-DEV060_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV061
+--------------------
+
+TIMEPOINT WARNING! sub-DEV061 has 5 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV061 MISSING task-SST_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV061 MISSING task-SST_acq-1 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+FILE WARNING! sub-DEV061 MISSING task-SST_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV061 MISSING task-SST_acq-1 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV062
+--------------------
+
+TIMEPOINT WARNING! sub-DEV062 has 4 ses-wave directories. Expected 2 
+
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV062 ses-wave1 has 2 total sequence directories Expected 3.
+
+WARNING! Too many json files in sub-DEV062 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV062
+     File: sub-DEV062_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV062
+     File: sub-DEV062_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV062 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV062
+     File: sub-DEV062_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV062
+     File: sub-DEV062_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV063
+--------------------
+
+TIMEPOINT WARNING! sub-DEV063 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV063 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV063
+     File: sub-DEV063_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV063
+     File: sub-DEV063_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV063 ses-wave2 has 2 total sequence directories Expected 3.
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV063
+     File: sub-DEV063_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV063
+     File: sub-DEV063_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV063 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV063 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV064
+--------------------
+
+TIMEPOINT WARNING! sub-DEV064 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV064 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV064
+     File: sub-DEV064_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV064
+     File: sub-DEV064_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV064
+     File: sub-DEV064_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV064
+     File: sub-DEV064_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV064 MISSING rest_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV064 MISSING rest_acq-1 nii.gz files in ses-wave2.
+FILE WARNING! sub-DEV064 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV064 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV065
+--------------------
+
+TIMEPOINT WARNING! sub-DEV065 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV065 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV065
+     File: sub-DEV065_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV065
+     File: sub-DEV065_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV065 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV065
+     File: sub-DEV065_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV065
+     File: sub-DEV065_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV066
+--------------------
+
+TIMEPOINT WARNING! sub-DEV066 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV066 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV066
+     File: sub-DEV066_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV066
+     File: sub-DEV066_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV066 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV066
+     File: sub-DEV066_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV066
+     File: sub-DEV066_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV067
+--------------------
+
+TIMEPOINT WARNING! sub-DEV067 has 5 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV067
+     File: sub-DEV067_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV067
+     File: sub-DEV067_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV067 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV067 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV067 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV067 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV067 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV067
+     File: sub-DEV067_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV067
+     File: sub-DEV067_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV068
+--------------------
+
+TIMEPOINT WARNING! sub-DEV068 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV068 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV068
+     File: sub-DEV068_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV068
+     File: sub-DEV068_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV068 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV068
+     File: sub-DEV068_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV068
+     File: sub-DEV068_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV069
+--------------------
+
+TIMEPOINT WARNING! sub-DEV069 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV069 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV069
+     File: sub-DEV069_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV069
+     File: sub-DEV069_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV069
+     File: sub-DEV069_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV069
+     File: sub-DEV069_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV069 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV069 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV070
+--------------------
+
+TIMEPOINT WARNING! sub-DEV070 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV070 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV070
+     File: sub-DEV070_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV070
+     File: sub-DEV070_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV070 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV070
+     File: sub-DEV070_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV070
+     File: sub-DEV070_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV071
+--------------------
+
+TIMEPOINT WARNING! sub-DEV071 has 4 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV071
+     File: sub-DEV071_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV071
+     File: sub-DEV071_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV071 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV071 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV071 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV071
+     File: sub-DEV071_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV071
+     File: sub-DEV071_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV072
+--------------------
+
+TIMEPOINT WARNING! sub-DEV072 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV072 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV072
+     File: sub-DEV072_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV072
+     File: sub-DEV072_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV072 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV072
+     File: sub-DEV072_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV072
+     File: sub-DEV072_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV073
+--------------------
+
+TIMEPOINT WARNING! sub-DEV073 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV073 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV073
+     File: sub-DEV073_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV073
+     File: sub-DEV073_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV073 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV073
+     File: sub-DEV073_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV073
+     File: sub-DEV073_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV074
+--------------------
+
+TIMEPOINT WARNING! sub-DEV074 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV074 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV074
+     File: sub-DEV074_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV074
+     File: sub-DEV074_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV074 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV074
+     File: sub-DEV074_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV074
+     File: sub-DEV074_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV075
+--------------------
+
+TIMEPOINT WARNING! sub-DEV075 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV075 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV075
+     File: sub-DEV075_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV075
+     File: sub-DEV075_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV075 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV075
+     File: sub-DEV075_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV075
+     File: sub-DEV075_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV076
+--------------------
+
+TIMEPOINT WARNING! sub-DEV076 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV076 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV076
+     File: sub-DEV076_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV076
+     File: sub-DEV076_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV076
+     File: sub-DEV076_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV076
+     File: sub-DEV076_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV076 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV076 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV077
+--------------------
+
+TIMEPOINT WARNING! sub-DEV077 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV077 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV077
+     File: sub-DEV077_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV077
+     File: sub-DEV077_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV077 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV077
+     File: sub-DEV077_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV077
+     File: sub-DEV077_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV078
+--------------------
+
+TIMEPOINT WARNING! sub-DEV078 has 3 ses-wave directories. Expected 2 
+
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV078 ses-wave1 has 2 total sequence directories Expected 3.
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV078
+     File: sub-DEV078_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV078
+     File: sub-DEV078_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV078 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV078 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV078 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV078
+     File: sub-DEV078_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV078
+     File: sub-DEV078_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV079
+--------------------
+
+TIMEPOINT WARNING! sub-DEV079 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV079 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV079
+     File: sub-DEV079_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV079
+     File: sub-DEV079_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV079 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV079
+     File: sub-DEV079_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV079
+     File: sub-DEV079_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV080
+--------------------
+
+TIMEPOINT WARNING! sub-DEV080 has 1 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV080
+     File: sub-DEV080_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV080
+     File: sub-DEV080_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV080 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV080 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV081
+--------------------
+
+TIMEPOINT WARNING! sub-DEV081 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV081 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV081
+     File: sub-DEV081_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV081
+     File: sub-DEV081_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV081 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV081
+     File: sub-DEV081_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV081
+     File: sub-DEV081_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV082
+--------------------
+
+TIMEPOINT WARNING! sub-DEV082 has 1 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV082 MISSING task-WTP_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV082 MISSING task-WTP_acq-4 nii.gz files in ses-wave1.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV082
+     File: sub-DEV082_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV082
+     File: sub-DEV082_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV082 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV082 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV083
+--------------------
+
+TIMEPOINT WARNING! sub-DEV083 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV083 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV083
+     File: sub-DEV083_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV083
+     File: sub-DEV083_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV083 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV083
+     File: sub-DEV083_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV083
+     File: sub-DEV083_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV084
+--------------------
+
+TIMEPOINT WARNING! sub-DEV084 has 4 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV084
+     File: sub-DEV084_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV084
+     File: sub-DEV084_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV084 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV084 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV084 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV084
+     File: sub-DEV084_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV084
+     File: sub-DEV084_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV085
+--------------------
+WARNING! Too many json files in sub-DEV085 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV085
+     File: sub-DEV085_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV085
+     File: sub-DEV085_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV085 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV085
+     File: sub-DEV085_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV085
+     File: sub-DEV085_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV086
+--------------------
+
+TIMEPOINT WARNING! sub-DEV086 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV086 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV086
+     File: sub-DEV086_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV086
+     File: sub-DEV086_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV086 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV086
+     File: sub-DEV086_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV086
+     File: sub-DEV086_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV087
+--------------------
+
+TIMEPOINT WARNING! sub-DEV087 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV087 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV087
+     File: sub-DEV087_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV087
+     File: sub-DEV087_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV087 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV087
+     File: sub-DEV087_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV087
+     File: sub-DEV087_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV088
+--------------------
+
+TIMEPOINT WARNING! sub-DEV088 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV088 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV088
+     File: sub-DEV088_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV088
+     File: sub-DEV088_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV088 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV088
+     File: sub-DEV088_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV088
+     File: sub-DEV088_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV089
+--------------------
+
+TIMEPOINT WARNING! sub-DEV089 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV089 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV089
+     File: sub-DEV089_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV089
+     File: sub-DEV089_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV089 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV089
+     File: sub-DEV089_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV089
+     File: sub-DEV089_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV090
+--------------------
+
+TIMEPOINT WARNING! sub-DEV090 has 4 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV090
+     File: sub-DEV090_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV090
+     File: sub-DEV090_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV090 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV090 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV090 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV090
+     File: sub-DEV090_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV090
+     File: sub-DEV090_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV091
+--------------------
+
+TIMEPOINT WARNING! sub-DEV091 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV091 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV091
+     File: sub-DEV091_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV091
+     File: sub-DEV091_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV091 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV091
+     File: sub-DEV091_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV091
+     File: sub-DEV091_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV093
+--------------------
+
+TIMEPOINT WARNING! sub-DEV093 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV093 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV093
+     File: sub-DEV093_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV093
+     File: sub-DEV093_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV093 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV093
+     File: sub-DEV093_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV093
+     File: sub-DEV093_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV094
+--------------------
+
+TIMEPOINT WARNING! sub-DEV094 has 4 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV094 MISSING task-ROC_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV094 MISSING task-ROC_acq-4 nii.gz files in ses-wave1.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV094
+     File: sub-DEV094_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV094
+     File: sub-DEV094_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV094 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV094
+     File: sub-DEV094_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV094
+     File: sub-DEV094_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV095
+--------------------
+
+TIMEPOINT WARNING! sub-DEV095 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV095 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV095
+     File: sub-DEV095_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV095
+     File: sub-DEV095_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV096
+--------------------
+
+TIMEPOINT WARNING! sub-DEV096 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV096 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV096
+     File: sub-DEV096_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV096
+     File: sub-DEV096_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV096 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV096
+     File: sub-DEV096_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV096
+     File: sub-DEV096_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV097
+--------------------
+
+TIMEPOINT WARNING! sub-DEV097 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV097 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV097
+     File: sub-DEV097_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV097
+     File: sub-DEV097_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV097 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV097
+     File: sub-DEV097_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV097
+     File: sub-DEV097_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV098
+--------------------
+
+TIMEPOINT WARNING! sub-DEV098 has 4 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV098 MISSING task-ROC_acq-3 json files in ses-wave1.
+FILE WARNING! sub-DEV098 MISSING task-ROC_acq-3 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV098 MISSING task-ROC_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV098 MISSING task-ROC_acq-4 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV098 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV098 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV098 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV098 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+FILE WARNING! sub-DEV098 MISSING rest_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV098 MISSING rest_acq-1 nii.gz files in ses-wave2.
+FILE WARNING! sub-DEV098 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV098 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV099
+--------------------
+
+TIMEPOINT WARNING! sub-DEV099 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV099 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV099
+     File: sub-DEV099_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV099
+     File: sub-DEV099_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV099 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV099
+     File: sub-DEV099_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV099
+     File: sub-DEV099_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV100
+--------------------
+
+TIMEPOINT WARNING! sub-DEV100 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV100 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV100
+     File: sub-DEV100_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV100
+     File: sub-DEV100_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV100 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV100
+     File: sub-DEV100_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV100
+     File: sub-DEV100_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV101
+--------------------
+
+TIMEPOINT WARNING! sub-DEV101 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV101 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV101
+     File: sub-DEV101_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV101
+     File: sub-DEV101_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV101 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV101
+     File: sub-DEV101_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV101
+     File: sub-DEV101_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV102
+--------------------
+WARNING! Too many json files in sub-DEV102 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV102
+     File: sub-DEV102_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV102
+     File: sub-DEV102_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV102 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV102
+     File: sub-DEV102_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV102
+     File: sub-DEV102_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV103
+--------------------
+
+TIMEPOINT WARNING! sub-DEV103 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV103 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV103
+     File: sub-DEV103_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV103
+     File: sub-DEV103_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV103 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV103
+     File: sub-DEV103_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV103
+     File: sub-DEV103_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV104
+--------------------
+
+TIMEPOINT WARNING! sub-DEV104 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV104 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV104
+     File: sub-DEV104_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV104
+     File: sub-DEV104_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV104 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV104
+     File: sub-DEV104_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV104
+     File: sub-DEV104_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV105
+--------------------
+
+TIMEPOINT WARNING! sub-DEV105 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV105 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV105
+     File: sub-DEV105_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV105
+     File: sub-DEV105_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV106
+--------------------
+
+TIMEPOINT WARNING! sub-DEV106 has 1 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV106 MISSING task-WTP_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV106 MISSING task-WTP_acq-4 nii.gz files in ses-wave1.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV106
+     File: sub-DEV106_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV106
+     File: sub-DEV106_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV106 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV106 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV107
+--------------------
+
+TIMEPOINT WARNING! sub-DEV107 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV107 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV107
+     File: sub-DEV107_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV107
+     File: sub-DEV107_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV107 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV107
+     File: sub-DEV107_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV107
+     File: sub-DEV107_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV108
+--------------------
+
+TIMEPOINT WARNING! sub-DEV108 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV108 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV108
+     File: sub-DEV108_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV108
+     File: sub-DEV108_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV108 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV108
+     File: sub-DEV108_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV108
+     File: sub-DEV108_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV109
+--------------------
+
+TIMEPOINT WARNING! sub-DEV109 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV109 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV109
+     File: sub-DEV109_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV109
+     File: sub-DEV109_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV109 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV109
+     File: sub-DEV109_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV109
+     File: sub-DEV109_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV110
+--------------------
+
+TIMEPOINT WARNING! sub-DEV110 has 4 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV110
+     File: sub-DEV110_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV110
+     File: sub-DEV110_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV110 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV110 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV110 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV110 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV110
+     File: sub-DEV110_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV110
+     File: sub-DEV110_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV110 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV110 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV111
+--------------------
+
+TIMEPOINT WARNING! sub-DEV111 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV111 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV111
+     File: sub-DEV111_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV111
+     File: sub-DEV111_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV112
+--------------------
+
+TIMEPOINT WARNING! sub-DEV112 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV112 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV112
+     File: sub-DEV112_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV112
+     File: sub-DEV112_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV112 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV112
+     File: sub-DEV112_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV112
+     File: sub-DEV112_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV113
+--------------------
+
+TIMEPOINT WARNING! sub-DEV113 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV113 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV113
+     File: sub-DEV113_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV113
+     File: sub-DEV113_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV113 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV113
+     File: sub-DEV113_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV113
+     File: sub-DEV113_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV114
+--------------------
+
+TIMEPOINT WARNING! sub-DEV114 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV114 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV114
+     File: sub-DEV114_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV114
+     File: sub-DEV114_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV114 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV114
+     File: sub-DEV114_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV114
+     File: sub-DEV114_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV115
+--------------------
+
+TIMEPOINT WARNING! sub-DEV115 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV115 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV115
+     File: sub-DEV115_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV115
+     File: sub-DEV115_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV115 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV115
+     File: sub-DEV115_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV115
+     File: sub-DEV115_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV116
+--------------------
+
+TIMEPOINT WARNING! sub-DEV116 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV116 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV116
+     File: sub-DEV116_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV116
+     File: sub-DEV116_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV116 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV116
+     File: sub-DEV116_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV116
+     File: sub-DEV116_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV117
+--------------------
+
+TIMEPOINT WARNING! sub-DEV117 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV117 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV117
+     File: sub-DEV117_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV117
+     File: sub-DEV117_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV117 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV117
+     File: sub-DEV117_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV117
+     File: sub-DEV117_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV118
+--------------------
+
+TIMEPOINT WARNING! sub-DEV118 has 4 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV118 MISSING task-WTP_acq-3 json files in ses-wave1.
+FILE WARNING! sub-DEV118 MISSING task-WTP_acq-3 nii.gz files in ses-wave1.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV118
+     File: sub-DEV118_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV118
+     File: sub-DEV118_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV118 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV118
+     File: sub-DEV118_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV118
+     File: sub-DEV118_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV119
+--------------------
+
+TIMEPOINT WARNING! sub-DEV119 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV119 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV119
+     File: sub-DEV119_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV119
+     File: sub-DEV119_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV119
+     File: sub-DEV119_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV119
+     File: sub-DEV119_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV119 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV119 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV120
+--------------------
+
+TIMEPOINT WARNING! sub-DEV120 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV120 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV120
+     File: sub-DEV120_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV120
+     File: sub-DEV120_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV120 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV120
+     File: sub-DEV120_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV120
+     File: sub-DEV120_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV121
+--------------------
+
+TIMEPOINT WARNING! sub-DEV121 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV121 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV121
+     File: sub-DEV121_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV121
+     File: sub-DEV121_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV121 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV121
+     File: sub-DEV121_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV121
+     File: sub-DEV121_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV122
+--------------------
+
+TIMEPOINT WARNING! sub-DEV122 has 4 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV122
+     File: sub-DEV122_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV122
+     File: sub-DEV122_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV122 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV122 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV122 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV122
+     File: sub-DEV122_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV122
+     File: sub-DEV122_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV123
+--------------------
+
+TIMEPOINT WARNING! sub-DEV123 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV123 ses-wave1 func
+WARNING! Too many nii.gz files in sub-DEV123 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV123
+     File: sub-DEV123_ses-wave1_task-WTP_acq-4_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV123
+     File: sub-DEV123_ses-wave1_task-WTP_acq-4_bold.nii.gz
+VALUE ERROR in fix_files:
+    Subject: sub-DEV123
+     File: sub-DEV123_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV123
+     File: sub-DEV123_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV124
+--------------------
+
+TIMEPOINT WARNING! sub-DEV124 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV124 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV124
+     File: sub-DEV124_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV124
+     File: sub-DEV124_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV124 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV124
+     File: sub-DEV124_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV124
+     File: sub-DEV124_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV125
+--------------------
+
+--------------------
+sub-DEV126
+--------------------
+
+TIMEPOINT WARNING! sub-DEV126 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV126 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV126
+     File: sub-DEV126_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV126
+     File: sub-DEV126_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV126 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV126
+     File: sub-DEV126_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV126
+     File: sub-DEV126_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV127
+--------------------
+
+TIMEPOINT WARNING! sub-DEV127 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV127 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV127
+     File: sub-DEV127_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV127
+     File: sub-DEV127_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV127 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV127
+     File: sub-DEV127_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV127
+     File: sub-DEV127_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV128
+--------------------
+
+TIMEPOINT WARNING! sub-DEV128 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV128 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV128
+     File: sub-DEV128_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV128
+     File: sub-DEV128_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV128 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV128
+     File: sub-DEV128_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV128
+     File: sub-DEV128_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV129
+--------------------
+
+TIMEPOINT WARNING! sub-DEV129 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV129 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV129
+     File: sub-DEV129_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV129
+     File: sub-DEV129_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV129
+     File: sub-DEV129_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV129
+     File: sub-DEV129_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV129 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV129 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV130
+--------------------
+
+TIMEPOINT WARNING! sub-DEV130 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV130 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV130
+     File: sub-DEV130_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV130
+     File: sub-DEV130_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV130 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV130
+     File: sub-DEV130_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV130
+     File: sub-DEV130_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV131
+--------------------
+
+TIMEPOINT WARNING! sub-DEV131 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV131 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV131
+     File: sub-DEV131_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV131
+     File: sub-DEV131_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV132
+--------------------
+
+TIMEPOINT WARNING! sub-DEV132 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV132 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV132
+     File: sub-DEV132_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV132
+     File: sub-DEV132_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV132
+     File: sub-DEV132_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV132
+     File: sub-DEV132_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV132 MISSING rest_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV132 MISSING rest_acq-1 nii.gz files in ses-wave2.
+FILE WARNING! sub-DEV132 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV132 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV133
+--------------------
+FILE WARNING! sub-DEV133 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV133 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV134
+--------------------
+
+TIMEPOINT WARNING! sub-DEV134 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV134 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV134
+     File: sub-DEV134_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV134
+     File: sub-DEV134_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV134 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV134
+     File: sub-DEV134_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV134
+     File: sub-DEV134_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV135
+--------------------
+
+TIMEPOINT WARNING! sub-DEV135 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV135 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV135
+     File: sub-DEV135_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV135
+     File: sub-DEV135_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV135 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV135
+     File: sub-DEV135_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV135
+     File: sub-DEV135_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV137
+--------------------
+
+TIMEPOINT WARNING! sub-DEV137 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV137 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV137
+     File: sub-DEV137_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV137
+     File: sub-DEV137_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV137 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV137
+     File: sub-DEV137_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV137
+     File: sub-DEV137_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV138
+--------------------
+
+TIMEPOINT WARNING! sub-DEV138 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV138 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV138
+     File: sub-DEV138_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV138
+     File: sub-DEV138_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV138 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV138
+     File: sub-DEV138_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV138
+     File: sub-DEV138_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV139
+--------------------
+
+TIMEPOINT WARNING! sub-DEV139 has 5 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV139 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV139
+     File: sub-DEV139_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV139
+     File: sub-DEV139_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV139 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV139
+     File: sub-DEV139_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV139
+     File: sub-DEV139_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV140
+--------------------
+
+TIMEPOINT WARNING! sub-DEV140 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV140 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV140
+     File: sub-DEV140_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV140
+     File: sub-DEV140_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV140 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV140
+     File: sub-DEV140_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV140
+     File: sub-DEV140_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV141
+--------------------
+
+TIMEPOINT WARNING! sub-DEV141 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV141 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV141
+     File: sub-DEV141_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV141
+     File: sub-DEV141_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV141 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV141
+     File: sub-DEV141_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV141
+     File: sub-DEV141_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV143
+--------------------
+
+TIMEPOINT WARNING! sub-DEV143 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV143 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV143
+     File: sub-DEV143_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV143
+     File: sub-DEV143_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV143 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV143
+     File: sub-DEV143_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV143
+     File: sub-DEV143_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV144
+--------------------
+WARNING! Too many json files in sub-DEV144 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV144
+     File: sub-DEV144_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV144
+     File: sub-DEV144_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV144 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV144
+     File: sub-DEV144_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV144
+     File: sub-DEV144_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV145
+--------------------
+
+TIMEPOINT WARNING! sub-DEV145 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV145 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV145
+     File: sub-DEV145_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV145
+     File: sub-DEV145_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV145 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV145
+     File: sub-DEV145_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV145
+     File: sub-DEV145_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV147
+--------------------
+
+TIMEPOINT WARNING! sub-DEV147 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV147 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV147
+     File: sub-DEV147_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV147
+     File: sub-DEV147_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV147 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV147
+     File: sub-DEV147_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV147
+     File: sub-DEV147_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV149
+--------------------
+
+TIMEPOINT WARNING! sub-DEV149 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV149 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV149
+     File: sub-DEV149_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV149
+     File: sub-DEV149_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV149 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV149
+     File: sub-DEV149_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV149
+     File: sub-DEV149_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV150
+--------------------
+WARNING! Too many json files in sub-DEV150 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV150
+     File: sub-DEV150_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV150
+     File: sub-DEV150_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV150 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV150
+     File: sub-DEV150_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV150
+     File: sub-DEV150_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV151
+--------------------
+
+TIMEPOINT WARNING! sub-DEV151 has 4 ses-wave directories. Expected 2 
+
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+--------------------
+sub-DEV152
+--------------------
+
+TIMEPOINT WARNING! sub-DEV152 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV152 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV152
+     File: sub-DEV152_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV152
+     File: sub-DEV152_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV153
+--------------------
+
+TIMEPOINT WARNING! sub-DEV153 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV153 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV153
+     File: sub-DEV153_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV153
+     File: sub-DEV153_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV153 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV153
+     File: sub-DEV153_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV153
+     File: sub-DEV153_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV154
+--------------------
+
+TIMEPOINT WARNING! sub-DEV154 has 3 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV154 MISSING task-ROC_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV154 MISSING task-ROC_acq-4 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+--------------------
+sub-DEV155
+--------------------
+
+TIMEPOINT WARNING! sub-DEV155 has 4 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV155
+     File: sub-DEV155_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV155
+     File: sub-DEV155_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV155 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV155 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV155 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV155
+     File: sub-DEV155_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV155
+     File: sub-DEV155_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV156
+--------------------
+
+TIMEPOINT WARNING! sub-DEV156 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV156 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV156
+     File: sub-DEV156_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV156
+     File: sub-DEV156_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+WARNING! Too many json files in sub-DEV156 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV156
+     File: sub-DEV156_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV156
+     File: sub-DEV156_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV157
+--------------------
+
+TIMEPOINT WARNING! sub-DEV157 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV157 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV157
+     File: sub-DEV157_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV157
+     File: sub-DEV157_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+WARNING! Too many json files in sub-DEV157 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV157
+     File: sub-DEV157_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV157
+     File: sub-DEV157_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV158
+--------------------
+
+TIMEPOINT WARNING! sub-DEV158 has 3 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV158
+     File: sub-DEV158_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV158
+     File: sub-DEV158_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV158 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV158 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV158 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV158 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+WARNING! Too many json files in sub-DEV158 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV158
+     File: sub-DEV158_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV158
+     File: sub-DEV158_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV159
+--------------------
+
+TIMEPOINT WARNING! sub-DEV159 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV159 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV159
+     File: sub-DEV159_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV159
+     File: sub-DEV159_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV159
+     File: sub-DEV159_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV159
+     File: sub-DEV159_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV159 MISSING rest_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV159 MISSING rest_acq-1 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV161
+--------------------
+
+TIMEPOINT WARNING! sub-DEV161 has 3 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV161
+     File: sub-DEV161_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV161
+     File: sub-DEV161_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV161 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV161 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV161 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV161 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+WARNING! Too many json files in sub-DEV161 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV161
+     File: sub-DEV161_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV161
+     File: sub-DEV161_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV163
+--------------------
+
+--------------------
+sub-DEV164
+--------------------
+
+TIMEPOINT WARNING! sub-DEV164 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV164 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV164
+     File: sub-DEV164_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV164
+     File: sub-DEV164_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+WARNING! Too many json files in sub-DEV164 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV164
+     File: sub-DEV164_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV164
+     File: sub-DEV164_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV166
+--------------------
+
+TIMEPOINT WARNING! sub-DEV166 has 1 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV166
+     File: sub-DEV166_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV166
+     File: sub-DEV166_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV166 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV166 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV167
+--------------------
+
+TIMEPOINT WARNING! sub-DEV167 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV167 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV167
+     File: sub-DEV167_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV167
+     File: sub-DEV167_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave5 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave5 because it is missing.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+WARNING! Too many json files in sub-DEV167 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV167
+     File: sub-DEV167_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV167
+     File: sub-DEV167_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV168
+--------------------
+
+TIMEPOINT WARNING! sub-DEV168 has 1 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV168
+     File: sub-DEV168_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV168
+     File: sub-DEV168_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV168 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV168 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV168 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV168 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV169
+--------------------
+
+TIMEPOINT WARNING! sub-DEV169 has 1 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV169
+     File: sub-DEV169_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV169
+     File: sub-DEV169_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV169 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV169 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV170
+--------------------
+
+TIMEPOINT WARNING! sub-DEV170 has 1 ses-wave directories. Expected 2 
+
+
+--------------------
+sub-DEV171
+--------------------
+
+TIMEPOINT WARNING! sub-DEV171 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV171 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV171
+     File: sub-DEV171_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV171
+     File: sub-DEV171_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV172
+--------------------
+
+TIMEPOINT WARNING! sub-DEV172 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV172 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV172
+     File: sub-DEV172_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV172
+     File: sub-DEV172_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV173
+--------------------
+
+TIMEPOINT WARNING! sub-DEV173 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV173 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV173
+     File: sub-DEV173_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV173
+     File: sub-DEV173_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV174
+--------------------
+
+TIMEPOINT WARNING! sub-DEV174 has 1 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV174 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV174 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV176
+--------------------
+
+TIMEPOINT WARNING! sub-DEV176 has 1 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV176 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV176
+     File: sub-DEV176_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV176
+     File: sub-DEV176_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV177
+--------------------
+
+TIMEPOINT WARNING! sub-DEV177 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV177 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV177
+     File: sub-DEV177_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV177
+     File: sub-DEV177_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV177 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV177
+     File: sub-DEV177_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV177
+     File: sub-DEV177_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV178
+--------------------
+
+TIMEPOINT WARNING! sub-DEV178 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV178 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV178
+     File: sub-DEV178_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV178
+     File: sub-DEV178_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV178 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV178
+     File: sub-DEV178_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV178
+     File: sub-DEV178_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV179
+--------------------
+
+TIMEPOINT WARNING! sub-DEV179 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV179 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV179
+     File: sub-DEV179_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV179
+     File: sub-DEV179_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV179 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV179
+     File: sub-DEV179_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV179
+     File: sub-DEV179_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV180
+--------------------
+
+TIMEPOINT WARNING! sub-DEV180 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV180 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV180
+     File: sub-DEV180_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV180
+     File: sub-DEV180_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV180 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV180
+     File: sub-DEV180_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV180
+     File: sub-DEV180_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV181
+--------------------
+
+TIMEPOINT WARNING! sub-DEV181 has 4 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV181 MISSING task-SST_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV181 MISSING task-SST_acq-1 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV181 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV181
+     File: sub-DEV181_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV181
+     File: sub-DEV181_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV182
+--------------------
+
+TIMEPOINT WARNING! sub-DEV182 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV182 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV182
+     File: sub-DEV182_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV182
+     File: sub-DEV182_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV182 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV182
+     File: sub-DEV182_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV182
+     File: sub-DEV182_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV183
+--------------------
+
+TIMEPOINT WARNING! sub-DEV183 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV183 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV183
+     File: sub-DEV183_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV183
+     File: sub-DEV183_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV183 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV183
+     File: sub-DEV183_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV183
+     File: sub-DEV183_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV185
+--------------------
+
+TIMEPOINT WARNING! sub-DEV185 has 4 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV185 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV185 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV185 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV185 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+--------------------
+sub-DEV186
+--------------------
+
+TIMEPOINT WARNING! sub-DEV186 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV186 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV186
+     File: sub-DEV186_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV186
+     File: sub-DEV186_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV186 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV186
+     File: sub-DEV186_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV186
+     File: sub-DEV186_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV187
+--------------------
+
+TIMEPOINT WARNING! sub-DEV187 has 4 ses-wave directories. Expected 2 
+
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+--------------------
+sub-DEV188
+--------------------
+FILE WARNING! sub-DEV188 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV188 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV188 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV188 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV189
+--------------------
+FILE WARNING! sub-DEV189 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV189 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV190
+--------------------
+
+TIMEPOINT WARNING! sub-DEV190 has 4 ses-wave directories. Expected 2 
+
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+--------------------
+sub-DEV191
+--------------------
+
+TIMEPOINT WARNING! sub-DEV191 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV191 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV191
+     File: sub-DEV191_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV191
+     File: sub-DEV191_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV191 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV191
+     File: sub-DEV191_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV191
+     File: sub-DEV191_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV192
+--------------------
+
+TIMEPOINT WARNING! sub-DEV192 has 3 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV192 MISSING task-ROC_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV192 MISSING task-ROC_acq-4 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV192 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV192 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV192 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV192 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+--------------------
+sub-DEV193
+--------------------
+
+TIMEPOINT WARNING! sub-DEV193 has 3 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV193
+     File: sub-DEV193_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV193
+     File: sub-DEV193_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV193 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV193 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV193 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV193
+     File: sub-DEV193_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV193
+     File: sub-DEV193_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV194
+--------------------
+
+TIMEPOINT WARNING! sub-DEV194 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV194 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV194
+     File: sub-DEV194_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV194
+     File: sub-DEV194_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV194 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV194 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV194
+     File: sub-DEV194_ses-wave2_task-ROC_acq-4_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV194
+     File: sub-DEV194_ses-wave2_task-ROC_acq-4_bold.nii.gz
+VALUE ERROR in fix_files:
+    Subject: sub-DEV194
+     File: sub-DEV194_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV194
+     File: sub-DEV194_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV195
+--------------------
+
+TIMEPOINT WARNING! sub-DEV195 has 4 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV195 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV195
+     File: sub-DEV195_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV195
+     File: sub-DEV195_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave4 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave4 because it is missing.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV195 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV195
+     File: sub-DEV195_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV195
+     File: sub-DEV195_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV196
+--------------------
+
+TIMEPOINT WARNING! sub-DEV196 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV196 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV196
+     File: sub-DEV196_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV196
+     File: sub-DEV196_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV196 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV196
+     File: sub-DEV196_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV196
+     File: sub-DEV196_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV197
+--------------------
+
+TIMEPOINT WARNING! sub-DEV197 has 3 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV197
+     File: sub-DEV197_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV197
+     File: sub-DEV197_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV197 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV197 MISSING rest_acq-1 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+VALUE ERROR in fix_files:
+    Subject: sub-DEV197
+     File: sub-DEV197_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV197
+     File: sub-DEV197_ses-wave2_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV197 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV197 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV198
+--------------------
+
+TIMEPOINT WARNING! sub-DEV198 has 3 ses-wave directories. Expected 2 
+
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+FILE WARNING! sub-DEV198 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV198 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV199
+--------------------
+WARNING! Too many json files in sub-DEV199 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV199
+     File: sub-DEV199_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV199
+     File: sub-DEV199_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV199 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV199
+     File: sub-DEV199_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV199
+     File: sub-DEV199_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV200
+--------------------
+
+TIMEPOINT WARNING! sub-DEV200 has 3 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV200 MISSING task-WTP_acq-3 json files in ses-wave1.
+FILE WARNING! sub-DEV200 MISSING task-WTP_acq-3 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+--------------------
+sub-DEV201
+--------------------
+WARNING! Too many json files in sub-DEV201 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV201
+     File: sub-DEV201_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV201
+     File: sub-DEV201_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV201 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV201
+     File: sub-DEV201_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV201
+     File: sub-DEV201_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV202
+--------------------
+
+TIMEPOINT WARNING! sub-DEV202 has 1 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV202
+     File: sub-DEV202_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV202
+     File: sub-DEV202_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV202 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV202 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV203
+--------------------
+
+--------------------
+sub-DEV204
+--------------------
+WARNING! Too many json files in sub-DEV204 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV204
+     File: sub-DEV204_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV204
+     File: sub-DEV204_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV204 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV204
+     File: sub-DEV204_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV204
+     File: sub-DEV204_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV205
+--------------------
+
+TIMEPOINT WARNING! sub-DEV205 has 3 ses-wave directories. Expected 2 
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV205
+     File: sub-DEV205_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV205
+     File: sub-DEV205_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV205 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV205 MISSING rest_acq-2 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV205 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV205
+     File: sub-DEV205_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV205
+     File: sub-DEV205_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV206
+--------------------
+
+TIMEPOINT WARNING! sub-DEV206 has 3 ses-wave directories. Expected 2 
+
+WARNING! Too many json files in sub-DEV206 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV206
+     File: sub-DEV206_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV206
+     File: sub-DEV206_ses-wave1_task-SST_acq-1_events.json
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+WARNING! Too many json files in sub-DEV206 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV206
+     File: sub-DEV206_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV206
+     File: sub-DEV206_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV207
+--------------------
+
+TIMEPOINT WARNING! sub-DEV207 has 3 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV207 MISSING task-WTP_acq-3 json files in ses-wave1.
+FILE WARNING! sub-DEV207 MISSING task-WTP_acq-3 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV207 MISSING task-WTP_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV207 MISSING task-WTP_acq-4 nii.gz files in ses-wave1.
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+FILE WARNING! sub-DEV207 MISSING task-SST_acq-1 json files in ses-wave2.
+FILE WARNING! sub-DEV207 MISSING task-SST_acq-1 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV208
+--------------------
+
+TIMEPOINT WARNING! sub-DEV208 has 3 ses-wave directories. Expected 2 
+
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+FILE WARNING! sub-DEV208 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV208 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV209
+--------------------
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV209 ses-wave1 has 2 total sequence directories Expected 3.
+
+VALUE ERROR in fix_files:
+    Subject: sub-DEV209
+     File: sub-DEV209_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV209
+     File: sub-DEV209_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV209 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV209 MISSING rest_acq-2 nii.gz files in ses-wave1.
+WARNING! Too many json files in sub-DEV209 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV209
+     File: sub-DEV209_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV209
+     File: sub-DEV209_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV210
+--------------------
+FILE WARNING! sub-DEV210 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV210 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV210 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV210 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV211
+--------------------
+WARNING! Too many json files in sub-DEV211 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV211
+     File: sub-DEV211_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV211
+     File: sub-DEV211_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV211 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV211
+     File: sub-DEV211_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV211
+     File: sub-DEV211_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV215
+--------------------
+WARNING! Too many json files in sub-DEV215 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV215
+     File: sub-DEV215_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV215
+     File: sub-DEV215_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV215 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV215
+     File: sub-DEV215_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV215
+     File: sub-DEV215_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV216
+--------------------
+WARNING! Too many json files in sub-DEV216 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV216
+     File: sub-DEV216_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV216
+     File: sub-DEV216_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV217
+--------------------
+WARNING! Too many json files in sub-DEV217 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV217
+     File: sub-DEV217_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV217
+     File: sub-DEV217_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV218
+--------------------
+WARNING! Too many json files in sub-DEV218 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV218
+     File: sub-DEV218_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV218
+     File: sub-DEV218_ses-wave1_task-SST_acq-1_events.json
+WARNING! Too many json files in sub-DEV218 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV218
+     File: sub-DEV218_ses-wave2_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV218
+     File: sub-DEV218_ses-wave2_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV219
+--------------------
+VALUE ERROR in fix_files:
+    Subject: sub-DEV219
+     File: sub-DEV219_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV219
+     File: sub-DEV219_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV219 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV219 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV220
+--------------------
+
+--------------------
+sub-DEV221
+--------------------
+
+TIMEPOINT WARNING! sub-DEV221 has 1 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV221 MISSING task-ROC_acq-3 json files in ses-wave1.
+FILE WARNING! sub-DEV221 MISSING task-ROC_acq-3 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV221 MISSING task-ROC_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV221 MISSING task-ROC_acq-4 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV221 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV221 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV221 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV221 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV222
+--------------------
+WARNING! Too many json files in sub-DEV222 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV222
+     File: sub-DEV222_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV222
+     File: sub-DEV222_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV223
+--------------------
+WARNING! Too many json files in sub-DEV223 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV223
+     File: sub-DEV223_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV223
+     File: sub-DEV223_ses-wave1_task-SST_acq-1_events.json
+FILE WARNING! sub-DEV223 MISSING task-WTP_acq-4 json files in ses-wave2.
+FILE WARNING! sub-DEV223 MISSING task-WTP_acq-4 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV224
+--------------------
+WARNING! Too many json files in sub-DEV224 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV224
+     File: sub-DEV224_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV224
+     File: sub-DEV224_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV225
+--------------------
+WARNING! Too many json files in sub-DEV225 ses-wave1 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV225
+     File: sub-DEV225_ses-wave1_task-SST_acq-1_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV225
+     File: sub-DEV225_ses-wave1_task-SST_acq-1_events.json
+
+--------------------
+sub-DEV228
+--------------------
+
+--------------------
+sub-DEV230
+--------------------
+
+--------------------
+sub-DEV231
+--------------------
+
+--------------------
+sub-DEV232
+--------------------
+
+--------------------
+sub-DEV233
+--------------------
+
+--------------------
+sub-DEV234
+--------------------
+
+--------------------
+sub-DEV235
+--------------------
+
+--------------------
+sub-DEV236
+--------------------
+FILE WARNING! sub-DEV236 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV236 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV237
+--------------------
+
+--------------------
+sub-DEV238
+--------------------
+
+--------------------
+sub-DEV239
+--------------------
+
+--------------------
+sub-DEV240
+--------------------
+
+--------------------
+sub-DEV241
+--------------------
+
+--------------------
+sub-DEV242
+--------------------
+
+TIMEPOINT WARNING! sub-DEV242 has 1 ses-wave directories. Expected 2 
+
+
+ SEQUENCE DIRECTORY WARNING! sub-DEV242 ses-wave1 has 1 total sequence directories Expected 3.
+
+FILE WARNING! sub-DEV242 MISSING task-ROC_acq-3 json files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-ROC_acq-3 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-ROC_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-ROC_acq-4 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-WTP_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-WTP_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-WTP_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-WTP_acq-2 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-WTP_acq-3 json files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-WTP_acq-3 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-WTP_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-WTP_acq-4 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-SST_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING task-SST_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV242 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV243
+--------------------
+
+--------------------
+sub-DEV244
+--------------------
+
+--------------------
+sub-DEV246
+--------------------
+
+--------------------
+sub-DEV247
+--------------------
+
+--------------------
+sub-DEV249
+--------------------
+
+--------------------
+sub-DEV250
+--------------------
+
+--------------------
+sub-DEV251
+--------------------
+
+--------------------
+sub-DEV252
+--------------------
+
+--------------------
+sub-DEV253
+--------------------
+
+TIMEPOINT WARNING! sub-DEV253 has 1 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV253 MISSING task-WTP_acq-4 json files in ses-wave1.
+FILE WARNING! sub-DEV253 MISSING task-WTP_acq-4 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV254
+--------------------
+
+--------------------
+sub-DEV255
+--------------------
+
+TIMEPOINT WARNING! sub-DEV255 has 3 ses-wave directories. Expected 2 
+
+TIMEPOINT WARNING! ses-wave3 missing or user entered duplicate or non-existant timepoint.
+TIMEPOINT WARNING! Skipping timepoint ses-wave3 because it is missing.
+
+--------------------
+sub-DEV256
+--------------------
+
+--------------------
+sub-DEV257
+--------------------
+
+--------------------
+sub-DEV258
+--------------------
+
+--------------------
+sub-DEV259
+--------------------
+
+--------------------
+sub-DEV260
+--------------------
+FILE WARNING! sub-DEV260 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV260 MISSING rest_acq-1 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV261
+--------------------
+
+--------------------
+sub-DEV262
+--------------------
+
+--------------------
+sub-DEV263
+--------------------
+
+--------------------
+sub-DEV264
+--------------------
+
+--------------------
+sub-DEV265
+--------------------
+
+--------------------
+sub-DEV266
+--------------------
+
+--------------------
+sub-DEV267
+--------------------
+
+--------------------
+sub-DEV268
+--------------------
+
+--------------------
+sub-DEV269
+--------------------
+
+--------------------
+sub-DEV270
+--------------------
+
+--------------------
+sub-DEV271
+--------------------
+
+--------------------
+sub-DEV272
+--------------------
+
+--------------------
+sub-DEV273
+--------------------
+
+--------------------
+sub-DEV274
+--------------------
+
+--------------------
+sub-DEV275
+--------------------
+
+--------------------
+sub-DEV276
+--------------------
+
+--------------------
+sub-DEV277
+--------------------
+
+--------------------
+sub-DEV278
+--------------------
+
+TIMEPOINT WARNING! sub-DEV278 has 1 ses-wave directories. Expected 2 
+
+
+--------------------
+sub-DEV281
+--------------------
+
+--------------------
+sub-DEV282
+--------------------
+
+--------------------
+sub-DEV283
+--------------------
+
+--------------------
+sub-DEV284
+--------------------
+
+--------------------
+sub-DEV285
+--------------------
+
+--------------------
+sub-DEV286
+--------------------
+
+--------------------
+sub-DEV290
+--------------------
+FILE WARNING! sub-DEV290 MISSING rest_acq-1 json files in ses-wave1.
+FILE WARNING! sub-DEV290 MISSING rest_acq-1 nii.gz files in ses-wave1.
+FILE WARNING! sub-DEV290 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV290 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV291
+--------------------
+
+--------------------
+sub-DEV292
+--------------------
+
+--------------------
+sub-DEV293
+--------------------
+
+TIMEPOINT WARNING! sub-DEV293 has 1 ses-wave directories. Expected 2 
+
+FILE WARNING! sub-DEV293 MISSING rest_acq-2 json files in ses-wave1.
+FILE WARNING! sub-DEV293 MISSING rest_acq-2 nii.gz files in ses-wave1.
+
+--------------------
+sub-DEV294
+--------------------
+
+--------------------
+sub-DEV295
+--------------------
+
+--------------------
+sub-DEV296
+--------------------
+
+--------------------
+sub-DEV297
+--------------------
+
+--------------------
+sub-DEV298
+--------------------
+
+--------------------
+sub-DEV299
+--------------------
+
+--------------------
+sub-DEV300
+--------------------
+
+--------------------
+sub-DEV301
+--------------------
+FILE WARNING! sub-DEV301 MISSING rest_acq-2 json files in ses-wave2.
+FILE WARNING! sub-DEV301 MISSING rest_acq-2 nii.gz files in ses-wave2.
+
+--------------------
+sub-DEV302
+--------------------
+
+--------------------
+sub-DEV303
+--------------------
+
+--------------------
+sub-DEV304
+--------------------
+
+--------------------
+sub-DEV305
+--------------------
+
+--------------------
+sub-DEV306
+--------------------
+
+--------------------
+sub-DEV307
+--------------------
+
+--------------------
+sub-DEV308
+--------------------
+
+--------------------
+sub-DEV309
+--------------------
+WARNING! Too many json files in sub-DEV309 ses-wave2 func
+WARNING! Too many nii.gz files in sub-DEV309 ses-wave2 func
+VALUE ERROR in fix_files:
+    Subject: sub-DEV309
+     File: sub-DEV309_ses-wave2_task-ROC_acq-4_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV309
+     File: sub-DEV309_ses-wave2_task-ROC_acq-4_bold.nii.gz
+VALUE ERROR in fix_files:
+    Subject: sub-DEV309
+     File: sub-DEV309_ses-wave2_task-WTP_acq-3_bold.json
+VALUE ERROR in fix_files:
+    Subject: sub-DEV309
+     File: sub-DEV309_ses-wave2_task-WTP_acq-3_bold.nii.gz
+
+--------------------
+sub-DEV310
+--------------------
+
+--------------------
+sub-DEV311
+--------------------
+
+--------------------
+sub-DEV312
+--------------------

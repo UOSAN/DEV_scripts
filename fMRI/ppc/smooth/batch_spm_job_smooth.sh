@@ -9,13 +9,13 @@
 STUDY=/projects/sanlab/shared/DEV/DEV_scripts
 
 # Set subject list
-SUBJLIST=`cat subject_list_single_col_20230210.txt`
+SUBJLIST=`cat subject_list_single_col.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV001
 
 # Which wave(s) to run? (e.g. WAVE=1:2 or WAVE=2)
-WAVE=2
+WAVE=1:2
 
 # SPM Path
 SPM_PATH=/projects/sanlab/shared/spm12
