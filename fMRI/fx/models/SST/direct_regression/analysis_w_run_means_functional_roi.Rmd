@@ -272,7 +272,9 @@ ggplot(df_offset %>% filter(condition %in% c("FailedStop","CorrectStop")),
 Let's now try to contrast these time series to see what the CS-FS looks like. This will be interesting because it's similar to the simple GLM result I got earlier that set me down the path of trying to analyze this.
 
 ```{r}
-trial_tps_compare_conditions<-df_offset_long %>% pivot_wider(id_cols=c(offset_start),names_from = "condition",values_from="CueFollowing.CS.FS.striatal_cluster_combined")
+
+
+trial_tps_compare_conditions<-df_offset %>% pivot_wider(id_cols=c(offset_start),names_from = "condition",values_from="CueFollowing.CS.FS.striatal_cluster_combined")
 trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectStop-trial_tps_compare_conditions$FailedStop
 ```
 
