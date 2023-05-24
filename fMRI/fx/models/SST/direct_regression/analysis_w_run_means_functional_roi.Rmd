@@ -311,40 +311,40 @@ OK, so from this graph it is very clear why, during the subsequent trial, we're 
 
 
 
-<!-- ## find a way to compare activity from the start and end. Is there a sort of habituation effect? -->
+## find a way to compare activity from the start and end. Is there a sort of habituation effect?
 
-<!-- Easy way first. Take just CS or FS, then do one graph per ROI, use color with the order of the task. -->
-
-
-<!-- ```{r} -->
-
-<!-- roi_cols <- colnames(time_points_c)[grepl("harvardoxford",colnames(time_points_c))] -->
-
-<!-- next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5 -->
-
-<!-- time_points_long<-time_points_c %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value") -->
-
-<!-- unique_rois<-sort(unique(time_points_long$ROI)) -->
-<!-- unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\.)([A-Za-z]*)$"))] -->
-
-<!-- time_points_long$ROI<-factor(time_points_long$ROI,levels = unique_rois_ordered, ordered=TRUE) -->
+Easy way first. Take just CS or FS, then do one graph per ROI, use color with the order of the task.
 
 
-<!-- for (c_i in unique(time_points_long$condition)){ -->
-<!--   c_plot <- ggplot(time_points_long %>% filter(condition==c_i), -->
-<!--        aes(x=offset, y=value,color=trial_n))+ -->
-<!--   facet_wrap(~ROI)+ -->
-<!--   geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+ -->
-<!--   annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+ -->
-<!--   geom_line(size=1,alpha=0.1)+ -->
-<!--   #scale_color_viridis_d(option = "C")+ -->
-<!--   #coord_cartesian(ylim=c(-0.1,0.25))+ -->
-<!--   ggplot_time_points_extras -->
-<!--   print(c_plot) -->
+```{r}
 
-<!-- } -->
+roi_cols <- colnames(time_points_c)[grepl("harvardoxford",colnames(time_points))]
 
-<!-- ``` -->
+next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
+
+time_points_long<-time_points_c %>% pivot_longer(cols=roi_cols,names_to="ROI",values_to="value")
+
+unique_rois<-sort(unique(time_points_long$ROI))
+unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\.)([A-Za-z]*)$"))]
+
+time_points_long$ROI<-factor(time_points_long$ROI,levels = unique_rois_ordered, ordered=TRUE)
+
+
+for (c_i in unique(time_points_long$condition)){
+  c_plot <- ggplot(time_points_long %>% filter(condition==c_i),
+       aes(x=offset, y=value,color=trial_n))+
+  facet_wrap(~ROI)+
+  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  geom_line(size=1,alpha=0.1)+
+  #scale_color_viridis_d(option = "C")+
+  #coord_cartesian(ylim=c(-0.1,0.25))+
+  ggplot_time_points_extras
+  print(c_plot)
+
+}
+
+```
 
 <!-- That doesn't work. OK, let's try putting the activity into buckets of trials (early, mid, late) then graph for those three groups -->
 
@@ -548,7 +548,7 @@ ggplot(df_offset,
   #facet_wrap(~ROI,ncol = 2)+
   ggplot_time_points_extras
   
-  model_full_effects_incc_abs
+#  model_full_effects_incc_abs
 
 ```
 

@@ -121,8 +121,9 @@ def get_data_for_confirmed_train_subjs(
 
     #other data for inclusion
     data_by_ppt = pd.read_csv(dropbox_datapath + "/data_by_ppt.csv")
+    print("loaded " + str(len(data_by_ppt)) + " rows from data_by_ppt.csv")
     include_exclude_list = pd.read_csv(ml_scripting_path + "/nsc_subject_exclusions.csv")
-    
+    print("loaded " + str(len(include_exclude_list)) + " rows from nsc_subject_exclusions.csv")
     
     # exclude_subjects = ['DEV061', 'DEV185', 'DEV187', 'DEV189', 'DEV190', 'DEV192', 'DEV198', 'DEV203', 'DEV220',
     #                         'DEV221']
@@ -131,15 +132,19 @@ def get_data_for_confirmed_train_subjs(
     
     data_quality_sst = data_quality.loc[data_quality.SST.isna()==False,]
     usable_dev_ids = data_quality_sst.dev_id[data_quality_sst.SST=="No reported problems"]
+    print(str(len(usable_dev_ids)) + " subjects with no reported problems in SST Redcap scanner notes, added to the provision useable_dev_id list.")
     #hard-coded excluded subjects
-    sst_exclude_list = pd.read_csv(dropbox_datapath + "/SST-wave1-data inclusion - Sheet1.csv")
-    usable_dev_ids = [id for id in usable_dev_ids if id not in sst_exclude_list['DevID'][sst_exclude_list['Final inclusion']=='Exclude'].tolist()]
+    sst_data_missing_includes = pd.read_csv(dropbox_datapath + "/SST-wave1-data inclusion - Sheet1.csv")
+    sst_data_missing_excludes = sst_data_missing_includes['DevID'][sst_data_missing_includes['Final inclusion']=='Exclude'].tolist()
+    print(str(len(sst_data_missing_excludes)) + " subjects excludeable for missing scan data.")
+    usable_dev_ids = [id for id in usable_dev_ids if id not in sst_data_missing_excludes]
+    print(str(len(usable_dev_ids)) + " subjects remaining on the provision useable_dev_id list from the redcap list after excluding subjects with missing scan data.")
     #and exclude subjects excluded by the motion quality process
     #read the CSV, discarding the first line and using the second as headers
     motion_exclusions = pd.read_csv(dropbox_datapath + '/DEVQC_all_subjects - All.csv', header=1)
     motion_exclusions_w1 = motion_exclusions[motion_exclusions['wave']==1]
     usable_dev_ids = [id for id in usable_dev_ids if id not in motion_exclusions_w1['subjectID'][motion_exclusions_w1['Exclude']=='Exclude'].tolist()]
-    
+    print(str(len(usable_dev_ids)) + " subjects remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
 
     if exclude_test_subjs:
         # get just the training subjects
@@ -158,9 +163,14 @@ def get_data_for_confirmed_train_subjs(
     else:
         include_exclude_list.loc[include_exclude_list.Include.isna(), 'Include'] = True
         exclusion_list_sst = include_exclude_list[(include_exclude_list.Task == 'SST') & include_exclude_list.Include==False]
+        print("" + str(len(exclusion_list_sst)) + " subject excludeable from the SST task via nsc_subject_exclusions.csv")
         
+        print("beta paths before exclusion: " + str(len(beta_df)))
         included_betas = beta_df[(beta_df.subject_id.isin(exclusion_list_sst.SubjectId)==False)].reset_index(inplace=False, drop=True)
+        print("beta paths after exclusion via nsc_subject_exclusions: " + str(len(included_betas)))
+
         useable_train_betas_with_data = included_betas.loc[included_betas.subject_id.isin(usable_dev_ids),]
+        print("beta paths after exclusion via nsc_subject_exclusions and the provision useable_dev_id list: " + str(len(useable_train_betas_with_data)))
         
 
     useable_train_betas_with_data.sort_values('subject_id', inplace=True)
@@ -205,6 +215,13 @@ def iterate_over_l1_images_and_run_l2_scripts(
      ):
     # pull date in format YYYYMMDD
     date_label = datetime.datetime.now().strftime("%Y%m%d")
+    
+    output_basedir = sst_level_2_path + analysis_name + "_" + date_label
+    #create the dir if it doesn't exist
+    if not os.path.exists(output_basedir):
+        os.makedirs(output_basedir)
+
+    l1_images_with_paths.to_csv(output_basedir + "/raw_filelist.csv")
 
     for l1_image_name in l1_image_name_list:
         colname = col_function(l1_image_name)
@@ -217,7 +234,7 @@ def iterate_over_l1_images_and_run_l2_scripts(
                     tmap_spm_command = "'" + tmap_filepath + ",1'"
                     print(tmap_spm_command)
                     img_filepath_list += tmap_spm_command + "\n"
-            output_folderpath=sst_level_2_path + analysis_name + "_" + date_label + "/" + l1_image_name
+            output_folderpath=output_basedir + "/" + l1_image_name
             output_filepath =output_folderpath + "/" + l1_image_name + "_one_sample_design_estimate.m"
             create_spm_l2_script(template_filepath, replacement_map = {
                     'OUTDIR': output_folderpath,

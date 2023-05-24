@@ -92,7 +92,7 @@ trial_neural_behav_roi_stop<- trial_neural_behav_roi_stop %>%
          post_pre_rt_change_z_stop = (post_pre_rt_change_z-mean(post_pre_rt_change_z))/sd(post_pre_rt_change_z)
          )
 
-friendly_name_transform_table<-read_csv("friendly_names.csv")
+
 
 
 ```
