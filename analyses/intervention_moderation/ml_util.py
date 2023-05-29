@@ -1,3 +1,7 @@
+
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer, KNNImputer
+from sklearn import linear_model
 from sklearn import svm, datasets
 from sklearn.model_selection import GridSearchCV
 from sklearn.linear_model import Ridge, Lasso, ElasticNet
@@ -11,6 +15,7 @@ from sklearn.utils.multiclass import type_of_target
 from sklearn.model_selection import StratifiedKFold
 import numpy as np
 import warnings
+import matplotlib.pyplot as plt
 
 
 pipeline_estimator_name = 'estimator'
@@ -131,4 +136,44 @@ class IndependentVarStratifiedKFold(StratifiedKFold):
             test_folds[g_encoded == k] = folds_for_class
         return test_folds
 
+
+
+
+
+
+def impute_data(analysis_data,graph_against_col=None):
+    """
+    Does data imputing. Should not be used for a final analysis, because
+    imputing of data should occur within the pipeline, so as not to permit data leakage
+    """
+
+    imputer = IterativeImputer(estimator=linear_model.Ridge(),n_nearest_features=10,max_iter=100,random_state=0)
+    analysis_data_imputed = get_data_for_imputation(analysis_data)
+
+    #this dataset is already filtered for columns so we don't need to filter those further.
+    analysis_data_imputed = pd.DataFrame(imputer.fit_transform(analysis_data_imputed), columns=analysis_data_imputed.columns)
+    imputed_datapoint = analysis_data.isna()
+    # do_aces_cses_imputation_diagnostic(analysis_data_imputed, imputed_datapoint,'ridge_10')
+    if graph_against_col is not None:
+        cols_with_imputed_data = analysis_data_imputed.columns[analysis_data_imputed.isna().sum()>0]
+        for i, col in enumerate(cols_with_imputed_data):
+            #get a column indicating whether each point in this column was imputed
+            imputed_datapoint = imputed_datapoint[col]
+            #plot a scatter plot of the outcome measure against the imputed data
+            #color the columns by whether they were imputed or not
+            fig, ax = plt.subplots()
+            ax.scatter(analysis_data_imputed[graph_against_col],analysis_data_imputed[col],c=imputed_datapoint)
+            ax.set_xlabel(graph_against_col)
+            ax.set_ylabel(col)
+            ax.set_title('Imputed ' + col + ' vs outcome')
+            #add a legend
+            ax.legend(['Not Imputed','Imputed'])
+            plt.show()
+
+            #only do three columns
+            if i>2:
+                break
+
+
+    return(analysis_data_imputed)
 

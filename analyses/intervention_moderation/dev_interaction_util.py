@@ -1,22 +1,67 @@
+
+
+from sklearn import clone
+from sklearn.feature_selection import RFE, SelectKBest, f_regression
 from sklearn.inspection import permutation_importance
+from sklearn.tree import DecisionTreeRegressor
 from ml_util import *
 import numpy as np
 import pandas as pd
 from IPython.display import display, HTML
-from sklearn.base import clone
-from sklearn.inspection import permutation_importance
-from sklearn.experimental import enable_iterative_imputer
-from sklearn.impute import IterativeImputer
-from sklearn import linear_model
 from ml_util import get_data_for_imputation
-from sklearn.tree import DecisionTreeRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.inspection import permutation_importance
-from sklearn.preprocessing import StandardScaler
-from sklearn.feature_selection import SelectKBest, f_regression, RFE
-from sklearn.pipeline import Pipeline
+
 import matplotlib.pyplot as plt
+import yaml
+from yaml.loader import SafeLoader
+from socket import gethostname
+
+
+
+# Open the file and load the file
+def load_config(config_filename):    
+    with open(config_filename) as f:
+        all_yaml = yaml.load(f, Loader=SafeLoader)
+        if gethostname() in all_yaml.keys():
+            config = all_yaml[gethostname()]
+        else:
+            config = all_yaml['default']
+
+    return config
+
+def generate_synthetic_dev_outcomes_and_interactions(outcome_measures, analysis_data_imputed):
+    #set np random seed
+    np.random.seed(3161527)
+
+    group_names = ['ichi','ni','san']
+    #assign each row randomly to a group
+    group_assignments = np.random.choice(group_names,analysis_data_imputed.shape[0])
+
+    #synthetic outcomes
+    outcome_measures = generate_synthetic_dev_outcomes(outcome_measures)
+
+    # add synthetic primary and interaction effects
+
+
+    #set up the interaction effects
+    custom_interaction_effects_g1 = [0]*analysis_data_imputed.shape[1]
+    custom_interaction_effects_g1[0] = 0.15
+    custom_interaction_effects_g1[1] = 0.15
+    custom_interaction_effects_g1[2] = -0.15
+    custom_interaction_effects_g1[3] = -0.15
+
+    custom_interaction_effects_g2 = [0]*analysis_data_imputed.shape[1]
+    custom_interaction_effects_g2[4] = 0.15
+    custom_interaction_effects_g2[5] = 0.15
+    custom_interaction_effects_g2[6] = -0.15
+    custom_interaction_effects_g2[7] = -0.15
+
+    custom_interaction_effects = {'ni':custom_interaction_effects_g1,'san':custom_interaction_effects_g2}
+
+
+
+    synthetic_data = generate_synthetic_dev_data(analysis_data_imputed, group_assignments,outcome_measures, group_interaction_effects = custom_interaction_effects)
+    
+    return(synthetic_data, group_assignments)
 
 
 
@@ -149,6 +194,27 @@ def generate_synthetic_dev_data(analysis_data_imputed, group_assignments, outcom
     return({'X_weights':interaction_effect_df,'y':outcome_measures})    
 
 
+def get_outcome_changes(outcome_measures, analysis_data, group_assignments):
+
+    outcome_measures = calculate_outcome_changes(outcome_measures)
+    group_assignment_onehots = pd.get_dummies(group_assignments).loc[:,['ni','san']]
+
+    predictor_data = set_up_interactions(analysis_data, group_assignment_onehots)
+
+    #remove any NA values for this outcome measure in both the predictor data and the outcome data
+    outcome_nas = outcome_measures['d_bf'].isna()
+    outcome_measures_nona = outcome_measures.loc[~outcome_nas,:]
+    predictor_data_nona = predictor_data.loc[~outcome_nas,:]
+    group_assignment_onehots_nonan = group_assignment_onehots.loc[~outcome_nas,:]
+    group_assignments_nona = group_assignments[~outcome_nas]
+
+
+    return(outcome_nas,outcome_measures_nona, predictor_data_nona,
+           group_assignment_onehots_nonan,
+           group_assignments_nona)
+
+
+
 
 def set_up_interactions(predictor_data, group_assignment_onehots):
     #predictor_data = analysis_data_imputed
@@ -168,6 +234,12 @@ def set_up_interactions(predictor_data, group_assignment_onehots):
 
     return(predictor_data)
     
+def apply_imputer(data,  imputer = None):
+    if imputer is None:
+        imputer = IterativeImputer(estimator=linear_model.Ridge(),n_nearest_features=10,max_iter=100,random_state=0)
+    data_imputed = pd.DataFrame(imputer.fit_transform(get_data_for_imputation(data)))
+    imputed_datapoints = data.isna()
+    return(data_imputed, imputed_datapoints)
     
 
 def do_scoring_loop(X, y, groups,hyperparameter_selection_on_fold,outer_folds):
@@ -194,13 +266,14 @@ def do_scoring_loop(X, y, groups,hyperparameter_selection_on_fold,outer_folds):
       #       "test:" + 
       #     str(dict(pd.Series(groups[test_i]).value_counts()))
       # )
+      
 
-      train_i_X = X.iloc[train_i]
+      train_i_X, X_was_imputed = apply_imputer(X.iloc[train_i])
       train_i_y = y.iloc[train_i]
       train_i_group_assignments = groups[train_i]
       #print(train_i_y)
 
-      test_i_X = X.iloc[test_i]
+      test_i_X, X_was_imputed = apply_imputer(X.iloc[test_i])
       test_i_y = y.iloc[test_i]
       #print(test_i_y)
 
@@ -224,6 +297,117 @@ def do_scoring_loop(X, y, groups,hyperparameter_selection_on_fold,outer_folds):
       'best_params_df_list':best_params_df_list,
       'raw_cv_results_list':raw_cv_results_list
   })
+
+
+
+#loops through the different estimators and feature selection methods and does a grid search over all to find the best hyperparameters
+def do_hyperparameter_selection_loop(X, y,cv):
+    #alpha parameters for Ridge and Lasso
+    alpha_10pow_lower = 1
+    alpha_10pow_upper = 0
+    alpha_increments=1
+    alpha_range = np.concatenate([np.power(10,np.linspace(-alpha_10pow_lower,alpha_10pow_upper,(alpha_10pow_lower+alpha_10pow_upper)*alpha_increments+1)),
+        [0.2,0.4,0.6,0.8,1.0]])
+    
+    all_cv_results = []
+
+    pipeline_estimator_name = 'estimator'
+    feature_selection_name = 'feature_selection'
+
+
+    #define the param_grid for the estimators
+    estimators_to_run = {
+        'Ridge':{
+            'estimator':linear_model.Ridge,
+            'parameters':{'alpha':alpha_range}
+        },
+        'Lasso':{
+            'estimator':linear_model.Lasso,
+            'parameters':{'alpha':alpha_range}
+        },
+        'DecisionTreeRegressor':{
+            'estimator':DecisionTreeRegressor,
+            'parameters':{
+                'max_depth':[2, 3,5,10],
+                'min_samples_split':[5,20,50],
+                'min_samples_leaf':[5,20,50]
+            }
+        }             
+    }
+
+    for estimator_name,estimator_dict in estimators_to_run.items():
+        #param grid for the feature seelction
+        #this is here because we need to know the estimator to pass to the feature selector
+        feature_selectors_to_run = {
+            'None':None,
+            'KBest':{
+                'selector':SelectKBest(),
+                'parameters':{
+                    'score_func' : [f_regression], 
+                    'k' : [20,50]
+                    }
+            },
+            'RFE':{
+                'selector':RFE(linear_model.LinearRegression()),
+                'parameters':{
+                    'n_features_to_select' : [10,25],
+                    #'verbose':[1],
+                    'step':[5]
+                }
+            }
+        }
+        for selector_name, selector_dict in feature_selectors_to_run.items():
+        #create the estimator
+            if selector_name == 'None':
+                pipeline = Pipeline([('scaler',StandardScaler()),
+                                     (pipeline_estimator_name,estimator_dict['estimator']())])
+                selector_params = {}
+            else:
+                pipeline = Pipeline([('scaler',StandardScaler()),
+                                     (feature_selection_name,selector_dict['selector']), 
+                                     (pipeline_estimator_name,estimator_dict['estimator']())])
+                selector_params = selector_dict['parameters']
+
+            estimator_param_grid = {(pipeline_estimator_name + '__'+k):v for k,v in estimator_dict['parameters'].items()}
+            selector_param_grid = {(feature_selection_name + '__'+k):v for k,v in selector_params.items()}
+            #combine the two param grid dictionaries
+            full_param_grid = {**selector_param_grid, **estimator_param_grid}
+            print(pipeline)
+            print(full_param_grid)
+
+            
+        
+            gs_1 = GridSearchCV(estimator=pipeline, 
+                                param_grid = full_param_grid, 
+                                cv=cv,scoring='neg_mean_absolute_error',verbose=1)
+            gs_1.fit(X,y)
+            all_cv_results.append(gs_1)
+
+    #create a dataframe with the best parameters, best mean_test_score, and name of the model
+
+    best_params_df = pd.DataFrame({
+        'model': [cv_result.estimator for cv_result in all_cv_results],
+        'model_name': [cv_result.estimator.__class__.__name__ for cv_result in all_cv_results],
+        'best_params': [extract_estimator_params_from_gridsearch(cv_result.best_params_) for cv_result in all_cv_results],
+        'best_score': [cv_result.best_score_ for cv_result in all_cv_results],
+        'best_raw_params' : [cv_result.best_params_ for cv_result in all_cv_results]
+        })
+    
+    best_params_df = best_params_df.sort_values('best_score',ascending=False).reset_index(drop=True)
+
+    best_model = clone(best_params_df['model'][0])
+    best_model_params = best_params_df['best_raw_params'][0]
+    best_model.set_params(**best_model_params)
+
+    return {
+        'best_model': best_model,
+        'best_params_df':best_params_df,
+        'raw_cv_results':all_cv_results
+    }
+
+
+
+
 
 
 def summarize_overall_df_results(raw_cv_results_list):
@@ -272,8 +456,11 @@ def get_best_model(cv_results_df):
 
     
 
-def do_final_fit(X,y,final_model):
-    final_fit = final_model.fit(X,y)
+def do_final_fit(X,y,final_model, impute_missing = False):
+    if impute_missing:
+        final_fit = final_model.fit(apply_imputer(X),y)
+    else:
+        final_fit = final_model.fit(X,y)
     
     return(final_fit)
 
@@ -321,16 +508,20 @@ def present_model_results(X,y, final_fit):
     display(HTML(final_results[0:20].to_html()))
     return(final_results)
 
-def present_results_vs_ground_truth_cors(predictor_data_nona,outcome_measures_nona,group_assignments_nona,final_results,base_regressors):
+def present_results_vs_ground_truth_cors(predictor_data_nona,outcome_measure,group_assignments_nona,final_results,base_regressors):
 
     group_correlation_list = []
     for group_name in ['ichi','ni','san']:
 
         #print(group_name)
         group_data = predictor_data_nona.loc[group_assignments_nona==group_name,:]
-        group_outcomes = outcome_measures_nona.loc[group_assignments_nona==group_name,'d_bf']
 
-        
+        #if outcome_measure is a dataframe, then subset to the column d_bf; otherwise, 
+        #assume it's a series and just extract via match to group_name
+        if isinstance(outcome_measure,pd.DataFrame):
+            group_outcomes = outcome_measure.loc[group_assignments_nona==group_name,'d_bf']
+        else:
+            group_outcomes = outcome_measure[group_assignments_nona==group_name]
         
         #get the two-way correlation between data and the outcome column
         #these are what was actually modeled into the data.
@@ -441,48 +632,6 @@ def load_and_preprocess_data(dropbox_data_dir):
     return(analysis_data, outcome_measures)
 
 
-def impute_data(analysis_data,graph_against_col=None):
-    """
-    Does data imputing. Should not be used for a final analysis, because
-    imputing of data should occur within the pipeline, so has not to permit data leakage
-    """
-
-    imputer = IterativeImputer(estimator=linear_model.Ridge(),n_nearest_features=10,max_iter=100,random_state=0)
-    analysis_data_imputed = get_data_for_imputation(analysis_data)
-
-    #this dataset is already filtered for columns so we don't need to filter those further.
-    analysis_data_imputed = pd.DataFrame(imputer.fit_transform(analysis_data_imputed), columns=analysis_data_imputed.columns)
-    imputed_datapoint = analysis_data.isna()
-    # do_aces_cses_imputation_diagnostic(analysis_data_imputed, imputed_datapoint,'ridge_10')
-    if graph_against_col is not None:
-        cols_with_imputed_data = analysis_data_imputed.columns[analysis_data_imputed.isna().sum()>0]
-        for i, col in enumerate(cols_with_imputed_data):
-            #get a column indicating whether each point in this column was imputed
-            imputed_datapoint = imputed_datapoint[col]
-            #plot a scatter plot of the outcome measure against the imputed data
-            #color the columns by whether they were imputed or not
-            fig, ax = plt.subplots()
-            ax.scatter(analysis_data_imputed[graph_against_col],analysis_data_imputed[col],c=imputed_datapoint)
-            ax.set_xlabel(graph_against_col)
-            ax.set_ylabel(col)
-            ax.set_title('Imputed ' + col + ' vs outcome')
-            #add a legend
-            ax.legend(['Not Imputed','Imputed'])
-            plt.show()
-
-            #only do three columns
-            if i>2:
-                break
-
-
-
-
-
-
-
-    return(analysis_data_imputed)
-
-
 
 
 def run_full_limited_predictor_analysis(total_predictor_count, outcome_measures, analysis_data_imputed, effect_size, hyperparameter_optimizer,
@@ -561,6 +710,7 @@ def run_full_limited_predictor_analysis(total_predictor_count, outcome_measures,
     print(overall_score)
 
 
+    #final_data = impute_data()
 
     best_model = get_best_model(summarize_overall_df_results(raw_cv_results_list))
     final_fit = do_final_fit(X=predictor_data_nona, y= outcome_measures_nona['d_bf'], final_model=best_model)
