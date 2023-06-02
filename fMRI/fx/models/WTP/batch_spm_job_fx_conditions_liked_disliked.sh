@@ -27,7 +27,7 @@ SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_conditions_liked_disliked_w1.m
 SHELL_SCRIPT=spm_job.sh
 
 # RRV the results files
-RESULTS_INFIX=fx_conditions_healthy_unhealthy
+RESULTS_INFIX=fx_conditions_liked_disliked
 
 # Set output dir and make it if it doesn't exist
 OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output
