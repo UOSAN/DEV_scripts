@@ -239,6 +239,7 @@ def apply_imputer(data,  imputer = None):
         imputer = IterativeImputer(estimator=linear_model.Ridge(),n_nearest_features=10,max_iter=100,random_state=0)
     data_imputed = pd.DataFrame(imputer.fit_transform(get_data_for_imputation(data)))
     imputed_datapoints = data.isna()
+    data_imputed.columns = data.columns
     return(data_imputed, imputed_datapoints)
     
 
@@ -289,6 +290,14 @@ def do_scoring_loop(X, y, groups,hyperparameter_selection_on_fold,outer_folds):
       best_model_i.fit(train_i_X, train_i_y)
       score_r2_i = best_model_i.score(test_i_X, test_i_y)
 
+      #draw a graph of predicted y vs actual y
+      #calculate simple correlation of predicted and actual y
+      predicted_y = best_model_i.predict(test_i_X)
+      actual_y = test_i_y
+      #get the correlation
+      corr = np.corrcoef(predicted_y,actual_y)[0,1]
+        
+
       scores.append(score_r2_i)
 
   return({
@@ -299,20 +308,38 @@ def do_scoring_loop(X, y, groups,hyperparameter_selection_on_fold,outer_folds):
   })
 
 
+#when passing things to hyperparameters
+#sometimes we need to limit the range to the number of predictors in X
+#this function does that
+def limit_range_to_n(range,X):
+        col_count = len(X.columns)
+        transformed_range = [x for x in range if x <= col_count]
+        if len(transformed_range) < len(range):
+            #add the max value if it's not already there
+            if col_count not in transformed_range:
+                transformed_range.append(col_count)
+
+        return(transformed_range)
+  
+def do_hyperparameter_selection_loop_fast(X, y, cv):
+    return(do_hyperparameter_selection_loop(X, y, cv, fast_mode=True))
 
 #loops through the different estimators and feature selection methods and does a grid search over all to find the best hyperparameters
-def do_hyperparameter_selection_loop(X, y,cv):
+def do_hyperparameter_selection_loop(X, y,cv, fast_mode=False):
+    #fast mode is for testing purposes. it only runs a few of the hyperparameter settings and estimators
     #alpha parameters for Ridge and Lasso
     alpha_10pow_lower = 1
     alpha_10pow_upper = 0
     alpha_increments=1
     alpha_range = np.concatenate([np.power(10,np.linspace(-alpha_10pow_lower,alpha_10pow_upper,(alpha_10pow_lower+alpha_10pow_upper)*alpha_increments+1)),
         [0.2,0.4,0.6,0.8,1.0]])
+    if fast_mode: alpha_range = [0.2,0.99]
     
     all_cv_results = []
 
     pipeline_estimator_name = 'estimator'
     feature_selection_name = 'feature_selection'
+
 
 
     #define the param_grid for the estimators
@@ -328,12 +355,14 @@ def do_hyperparameter_selection_loop(X, y,cv):
         'DecisionTreeRegressor':{
             'estimator':DecisionTreeRegressor,
             'parameters':{
-                'max_depth':[2, 3,5,10],
-                'min_samples_split':[5,20,50],
-                'min_samples_leaf':[5,20,50]
+                'max_depth':limit_range_to_n([2, 3,5,10], X),
+                'min_samples_split':limit_range_to_n([2,5,20], X),
+                'min_samples_leaf':limit_range_to_n([2,5,20], X)
             }
         }             
     }
+    #remove decision trees if we're running in fast mode
+    if fast_mode: estimators_to_run.pop('DecisionTreeRegressor')
 
     for estimator_name,estimator_dict in estimators_to_run.items():
         #param grid for the feature seelction
@@ -344,18 +373,21 @@ def do_hyperparameter_selection_loop(X, y,cv):
                 'selector':SelectKBest(),
                 'parameters':{
                     'score_func' : [f_regression], 
-                    'k' : [20,50]
+                    'k' : limit_range_to_n([5, 10, 15], X)
                     }
             },
             'RFE':{
                 'selector':RFE(linear_model.LinearRegression()),
                 'parameters':{
-                    'n_features_to_select' : [10,25],
+                    'n_features_to_select' : limit_range_to_n([5,10,15], X),
                     #'verbose':[1],
                     'step':[5]
                 }
             }
         }
+        #remove RFE if we're running in fast mode
+        if fast_mode: feature_selectors_to_run.pop('RFE')
+
         for selector_name, selector_dict in feature_selectors_to_run.items():
         #create the estimator
             if selector_name == 'None':
@@ -458,13 +490,17 @@ def get_best_model(cv_results_df):
 
 def do_final_fit(X,y,final_model, impute_missing = False):
     if impute_missing:
-        final_fit = final_model.fit(apply_imputer(X),y)
+        X_imputed, X_was_imputed = apply_imputer(X)
+        final_fit = final_model.fit(X_imputed,y)
     else:
         final_fit = final_model.fit(X,y)
     
     return(final_fit)
 
 def present_model_results(X,y, final_fit):
+
+    
+
     final_estimator = final_fit.named_steps['estimator']
     
     if hasattr(final_estimator,'coef_'):

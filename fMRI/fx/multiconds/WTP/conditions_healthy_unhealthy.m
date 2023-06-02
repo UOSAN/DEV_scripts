@@ -5,10 +5,10 @@
 
 %% Load data and intialize variables
 %inputDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/WTP/output';
-inputDir = '/Users/denicia/Dropbox (University of Oregon)/Berkman Lab/Devaluation/Tasks/WTP/output';
+inputDir = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/WTP/output';
 runNames = {'run1', 'run2', 'run3', 'run4'};
 waveNames = {'1', '2'};
-writeDir = '/Users/denicia/Desktop/DEV_scripts/fMRI/fx/multiconds/WTP/conditions_healthy_unhealthy';
+writeDir = '~/DEV_scripts/fMRI/fx/multiconds/WTP/conditions_healthy_unhealthy';
 studyName = 'DEV';
 filePattern = 'DEV.';
 rowNum = -1;

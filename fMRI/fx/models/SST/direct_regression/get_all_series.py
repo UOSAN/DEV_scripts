@@ -1,4 +1,5 @@
 import glob
+import os
 import pandas as pd
 import re
 import nilearn as nil
@@ -24,6 +25,53 @@ from socket import gethostname
 # then create n_{ROI}*n_{trial classes} graphs of samples, where x is the time from trial class reveal to image, and y is the measurement. plot a lowess curve.
 # potentially overlay the lowess curves for each trial type so that the response within each ROI can be easily compared.
 
+def get_beta_img(beta_img_filepath):
+    #first check if the file exists
+    if not os.path.isfile(beta_img_filepath):
+        print("file " + beta_img_filepath + " does not exist")
+        return(None)
+        
+    active_img = image.load_img(beta_img_filepath)
+    if len(active_img.shape) == 4:
+        #this only applies for image series; it's not relevant for individual beta images
+        active_img = nil.image.clean_img(active_img)
+        
+    return active_img
+
+def mask_4d_subject_image(mask_raw, active_img_cleaned):
+    mask_in_subj_space = nil.image.resample_img(
+        mask_raw, 
+        target_affine=active_img_cleaned.affine,
+        target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
+    return(subject_space_mask_image(mask_in_subj_space, active_img_cleaned))
+
+def mask_3d_subject_image(mask_raw, active_img_cleaned, bin_threshold=None):
+    mask_in_subj_space = nil.image.resample_img(mask_raw, 
+        target_affine=active_img_cleaned.affine,target_shape = active_img_cleaned.shape)
+    return(subject_space_mask_image(mask_in_subj_space, active_img_cleaned, bin_threshold=bin_threshold))
+
+
+def subject_space_mask_image(mask_in_subj_space, active_img_cleaned,bin_threshold=None):
+    mask_data = mask_in_subj_space.get_fdata()
+
+    if len(np.unique(mask_data))==2:
+        print("mask " + m_set['mask_label'] + " is already binarized; skipping binarization step")
+        active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_in_subj_space)
+    else:
+        if bin_threshold is None:
+            #middle of the range of greatest and least;
+            #useful when the image is _almost_ binary but not quite, say, because a transform has created
+            #a few voxels on the border that are mixed
+            bin_threshold = (mask_in_subj_space.get_fdata().max()-mask_in_subj_space.get_fdata().min())/2
+            print("binarizing mask with threshold " + str(bin_threshold))
+
+        mask_binarized = nil.image.binarize_img(mask_in_subj_space,threshold=bin_threshold)
+        mask_binarized_fdata = mask_binarized.get_fdata()
+        print("proportion of image active: " + str(np.sum(mask_binarized_fdata==np.max(mask_binarized_fdata))/np.prod(mask_binarized_fdata.shape)))
+        active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_binarized)
+
+    return(active_img_masked)
+
 
 def get_roi_data(nii_raw_files, mask_df):
     roi_data = {}
@@ -47,10 +95,6 @@ def get_roi_data(nii_raw_files, mask_df):
             roi_data[dev_name]={}
         
         run_df = pd.DataFrame(index=range(0,run_len))
-        #run_df = pd.DataFrame({'image_id':range(0,run_len)})
-        #run_df['TR_onset']=run_df.image_id*TR
-
-
         
         for m_i, m_set in mask_df.iterrows():
             print(m_set['mask_label'])
@@ -58,20 +102,8 @@ def get_roi_data(nii_raw_files, mask_df):
             
             #active_mask = nilearn.masking.compute_brain_mask(m_set['mask_path'])
             mask_raw = nil.image.load_img(m_set['mask_path'])
-            mask_in_subj_space = nil.image.resample_img(mask_raw, target_affine=active_img_cleaned.affine,target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
-            #work out whether the mask is already binarized
-            #mask_raw_data = mask_raw.get_fdata()
-            mask_data = mask_in_subj_space.get_fdata()
-            if len(np.unique(mask_data))==2:
-                print("mask " + m_set['mask_label'] + " is already binarized; skipping binarization step")
-                active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_in_subj_space)
-            else:            
-                thresh = (mask_in_subj_space.get_fdata().max()-mask_in_subj_space.get_fdata().min())/2
-                print("binarizing mask with threshold " + str(thresh))
-                mask_binarized = nil.image.binarize_img(mask_in_subj_space,threshold=thresh)
-                mask_binarized_fdata = mask_binarized.get_fdata()
-                print("proportion of image active: " + str(np.sum(mask_binarized_fdata==np.max(mask_binarized_fdata))/np.prod(mask_binarized_fdata.shape)))
-                active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_binarized)
+
+            active_img_masked = mask_4d_subject_image(mask_raw,active_img_cleaned)
 
             activity_vector = active_img_masked.mean(axis=1)
             run_df[m_set['mask_label']]=activity_vector

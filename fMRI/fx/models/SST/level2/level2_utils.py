@@ -12,6 +12,7 @@ import re
 
 def read_yaml_for_host(file_path):
     hostname = socket.gethostname()
+    print(hostname)
     with open(file_path, "r") as f:
         yaml_all = yaml.safe_load(f)
         if hostname in yaml_all:
@@ -248,3 +249,4 @@ def iterate_over_l1_images_and_run_l2_scripts(
             execute_spm_l2_script(output_filepath, spm_path=spm_path)
         else:
             print('contrast ' + l1_image_name + ' not found.')
+
