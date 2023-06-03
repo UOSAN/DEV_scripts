@@ -24,8 +24,8 @@ filesCell = struct2cell(runFiles);
 subjectID = unique(extractBetween(filesCell(1,:), 5,7));
 
 % exclude test responses
-excluded = subjectID(cellfun(@isempty,regexp(subjectID, '[0-2]{1}[0-9]{2}')));
-subjectID = subjectID(~cellfun(@isempty,regexp(subjectID, '[0-2]{1}[0-9]{2}')));
+excluded = subjectID(cellfun(@isempty,regexp(subjectID, '[0-3]{1}[0-9]{2}')));
+subjectID = subjectID(~cellfun(@isempty,regexp(subjectID, '[0-3]{1}[0-9]{2}')));
 fprintf(1, 'Excluded: %s\n', excluded{:})
 
 % initialize table
