@@ -1,3 +1,4 @@
+stop("this file is deprecated. use the updated auto_motion_fmriprep.")
 # This script loads the fmriprep confound files, applies a machine learning classifier to 
 # predict motion artifacts, and returns summaries by task, task and run, and trash volumes only. 
 # It will also export new rp_txt files if writeRP = TRUE and plots if writePlots = TRUE.
