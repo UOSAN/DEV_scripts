@@ -30,6 +30,17 @@ mask_df = get_mask_df_from_mask_locations(mask_locations)
 #get the list of raw nii files
 glob_path = config['fmriprep_dir'] + config['nii_raw_path']
 
+# task_info = {
+#     'SST': {
+#         'task_name': 'SST',
+#         'task_betas': ['CorrectGo', 'CorrectStop', 'FailedStop']
+#     },
+#     'WTP': {
+#         'task_name': 'WTP',
+
+#     }
+# }
+## SST
 train_betas_with_data = get_data_for_confirmed_train_subjs(
     beta_glob = config['nonbids_data_path'] + "fMRI/fx/models/SST/wave1/conditions/sub-DEV*/",
     nonbids_data_path = config['nonbids_data_path'],
@@ -57,6 +68,37 @@ roi_data = get_roi_data_for_l2_betas(betas_with_paths, beta_name_list, mask_df)
 
 roi_data.to_csv(config['dropbox_data_dir'] + '/subject_sst_avg_roi_data_raw.csv')
 
+
+## WTP
+train_betas_with_data = get_data_for_confirmed_train_subjs(
+    beta_glob = config['nonbids_data_path'] + "fMRI/fx/models/WTP/wave1/conditions/sub-DEV*/",
+    nonbids_data_path = config['nonbids_data_path'],
+    #ml_data_folderpath = ml_data_folderpath,
+    ml_scripting_path = config['dev_scripts_path'] + "/fMRI/ml",
+    dropbox_datapath=config['dropbox_data_dir'],
+    exclude_test_subjs=False
+)
+train_betas_with_data['wave']=1
+
+#we're not interestd in getting contrasts; comment this out.
+#betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
+betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
+
+beta_name_list = [
+    'CorrectGo',
+    'CorrectStop',
+    'FailedStop',
+    #'Cue',
+    #'FailedGo'
+    ]
+
+#get the ROI data
+roi_data = get_roi_data_for_l2_betas(betas_with_paths, beta_name_list, mask_df)
+
+roi_data.to_csv(config['dropbox_data_dir'] + '/subject_sst_avg_roi_data_raw.csv')
+
+## ROC
+raise NotImplementedError("ROC not implemented yet")
 
 #save
 with open(config['dropbox_data_dir'] + '/subject_sst_avg_roi_data_raw.pkl', 'wb') as handle:

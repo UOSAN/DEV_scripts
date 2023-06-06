@@ -101,7 +101,8 @@ def get_data_for_confirmed_train_subjs(
         nonbids_data_path,
         dropbox_datapath,
         ml_scripting_path,
-        exclude_test_subjs=True
+        exclude_test_subjs=True,
+        task='SST'
         ):
     beta_paths = glob(
         beta_glob)
@@ -123,20 +124,21 @@ def get_data_for_confirmed_train_subjs(
     #other data for inclusion
     data_by_ppt = pd.read_csv(dropbox_datapath + "/data_by_ppt.csv")
     print("loaded " + str(len(data_by_ppt)) + " rows from data_by_ppt.csv")
-    include_exclude_list = pd.read_csv(ml_scripting_path + "/nsc_subject_exclusions.csv")
-    print("loaded " + str(len(include_exclude_list)) + " rows from nsc_subject_exclusions.csv")
+    # include_exclude_list = pd.read_csv(ml_scripting_path + "/nsc_subject_exclusions.csv")
+    # print("loaded " + str(len(include_exclude_list)) + " rows from nsc_subject_exclusions.csv")
     
     # exclude_subjects = ['DEV061', 'DEV185', 'DEV187', 'DEV189', 'DEV190', 'DEV192', 'DEV198', 'DEV203', 'DEV220',
     #                         'DEV221']
     #also want to exclude subjects whose data was marked questionable in Redcap/Teams
     data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
     
-    data_quality_sst = data_quality.loc[data_quality.SST.isna()==False,]
-    usable_dev_ids = data_quality_sst.dev_id[data_quality_sst.SST=="No reported problems"]
-    print(str(len(usable_dev_ids)) + " subjects with no reported problems in SST Redcap scanner notes, added to the provision useable_dev_id list.")
+    data_quality_task = data_quality.loc[data_quality[task].isna()==False,]
+    usable_dev_ids = data_quality_task.dev_id[data_quality_task[task]=="No reported problems"]
+    print(str(len(usable_dev_ids)) + " subjects with no reported problems in task Redcap scanner notes, added to the provision useable_dev_id list.")
+    
     #hard-coded excluded subjects
-    sst_data_missing_includes = pd.read_csv(dropbox_datapath + "/SST-wave1-data inclusion - Sheet1.csv")
-    sst_data_missing_excludes = sst_data_missing_includes['DevID'][sst_data_missing_includes['Final inclusion']=='Exclude'].tolist()
+    sst_data_missing_includes = pd.read_csv(dropbox_datapath + "/post-processing-fmri-data-inclusion.csv")
+    sst_data_missing_excludes = sst_data_missing_includes['DevID'][sst_data_missing_includes[task]=='Exclude'].tolist()
     print(str(len(sst_data_missing_excludes)) + " subjects excludeable for missing scan data.")
     usable_dev_ids = [id for id in usable_dev_ids if id not in sst_data_missing_excludes]
     print(str(len(usable_dev_ids)) + " subjects remaining on the provision useable_dev_id list from the redcap list after excluding subjects with missing scan data.")
@@ -144,14 +146,22 @@ def get_data_for_confirmed_train_subjs(
     #read the CSV, discarding the first line and using the second as headers
     motion_exclusions = pd.read_csv(dropbox_datapath + '/DEVQC_all_subjects - All.csv', header=1)
     motion_exclusions_w1 = motion_exclusions[motion_exclusions['wave']==1]
-    usable_dev_ids = [id for id in usable_dev_ids if id not in motion_exclusions_w1['subjectID'][motion_exclusions_w1['Exclude']=='Exclude'].tolist()]
+
+    general_motion_exclusion_binvec = motion_exclusions_w1['Exclude'].str.contains('exclude', flags=re.IGNORECASE)
+    task_motion_exclusions_binvec = motion_exclusions_w1[task + "_Exclude"].str.contains('exclude', flags=re.IGNORECASE)
+    motion_exclusions = motion_exclusions_w1['subjectID'][general_motion_exclusion_binvec | task_motion_exclusions_binvec]
+
+    usable_dev_ids = [id for id in usable_dev_ids if id not in motion_exclusions]
     print(str(len(usable_dev_ids)) + " subjects remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
 
+    #raise NotImplementedError("this still ruels out whole sets of ROC and WTP for single runs that are out; we should be more precise than this.")
+    #raise NotImplementedError("need to re-write this to handle exclusion for WTP and ROC as well as SST, depnding on task passed in to the function")
+    
     if exclude_test_subjs:
         # get just the training subjects
-        test_train_df_raw = pd.read_csv(nonbids_data_path + "fMRI/ml/train_test_markers_20220818T144138.csv")
-        test_train_df_raw = test_train_df_raw.merge(include_exclude_list[include_exclude_list.Task == 'SST'],
-                                                    left_on='sub_label', right_on='SubjectId', how='left')
+        test_train_df_raw = pd.read_csv(nonbids_data_path + "fMRI/ml/train_test_markers_20230102T164214.csv")
+        # test_train_df_raw = test_train_df_raw.merge(include_exclude_list[include_exclude_list.Task == task],
+        #                                             left_on='sub_label', right_on='SubjectId', how='left')
         test_train_df_raw.loc[test_train_df_raw.Include.isna(), 'Include'] = True
         test_train_df = test_train_df_raw[test_train_df_raw.Include == True]
         train_subjs = test_train_df.loc[
@@ -162,13 +172,14 @@ def get_data_for_confirmed_train_subjs(
         train_betas_with_data = train_betas.merge(data_by_ppt, left_on='subject_id', right_on='SID')
         useable_train_betas_with_data = train_betas_with_data.loc[train_betas_with_data.subject_id.isin(usable_dev_ids),]
     else:
-        include_exclude_list.loc[include_exclude_list.Include.isna(), 'Include'] = True
-        exclusion_list_sst = include_exclude_list[(include_exclude_list.Task == 'SST') & include_exclude_list.Include==False]
-        print("" + str(len(exclusion_list_sst)) + " subject excludeable from the SST task via nsc_subject_exclusions.csv")
+        # include_exclude_list.loc[include_exclude_list.Include.isna(), 'Include'] = True
+        # exclusion_list_sst = include_exclude_list[(include_exclude_list.Task == 'SST') & include_exclude_list.Include==False]
+        # print("" + str(len(exclusion_list_sst)) + " subject excludeable from the SST task via nsc_subject_exclusions.csv")
         
         print("beta paths before exclusion: " + str(len(beta_df)))
-        included_betas = beta_df[(beta_df.subject_id.isin(exclusion_list_sst.SubjectId)==False)].reset_index(inplace=False, drop=True)
-        print("beta paths after exclusion via nsc_subject_exclusions: " + str(len(included_betas)))
+        #included_betas = beta_df[(beta_df.subject_id.isin(exclusion_list_sst.SubjectId)==False)].reset_index(inplace=False, drop=True)
+        included_betas = beta_df.reset_index(inplace=False, drop=True)
+        #print("beta paths after exclusion via nsc_subject_exclusions: " + str(len(included_betas)))
 
         useable_train_betas_with_data = included_betas.loc[included_betas.subject_id.isin(usable_dev_ids),]
         print("beta paths after exclusion via nsc_subject_exclusions and the provision useable_dev_id list: " + str(len(useable_train_betas_with_data)))
