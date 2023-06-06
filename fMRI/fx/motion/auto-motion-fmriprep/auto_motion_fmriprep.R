@@ -178,7 +178,10 @@ if (gsub("\\.", "", version) <= 118) {
 
 print(dataset$subjectID)
 # filter if we're doing that.
-dataset <- dataset[dataset$subjectID %in% filter_list,]
+if (exists("filter_list")){
+  dataset <- dataset[dataset$subjectID %in% filter_list,]
+}
+
 
 
 print(dataset$subjectID)
