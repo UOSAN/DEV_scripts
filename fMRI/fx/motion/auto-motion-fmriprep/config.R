@@ -25,7 +25,7 @@ outputDir = '/projects/sanlab/shared/DEV/bids_data/derivatives/'
 # variables
 version = '20.0.6'
 study = 'DEV'
-ses = FALSE
+ses = TRUE
 noRP = FALSE
 noNames = TRUE
 noPlot = FALSE
