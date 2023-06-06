@@ -9,4 +9,4 @@
 
 module load R gcc
 
-Rscript --verbose auto_motion_fmriprep_2022.R
+Rscript --verbose auto_motion_fmriprep.R

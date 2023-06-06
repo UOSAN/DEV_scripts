@@ -9,15 +9,9 @@
 # * study_summaryRun.csv = CSV file with summary by task and run
 # * study_summaryTask.csv = CSV file with summary by task only
 # * study_trashVols.csv = CSV file with trash volumes only
-<<<<<<< HEAD
-# * if writeRP = TRUE, rp_txt files will be written to rpDir
-# * if writePlots = TRUE, plots for each subjects will be written to plotDir
-#
-=======
 # * if writeRP = TRUE, rp_txt files will be written to outputDir/auto-motion-fmriprep/sub-[subject ID]
 # * if writePlots = TRUE, plots for each subjects will be written to outputDir/auto-motion-fmriprep/sub-[subject ID]
 
->>>>>>> master
 #------------------------------------------------------
 # load/install packages
 #------------------------------------------------------
