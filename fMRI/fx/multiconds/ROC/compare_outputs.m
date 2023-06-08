@@ -1,0 +1,2 @@
+D045_w1_r1_conditions=load('/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/ROC/conditions/DEV045_1_ROC_run1.mat')
+D045_w1_r1_betaseries=load('/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries/DEV045_1_ROC1.mat')

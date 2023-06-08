@@ -3,9 +3,8 @@ import pandas as pd
 import numpy as np
 from direct_regression.get_all_series import get_beta_img, mask_3d_subject_image
 
-def get_roi_data_for_l2_betas(beta_list, condition_list,mask_df):
-    col_function=lambda img_name: "beta_" + img_name + "_fname"
-    #iterate through each mask
+
+def load_masks(mask_df):
     raw_mask_list = []
     for m_i, m_set in mask_df.iterrows():
         print(m_set['mask_label'])
@@ -14,6 +13,116 @@ def get_roi_data_for_l2_betas(beta_list, condition_list,mask_df):
         mask_raw = nil.image.load_img(m_set['mask_path'])
         raw_mask_list = raw_mask_list + [mask_raw]
 
+    return raw_mask_list
+
+def get_mask_roi_data_for_beta(
+        subject_id,
+        wave,
+        spm_l2_path,
+        condition,
+        beta_name,
+          raw_mask_list, mask_df, active_img_cleaned):
+    roi_data_for_beta = []
+    for m_i, m_set in mask_df.iterrows():
+        print(condition + ", " + m_set['mask_label'])
+        #print('producing the vector for this mask/series...')
+        
+        #active_mask = nilearn.masking.compute_brain_mask(m_set['mask_path'])
+        mask_raw = raw_mask_list[m_i]
+
+        #binary threshold has to be not quite zero because, with the dtype transform, 
+        # some zeros get rounded up to a very-close-to-zero amount.
+        active_img_masked = mask_3d_subject_image(mask_raw, active_img_cleaned, bin_threshold=np.max(mask_raw.get_fdata())/1000)
+
+        activity_scalar = active_img_masked.mean()
+        roi_data_for_beta.append({
+            'subject_id': subject_id,#r['subject_id'],
+            'wave':wave,# r['wave'],
+            'spm_l2_path':spm_l2_path,#r['spm_l2_path'],
+            'condition' : condition,
+            'beta_name': beta_name,#r[colname],
+            'mask_label': m_set['mask_label'],
+            'roi_activity': activity_scalar
+        })
+    return roi_data_for_beta
+
+
+def get_roi_data_for_multirun_l2_betas(beta_list,condition_list,mask_df,spatial_mean_center=False,
+                                       collapse_runs=False):
+    ###
+    #takes a beta list where each entry is one beta image 
+    #mean-centers each mask
+    #and gets the ROI data for each beta image
+    
+    
+    raw_mask_list = load_masks(mask_df)
+
+    roi_data_all = []
+
+    #iterate through each subject and wave
+    for sub_i,sub in enumerate(np.unique(beta_list.subject_id)):
+        #and through each condition
+        for wave_i,wave in enumerate(np.unique(beta_list.wave)):
+            #get the conditions applicable for this subject
+            session_betas = beta_list[(beta_list['subject_id']==sub) & (beta_list['wave']==wave)]
+            #iterate through each condition
+            for condition in set(np.unique(session_betas.beta_description)).intersection(set(condition_list)):
+                #get the betas for this condition
+                condition_betas = session_betas[session_betas['beta_description']==condition]
+                #iterate through each beta
+                for i, r in condition_betas.iterrows():
+                    #some checks where skipping is necessary
+                    if type(r['beta_fname'])==float:
+                        if np.isnan(r['beta_fname']):
+                            continue
+                        #we want an error thrown if somehow it's a float but not nan,
+                        # so we handle that case here.
+                    if r['beta_fname'] is None:
+                        continue
+                    
+                
+                    #get the beta image from which to pull an ROI
+                    beta_img_filepath = r['spm_l2_path'] + r['beta_fname']
+                    active_img_cleaned = get_beta_img(beta_img_filepath)
+                    if active_img_cleaned is None:
+                        continue
+
+                    print("img mean is " + str(np.mean(active_img_cleaned.get_fdata()[np.isnan(active_img_cleaned.get_fdata())==False])))
+
+                    if spatial_mean_center:
+                        #mean center the nifti image
+                        raise NotImplementedError("spatial mean centering not implemented")
+                        active_img_cleaned = active_img_cleaned - active_img_cleaned.mean()
+
+
+                        #active_img_cleaned = active_img_cleaned - active_img_cleaned.mean()
+
+                    #for each mask
+                    roi_data_from_masks = get_mask_roi_data_for_beta(
+                            r['subject_id'],
+                            r['wave'],
+                            r['spm_l2_path'],
+                            condition,
+                            r['beta_fname'],
+                            raw_mask_list, mask_df, active_img_cleaned)
+                    roi_data_from_masks_df = pd.DataFrame(roi_data_from_masks)
+                    roi_data_from_masks_df['run'] = r['task_run']
+                    roi_data_all.append(roi_data_from_masks_df)
+                    
+    roi_data_all_df = pd.concat(roi_data_all)
+
+    if collapse_runs:
+        roi_data_all_df = collapse_runs(roi_data_all_df)
+
+    return roi_data_all_df
+
+
+
+def get_roi_data_for_l2_betas(beta_list, condition_list,mask_df):
+    col_function=lambda img_name: "beta_" + img_name + "_fname"
+    #iterate through each mask
+    
+    raw_mask_list = load_masks(mask_df)
 
 
 
@@ -46,27 +155,15 @@ def get_roi_data_for_l2_betas(beta_list, condition_list,mask_df):
 
             #for each mask
 
-            for m_i, m_set in mask_df.iterrows():
-                print(colname + ", " + condition + ", " + m_set['mask_label'])
-                #print('producing the vector for this mask/series...')
-                
-                #active_mask = nilearn.masking.compute_brain_mask(m_set['mask_path'])
-                mask_raw = raw_mask_list[m_i]
-
-                #binary threshold has to be not quite zero because, with the dtype transform, 
-                # some zeros get rounded up to a very-close-to-zero amount.
-                active_img_masked = mask_3d_subject_image(mask_raw, active_img_cleaned, bin_threshold=np.max(mask_raw.get_fdata())/1000)
-
-                activity_scalar = active_img_masked.mean()
-                roi_data_all.append({
-                    'subject_id': r['subject_id'],
-                    'wave': r['wave'],
-                    'spm_l2_path': r['spm_l2_path'],
-                    'condition' : condition,
-                    'beta_name': r[colname],
-                    'mask_label': m_set['mask_label'],
-                    'roi_activity': activity_scalar
-                })
+            roi_data_all.append(
+                get_mask_roi_data_for_beta(
+                    r['subject_id'],
+                    r['wave'],
+                    r['spm_l2_path'],
+                    condition,
+                    r[colname],
+                    raw_mask_list, mask_df, active_img_cleaned)
+            )
 
     roi_data_df = pd.DataFrame(roi_data_all)
     return roi_data_df
