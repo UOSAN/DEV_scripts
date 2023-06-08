@@ -95,6 +95,64 @@ def get_beta_fnames_for_beta_dirs(
     return (beta_dir_df)
 
 
+#here we're going to find a way to pass betas themselves instead of contrasts
+def get_beta_fname_list_for_beta_dirs(
+        beta_dir_df
+):
+    beta_dir_df['spm_l2_targeted_contrast_filepath'] = None
+
+    beta_dir_df.reset_index(inplace=True,drop=True)
+
+    beta_roi_list = []
+
+    for beta_i, beta_folderpath in enumerate(beta_dir_df.spm_l2_path):
+        print(beta_folderpath)
+        # load the mat file associated with the current run
+        subj_l1_mat_config = scipy.io.loadmat(str(
+            beta_folderpath + '/SPM.mat'), appendmat=False, simplify_cells=True, variable_names='SPM')
+
+        # get the list of level 1 contrasts that are included in the level 1 analysis we're examining
+        # contrasts_in_run = [contrast['name'] for contrast in subj_l1_mat_config['SPM']['xCon']]
+
+        # which is it?
+        # contrast_index = [c_i for c_i, contrast in enumerate(subj_l1_mat_config['SPM']['xCon'])
+        #                   if contrast['name'] == contrast_to_extract
+        #                   ][0]
+
+        for b_i, vbeta in enumerate(subj_l1_mat_config['SPM']['Vbeta']):
+            beta_readable_description_wrapped = re.search(r'Sn\((\d)\) (.*?)(\^\d)?(\*bf\(1\))?$', vbeta['descrip'])
+            if beta_readable_description_wrapped is None:
+                raise Exception("could not find beta description in " + vbeta['descrip'])
+                
+            beta_run = int(beta_readable_description_wrapped[1])
+            beta_readable_description = beta_readable_description_wrapped[2]
+            #print(str(b_i) + ": " + beta_readable_description + " " + vbeta['fname'])
+            # if beta_dir_df.loc[beta_i, 'beta_' + beta_readable_description + "_fname"] is None:
+            #     beta_dir_df.loc[beta_i, 'beta_' + beta_readable_description + "_fname"] =vbeta['fname']
+            # else:
+            #     beta_dir_df.loc[beta_i, 'beta_' + beta_readable_description + "_fname"] = (
+            #         beta_dir_df.loc[beta_i, 'beta_' + beta_readable_description + "_fname"] + "," + vbeta['fname']
+            #     )
+
+            beta_roi_list.append({
+                'subject_id': beta_dir_df.loc[beta_i, 'subject_id'],
+                'spm_l2_path': beta_dir_df.loc[beta_i, 'spm_l2_path'],
+                'spm_l2_path_description': beta_dir_df.loc[beta_i, 'spm_l2_path_description'],
+                'wave': beta_dir_df.loc[beta_i, 'wave'],
+                'spm_l2_targeted_contrast_filepath': beta_dir_df.loc[beta_i, 'spm_l2_targeted_contrast_filepath'],
+                'task_run':beta_run,
+                'beta_description': beta_readable_description,
+                'beta_fname': vbeta['fname']
+                
+                
+            })
+                #we'll transform this once we're done, I guess
+        
+    #turn the ROI list into a single dataframe
+    beta_roi_df = pd.DataFrame(beta_roi_list)
+
+    return (beta_roi_df)
+
 
 def get_data_for_confirmed_train_subjs(
         beta_glob,

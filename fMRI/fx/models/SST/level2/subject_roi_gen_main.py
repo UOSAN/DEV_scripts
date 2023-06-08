@@ -3,6 +3,7 @@ import pandas as pd
 
 from os.path import basename
 import pickle
+from level2.level2_roi_extraction import get_roi_data_for_multirun_l2_betas
 
 from level2.level2_utils import *
 from level2.level2_roi_extraction import get_roi_data_for_l2_betas
@@ -71,31 +72,31 @@ roi_data.to_csv(config['dropbox_data_dir'] + '/subject_sst_avg_roi_data_raw.csv'
 
 ## WTP
 train_betas_with_data = get_data_for_confirmed_train_subjs(
-    beta_glob = config['nonbids_data_path'] + "fMRI/fx/models/WTP/wave1/conditions/sub-DEV*/",
+    beta_glob = config['nonbids_data_path'] + "fMRI/fx/models/WTP/wave1/conditions_liked_disliked/sub-DEV*/",
     nonbids_data_path = config['nonbids_data_path'],
     #ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = config['dev_scripts_path'] + "/fMRI/ml",
     dropbox_datapath=config['dropbox_data_dir'],
-    exclude_test_subjs=False
-)
+    exclude_test_subjs=False,
+    task='WTP'
+).copy()
 train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
+betas_with_paths = get_beta_fname_list_for_beta_dirs(train_betas_with_data)
 
 beta_name_list = [
-    'CorrectGo',
-    'CorrectStop',
-    'FailedStop',
-    #'Cue',
-    #'FailedGo'
+    'liked',
+    'disliked'
     ]
 
-#get the ROI data
-roi_data = get_roi_data_for_l2_betas(betas_with_paths, beta_name_list, mask_df)
 
-roi_data.to_csv(config['dropbox_data_dir'] + '/subject_sst_avg_roi_data_raw.csv')
+#get the ROI data
+roi_data_wtp = get_roi_data_for_multirun_l2_betas(betas_with_paths[0:20], condition_list = beta_name_list, mask_df = mask_df[0:2])
+
+roi_data_wtp.to_csv(config['dropbox_data_dir'] + '/subject_wtp_avg_roi_data_raw.csv')
+
 
 ## ROC
 raise NotImplementedError("ROC not implemented yet")
