@@ -1,0 +1,30 @@
+loading anaconda
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter "sessions" will be removed in 0.9.0 release of Nilearn. Please use the parameter "runs" instead.
+  data = signal.clean(
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/image/resampling.py:273: UserWarning: Resampling binary images with continuous or linear interpolation. This might lead to unexpected results. You might consider using nearest interpolation instead.
+  warnings.warn("Resampling binary images with continuous or "
+n222
+{'dropbox_data_dir': '/gpfs/projects/sanlab/bsmith16/data', 'fmriprep_dir': '/gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/', 'nii_raw_path': 'sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii', 'mask_location': '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/'}
+looking up /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii
+DEV033, 1
+CueFollowing(CS>FS)striatal_cluster_combined_20230512
+producing the vector for this mask/series...
+mask is already binarized; skipping binarization step
+created an activity vector for this mask with the following length: 212
+CueFollowing(CS>FS)striatal_cluster_combined_20221207
+producing the vector for this mask/series...
+mask is already binarized; skipping binarization step
+Traceback (most recent call last):
+  File "get_all_series_main.py", line 81, in <module>
+    roi_data = get_roi_data(nii_raw_files,mask_df)
+  File "/gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/SST/direct_regression/get_all_series.py", line 66, in get_roi_data
+    active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_in_subj_space)
+  File "/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/masking.py", line 845, in apply_mask
+    mask, mask_affine = _load_mask_img(mask_img)
+  File "/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/masking.py", line 63, in _load_mask_img
+    raise ValueError('Given mask is not made of 2 values: %s'
+ValueError: Given mask is not made of 2 values: [0.000000e+00 1.401298e-45 2.802597e-45 ... 9.999504e-01 9.999770e-01
+ 1.000000e+00]. Cannot interpret as true or false
+finished
