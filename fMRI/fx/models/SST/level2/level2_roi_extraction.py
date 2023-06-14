@@ -1,10 +1,10 @@
 import nilearn as nil
 import pandas as pd
 import numpy as np
-from direct_regression.get_all_series import get_beta_img, mask_3d_subject_image
+from direct_regression.get_all_series import get_beta_img, mask_3d_subject_image, signature_weight_3d_subject_image
 
 
-def load_masks(mask_df):
+def load_rois(mask_df):
     raw_mask_list = []
     for m_i, m_set in mask_df.iterrows():
         print(m_set['mask_label'])
@@ -15,26 +15,39 @@ def load_masks(mask_df):
 
     return raw_mask_list
 
-def get_mask_roi_data_for_beta(
+def get_roi_data_for_beta(
         subject_id,
         wave,
         spm_l2_path,
         condition,
         beta_name,
-          raw_mask_list, mask_df, active_img_cleaned):
+          raw_roi_list, roi_df, active_img_cleaned):
     roi_data_for_beta = []
-    for m_i, m_set in mask_df.iterrows():
-        print(condition + ", " + m_set['mask_label'])
+    roi_df = roi_df.copy().reset_index(drop=True)
+
+    for m_i, m_set in roi_df.iterrows():
+        print(subject_id + ", " + str(wave) + ", " + condition + ", " + m_set['mask_label'])
         #print('producing the vector for this mask/series...')
         
         #active_mask = nilearn.masking.compute_brain_mask(m_set['mask_path'])
-        mask_raw = raw_mask_list[m_i]
+        
+        roi_raw = raw_roi_list[m_i]
 
-        #binary threshold has to be not quite zero because, with the dtype transform, 
-        # some zeros get rounded up to a very-close-to-zero amount.
-        active_img_masked = mask_3d_subject_image(mask_raw, active_img_cleaned, bin_threshold=np.max(mask_raw.get_fdata())/1000)
+        if 'image_type' not in m_set.keys():
+            #no image type set. need to handle this case first in order to avoid errors.
+            active_img_masked = mask_3d_subject_image(roi_raw, active_img_cleaned, bin_threshold=np.max(roi_raw.get_fdata())/1000)
+        elif m_set['image_type'] == 'mask':
+            #binary threshold has to be not quite zero because, with the dtype transform, 
+            # some zeros get rounded up to a very-close-to-zero amount.
+            active_img_masked = mask_3d_subject_image(roi_raw, active_img_cleaned, bin_threshold=np.max(roi_raw.get_fdata())/1000)
+        elif m_set['image_type'] == 'signature':
+            active_img_masked = signature_weight_3d_subject_image(roi_raw, active_img_cleaned)
+        else:
+            raise ValueError("image type not recognized")
+        
 
         activity_scalar = active_img_masked.mean()
+        print("activity scalar is " + str(activity_scalar))
         roi_data_for_beta.append({
             'subject_id': subject_id,#r['subject_id'],
             'wave':wave,# r['wave'],
@@ -55,7 +68,7 @@ def get_roi_data_for_multirun_l2_betas(beta_list,condition_list,mask_df,spatial_
     #and gets the ROI data for each beta image
     
     
-    raw_mask_list = load_masks(mask_df)
+    raw_mask_list = load_rois(mask_df)
 
     roi_data_all = []
 
@@ -98,7 +111,7 @@ def get_roi_data_for_multirun_l2_betas(beta_list,condition_list,mask_df,spatial_
                         #active_img_cleaned = active_img_cleaned - active_img_cleaned.mean()
 
                     #for each mask
-                    roi_data_from_masks = get_mask_roi_data_for_beta(
+                    roi_data_from_masks = get_roi_data_for_beta(
                             r['subject_id'],
                             r['wave'],
                             r['spm_l2_path'],
@@ -118,11 +131,11 @@ def get_roi_data_for_multirun_l2_betas(beta_list,condition_list,mask_df,spatial_
 
 
 
-def get_roi_data_for_l2_betas(beta_list, condition_list,mask_df):
+def get_roi_data_for_l2_betas(beta_list, condition_list,roi_df):
     col_function=lambda img_name: "beta_" + img_name + "_fname"
     #iterate through each mask
     
-    raw_mask_list = load_masks(mask_df)
+    raw_roi_list = load_rois(roi_df)
 
 
 
@@ -130,10 +143,12 @@ def get_roi_data_for_l2_betas(beta_list, condition_list,mask_df):
     #for each beta type
     roi_data_all = []
     for condition in condition_list:
+        print(condition)
         colname = col_function(condition)
         
         #iterate through each image, if it exists, and pull the ROI
         for i, r in beta_list.iterrows():
+            #print(r['subject_id'] + ", " + str(r['wave']))xx
             #print(r.index)
             #some checks where skipping is necessary
             if colname not in beta_list.columns:
@@ -156,13 +171,13 @@ def get_roi_data_for_l2_betas(beta_list, condition_list,mask_df):
             #for each mask
 
             roi_data_all.append(
-                get_mask_roi_data_for_beta(
+                get_roi_data_for_beta(
                     r['subject_id'],
                     r['wave'],
                     r['spm_l2_path'],
                     condition,
                     r[colname],
-                    raw_mask_list, mask_df, active_img_cleaned)
+                    raw_roi_list, roi_df, active_img_cleaned)
             )
 
     roi_data_df = pd.DataFrame(roi_data_all)
