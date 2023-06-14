@@ -45,6 +45,16 @@ def mask_4d_subject_image(mask_raw, active_img_cleaned):
         target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
     return(subject_space_mask_image(mask_in_subj_space, active_img_cleaned))
 
+def signature_weight_3d_subject_image(signature_raw, active_img_cleaned):
+    signature_in_subj_space = nil.image.resample_img(signature_raw, 
+        target_affine=active_img_cleaned.affine,target_shape = active_img_cleaned.shape)
+    
+    nifti_weighted = nil.image.math_img("img1*img2", img1=signature_in_subj_space, img2=active_img_cleaned)
+    
+    signature_weighted_voxels = nifti_weighted.get_fdata()[~np.isnan(nifti_weighted.get_fdata())]
+    return(signature_weighted_voxels)
+
+
 def mask_3d_subject_image(mask_raw, active_img_cleaned, bin_threshold=None):
     mask_in_subj_space = nil.image.resample_img(mask_raw, 
         target_affine=active_img_cleaned.affine,target_shape = active_img_cleaned.shape)
