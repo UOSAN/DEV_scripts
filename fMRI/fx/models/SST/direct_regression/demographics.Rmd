@@ -67,11 +67,11 @@ year(as.Date(ppt_list_w_data$date_0))#-as.Date(ppt_list_w_data$dob)
 ppt_list_w_data$age_in_years <- interval(as.Date(ppt_list_w_data$dob),as.Date(ppt_list_w_data$date_0)) %/% years(1)
 
 bs_table<-table(ppt_list_w_data$birthsex)
-num_female<-bs_table[bs_table==1]
-num_male<-bs_table[bs_table==2]
+num_female<-bs_table[names(bs_table)==1]
+num_male<-bs_table[names(bs_table)==2]
 ```
 
 
-Mean participant age is `r round(mean(ppt_list_w_data$age_in_years,na.rm=TRUE))`. 
+Mean participant age is `r round(mean(ppt_list_w_data$age_in_years,na.rm=TRUE))` (SD=`r sd(ppt_list_w_data$age_in_years,na.rm=TRUE)`); age range was `r min(ppt_list_w_data$age_in_years,na.rm=TRUE)` to `r max(ppt_list_w_data$age_in_years,na.rm=TRUE)`
 
 There were `r num_female` participants and `r num_male` participants.

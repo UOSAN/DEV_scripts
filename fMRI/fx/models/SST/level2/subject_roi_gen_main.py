@@ -61,7 +61,7 @@ train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fname_list_for_beta_dirs(train_betas_with_data[0:5])
+betas_with_paths = get_beta_fname_list_for_beta_dirs(train_betas_with_data)
 
 
 
@@ -101,7 +101,7 @@ train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fname_list_for_beta_dirs(train_betas_with_data[0:5])
+betas_with_paths = get_beta_fname_list_for_beta_dirs(train_betas_with_data[0:3])
 
 #from level2.level2_roi_extraction import get_roi_data_for_l2_betas, get_roi_data_for_multirun_l2_betas
 
@@ -133,7 +133,7 @@ train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data[0:10])
+betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data[0:3])
 
 beta_name_list = [
     'CorrectGo',
@@ -161,7 +161,7 @@ train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data[0:10])
+betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data[0:3])
 
 beta_name_list = ['CorrectGoFollowingFailedStop']
 
@@ -181,7 +181,7 @@ roi_data_sst.to_csv(config['dropbox_data_dir'] + '/subject_sst_avg_roi_data_raw.
 ## COMBINE ALL
 
 #combine all the dataframes
-roi_data_all = pd.concat([roi_data_sst, roi_data_wtp, roi_data_roc], axis=1)
+roi_data_all = pd.concat([rddf.reset_index(inplace=False,drop=True) for rddf in [roi_data_sst, roi_data_wtp, roi_data_roc]], axis=1)
 
 #save the data
 roi_data_all.to_csv(config['dropbox_data_dir'] + '/subject_avg_roi_data_raw.csv')

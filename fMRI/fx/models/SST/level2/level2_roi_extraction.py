@@ -41,6 +41,7 @@ def get_roi_data_for_beta(
             # some zeros get rounded up to a very-close-to-zero amount.
             active_img_masked = mask_3d_subject_image(roi_raw, active_img_cleaned, bin_threshold=np.max(roi_raw.get_fdata())/1000)
         elif m_set['image_type'] == 'signature':
+            #handles a bit differently; for signatures we don't set a binary threshold; the images are simply multiplied together.
             active_img_masked = signature_weight_3d_subject_image(roi_raw, active_img_cleaned)
         else:
             raise ValueError("image type not recognized")

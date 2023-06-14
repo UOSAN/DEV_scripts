@@ -108,8 +108,14 @@ def get_beta_fname_list_for_beta_dirs(
     for beta_i, beta_folderpath in enumerate(beta_dir_df.spm_l2_path):
         print(beta_folderpath)
         # load the mat file associated with the current run
-        subj_l1_mat_config = scipy.io.loadmat(str(
+        #try to load the file; if it doesn't load, through a warning and move on
+        try:
+            subj_l1_mat_config = scipy.io.loadmat(str(
             beta_folderpath + '/SPM.mat'), appendmat=False, simplify_cells=True, variable_names='SPM')
+        except FileNotFoundError:
+            print("could not find SPM.mat in " + beta_folderpath + '/SPM.mat')
+            continue
+
 
         # get the list of level 1 contrasts that are included in the level 1 analysis we're examining
         # contrasts_in_run = [contrast['name'] for contrast in subj_l1_mat_config['SPM']['xCon']]

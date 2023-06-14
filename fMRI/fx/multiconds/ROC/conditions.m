@@ -125,7 +125,28 @@ for i = 1:numel(subjectID)
                             onsets{nConds+3}(onsets{nConds+3} == 0) = []; % remove incomplete trials
                             durations(nConds+3) = {repelem(9, length(onsets{nConds+3}))'};
                         end
-                    end 
+                    end
+
+                    %% need to remove CONDITIONS for any empty conditions because these will cause level 1 errors
+                    % these need to be handled pretty carefully
+                    % when doing level 2 analyses we need to ensure we
+                    % don't just assume a condition always corresponds to
+                    % the same numbered beta file.
+                    if cellfun('length',onsets)~=cellfun('length',durations)
+                        error('for %s %s %s, length of onsets does not match length of durations',sub,wave,run)
+                    end
+                    %great, we know the lengths are the same so we can now
+                    %remove from names, onsets, and durations
+                    if any(cellfun('length',onsets)==0)
+                        warning(['for ' sub ' ' wave ' ' run ', some conditions had no trials and were excluded.'])
+                        warning(names{cellfun('length',onsets)==0})
+                        zero_length_conditions = cellfun('length',onsets)==0;
+                        names = names(~zero_length_conditions);
+                        onsets = onsets(~zero_length_conditions);
+                        durations = durations(~zero_length_conditions);
+
+                    end
+
     
                     %% Define output file name
                     %outputName = sprintf('%s%s_ROC%d.mat', studyName, sub, j);
@@ -136,9 +157,9 @@ for i = 1:numel(subjectID)
                     %% Save as .mat file and clear
                     if ~exist(writeDir); mkdir(writeDir); end
                     
-                    if ~(isempty(onsets{1}) && isempty(onsets{2}))
+                    if any(~cellfun('isempty', onsets)) % if any of the conditions aren't empty
                         save(fullfile(writeDir,outputName),'names','onsets','durations');
-                    else
+                    else %all conditions are empty.
                         warning('File is empty. Did not save %s.', outputName);
                     end
                     
@@ -148,7 +169,7 @@ for i = 1:numel(subjectID)
                     clear names onsets durations;
                 end
             else
-                warning('Unable to load subject %s run %s.', sub, run);
+                warning('Unable to load subject %s run %s; file not found.', sub, run);
             end
         end
     end
