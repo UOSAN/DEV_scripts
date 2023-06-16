@@ -34,6 +34,7 @@ source("display_utils.R")
 
 ```{r}
 dropbbox_dir <- config::get("dev_analysis_data_dir")
+output_folder <- "sst_paper_generation_w12_output"
 
 ```
 
@@ -675,7 +676,7 @@ ggplot_time_points_extras <- list(
     x="time from tone sound or expected time of tone (s)",
     y="mean BOLD activity (no HRF convolution)",
     #title="Stop Signal Task Activity",
-    subtitle=paste0("Across ", as.character(subj_count)," subjects with 128 trials each"),
+    subtitle=paste0("Across ", as.character(subj_count)," subjects with two sessions of 128 trials each"),
     caption="0 point is the moment of tone sound (Stop trials)\n or expected tone sound based on prior trial (Go trials)\n HRF convolution not applied\n1 s moving averages")
   )
 
@@ -713,7 +714,7 @@ trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectSt
 
 ```{r}
 
-ggplot(trial_tps_compare_conditions,
+figure_2 <- ggplot(trial_tps_compare_conditions,
        aes(x=offset_start, y=CS_minus_FS))+
   #geom_tile(data = next_trial_gradient, aes(x=tp,alpha=pct_in_range,y=0),fill="#000000",color="transparent")+
   geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
@@ -725,6 +726,11 @@ ggplot(trial_tps_compare_conditions,
   ggplot_time_points_extras+
   coord_cartesian(ylim=c(-0.15,0.25))+
   labs(y="CS-FS BOLD activity difference")
+
+
+ggsave(paste0(output_folder, "/figure_2.svg"))
+
+
   
 ```
 
