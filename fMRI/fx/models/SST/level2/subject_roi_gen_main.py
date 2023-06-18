@@ -101,7 +101,7 @@ train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fname_list_for_beta_dirs(train_betas_with_data[0:3])
+betas_with_paths = get_beta_fname_list_for_beta_dirs(train_betas_with_data)
 
 #from level2.level2_roi_extraction import get_roi_data_for_l2_betas, get_roi_data_for_multirun_l2_betas
 
@@ -133,7 +133,7 @@ train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data[0:3])
+betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 
 beta_name_list = [
     'CorrectGo',
@@ -161,7 +161,7 @@ train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data[0:3])
+betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 
 beta_name_list = ['CorrectGoFollowingFailedStop']
 

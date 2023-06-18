@@ -65,7 +65,7 @@ def subject_space_mask_image(mask_in_subj_space, active_img_cleaned,bin_threshol
     mask_data = mask_in_subj_space.get_fdata()
 
     if len(np.unique(mask_data))==2:
-        print("mask " + m_set['mask_label'] + " is already binarized; skipping binarization step")
+        print("mask is already binarized; skipping binarization step")
         active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_in_subj_space)
     else:
         if bin_threshold is None:
