@@ -20,7 +20,7 @@ dev_scripts_path = config_data['dev_scripts_path']
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
 dropbox_datapath = config_data['dropbox_datapath']
 sst_level_2_path = config_data['sst_level_2_path']
-template_filepath = config_data['sst_level_2_path']
+template_filepath = config_data['spm_l2_script_template_filepath']
 spm_path = config_data['spm_path']
 analysis_name = 'conditions'
 

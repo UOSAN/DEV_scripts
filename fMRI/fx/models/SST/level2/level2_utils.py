@@ -215,7 +215,7 @@ def get_data_for_confirmed_train_subjs(
     task_motion_exclusions_binvec = motion_exclusions_w1[task + "_Exclude"].str.contains('exclude', flags=re.IGNORECASE)
     motion_exclusions = motion_exclusions_w1['subjectID'][general_motion_exclusion_binvec | task_motion_exclusions_binvec]
 
-    usable_dev_ids = [id for id in usable_dev_ids if id not in motion_exclusions]
+    usable_dev_ids = [id for id in usable_dev_ids if id not in motion_exclusions.tolist()]
     print(str(len(usable_dev_ids)) + " subjects remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
 
     #raise NotImplementedError("this still ruels out whole sets of ROC and WTP for single runs that are out; we should be more precise than this.")
