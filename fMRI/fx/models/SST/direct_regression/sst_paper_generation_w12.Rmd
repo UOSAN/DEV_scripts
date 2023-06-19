@@ -52,7 +52,7 @@ if (file.exists(cache_filepath)){
   #now only include subjects that have been deemed includeable
   #this is the set that made up the ROI.
   included_subjects_table <-readr::read_csv(paste0(config::get("dev_scripts_path"),
-                                    "fMRI/fx/models/SST/level2/conditions_20230518/raw_filelist.csv"))
+                                    "fMRI/fx/models/SST/level2/conditions_20230616/raw_filelist.csv"))
   included_subjects <- included_subjects_table$subject_id
   time_points<-time_points_raw[time_points_raw$subid %in% included_subjects_table$subject_id,]
   
