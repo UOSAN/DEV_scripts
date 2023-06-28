@@ -29,6 +29,7 @@ library(tidyverse)
 library(gt)
 source("preprocessing.R")
 source("display_utils.R")
+library(lmerTest)
 
 ```
 
@@ -55,9 +56,6 @@ if (file.exists(cache_filepath)){
                                     "fMRI/fx/models/SST/level2/conditions_20230616/raw_filelist.csv"))
   included_subjects <- included_subjects_table$subject_id
   time_points<-time_points_raw[time_points_raw$subid %in% included_subjects_table$subject_id,]
-  
-  
-  
 }
 
 ```
@@ -284,33 +282,53 @@ I think if you're going to do P_stop
 Modeled in more detail in `modeling_t_5_10_activity_as_learning.Rmd`.
 ```{r}
 model_full_effects <- lme4::lmer(
-   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid)  + (1 | wave),
+   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change_z+ post_pre_rt_change_z + (1 +post_pre_rt_change_z  + P_stop_trial_change_z  | subid)  + (1 | wave),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
   )
 summary(model_full_effects)
 
 model_no_rt<- lme4::lmer(
-   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid) + (1 | wave),
+   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change_z + (1 +post_pre_rt_change_z  + P_stop_trial_change_z  | subid) + (1 | wave),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
   )
 
 anova(model_full_effects,model_no_rt)
 model_no_p_stop<- lme4::lmer(
-   med_post_trial_z ~ trial_n_s+ condition + post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid) + (1|wave),
+   med_post_trial_z ~ trial_n_s+ condition + post_pre_rt_change_z + (1 +post_pre_rt_change_z  + P_stop_trial_change_z  | subid) + (1|wave),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
   )
 
 anova(model_full_effects,model_no_p_stop)
 
-model_list <- list("RT Only"=model_no_p_stop,
-                   "P(Stop) Only"=model_no_rt,
+
+
+model_list <- list("RT Change Only, Excluding P(Stop) Change"=model_no_p_stop,
+                   "P(Stop) Change Only, Excluding RT Change"=model_no_rt,
                    "Full model"=model_full_effects
                    )
 
 
 friendly_name_transform_table<-read_csv("friendly_names.csv")
+
+
+```
+
+
+```{r}
+#save(model_list, file="temp_state.Rdata")
 table_cells <- create_sst_mlm_table(
   model_list,name_transform =friendly_name_transform_table)
+```
+
+
+
+
+The below code block is designed to do some testing.
+```{r}
+#debugSource("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/direct_regression/display_utils.R")
+#load("temp_state.Rdata")
+# table_cells <- create_sst_mlm_table(
+#   model_list,name_transform =friendly_name_transform_table,do_model_comparison=TRUE)
 
 ```
 
@@ -363,8 +381,9 @@ anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_rt, model_P_stop_trial_w_change_no_p_stop_d)
 
 
-model_list <- list("RT Only"=model_P_stop_trial_w_change_no_p_stop_d,
-                   "P(Stop) Only"=model_P_stop_trial_w_change_no_rt,
+
+model_list <- list("RT Change Only, Excluding P(Stop) Change"=model_P_stop_trial_w_change_no_p_stop_d,
+                   "P(Stop) Change Only, Excluding RT Change"=model_P_stop_trial_w_change_no_rt,
                    "Full model"=model_P_stop_trial_w_change
                    )
 
@@ -384,7 +403,7 @@ gtsave(table_cells,filename = "sst_paper_generation_w12_output/table2.html")
 
 
 ```{r}
-sjPlot::tab_model(model_P_stop_trial_w_change)
+sjplot_result <- sjPlot::tab_model(model_P_stop_trial_w_change)
 ```
 
 
@@ -397,21 +416,6 @@ anova_model$`Pr(>Chisq)`
 
 ```{r}
 model_P_stop_trial_w_change_summary <- summary(model_P_stop_trial_w_change)
-
-
-
-present_estimate_with_std_error<-function(coef_row,dp=2){
-  return(paste0(
-    as.character(round(coef_row[["Estimate"]],dp)), " (", 
-    as.character(round(coef_row[["Std. Error"]],dp)), ")"
-    ))
-}
-
-custom_mixed_model_summary<-function(model){
-  m_summary <- summary(model)
-  fixed_effects = apply(m_summary$coefficients,1,present_estimate_with_std_error)
-  return(fixed_effects)
-}
 
 #model_comparison_summary <- function(model_list){
 model_list <- list("RT Only"=model_P_stop_trial_w_change_no_p_stop_d,
@@ -553,8 +557,8 @@ anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 
 
 
-model_list <- list("RT Only"=model_P_stop_trial_w_change_no_p_stop_d,
-                   "P(Stop) Only"=model_P_stop_trial_w_change_no_rt,
+model_list <- list("RT Change Only, Excluding P(Stop) Change"=model_P_stop_trial_w_change_no_p_stop_d,
+                   "P(Stop) Change Only, Excluding RT Change "=model_P_stop_trial_w_change_no_rt,
                    "Full model"=model_P_stop_trial_w_change
                    )
 
@@ -691,6 +695,10 @@ plot_final<-ggplot(df_offset,
   #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
   #scale_y_continuous(limits=c(-2.5,2.5))
   
+#ggsave(paste0(output_folder, "/figure_1.svg"))
+
+
+#plot_final
 
 ```
 
@@ -728,10 +736,17 @@ figure_2 <- ggplot(trial_tps_compare_conditions,
   labs(y="CS-FS BOLD activity difference")
 
 
-ggsave(paste0(output_folder, "/figure_2.svg"))
 
 
-  
+
+ggsave(paste0(output_folder, "/figure_2.svg"),width = 6,height=4)
+
+ggsave(paste0(output_folder, "/figure_2.png"),width = 6,height=4)
+
+
+
+
+  figure_2
 ```
 
 OK, so from this graph it is very clear why, during the subsequent trial, we're seeing positive striatum activity, and it is also clear there is a large dip in the same area right after the tone.
@@ -748,12 +763,19 @@ OK, so from this graph it is very clear why, during the subsequent trial, we're 
 
 count_subjs <- function(df){length(unique(df$subid))}
 subj_count <- length(unique(time_points_c$subid))
-ggplot(df_offset,
+figure_3 <- ggplot(df_offset,
        aes(x=offset_start, y=`CueFollowing(CS>FS)striatal_cluster_combined`,color=condition))+
   geom_line()+
   #facet_wrap(~ROI,ncol = 2)+
   ggplot_time_points_extras
   
+
+
+ggsave(paste0(output_folder, "/figure_3.svg"),width = 6,height=4)
+
+ggsave(paste0(output_folder, "/figure_3.png"),width = 6,height=4)
+
+figure_3
 
 ```
 
@@ -785,10 +807,11 @@ df_offset_long<-df_offset %>% pivot_longer(cols=anatomical_roi_cols,names_to="RO
 
 #df_offset_long$ROI<-get_roi_good_names(df_offset_long$ROI)
 df_offset_long$ROI_bilat <- sub("(Left )|(Right )","",df_offset_long$ROI)
+df_offset_long$ROI_bilat <- gsub("Cingulate Gyrus, anterior division","ACC",df_offset_long$ROI_bilat)
 
 next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
 
-ggplot(df_offset_long %>% filter(condition %in% c("FailedStop","CorrectStop")),
+figure_4 <- ggplot(df_offset_long %>% filter(condition %in% c("FailedStop","CorrectStop")),
        aes(x=offset_start, y=value,color=ROI_bilat,group=ROI))+
   facet_wrap(~condition,nrow = 2)+
   #geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
@@ -801,8 +824,13 @@ ggplot(df_offset_long %>% filter(condition %in% c("FailedStop","CorrectStop")),
   #guides(alpha="none",color=guide_legend(title="ROI",nrow = 2))+
   ggplot_time_points_extras#+
   #theme(legend.position = "bottom")
-  
 
+ggsave(paste0(output_folder, "/figure_4.svg"),width = 6,height=6)
+
+ggsave(paste0(output_folder, "/figure_4.png"),width = 6,height=6)
+
+  
+figure_4
 #ggplot(df_offset_long,aes(x=offset_start, y=value,color=ROI,group=intersect(ROI,condition)))+geom_line()
   #geom_point()+
   #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
@@ -828,14 +856,17 @@ labels <- trial_tps_compare_conditions %>% filter(offset_start==9) %>% group_by(
   slice(1)
 #labels <- labels %>% mutate(y_pos=CS_minus_FS+(CS_minus_FS-mean(CS_minus_FS))*3)
 labels$ROI_labels <- gsub(" ","\n",labels$ROI_bilat)
-labels$ROI_labels <- gsub("Cingulate\nGyrus,\nanterior\ndivision", "Anterior\nCingulate\nGyrus",labels$ROI_labels)
+labels$ROI_bilat <- gsub("Cingulate\nGyrus,\nanterior\ndivision", "ACC",labels$ROI_bilat)
 
 
 labels <- labels %>% arrange(ROI_labels)
-labels$xpos <- c(10,6,13,10,11)
-labels$ypos <- c(0.2,-0.07,0.1,-0.07,0.15)
+#these need to be in alphabetical order
+labels$xpos <- c(6,10,13,10,11) 
+labels$ypos <- c(-0.07,0.2,0.1,-0.07,0.15)
 
-ggplot(trial_tps_compare_conditions, aes(x=offset_start, y=CS_minus_FS,color=ROI_bilat))+
+trial_tps_compare_conditions$ROI_bilat <- gsub("Cingulate Gyrus, anterior division","ACC",trial_tps_compare_conditions$ROI_bilat)
+
+figure_5 <- ggplot(trial_tps_compare_conditions, aes(x=offset_start, y=CS_minus_FS,color=ROI_bilat))+
   geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
   
   annotate("text",x=5,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
@@ -856,6 +887,14 @@ ggplot(trial_tps_compare_conditions, aes(x=offset_start, y=CS_minus_FS,color=ROI
   labs(y="CS-FS BOLD activity difference")
 
 
+
+
+ggsave(paste0(output_folder, "/figure_5.svg"),width = 6,height=4)
+
+ggsave(paste0(output_folder, "/figure_5.png"),width = 6,height=4)
+
+  
+figure_5
 
 ```
 

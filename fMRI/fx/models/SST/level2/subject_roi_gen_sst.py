@@ -58,7 +58,7 @@ train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)[0:2]
+betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 
 beta_name_list = [
     'CorrectGo',
@@ -93,7 +93,7 @@ beta_name_list = ['CorrectGoFollowingFailedStop']
 #get the ROI data
 roi_data_sst_posterror_conditions = get_roi_data_for_l2_betas(betas_with_paths, beta_name_list, sst_roi_df)
 
-roi_data_sst=pd.concat([rddf.reset_index(inplace=False, drop=True) for rddf in [roi_data_sst_conditions, roi_data_sst_posterror_conditions]], axis=1)
+roi_data_sst=pd.concat([rddf.reset_index(inplace=False, drop=True) for rddf in [roi_data_sst_conditions, roi_data_sst_posterror_conditions]], axis=0)
 
 roi_data_sst.to_csv(config['dropbox_data_dir'] + '/subject_sst_avg_roi_data_raw.csv')
 

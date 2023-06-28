@@ -41,22 +41,19 @@ roi_df = pd.concat([roi_df, signature_df])
 glob_path = config['fmriprep_dir'] + config['nii_raw_path']
 
 
-
 ###################################
-## WTP
-#filter the mask_label in mask_df, using regex, to only use stiraum, finger movements, motor control, and response inbhitioin
-wtp_roi_df = roi_df.loc[roi_df['mask_label'].str.contains('koban|value')]
+## ROC
+roc_mask_df = roi_df.loc[roi_df['mask_label'].str.contains('reappraisal|abstract|attention|striatum|craving|regulation')]
 
 
-## WTP
 train_betas_with_data = get_data_for_confirmed_train_subjs(
-    beta_glob = config['nonbids_data_path'] + "fMRI/fx/models/WTP/wave1/conditions_liked_disliked/sub-DEV*/",
+    beta_glob = config['nonbids_data_path'] + "fMRI/fx/models/ROC/wave1/conditions/sub-DEV*/",
     nonbids_data_path = config['nonbids_data_path'],
     #ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = config['dev_scripts_path'] + "/fMRI/ml",
     dropbox_datapath=config['dropbox_data_dir'],
     exclude_test_subjs=False,
-    task='WTP'
+    task='ROC'
 ).copy()
 train_betas_with_data['wave']=1
 
@@ -66,14 +63,17 @@ train_betas_with_data['wave']=1
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 betas_with_paths = get_beta_fname_list_for_beta_dirs(train_betas_with_data)
 
+
+
 #from level2.level2_roi_extraction import get_roi_data_for_l2_betas, get_roi_data_for_multirun_l2_betas
 
 beta_name_list = [
-    'liked'
+    'lookCrave',
+    'reappraiseCrave'
     ]
 
 #get the ROI data
-roi_data_wtp = get_roi_data_for_multirun_l2_betas(betas_with_paths, condition_list = beta_name_list, mask_df = wtp_roi_df)
+roi_data_roc = get_roi_data_for_multirun_l2_betas(betas_with_paths, condition_list = beta_name_list, mask_df = roc_mask_df)
 
-roi_data_wtp.to_csv(config['dropbox_data_dir'] + '/subject_wtp_avg_roi_data_raw.csv')
+roi_data_roc.to_csv(config['dropbox_data_dir'] + '/subject_roc_avg_roi_data_raw.csv')
 
