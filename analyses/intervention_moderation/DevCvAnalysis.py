@@ -13,7 +13,7 @@ class DevCvAnalysis:
         self.data_by_ppt_path = dropbox_data_dir + '/data_by_ppt.csv'
         self.data_by_wave_ppt_path = dropbox_data_dir + '/data_by_wave_ppt.csv'
         self.group_codes_path = dropbox_data_dir + '/DEV-GroupAbridged_DATA_LABELS_2023-06-23_1859.csv'
-        self.data_codebook_path = dropbox_data_dir + 'data_codebook_DEV - data_codebook_combined.csv'
+        self.data_codebook_path = dropbox_data_dir + 'data_codebook_DEV - data_codebook_optimized.csv'
         self.mastersheet_path = dropbox_data_dir + 'DEV Participant Mastersheet_copy.xlsx'
 
         self.run_real_analysis=False
@@ -24,10 +24,12 @@ class DevCvAnalysis:
         self.__predictor_data = None
         self.__predictors_main_names = []
         self.__predictors_interactions_names = []
+        self.__full_dataset = None
         #self.__predictors_groups = []
         self.group_assignment_onehots = None
         self.outcome = None
         self.predictor_subset = None
+
 
     def set_predictor_subset(self, predictor_subset: list):
         '''
@@ -42,10 +44,15 @@ class DevCvAnalysis:
         self.predictor_subset = predictor_subset
 
 
+    def get_full_dataset(self):
+        return(self.__full_dataset)
 
     def get_predictor_data(self):
         return(self.__predictor_data)
     
+    '''
+    Gets predictors excluding interaction terms and groups
+    '''
     def get_main_predictor_data(self):
         return(self.__predictor_data[self.__predictors_main_names])
 
@@ -55,7 +62,13 @@ class DevCvAnalysis:
     def get_active_predictor_subset(self) -> pd.DataFrame:
         return(self.__predictor_data[self.predictor_subset])
     
+    '''
+    set_predictor_data:
+    currently deprecated and will throw an error
+    let's make this immutable for now!
+    '''
     def set_predictor_data(self, predictor_data):
+        raise NotImplementedError("currently predictor data is immutable once it has been set")
         self.__predictor_data = predictor_data
         self.__predictors_main_names = predictor_data.columns
 
@@ -76,7 +89,9 @@ class DevCvAnalysis:
         use_dummy_outcome_data=True,
         include_neural_data=False,
         include_groups=False,
-        rearrange_groups=None
+        rearrange_groups=None,
+        predictor_transform_func=None,
+        groups_to_remove = []
         ):
         """
         
@@ -156,7 +171,19 @@ class DevCvAnalysis:
             outcomes_s2_minus_s1 = subjects_in_both_df.merge(outcomes_s2_minus_s1, how='left', on='SID')
             
             raw_predictors = subjects_in_both_df.merge(raw_predictors, how='left', on='SID')
+
+            #if groups are marked for removal, remove them
+            #test if each element in the series raw_predictors.intervention_group is in groups_to_remove
+            #if it is, then set it to np.nan
+            rows_to_remove = raw_predictors.intervention_group.isin(groups_to_remove)
+            raw_predictors = raw_predictors.loc[rows_to_remove==False,:].reset_index(drop=True)
+            outcomes_s2_minus_s1 = outcomes_s2_minus_s1.loc[rows_to_remove==False,:].reset_index(drop=True)
+            
+
             outcomes_s2_minus_s1 = outcomes_s2_minus_s1.loc[:,outcome_cols_only].copy()
+
+        if predictor_transform_func is not None:
+            raw_predictors = predictor_transform_func(raw_predictors)
 
         # do a report on missing data
         predictors_df  = raw_predictors.loc[:,data_codebook.loc[data_codebook.Aim3PredictorsFinal,"VarName"]].copy()
@@ -181,9 +208,13 @@ class DevCvAnalysis:
             outcomes_sid = outcomes_s2_minus_s1.SID.tolist()
             outcomes_s2_minus_s1 = outcomes_s2_minus_s1.sample(frac=1, random_state=42).reset_index(drop=True)
             outcomes_s2_minus_s1['SID'] = outcomes_sid
+            print("run_real_analysis is False, so we're randomizing the outcomes, but keeping the SIDs the same. ")
+        else:
+            print("run_real_analysis is True, so we're not randomizing the outcomes. ")
 
         self.__predictor_data=predictors_df.copy()
         self.__predictors_main_names=predictors_df.columns.tolist()
+        self.__full_dataset = raw_predictors.copy()
 
         self.outcome_measures=outcomes_s2_minus_s1.copy()
 

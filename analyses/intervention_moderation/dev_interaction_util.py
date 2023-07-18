@@ -1,5 +1,6 @@
 
 
+import time
 from sklearn import clone
 from sklearn.feature_selection import RFE, SelectKBest, f_regression
 from sklearn.inspection import permutation_importance
@@ -195,9 +196,14 @@ def generate_synthetic_dev_data(analysis_data_imputed, group_assignments, outcom
 
 
 def get_outcome_diff_scores_from_longitudinal(data_codebook_path, data_by_wave_ppt_path):
-    #calculate the difference score for the outcome measures
     data_by_wave_ppt = pd.read_csv(data_by_wave_ppt_path)
     data_codebook = pd.read_csv(data_codebook_path,skiprows=1)
+    #calculate the difference score for the outcome measures
+    return(get_outcome_diff_scores_from_longitudinal_dfs(data_codebook, data_by_wave_ppt))
+
+
+def get_outcome_diff_scores_from_longitudinal_dfs(data_codebook, data_by_wave_ppt):
+    #calculate the difference score for the outcome measures
 
     outcome_cols_only = data_codebook.loc[data_codebook.IsSelectedLongitudinalOutcomeMeasure,"VarName"].tolist()
     outcome_df_cols = ['SID', 'session_id']+ outcome_cols_only
@@ -350,7 +356,7 @@ def do_scoring_loop(X, y, groups,hyperparameter_selection_on_fold,outer_folds):
       predicted_y = best_model_i.predict(test_i_X)
       actual_y = test_i_y
       #get the correlation
-      corr = np.corrcoef(predicted_y,actual_y)[0,1]
+      #corr = np.corrcoef(predicted_y,actual_y)[0,1]
         
 
       scores.append(score_r2_i)
@@ -388,7 +394,11 @@ def do_hyperparameter_selection_loop(X, y,cv, fast_mode=False):
     alpha_increments=1
     alpha_range = np.concatenate([np.power(10,np.linspace(-alpha_10pow_lower,alpha_10pow_upper,(alpha_10pow_lower+alpha_10pow_upper)*alpha_increments+1)),
         [0.2,0.4,0.6,0.8,1.0]])
+    C_range = [0.01, 0.1, 1, 10, 100]
+    gamma_range = [0.001, 0.01, 0.1, 1]
     if fast_mode: alpha_range = [0.2,0.99]
+    if fast_mode: C_range = [0.02, 1, 20]
+    if fast_mode: gamma_range = [0.02, 1]
     
     all_cv_results = []
 
@@ -407,6 +417,32 @@ def do_hyperparameter_selection_loop(X, y,cv, fast_mode=False):
             'estimator':linear_model.Lasso,
             'parameters':{'alpha':alpha_range}
         },
+        'LinearSVR':{
+            'estimator':svm.SVR,
+            'parameters':{
+                'kernel':['linear'],
+                'C': C_range}
+
+        },
+        'PolySVR':{
+            'estimator':svm.SVR,
+            'parameters':{
+                            'kernel':['poly'],
+                            'C': C_range,
+                            'degree': [2,3],
+                            'coef0': [0.1, 0.333, 1]
+                          }
+
+        },
+        'RBFSVR':{
+            'estimator':svm.SVR,
+            'parameters':{'kernel':['rbf'],
+                        'C': C_range,
+                        'gamma': gamma_range,
+                        'epsilon': [0.05, 0.5]
+                          }
+
+        },
         'DecisionTreeRegressor':{
             'estimator':DecisionTreeRegressor,
             'parameters':{
@@ -417,31 +453,48 @@ def do_hyperparameter_selection_loop(X, y,cv, fast_mode=False):
         }             
     }
     #remove decision trees if we're running in fast mode
-    if fast_mode: estimators_to_run.pop('DecisionTreeRegressor')
+    if fast_mode:
+        estimators_to_run.pop('DecisionTreeRegressor')
+        #estimators_to_run.pop('DecisionTreeRegressor')
 
+    #let's time how long it takes for each estimator name,
+    # #starting with a dictionary that stores the elapsed time in seconds (starting at 0) for each estimator
+    # #we'll use this to store the elapsed time for each estimator
+    estimator_elapsed_time = {estimator_name:0 for estimator_name in estimators_to_run.keys()}
+
+
+    
     for estimator_name,estimator_dict in estimators_to_run.items():
         #param grid for the feature seelction
         #this is here because we need to know the estimator to pass to the feature selector
-        feature_selectors_to_run = {
-            'None':None,
-            'KBest':{
-                'selector':SelectKBest(),
-                'parameters':{
-                    'score_func' : [f_regression], 
-                    'k' : limit_range_to_n([5, 10, 15], X)
+        if X.shape[1]==1:
+            feature_selectors_to_run = {
+                'None':None}
+            print("Only one feature, so skipping feature selection")
+        else:
+            feature_selectors_to_run = {
+                'None':None,
+                'KBest':{
+                    'selector':SelectKBest(),
+                    'parameters':{
+                        'score_func' : [f_regression], 
+                        'k' : limit_range_to_n([5, 10, 15], X)
+                        }
+                },
+                'RFE':{
+                    'selector':RFE(linear_model.LinearRegression()),
+                    'parameters':{
+                        'n_features_to_select' : limit_range_to_n([5,10,15], X),
+                        #'verbose':[1],
+                        'step':[5]
                     }
-            },
-            'RFE':{
-                'selector':RFE(linear_model.LinearRegression()),
-                'parameters':{
-                    'n_features_to_select' : limit_range_to_n([5,10,15], X),
-                    #'verbose':[1],
-                    'step':[5]
                 }
             }
-        }
-        #remove RFE if we're running in fast mode
-        if fast_mode: feature_selectors_to_run.pop('RFE')
+            #remove RFE if we're running in fast mode
+            if fast_mode: feature_selectors_to_run.pop('RFE')
+
+        #start timer
+        estimator_start_time = time.time()
 
         for selector_name, selector_dict in feature_selectors_to_run.items():
         #create the estimator
@@ -466,9 +519,21 @@ def do_hyperparameter_selection_loop(X, y,cv, fast_mode=False):
         
             gs_1 = GridSearchCV(estimator=pipeline, 
                                 param_grid = full_param_grid, 
-                                cv=cv,scoring='neg_mean_absolute_error',verbose=1)
-            gs_1.fit(X,y)
-            all_cv_results.append(gs_1)
+                                cv=cv,scoring='r2',verbose=1)
+            try:
+                gs_1.fit(X,y)
+                all_cv_results.append(gs_1)
+            except ValueError as e:
+                print("Error: {}".format(e) + " for {}".format(estimator_name))
+                print("Skipping {}".format(estimator_name))
+                continue
+            
+            
+
+        #stop timer
+        estimator_elapsed_time[estimator_name] += time.time() - estimator_start_time
+        print("Time elapsed for {}: {:.2f} seconds".format(estimator_name, estimator_elapsed_time[estimator_name]))
+
 
     #create a dataframe with the best parameters, best mean_test_score, and name of the model
 
@@ -526,7 +591,8 @@ def get_best_model(cv_results_df):
     )
 
     #print the list in an html format that will look pretty in jupyter
-    display(HTML(list_model_performance.to_html()))
+    performance_to_show = list_model_performance.iloc[range(min(list_model_performance.shape[0],20)),:]
+    display(HTML(performance_to_show.to_html()))
 
     overall_fits =  performance_list.reset_index()
 
@@ -559,7 +625,7 @@ def present_model_results(X,y, final_fit):
     final_estimator = final_fit.named_steps['estimator']
     
     if hasattr(final_estimator,'coef_'):
-        coef = final_estimator.coef_
+        coef = final_estimator.coef_.flatten()
     else:
         coef = None
 
@@ -583,7 +649,7 @@ def present_model_results(X,y, final_fit):
     
     final_results = pd.DataFrame({
         'predictor': feature_names,
-        'coef': coef,
+        'coef': coef,# NOT SURE IF THIS IS RIGHT. NEED TO BE VERY CAREFUL ABOUT IT.
         'feature_importance':pd.Series(permutation_res)[feature_bool]
         #'std_err': np.sqrt(np.diag(model_fit.coef_cov_)),
         #'pval': 2*(1-stats.t.cdf(np.abs(model_fit.coef_/np.sqrt(np.diag(model_fit.coef_cov_))),df=predictor_data_nona.shape[0]-predictor_data_nona.shape[1]))
@@ -854,6 +920,16 @@ def run_full_limited_predictor_analysis(total_predictor_count, outcome_measures,
 
 
 
+def get_combined_roi_analyses(predictors):
+    cols_to_aggregate = [
+        'wtp_liked_koban_kober_craving_wmapN99_boot10K_02-May-2022_notzero',
+        'roc_lookCrave_koban_kober_craving_wmapN99_boot10K_02-May-2022_notzero'   
+    ]
+    #get the mean of the two columns across rows
+    predictors['wtp_roc_koban_kober_craving_combined'] = predictors[cols_to_aggregate].mean(axis=1)
+
+    return(predictors)
+
 
 
 def load_roi_data(roi_data_dir):
@@ -878,6 +954,9 @@ def load_roi_data(roi_data_dir):
     roi_data_w1 = roi_data_w1_raw.loc[:,unique_activity_cols + ['run','roi_activity']]
 
     roi_grouped_data_long = roi_data_w1.groupby(unique_activity_cols)['roi_activity'].mean().reset_index()
+
+    #get just the reappraisecrave condition for the ROC task
+    roi_grouped_data_long.loc[roi_grouped_data_long['condition']!='reappraiseCrave','roi_activity']
 
     roi_grouped_data = roi_grouped_data_long.pivot_table(index=['subject_id'],columns=['task','condition','mask_label'],values='roi_activity').reset_index()
     #now flatten the table to make it easier to work with, combining levels with underscores

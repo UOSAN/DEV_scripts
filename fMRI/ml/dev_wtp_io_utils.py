@@ -98,7 +98,8 @@ def get_run_event_df(run_object):
             'health_cond':run_object['HealthCond'][event_i],
             'liking_cond':run_object['LikingCond'][event_i],
             'liking_rating':run_object['LikingRating'][event_i],
-            'response':run_object['Resp'][event_i]
+            'response':run_object['Resp'][event_i],
+            'RT':run_object['RT'][event_i]
         }
         #only log a 'post-jitter' if there's actually one coming after
         if event_i < (len(run_object['Jitter'])-1):
