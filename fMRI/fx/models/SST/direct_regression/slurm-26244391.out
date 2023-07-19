@@ -1,0 +1,22 @@
+loading anaconda
+n222
+{'dropbox_data_dir': '/gpfs/projects/sanlab/bsmith16/data', 'fmriprep_dir': '/gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/', 'nii_raw_path': 'sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii', 'mask_location': '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/'}
+looking up /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii
+DEV033, 1
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/image/image.py:1106: FutureWarning: The parameter "sessions" will be removed in 0.9.0 release of Nilearn. Please use the parameter "runs" instead.
+  data = signal.clean(
+CueFollowing(CS>FS)striatal_cluster_combined_20230512
+producing the vector for this mask/series...
+Traceback (most recent call last):
+  File "get_all_series_main.py", line 81, in <module>
+    roi_data = get_roi_data(nii_raw_files,mask_df)
+  File "/gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/SST/direct_regression/get_all_series.py", line 116, in get_roi_data
+    active_img_masked = mask_4d_subject_image(mask_raw,active_img_cleaned)
+  File "/gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/SST/direct_regression/get_all_series.py", line 46, in mask_4d_subject_image
+    return(subject_space_mask_image(mask_in_subj_space, active_img_cleaned))
+  File "/gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/SST/direct_regression/get_all_series.py", line 68, in subject_space_mask_image
+    print("mask " + m_set['mask_label'] + " is already binarized; skipping binarization step")
+NameError: name 'm_set' is not defined
+finished
