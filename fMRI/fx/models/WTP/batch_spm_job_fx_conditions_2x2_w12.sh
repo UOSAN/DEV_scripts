@@ -23,6 +23,7 @@ SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 # Set MATLAB script path
 SCRIPT_PATH_PREFIX=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_conditions_
 
+TASK=WTP
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job.sh
@@ -31,7 +32,7 @@ SHELL_SCRIPT=spm_job.sh
 RESULTS_INFIX=fx_conditions
 
 # Set output dir and make it if it doesn't exist
-OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output
+OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_${TASK}_${RESULTS_INFIX}
 
 if [ ! -d ${OUTPUTDIR} ]; then
 	mkdir -p ${OUTPUTDIR}
