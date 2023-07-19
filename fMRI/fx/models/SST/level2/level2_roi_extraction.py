@@ -170,16 +170,15 @@ def get_roi_data_for_l2_betas(beta_list, condition_list,roi_df):
                 continue
 
             #for each mask
-
-            roi_data_all.append(
-                get_roi_data_for_beta(
+            roi_data_for_beta = get_roi_data_for_beta(
                     r['subject_id'],
                     r['wave'],
                     r['spm_l2_path'],
                     condition,
                     r[colname],
                     raw_roi_list, roi_df, active_img_cleaned)
-            )
 
-    roi_data_df = pd.DataFrame(roi_data_all)
+            roi_data_all.append(pd.DataFrame(roi_data_for_beta))
+
+    roi_data_df = pd.concat(roi_data_all)
     return roi_data_df

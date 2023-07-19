@@ -45,7 +45,7 @@ glob_path = config['fmriprep_dir'] + config['nii_raw_path']
 ###################################
 ## WTP
 #filter the mask_label in mask_df, using regex, to only use stiraum, finger movements, motor control, and response inbhitioin
-wtp_roi_df = roi_df.loc[roi_df['mask_label'].str.contains('striatum|value')]
+wtp_roi_df = roi_df.loc[roi_df['mask_label'].str.contains('koban|value')]
 
 
 ## WTP

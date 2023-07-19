@@ -1,0 +1,176 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+
+#install.packages("tidystats")
+library(stringr)
+library(dplyr)
+library(ggplot2)
+library(rstatix)
+library(data.table)
+library(tidyverse)
+#source("utils.R")
+# data_path <- "../../grant-writing-workshop/files/data/"
+
+# load(paste0(config::get("dev_analysis_data_dir"),"scored_data_w_demographics.RData"))
+dropbox_file_dir = config::get("dropbox_data_dir")
+# scored<-scored_with_demographics
+# rm(scored_with_demographics)
+# scored$score <- as.numeric(scored$score)
+# scored$scale_name <- sub("-","_",scored$scale_name)
+
+```
+
+Now let's load the file
+
+```{r}
+full_dataset_aim3<- readr::read_csv(paste0(dropbox_file_dir,"full_dataset_aim3.csv"))
+```
+```{r}
+# nutrient_density_t0t1_summary <- 
+#   nutrient_density_t0t1 %>% 
+#   group_by("intervention_group",)
+#   summarise(Mean=mean)
+# ggplot(nutrient_density_t0t1,aes())
+```
+
+Set up intervention_group as a factor and identify the outcome_cols
+
+```{r}
+full_dataset_aim3$intervention_group <- factor(full_dataset_aim3$intervention_group,levels = c("willamette","umpqua","mckenzie"))
+outcome_cols <- colnames(full_dataset_aim3) %>% stringr::str_extract(".*(baseline|wkpost|mopost)") %>% .[!is.na(.)]
+```
+
+
+Do the transform into a long format, for the mixed effects model.
+
+```{r}
+
+
+
+
+key_cols = c("SID","intervention_group")
+
+main_effect_long <- full_dataset_aim3[,c(key_cols,outcome_cols)] %>% 
+  pivot_longer(cols=outcome_cols,names_to=c("outcome_type","outcome_time"),names_pattern = "(.*)\\_(.*)$", values_to = "outcome_value")
+
+main_effect_long$outcome_time <- factor(main_effect_long$outcome_time,levels = c("baseline","1wkpost","3mopost","6mopost","12mopost"))
+```
+
+
+```{r}
+table(main_effect_long$outcome_type)
+```
+
+Why don't we loop over the different otucome types and see what comes out for each?
+```{r}
+outcome_types <- unique(main_effect_long$outcome_type)
+
+for (ot in outcome_types){
+  print("----")
+  print(ot)
+  
+  outcome_table_t0t1<-main_effect_long %>% filter(outcome_type==ot & outcome_time %in% c("baseline","1wkpost"))
+  
+  
+  library(lme4)
+  model_base <- lme4::lmer(outcome_value~intervention_group+outcome_time + (1|SID),outcome_table_t0t1)
+  model_int <- lme4::lmer(outcome_value~intervention_group*outcome_time + (1|SID),outcome_table_t0t1)
+  
+  print(summary(model_int))
+  print(anova(model_base, model_int))
+
+}
+
+
+```
+
+
+Right I see. Now, in the Moderation Analysis, we've used difference scores. So. Do we get the significant effects with difference scores?
+
+Let's create a new table with difference scores
+
+```{r}
+full_dataset_aim3_w_diffscores<-full_dataset_aim3
+separated_outcome_time_matrix<-stringr::str_match(outcome_cols,"(.*)\\_(.*)$")
+unique_outcome_times<-unique(separated_outcome_time_matrix[,3])
+unique_outcome_types<-unique(separated_outcome_time_matrix[,2])
+
+for (ot in unique_outcome_types){
+  full_dataset_aim3_w_diffscores[,paste0(ot,"_1wkpost_minus_baseline")] <- full_dataset_aim3_w_diffscores[,paste0(ot,"_1wkpost")] - full_dataset_aim3_w_diffscores[,paste0(ot,"_baseline")]
+}
+
+```
+
+```{r}
+for (ot in outcome_types){
+  print(ot)
+  #create the formula
+  ot_colname <- paste0(ot,"_1wkpost_minus_baseline")
+  formula <- paste0(ot_colname, " ~ intervention_group")
+  print(formula)
+  print(summary(lm(as.formula(formula),full_dataset_aim3_w_diffscores)))
+  #let's count exactly how many not NA values there are for this analysis.
+  ig_na <- is.na(full_dataset_aim3_w_diffscores$intervention_group)
+  outcome_na <-is.na(full_dataset_aim3_w_diffscores[,ot_colname])
+  na_mask <- ig_na | outcome_na
+  not_na_ds<-full_dataset_aim3_w_diffscores[!na_mask,]
+  print("dataset shape: ")
+  print(dim(not_na_ds))
+  #print(paste(not_na_ds$SID,collapse=", "))
+  
+  
+}
+```
+
+
+Yep the results are more or less the same. We should see an effect for Nutrient Density, and, if we measure it, the old Cncer Preventing less Cancer Promoting measure. For umpqua in particular.
+
+## Nutrient density deep dive
+
+It might be that the cross-validated design is just not sensitive enough to the differences, such that although we get an r^2 above of 0.07, this doesn't work out to be significantly predictive with cross-validation. At least now we can zoom in on this difference.
+
+
+```{r}
+
+not_na_ds$NUTRIENT_DENSITY_2wkAverage_FFQ_NutrientDensity_1wkpost_minus_baseline
+
+```
+
+
+
+```{r}
+ig_na <- is.na(full_dataset_aim3$intervention_group)
+outcome_na <-is.na(full_dataset_aim3[,"NUTRIENT_DENSITY_2wkAverage_FFQ_NutrientDensity_baseline"])
+na_mask = ig_na | outcome_na
+```
+
+```{r}
+full_dataset_aim3[!na_mask,c("SID","NUTRIENT_DENSITY_2wkAverage_FFQ_NutrientDensity_baseline")]
+```
+What if we read data directly from the python?
+
+```{r}
+X<- readr::read_csv(paste0(dropbox_file_dir,"intervention_only_X_onehots.csv"))
+y<-readr::read_csv(paste0(dropbox_file_dir,"intervention_only_y.csv"))
+
+yX<-cbind(y,X)
+
+nutrient_rich_model <- lm(NUTRIENT_RICH_FOODS_INDEX_2wkAverage~umpqua + mckenzie, yX)
+
+summary(nutrient_rich_model)
+```
+
+## Calculate cohen's d
+
+```{r}
+nrm_summary<-summary(nutrient_rich_model)
+cohens_d <- nrm_summary$coefficients[,1] / (nrm_summary$coefficients[,2]*sqrt(nrow(nutrient_rich_model$model)))
+cohens_d
+```
+

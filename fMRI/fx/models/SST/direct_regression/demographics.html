@@ -453,6 +453,31 @@ num_male&lt;-bs_table[names(bs_table)==2]</code></pre>
 60</p>
 <p>There were 208 participants and 93 participants.</p>
 </div>
+<div id="demographics-of-contrast-analysis" class="section level2">
+<h2>Demographics of Contrast analysis</h2>
+<pre class="r"><code>contrast_dataset_raw &lt;- readr::read_csv(paste0(config::get(&quot;dev_scripts_path&quot;),&quot;fMRI/fx/models/SST/level2/posterror_cues_no_rt_20230616/raw_filelist.csv&quot;))</code></pre>
+<pre><code>## New names:
+## Rows: 217 Columns: 26
+## ── Column specification
+## ──────────────────────────────────────────────────────── Delimiter: &quot;,&quot; chr
+## (24): subject_id, spm_l2_path, spm_l2_path_description, contrast_CueFoll... dbl
+## (1): ...1 lgl (1): spm_l2_targeted_contrast_filepath
+## ℹ Use `spec()` to retrieve the full column specification for this data. ℹ
+## Specify the column types or set `show_col_types = FALSE` to quiet this message.
+## • `` -&gt; `...1`</code></pre>
+<pre class="r"><code>contrast_dataset_full &lt;- merge(contrast_dataset_raw,ppt_list_w_data,by.x = &quot;subject_id&quot;,by.y=&quot;dev_id&quot;,all.x=TRUE)</code></pre>
+<pre class="r"><code>library(lubridate)
+
+#year(as.Date(ppt_list_w_data$date_0))#-as.Date(ppt_list_w_data$dob)
+contrast_dataset_full$age_in_years &lt;- interval(as.Date(contrast_dataset_full$dob),as.Date(contrast_dataset_full$date_0)) %/% years(1)
+
+bs_table&lt;-table(contrast_dataset_full$birthsex)
+num_female&lt;-bs_table[names(bs_table)==1]
+num_male&lt;-bs_table[names(bs_table)==2]</code></pre>
+<p>Mean participant age is 37 (SD=11.3217954); age range was 18 to
+60</p>
+<p>There were 163 female participants and 51 male participants.</p>
+</div>
 
 
 

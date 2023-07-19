@@ -1,5 +1,6 @@
 
 
+import time
 from sklearn import clone
 from sklearn.feature_selection import RFE, SelectKBest, f_regression
 from sklearn.inspection import permutation_importance
@@ -194,7 +195,43 @@ def generate_synthetic_dev_data(analysis_data_imputed, group_assignments, outcom
     return({'X_weights':interaction_effect_df,'y':outcome_measures})    
 
 
+def get_outcome_diff_scores_from_longitudinal(data_codebook_path, data_by_wave_ppt_path):
+    data_by_wave_ppt = pd.read_csv(data_by_wave_ppt_path)
+    data_codebook = pd.read_csv(data_codebook_path,skiprows=1)
+    #calculate the difference score for the outcome measures
+    return(get_outcome_diff_scores_from_longitudinal_dfs(data_codebook, data_by_wave_ppt))
+
+
+def get_outcome_diff_scores_from_longitudinal_dfs(data_codebook, data_by_wave_ppt):
+    #calculate the difference score for the outcome measures
+
+    outcome_cols_only = data_codebook.loc[data_codebook.IsSelectedLongitudinalOutcomeMeasure,"VarName"].tolist()
+    outcome_df_cols = ['SID', 'session_id']+ outcome_cols_only
+    outcome_measures_long_all = data_by_wave_ppt.loc[:,outcome_df_cols].copy()
+    #just select session 1 and 2
+    outcome_measures_long = outcome_measures_long_all.loc[outcome_measures_long_all.session_id.isin([1,2]),:]
+    #now get the difference between session 1 and session 2
+
+    outcomes_s1 = outcome_measures_long.loc[outcome_measures_long['session_id'] == 1].set_index('SID')
+    outcomes_s2 = outcome_measures_long.loc[outcome_measures_long['session_id'] == 2].set_index('SID')
+    outcomes_s2_minus_s1 = (outcomes_s2 - outcomes_s1).reset_index()
+    #session_id isn't applicable anymore
+    outcomes_s2_minus_s1.drop(columns=['session_id'], inplace=True)
+    #remove any rows where there's an NaN difference for all columns
+    #get a dataframe that is all the columns except the index
+    outcomes_s2_minus_s1 = outcomes_s2_minus_s1.loc[~outcomes_s2_minus_s1.drop(columns=['SID'], inplace=False).isna().all(axis=1),:]
+
+    return(outcomes_s2_minus_s1)
+
+
+
+
 def get_outcome_changes(outcome_measures, analysis_data, group_assignments):
+    ###
+    #calculates outcome changes for the outcome measures
+    #assigns groups into one-hots
+    #sets up interactions between groups
+    #removes NA values
 
     outcome_measures = calculate_outcome_changes(outcome_measures)
     group_assignment_onehots = pd.get_dummies(group_assignments).loc[:,['ni','san']]
@@ -212,6 +249,30 @@ def get_outcome_changes(outcome_measures, analysis_data, group_assignments):
     return(outcome_nas,outcome_measures_nona, predictor_data_nona,
            group_assignment_onehots_nonan,
            group_assignments_nona)
+
+def remove_nas_from_data(outcome_measures, predictor_data, group_assignments, group_assignment_onehots):
+    outcome_nas = outcome_measures['d_bf'].isna()
+    outcome_measures_nona = outcome_measures.loc[~outcome_nas,:]
+    predictor_data_nona = predictor_data.loc[~outcome_nas,:]
+    group_assignment_onehots_nonan = group_assignment_onehots.loc[~outcome_nas,:]
+    group_assignments_nona = group_assignments[~outcome_nas]
+    return(outcome_nas,outcome_measures_nona,
+           predictor_data_nona,
+           group_assignment_onehots_nonan, group_assignments_nona)
+
+
+
+
+def set_up_interactions_from_group_assignments(analysis_data, group_assignments,reference_group_name=None):
+    if reference_group_name is not None:
+        all_groups = group_assignments.unique()
+        indicator_vars = all_groups[all_groups != reference_group_name]
+    else:
+        indicator_vars = group_assignments.unique()[1:]
+
+    group_assignment_onehots = pd.get_dummies(group_assignments).loc[:,indicator_vars]
+    predictor_data = set_up_interactions(analysis_data, group_assignment_onehots)
+    return(predictor_data, group_assignment_onehots)
 
 
 
@@ -271,7 +332,7 @@ def do_scoring_loop(X, y, groups,hyperparameter_selection_on_fold,outer_folds):
 
       train_i_X, X_was_imputed = apply_imputer(X.iloc[train_i])
       train_i_y = y.iloc[train_i]
-      train_i_group_assignments = groups[train_i]
+      train_i_group_assignments = groups.iloc[train_i]
       #print(train_i_y)
 
       test_i_X, X_was_imputed = apply_imputer(X.iloc[test_i])
@@ -295,7 +356,7 @@ def do_scoring_loop(X, y, groups,hyperparameter_selection_on_fold,outer_folds):
       predicted_y = best_model_i.predict(test_i_X)
       actual_y = test_i_y
       #get the correlation
-      corr = np.corrcoef(predicted_y,actual_y)[0,1]
+      #corr = np.corrcoef(predicted_y,actual_y)[0,1]
         
 
       scores.append(score_r2_i)
@@ -333,7 +394,11 @@ def do_hyperparameter_selection_loop(X, y,cv, fast_mode=False):
     alpha_increments=1
     alpha_range = np.concatenate([np.power(10,np.linspace(-alpha_10pow_lower,alpha_10pow_upper,(alpha_10pow_lower+alpha_10pow_upper)*alpha_increments+1)),
         [0.2,0.4,0.6,0.8,1.0]])
+    C_range = [0.01, 0.1, 1, 10, 100]
+    gamma_range = [0.001, 0.01, 0.1, 1]
     if fast_mode: alpha_range = [0.2,0.99]
+    if fast_mode: C_range = [0.02, 1, 20]
+    if fast_mode: gamma_range = [0.02, 1]
     
     all_cv_results = []
 
@@ -352,6 +417,32 @@ def do_hyperparameter_selection_loop(X, y,cv, fast_mode=False):
             'estimator':linear_model.Lasso,
             'parameters':{'alpha':alpha_range}
         },
+        'LinearSVR':{
+            'estimator':svm.SVR,
+            'parameters':{
+                'kernel':['linear'],
+                'C': C_range}
+
+        },
+        'PolySVR':{
+            'estimator':svm.SVR,
+            'parameters':{
+                            'kernel':['poly'],
+                            'C': C_range,
+                            'degree': [2,3],
+                            'coef0': [0.1, 0.333, 1]
+                          }
+
+        },
+        'RBFSVR':{
+            'estimator':svm.SVR,
+            'parameters':{'kernel':['rbf'],
+                        'C': C_range,
+                        'gamma': gamma_range,
+                        'epsilon': [0.05, 0.5]
+                          }
+
+        },
         'DecisionTreeRegressor':{
             'estimator':DecisionTreeRegressor,
             'parameters':{
@@ -362,31 +453,48 @@ def do_hyperparameter_selection_loop(X, y,cv, fast_mode=False):
         }             
     }
     #remove decision trees if we're running in fast mode
-    if fast_mode: estimators_to_run.pop('DecisionTreeRegressor')
+    if fast_mode:
+        estimators_to_run.pop('DecisionTreeRegressor')
+        #estimators_to_run.pop('DecisionTreeRegressor')
 
+    #let's time how long it takes for each estimator name,
+    # #starting with a dictionary that stores the elapsed time in seconds (starting at 0) for each estimator
+    # #we'll use this to store the elapsed time for each estimator
+    estimator_elapsed_time = {estimator_name:0 for estimator_name in estimators_to_run.keys()}
+
+
+    
     for estimator_name,estimator_dict in estimators_to_run.items():
         #param grid for the feature seelction
         #this is here because we need to know the estimator to pass to the feature selector
-        feature_selectors_to_run = {
-            'None':None,
-            'KBest':{
-                'selector':SelectKBest(),
-                'parameters':{
-                    'score_func' : [f_regression], 
-                    'k' : limit_range_to_n([5, 10, 15], X)
+        if X.shape[1]==1:
+            feature_selectors_to_run = {
+                'None':None}
+            print("Only one feature, so skipping feature selection")
+        else:
+            feature_selectors_to_run = {
+                'None':None,
+                'KBest':{
+                    'selector':SelectKBest(),
+                    'parameters':{
+                        'score_func' : [f_regression], 
+                        'k' : limit_range_to_n([5, 10, 15], X)
+                        }
+                },
+                'RFE':{
+                    'selector':RFE(linear_model.LinearRegression()),
+                    'parameters':{
+                        'n_features_to_select' : limit_range_to_n([5,10,15], X),
+                        #'verbose':[1],
+                        'step':[5]
                     }
-            },
-            'RFE':{
-                'selector':RFE(linear_model.LinearRegression()),
-                'parameters':{
-                    'n_features_to_select' : limit_range_to_n([5,10,15], X),
-                    #'verbose':[1],
-                    'step':[5]
                 }
             }
-        }
-        #remove RFE if we're running in fast mode
-        if fast_mode: feature_selectors_to_run.pop('RFE')
+            #remove RFE if we're running in fast mode
+            if fast_mode: feature_selectors_to_run.pop('RFE')
+
+        #start timer
+        estimator_start_time = time.time()
 
         for selector_name, selector_dict in feature_selectors_to_run.items():
         #create the estimator
@@ -411,9 +519,21 @@ def do_hyperparameter_selection_loop(X, y,cv, fast_mode=False):
         
             gs_1 = GridSearchCV(estimator=pipeline, 
                                 param_grid = full_param_grid, 
-                                cv=cv,scoring='neg_mean_absolute_error',verbose=1)
-            gs_1.fit(X,y)
-            all_cv_results.append(gs_1)
+                                cv=cv,scoring='r2',verbose=1)
+            try:
+                gs_1.fit(X,y)
+                all_cv_results.append(gs_1)
+            except ValueError as e:
+                print("Error: {}".format(e) + " for {}".format(estimator_name))
+                print("Skipping {}".format(estimator_name))
+                continue
+            
+            
+
+        #stop timer
+        estimator_elapsed_time[estimator_name] += time.time() - estimator_start_time
+        print("Time elapsed for {}: {:.2f} seconds".format(estimator_name, estimator_elapsed_time[estimator_name]))
+
 
     #create a dataframe with the best parameters, best mean_test_score, and name of the model
 
@@ -471,7 +591,8 @@ def get_best_model(cv_results_df):
     )
 
     #print the list in an html format that will look pretty in jupyter
-    display(HTML(list_model_performance.to_html()))
+    performance_to_show = list_model_performance.iloc[range(min(list_model_performance.shape[0],20)),:]
+    display(HTML(performance_to_show.to_html()))
 
     overall_fits =  performance_list.reset_index()
 
@@ -504,7 +625,7 @@ def present_model_results(X,y, final_fit):
     final_estimator = final_fit.named_steps['estimator']
     
     if hasattr(final_estimator,'coef_'):
-        coef = final_estimator.coef_
+        coef = final_estimator.coef_.flatten()
     else:
         coef = None
 
@@ -528,7 +649,7 @@ def present_model_results(X,y, final_fit):
     
     final_results = pd.DataFrame({
         'predictor': feature_names,
-        'coef': coef,
+        'coef': coef,# NOT SURE IF THIS IS RIGHT. NEED TO BE VERY CAREFUL ABOUT IT.
         'feature_importance':pd.Series(permutation_res)[feature_bool]
         #'std_err': np.sqrt(np.diag(model_fit.coef_cov_)),
         #'pval': 2*(1-stats.t.cdf(np.abs(model_fit.coef_/np.sqrt(np.diag(model_fit.coef_cov_))),df=predictor_data_nona.shape[0]-predictor_data_nona.shape[1]))
@@ -626,7 +747,7 @@ def present_results_vs_ground_truth_cors(predictor_data_nona,outcome_measure,gro
     })
 
 
-def load_and_preprocess_data(dropbox_data_dir):
+def load_and_preprocess_data(dropbox_data_dir, use_dummy_outcome_data=True):
     """
     Load the data and preprocess it
     does not include imputing data
@@ -634,24 +755,59 @@ def load_and_preprocess_data(dropbox_data_dir):
     """
 
     data_by_ppt_path = dropbox_data_dir + '/data_by_ppt.csv'
-    data_codebook_path = dropbox_data_dir + 'data_codebook.csv'
+    data_codebook_path = dropbox_data_dir + 'data_codebook_DEV - data_codebook_combined.csv'
+    data_by_wave_ppt_path = dropbox_data_dir + '/data_by_wave_ppt.csv'
 
     data_by_ppt = pd.read_csv(data_by_ppt_path)
-    data_codebook = pd.read_csv(data_codebook_path)
+    data_codebook = pd.read_csv(data_codebook_path,skiprows=1)
 
     #find out which columns in data_by_ppt are missing from the codebook
     data_by_ppt.columns.difference(data_codebook['VarName'])
 
+    if use_dummy_outcome_data:
+        #copy our outcome measures, bf_1 and FFQ_1, into a new dataframe
+        data_by_ppt['bf_2'] = data_by_ppt.bf_1
+        #need to decide what sort of FFQ we want to use
+        data_by_ppt['cancer_promoting_minus_preventing_FFQ_1'] = data_by_ppt.cancer_promoting_minus_preventing_FFQ
+        data_by_ppt['cancer_promoting_minus_preventing_FFQ_2'] = data_by_ppt.cancer_promoting_minus_preventing_FFQ
+        outcome_measures = data_by_ppt.loc[:,data_codebook.loc[data_codebook.IsSelectedDraftOutcomeMeasure,"VarName"]].copy()
+    else:
+        data_by_wave_ppt = pd.read_csv(data_by_wave_ppt_path)
+        outcome_cols_only = data_codebook.loc[data_codebook.IsSelectedLongitudinalOutcomeMeasure,"VarName"].tolist()
+        outcome_df_cols = ['SID', 'session_id']+ outcome_cols_only
+        outcome_measures_long_all = data_by_wave_ppt.loc[:,outcome_df_cols].copy()
+        #just select session 1 and 2
+        outcome_measures_long = outcome_measures_long_all.loc[outcome_measures_long_all.session_id.isin([1,2]),:]
+        #now get the difference between session 1 and session 2
 
-    #copy our outcome measures, bf_1 and FFQ_1, into a new dataframe
-    data_by_ppt['bf_2'] = data_by_ppt.bf_1
-    #need to decide what sort of FFQ we want to use
-    data_by_ppt['cancer_promoting_minus_preventing_FFQ_1'] = data_by_ppt.cancer_promoting_minus_preventing_FFQ
-    data_by_ppt['cancer_promoting_minus_preventing_FFQ_2'] = data_by_ppt.cancer_promoting_minus_preventing_FFQ
+        outcomes_s1 = outcome_measures_long.loc[outcome_measures_long['session_id'] == 1].set_index('SID')
+        outcomes_s2 = outcome_measures_long.loc[outcome_measures_long['session_id'] == 2].set_index('SID')
+        outcomes_s2_minus_s1 = (outcomes_s2 - outcomes_s1).reset_index()
+        #session_id isn't applicable anymore
+        outcomes_s2_minus_s1.drop(columns=['session_id'], inplace=True)
+        #remove any rows where there's an NaN difference for all columns
+        #get a dataframe that is all the columns except the index
+        outcomes_s2_minus_s1 = outcomes_s2_minus_s1.loc[~outcomes_s2_minus_s1.drop(columns=['SID'], inplace=False).isna().all(axis=1),:]
+
+        #OK, now we need to make sure that we have the same set of subjects in the outcome_measures_long and data_by_ppt
+        #get the set of subjects in each
+        subjects_in_outcomes = set(outcomes_s2_minus_s1.SID)
+        subjects_in_data_by_ppt = set(data_by_ppt.SID)
+        #get the intersection of these two sets
+        subjects_in_both = list(subjects_in_outcomes.intersection(subjects_in_data_by_ppt))
+        subjects_in_both.sort()
+        #now turn that into a one-column dataframe, and left-join each independently on that dataframe
+        subjects_in_both_df = pd.DataFrame({'SID':subjects_in_both})
+        outcomes_s2_minus_s1 = subjects_in_both_df.merge(outcomes_s2_minus_s1, how='left', on='SID')
+        
+        data_by_ppt = subjects_in_both_df.merge(data_by_ppt, how='left', on='SID')
+        outcomes_s2_minus_s1 = outcomes_s2_minus_s1.loc[:,outcome_cols_only].copy()
+
+        
 
     # do a report on missing data
-    analysis_data  = data_by_ppt.loc[:,data_codebook.loc[data_codebook.IsSelectedPredictor,"VarName"]].copy()
-    outcome_measures = data_by_ppt.loc[:,data_codebook.loc[data_codebook.IsSelectedOutcomeMeasure,"VarName"]].copy()
+    analysis_data  = data_by_ppt.loc[:,data_codebook.loc[data_codebook.Aim3PredictorsFinal,"VarName"]].copy()
+    
 
     na_values = pd.DataFrame(data_by_ppt.isna().sum())
     na_values.columns = ['NA_Count']
@@ -665,7 +821,7 @@ def load_and_preprocess_data(dropbox_data_dir):
     analysis_data.drop(columns=['birthsex_factor'], inplace=True)
     one_hot_vals.columns = ['birthsex_factor_' + str(col) for col in one_hot_vals.columns]
     analysis_data = analysis_data.join(one_hot_vals.iloc[:,1:])
-    return(analysis_data, outcome_measures)
+    return(analysis_data, outcomes_s2_minus_s1)
 
 
 
@@ -760,5 +916,103 @@ def run_full_limited_predictor_analysis(total_predictor_count, outcome_measures,
     present_results_vs_ground_truth_cors(predictor_data_nona,outcome_measures_nona,group_assignments_nona,final_results,base_regressors)
 
     return(overall_score)
+
+
+
+
+def get_combined_roi_analyses(predictors):
+    cols_to_aggregate = [
+        'wtp_liked_koban_kober_craving_wmapN99_boot10K_02-May-2022_notzero',
+        'roc_lookCrave_koban_kober_craving_wmapN99_boot10K_02-May-2022_notzero'   
+    ]
+    #get the mean of the two columns across rows
+    predictors['wtp_roc_koban_kober_craving_combined'] = predictors[cols_to_aggregate].mean(axis=1)
+
+    return(predictors)
+
+
+
+def load_roi_data(roi_data_dir):
+    task_list = ['wtp', 'roc','sst']
+
+    roi_data_list = []
+    for task in task_list:
+        roi_file = 'subject_' + task + '_avg_roi_data_raw.csv'
+        roi_data_for_task = pd.read_csv(roi_data_dir + roi_file)
+        roi_data_for_task['task'] = task
+        if 'run' not in roi_data_for_task.columns:
+            roi_data_for_task['run'] = 1
+
+        print(roi_data_for_task.columns)
+        roi_data_list.append(roi_data_for_task)
+    roi_data_raw = pd.concat(roi_data_list)
+
+    roi_data_w1_raw = roi_data_raw[roi_data_raw['wave']==1]
+
+    #take the mean across runs
+    unique_activity_cols = ['subject_id','task','condition','mask_label']
+    roi_data_w1 = roi_data_w1_raw.loc[:,unique_activity_cols + ['run','roi_activity']]
+
+    roi_grouped_data_long = roi_data_w1.groupby(unique_activity_cols)['roi_activity'].mean().reset_index()
+
+    #get just the reappraisecrave condition for the ROC task
+    roi_grouped_data_long.loc[roi_grouped_data_long['condition']!='reappraiseCrave','roi_activity']
+
+    roi_grouped_data = roi_grouped_data_long.pivot_table(index=['subject_id'],columns=['task','condition','mask_label'],values='roi_activity').reset_index()
+    #now flatten the table to make it easier to work with, combining levels with underscores
+    roi_grouped_data.columns = ['_'.join(col).strip() for col in roi_grouped_data.columns.values]
+    #trim underscores off the end of colunmn names
+    roi_grouped_data.columns = [col.strip('_') for col in roi_grouped_data.columns.values]
+
+
+
+       
+# WTP task, Liked stimuli only
+      #wtp_liked_koban_kober_craving_wmapN99_boot10K_02-May-2022_notzero#  - Koban-Kober craving signature # NEED TO GET THIS
+#      'wtp_liked_value_association-test_z_FDR_0.01', #  - neurosynth "value"
+# ROC, Craved stimuli only, just "regulate" task
+  #    'roc_reappraiseCrave_reappraisal_association-test_z_FDR_0.01',#  - Neurosynth “Reappraisal”
+ #      'roc_reappraiseCrave_abstract_association-test_z_FDR_0.01',#  - Neurosynth “Abstract”
+ #      'roc_reappraiseCrave_univariate_regulate_look', # is this the right one??? It isn't, we need to replace it.#  - “Regulate-look” neural signature of regulation (Cosme et al 2020)
+# ROC, Craved stimuli only, just "look" task
+#'roc_lookCrave_koban_kober_craving_wmapN99_boot10K_02-May-2022_notzero', #  - Koban-Kober craving signature
+# SST, CorrectGo:
+ #      'sst_CorrectGo_striatum_joint_mask' #  - Striatum
+  #     'sst_CorrectGo_finger movements_association-test_z_FDR_0.01',#  - "Finger movements" from neurosynth
+# SST, CorrectStop:
+  #     'sst_CorrectStop_motor_control_striatum_joint_mask',#  - Neurosynth “Motor control” * striatal mask
+  #     'sst_CorrectStop_response inhibition_association-test_z_FDR_0.01',,#  - Neurosynth “Response inhibition” general mask
+# SST, FailedStop:
+  #     'sst_FailedStop_motor_control_striatum_joint_mask',#  - Neurosynth  “Motor control” * striatal mask
+# SST, Post-error Go:
+   #    'sst_CorrectGoFollowingFailedStop_striatum_joint_mask',#  - Striatum
+      
+    return(roi_grouped_data)
+
+
+
+def load_groups_from_mastersheet(mastersheet_filepath):
+    #read the mastersheet from xlsx file into a pandas dataframe
+    mastersheet_full = pd.read_excel(mastersheet_filepath, sheet_name='Participants')
+    ms_groups = mastersheet_full[['Dev ID#','Group']]
+    del mastersheet_full
+    ms_groups.rename(columns={'Dev ID#':'dev_id', 'Group':'group_raw'}, inplace=True)
+    #remove rows where group is na
+    ms_groups = ms_groups[ms_groups['group_raw'].notna()]
+    #now detect any text within the Group column within parentheses and remove it, including the parentheses
+    ms_groups['intervention_group'] = ms_groups['group_raw'].str.replace(r"\(.*\)","")
+    #now remove any whitespace
+    ms_groups['intervention_group'] = ms_groups['intervention_group'].str.strip()
+    #convert to lowercase
+    ms_groups['intervention_group'] = ms_groups['intervention_group'].str.lower()
+    #convert spelling mistakes; umqua to umpqua; willamete and wilamette to willamette
+    ms_groups['intervention_group'] = ms_groups['intervention_group'].str.replace('umqua','umpqua')
+    ms_groups['intervention_group'] = ms_groups['intervention_group'].str.replace('wilamette','willamette')
+    ms_groups['intervention_group'] = ms_groups['intervention_group'].str.replace('willamete','willamette')
+
+    #now drop the raw column
+    ms_groups.drop(columns=['group_raw'], inplace=True)
+
+    return(ms_groups)
 
 

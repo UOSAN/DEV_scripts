@@ -1,0 +1,173 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+
+#install.packages("tidystats")
+library(stringr)
+library(dplyr)
+library(ggplot2)
+library(rstatix)
+library(data.table)
+library(tidyverse)
+#source("utils.R")
+# data_path <- "../../grant-writing-workshop/files/data/"
+
+# load(paste0(config::get("dev_analysis_data_dir"),"scored_data_w_demographics.RData"))
+dropbox_file_dir = config::get("dropbox_data_dir")
+# scored<-scored_with_demographics
+# rm(scored_with_demographics)
+# scored$score <- as.numeric(scored$score)
+# scored$scale_name <- sub("-","_",scored$scale_name)
+
+```
+
+Now let's load the file
+
+```{r}
+full_dataset_aim3<- readr::read_csv(paste0(dropbox_file_dir,"full_dataset_aim3.csv"))
+```
+```{r}
+# nutrient_density_t0t1_summary <- 
+#   nutrient_density_t0t1 %>% 
+#   group_by("intervention_group",)
+#   summarise(Mean=mean)
+# ggplot(nutrient_density_t0t1,aes())
+```
+
+Set up intervention_group as a factor and identify the outcome_cols
+
+```{r}
+full_dataset_aim3$intervention_group <- factor(full_dataset_aim3$intervention_group,levels = c("willamette","umpqua","mckenzie"))
+outcome_cols <- colnames(full_dataset_aim3) %>% stringr::str_extract(".*(baseline|wkpost|mopost)") %>% .[!is.na(.)]
+```
+
+
+Do the transform into a long format, for the mixed effects model.
+
+```{r}
+
+
+
+
+key_cols = c("SID","intervention_group")
+
+main_effect_long <- full_dataset_aim3[,c(key_cols,outcome_cols)] %>% 
+  pivot_longer(cols=outcome_cols,names_to=c("outcome_type","outcome_time"),names_pattern = "(.*)\\_(.*)$", values_to = "outcome_value")
+
+main_effect_long$outcome_time <- factor(main_effect_long$outcome_time,levels = c("baseline","1wkpost","3mopost","6mopost","12mopost"))
+```
+
+
+```{r}
+table(main_effect_long$outcome_type)
+```
+
+Why don't we loop over the different otucome types and see what comes out for each?
+```{r}
+outcome_types <- unique(main_effect_long$outcome_type)
+
+for (ot in outcome_types){
+  print("----")
+  print(ot)
+  
+  outcome_table_3month<-main_effect_long %>% filter(outcome_type==ot & outcome_time %in% c("baseline","1wkpost","3mopost"))
+  
+  outcome_table_3month$outcome_time_f <- factor(outcome_table_3month$outcome_time,ordered = TRUE,levels=c("baseline","1wkpost","3mopost"))
+  outcome_table_3month$outcome_time_int <- as.integer(outcome_table_3month$outcome_time_f)
+  
+  
+  library(lme4)
+  model_base <- lme4::lmer(outcome_value~intervention_group+outcome_time_int + (1|SID),outcome_table_3month)
+  model_int <- lme4::lmer(outcome_value~intervention_group*outcome_time_int + (1|SID),outcome_table_3month)
+  
+  print(summary(model_int))
+  print(anova(model_base, model_int))
+
+}
+
+
+```
+
+
+## Difference score
+
+
+```{r}
+full_dataset_aim3_w_diffscores<-full_dataset_aim3
+separated_outcome_time_matrix<-stringr::str_match(outcome_cols,"(.*)\\_(.*)$")
+unique_outcome_times<-unique(separated_outcome_time_matrix[,3])
+unique_outcome_types<-unique(separated_outcome_time_matrix[,2])
+
+for (ot in unique_outcome_types){
+  full_dataset_aim3_w_diffscores[,paste0(ot,"_3mo1wkpost_minus_baseline")] <- rowMeans(full_dataset_aim3_w_diffscores[,c(paste0(ot,"_3mopost"),paste0(ot,"_1wkpost"))]) - full_dataset_aim3_w_diffscores[,paste0(ot,"_baseline")]
+}
+
+```
+
+```{r}
+for (ot in outcome_types){
+  print(ot)
+  #create the formula
+  ot_colname <- paste0(ot,"_3mo1wkpost_minus_baseline")
+  formula <- paste0(ot_colname, " ~ intervention_group")
+  print(formula)
+  print(summary(lm(as.formula(formula),full_dataset_aim3_w_diffscores)))
+  #let's count exactly how many not NA values there are for this analysis.
+  ig_na <- is.na(full_dataset_aim3_w_diffscores$intervention_group)
+  outcome_na <-is.na(full_dataset_aim3_w_diffscores[,ot_colname])
+  na_mask <- ig_na | outcome_na
+  not_na_ds<-full_dataset_aim3_w_diffscores[!na_mask,]
+  print("dataset shape: ")
+  print(dim(not_na_ds))
+  #print(paste(not_na_ds$SID,collapse=", "))
+  
+  
+}
+```
+
+
+## bf %
+
+
+```{r}
+library(tidyverse)
+
+data_by_wave_ppt <- readr::read_csv(paste0(dropbox_file_dir, "data_by_wave_ppt.csv"))
+outcomes_wide<-data_by_wave_ppt %>% filter(session_id!=0) %>% select(SID, bf,session_id,bmi) %>% 
+  pivot_wider(id_cols = "SID",values_fill = NA,names_from = "session_id",values_from = c("bf","bmi"))
+
+outcomes_wide$bf23_minus_1<-rowMeans(outcomes_wide[,c("bf_2","bf_3")])-outcomes_wide$bf_1
+outcomes_wide$bf2_minus_1<-outcomes_wide$bf_2-outcomes_wide$bf_1
+physical_measurement_diffs<-merge(full_dataset_aim3_w_diffscores,outcomes_wide,by = "SID")
+phys_measurements<-merge(full_dataset_aim3 %>% select("SID","intervention_group"),data_by_wave_ppt,by="SID")
+```
+
+
+
+```{r}
+outcome_types<-c("bf23_minus_1","bf2_minus_1")
+for (ot in outcome_types){
+  print(ot)
+  #create the formula
+  #ot_colname <- paste0(ot,"_bf23_minus_1")
+  formula <- paste0(ot, " ~ intervention_group")
+  print(formula)
+  print(summary(lm(as.formula(formula),physical_measurement_diffs)))
+  #let's count exactly how many not NA values there are for this analysis.
+  ig_na <- is.na(physical_measurement_diffs$intervention_group)
+  outcome_na <-is.na(physical_measurement_diffs[,ot_colname])
+  na_mask <- ig_na | outcome_na
+  not_na_ds<-physical_measurement_diffs[!na_mask,]
+  print("dataset shape: ")
+  print(dim(not_na_ds))
+  #print(paste(not_na_ds$SID,collapse=", "))
+  
+  
+}
+```
+
