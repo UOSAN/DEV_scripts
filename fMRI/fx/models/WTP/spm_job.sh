@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --partition=short
+#SBATCH --partition=ctn
 #--------------------------------------------------------------
 # This script:
 #	* Creates a batch job for $SUB
