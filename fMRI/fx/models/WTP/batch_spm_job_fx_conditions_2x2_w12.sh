@@ -56,7 +56,7 @@ do
 
     sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$DEVID,SUBID=$DEVID,SPM_PATH=$SPM_PATH,  \
 	 	--job-name=${RESULTS_INFIX} \
-	 	-o ${OUTPUTDIR}/${DEVID}_${RESULTS_INFIX}.log \
+	 	-o ${OUTPUTDIR}/${DEVID}_${WAVENAME}_${RESULTS_INFIX}.log \
 	 	--cpus-per-task=${cpuspertask} \
 	 	--mem-per-cpu=${mempercpu} \
 	 	--account=sanlab \
