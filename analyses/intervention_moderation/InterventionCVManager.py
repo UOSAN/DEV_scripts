@@ -33,6 +33,7 @@ class InterventionCVManager:
         dev_cv_analysis.run_real_analysis = set_as_random==False
 
         groups_to_remove = []
+        reference_group = None
         if self.group_mode=='default':
             groups_rekey = None
             reference_group = 'willamette'
@@ -47,6 +48,9 @@ class InterventionCVManager:
             groups_rekey = None
             reference_group = 'willamette'
             groups_to_remove=['mckenzie']
+        elif self.group_mode=='umpqua_only':
+            groups_rekey = None
+            groups_to_remove=['mckenzie', 'willamette']
 
         analysis_data, outcome_measures_raw,group_assignments = dev_cv_analysis.load_and_preprocess_data_full(
             use_dummy_outcome_data=False,
@@ -56,9 +60,8 @@ class InterventionCVManager:
             groups_to_remove=groups_to_remove
             )
         
-
-
-        dev_cv_analysis.set_up_interactions_and_groups(reference_group = reference_group)
+        if reference_group is not None:
+            dev_cv_analysis.set_up_interactions_and_groups(reference_group = reference_group)
 
 
         return(dev_cv_analysis)

@@ -232,8 +232,11 @@ class DevCvAnalysis:
         outcome_is_na = self.outcome.isna()
         self.outcome = self.outcome[~outcome_is_na]
         self.__predictor_data = self.__predictor_data[~outcome_is_na]
-        self.group_assignments = self.group_assignments[~outcome_is_na]
-        self.group_assignment_onehots = self.group_assignment_onehots[~outcome_is_na]
+        if self.group_assignments is not None:
+            self.group_assignments = self.group_assignments[~outcome_is_na]
+
+        if self.group_assignment_onehots is not None:
+            self.group_assignment_onehots = self.group_assignment_onehots[~outcome_is_na]
         
 
     
