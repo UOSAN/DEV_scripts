@@ -9,7 +9,7 @@
 STUDY=/projects/sanlab/shared/DEV/DEV_scripts
 
 # Set subject list
-SUBJLIST=`cat subject_list_single_col_20230510.txt`
+SUBJLIST=`cat subject_list_single_col.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV001
@@ -46,6 +46,7 @@ for SUB in $SUBJLIST; do
 	# Set MATLAB script path
 	for TASK in ${TASKS[@]}; do
 		SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth_${TASK}.m # update script name if applicable
+		echo "running script ${SCRIPT}"
 
 		# Run task job
 	 	sbatch --dependency=singleton --export ALL,REPLACESID=$REPLACESID,WAVE=$WAVE,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \

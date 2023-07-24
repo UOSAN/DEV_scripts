@@ -1,3 +1,5 @@
+echo "don't do this version; spm_job and the smoothing m files don't take wave in a compatible manner".
+
 #!/bin/bash
 #--------------------------------------------------------------
 # This script executes $SHELL_SCRIPT for $SUB and matlab $SCRIPT
@@ -9,7 +11,7 @@
 STUDY=/projects/sanlab/shared/DEV/DEV_scripts
 
 # Set subject list
-SUBJLIST=`cat subject_list_full_20230720.txt`
+SUBJLIST=`cat subject_list_single_col.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV001
