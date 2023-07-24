@@ -46,7 +46,7 @@ for SUB in $SUBJLIST; do
 	# Set MATLAB script path
 	for TASK in ${TASKS[@]}; do
 		SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth_${TASK}.m # update script name if applicable
-		echo "running script ${SCRIPT}"
+		echo "running script ${SCRIPT} for ${SUB}, and task ${TASK}"
 
 		# Run task job
 	 	sbatch --dependency=singleton --export ALL,REPLACESID=$REPLACESID,WAVE=$WAVE,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \
