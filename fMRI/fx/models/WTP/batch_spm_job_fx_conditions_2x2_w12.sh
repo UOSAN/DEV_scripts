@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=subject_list_20230515.txt
+SUBJLIST=subject_list_full_20230720.txt
 
 # Which SID should be replaced?
 REPLACESID=DEV001
