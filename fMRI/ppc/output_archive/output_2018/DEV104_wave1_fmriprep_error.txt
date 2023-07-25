@@ -1,5 +1,0 @@
-/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
-  return f(*args, **kwds)
-/usr/local/miniconda/lib/python3.6/importlib/_bootstrap.py:219: RuntimeWarning: numpy.dtype size changed, may indicate binary incompatibility. Expected 96, got 88
-  return f(*args, **kwds)
-slurmstepd: error: *** JOB 22410056 ON n222 CANCELLED AT 2022-10-20T16:55:43 ***
