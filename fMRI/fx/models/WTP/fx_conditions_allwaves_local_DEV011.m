@@ -1,5 +1,5 @@
 %-----------------------------------------------------------------------
-% Job saved on 25-Jul-2023 14:17:01 by cfg_util (rev $Rev: 7345 $)
+% Job saved on 25-Jul-2023 15:18:29 by cfg_util (rev $Rev: 7345 $)
 % spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
@@ -74,3 +74,11 @@ matlabbatch{13}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
 matlabbatch{14}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV011/ses-wave2/func'};
 matlabbatch{14}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV011_ses-wave2_task-WTP_acq-4_space-MNI152NLin2009cAsym_desc-preproc_bold.nii';
 matlabbatch{14}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
+matlabbatch{15}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV011_ses-wave2_task-WTP_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)', substruct('.','val', '{}',{11}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{15}.spm.util.exp_frames.frames = Inf;
+matlabbatch{16}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV011_ses-wave2_task-WTP_acq-2_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)', substruct('.','val', '{}',{12}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{16}.spm.util.exp_frames.frames = Inf;
+matlabbatch{17}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV011_ses-wave2_task-WTP_acq-3_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)', substruct('.','val', '{}',{13}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{17}.spm.util.exp_frames.frames = Inf;
+matlabbatch{18}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV011_ses-wave2_task-WTP_acq-4_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)', substruct('.','val', '{}',{14}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+matlabbatch{18}.spm.util.exp_frames.frames = Inf;
