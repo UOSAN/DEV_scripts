@@ -21,7 +21,7 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_conditions_allwaves.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_conditions_allwaves_T1vT2_contrast.m
 
 TASK=WTP
 
@@ -51,7 +51,7 @@ for SUBID in $SUBJLIST; do
 	
     echo "script to run is ${SCRIPT} for $SUBID"
     
-    echo sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUBID,SUBID=$SUBID,SPM_PATH=$SPM_PATH,  \
+    sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$SUBID,SUBID=$SUBID,SPM_PATH=$SPM_PATH,  \
 	 	--job-name=${RESULTS_INFIX} \
 	 	-o ${OUTPUTDIR}/${SUBID}_${RESULTS_INFIX}.log \
 	 	--cpus-per-task=${cpuspertask} \
