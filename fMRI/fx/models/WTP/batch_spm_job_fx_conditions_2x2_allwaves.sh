@@ -21,7 +21,7 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT_PATH_PREFIX=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_conditions_
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_conditions_allwaves.m
 
 TASK=WTP
 
