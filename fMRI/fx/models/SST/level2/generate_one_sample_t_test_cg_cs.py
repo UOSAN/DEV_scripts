@@ -25,7 +25,7 @@ spm_path = config_data['spm_path']
 analysis_name = 'conditions'
 
 train_betas_with_data = get_data_for_confirmed_train_subjs(
-    beta_glob = nonbids_data_path + "fMRI/fx/models/SST/wave1/conditions/sub-DEV*/",
+    beta_glob = nonbids_data_path + "fMRI/fx/models/WTP/allwaves/conditions/sub-DEV*/",
     nonbids_data_path = nonbids_data_path,
     #ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = ml_scripting_path,

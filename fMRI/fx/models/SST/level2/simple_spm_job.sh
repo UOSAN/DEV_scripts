@@ -26,6 +26,7 @@ echo "Running ${SCRIPT}"
 echo -------------------------------------------------------------------------------
 
 
+
 MATLAB_PATH=/Applications/MATLAB_R2022a.app/bin/
 #module load matlab
 $MATLAB_PATH/matlab -nosplash -nodisplay -nodesktop ${ADDITIONALOPTIONS} -r "clear; addpath('$SPM_PATH'); spm_jobman('initcfg'); script_file='$SCRIPT'; run('create_matlabbatch_mat_from_script.m'); spm_jobman('run',matlabbatch); exit"
