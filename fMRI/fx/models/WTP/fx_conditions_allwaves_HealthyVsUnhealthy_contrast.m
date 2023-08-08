@@ -1,5 +1,5 @@
 %-----------------------------------------------------------------------
-% Job saved on 01-Aug-2023 13:52:35 by cfg_util (rev $Rev: 7345 $)
+% Job saved on 01-Aug-2023 14:23:33 by cfg_util (rev $Rev: 7345 $)
 % spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
@@ -107,40 +107,16 @@ matlabbatch{18}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification
 matlabbatch{18}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{18}.spm.stats.fmri_est.method.Classical = 1;
 matlabbatch{19}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{18}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
-matlabbatch{19}.spm.stats.con.consess{1}.tcon.name = 'HealthyLiked(T2>T1)';
-matlabbatch{19}.spm.stats.con.consess{1}.tcon.weights = [-0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+matlabbatch{19}.spm.stats.con.consess{1}.tcon.name = 'HealthyVsUnhealthy';
+matlabbatch{19}.spm.stats.con.consess{1}.tcon.weights = [0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0 0 0 0 0 0 0 0];
 matlabbatch{19}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{2}.tcon.name = 'UnhealthyLiked(T2>T1)';
-matlabbatch{19}.spm.stats.con.consess{2}.tcon.weights = [0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+matlabbatch{19}.spm.stats.con.consess{2}.tcon.name = 'UnhealthyVSHealthy';
+matlabbatch{19}.spm.stats.con.consess{2}.tcon.weights = [-0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 0 0 0 0 0 0 0 0];
 matlabbatch{19}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{3}.tcon.name = 'HealthyDisliked(T2>T1)';
-matlabbatch{19}.spm.stats.con.consess{3}.tcon.weights = [0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+matlabbatch{19}.spm.stats.con.consess{3}.tcon.name = 'HealthyLikedVsUnhealthyLiked';
+matlabbatch{19}.spm.stats.con.consess{3}.tcon.weights = [0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 matlabbatch{19}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{4}.tcon.name = 'UnhealthyDisliked(T2>T1)';
-matlabbatch{19}.spm.stats.con.consess{4}.tcon.weights = [0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0 0 0 0 0];
+matlabbatch{19}.spm.stats.con.consess{4}.tcon.name = 'UnhealthyLikedVsHealthyLiked';
+matlabbatch{19}.spm.stats.con.consess{4}.tcon.weights = [-0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 matlabbatch{19}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{5}.tcon.name = 'HealthyLiked(T2<T1)';
-matlabbatch{19}.spm.stats.con.consess{5}.tcon.weights = [0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
-matlabbatch{19}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{6}.tcon.name = 'UnhealthyLiked(T2<T1)';
-matlabbatch{19}.spm.stats.con.consess{6}.tcon.weights = [0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
-matlabbatch{19}.spm.stats.con.consess{6}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{7}.tcon.name = 'HealthyDisliked(T2<T1)';
-matlabbatch{19}.spm.stats.con.consess{7}.tcon.weights = [0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
-matlabbatch{19}.spm.stats.con.consess{7}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{8}.tcon.name = 'UnhealthyDisliked(T2<T1)';
-matlabbatch{19}.spm.stats.con.consess{8}.tcon.weights = [0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0 0 0 0 0];
-matlabbatch{19}.spm.stats.con.consess{8}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{9}.tcon.name = 'HealthyVSUnhealthy';
-matlabbatch{19}.spm.stats.con.consess{9}.tcon.weights = [0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0.0625 -0.0625 0.0625 -0.0625 0 0 0 0 0 0 0 0 0 0 0 0 0];
-matlabbatch{19}.spm.stats.con.consess{9}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{10}.tcon.name = 'UnealthyVSHealthy';
-matlabbatch{19}.spm.stats.con.consess{10}.tcon.weights = [-0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 -0.0625 0.0625 -0.0625 0.0625 0 0 0 0 0 0 0 0 0 0 0 0 0];
-matlabbatch{19}.spm.stats.con.consess{10}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{11}.tcon.name = 'HealthyLikedVsUnhealthyLiked';
-matlabbatch{19}.spm.stats.con.consess{11}.tcon.weights = [0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0.125 -0.125 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
-matlabbatch{19}.spm.stats.con.consess{11}.tcon.sessrep = 'none';
-matlabbatch{19}.spm.stats.con.consess{12}.tcon.name = 'UnhealthyLikedVsHealthyLiked';
-matlabbatch{19}.spm.stats.con.consess{12}.tcon.weights = [-0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 -0.125 0.125 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
-matlabbatch{19}.spm.stats.con.consess{12}.tcon.sessrep = 'none';
 matlabbatch{19}.spm.stats.con.delete = 1;
