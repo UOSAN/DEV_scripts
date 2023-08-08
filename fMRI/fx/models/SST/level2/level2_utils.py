@@ -9,6 +9,7 @@ import yaml
 import socket
 #import regex package
 import re
+from collections import OrderedDict
 
 def read_yaml_for_host(file_path):
     hostname = socket.gethostname()
@@ -18,6 +19,7 @@ def read_yaml_for_host(file_path):
         if hostname in yaml_all:
             return yaml_all[hostname]
         else:
+            print("hostname '" + hostname + "' not found in yaml file. using default.")
             return yaml.safe_load(f)['default']
 
 def get_contrasts_for_betas(
@@ -232,9 +234,7 @@ def get_data_for_confirmed_train_subjs(
             test_train_df.SplitGroup_75_25 == 'Train', 'sub_label'].tolist()  # only get the train subjects; ignore those previously marked hold-out
 
         # now merge the train list with the beta list, the data list, and the useable subject list
-        train_betas = beta_df[(beta_df.subject_id.isin(train_subjs))].reset_index(inplace=False, drop=True)
-        train_betas_with_data = train_betas.merge(data_by_ppt, left_on='subject_id', right_on='SID')
-        useable_train_betas_with_data = train_betas_with_data.loc[train_betas_with_data.subject_id.isin(usable_dev_ids),]
+        selected_betas = beta_df[(beta_df.subject_id.isin(train_subjs))].reset_index(inplace=False, drop=True)
     else:
         # include_exclude_list.loc[include_exclude_list.Include.isna(), 'Include'] = True
         # exclusion_list_sst = include_exclude_list[(include_exclude_list.Task == 'SST') & include_exclude_list.Include==False]
@@ -242,16 +242,17 @@ def get_data_for_confirmed_train_subjs(
         
         print("beta paths before exclusion: " + str(len(beta_df)))
         #included_betas = beta_df[(beta_df.subject_id.isin(exclusion_list_sst.SubjectId)==False)].reset_index(inplace=False, drop=True)
-        included_betas = beta_df.reset_index(inplace=False, drop=True)
+        selected_betas = beta_df.reset_index(inplace=False, drop=True)
         #print("beta paths after exclusion via nsc_subject_exclusions: " + str(len(included_betas)))
 
-        useable_train_betas_with_data = included_betas.loc[included_betas.subject_id.isin(usable_dev_ids),]
-        print("beta paths after exclusion via nsc_subject_exclusions and the provision useable_dev_id list: " + str(len(useable_train_betas_with_data)))
+    betas_with_data = selected_betas.merge(data_by_ppt, left_on='subject_id', right_on='SID')
+    useable_betas_with_data = betas_with_data.loc[betas_with_data.subject_id.isin(usable_dev_ids),]
+    print("beta paths after exclusion via nsc_subject_exclusions and the provision useable_dev_id list: " + str(len(useable_betas_with_data)))
         
 
-    useable_train_betas_with_data.sort_values('subject_id', inplace=True)
+    useable_betas_with_data.sort_values('subject_id', inplace=True)
 
-    return useable_train_betas_with_data
+    return useable_betas_with_data
 
 
 def create_spm_l2_script(template_filepath, replacement_map, output_filepath):
@@ -284,10 +285,52 @@ def execute_spm_l2_script(script_to_execute, spm_path):
     # run the script
     os.system('export SCRIPT="' + script_to_execute + '"; echo $SCRIPT; bash simple_spm_job.sh');
 
+def generate_single_confounder_script_fragment(confounder_template_path, confounder_name,confound_i,confounder_contents):
+    ### this function takes a template file and replaces the values in the replacement map
+    ### it then outputs the new file to the specified output path
+    with open(confounder_template_path, 'r') as template_file:
+        template_string = template_file.read()
+    
+    template_string = template_string.replace("CONFOUND_LABEL", confounder_name)
+    if confounder_contents is not None:
+        confounder_contents_string = "\n".join([str(f) for f in confounder_contents])
+        template_string = template_string.replace("CONFOUND_LIST", confounder_contents_string)
+    template_string = template_string.replace("confound_i", str(confound_i))
+    template_string = template_string.replace("weight_vec", " ".join(["0"]*(confound_i-1)) + " 1")
+    
+
+    return(template_string)
+
+# def generate_confounder_set_script_fragment_from_dataframe(colnames_to_add,subjects_df,confounder_template_path):
+#     ### this function takes a template file and replaces the values in the replacement map
+#     ### it then returns that for insertion into the main script
+#     script_fragment = ""
+#     for i, colname in enumerate(colnames_to_add):
+#         confound_i = str(i+1)
+#         confounder_name = colname
+#         confounder_contents = subjects_df[colname].tolist()
+#         confounder_script_fragment = generate_single_confounder_script_fragment(confounder_template_path, confounder_name,confound_i,confounder_contents)
+#         script_fragment = script_fragment + confounder_script_fragment
+
+#     return(script_fragment)
+
+def generate_confounder_set_script_fragment_from_dict(confounder_dict, confounder_template_path):
+    ### this function takes a template file and replaces the values in the replacement map
+    ### it then returns that for insertion into the main script
+    script_fragment = ""
+    for i, (confounder_name, confounder_contents) in enumerate(confounder_dict.items()):
+        confound_i = i+1
+        confounder_script_fragment = generate_single_confounder_script_fragment(confounder_template_path, confounder_name,confound_i,confounder_contents)
+        script_fragment = script_fragment + confounder_script_fragment
+
+    return(script_fragment)
+
+
 
 def iterate_over_l1_images_and_run_l2_scripts(
     l1_image_name_list, l1_images_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
-    col_function = lambda img_name: 'contrast_' + img_name + '_fname'
+    col_function = lambda img_name: 'contrast_' + img_name + '_fname',
+    confounders = [], confounder_template_path = None, consess_template_path = None, conspec_template_path = None
      ):
     # pull date in format YYYYMMDD
     date_label = datetime.datetime.now().strftime("%Y%m%d")
@@ -299,23 +342,51 @@ def iterate_over_l1_images_and_run_l2_scripts(
 
     l1_images_with_paths.to_csv(output_basedir + "/raw_filelist.csv")
 
+    #loop through the l1 images
     for l1_image_name in l1_image_name_list:
         colname = col_function(l1_image_name)
         print(l1_image_name)
         if colname in l1_images_with_paths.columns:
             img_filepath_list = ""
+            #create a dictionary of empty lists where there's one entry for each string in the list confounders
+            #ensure each list is a new copy of the list, not a reference to the same list
+            confounder_dict = OrderedDict({k: [] for k in confounders})
+
+            
             for i, r in l1_images_with_paths.iterrows():
                 if pd.isnull(r[colname]) is False:
                     tmap_filepath = r.loc['spm_l2_path'] + r.loc[colname]
                     tmap_spm_command = "'" + tmap_filepath + ",1'"
                     print(tmap_spm_command)
                     img_filepath_list += tmap_spm_command + "\n"
+                    #now add the confounders
+                    for cf in confounders:
+                        confounder_dict[cf].append(r.loc[cf])
+
+            #now we want to go through that confounder dict, and change any null entries to the mean of the column.
+            for cf in confounders:
+                confounder_dict[cf] = [np.nanmean(confounder_dict[cf]) if np.isnan(x) else x for x in confounder_dict[cf]]
+
+
+            all_contrast_dict = OrderedDict({**OrderedDict({l1_image_name:None}),**confounder_dict})
+
+            #now generate the confounder script fragment
+            confounder_script_text = generate_confounder_set_script_fragment_from_dict(confounder_dict, confounder_template_path)
+            #for the conspecs and consess we need to pass in the confounder dict AND the main contrast
+            confounder_consess_script_text = generate_confounder_set_script_fragment_from_dict(all_contrast_dict, consess_template_path)
+            confounder_conspec_script_text = generate_confounder_set_script_fragment_from_dict(all_contrast_dict, conspec_template_path)
+            
+
+
             output_folderpath=output_basedir + "/" + l1_image_name
             output_filepath =output_folderpath + "/" + l1_image_name + "_one_sample_design_estimate.m"
             create_spm_l2_script(template_filepath, replacement_map = {
                     'OUTDIR': output_folderpath,
                     'img_filepath_list': img_filepath_list,
-                    '(MAIN HEADER)': l1_image_name
+                    '(MAIN HEADER)': l1_image_name,
+                    'CONFOUNDS': confounder_script_text,
+                    'CONSESS': confounder_consess_script_text,
+                    'CONSPEC': confounder_conspec_script_text
                     },
                 output_filepath = output_filepath
                 )

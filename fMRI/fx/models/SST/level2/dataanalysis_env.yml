@@ -146,5 +146,5 @@ dependencies:
   - pip:
     - gsheets==0.6.1
     - msal==1.21.0
-    - office365-rest-python-client==2.3.16
+    - office365-rest-python-client
 prefix: /Users/benjaminsmith/opt/anaconda3/envs/dataanalysis

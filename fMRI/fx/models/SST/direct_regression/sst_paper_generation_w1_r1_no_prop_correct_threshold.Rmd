@@ -1,0 +1,983 @@
+---
+title: "SST Paper generation Wave 1 Only"
+author: "Ben Smith"
+date: "2022-12-19"
+output: 
+  html_document: 
+    toc: true
+    toc_float: true
+    code_folding: hide
+    theme: spacelab
+  pdf_document:
+    toc: yes
+    keep_tex: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,warning = FALSE)
+
+```
+This file just generates the stuf that goes into the final paper.
+# Prep
+
+```{r}
+library(tidyverse)
+library(MuMIn)
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+print(Sys.info()["nodename"])
+library(stargazer)
+library(tidyverse)
+library(gt)
+source("preprocessing.R")
+source("display_utils.R")
+library(lmerTest)
+
+```
+
+```{r}
+dropbbox_dir <- config::get("dev_analysis_data_dir")
+output_folder <- "sst_paper_generation_w1_no_prop_correct_threshold_output"
+
+```
+
+
+
+```{r}
+cache_filepath <- paste0(dropbbox_dir,"sst_paper_generation_w1_no_prop_correct_threshold.Rdata")
+loaded_from_cache<-FALSE
+if (file.exists(cache_filepath)){
+  load(cache_filepath)
+  loaded_from_cache<-TRUE
+} else
+{
+  time_points_raw <- readr::read_csv(paste0(dropbbox_dir,"/SST_roi_by_time_point.csv")) %>% filter(wave %in% c(1))
+  #now only include subjects that have been deemed includeable
+  #this is the set that made up the ROI.
+  included_subjects_table <-readr::read_csv(paste0(config::get("level2_output_path"),
+                                    "conditions_20230616/raw_filelist.csv"))
+  included_subjects <- included_subjects_table$subject_id
+  time_points<-time_points_raw[time_points_raw$subid %in% included_subjects_table$subject_id,]
+}
+
+```
+
+
+```{r}
+if(!loaded_from_cache){
+  roi_cols <- colnames(time_points)[grepl("harvardoxford",colnames(time_points))]
+time_points$tr_roi_mean <- rowMeans(time_points[,roi_cols])
+time_points<- 
+  time_points %>% group_by(subid,wave) %>%
+  mutate(run_mean_across_rois = mean(tr_roi_mean, na.rm = TRUE))
+
+#now mean-center the ROIs
+time_points_c<-time_points
+for (roi_col in roi_cols){
+  time_points_c[,roi_col]<-time_points_c[,roi_col]-time_points_c$run_mean_across_rois
+}
+
+
+roi_detect_pattern<-"((?<=harvardoxford-.{0,3}cortical_prob_)(.*))|(CueFollowing\\(CS\\>FS\\).*)"
+anatomical_rois_detect_pattern <- "(?<=harvardoxford-.{0,3}cortical_prob_)(.*)"
+
+roi_cols_vec <- colnames(time_points_c) %>% stringr::str_detect(pattern = roi_detect_pattern)
+new_roi_cols <- colnames(time_points_c) %>% stringr::str_extract_all(pattern = roi_detect_pattern) %>% unlist
+anatomical_roi_cols <- colnames(time_points_c) %>% stringr::str_extract_all(pattern = anatomical_rois_detect_pattern) %>% unlist
+unique(new_roi_cols)
+colnames(time_points_c)[roi_cols_vec] <- new_roi_cols
+
+}
+
+```
+
+We need to group by subject, wave, and trial, select just the FailedStop trials, and just the high trial numbers, then get the min and max accumbens activity. We could even do a long transform across the ROIs, then also group by ROI and get the min and max for ROIs
+
+So let's first long transform the ROIs
+
+
+
+Then do the grouping and summarizing.
+
+We define a peak period and trough period based on the previously observed shape of the accumbens response in the FS trial. This will put a peak around 2-6 seconds and a trough around 7-10 seconds. These values were chosen subjectively to try to encompass the peak and trough allowing for as much variability as possible without grabbing unrelated data from other time points. With a TR of 2.0 we should always have one or two images to grab from within these ranges, too.
+
+```{r}
+
+if(!loaded_from_cache){
+  tpc_long<-time_points_c %>% pivot_longer(cols=all_of(new_roi_cols),names_to="ROI",values_to="value")
+  
+  trial_summary_data <- tpc_long %>% 
+    #filter(condition=="FailedStop") %>% 
+    group_by(subid,wave,trial_n,ROI, condition) %>%
+    summarise(
+      peak=max(value[offset>=4.0 & offset <=11.0],na.rm = TRUE),
+      trough = min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE),
+      peak_time = offset[offset>=4.0 & offset <=11.0][value[offset>=4.0 & offset <=11.0]==max(value[offset>=4.0 & offset <=11.0],na.rm = TRUE)],
+      trough_time = offset[offset>=4.0 & offset <=11.0][value[offset>=4.0 & offset <=11.0]==min(value[offset>=4.0 & offset <=11.0],na.rm = TRUE)],
+      med_post_trial = median(value[offset>=4.0 & offset <=10.0],na.rm = TRUE),
+      med_post_trial_1_5 = median(value[offset>=1.0 & offset <=5.0],na.rm = TRUE)
+      
+      
+    )
+    
+  
+  trial_summary_data$response_amplitude <-trial_summary_data$peak-trial_summary_data$trough
+}
+
+```
+
+OK. So now, let's try to merge in that with post-pre RTs. Where do we get those from?
+
+
+
+
+## get the SST Post-pre data
+
+```{r}
+source(paste0(config::get("ben_dev_data_analysis"),"SST_processing.R"))
+
+dropbox_file_dir = config::get("dev_analysis_data_dir")
+
+sst_all_data_filepath <- paste0(dropbox_file_dir,"sst_behavioral_data_all.csv")
+
+if(!loaded_from_cache){
+    
+  sst_all_data_raw <- readr::read_csv(sst_all_data_filepath)  %>% filter(waveid %in% c(1))
+  sst_all_data<-clean_sst_data(sst_all_data_raw)
+  sst_all_data <- get_expected_tone_time(sst_all_data)
+  
+  sst_all_data<-calculate_response_latency(sst_all_data)
+  sst_all_data<-calculate_rpe(sst_all_data)
+  
+  sst_all_data<-get_more_sst_stats(sst_all_data)
+  
+  #remove subjects with too many incorrect trials--theyre' probably not paying attention
+  
+}
+
+```
+
+
+
+```{r}
+  
+if(!loaded_from_cache){
+  sst_all_data_accuracy <- sst_all_data %>% select(-numchunks_reciprocal,-ladder_movement,-rundatetime,-RPE_SSD_based,-RPE_SSD_RT_diff,-ssrt_0)
+  prop_correct_included_range <- c(0.2,0.8)
+  print("before removing very high and low performance trials:")
+  print(sst_all_data$subid %>% unique %>% length)
+  # sst_all_data <- sst_all_data %>% filter(
+  #   stop_prop_correct>prop_correct_included_range[[1]] & 
+  #     stop_prop_correct<prop_correct_included_range[[2]])
+  print("after removing very high and low performance trials:")
+  print(sst_all_data$subid %>% unique %>% length)
+  #readr::write_csv(sst_all_data,file=paste0(dropbox_file_dir,"sst_behavioral_data_all_with_analysis_w1.csv"))
+  
+  post_pre_rt_data <- sst_all_data%>% filter(condition!="Cue")
+}
+
+```
+
+
+
+
+## Prepare neural data
+
+
+
+```{r}
+
+if(!loaded_from_cache){
+  trial_summary_data$ROI_delateralized <-  trial_summary_data$ROI %>% str_replace_all("(Left|Right)\\s","")
+  
+  
+  trial_summary_data_delat <- trial_summary_data %>% 
+    #filter(ROI %in% c("Left Accumbens","Right Accumbens")) %>% 
+    group_by(subid,wave,trial_n, ROI_delateralized,condition) %>%
+    summarize(peak=mean(peak),
+              trough=mean(trough),
+              peak_time=mean(peak_time),
+              trough_time=mean(trough_time),
+              response_amplitude=mean(response_amplitude),
+              med_post_trial=mean(med_post_trial),
+              med_post_trial_1_5 = mean(med_post_trial_1_5)
+              )
+}
+```
+
+
+## Merge the datasets
+
+
+
+```{r}
+if(!loaded_from_cache){
+
+  trial_summary_data_delat_pp <- merge(trial_summary_data_delat,post_pre_rt_data,by.x = c("subid","wave","trial_n","condition"),by.y=c("subid","waveid","trial_n","condition"),all.x = TRUE)
+    
+  trial_summary_data_delat_pp$trial_n_c<-128-trial_summary_data_delat_pp$trial_n
+
+}
+```
+
+# Preparing regressors
+
+```{r}
+if(!loaded_from_cache){
+  trial_neural_behav_data_not_na<-trial_summary_data_delat_pp[
+    #rowSums(is.na(trial_summary_data_delat_pp[,c("response_amplitude","post_pre_rt_change")]))==0 & #no NA values in correlation and
+    is.na(trial_summary_data_delat_pp[,c("post_pre_rt_change")])==FALSE & #no NA values in correlation and
+      #is.finite(trial_summary_data_delat_pp$response_amplitude) #&
+      is.finite(trial_summary_data_delat_pp$post_pre_rt_change) & #no infinite values
+      (is.finite(trial_summary_data_delat_pp$med_post_trial) |  
+       is.finite(trial_summary_data_delat_pp$med_post_trial_1_5)
+     )
+      ,]
+  
+  trial_neural_behav_data_not_na$trial_n_c<-128-trial_neural_behav_data_not_na$trial_n
+  
+  
+  trial_neural_behav_roi <- trial_neural_behav_data_not_na %>% filter(ROI_delateralized=="CueFollowing(CS>FS)striatal_cluster_combined")
+  
+  trial_neural_behav_roi$condition<-(
+    factor(trial_neural_behav_roi$condition,
+              levels=c("CorrectGo","CorrectStop","FailedGo","FailedStop"),
+              ordered=FALSE))
+  
+  
+  trial_neural_behav_roi$trial_n_s<-scale(trial_neural_behav_roi$trial_n_c)
+  trial_neural_behav_roi$peak_z<-scale(trial_neural_behav_roi$peak)
+  trial_neural_behav_roi$post_pre_rt_change_z<-scale(trial_neural_behav_roi$post_pre_rt_change)
+  trial_neural_behav_roi$P_stop_trial_change_z<-scale(trial_neural_behav_roi$P_stop_trial_change)
+  trial_neural_behav_roi$trial_n_z<-scale(trial_neural_behav_roi$trial_n)
+  trial_neural_behav_roi$med_post_trial_z<-scale(trial_neural_behav_roi$med_post_trial)
+  
+}
+
+
+```
+
+
+# Prepare time series data
+
+
+
+```{r}
+
+
+if(!loaded_from_cache){
+df_offset<-get_df_offset(time_points_c)
+}
+
+```
+
+# Save cache
+
+
+```{r}
+if (!loaded_from_cache){
+  save.image(cache_filepath)
+}
+
+#load(paste0(dropbbox_dir,"/sst_paper_generation.Rdata"))
+```
+
+
+
+
+# Accuracy
+
+```{r}
+# 
+stop("import appropriate code from data_inventory.Rmd")
+```
+
+
+
+# Basic Striatal cluster mixed effects models
+
+
+# All trial types, with P_Stop
+
+I think if you're going to do P_stop
+
+ - P_stop_trial seems mostly irrelevant and P_stop_trial_post is a more relevant measure; P_stop_trial_change is more relevant still.
+ - measuring P_stop_trial rather than P_stop_trial_change doesn't make much sense, but
+ - If you're only measuring FS, neither P_stop_trial_post nor P_stop_trial_change are necessarily going to measure what you think because the data is censored to just FS trials, which are _always_ going to move in a particular direction
+ - so while measuring `P_stop_trial`, it's best to do a model with all kinds of trials
+
+## Table 1: stop conditions, with condition 
+
+Modeled in more detail in `modeling_t_5_10_activity_as_learning.Rmd`.
+```{r}
+model_full_effects <- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change_z+ post_pre_rt_change_z + (1 +post_pre_rt_change_z  + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+summary(model_full_effects)
+
+model_no_rt<- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change_z + (1 +post_pre_rt_change_z  + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+
+anova(model_full_effects,model_no_rt)
+model_no_p_stop<- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + post_pre_rt_change_z + (1 +post_pre_rt_change_z  + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+
+anova(model_full_effects,model_no_p_stop)
+
+
+
+model_list <- list("RT Change Only, Excluding P(Stop) Change"=model_no_p_stop,
+                   "P(Stop) Change Only, Excluding RT Change"=model_no_rt,
+                   "Full model"=model_full_effects
+                   )
+
+
+friendly_name_transform_table<-read_csv("friendly_names.csv")
+
+
+```
+
+
+```{r}
+#save(model_list, file="temp_state.Rdata")
+table_cells <- create_sst_mlm_table(
+  model_list,name_transform =friendly_name_transform_table)
+```
+
+
+
+
+The below code block is designed to do some testing.
+```{r}
+#debugSource("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/direct_regression/display_utils.R")
+#load("temp_state.Rdata")
+# table_cells <- create_sst_mlm_table(
+#   model_list,name_transform =friendly_name_transform_table,do_model_comparison=TRUE)
+
+```
+
+```{r }
+gtsave(table_cells,filename = "sst_paper_generation_w12_output/table1.html")
+```
+
+
+
+```{r}
+anova(model_full_effects,model_no_p_stop, model_no_rt)
+```
+
+
+### Predicted vs. ground truth
+
+Are we able to _predict_ RPE? We've already demonstrated 
+
+```{r}
+relevant_data<- trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+predicted_overall_rpe <- predict(model_full_effects,relevant_data)
+relevant_data$predicted_med_post_trial_z<-predicted_overall_rpe
+
+ggplot(relevant_data,aes(x=med_post_trial_z,y=predicted_med_post_trial_z,color=condition))+geom_point(alpha=0.05)
+
+cor.test(relevant_data$med_post_trial_z,relevant_data$predicted_med_post_trial_z)
+```
+
+```{r}
+r.squaredGLMM(model_full_effects) 
+```
+
+# Looking at CS and FS trials separately.
+
+## Table 2: Just FS Trials
+Modeled in more detail in `modeling_t_5_10_activity_as_learning.Rmd`.
+
+### median
+
+```{r}
+
+is_not_na<-(
+  !is.na(trial_neural_behav_roi$med_post_trial_z) & 
+    !is.na(trial_neural_behav_roi$trial_n_z) &
+    !is.na(trial_neural_behav_roi$post_pre_rt_change_z) &
+    !is.na(trial_neural_behav_roi$P_stop_trial_change_z) &
+    !is.na(trial_neural_behav_roi$subid))
+
+
+    
+relevant_data <- trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop") & is_not_na)
+model_P_stop_trial_w_change <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  relevant_data
+  )
+summary(model_P_stop_trial_w_change)
+
+#ignoring post_pre_rt_change_z
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z  + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  relevant_data
+  )
+#summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+#ignoring P_stop_trial_change_z
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  relevant_data
+  )
+#summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_rt, model_P_stop_trial_w_change_no_p_stop_d)
+
+
+
+model_list <- list("RT Change Only, Excluding P(Stop) Change"=model_P_stop_trial_w_change_no_p_stop_d,
+                   "P(Stop) Change Only, Excluding RT Change"=model_P_stop_trial_w_change_no_rt,
+                   "Full model"=model_P_stop_trial_w_change
+                   )
+
+
+friendly_name_transform_table<-read_csv("friendly_names.csv")
+table_cells <- create_sst_mlm_table(model_list,name_transform =friendly_name_transform_table,
+  "Median Activity 4-10 s Post-Stop Signal")
+
+
+
+```
+```{r }
+gtsave(table_cells,filename = "sst_paper_generation_w12_output/table2.html")
+```
+
+
+
+
+```{r}
+sjplot_result <- sjPlot::tab_model(model_P_stop_trial_w_change)
+```
+
+
+```{r}
+anova_model <- do.call(anova,
+                       list(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_rt, model_P_stop_trial_w_change_no_p_stop_d))
+
+anova_model$`Pr(>Chisq)`
+```
+
+
+
+```{r}
+model_P_stop_trial_w_change_summary <- summary(model_P_stop_trial_w_change)
+
+#model_comparison_summary <- function(model_list){
+model_list <- list("RT Only"=model_P_stop_trial_w_change_no_p_stop_d,
+                   "Full model"=model_P_stop_trial_w_change,
+                   "P(Stop) Only"=model_P_stop_trial_w_change_no_rt
+                   )
+
+
+fixed_effects_list <- sapply(model_list, custom_mixed_model_summary)
+
+fixed_effects_df <- t(dplyr::bind_rows(fixed_effects_list))
+
+model_comparison <- do.call(anova,unname(model_list))
+anova_model_order <- rownames(model_comparison) %>% str_extract("\\d+") %>% as.numeric
+#anova re-organizes its results depending on which are better fit.
+#we can do the same to the rest of the data, or we can re-organize back to how we had it.
+
+
+anova_raw_result_df <- t(data.frame(model_comparison)[,c("npar", "AIC", "BIC", "logLik", "Chisq","Pr..Chisq.")])
+anova_reorganized_list <- rep(list(NA),length(anova_model_order))
+#to re-orgnize back
+for (ri in 1:length(anova_model_order)){
+  anova_reorganized_list[[ri]] <- anova_raw_result_df[,which(anova_model_order==ri)]
+}
+anova_result_df_input_order <- do.call(rbind, anova_reorganized_list)
+#or we can organize the fixed effects in terms of the anova
+#I think that is better...
+fixed_effects_df_anova_order <- fixed_effects_df[,anova_model_order]
+#then we can merge it with the anova results
+anova_low_precision<-c( "AIC", "BIC", "logLik")
+anova_med_precision<-c("Chisq")
+anova_p_precision<-c("Pr..Chisq.")
+anova_results_tided<-anova_raw_result_df
+anova_results_tided[anova_low_precision,]<-round(anova_results_tided[anova_low_precision,],0)
+anova_results_tided[anova_med_precision,]<-round(anova_results_tided[anova_med_precision,],2)
+anova_results_tided[anova_p_precision,]<-format.pval(anova_results_tided[anova_p_precision,])
+table_cells <- rbind(fixed_effects_df_anova_order,anova_results_tided) 
+```
+
+```{r results="asis"}
+#table_normed <- stargazer(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_rt, model_P_stop_trial_w_change_no_p_stop_d,title="asis Markdown")
+
+```
+
+
+#### R^2 variance explained estimate
+
+
+
+```{r}
+
+
+
+r.squaredGLMM(model_P_stop_trial_w_change) 
+
+relevant_data <- trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop") & is_not_na)
+
+relevant_data$predicted_med_post_trial_z <- predict(model_P_stop_trial_w_change,relevant_data)
+
+ggplot(relevant_data,aes(x=med_post_trial_z,y=predicted_med_post_trial_z,color=condition))+geom_point(alpha=0.2)
+
+
+```
+
+
+### median, all trials
+
+
+```{r}
+
+model_P_stop_trial_w_change <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change)
+
+#ignoring post_pre_rt_change_z
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z  + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+#ignoring P_stop_trial_change_z
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   med_post_trial_z ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+
+
+```
+
+#### distribution thereof
+
+```{r}
+# plot a ggplot2 point graph of trial_neural_behav_roi filtered by FailedStop, plotting med_post_trial_z against post_pre_rt_change_z
+# coloring points by whether trial_n is <50 or not
+
+ggplot(data = trial_neural_behav_roi %>%
+          filter(condition=="FailedStop"),
+        aes(x = med_post_trial_z,
+            y = post_pre_rt_change_z,
+            color = trial_n < 50)) +
+   geom_point(alpha=0.1)
+```
+
+
+# Table 3: Post-Fail Spike
+
+This is modeled in more detail in `modeling_t_1_5_activity_as_learning.Rmd`.
+## Just FS Trials
+
+```{r}
+count_subs <- function(ds){length(unique(ds$subid))}
+
+count_subs(trial_summary_data)
+count_subs(trial_summary_data_delat)
+count_subs(trial_summary_data_delat_pp)
+count_subs(trial_neural_behav_data_not_na)
+subjects_in_table_3_analysis <- unique(trial_neural_behav_roi$subid)
+length(subjects_in_table_3_analysis)
+#print(subjects_in_table_3_analysis)
+```
+
+```{r}
+
+model_P_stop_trial_w_change <- lme4::lmer(
+   med_post_trial_1_5 ~ trial_n_z + post_pre_rt_change_z + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+summary(model_P_stop_trial_w_change)
+
+#ignoring post_pre_rt_change_z
+model_P_stop_trial_w_change_no_rt <- lme4::lmer(
+   med_post_trial_1_5 ~ trial_n_z  + P_stop_trial_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+#summary(model_P_stop_trial_w_change_no_rt)
+
+anova(model_P_stop_trial_w_change,model_P_stop_trial_w_change_no_rt)
+
+#ignoring P_stop_trial_change_z
+model_P_stop_trial_w_change_no_p_stop_d <- lme4::lmer(
+   med_post_trial_1_5 ~ trial_n_z +  post_pre_rt_change_z +(1+ post_pre_rt_change_z + P_stop_trial_change_z | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("FailedStop"))
+  )
+#summary(model_P_stop_trial_w_change_no_p_stop_d)
+
+
+anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
+
+
+
+model_list <- list("RT Change Only, Excluding P(Stop) Change"=model_P_stop_trial_w_change_no_p_stop_d,
+                   "P(Stop) Change Only, Excluding RT Change "=model_P_stop_trial_w_change_no_rt,
+                   "Full model"=model_P_stop_trial_w_change
+                   )
+
+
+friendly_name_transform_table<-read_csv("friendly_names.csv")
+table_cells <- create_sst_mlm_table(
+  model_list,name_transform =friendly_name_transform_table,
+  "Median Activity 1-5 s Post-Stop Signal")
+
+
+```
+
+
+```{r }
+gtsave(table_cells,filename = "sst_paper_generation_w12_output/table3.html")
+```
+
+
+```{r results="asis"}
+
+
+#table_normed <- stargazer(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_rt, model_P_stop_trial_w_change_no_p_stop_d,title="Post-Fail Spike")
+# 
+```
+
+#### Variance explained
+
+```{r}
+r.squaredGLMM(model_P_stop_trial_w_change)
+```
+
+
+# Time series figures
+
+## Setup
+
+
+
+# get the delay to next trial
+
+```{r}
+
+behavioral_data_w_tone_data <- readr::read_csv(paste0(dropbbox_dir,"/sst_behavioral_data_all_w_class_type_reveal_onset.csv")) %>% filter(waveid %in% c(1))
+
+# I want to know: what is the time delay from the tone sound to the PERIOD of the next trial?
+
+```
+
+```{r}
+#so I want to match each trial up with the _next_ trial
+#grab the set of next trials-we want their onset and their duration
+#then match that back onto n+1 of their prior trial
+trial_df <- behavioral_data_w_tone_data %>% filter(condition!="Cue") %>% 
+  arrange(trial_n) %>%
+  group_by(subid,waveid,runid) %>%
+  mutate(next_trial_n = lead(trial_n,1)) %>%
+  ungroup()
+
+
+next_trial_df <- behavioral_data_w_tone_data %>% 
+  filter(condition!="Cue") %>%
+  select(trial_n,condition,onset,trial_duration,subid,waveid,runid)
+
+
+trials_with_next<-merge(
+  trial_df,next_trial_df,
+  by.x = c("subid","waveid","runid", "next_trial_n"),
+  by.y=c("subid","waveid","runid","trial_n"),
+  suffixes = c("","_next"))
+```
+
+
+now, mark for each trial the start and end time point of the next trial, and get measures of how long after each trial the next one appears
+
+```{r}
+trials_with_next$trial_end_next <- trials_with_next$onset_next+trials_with_next$trial_duration_next
+trials_with_next$class_type_reveal_onset_to_next_trial_start<-trials_with_next$onset_next-trials_with_next$class_type_reveal_onset
+trials_with_next$class_type_reveal_onset_to_next_trial_end<-trials_with_next$trial_end_next-trials_with_next$class_type_reveal_onset
+```
+
+```{r}
+next_trial_median <- data.frame(
+  "next_trial_start_median" = median(trials_with_next$class_type_reveal_onset_to_next_trial_start),
+  "next_trial_end_median" = median(trials_with_next$class_type_reveal_onset_to_next_trial_end)
+  )
+
+quantiles <- (1:10)/10
+# next_trial_gradient <- data.frame(
+#   "quantiles" = quantiles,
+#   "next_trial_start" = quantile(trials_with_next$class_type_reveal_onset_to_next_trial_start,(1:10)/10),
+#   "next_trial_end" = quantile(trials_with_next$class_type_reveal_onset_to_next_trial_end,(1:10)/10)
+#   )
+
+gradient_range = seq(floor(min(trials_with_next$class_type_reveal_onset_to_next_trial_start)),ceiling(max(trials_with_next$class_type_reveal_onset_to_next_trial_end)),0.1)
+
+in_range_by_gradient <- sapply(gradient_range,function(tp){
+  time_point_is_after_start <- tp > trials_with_next$class_type_reveal_onset_to_next_trial_start
+  time_point_is_before_end <- tp < trials_with_next$class_type_reveal_onset_to_next_trial_end
+  number_of_trials <- length(trials_with_next$class_type_reveal_onset_to_next_trial_start) 
+  return(sum(time_point_is_after_start & time_point_is_before_end)/number_of_trials)
+})
+
+next_trial_gradient <- data.frame("tp"=gradient_range,"pct_in_range"=in_range_by_gradient)
+next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
+```
+
+# do graphs
+
+```{r}
+
+
+subj_count <- length(unique(time_points_c$subid))
+#df_offset_long<-df_offset# %>% pivot_longer(cols=roi_cols,names_to="ROI_fullname",values_to="value")
+# df_offset_long$ROI<-stringr::str_extract_all(df_offset_long$ROI_fullname,pattern = "(?<=harvardoxford\\..{0,3}cortical_prob_)(.*)") %>% sub("\\."," ",.)
+
+# unique_rois<-sort(unique(df_offset_long$ROI))
+# unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\s)(.*)"))]
+
+# df_offset_long$ROI<-factor(df_offset_long$ROI,levels = unique_rois_ordered, ordered=TRUE)
+
+ggplot_time_points_extras <- list(
+  geom_vline(xintercept = 0,linetype="dashed"),
+  geom_hline(yintercept = 0,linetype="dotted"),
+  labs(
+    x="time from tone sound or expected time of tone (s)",
+    y="mean BOLD activity (no HRF convolution)",
+    #title="Stop Signal Task Activity",
+    subtitle=paste0("Across ", as.character(subj_count)," subjects with two sessions of 128 trials each"),
+    caption="0 point is the moment of tone sound (Stop trials)\n or expected tone sound based on prior trial (Go trials)\n HRF convolution not applied\n1 s moving averages")
+  )
+
+
+plot_final<-ggplot(df_offset,
+       aes(x=offset_start, y=`CueFollowing(CS>FS)striatal_cluster_combined`,color=condition))+
+  geom_line()+
+  #facet_wrap(~ROI,ncol = 2)+
+  ggplot_time_points_extras
+  
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  #scale_y_continuous(limits=c(-2.5,2.5))
+  
+#ggsave(paste0(output_folder, "/figure_1.svg"))
+
+
+#plot_final
+
+```
+
+
+## CS-FS
+
+Let's now try to contrast these time series to see what the CS-FS looks like. This will be interesting because it's similar to the simple GLM result I got earlier that set me down the path of trying to analyze this.
+
+```{r}
+
+
+trial_tps_compare_conditions<-df_offset %>% pivot_wider(
+  id_cols=c(offset_start),
+  names_from = "condition",
+  values_from="CueFollowing(CS>FS)striatal_cluster_combined"
+  )
+trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectStop-trial_tps_compare_conditions$FailedStop
+```
+
+### Figure 2: 
+
+```{r}
+
+figure_2 <- ggplot(trial_tps_compare_conditions,
+       aes(x=offset_start, y=CS_minus_FS))+
+  #geom_tile(data = next_trial_gradient, aes(x=tp,alpha=pct_in_range,y=0),fill="#000000",color="transparent")+
+  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  #annotate("text",x=4,y=0.25,label="Subsequent Go Trial\nTime Range",size=2)+
+  annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  scale_alpha_continuous(name="Subsequent go trial range", range=c(0,0.7),labels=scales::percent_format())+
+  geom_line(size=1,alpha=0.5)+
+  scale_color_viridis_d(option = "C")+
+  ggplot_time_points_extras+
+  coord_cartesian(ylim=c(-0.15,0.25))+
+  labs(y="CS-FS BOLD activity difference")
+
+
+
+
+
+ggsave(paste0(output_folder, "/figure_2.svg"),width = 6,height=4)
+
+ggsave(paste0(output_folder, "/figure_2.png"),width = 6,height=4)
+
+
+```
+
+OK, so from this graph it is very clear why, during the subsequent trial, we're seeing positive striatum activity, and it is also clear there is a large dip in the same area right after the tone.
+
+
+
+
+
+## Figure 3:
+
+
+
+```{r}
+
+count_subjs <- function(df){length(unique(df$subid))}
+subj_count <- length(unique(time_points_c$subid))
+figure_3 <- ggplot(df_offset,
+       aes(x=offset_start, y=`CueFollowing(CS>FS)striatal_cluster_combined`,color=condition))+
+  geom_line()+
+  #facet_wrap(~ROI,ncol = 2)+
+  ggplot_time_points_extras
+  
+
+
+ggsave(paste0(output_folder, "/figure_3.svg"),width = 6,height=4)
+
+ggsave(paste0(output_folder, "/figure_3.png"),width = 6,height=4)
+
+figure_3
+
+```
+
+# Figure 4 and 5
+
+
+## Just stop trials, divided separately
+
+
+```{r}
+
+get_roi_good_names <- function(roi_fullname_col){
+  
+  roi_organized<-stringr::str_extract_all(unlist(roi_fullname_col),pattern = "(?<=harvardoxford\\.(sub)?cortical_prob_)(.*)") %>% sub("\\.\\.",", ",.) %>% gsub("\\."," ",.)
+  #print(roi_organized)
+  unique_rois<-sort(unique(roi_organized))
+  unique_rois_ordered <- unique_rois[order(unique_rois %>% str_extract("(?<=.{3,5}\\s)(.*)"))]
+  print(unique_rois)
+  roi_factor_col<-factor(roi_organized,levels = unique_rois_ordered, ordered=TRUE)
+  return(roi_factor_col)
+}
+
+```
+
+
+```{r}
+#roi_cols <- colnames(df_offset)[grepl("harvardoxford",colnames(df_offset))]
+df_offset_long<-df_offset %>% pivot_longer(cols=anatomical_roi_cols,names_to="ROI",values_to="value")
+
+#df_offset_long$ROI<-get_roi_good_names(df_offset_long$ROI)
+df_offset_long$ROI_bilat <- sub("(Left )|(Right )","",df_offset_long$ROI)
+df_offset_long$ROI_bilat <- gsub("Cingulate Gyrus, anterior division","ACC",df_offset_long$ROI_bilat)
+
+next_trial_gradient$hrf_tp<-next_trial_gradient$tp+5
+
+figure_4 <- ggplot(df_offset_long %>% filter(condition %in% c("FailedStop","CorrectStop")),
+       aes(x=offset_start, y=value,color=ROI_bilat,group=ROI))+
+  facet_wrap(~condition,nrow = 2)+
+  #geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  #annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  geom_line(size=1,alpha=0.7)+
+  
+  scale_color_viridis_d(option = "C")+
+  coord_cartesian(ylim=c(-0.15,0.2))+
+  guides(alpha="none",color=guide_legend(title="ROI"))+
+  #guides(alpha="none",color=guide_legend(title="ROI",nrow = 2))+
+  ggplot_time_points_extras#+
+  #theme(legend.position = "bottom")
+
+ggsave(paste0(output_folder, "/figure_4.svg"),width = 6,height=6)
+
+ggsave(paste0(output_folder, "/figure_4.png"),width = 6,height=6)
+
+  
+figure_4
+#ggplot(df_offset_long,aes(x=offset_start, y=value,color=ROI,group=intersect(ROI,condition)))+geom_line()
+  #geom_point()+
+  #geom_smooth(method="loess",span=2,na.rm=TRUE) + #https://ggplot2.tidyverse.org/reference/geom_smooth.html
+  #scale_y_continuous(limits=c(-2.5,2.5))
+
+```
+
+
+
+```{r}
+trial_tps_compare_conditions<-df_offset_long %>% pivot_wider(id_cols=c(ROI, ROI_bilat,offset_start),names_from = "condition",values_from="value")
+trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectStop-trial_tps_compare_conditions$FailedStop
+```
+
+
+
+
+```{r}
+library(directlabels)
+library(ggrepel)
+
+labels <- trial_tps_compare_conditions %>% filter(offset_start==9) %>% group_by(ROI_bilat) %>% 
+  slice(1)
+#labels <- labels %>% mutate(y_pos=CS_minus_FS+(CS_minus_FS-mean(CS_minus_FS))*3)
+labels$ROI_labels <- gsub(" ","\n",labels$ROI_bilat)
+labels$ROI_bilat <- gsub("Cingulate\nGyrus,\nanterior\ndivision", "ACC",labels$ROI_bilat)
+
+
+labels <- labels %>% arrange(ROI_labels)
+#these need to be in alphabetical order
+labels$xpos <- c(6,10,13,10,11) 
+labels$ypos <- c(-0.07,0.2,0.1,-0.07,0.15)
+
+trial_tps_compare_conditions$ROI_bilat <- gsub("Cingulate Gyrus, anterior division","ACC",trial_tps_compare_conditions$ROI_bilat)
+
+figure_5 <- ggplot(trial_tps_compare_conditions, aes(x=offset_start, y=CS_minus_FS,color=ROI_bilat))+
+  geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
+  
+  annotate("text",x=5,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  scale_alpha_continuous(name="Subsequent go trial range", range=c(0,0.7),labels=scales::percent_format())+
+  geom_line(size=1,alpha=0.5)+
+  #geom_text(data=labels,mapping= aes(x=offset_start,y=CS_minus_FS,color=ROI_bilat,label=ROI_bilat))+
+  # geom_text_repel(data = labels,  aes(x=offset_start,y=CS_minus_FS,label=ROI_labels),color="#333333",
+  #                 size = 3, fontface = "bold",force=2,box.padding=0.1, point.padding = 10, nudge_x = -3*1.01,nudge_y = 0.01*1.1)+
+  geom_label_repel(data = labels,
+                   #aes(x=offset_start,y=y_pos,color=ROI_bilat,label=ROI_labels),
+                   aes(x=xpos,y=ypos,color=ROI_bilat,label=ROI_labels),
+                   size = 3, fontface = "bold",force=2,box.padding=0.1, label.size =0,
+                   nudge_x = 1,nudge_y = 0.01,fill=rgb(0.3,0.3,0.3,alpha=0.3)
+                   )+
+  scale_color_viridis_d(option = "C")+
+  ggplot_time_points_extras+
+  coord_cartesian(ylim=c(-0.1,0.25))+
+  labs(y="CS-FS BOLD activity difference")
+
+
+
+
+ggsave(paste0(output_folder, "/figure_5.svg"),width = 6,height=4)
+
+ggsave(paste0(output_folder, "/figure_5.png"),width = 6,height=4)
+
+  
+figure_5
+
+```
+
+
+
+
