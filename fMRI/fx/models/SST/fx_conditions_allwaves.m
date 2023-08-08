@@ -1,5 +1,5 @@
 %-----------------------------------------------------------------------
-% Job saved on 08-Aug-2023 09:07:52 by cfg_util (rev $Rev: 7345 $)
+% Job saved on 08-Aug-2023 09:25:20 by cfg_util (rev $Rev: 7345 $)
 % spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
@@ -37,6 +37,6 @@ matlabbatch{5}.spm.stats.fmri_spec.global = 'None';
 matlabbatch{5}.spm.stats.fmri_spec.mthresh = -Inf;
 matlabbatch{5}.spm.stats.fmri_spec.mask = {'/projects/sanlab/shared/spm12/canonical/MNI152_T1_1mm_brain_mask.nii,1'};
 matlabbatch{5}.spm.stats.fmri_spec.cvi = 'FAST';
-matlabbatch{6}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File', substruct('.','val', '{}',{3}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{6}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File', substruct('.','val', '{}',{5}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
 matlabbatch{6}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{6}.spm.stats.fmri_est.method.Classical = 1;
