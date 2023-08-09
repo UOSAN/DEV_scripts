@@ -1,8 +1,9 @@
 %TODO:
 %open this up in MATLAB, open BOTH conditions files for an exemplar subject, and work out the right code to add to do the contrasts we need to do
 %probably plan the contrasts first!
+matlabbatch = {};
 
-
+conditions_filepaths = 
 
 conditions_filepath_1 = '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions/DEV011_1_SST1.mat';
 conditions_filepath_2 = '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions/DEV011_2_SST1.mat';
@@ -89,35 +90,29 @@ contrasts = {
     struct(name='FS(W1-W2)',weights=-FS2_FS1)
     };
 
-use_contrast = [];
+use_contrast = logical([]);
 % for each set of contrast weights, normalize to zero
+% and also mark whether we will use the contrasts
 for i = 1:length(contrasts)
     % Normalize the weights
     contrasts{i}.weights = normalizePosAndNeg(contrasts{i}.weights);
     use_contrast = [use_contrast sum(abs(contrasts{i}.weights))>0];
 end
 
+%filter to only the contrasts we'll use
+contrasts_filtered = contrasts(use_contrast);
+
 %now add the contrasts
 if any(use_contrast)
-     matlabbatch{5}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
-     matlabbatch{5}.spm.stats.con.delete = 0;
+     matlabbatch{7}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+     matlabbatch{7}.spm.stats.con.delete = 0;
 end
 
-
-
-
-
-
-% for each matrix, need normalize them to sum to 1
-CG_matrix = normalizePosAndNeg(CG_matrix);
-FS_matrix = normalizePosAndNeg(FS_matrix);
-
-CS_CG_matrix = normalizePosAndNeg(CS_CG_matrix);
-CS_FS_matrix = normalizePosAndNeg(CS_FS_matrix);
-
-CS2_CS1 = normalizePosAndNeg(CS2_CS1);
-CG2_CG1 = normalizePosAndNeg(CG2_CG1);
-FS2_FS1 = normalizePosAndNeg(FS2_FS1);
+for i = 1:length(contrasts_filtered)
+    matlabbatch{7}.spm.stats.con.consess{i}.tcon.name = contrasts_filtered{i}.name;
+    matlabbatch{7}.spm.stats.con.consess{i}.tcon.weights = contrasts_filtered{i}.weights;
+    matlabbatch{7}.spm.stats.con.consess{i}.tcon.sessrep = 'none';
+end
 
 
 %CS>CG; include each wave iif we have BOTH of the two items within that wave
@@ -132,31 +127,6 @@ FS2_FS1 = normalizePosAndNeg(FS2_FS1);
 
 % 
 
-% 
-% do_CS_CG_contrast = sum(CS_matrix) && sum(CG_matrix);
-% do_CS_FS_contrast = sum(CS_matrix) && sum(FS_matrix);
-% if do_CS_CG_contrast || do_CS_FS_contrast
-%     matlabbatch{5}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
-%     matlabbatch{5}.spm.stats.con.delete = 0;
-% end
-% if do_CS_CG_contrast
-% 	matlabbatch{5}.spm.stats.con.consess{contrast_iter}.tcon.name = 'CS>CG';
-% 	matlabbatch{5}.spm.stats.con.consess{contrast_iter}.tcon.weights = CS_matrix - CG_matrix;
-% 	matlabbatch{5}.spm.stats.con.consess{contrast_iter}.tcon.sessrep = 'none';
-% 	matlabbatch{5}.spm.stats.con.consess{contrast_iter + 1}.tcon.name = 'CG>CS';
-% 	matlabbatch{5}.spm.stats.con.consess{contrast_iter + 1}.tcon.weights = CG_matrix - CS_matrix;
-% 	matlabbatch{5}.spm.stats.con.consess{contrast_iter + 1}.tcon.sessrep = 'none';
-% 	contrast_iter = contrast_iter + 2;
-% end
-% if do_CS_FS_contrast
-%     matlabbatch{5}.spm.stats.con.consess{contrast_iter}.tcon.name = 'CS>FS';
-%     matlabbatch{5}.spm.stats.con.consess{contrast_iter}.tcon.weights = CS_matrix - FS_matrix;
-%     matlabbatch{5}.spm.stats.con.consess{contrast_iter}.tcon.sessrep = 'none';
-%     matlabbatch{5}.spm.stats.con.consess{contrast_iter + 1}.tcon.name = 'FS>CS';
-%     matlabbatch{5}.spm.stats.con.consess{contrast_iter + 1}.tcon.weights = FS_matrix - CS_matrix;
-%     matlabbatch{5}.spm.stats.con.consess{contrast_iter + 1}.tcon.sessrep = 'none';
-% end
-% 
 
 function newArray = normalizePosAndNeg(inputArray)
     % Initialize the new array to the same values as the input array

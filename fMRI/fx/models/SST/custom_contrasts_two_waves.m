@@ -4,15 +4,29 @@
 matlabbatch = {};
 
 
-conditions_filepath_1 = '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions/DEV011_1_SST1.mat';
-conditions_filepath_2 = '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions/DEV011_2_SST1.mat';
+% conditions_filepath_1 = '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions/DEV011_1_SST1.mat';
+% conditions_filepath_2 = '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions/DEV011_2_SST1.mat';
+% 
+% condition_filepaths = {conditions_filepath_1, 
+%     conditions_filepath_2};
 
-condition_filepaths = {conditions_filepath_1, 
-    conditions_filepath_2};
+
+% motion_filepaths = {
+%     '/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV011/sub-DEV011_ses-wave1_task-SST_acq-1_run-1_desc-motion_regressors.txt',
+%     '/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV011/sub-DEV011_ses-wave2_task-SST_acq-1_run-1_desc-motion_regressors.txt'
+%     };
+
+
+conditions_filepaths = {
+    matlabbatch{5}.spm.stats.fmri_spec.sess(1).multi(1),
+    matlabbatch{5}.spm.stats.fmri_spec.sess(2).multi(1)
+    };
+
+
 
 motion_filepaths = {
-    '/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV011/sub-DEV011_ses-wave1_task-SST_acq-1_run-1_desc-motion_regressors.txt',
-    '/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV011/sub-DEV011_ses-wave2_task-SST_acq-1_run-1_desc-motion_regressors.txt'
+    matlabbatch{5}.spm.stats.fmri_spec.sess(1).multi_reg(1),
+    matlabbatch{5}.spm.stats.fmri_spec.sess(2).multi_reg(1)
     };
 
 CS_matrix =[];
@@ -103,14 +117,14 @@ contrasts_filtered = contrasts(use_contrast);
 
 %now add the contrasts
 if any(use_contrast)
-     matlabbatch{5}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
-     matlabbatch{5}.spm.stats.con.delete = 0;
+     matlabbatch{7}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+     matlabbatch{7}.spm.stats.con.delete = 0;
 end
 
 for i = 1:length(contrasts_filtered)
-    matlabbatch{5}.spm.stats.con.consess{i}.tcon.name = contrasts_filtered{i}.name;
-    matlabbatch{5}.spm.stats.con.consess{i}.tcon.weights = contrasts_filtered{i}.weights;
-    matlabbatch{5}.spm.stats.con.consess{i}.tcon.sessrep = 'none';
+    matlabbatch{7}.spm.stats.con.consess{i}.tcon.name = contrasts_filtered{i}.name;
+    matlabbatch{7}.spm.stats.con.consess{i}.tcon.weights = contrasts_filtered{i}.weights;
+    matlabbatch{7}.spm.stats.con.consess{i}.tcon.sessrep = 'none';
 end
 
 
