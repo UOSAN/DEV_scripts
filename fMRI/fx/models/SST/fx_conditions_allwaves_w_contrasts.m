@@ -128,21 +128,21 @@ FS2_FS1 = FS_matrix.*(wave_matrix==2) - FS_matrix.*(wave_matrix==1);
 % then we need to add the contrasts that can be added
 contrasts = {
     %simple conditions (aggregated across multiple waves if available)
-    struct(name, 'CS',weights, CS_matrix),
-    struct(name, 'CG',weights, CG_matrix),
-    struct(name, 'FS',weights, FS_matrix),
+    struct('name', 'CS', 'weights', CS_matrix),
+    struct('name', 'CG', 'weights', CG_matrix),
+    struct('name', 'FS', 'weights', FS_matrix),
     %contrasts between conditions
-    struct(name, 'CS>CG',weights, CS_CG_matrix),
-    struct(name, 'CG>CS',weights, -CS_CG_matrix),
-    struct(name, 'CS>FS',weights, CS_FS_matrix),
-    struct(name, 'FS>CS',weights, -CS_FS_matrix),
+    struct('name', 'CS>CG', 'weights', CS_CG_matrix),
+    struct('name', 'CG>CS', 'weights', -CS_CG_matrix),
+    struct('name', 'CS>FS', 'weights', CS_FS_matrix),
+    struct('name', 'FS>CS', 'weights', -CS_FS_matrix),
     %contrasts between waves
-    struct(name, 'CS(W2-W1)',weights, CS2_CS1),
-    struct(name, 'CG(W2-W1)',weights, CG2_CG1),
-    struct(name, 'FS(W2-W1)',weights, FS2_FS1),
-    struct(name, 'CS(W1-W2)',weights, -CS2_CS1),
-    struct(name, 'CG(W1-W2)',weights, -CG2_CG1),
-    struct(name, 'FS(W1-W2)',weights, -FS2_FS1)
+    struct('name', 'CS(W2-W1)', 'weights', CS2_CS1),
+    struct('name', 'CG(W2-W1)', 'weights', CG2_CG1),
+    struct('name', 'FS(W2-W1)', 'weights', FS2_FS1),
+    struct('name', 'CS(W1-W2)', 'weights', -CS2_CS1),
+    struct('name', 'CG(W1-W2)', 'weights', -CG2_CG1),
+    struct('name', 'FS(W1-W2)', 'weights', -FS2_FS1)
     };
 
 
