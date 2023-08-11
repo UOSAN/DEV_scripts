@@ -1,5 +1,5 @@
 %-----------------------------------------------------------------------
-% Job saved on 01-Aug-2023 14:12:41 by cfg_util (rev $Rev: 7345 $)
+% Job saved on 11-Aug-2023 11:14:35 by cfg_util (rev $Rev: 7345 $)
 % spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
@@ -43,7 +43,7 @@ matlabbatch{15}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mod
 matlabbatch{15}.spm.util.exp_frames.frames = Inf;
 matlabbatch{16}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV021_ses-wave2_task-WTP_acq-4_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)', substruct('.','val', '{}',{12}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{16}.spm.util.exp_frames.frames = Inf;
-matlabbatch{17}.spm.stats.fmri_spec.dir = {'/Users/denicia/DEV/nonbids_data/fMRI/fx/models/WTP/all_waves/conditions/sub-DEV021'};
+matlabbatch{17}.spm.stats.fmri_spec.dir = {'/Users/denicia/DEV/nonbids_data/fMRI/fx/models/WTP/all_waves/local_conditions/sub-DEV021'};
 matlabbatch{17}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{17}.spm.stats.fmri_spec.timing.RT = 2;
 matlabbatch{17}.spm.stats.fmri_spec.timing.fmri_t = 72;
@@ -123,7 +123,7 @@ matlabbatch{19}.spm.stats.con.consess{5}.tcon.name = 'HealthyLiked(T2<T1)';
 matlabbatch{19}.spm.stats.con.consess{5}.tcon.weights = [0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 matlabbatch{19}.spm.stats.con.consess{5}.tcon.sessrep = 'none';
 matlabbatch{19}.spm.stats.con.consess{6}.tcon.name = 'UnhealthyLiked(T2<T1)';
-matlabbatch{19}.spm.stats.con.consess{6}.tcon.weights = [0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
+matlabbatch{19}.spm.stats.con.consess{6}.tcon.weights = [0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
 matlabbatch{19}.spm.stats.con.consess{6}.tcon.sessrep = 'none';
 matlabbatch{19}.spm.stats.con.consess{7}.tcon.name = 'HealthyDisliked(T2<T1)';
 matlabbatch{19}.spm.stats.con.consess{7}.tcon.weights = [0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 0 0.25 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 -0.25 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0];
