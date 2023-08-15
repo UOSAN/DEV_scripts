@@ -3,7 +3,7 @@
 % spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
-spm('defaults','fMRI');
+% spm('defaults','fMRI');
 matlabbatch{1}.spm.stats.factorial_design.dir = {'OUTDIR'};
 matlabbatch{1}.spm.stats.factorial_design.des.t1.scans = {
 img_filepath_list

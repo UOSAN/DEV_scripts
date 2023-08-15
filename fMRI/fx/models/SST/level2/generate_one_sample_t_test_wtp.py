@@ -34,7 +34,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
 
 betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 
-contrast_name_list = ['HealthyLiked(T2>T1)','UnhealthyLiked(T2>T1)','HealthyDisliked(T2>T1)','UnhealthyDisliked(T2>T1)']
+contrast_name_list = ['HealthyLiked(T2>T1)','UnhealthyLiked(T2>T1)','HealthyDisliked(T2>T1)','UnhealthyDisliked(T2>T1)', 'HealthyLiked(T2<T1)','UnhealthyLiked(T2<T1)','HealthyDisliked(T2<T1)','UnhealthyDisliked(T2<T1)', 'HealthyVSUnhealthy', 'UnealthyVSHealthy', 'HealthyLikedVsUnhealthyLiked', 'UnhealthyLikedVsHealthyLiked'] 
 # for contrast_name in ['HealthyLiked(T2>T1)','UnhealthyLiked(T2>T1)','HealthyDisliked(T2>T1)','UnhealthyDisliked(T2>T1)']:
 #     contrast_colname = 'contrast_' + contrast_name + '_fname'
 #     print(contrast_name)
