@@ -325,13 +325,7 @@ def generate_confounder_set_script_fragment_from_dict(confounder_dict, confounde
 
     return(script_fragment)
 
-
-
-def iterate_over_l1_images_and_run_l2_scripts(
-    l1_image_name_list, l1_images_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
-    col_function = lambda img_name: 'contrast_' + img_name + '_fname',
-    confounders = [], confounder_template_path = None, consess_template_path = None, conspec_template_path = None
-     ):
+def setup_l2_dir(sst_level_2_path,analysis_name,l1_images_with_paths):
     # pull date in format YYYYMMDD
     date_label = datetime.datetime.now().strftime("%Y%m%d")
     
@@ -341,6 +335,16 @@ def iterate_over_l1_images_and_run_l2_scripts(
         os.makedirs(output_basedir)
 
     l1_images_with_paths.to_csv(output_basedir + "/raw_filelist.csv")
+    return(output_basedir)
+
+def iterate_over_l1_images_and_run_l2_scripts_w_confounds(
+    l1_image_name_list, l1_images_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
+    col_function = lambda img_name: 'contrast_' + img_name + '_fname',
+    confounders = [], confounder_template_path = None, consess_template_path = None, conspec_template_path = None,
+    execute_l2_script = True
+     ):
+    
+    output_basedir = setup_l2_dir(sst_level_2_path,analysis_name,l1_images_with_paths)
 
     #loop through the l1 images
     for l1_image_name in l1_image_name_list:
@@ -353,56 +357,85 @@ def iterate_over_l1_images_and_run_l2_scripts(
             output_filepath =output_folderpath + "/" + l1_image_name + "_one_sample_design_estimate.m"
 
 
-            if len(confounders)>0:
-                #create a dictionary of empty lists where there's one entry for each string in the list confounders
-                #ensure each list is a new copy of the list, not a reference to the same list
-                confounder_dict = OrderedDict({k: [] for k in confounders})
+            #create a dictionary of empty lists where there's one entry for each string in the list confounders
+            #ensure each list is a new copy of the list, not a reference to the same list
+            confounder_dict = OrderedDict({k: [] for k in confounders})
 
-                
-                for i, r in l1_images_with_paths.iterrows():
-                    if pd.isnull(r[colname]) is False:
-                        tmap_filepath = r.loc['spm_l2_path'] + r.loc[colname]
-                        tmap_spm_command = "'" + tmap_filepath + ",1'"
-                        print(tmap_spm_command)
-                        img_filepath_list += tmap_spm_command + "\n"
-                        #now add the confounders
-                        for cf in confounders:
-                            confounder_dict[cf].append(r.loc[cf])
+            
+            for i, r in l1_images_with_paths.iterrows():
+                if pd.isnull(r[colname]) is False:
+                    tmap_filepath = r.loc['spm_l2_path'] + r.loc[colname]
+                    tmap_spm_command = "'" + tmap_filepath + ",1'"
+                    print(tmap_spm_command)
+                    img_filepath_list += tmap_spm_command + "\n"
+                    #now add the confounders
+                    for cf in confounders:
+                        confounder_dict[cf].append(r.loc[cf])
 
-                #now we want to go through that confounder dict, and change any null entries to the mean of the column.
-                for cf in confounders:
-                    confounder_dict[cf] = [np.nanmean(confounder_dict[cf]) if np.isnan(x) else x for x in confounder_dict[cf]]
+            #now we want to go through that confounder dict, and change any null entries to the mean of the column.
+            for cf in confounders:
+                confounder_dict[cf] = [np.nanmean(confounder_dict[cf]) if np.isnan(x) else x for x in confounder_dict[cf]]
 
 
-                all_contrast_dict = OrderedDict({**OrderedDict({l1_image_name:None}),**confounder_dict})
+            all_contrast_dict = OrderedDict({**OrderedDict({l1_image_name:None}),**confounder_dict})
 
-                #now generate the confounder script fragment
-                confounder_script_text = generate_confounder_set_script_fragment_from_dict(confounder_dict, confounder_template_path)
-                #for the conspecs and consess we need to pass in the confounder dict AND the main contrast
-                confounder_consess_script_text = generate_confounder_set_script_fragment_from_dict(all_contrast_dict, consess_template_path)
-                confounder_conspec_script_text = generate_confounder_set_script_fragment_from_dict(all_contrast_dict, conspec_template_path)
-                
-                create_spm_l2_script(template_filepath, replacement_map = {
-                        'OUTDIR': output_folderpath,
-                        'img_filepath_list': img_filepath_list,
-                        '(MAIN HEADER)': l1_image_name,
-                        'CONFOUNDS': confounder_script_text,
-                        'CONSESS': confounder_consess_script_text,
-                        'CONSPEC': confounder_conspec_script_text
-                        },
-                    output_filepath = output_filepath
-                    )
-            else:
-                create_spm_l2_script(template_filepath, replacement_map = {
-                        'OUTDIR': output_folderpath,
-                        'img_filepath_list': img_filepath_list,
-                        '(MAIN HEADER)': l1_image_name
-                        },
-                    output_filepath = output_filepath
-                    )
+            #now generate the confounder script fragment
+            confounder_script_text = generate_confounder_set_script_fragment_from_dict(confounder_dict, confounder_template_path)
+            #for the conspecs and consess we need to pass in the confounder dict AND the main contrast
+            confounder_consess_script_text = generate_confounder_set_script_fragment_from_dict(all_contrast_dict, consess_template_path)
+            confounder_conspec_script_text = generate_confounder_set_script_fragment_from_dict(all_contrast_dict, conspec_template_path)
+            
+            create_spm_l2_script(template_filepath, replacement_map = {
+                    'OUTDIR': output_folderpath,
+                    'img_filepath_list': img_filepath_list,
+                    '(MAIN HEADER)': l1_image_name,
+                    'CONFOUNDS': confounder_script_text,
+                    'CONSESS': confounder_consess_script_text,
+                    'CONSPEC': confounder_conspec_script_text
+                    },
+                output_filepath = output_filepath
+                )
             #now run the script
             #now to texecute, something like
-            execute_spm_l2_script(output_filepath, spm_path=spm_path)
+            if execute_l2_script:
+                execute_spm_l2_script(output_filepath, spm_path=spm_path)
+        else:
+            print('contrast ' + l1_image_name + ' not found.')
+
+
+
+
+def iterate_over_l1_images_and_run_l2_scripts(
+    l1_image_name_list, l1_images_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
+    col_function = lambda img_name: 'contrast_' + img_name + '_fname',
+    confounders = [], confounder_template_path = None, consess_template_path = None, conspec_template_path = None,
+    execute_l2_script = True
+     ):
+    
+    output_basedir = setup_l2_dir(sst_level_2_path,analysis_name,l1_images_with_paths)
+
+    #loop through the l1 images
+    for l1_image_name in l1_image_name_list:
+        colname = col_function(l1_image_name)
+        print(l1_image_name)
+        if colname in l1_images_with_paths.columns:
+            img_filepath_list = ""
+
+            output_folderpath=output_basedir + "/" + l1_image_name
+            output_filepath =output_folderpath + "/" + l1_image_name + "_one_sample_design_estimate.m"
+
+
+            create_spm_l2_script(template_filepath, replacement_map = {
+                    'OUTDIR': output_folderpath,
+                    'img_filepath_list': img_filepath_list,
+                    '(MAIN HEADER)': l1_image_name
+                    },
+                output_filepath = output_filepath
+                )
+            #now run the script
+            #now to texecute, something like
+            if execute_l2_script:
+                execute_spm_l2_script(output_filepath, spm_path=spm_path)
         else:
             print('contrast ' + l1_image_name + ' not found.')
 
