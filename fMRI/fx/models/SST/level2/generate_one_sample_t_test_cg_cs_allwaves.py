@@ -56,11 +56,17 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
 
 
 betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
-betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
+#betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 
 
 print(betas_with_contrasts.columns)
-contrast_name_list = ['CS>CG','CG>CS','CS>FS','FS>CS']
+contrast_name_list = ['CS','CG','FS','CS>CG','CG>CS','CS>FS','FS>CS',
+                      'CS(W2-W1)'
+'CG(W2-W1)',
+'FS(W2-W1)',
+'CS(W1-W2)',
+'CG(W1-W2)',
+'FS(W1-W2)']
 
 iterate_over_l1_images_and_run_l2_scripts(
     contrast_name_list, betas_with_contrasts, analysis_name, sst_level_2_path, template_filepath, spm_path,
@@ -69,18 +75,18 @@ iterate_over_l1_images_and_run_l2_scripts(
 
 
 
-print(betas_with_paths.columns)
+#print(betas_with_paths.columns)
 
-beta_name_list = [
-    'CorrectGo',
-    'CorrectStop',
-    'FailedStop',
-    'Cue',
-    'FailedGo'
-    ]
+# beta_name_list = [
+#     'CorrectGo',
+#     'CorrectStop',
+#     'FailedStop',
+#     'Cue',
+#     'FailedGo'
+#     ]
 
-iterate_over_l1_images_and_run_l2_scripts(
-    beta_name_list, betas_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
-    col_function=lambda img_name: "beta_" + img_name + "_fname"
-)
+# iterate_over_l1_images_and_run_l2_scripts(
+#     beta_name_list, betas_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
+#     col_function=lambda img_name: "beta_" + img_name + "_fname"
+# )
 

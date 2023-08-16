@@ -82,7 +82,12 @@ def get_beta_fnames_for_beta_dirs(
         #                   ][0]
 
         for b_i, vbeta in enumerate(subj_l1_mat_config['SPM']['Vbeta']):
-            beta_readable_description = re.search(r'Sn\(1\) (.*?)(\^\d)?(\*bf\(1\))?$', vbeta['descrip'])[1]
+            beta_match = re.search(r'Sn\((\d+)\) (.*?)(\^\d)?(\*bf\(1\))?$', vbeta['descrip'])
+            beta_session_id = int(beta_match[1])
+            if beta_session_id!=1:
+                raise NotImplementedError("this function only works for single-session data at the moment.")
+
+            beta_readable_description = beta_match[2]
             #print(str(b_i) + ": " + beta_readable_description + " " + vbeta['fname'])
             beta_dir_df.loc[beta_i, 'beta_' + beta_readable_description + "_fname"] =vbeta['fname']
 
@@ -361,13 +366,10 @@ def iterate_over_l1_images_and_run_l2_scripts_w_confounds(
             #ensure each list is a new copy of the list, not a reference to the same list
             confounder_dict = OrderedDict({k: [] for k in confounders})
 
-            
+            img_filepath_list = populate_filepath_list(l1_images_with_paths,colname)
+
             for i, r in l1_images_with_paths.iterrows():
                 if pd.isnull(r[colname]) is False:
-                    tmap_filepath = r.loc['spm_l2_path'] + r.loc[colname]
-                    tmap_spm_command = "'" + tmap_filepath + ",1'"
-                    print(tmap_spm_command)
-                    img_filepath_list += tmap_spm_command + "\n"
                     #now add the confounders
                     for cf in confounders:
                         confounder_dict[cf].append(r.loc[cf])
@@ -403,7 +405,16 @@ def iterate_over_l1_images_and_run_l2_scripts_w_confounds(
             print('contrast ' + l1_image_name + ' not found.')
 
 
+def populate_filepath_list(l1_images_with_paths,colname):
+    img_filepath_list = ""
+    for i, r in l1_images_with_paths.iterrows():
+        if pd.isnull(r[colname]) is False:
+            tmap_filepath = r.loc['spm_l2_path'] + r.loc[colname]
+            tmap_spm_command = "'" + tmap_filepath + ",1'"
+            print(tmap_spm_command)
+            img_filepath_list += tmap_spm_command + "\n"
 
+    return(img_filepath_list)
 
 def iterate_over_l1_images_and_run_l2_scripts(
     l1_image_name_list, l1_images_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
@@ -419,10 +430,13 @@ def iterate_over_l1_images_and_run_l2_scripts(
         colname = col_function(l1_image_name)
         print(l1_image_name)
         if colname in l1_images_with_paths.columns:
-            img_filepath_list = ""
+            
 
             output_folderpath=output_basedir + "/" + l1_image_name
             output_filepath =output_folderpath + "/" + l1_image_name + "_one_sample_design_estimate.m"
+
+            img_filepath_list = populate_filepath_list(l1_images_with_paths,colname)
+
 
 
             create_spm_l2_script(template_filepath, replacement_map = {
