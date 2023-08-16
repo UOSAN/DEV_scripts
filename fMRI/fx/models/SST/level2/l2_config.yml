@@ -13,6 +13,8 @@ UO-2010765:
   wtp_level2_path: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/WTP/level2/
   spm_l2_script_template_filepath: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_design_estimate.m
   spm_path: /Users/denicia/spm12
+  spm_l2_script_w_confounders_template_filepath: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_design_estimate.m
+  confounder_template_path: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_confounder.m
 Benjamins-MacBook-Pro-3.local:
   sst_wave1_path:  /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/
   sst_allwaves_path: /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/all_waves/
