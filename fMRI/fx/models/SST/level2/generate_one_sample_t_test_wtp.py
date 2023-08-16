@@ -56,5 +56,6 @@ iterate_over_l1_images_and_run_l2_scripts(
     sst_level_2_path = wtp_level2_path, 
     template_filepath = template_filepath, 
     spm_path = spm_path,
+    execute_l2_script = False,
     col_function=lambda img_name: 'contrast_' + img_name + "_fname"
     )
