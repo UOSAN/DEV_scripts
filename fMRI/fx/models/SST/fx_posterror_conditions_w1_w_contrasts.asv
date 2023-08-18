@@ -1,8 +1,11 @@
 %-----------------------------------------------------------------------
-% Job saved on 24-May-2022 13:54:32 by cfg_util (rev $Rev: 7345 $)
-% spm SPM - SPM12 (7771):
+% Job saved on 11-Sep-2021 12:22:38 by cfg_util (rev $Rev: 7345 $)
+% spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
+%s6_sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+%s6_sub-DEV004_ses-wave1_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+disp('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV004/ses-wave1/func/');
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV004/ses-wave1/func/'};
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV004_ses-wave1_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii';
 matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
@@ -13,20 +16,21 @@ matlabbatch{3}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode
 matlabbatch{3}.spm.util.exp_frames.frames = Inf;
 matlabbatch{4}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV004_ses-wave2_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)', substruct('.','val', '{}',{2}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{4}.spm.util.exp_frames.frames = Inf;
-matlabbatch{5}.spm.stats.fmri_spec.dir = {'/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/all_waves/posterror_cues_no_rt/sub-DEV004'};
+
+matlabbatch{5}.spm.stats.fmri_spec.dir = {'/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/SST/all_waves/posterror_conditions/sub-DEV004'};
 matlabbatch{5}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{5}.spm.stats.fmri_spec.timing.RT = 2;
 matlabbatch{5}.spm.stats.fmri_spec.timing.fmri_t = 72;
 matlabbatch{5}.spm.stats.fmri_spec.timing.fmri_t0 = 36;
 matlabbatch{5}.spm.stats.fmri_spec.sess(1).scans(1) = cfg_dep('Expand image frames: Expanded filename list.', substruct('.','val', '{}',{3}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{5}.spm.stats.fmri_spec.sess(1).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
-matlabbatch{5}.spm.stats.fmri_spec.sess(1).multi = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/posterror_cues_no_rt/DEV004_1_SST1.mat'};
+matlabbatch{5}.spm.stats.fmri_spec.sess(1).multi = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/posterror_conditions/DEV004_1_SST1.mat'};
 matlabbatch{5}.spm.stats.fmri_spec.sess(1).regress = struct('name', {}, 'val', {});
 matlabbatch{5}.spm.stats.fmri_spec.sess(1).multi_reg = {'/projects/sanlab/shared/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV004/sub-DEV004_ses-wave1_task-SST_acq-1_run-1_desc-motion_regressors.txt'};
 matlabbatch{5}.spm.stats.fmri_spec.sess(1).hpf = 128;
 matlabbatch{5}.spm.stats.fmri_spec.sess(2).scans(1) = cfg_dep('Expand image frames: Expanded filename list.', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 matlabbatch{5}.spm.stats.fmri_spec.sess(2).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
-matlabbatch{5}.spm.stats.fmri_spec.sess(2).multi = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/posterror_cues_no_rt/DEV004_2_SST1.mat'};
+matlabbatch{5}.spm.stats.fmri_spec.sess(2).multi = {'/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/posterror_conditions/DEV004_2_SST1.mat'};
 matlabbatch{5}.spm.stats.fmri_spec.sess(2).regress = struct('name', {}, 'val', {});
 matlabbatch{5}.spm.stats.fmri_spec.sess(2).multi_reg = {'/projects/sanlab/shared/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV004/sub-DEV004_ses-wave2_task-SST_acq-1_run-1_desc-motion_regressors.txt'};
 matlabbatch{5}.spm.stats.fmri_spec.sess(2).hpf = 128;
@@ -41,6 +45,20 @@ matlabbatch{6}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification:
 matlabbatch{6}.spm.stats.fmri_est.write_residuals = 0;
 matlabbatch{6}.spm.stats.fmri_est.method.Classical = 1;
 
+%result we want:
+%aggregates across waves of the following contrasts:
+%1. 'CorrectGoFollowing(CS>FS)'
+%2. 'CorrectGoFollowing(FS>CS)'
+%3. 'CS>FS(PrecedingCorrectGo)'
+%4. 'FS>CS(PrecedingCorrectGo)'
+% wave contrasts of four betas:
+% CorrectGoFollowingCorrectStop
+% CorrectGoFollowingFailedStop
+% CorrectStopPrecedingCorrectGo
+% FailedStopPrecedingCorrectGo
+
+%each contrast would only appear if the contrasts are available
+
 condition_filepaths = {
     matlabbatch{5}.spm.stats.fmri_spec.sess(1).multi{1} ,
     matlabbatch{5}.spm.stats.fmri_spec.sess(2).multi{1}
@@ -51,19 +69,14 @@ motion_filepaths = {
     matlabbatch{5}.spm.stats.fmri_spec.sess(2).multi_reg{1}
     };
 
+%list the betas we want build contrasts of
 main_betas = {
-'CueFollowingCorrectStop',
-'CueFollowingFailedStop',
 'CorrectGoFollowingCorrectStop',
 'CorrectGoFollowingFailedStop',
 'CorrectStopPrecedingCorrectGo',
-'FailedStopPrecedingCorrectGo',
-'OtherCue',
-'OtherCorrectGo',
-'OtherCorrectStop',
-'OtherFailedStop',
-'OtherFailedGo'};
+'FailedStopPrecedingCorrectGo'};
 
+%create a matirx identifying positions of the betas of interest
 beta_matrix = struct;
 for mb_i = 1:length(main_betas)
     mb = main_betas{mb_i};
@@ -71,10 +84,9 @@ for mb_i = 1:length(main_betas)
 end
 wave_matrix = [];
 
-CueFollowingCSmFS_matrix=[];
-%CueFollowingFSmCS_matrix = [];
-CGFollowingCSmFS_matrix = [];
-%CGFollowingFSmCS_matrix = [];
+%matrices for the contrasts we're interested in
+CGFollowingCSmFS_matrix=[];
+CSmFSPrecedingCG_matrix = [];
 
 for i = 1:numel(condition_filepaths) %iterate through the two sessiosn
     % for this session
@@ -85,6 +97,7 @@ for i = 1:numel(condition_filepaths) %iterate through the two sessiosn
     dataTable = readtable(motion_filepaths{i}, 'Delimiter', '\t', 'ReadVariableNames', false);
     motion_colnum = width(dataTable);
     session_motion_regressor_count{i}=motion_colnum;
+    motion_matrix = zeros(1,motion_colnum);
 
     
     % build concatenated matrices
@@ -92,28 +105,23 @@ for i = 1:numel(condition_filepaths) %iterate through the two sessiosn
         mb = main_betas{mb_i};
         multicond_mat.(mb) = cellfun(@(x) strcmp(x,mb), multicond_mat.names, 'UniformOutput', 1);
         has_mb.(mb)=sum(multicond_mat.(mb));
+        %last of all, develop a continuously concatenated matrix for the thre
+        beta_matrix.(mb) = [beta_matrix.(mb) multicond_mat.(mb) motion_matrix];
     end
 
     %save to our multicond array
     multicond_array{i} = multicond_mat;
 
-    motion_matrix = zeros(1,motion_colnum);
-    
-    %last of all, develop a continuously concatenated matrix for the three
-    for mb_i = 1:length(main_betas)
-        mb = main_betas{mb_i};
-        beta_matrix.(mb) = [beta_matrix.(mb) multicond_mat.(mb) motion_matrix];
-    end
 
     %only adds this session to the matrix if it has both of the relevant
     %items
-    %'CueFollowing(CS>FS)'
-    session_CueFollowingCSmFS = (multicond_mat.CueFollowingCorrectStop-multicond_mat.CueFollowingFailedStop) * has_mb.('CueFollowingCorrectStop') * has_mb.('CueFollowingFailedStop'); 
-    CueFollowingCSmFS_matrix  = [CueFollowingCSmFS_matrix session_CueFollowingCSmFS motion_matrix];
-
     %'CorrectGoFollowing(CS>FS)'
     session_CGFollowingCSmFS = (multicond_mat.CorrectGoFollowingCorrectStop-multicond_mat.CorrectGoFollowingFailedStop) * has_mb.('CorrectGoFollowingCorrectStop') * has_mb.('CorrectGoFollowingFailedStop'); 
     CGFollowingCSmFS_matrix  = [CGFollowingCSmFS_matrix session_CGFollowingCSmFS motion_matrix];
+
+    %'CS>FS(PrecedingCorrectGo)'
+    session_CSmFSPrecedingCG = (multicond_mat.CorrectStopPrecedingCorrectGo-multicond_mat.FailedStopPrecedingCorrectGo) * has_mb.('CorrectStopPrecedingCorrectGo') * has_mb.('FailedStopPrecedingCorrectGo'); 
+    CSmFSPrecedingCG_matrix  = [CSmFSPrecedingCG_matrix session_CSmFSPrecedingCG motion_matrix];
 
     %this just marks the waves
     wave_i_matrix = repmat(i,1,length(multicond_mat.names) + motion_colnum);
@@ -135,10 +143,11 @@ for mb_i = 1:length(main_betas)
 end
 % contrasts between conditions
 condition_contrasts = {
-    struct('name', 'CueFollowing(CS>FS)', 'weights', CueFollowingCSmFS_matrix),
-    struct('name', 'CueFollowing(FS>CS)', 'weights', -CueFollowingCSmFS_matrix),
     struct('name', 'CorrectGoFollowing(CS>FS)', 'weights', CGFollowingCSmFS_matrix),
     struct('name', 'CorrectGoFollowing(FS>CS)', 'weights', -CGFollowingCSmFS_matrix),
+    struct('name', 'CorrectGoFollowing(CS>FS)', 'weights', CGFollowingCSmFS_matrix),
+    struct('name', 'CorrectGoFollowing(FS>CS)', 'weights', -CGFollowingCSmFS_matrix),
+
     };
 
 %wave contrasts for each of the betas
@@ -187,3 +196,25 @@ for i = 1:length(contrasts_filtered)
     matlabbatch{7}.spm.stats.con.consess{i}.tcon.sessrep = 'none';
 end
 
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+matlabbatch{5}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{4}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+matlabbatch{5}.spm.stats.con.consess{1}.tcon.name = 'CorrectGoFollowing(CS>FS)';
+matlabbatch{5}.spm.stats.con.consess{1}.tcon.weights = [1 -1];
+matlabbatch{5}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
+matlabbatch{5}.spm.stats.con.consess{2}.tcon.name = 'CorrectGoFollowing(FS>CS)';
+matlabbatch{5}.spm.stats.con.consess{2}.tcon.weights = [-1 1];
+matlabbatch{5}.spm.stats.con.consess{2}.tcon.sessrep = 'none';
+matlabbatch{5}.spm.stats.con.consess{3}.tcon.name = 'CS>FS(PrecedingCorrectGo)';
+matlabbatch{5}.spm.stats.con.consess{3}.tcon.weights = [0 0 0 1 -1];
+matlabbatch{5}.spm.stats.con.consess{3}.tcon.sessrep = 'none';
+matlabbatch{5}.spm.stats.con.consess{4}.tcon.name = 'FS>CS(PrecedingCorrectGo)';
+matlabbatch{5}.spm.stats.con.consess{4}.tcon.weights = [0 0 0 -1 1];
+matlabbatch{5}.spm.stats.con.consess{4}.tcon.sessrep = 'none';
+%we can add additional contrasts to this file if necessary.
+matlabbatch{5}.spm.stats.con.delete = 0;
