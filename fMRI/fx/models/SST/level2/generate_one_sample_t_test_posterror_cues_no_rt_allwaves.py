@@ -27,13 +27,13 @@ spm_path = config_data['spm_path']
 analysis_name = 'posterror_cues_no_rt'
 
 train_betas_with_data = get_data_for_confirmed_train_subjs(
-    beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/wave1/" + analysis_name + "/sub-DEV*/",
+    beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/" + analysis_name + "/sub-DEV*/",
     nonbids_data_path = nonbids_data_path,
     #ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = ml_scripting_path,
     dropbox_datapath=dropbox_datapath,
     exclude_test_subjs=False
-)[0:20]
+)
 
 betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 #betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)

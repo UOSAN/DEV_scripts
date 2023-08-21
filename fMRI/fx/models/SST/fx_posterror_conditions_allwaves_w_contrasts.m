@@ -146,10 +146,16 @@ for mb_i = 1:length(main_betas)
     wave_contrasts = [wave_contrasts; {struct('name', name_1_2, 'weights', -main_betas_2_1.(mb))}];
 end
 
+CGFollowingCS_m_FS_2_1_matrix = CGFollowingCSmFS_matrix*(wave_matrix==2) - CGFollowingCSmFS_matrix.*(wave_matrix==1);
+CGFollowingCS_m_FS_2_1_contrast = {struct('name','CorrectGoFollowing(CS>FS)(W2-W1)','weights',CGFollowingCS_m_FS_2_1_matrix)};
+CGFollowingCS_m_FS_1_2_contrast = {struct('name','CorrectGoFollowing(CS>FS)(W1-W2)','weights',-CGFollowingCS_m_FS_2_1_matrix)};
+
 contrasts = [
     simple_condition_aggregates, %simple conditions (aggregated across multiple waves if available)
     condition_contrasts, %contrasts between conditions
-    wave_contrasts %contrasts between waves
+    wave_contrasts, %contrasts between waves
+    CGFollowingCS_m_FS_2_1_contrast,
+    CGFollowingCS_m_FS_1_2_contrast
     ];
 
 
