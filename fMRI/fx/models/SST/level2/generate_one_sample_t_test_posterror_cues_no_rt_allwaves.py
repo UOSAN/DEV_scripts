@@ -44,10 +44,33 @@ contrast_name_list = [
     'CueFollowing(CS>FS)',
     'CueFollowing(FS>CS)',
     'CorrectGoFollowing(CS>FS)',
-    'CorrectGoFollowing(FS>CS)'
+    'CorrectGoFollowing(FS>CS)',
+    'CueFollowingCorrectStop(W2-W1)',
+    'CueFollowingCorrectStop(W1-W2)',
+    'CueFollowingFailedStop(W2-W1)',
+    'CueFollowingFailedStop(W1-W2)'
     #we can't contrast CG and CS because
     #we haven't prepared t-maps properly
     #considering that some cue items will be missing and the betas won't be in the same order
+    # ,'CorrectStopPrecedingCorrectGo',
+    #    'FailedStopPrecedingCorrectGo',
+    #    'OtherCue', 'OtherCorrectGo',
+    #    'OtherCorrectStop', 'OtherFailedStop',
+    #    'CueFollowing(CS>FS)',
+    #    'CueFollowing(FS>CS)',
+    #    'CorrectGoFollowing(CS>FS)',
+    #    'CorrectGoFollowing(FS>CS)',
+
+
+
+    #    'CorrectGoFollowingCorrectStop(W2-W1)',
+    #    'CorrectGoFollowingCorrectStop(W1-W2)',
+    #    'CorrectGoFollowingFailedStop(W2-W1)',
+    #    'CorrectGoFollowingFailedStop(W1-W2)',
+    #    'CorrectStopPrecedingCorrectGo(W2-W1)',
+    #    'CorrectStopPrecedingCorrectGo(W1-W2)',
+    #    'FailedStopPrecedingCorrectGo(W2-W1)',
+    #    'FailedStopPrecedingCorrectGo(W1-W2)'
 ]
 
 iterate_over_l1_images_and_run_l2_scripts(

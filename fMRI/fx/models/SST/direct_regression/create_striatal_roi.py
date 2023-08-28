@@ -20,8 +20,8 @@ with open('config.yml') as f:
 print(config)
         
 dev_scripts_abs_path = config['dev_scripts_path']
-posterror_folder = 'posterror_cues_no_rt_20230616'
-
+#posterror_folder = 'posterror_cues_no_rt_20230616'
+posterror_folder = 'posterror_cues_no_rt_20230821'
 # roi file to open
 roi_files = [dev_scripts_abs_path + 'fMRI/fx/models/SST/level2/' + posterror_folder + '/CueFollowing(CS>FS)/CueFollowing(CS>FS)striatal_cluster_1.nii',
 dev_scripts_abs_path + 'fMRI/fx/models/SST/level2/' + posterror_folder + '/CueFollowing(CS>FS)/CueFollowing(CS>FS)striatal_cluster_2.nii']

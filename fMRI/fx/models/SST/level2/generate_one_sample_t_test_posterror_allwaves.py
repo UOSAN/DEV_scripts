@@ -28,13 +28,16 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     ml_scripting_path = ml_scripting_path,
     dropbox_datapath=dropbox_data_path,
     exclude_test_subjs=False
-)[0:5]
+)
 
 
 betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 
 
-contrast_name_list = ['CorrectGoFollowing(CS>FS)',
+contrast_name_list = [
+    'CorrectGoFollowing(CS>FS)(W2-W1)',
+    'CorrectGoFollowing(CS>FS)(W1-W2)',
+    'CorrectGoFollowing(CS>FS)',
     'CorrectGoFollowing(FS>CS)',
     '(CS>FS)PrecedingCorrectGo',
     '(FS>CS)PrecedingCorrectGo',
@@ -45,7 +48,9 @@ contrast_name_list = ['CorrectGoFollowing(CS>FS)',
     'CorrectStopPrecedingCorrectGo(W2-W1)',
     'CorrectStopPrecedingCorrectGo(W1-W2)',
     'FailedStopPrecedingCorrectGo(W2-W1)',
-    'FailedStopPrecedingCorrectGo(W1-W2)'
+    'FailedStopPrecedingCorrectGo(W1-W2)',
+    'CorrectGoFollowing(CS>FS)'
+
     ]
 
 # maybe we should also do the W2-W1 contrast specifcially for 'CorrectGoFollowing(CS>FS)'.
