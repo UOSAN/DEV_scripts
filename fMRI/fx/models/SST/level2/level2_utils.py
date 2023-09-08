@@ -300,8 +300,10 @@ def generate_single_confounder_script_fragment(confounder_template_path, confoun
     if confounder_contents is not None:
         confounder_contents_string = "\n".join([str(f) for f in confounder_contents])
         template_string = template_string.replace("CONFOUND_LIST", confounder_contents_string)
+        template_string = template_string.replace("weight_vec", confounder_contents_string)
     template_string = template_string.replace("confound_i", str(confound_i))
-    template_string = template_string.replace("weight_vec", " ".join(["0"]*(confound_i-1)) + " 1")
+    #template_string = template_string.replace("weight_vec", " ".join(["0"]*(confound_i-1)) + " 1")
+    
     
 
     return(template_string)
@@ -319,7 +321,7 @@ def generate_single_confounder_script_fragment(confounder_template_path, confoun
 
 #     return(script_fragment)
 
-def generate_confounder_set_script_fragment_from_dict(confounder_dict, confounder_template_path):
+def generate_contrast_set_script_fragment_from_dict(confounder_dict, confounder_template_path):
     ### this function takes a template file and replaces the values in the replacement map
     ### it then returns that for insertion into the main script
     script_fragment = ""
@@ -346,7 +348,7 @@ def iterate_over_l1_images_and_run_l2_scripts_w_confounds(
     l1_image_name_list, l1_images_with_paths, analysis_name, sst_level_2_path, template_filepath, spm_path,
     col_function = lambda img_name: 'contrast_' + img_name + '_fname',
     confounders = [], confounder_template_path = None, consess_template_path = None, conspec_template_path = None,
-    execute_l2_script = True
+    execute_l2_script = True, include_base_contrast = True, confounder_contrasts = []
      ):
     
     output_basedir = setup_l2_dir(sst_level_2_path,analysis_name,l1_images_with_paths)
@@ -359,7 +361,7 @@ def iterate_over_l1_images_and_run_l2_scripts_w_confounds(
             img_filepath_list = ""
 
             output_folderpath=output_basedir + "/" + l1_image_name
-            output_filepath =output_folderpath + "/" + l1_image_name + "_one_sample_design_estimate.m"
+            output_filepath =output_folderpath + "/" + l1_image_name + "_confounds_design_estimate.m"
 
 
             #create a dictionary of empty lists where there's one entry for each string in the list confounders
@@ -378,22 +380,50 @@ def iterate_over_l1_images_and_run_l2_scripts_w_confounds(
             for cf in confounders:
                 confounder_dict[cf] = [np.nanmean(confounder_dict[cf]) if np.isnan(x) else x for x in confounder_dict[cf]]
 
+            #now create the contrasts
+            contrast_names = list(confounder_dict.keys())
+            if include_base_contrast:
+                contrast_names = [l1_image_name] + contrast_names
 
-            all_contrast_dict = OrderedDict({**OrderedDict({l1_image_name:None}),**confounder_dict})
+            contrast_dict = OrderedDict((c_k, [0]*c_i + [1] + [0]*(len(contrast_names)-c_i-1)) for c_i,c_k in enumerate(contrast_names))
+
+
+            if len(confounder_contrasts)>0:
+                #these are named contrasts that we want to add to the consess and conspec
+                #we'll need to use regex to detect exactly which contrast we're talking about
+                #right now we just support '>' contrasts
+                for cc in confounder_contrasts:
+                    #regex to find the contrast name, assuming there's a > in the middle
+                    try:
+                        r1, op, r2 = re.search(r'(.*)(\W+)(.*)',cc).groups()
+                    except AttributeError:
+                        raise Exception("could not parse confounder contrast '" + cc + "'; it may not be in a supported format.")
+                    if op=='>':
+                        
+                        cc_contrast = [r1_i - r2_i for r1_i, r2_i in zip(contrast_dict[r1], contrast_dict[r2])] 
+
+                    else:
+                        raise NotImplementedError("we only support > contrasts at the moment.")
+                    
+                    #all_contrast_dict = OrderedDict((**all_contrast_dict,**OrderedDict({cc:cc_contrast})))
+                    contrast_dict.update({cc:cc_contrast})
+                    
 
             #now generate the confounder script fragment
-            confounder_script_text = generate_confounder_set_script_fragment_from_dict(confounder_dict, confounder_template_path)
+            confounder_script_text = generate_contrast_set_script_fragment_from_dict(confounder_dict, confounder_template_path)
             #for the conspecs and consess we need to pass in the confounder dict AND the main contrast
-            confounder_consess_script_text = generate_confounder_set_script_fragment_from_dict(all_contrast_dict, consess_template_path)
-            confounder_conspec_script_text = generate_confounder_set_script_fragment_from_dict(all_contrast_dict, conspec_template_path)
+            contrast_consess_script_text = generate_contrast_set_script_fragment_from_dict(contrast_dict, consess_template_path)
+
+            result_contrast_dict = OrderedDict((l1_image_name + '_' + key, value) for key, value in contrast_dict.items())
+            contrast_conspec_script_text = generate_contrast_set_script_fragment_from_dict(result_contrast_dict, conspec_template_path)
             
             create_spm_l2_script(template_filepath, replacement_map = {
                     'OUTDIR': output_folderpath,
                     'img_filepath_list': img_filepath_list,
                     '(MAIN HEADER)': l1_image_name,
                     'CONFOUNDS': confounder_script_text,
-                    'CONSESS': confounder_consess_script_text,
-                    'CONSPEC': confounder_conspec_script_text
+                    'CONSESS': contrast_consess_script_text,
+                    'CONSPEC': contrast_conspec_script_text
                     },
                 output_filepath = output_filepath
                 )

@@ -1000,7 +1000,7 @@ def load_groups_from_mastersheet(mastersheet_filepath):
     #remove rows where group is na
     ms_groups = ms_groups[ms_groups['group_raw'].notna()]
     #now detect any text within the Group column within parentheses and remove it, including the parentheses
-    ms_groups['intervention_group'] = ms_groups['group_raw'].str.replace(r"\(.*\)","")
+    ms_groups['intervention_group'] = ms_groups['group_raw'].str.replace(r"\(.*\)","",regex=True)
     #now remove any whitespace
     ms_groups['intervention_group'] = ms_groups['intervention_group'].str.strip()
     #convert to lowercase

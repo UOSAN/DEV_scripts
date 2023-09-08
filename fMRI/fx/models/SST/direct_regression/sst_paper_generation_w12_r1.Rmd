@@ -364,13 +364,13 @@ One justification would be if P(Stop | Signal) isn't higher for healthy vs. unhe
 A more thorough justification would be if there wasn't any kind of distinction between the food cues for Stopping vs not stopping.
 
 ```{r}
-table(sst_all_data$health)
-colnames(sst_all_data)
+#table(sst_all_data$health)
+#colnames(sst_all_data)
 #basic: health label doesn't predict failed Stop
-sst_all_data %>% filter(go_no_go_condition_label=="Stop") %>%
-  select(health_condition_label, go_no_go_condition_label,condition)
+# sst_all_data %>% filter(go_no_go_condition_label=="Stop") %>%
+#   select(health_condition_label, go_no_go_condition_label,condition)
 
-table(sst_all_data$health_condition_label,sst_all_data$health_condition)
+#table(sst_all_data$health_condition_label,sst_all_data$health_condition)
 sst_all_data$IsCorrect<-sst_all_data$condition %in% c("CorrectGo","CorrectStop")
 summary(glm( IsCorrect~health_condition_label, family=binomial(link = "logit"),
      sst_all_data %>% filter(go_no_go_condition_label=="Stop")))
@@ -405,8 +405,8 @@ sst_all_active_data<-sst_all_data %>% arrange(subid, waveid, runid, trial_n) %>%
   mutate(preceding_condition_label = lag(condition,1)) %>%
   mutate(FollowsStopTrial = preceding_condition_label %in% c("FailedStop","CorrectStop"))
 
-sst_all_active_data %>% select(
-  trial_n,condition,preceding_condition_label,FollowsStopTrial)
+#sst_all_active_data %>% select(
+  #trial_n,condition,preceding_condition_label,FollowsStopTrial)
 
 summary_counts_of_trial_types <- sst_all_active_data %>%
   arrange(subid, waveid, runid, trial_n) %>% 
@@ -436,7 +436,7 @@ summary_counts_of_following_trial_types<-sst_all_active_data %>%
 
 cg_count<-summary_counts_of_following_trial_types[names(summary_counts_of_following_trial_types)=="CorrectGoCount"]
 
-cg_count/sum(summary_counts_of_following_trial_types)
+#cg_count/sum(summary_counts_of_following_trial_types)
   
 
 

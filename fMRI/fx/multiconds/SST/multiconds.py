@@ -42,9 +42,13 @@ COUNT_RESPONSE = 256
 
 STUDY_ID = 'DEV'
 
+#(0=unhealthy, 1=healthy, 2=null)
+UNHEALTHY_TRIAL = 0
+HEALTHY_TRIAL = 1
+HEALTH_STATUS_NULL = 2
 
 
-def read_data(file: Path, use_rt_for_go_success_trials=True):
+def read_data(file: Path, use_rt_for_go_success_trials=True,include_health=False):
     """
     Read behavioral data out of the .mat files. The data is interpreted as follows:
 
@@ -76,6 +80,7 @@ def read_data(file: Path, use_rt_for_go_success_trials=True):
 
     trial_duration = response_data[:, 14]
     trial_start_time = response_data[:, 15]
+    health_condition = response_data[:, 16]
 
     go_success = np.logical_and(go_no_go_condition == GO_TRIAL,
                                    np.logical_or(subject_response == BUTTON_BOX_3, subject_response == BUTTON_BOX_6))
@@ -84,7 +89,10 @@ def read_data(file: Path, use_rt_for_go_success_trials=True):
     if use_rt_for_go_success_trials:
         np.copyto(trial_duration, reaction_time, where=go_success)
 
-    return trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time, arrow_presented
+    if include_health:
+        return trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time, arrow_presented, health_condition
+    else:
+        return trial_number, go_no_go_condition, subject_response, reaction_time, trial_duration, trial_start_time, arrow_presented
 
 
 def read_all_data(file: Path, jitter_values: pd.Series):
@@ -137,7 +145,7 @@ def read_all_data(file: Path, jitter_values: pd.Series):
     
 
 
-def create_masks(condition: np.ndarray, response: np.ndarray) -> List:
+def create_masks_dict(condition: np.ndarray, response: OrderedDict) -> List:
     """Create masks of conditions"""
     temp = np.logical_or.reduce((response == NO_RESPONSE, response == RANDOM_3_KEY,
                                     response == RANDOM_F_KEY, response == RANDOM_U_KEY,
@@ -155,7 +163,33 @@ def create_masks(condition: np.ndarray, response: np.ndarray) -> List:
 
     null_trials = (condition == NULL_TRIAL)
 
-    return list((go_success, no_go_success, no_go_fail, null_trials, go_fail))
+    return(OrderedDict({
+        'CorrectGo': go_success,
+        'CorrectStop': no_go_success,
+        'FailedStop': no_go_fail,
+        'Cue': null_trials,
+        'FailedGo': go_fail
+    }))
+
+def create_masks(condition: np.ndarray, response: np.ndarray) -> List:
+    """Create masks of conditions"""
+    return(list(create_masks_dict(condition, response).values()))
+    
+def get_go_no_go_masks(masks: List) -> OrderedDict:
+    #     go_success = condition_masks[0]
+    # no_go_success = condition_masks[1]
+    # no_go_fail = condition_masks[2]
+    # null_trials = condition_masks[3]
+    # go_fail = condition_masks[4]
+    go_masks = masks['CorrectGo'] | masks['FailedGo']
+    no_go_masks = masks['CorrectStop'] | masks['FailedStop']
+    return(OrderedDict({
+        'Go': go_masks,
+        'NoGo': no_go_masks,
+        'Cue': masks['Cue']
+    }))
+
+
 
 def get_pss(condition_masks: List,posterror_masks_dict: List,reaction_time:np.ndarray):
     go_success = condition_masks[0]
@@ -684,6 +718,25 @@ def save_varying_condition_list(output_folder: str, subfolder: str, file_conditi
                     filehandle.write('DEV%s\n' % listitem)
 
 
+def quality_check(subject_response,subject_id,masks,wave_number):
+    # Perform some quality checking on the numbers of responses (should be 256),
+            # the number of null trials (should be 128),
+            # go trials (should be 96), and no-go trials (should be 32)
+    if subject_response.size != COUNT_RESPONSE:
+        print(f'Wrong number of responses   : (subject, expected, actual) '
+                f'({subject_id}, {COUNT_RESPONSE}, {subject_response.size})')
+    if np.count_nonzero(masks[0] + masks[-1]) != COUNT_GO:
+        print(f'Wrong number of go trials : (subject, run, expected, actual) '
+                f'({subject_id}, {wave_number}, {COUNT_GO}, {np.count_nonzero(masks[0] + masks[-1])})')
+    if np.count_nonzero(masks[1] + masks[2]) != COUNT_NO_GO:
+        print(f'Wrong number of no-go trials: (subject, expected, actual) '
+                f'({subject_id}, {COUNT_NO_GO}, {np.count_nonzero(masks[1] + masks[2])})')
+    if np.count_nonzero(masks[3]) != COUNT_NULL:
+        print(f'Wrong number of null trials : (subject, expected, actual) '
+                f'({subject_id}, {COUNT_NULL}, {np.count_nonzero(masks[3])})')
+
+
+
 def main(input_dir: str, bids_dir: str = None, file_limit=None,
          use_rt_for_go_success_trials=True,
          output_folder=""):
@@ -767,9 +820,10 @@ def main(input_dir: str, bids_dir: str = None, file_limit=None,
                     'arrow_presented': arrow_presented})
 
                 multicond_df_list = multicond_df_list + [trial_df_row]
-                # Create paths and file names
+                #creates betaseries with each trial as a separate condition
                 write_betaseries(output_folder, subject_id, wave_number, trials)
 
+                #creates betaseries combining trials into conditions based on their classification
                 conditions = create_conditions(trial_start_time, trial_duration, masks)
                 write_beta_data(output_folder, 'conditions', subject_id, wave_number, conditions)
 
