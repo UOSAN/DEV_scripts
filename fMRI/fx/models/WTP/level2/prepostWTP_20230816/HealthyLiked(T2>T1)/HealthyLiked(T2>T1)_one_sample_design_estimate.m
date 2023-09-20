@@ -3,7 +3,7 @@
 % spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
-% spm('defaults','fMRI');
+spm('defaults','fMRI');
 matlabbatch{1}.spm.stats.factorial_design.dir = {'/Users/denicia/DEV/DEV_scripts/fMRI/fx/models/WTP/level2/prepostWTP_20230816/HealthyLiked(T2>T1)'};
 matlabbatch{1}.spm.stats.factorial_design.des.t1.scans = {
 '/Users/denicia/DEV/nonbids_data/fMRI/fx/models/WTP/all_waves/conditions/sub-DEV005/spmT_0001.nii,1'
