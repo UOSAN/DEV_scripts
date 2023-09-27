@@ -2,9 +2,10 @@ import pandas as pd
 import os
 from glob import glob
 import numpy as np
+import sys
+sys.path.append('/Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/')
 from level2_utils import get_data_for_confirmed_train_subjs, read_yaml_for_host
 from level2_utils import *
-import sys
 sys.path.append('/Users/denicia/DEV/DEV_scripts/analyses/intervention_moderation/')
 from dev_interaction_util import load_groups_from_mastersheet
 #beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
@@ -45,7 +46,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
 
 train_betas_with_data_w_groups = train_betas_with_data.merge(group_codes, left_on='SID', right_on='dev_id', how='inner')
 
-betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data_w_groups)
+betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data_w_groups[0:5])
 #betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 
 
