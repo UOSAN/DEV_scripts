@@ -298,7 +298,7 @@ def generate_single_confounder_script_fragment(confounder_template_path, confoun
     
     template_string = template_string.replace("CONFOUND_LABEL", confounder_name)
     if confounder_contents is not None:
-        confounder_contents_string = "\n".join([str(f) for f in confounder_contents])
+        confounder_contents_string = "\n".join([str(int(f)) for f in confounder_contents])
         template_string = template_string.replace("CONFOUND_LIST", confounder_contents_string)
         template_string = template_string.replace("weight_vec", confounder_contents_string)
     template_string = template_string.replace("confound_i", str(confound_i))
