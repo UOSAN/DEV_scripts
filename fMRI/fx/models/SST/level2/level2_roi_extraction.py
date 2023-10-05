@@ -1,5 +1,6 @@
 import os
 import nilearn as nil
+import nibabel as nib
 import pandas as pd
 import numpy as np
 from direct_regression.get_all_series import get_beta_img, mask_3d_subject_image, mask_4d_subject_image, signature_weight_3d_subject_image
@@ -39,6 +40,7 @@ class level2_roi_extractor:
         self.center_data = center_data
         self.scale_data = scale_data
         self.load_all_images_simultaneously = False
+        self.image_cleaning = False
         self.image_standardize = False
         self.brain_mask_path = None
 
@@ -53,6 +55,34 @@ class level2_roi_extractor:
             raw_mask_list = raw_mask_list + [mask_raw]
 
         return raw_mask_list
+    
+    
+    def spatially_normalize(self, image_series: nib.nifti1.Nifti1Image) -> nib.nifti1.Nifti1Image:
+        """
+        takes a 4d image series with 0s representing voxels outside the brain and every other value representing inside the brain
+        creates an auto-mask from that image series
+        then spatially normalizes the image series by subtracting the mean and dividing by the standard deviation
+        """
+        assert (len(image_series.shape)==4)
+        #get a mean of the first three dimensions of the image
+        #actually have to mask these first.
+
+        image_fdata = image_series.get_fdata()
+        image_defacto_mask = np.mean(np.abs(image_fdata),axis=3)>0.00001
+        image_means = np.mean(image_fdata[image_defacto_mask],axis=0)
+        image_sds = np.std(image_fdata[image_defacto_mask],axis=0)
+        # print(image_means, image_sds)
+        # print(np.mean(image_means), np.mean(image_sds))
+
+        #now divide each voxel by the mean applicalbe to that voxel
+        image_series_normed_fdata = image_fdata.copy()
+        image_series_normed_fdata[image_defacto_mask]= (image_fdata[image_defacto_mask] - image_means)/image_sds
+
+        image_series_normed = nil.image.new_img_like(image_series,image_series_normed_fdata)
+
+        return(image_series_normed)
+
+
     
     def mask_subject_image(self,roi_raw, active_img_cleaned, bin_threshold):
         if len(active_img_cleaned.shape)==3 or active_img_cleaned.shape[3]==1:
@@ -239,12 +269,15 @@ class level2_roi_extractor:
         colname = col_function(condition)
         image_series,beta_list_exists = self.get_image_series(beta_list,colname)
 
-        #clean the image
-        image_series_cleaned = nil.image.clean_img(image_series,detrend=self.center_data ,standardize=self.scale_data)
+    
+        if self.center_data or self.scale_data:
+            image_series_cleaned = nil.image.clean_img(image_series,detrend=self.center_data ,standardize=self.scale_data)
+        else:
+            image_series_cleaned = image_series
 
         if self.image_standardize:
             #get the f
-            image_series_cleaned = nil.image.standardize(image_series_cleaned)
+            image_series_cleaned = self.spatially_normalize(image_series_cleaned)
 
         #image_series_cleaned.to_filename('cleaned_img.nii.gz')
         # img_cleaned_fdata = image_series_cleaned.get_fdata()
