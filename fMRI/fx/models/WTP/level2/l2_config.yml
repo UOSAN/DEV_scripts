@@ -16,6 +16,10 @@ UO-2010765:
   spm_l2_script_w_confounders_template_filepath: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_design_estimate.m
   confounder_template_path: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_confounder.m
   wtp_level_2_path: /Users/denicia/Dropbox (University of Oregon)/Berkman Lab/Devaluation/analysis_files/level2/WTP/
+  template_mlr_main: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_main.m
+  template_mlr_confounder_no_centering: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_confounder_no_centering.m
+  template_mlr_consess: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_consess.m
+  template_mlr_conspec: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_conspec.m
 
 Benjamins-MacBook-Pro-3.local:
   sst_wave1_path:  /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/
