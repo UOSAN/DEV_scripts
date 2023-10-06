@@ -122,6 +122,10 @@ CS2_CS1 = CS_matrix.*(wave_matrix==2) - CS_matrix.*(wave_matrix==1);
 CG2_CG1 = CG_matrix.*(wave_matrix==2) - CG_matrix.*(wave_matrix==1);
 FS2_FS1 = FS_matrix.*(wave_matrix==2) - FS_matrix.*(wave_matrix==1);
 
+%now do wave and condition contrasts
+CS_CG_W21_matrix = CS_CG_matrix.*(wave_matrix==2) - CS_CG_matrix.*(wave_matrix==1);
+CS_FS_W21_matrix = CS_FS_matrix.*(wave_matrix==2) - CS_FS_matrix.*(wave_matrix==1);
+
 %OK, now, if ANY of the contrasts are doable, we need to create the basic
 %opening to contrast
 % then we need to add the contrasts that can be added
@@ -142,7 +146,12 @@ contrasts = {
     struct('name', 'FS(W2-W1)', 'weights', FS2_FS1),
     struct('name', 'CS(W1-W2)', 'weights', -CS2_CS1),
     struct('name', 'CG(W1-W2)', 'weights', -CG2_CG1),
-    struct('name', 'FS(W1-W2)', 'weights', -FS2_FS1)
+    struct('name', 'FS(W1-W2)', 'weights', -FS2_FS1),
+    %contrasts between conditions and waves
+    struct('name', 'CS>CG(W2-W1)', 'weights', CS_CG_W21_matrix),
+    struct('name', 'CG>CS(W2-W1)', 'weights', -CS_CG_W21_matrix),
+    struct('name', 'CS>FS(W2-W1)', 'weights', CS_FS_W21_matrix),
+    struct('name', 'FS>CS(W2-W1)', 'weights', -CS_FS_W21_matrix)
     };
 
 
