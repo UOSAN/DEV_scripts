@@ -16,3 +16,4 @@ writecell( ...
 
 roi_data = [y_neurosynth_response_inhibition_insula_mean ];
 writematrix(roi_data, output_filename,'WriteMode','append');
+subject_sst_avg_roi_data_raw

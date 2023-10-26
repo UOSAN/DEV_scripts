@@ -28,14 +28,14 @@ sst_level_2_path = config_data['sst_level_2_path']
 
 spm_path = config_data['spm_path']
 
-analysis_name = 'health_conditions'
+analysis_name = 'conditions'
 
 output_name = analysis_name + '_groups'
 
 groups_by_name = load_groups_from_mastersheet(dropbox_datapath + 'DEV Participant Mastersheet_copy.xlsx')
 
 group_codes = pd.concat([groups_by_name.dev_id, pd.get_dummies(groups_by_name.intervention_group)], axis=1)
-train_betas_with_data = get_data_for_confirmed_train_subjs(
+train_betas_with_data = get_data_for_confirmed_subj_by_wave(
     beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/" + analysis_name + "/sub-DEV*/",
     nonbids_data_path = nonbids_data_path,
     #ml_data_folderpath = ml_data_folderpath,
@@ -52,17 +52,23 @@ betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data_w_groups)
 
 print(betas_with_contrasts.columns)
 contrast_name_list = [
-    'Unhealthy_Go(W2-W1)',
-    'Unhealthy_NoGo(W2-W1)',
-    'Unhealthy_Go(W1-W2)',
-    'Unhealthy_NoGo(W1-W2)',
-    'Stop(Healthy>Unhealthy)(W2-W1)',
-    'Stop(Healthy>Unhealthy)(W1-W2)',
-    'Unhealthy_CS>CG(W2-W1)',
-    'Unhealthy_CG>CS(W2-W1)',
-    'Unhealthy_CS>FS(W2-W1)',
-    'Unhealthy_FS>CS(W2-W1)'
-
+    'CS',
+    'CG',
+    'FS',
+    'CS>CG',
+    'CG>CS',
+    'CS>FS',
+    'FS>CS',
+    'CS(W2-W1)',
+    'CG(W2-W1)',
+    'FS(W2-W1)',
+    'CS(W1-W2)',
+    'CG(W1-W2)',
+    'FS(W1-W2)',
+    'CS>CG(W2-W1)',
+    'CG>CS(W2-W1)',
+    'CS>FS(W2-W1)',
+    'FS>CS(W2-W1)'
 ]
 
 

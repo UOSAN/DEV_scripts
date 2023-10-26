@@ -53,3 +53,8 @@ rsfMRI/baseline_analysis/subject_connectivity/DEV*.csv
 fMRI/fx/models/SST/direct_regression/*.RData
 fMRI/fx/motion/auto-motion-fmriprep/confounds_loaded_state.RData
 .RData
+
+
+*/__pycache__
+*/__pycache__/*.*
+__pycache__/*

@@ -136,10 +136,7 @@ contrasts = {
     struct('name', 'CG', 'weights', CG_matrix),
     struct('name', 'FS', 'weights', FS_matrix),
     %contrasts between conditions
-    struct('name', 'CS>CG', 'weights', CS_CG_matrix),
-    struct('name', 'CG>CS', 'weights', -CS_CG_matrix),
-    struct('name', 'CS>FS', 'weights', CS_FS_matrix),
-    struct('name', 'FS>CS', 'weights', -CS_FS_matrix),
+x
     %contrasts between waves
     struct('name', 'CS(W2-W1)', 'weights', CS2_CS1),
     struct('name', 'CG(W2-W1)', 'weights', CG2_CG1),

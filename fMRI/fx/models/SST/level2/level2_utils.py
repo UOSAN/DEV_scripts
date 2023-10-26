@@ -201,6 +201,7 @@ def get_data_for_confirmed_train_subjs(
     # exclude_subjects = ['DEV061', 'DEV185', 'DEV187', 'DEV189', 'DEV190', 'DEV192', 'DEV198', 'DEV203', 'DEV220',
     #                         'DEV221']
     #also want to exclude subjects whose data was marked questionable in Redcap/Teams
+#1. this needs to call on session 1, 2, or joint, depending on what we're doing
     data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
     
     data_quality_task = data_quality.loc[data_quality[task].isna()==False,]
@@ -215,6 +216,7 @@ def get_data_for_confirmed_train_subjs(
     print(str(len(usable_dev_ids)) + " subjects remaining on the provision useable_dev_id list from the redcap list after excluding subjects with missing scan data.")
     #and exclude subjects excluded by the motion quality process
     #read the CSV, discarding the first line and using the second as headers
+# this also neds to be session 1, 2, or joint
     motion_exclusions = pd.read_csv(dropbox_datapath + '/DEVQC_all_subjects - All.csv', header=1)
     motion_exclusions_w1 = motion_exclusions[motion_exclusions['wave']==1]
 
@@ -250,8 +252,120 @@ def get_data_for_confirmed_train_subjs(
         selected_betas = beta_df.reset_index(inplace=False, drop=True)
         #print("beta paths after exclusion via nsc_subject_exclusions: " + str(len(included_betas)))
 
+    #betas with data is just the paths of all the betas where hter is beta data, i.e., beta files that exist
     betas_with_data = selected_betas.merge(data_by_ppt, left_on='subject_id', right_on='SID')
+    #useable dev ids is the list of dev ids that have data and aren't excluded for one reason or another
+    #there's two different questions we can ask here:
+    #why are there so many subjects where the data is "useable" but there is no beta data and
+    #why there so many subjects with beta data but exluded for one reason or another
+    #we do actually know why sbjects re exclued, more or less. the question is where all the beta data went.
     useable_betas_with_data = betas_with_data.loc[betas_with_data.subject_id.isin(usable_dev_ids),]
+
+    #get subjects in usable_dev_ids without an entry in betas_with_data.subject_id
+    only_in_betas = set(betas_with_data.subject_id) - set(usable_dev_ids)
+    only_in_usable_dev_ids = list(set(usable_dev_ids) - set(betas_with_data.subject_id))
+    only_in_usable_dev_ids.sort()
+
+
+
+    print("beta paths after exclusion via nsc_subject_exclusions and the provision useable_dev_id list: " + str(len(useable_betas_with_data)))
+        
+
+    useable_betas_with_data.sort_values('subject_id', inplace=True)
+
+    return useable_betas_with_data
+
+
+def get_data_for_confirmed_subj_by_wave(
+        beta_glob,
+        nonbids_data_path,
+        dropbox_datapath,
+        ml_scripting_path,
+        exclude_subjects_without_both_waves=True,
+        task='SST',
+        waves = [1,2]
+        ):
+    """
+    Based on get_data_for_confirmed_train_subjs
+    I've taken out the code to exclude subjects based on the train/test split because this is no longer relevant
+    However, this now includes code to decide which group of subjects to examine: wave 1, wave 2, or both waves.
+    """
+    beta_paths = glob(
+        beta_glob)
+    scan_list = ["'" + bp + ",1'" for bp in beta_paths]
+
+    # for sli in scan_list:
+    #     print(sli)
+
+    # turn the scan list into a dataframe we can match on.
+    subj_beta_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in scan_list]
+    beta_df = pd.DataFrame({
+        'subject_id': subj_beta_list,
+        'spm_l2_path': beta_paths,
+        'spm_l2_path_description': scan_list
+    })
+
+    # beta_df['spm_l2_path_description'] =beta_df.beta_filepath
+
+    #other data for inclusion
+    data_by_ppt = pd.read_csv(dropbox_datapath + "/data_by_ppt.csv")
+    print("loaded " + str(len(data_by_ppt)) + " rows from data_by_ppt.csv")
+    # include_exclude_list = pd.read_csv(ml_scripting_path + "/nsc_subject_exclusions.csv")
+    # print("loaded " + str(len(include_exclude_list)) + " rows from nsc_subject_exclusions.csv")
+    
+    # exclude_subjects = ['DEV061', 'DEV185', 'DEV187', 'DEV189', 'DEV190', 'DEV192', 'DEV198', 'DEV203', 'DEV220',
+    #                         'DEV221']
+    #also want to exclude subjects whose data was marked questionable in Redcap/Teams
+#1. this needs to call on session 1, 2, or joint, depending on what we're doing
+    data_quality = pd.read_excel(dropbox_datapath + "/DEV-BothSessionsDataQualityC_DATA.xlsx", engine = 'openpyxl')
+    
+    data_quality_task = data_quality.loc[data_quality[task].isna()==False,]
+    usable_dev_ids = data_quality_task.dev_id[data_quality_task[task]=="No reported problems"]
+    print(str(len(usable_dev_ids)) + " subjects with no reported problems in task Redcap scanner notes, added to the provision useable_dev_id list.")
+    
+    #hard-coded excluded subjects
+    sst_data_missing_includes = pd.read_csv(dropbox_datapath + "/post-processing-fmri-data-inclusion.csv")
+    sst_data_missing_excludes = sst_data_missing_includes['DevID'][sst_data_missing_includes[task]=='Exclude'].tolist()
+    print(str(len(sst_data_missing_excludes)) + " subjects excludeable for missing scan data.")
+    usable_dev_ids = [id for id in usable_dev_ids if id not in sst_data_missing_excludes]
+    print(str(len(usable_dev_ids)) + " subjects remaining on the provision useable_dev_id list from the redcap list after excluding subjects with missing scan data.")
+    #and exclude subjects excluded by the motion quality process
+    #read the CSV, discarding the first line and using the second as headers
+# this also neds to be session 1, 2, or joint
+    motion_exclusions = pd.read_csv(dropbox_datapath + '/DEVQC_all_subjects - All.csv', header=1)
+    motion_exclusions_w1 = motion_exclusions[motion_exclusions['wave']==1]
+
+    general_motion_exclusion_binvec = motion_exclusions_w1['Exclude'].str.contains('exclude', flags=re.IGNORECASE)
+    task_motion_exclusions_binvec = motion_exclusions_w1[task + "_Exclude"].str.contains('exclude', flags=re.IGNORECASE)
+    motion_exclusions = motion_exclusions_w1['subjectID'][general_motion_exclusion_binvec | task_motion_exclusions_binvec]
+
+    usable_dev_ids = [id for id in usable_dev_ids if id not in motion_exclusions.tolist()]
+    print(str(len(usable_dev_ids)) + " subjects remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
+
+    #raise NotImplementedError("this still ruels out whole sets of ROC and WTP for single runs that are out; we should be more precise than this.")
+    #raise NotImplementedError("need to re-write this to handle exclusion for WTP and ROC as well as SST, depnding on task passed in to the function")
+    
+    print("beta paths before exclusion: " + str(len(beta_df)))
+    #included_betas = beta_df[(beta_df.subject_id.isin(exclusion_list_sst.SubjectId)==False)].reset_index(inplace=False, drop=True)
+    selected_betas = beta_df.reset_index(inplace=False, drop=True)
+    #print("beta paths after exclusion via nsc_subject_exclusions: " + str(len(included_betas)))
+
+    #betas with data is just the paths of all the betas where hter is beta data, i.e., beta files that exist
+    betas_with_data = selected_betas.merge(data_by_ppt, left_on='subject_id', right_on='SID')
+    #useable dev ids is the list of dev ids that have data and aren't excluded for one reason or another
+    #there's two different questions we can ask here:
+    #why are there so many subjects where the data is "useable" but there is no beta data and
+    #why there so many subjects with beta data but exluded for one reason or another
+    #we do actually know why sbjects re exclued, more or less. the question is where all the beta data went.
+    useable_betas_with_data = betas_with_data.loc[betas_with_data.subject_id.isin(usable_dev_ids),]
+
+    #get subjects in usable_dev_ids without an entry in betas_with_data.subject_id
+    only_in_betas = set(betas_with_data.subject_id) - set(usable_dev_ids)
+    only_in_usable_dev_ids = list(set(usable_dev_ids) - set(betas_with_data.subject_id))
+    only_in_usable_dev_ids.sort()
+
+
+
     print("beta paths after exclusion via nsc_subject_exclusions and the provision useable_dev_id list: " + str(len(useable_betas_with_data)))
         
 

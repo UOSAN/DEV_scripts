@@ -66,7 +66,12 @@ contrast_name_list = ['CS','CG','FS','CS>CG','CG>CS','CS>FS','FS>CS',
 'FS(W2-W1)',
 'CS(W1-W2)',
 'CG(W1-W2)',
-'FS(W1-W2)']
+'FS(W1-W2)',
+'CS>CG(W2-W1)',
+'CG>CS(W2-W1)',
+'CS>FS(W2-W1)',
+'FS>CS(W2-W1)'
+]
 
 iterate_over_l1_images_and_run_l2_scripts(
     contrast_name_list, betas_with_contrasts, analysis_name, sst_level_2_path, template_filepath, spm_path,
