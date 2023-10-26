@@ -165,7 +165,7 @@ contrasts_filtered = contrasts(use_contrast);
 
 %first the preamble apply to all of the 
 if any(use_contrast)
-     matlabbatch{7}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{6}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
+%     matlabbatch{7}.spm.stats.con.spmmat(1) = cfg_dep('Model estimation: SPM.mat File', substruct('.','val', '{}',{6}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
      matlabbatch{7}.spm.stats.con.delete = 0;
 end
 

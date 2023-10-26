@@ -218,3 +218,700 @@ affine set
 xyzt_units: ('mm', 'sec')
 file saved
 Complete.
+Running modification script at 2023-07-20 11:13:42.525312
+Found 13 images for sub-DEV018 run-wave1
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/fmap/sub-DEV018_ses-wave1_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/fmap/sub-DEV018_ses-wave1_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/fmap/sub-DEV018_ses-wave1_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/fmap/sub-DEV018_ses-wave1_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/anat/sub-DEV018_ses-wave1_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/anat/sub-DEV018_ses-wave1_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-rest_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-rest_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave1/func/sub-DEV018_ses-wave1_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Found 14 images for sub-DEV018 run-wave2
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/fmap/sub-DEV018_ses-wave2_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/fmap/sub-DEV018_ses-wave2_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/fmap/sub-DEV018_ses-wave2_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/fmap/sub-DEV018_ses-wave2_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/anat/sub-DEV018_ses-wave2_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/anat/sub-DEV018_ses-wave2_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-rest_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-rest_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-rest_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-rest_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV018/ses-wave2/func/sub-DEV018_ses-wave2_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Found 14 images for sub-DEV093 run-wave1
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/fmap/sub-DEV093_ses-wave1_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/fmap/sub-DEV093_ses-wave1_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/fmap/sub-DEV093_ses-wave1_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/fmap/sub-DEV093_ses-wave1_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/anat/sub-DEV093_ses-wave1_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/anat/sub-DEV093_ses-wave1_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-rest_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-rest_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-rest_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-rest_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave1/func/sub-DEV093_ses-wave1_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Found 14 images for sub-DEV093 run-wave2
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/fmap/sub-DEV093_ses-wave2_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/fmap/sub-DEV093_ses-wave2_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/fmap/sub-DEV093_ses-wave2_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/fmap/sub-DEV093_ses-wave2_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/anat/sub-DEV093_ses-wave2_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/anat/sub-DEV093_ses-wave2_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-rest_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-rest_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-rest_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-rest_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV093/ses-wave2/func/sub-DEV093_ses-wave2_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Found 14 images for sub-DEV198 run-wave1
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/fmap/sub-DEV198_ses-wave1_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/fmap/sub-DEV198_ses-wave1_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/fmap/sub-DEV198_ses-wave1_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/fmap/sub-DEV198_ses-wave1_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/anat/sub-DEV198_ses-wave1_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/anat/sub-DEV198_ses-wave1_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-rest_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-rest_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-rest_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave1/func/sub-DEV198_ses-wave1_task-rest_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Found 13 images for sub-DEV198 run-wave2
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/fmap/sub-DEV198_ses-wave2_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/fmap/sub-DEV198_ses-wave2_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/fmap/sub-DEV198_ses-wave2_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/fmap/sub-DEV198_ses-wave2_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/anat/sub-DEV198_ses-wave2_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/anat/sub-DEV198_ses-wave2_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-rest_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-rest_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV198/ses-wave2/func/sub-DEV198_ses-wave2_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Found 14 images for sub-DEV205 run-wave1
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/fmap/sub-DEV205_ses-wave1_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/fmap/sub-DEV205_ses-wave1_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/fmap/sub-DEV205_ses-wave1_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/fmap/sub-DEV205_ses-wave1_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/anat/sub-DEV205_ses-wave1_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/anat/sub-DEV205_ses-wave1_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-rest_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-rest_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-rest_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-rest_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave1/func/sub-DEV205_ses-wave1_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Found 13 images for sub-DEV205 run-wave2
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/fmap/sub-DEV205_ses-wave2_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/fmap/sub-DEV205_ses-wave2_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/fmap/sub-DEV205_ses-wave2_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/fmap/sub-DEV205_ses-wave2_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/anat/sub-DEV205_ses-wave2_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/anat/sub-DEV205_ses-wave2_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-rest_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-rest_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV205/ses-wave2/func/sub-DEV205_ses-wave2_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Found 14 images for sub-DEV255 run-wave1
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/fmap/sub-DEV255_ses-wave1_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/fmap/sub-DEV255_ses-wave1_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/fmap/sub-DEV255_ses-wave1_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/fmap/sub-DEV255_ses-wave1_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/anat/sub-DEV255_ses-wave1_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/anat/sub-DEV255_ses-wave1_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-rest_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-rest_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-rest_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-rest_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave1/func/sub-DEV255_ses-wave1_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Found 14 images for sub-DEV255 run-wave2
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/fmap/sub-DEV255_ses-wave2_dir-pa_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/fmap/sub-DEV255_ses-wave2_dir-pa_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/fmap/sub-DEV255_ses-wave2_dir-ap_epi.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/fmap/sub-DEV255_ses-wave2_dir-ap_epi.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/anat/sub-DEV255_ses-wave2_T1w.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/anat/sub-DEV255_ses-wave2_T1w.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-ROC_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-ROC_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-ROC_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-ROC_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-rest_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-rest_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-ROC_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-ROC_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-WTP_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-WTP_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-WTP_acq-4_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-WTP_acq-4_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-SST_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-SST_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-rest_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-rest_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-ROC_acq-3_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-ROC_acq-3_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-WTP_acq-1_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-WTP_acq-1_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+/gpfs/projects/sanlab/shared/DEV/bids_data/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-WTP_acq-2_bold.nii.gz
+backup of original file saved at /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/affine_correction_originals/sub-DEV255/ses-wave2/func/sub-DEV255_ses-wave2_task-WTP_acq-2_bold.nii.gz
+affine set
+xyzt_units: ('mm', 'sec')
+file saved
+Complete.

@@ -7,6 +7,7 @@
 
 # get this from a value passed in
 SCRIPT_NAME=$1
+SCRIPT_LABEL=$2
 
 echo ${SCRIPT_NAME}
 
@@ -38,7 +39,7 @@ SHELL_SCRIPT=spm_job_ctn.sh
 RESULTS_INFIX=fx
 
 # Set output dir and make it if it doesn't exist
-OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_${TASK}_${RESULTS_INFIX}
+OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output_${TASK}_${RESULTS_INFIX}${SCRIPT_LABEL}
 
 if [ ! -d ${OUTPUTDIR} ]; then
 	mkdir -p ${OUTPUTDIR}
