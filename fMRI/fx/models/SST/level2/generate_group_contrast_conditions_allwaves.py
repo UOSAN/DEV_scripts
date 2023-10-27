@@ -35,13 +35,14 @@ output_name = analysis_name + '_groups'
 groups_by_name = load_groups_from_mastersheet(dropbox_datapath + 'DEV Participant Mastersheet_copy.xlsx')
 
 group_codes = pd.concat([groups_by_name.dev_id, pd.get_dummies(groups_by_name.intervention_group)], axis=1)
-train_betas_with_data = get_data_for_confirmed_subj_by_wave(
+train_betas_with_data = get_data_for_confirmed_task_session(
     beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/" + analysis_name + "/sub-DEV*/",
     nonbids_data_path = nonbids_data_path,
     #ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = ml_scripting_path,
     dropbox_datapath=dropbox_datapath,
-    exclude_test_subjs=False
+    exclude_test_subjs=False,
+    waves = [1,2]
 )
 
 train_betas_with_data_w_groups = train_betas_with_data.merge(group_codes, left_on='SID', right_on='dev_id', how='inner')
