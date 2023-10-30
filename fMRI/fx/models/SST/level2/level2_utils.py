@@ -202,7 +202,7 @@ def get_data_for_confirmed_train_subjs(
     #                         'DEV221']
     #also want to exclude subjects whose data was marked questionable in Redcap/Teams
 #1. this needs to call on session 1, 2, or joint, depending on what we're doing
-    raise Exception("need to code this to handle exclusions of individual runs.")
+    raise NotImplementedError("need to code this to handle exclusions of individual runs.")
     redcap_data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
     redcap_data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
     
@@ -324,7 +324,7 @@ def get_data_for_confirmed_task_session(
     #also want to exclude subjects whose data was marked questionable in Redcap/Teams
 
     #scan room data quality
-    raise Exception("need to code this to handle exclusions of individual runs.")
+    raise NotImplementedError("need to code this to handle exclusions of individual runs.")
     redcap_data_quality = pd.read_excel(dropbox_datapath + "/DEV-BothSessionsDataQualityC_DATA.xlsx", engine = 'openpyxl')
     #use a regex to extract the wave number from the redcap event name column which comes in the form session_{wave}_arm_\d
     redcap_data_quality['wave'] = redcap_data_quality['redcap_event_name'].str.extract(r'session_(\d)_arm_\d').astype(int)
@@ -460,7 +460,7 @@ def get_data_for_confirmed_sessions_across_tasks(
     #also want to exclude subjects whose data was marked questionable in Redcap/Teams
 
     #scan room data quality
-    raise Exception("need to code this to handle exclusions of individual runs.")
+    raise NotImplementedError("need to code this to handle exclusions of individual runs.")
     redcap_data_quality = pd.read_excel(dropbox_datapath + "/DEV-BothSessionsDataQualityC_DATA.xlsx", engine = 'openpyxl')
     #append column names with 'redcap_' to avoid confusion with other data
     redcap_data_quality.columns = ['redcap_' + c for c in redcap_data_quality.columns]
