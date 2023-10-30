@@ -202,16 +202,19 @@ def get_data_for_confirmed_train_subjs(
     #                         'DEV221']
     #also want to exclude subjects whose data was marked questionable in Redcap/Teams
 #1. this needs to call on session 1, 2, or joint, depending on what we're doing
-    data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
-    data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
+    raise Exception("need to code this to handle exclusions of individual runs.")
+    redcap_data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
+    redcap_data_quality = pd.read_excel(dropbox_datapath + "/DEV-Session1DataQualityC_DATA.xlsx", engine = 'openpyxl')
     
-    data_quality_task = data_quality.loc[data_quality[task].isna()==False,]
+    data_quality_task = redcap_data_quality.loc[redcap_data_quality[task].isna()==False,]
     usable_dev_ids = data_quality_task.dev_id[data_quality_task[task]=="No reported problems"]
     print(str(len(usable_dev_ids)) + " subjects with no reported problems in task Redcap scanner notes, added to the provision useable_dev_id list.")
     
     #hard-coded excluded subjects
-    sst_data_missing_includes = pd.read_csv(dropbox_datapath + "/post-processing-fmri-data-inclusion.csv")
-    sst_data_missing_excludes = sst_data_missing_includes['DevID'][sst_data_missing_includes[task]=='Exclude'].tolist()
+    data_missing_includes = pd.read_csv(dropbox_datapath + "/post-processing-fmri-data-inclusion.csv")
+
+    sst_data_missing_excludes = data_missing_includes['DevID'][data_missing_includes[task]=='Exclude'].tolist()
+
     print(str(len(sst_data_missing_excludes)) + " subjects excludeable for missing scan data.")
     usable_dev_ids = [id for id in usable_dev_ids if id not in sst_data_missing_excludes]
     print(str(len(usable_dev_ids)) + " subjects remaining on the provision useable_dev_id list from the redcap list after excluding subjects with missing scan data.")
@@ -311,6 +314,7 @@ def get_data_for_confirmed_task_session(
 
     #other data for inclusion
     data_by_ppt = pd.read_csv(dropbox_datapath + "/data_by_ppt.csv")
+    data_by_ppt['data_by_ppt_merge_status'] = 'participant_present'
     print("loaded " + str(len(data_by_ppt)) + " rows from data_by_ppt.csv")
     # include_exclude_list = pd.read_csv(ml_scripting_path + "/nsc_subject_exclusions.csv")
     # print("loaded " + str(len(include_exclude_list)) + " rows from nsc_subject_exclusions.csv")
@@ -320,26 +324,37 @@ def get_data_for_confirmed_task_session(
     #also want to exclude subjects whose data was marked questionable in Redcap/Teams
 
     #scan room data quality
-    data_quality = pd.read_excel(dropbox_datapath + "/DEV-BothSessionsDataQualityC_DATA.xlsx", engine = 'openpyxl')
+    raise Exception("need to code this to handle exclusions of individual runs.")
+    redcap_data_quality = pd.read_excel(dropbox_datapath + "/DEV-BothSessionsDataQualityC_DATA.xlsx", engine = 'openpyxl')
     #use a regex to extract the wave number from the redcap event name column which comes in the form session_{wave}_arm_\d
-    data_quality['wave'] = data_quality['redcap_event_name'].str.extract(r'session_(\d)_arm_\d').astype(int)
+    redcap_data_quality['wave'] = redcap_data_quality['redcap_event_name'].str.extract(r'session_(\d)_arm_\d').astype(int)
     
     
-    data_quality_task = data_quality.loc[data_quality[task].isna()==False,]
-    usable_sessions = data_quality_task.loc[:,['dev_id','wave']][data_quality_task[task]=="No reported problems"]
+    data_quality_task = redcap_data_quality.loc[redcap_data_quality[task].isna()==False,]
+    print(str(len(data_quality_task)) + " total sessions from "
+          + str(len(data_quality_task['dev_id'].unique())) + " subjects in task Redcap scanner notes, added to the provision useable_dev_id list.")
+    redcap_data_quality = data_quality_task.loc[:,['dev_id','wave']][data_quality_task[task]=="No reported problems"]
     # if subj_wave_inclusion=='any':
     #     pass
     # elif subj_wave_inclusion=='all':
-    #     usable_sessions2 = usable_sessions.groupby('dev_id').filter(lambda x: len(x)==2)
+    #     usable_sessions2 = redcap_data_quality
+    # .groupby('dev_id').filter(lambda x: len(x)==2)
 
-    print(str(len(usable_sessions)) + " sessions with no reported problems in task Redcap scanner notes, added to the provision useable_dev_id list.")
+    print(str(len(redcap_data_quality)) + " sessions from "
+          + str(len(redcap_data_quality
+          ['dev_id'].unique())) + " subjects with no reported problems in task Redcap scanner notes, added to the provision useable_dev_id list.")
     
     #hard-coded excluded subjects
-    sst_data_missing_includes = pd.read_csv(dropbox_datapath + "/post-processing-fmri-data-inclusion.csv")
-    sst_data_missing_excludes = sst_data_missing_includes['DevID'][sst_data_missing_includes[task]=='Exclude'].tolist()
+    data_missing_includes = pd.read_csv(dropbox_datapath + "/post-processing-fmri-data-inclusion.csv")
+
+    sst_data_missing_excludes = data_missing_includes['DevID'][data_missing_includes[task]=='Exclude'].tolist()
+
     print(str(len(sst_data_missing_excludes)) + " subjects excludeable for missing scan data.")
-    usable_sessions = usable_sessions[usable_sessions['dev_id'].isin(sst_data_missing_excludes)==False]
-    print(str(len(usable_sessions)) + " sessions remaining on the provision useable_dev_id list from the redcap list after excluding subjects with missing scan data.")
+    redcap_data_quality = redcap_data_quality
+    [redcap_data_quality
+    ['dev_id'].isin(sst_data_missing_excludes)==False]
+    print(str(len(redcap_data_quality
+    )) + " sessions remaining on the provision useable_dev_id list from the redcap list after excluding subjects with missing scan data.")
     #and exclude subjects excluded by the motion quality process
     #read the CSV, discarding the first line and using the second as headers
 
@@ -349,14 +364,21 @@ def get_data_for_confirmed_task_session(
     general_motion_exclusion_binvec = motion_exclusions['Exclude'].str.contains('exclude', flags=re.IGNORECASE)
     task_motion_exclusions_binvec = motion_exclusions[task + "_Exclude"].str.contains('exclude', flags=re.IGNORECASE)
     motion_exclusions2 = motion_exclusions.loc[:,['subjectID','wave']][general_motion_exclusion_binvec | task_motion_exclusions_binvec]
-    #get thes ubset of usable_sessions where dev_id, wave pairs are not in motion_exclusions2
+    #get thes ubset of redcap_data_quality
+    #  where dev_id, wave pairs are not in motion_exclusions2
     #convert motion_exclusions2 into a list of tuples
     motion_exclusions2_tuples = [tuple(x) for x in motion_exclusions2[['subjectID','wave']].to_numpy()]
-    usable_sessions_tuples = [tuple(x) for x in usable_sessions[['dev_id','wave']].to_numpy()]
-    usable_sessions2= usable_sessions[[(r not in motion_exclusions2_tuples) for r in usable_sessions_tuples]]
+    usable_sessions_tuples = [tuple(x) for x in redcap_data_quality
+    [['dev_id','wave']].to_numpy()]
+    usable_sessions2= redcap_data_quality
+    [[(r not in motion_exclusions2_tuples) for r in usable_sessions_tuples]]
 
-    #usable_sessions = usable_sessions[usable_sessions['subjectID'].isna()]
-    print(str(len(usable_sessions)) + " sessions remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
+    #redcap_data_quality
+    #  = redcap_data_quality
+    # [redcap_data_quality
+    # ['subjectID'].isna()]
+    print(str(len(redcap_data_quality
+    )) + " sessions remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
 
     #raise NotImplementedError("this still ruels out whole sets of ROC and WTP for single runs that are out; we should be more precise than this.")
     #raise NotImplementedError("need to re-write this to handle exclusion for WTP and ROC as well as SST, depnding on task passed in to the function")
@@ -392,6 +414,146 @@ def get_data_for_confirmed_task_session(
     useable_betas_with_data.sort_values('subject_id', inplace=True)
 
     return useable_betas_with_data
+
+
+def get_data_for_confirmed_sessions_across_tasks(
+        beta_glob,
+        nonbids_data_path,
+        dropbox_datapath,
+        ml_scripting_path,
+        subj_wave_inclusion = 'all'
+        ):
+    """
+    Based on get_data_for_confirmed_train_subjs
+    I've taken out the code to exclude subjects based on the train/test split because this is no longer relevant
+    However, this now includes code to decide which group of subjects to examine: wave 1, wave 2, or both waves.
+    subj_wave_inclusion can be "all" to only include subjects where ALL waves are present or "any" to include subjects 
+    where any wave is present.
+    """
+    beta_paths = glob(
+        beta_glob)
+    scan_list = ["'" + bp + ",1'" for bp in beta_paths]
+
+    # for sli in scan_list:
+    #     print(sli)
+
+    # turn the scan list into a dataframe we can match on.
+    subj_beta_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in scan_list]
+    beta_df = pd.DataFrame({
+        'subject_id': subj_beta_list,
+        'spm_l2_path': beta_paths,
+        'spm_l2_path_description': scan_list
+    })
+
+    #now combine:
+
+
+    #other data for inclusion
+    data_by_ppt = pd.read_csv(dropbox_datapath + "/data_by_ppt.csv")
+    data_by_ppt['data_by_ppt_merge_status'] = 'participant_present'
+    print("loaded " + str(len(data_by_ppt)) + " rows from data_by_ppt.csv")
+    # include_exclude_list = pd.read_csv(ml_scripting_path + "/nsc_subject_exclusions.csv")
+    # print("loaded " + str(len(include_exclude_list)) + " rows from nsc_subject_exclusions.csv")
+    
+    # exclude_subjects = ['DEV061', 'DEV185', 'DEV187', 'DEV189', 'DEV190', 'DEV192', 'DEV198', 'DEV203', 'DEV220',
+    #                         'DEV221']
+    #also want to exclude subjects whose data was marked questionable in Redcap/Teams
+
+    #scan room data quality
+    raise Exception("need to code this to handle exclusions of individual runs.")
+    redcap_data_quality = pd.read_excel(dropbox_datapath + "/DEV-BothSessionsDataQualityC_DATA.xlsx", engine = 'openpyxl')
+    #append column names with 'redcap_' to avoid confusion with other data
+    redcap_data_quality.columns = ['redcap_' + c for c in redcap_data_quality.columns]
+    
+    #use a regex to extract the wave number from the redcap event name column which comes in the form session_{wave}_arm_\d
+    redcap_data_quality['redcap_wave'] = redcap_data_quality['redcap_redcap_event_name'].str.extract(r'session_(\d)_arm_\d').astype(int)
+
+
+    motion_exclusions = pd.read_csv(dropbox_datapath + '/DEVQC_all_subjects - All.csv', header=1)
+    #motion_exclusions_w1 = motion_exclusions[motion_exclusions['wave']==1]
+
+    motion_exclusions.columns = ['motion_exclude_' + c for c in motion_exclusions.columns]
+    # general_motion_exclusion_binvec = motion_exclusions['Exclude'].str.contains('exclude', flags=re.IGNORECASE)
+    # task_motion_exclusions_binvec = motion_exclusions[task + "_Exclude"].str.contains('exclude', flags=re.IGNORECASE)
+    # motion_exclusions2 = motion_exclusions.loc[:,['subjectID','wave']][general_motion_exclusion_binvec | task_motion_exclusions_binvec]
+    #get thes ubset of redcap_data_quality
+    #  where dev_id, wave pairs are not in motion_exclusions2
+    #convert motion_exclusions2 into a list of tuples
+    # motion_exclusions2_tuples = [tuple(x) for x in motion_exclusions2[['subjectID','wave']].to_numpy()]
+    # usable_sessions_tuples = [tuple(x) for x in redcap_data_quality
+    # [['dev_id','wave']].to_numpy()]
+    # usable_sessions2= redcap_data_quality
+    # [[(r not in motion_exclusions2_tuples) for r in usable_sessions_tuples]]
+
+
+    #redcap_data_quality
+    #  = redcap_data_quality
+    # [redcap_data_quality
+    # ['subjectID'].isna()]
+    print(str(len(redcap_data_quality
+    )) + " sessions remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
+
+    #raise NotImplementedError("this still ruels out whole sets of ROC and WTP for single runs that are out; we should be more precise than this.")
+    #raise NotImplementedError("need to re-write this to handle exclusion for WTP and ROC as well as SST, depnding on task passed in to the function")
+
+    #data quality cols are: 
+    # data_by_ppt:  data_by_ppt_merge_status
+    # redcap_data_quality: redcap_SST
+    #               redcap_WTP
+    #               redcap_ROC
+    # data_missing_includes:
+    #              manual_exclude_SST
+    #              manual_exclude_WTP
+    #              manual_exclude_ROC
+    # motion_exclusions:
+    #               motion_exclusions_Exclude
+    #               motion_exclusions_SST_Exclude
+    #               motion_exclusions_WTP_Exclude
+    #               motion_exclusions_ROC_Exclude
+    #data present columns are (cols to check whether a data source includes an entry):
+    # beta_df: spm_l2_path
+    # data_by_ppt:  data_by_ppt_merge_status
+    # redcap_data_quality: columns preceded with 'redcap_{Task}'
+    # data_missing_includes: columns preceded with 'manual_exclude_{Task}'
+    # motion_exclusions: motion_exclusions_Exclude, motion_exclusions_{Task}_Exclude
+    #first merge by-participant data
+    beta_df.rename(columns={'subject_id':'beta_subject_id'}, inplace=True)
+    data_by_ppt_all = beta_df.merge(data_by_ppt, left_on='beta_subject_id', right_on='SID', how='outer')
+    print(beta_df.shape, data_by_ppt.shape, data_by_ppt_all.shape)
+    #make sure there's a column that stores IDs across the merged columns
+    data_by_ppt_all['subject_id'] = [r['beta_subject_id'] if not pd.isna(r['beta_subject_id']) else r['SID'] for i, r in data_by_ppt_all.iterrows()]
+    #now merge by-session data
+    data_by_session_merge1=redcap_data_quality.merge(motion_exclusions, left_on=['redcap_dev_id','redcap_wave'], right_on=['motion_exclude_subjectID','motion_exclude_wave'], how='outer')
+    #make sure there's a column that stores IDs across the merged columns
+    data_by_session_merge1['subject_id'] = [r['redcap_dev_id'] if not pd.isna(r['redcap_dev_id']) else r['motion_exclude_subjectID'] for i, r in data_by_session_merge1.iterrows()]
+    data_by_session_merge1['wave_id'] = [r['redcap_wave'] if not pd.isna(r['redcap_wave']) else r['motion_exclude_wave'] for i, r in data_by_session_merge1.iterrows()]
+    print(redcap_data_quality.shape, motion_exclusions.shape, data_by_session_merge1.shape)
+    #now merge in teh by-session data with the by-ppt data
+    data_by_session_merge2 = data_by_ppt_all.merge(data_by_session_merge1, left_on=['subject_id'], right_on=['subject_id'], how='outer')
+    print(data_by_ppt_all.shape, data_by_session_merge1.shape, data_by_session_merge2.shape)
+
+    all_data_by_session = data_by_session_merge2
+
+    all_data_by_session.sort_values(['subject_id','wave_id'], inplace=True)
+    all_data_by_session.reset_index(inplace=True, drop=True)
+
+    #now place the indicator columns at the beginning of the dataframe, using a regex match on the columns
+    indicator_cols = [c for c in all_data_by_session.columns if re.match(r'.*(subject_id|wave|SID|dev_id).*', c)]
+    print(indicator_cols)
+
+    #now re-arrange so that the indicator columns are first
+    # and then all the exclusion columns follow
+    exclusion_columns =  ['data_by_ppt_merge_status',
+                          'redcap_SST','redcap_WTP','redcap_ROC'] + [c for c in all_data_by_session.columns if re.match(r'motion_exclude.*(Exclude).*', c)]
+
+    other_cols = [c for c in all_data_by_session.columns if c not in indicator_cols + exclusion_columns]
+
+    all_data_by_session = all_data_by_session[indicator_cols + exclusion_columns + other_cols]
+
+    
+
+
+    return all_data_by_session
 
 
 def create_spm_l2_script(template_filepath, replacement_map, output_filepath):
