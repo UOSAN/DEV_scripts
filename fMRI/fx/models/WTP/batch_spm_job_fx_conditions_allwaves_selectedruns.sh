@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST=`cat wtp_run_data_quality_20231109.txt`
+SUBJLIST="wtp_run_data_quality_20231109.txt"
 
 # Which SID should be replaced?
 REPLACESID=DEV001
