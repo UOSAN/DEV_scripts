@@ -31,6 +31,12 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     task="WTP"
 )
 
+raise NotImplementedError("not implemented yet; for WTP, first we need to sort out handling for first-level; then we can do second-level re-write")
+train_betas_with_data = get_wtp_subj_folder_paths_for_subjs_w_two_sessions(
+    beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/" + analysis_name + "/sub-DEV*/",
+    dropbox_datapath=dropbox_datapath
+)
+
 
 betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 

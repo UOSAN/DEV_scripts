@@ -104,9 +104,9 @@ class level2_roi_extractor:
         #rules for input: 
         # length of active_img_cleaned can be 1 or more
         # subject_id should be a scalar, a string, or an iterable with the same number of images in active_img_cleaned
-        assert (len(subject_id)==active_img_cleaned.shape[3] or isinstance(subject_id,str) or (not hasattr(subject_id, "__iter__")))
+        assert (isinstance(subject_id,str) or (not hasattr(subject_id, "__iter__")) or len(subject_id)==active_img_cleaned.shape[3])
         # length of beta_name should also be 1 or the same as the number of images in active_img_cleaned
-        assert (len(beta_name)==active_img_cleaned.shape[3] or isinstance(beta_name,str) or (not hasattr(beta_name, "__iter__")))
+        assert (isinstance(beta_name,str) or (not hasattr(beta_name, "__iter__")) or len(beta_name)==active_img_cleaned.shape[3])
         #if subject_id or wave are iterables, then beta_name should be, too
         if (
             (hasattr(subject_id, "__iter__") and subject_id is not str) or
@@ -140,7 +140,7 @@ class level2_roi_extractor:
 
 
             print("activity scalar is " + str(activity_scalar))
-            roi_data_for_beta.append(pd.DataFrame({
+            roi_data_for_beta.append(pd.DataFrame(index=[0]*len(activity_scalar),data={
                 'subject_id': subject_id,#r['subject_id'],
                 'wave':wave,# r['wave'],
                 'spm_l2_path':spm_l2_path,#r['spm_l2_path'],
@@ -149,7 +149,11 @@ class level2_roi_extractor:
                 'mask_label': m_set['mask_label'],
                 'roi_activity': activity_scalar
             }))
-        return roi_data_for_beta
+
+        roi_data_for_beta_df = pd.concat(roi_data_for_beta)
+
+        roi_data_for_beta_df.reset_index(drop=True,inplace=True)
+        return roi_data_for_beta_df
 
 
 
@@ -355,9 +359,9 @@ class level2_roi_extractor:
             print(condition)
             
             if self.load_all_images_simultaneously:
-                roi_data = self.get_roi_data_across_all_betas(beta_list, condition,col_function, raw_roi_list, roi_df)
+                roi_data = [self.get_roi_data_across_all_betas(beta_list, condition,col_function, raw_roi_list, roi_df)]
             else:
-                roi_data = self.get_roi_data_for_roi_col(beta_list, condition,col_function, raw_roi_list)
+                roi_data = self.get_roi_data_for_roi_col(beta_list, condition,col_function, raw_roi_list, roi_df)
             roi_data_all = roi_data_all + roi_data
             
 

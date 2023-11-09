@@ -37,7 +37,8 @@ roi_df['image_type'] = 'mask'
 #signature_df['image_type'] = 'signature'
 
 #combine the two dfs
-#roi_df = pd.concat([roi_df, signature_df])
+roi_df = pd.concat([roi_df#, signature_df
+                    ])
 #get the list of raw nii files
 glob_path = config['fmriprep_dir'] + config['nii_raw_path']
 
@@ -47,24 +48,17 @@ glob_path = config['fmriprep_dir'] + config['nii_raw_path']
 #filter the mask_label in mask_df, using regex, to only use stiraum, finger movements, motor control, and response inbhitioin
 sst_roi_df = roi_df.loc[roi_df['mask_label'].str.contains('striatum|finger|motor|response inhibition')]
 
-# train_betas_with_data = get_data_for_confirmed_train_subjs(
-#     beta_glob = config['nonbids_data_path'] + "fMRI/fx/models/SST/wave1/conditions/sub-DEV*/",
-#     nonbids_data_path = config['nonbids_data_path'],
-#     #ml_data_folderpath = ml_data_folderpath,
-#     ml_scripting_path = config['dev_scripts_path'] + "/fMRI/ml",
-#     dropbox_datapath=config['dropbox_data_dir'],
-#     exclude_test_subjs=False
-# )[0:20]
-
-train_betas_with_data = get_data_for_confirmed_train_subjs(
+train_betas_with_data = get_sst_data_for_confirmed_sessions_across_tasks(
     beta_glob = config['nonbids_data_path'] + "fMRI/fx/models/SST/all_waves/health_conditions/sub-DEV*/",
-    nonbids_data_path = config['nonbids_data_path'],
+    #nonbids_data_path = config['nonbids_data_path'],
     #ml_data_folderpath = ml_data_folderpath,
-    ml_scripting_path = config['dev_scripts_path'] + "/fMRI/ml",
-    dropbox_datapath=config['dropbox_data_dir'],
-    exclude_test_subjs=False
-)[0:20]
-train_betas_with_data['wave']=1
+    #ml_scripting_path = config['dev_scripts_path'] + "/fMRI/ml",
+    dropbox_datapath=config['dropbox_data_dir'],#,
+    #exclude_test_subjs=False
+    subj_wave_inclusion='all'
+)
+#train_betas_with_data['wave']=1
+train_betas_with_data = train_betas_with_data[train_betas_with_data.wave_id==1]
 
 #we're not interestd in getting contrasts; comment this out.
 #betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
@@ -79,9 +73,7 @@ beta_name_list = [
     ]
 
 #get the ROI data
-l2_roi_extractor = level2_roi_extractor()
-l2_roi_extractor.image_standardize=True
-#l2_roi_extractor = level2_roi_extractor(center_data=True, scale_data=True)
+l2_roi_extractor = level2_roi_extractor(image_standardize=True)
 
 #one of:
 #get_roi_data_across_all_betas(self,beta_list: pd.DataFrame, condition,col_function, raw_roi_list, roi_df)
@@ -89,7 +81,7 @@ l2_roi_extractor.image_standardize=True
 #get_roi_data_for_l2(self, beta_list,condition_list,roi_df,col_function):
 #get_roi_data_for_l2_betas(self, beta_list, condition_list,roi_df):
 
-roi_data_sst_health = l2_roi_extractor.get_roi_data_for_l2_betas(betas_with_paths[0:20], beta_name_list, sst_roi_df)
+roi_data_sst_health = l2_roi_extractor.get_roi_data_for_l2_betas(betas_with_paths, beta_name_list, sst_roi_df)
 
 
 #roi_data_sst_health.to_csv(config['dropbox_data_dir'] + '/subject_sst_health_avg_roi_data_raw.csv')

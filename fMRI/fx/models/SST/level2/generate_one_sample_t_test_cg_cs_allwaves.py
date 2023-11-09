@@ -24,13 +24,18 @@ template_filepath = config_data['spm_l2_script_template_filepath']
 spm_path = config_data['spm_path']
 analysis_name = 'conditions'
 
-train_betas_with_data = get_data_for_confirmed_train_subjs(
-    beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/conditions/sub-DEV*/",
-    nonbids_data_path = nonbids_data_path,
-    #ml_data_folderpath = ml_data_folderpath,
-    ml_scripting_path = ml_scripting_path,
-    dropbox_datapath=dropbox_datapath,
-    exclude_test_subjs=False
+# train_betas_with_data = get_data_for_confirmed_train_subjs(
+#     beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/conditions/sub-DEV*/",
+#     nonbids_data_path = nonbids_data_path,
+#     #ml_data_folderpath = ml_data_folderpath,
+#     ml_scripting_path = ml_scripting_path,
+#     dropbox_datapath=dropbox_datapath,
+#     exclude_test_subjs=False
+# )
+
+train_betas_with_data = get_sst_subj_folder_paths_for_subjs_w_two_sessions(
+    beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/" + analysis_name + "/sub-DEV*/",
+    dropbox_datapath=dropbox_datapath
 )
 
 # betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)

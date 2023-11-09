@@ -5,6 +5,7 @@ from os.path import basename
 import pickle
 
 from level2.level2_utils import *
+from level2.level2_roi_extraction import level2_roi_extractor# load_rois, get_roi_data_for_beta
 from level2.level2_roi_extraction import load_rois, get_roi_data_for_beta
 from level2.level2_roi_extraction import get_roi_data_for_l2_betas, get_roi_data_for_multirun_l2_betas
 #import modules from files in a parallel directory "direct_regression"
@@ -68,8 +69,9 @@ beta_name_list = [
     #'FailedGo'
     ]
 
+level2_extractor = level2_roi_extractor()
 #get the ROI data
-roi_data_sst_conditions = get_roi_data_for_l2_betas(betas_with_paths, beta_name_list, sst_roi_df)
+roi_data_sst_conditions = level2_extractor.get_roi_data_for_l2_betas(betas_with_paths, beta_name_list, sst_roi_df)
 
 ###################################
 ## SST, posterror conditions
