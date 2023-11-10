@@ -1,6 +1,7 @@
 addpath('../SST')
 %list of runs we will include; not sure how we import but let's assume it's
 %a numeric array of runs
+runs_json = strrep(runs_json,"""","");
 disp(runs_json);
 included_runs_by_wave = jsondecode(runs_json);
 
