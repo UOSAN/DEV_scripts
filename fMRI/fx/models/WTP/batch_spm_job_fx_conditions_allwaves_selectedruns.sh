@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST="wtp_run_data_quality_20231109.txt"
+SUBJLIST="wtp_run_data_quality_20231110.tsv"
 
 # Which SID should be replaced?
 REPLACESID=DEV001
@@ -53,7 +53,7 @@ do
 	
     echo "script to run is ${SCRIPT} for $DEVID for runs $SELECTEDRUNS using ${SHELL_SCRIPT}"
     
-    sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$DEVID,SUBID=$DEVID,RUN_JSON=$SELECTEDRUNS,SPM_PATH=$SPM_PATH  \
+    sbatch --export "ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$DEVID,SUBID=$DEVID,RUN_JSON=\"${SELECTEDRUNS}\",SPM_PATH=$SPM_PATH"  \
 	 	--job-name=${RESULTS_INFIX} \
 	 	-o ${OUTPUTDIR}/${DEVID}_${RESULTS_INFIX}.log \
 	 	--cpus-per-task=${cpuspertask} \

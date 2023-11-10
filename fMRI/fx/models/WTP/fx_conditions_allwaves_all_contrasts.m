@@ -4,6 +4,7 @@ addpath('../SST')
 %included_runs_w1=[2,4];
 %included_runs_w2=[2,4];
 %included_runs_by_wave = {included_runs_w1,included_runs_w2};
+disp(runs_json);
 included_runs_by_wave = jsondecode(runs_json);
 
 if ismatrix(included_runs_by_wave)
