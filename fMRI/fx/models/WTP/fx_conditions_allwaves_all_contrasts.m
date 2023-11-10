@@ -8,6 +8,8 @@ if ismatrix(included_runs_by_wave)
     included_runs_by_wave = num2cell(included_runs_by_wave',1);
 end
 
+disp(included_runs_by_wave);
+
 %can get the number of runs with numel(included_runs)
 %-----------------------------------------------------------------------
 % Job saved on 01-Aug-2023 14:12:41 by cfg_util (rev $Rev: 7345 $)
