@@ -1,9 +1,9 @@
 addpath('../SST')
 %list of runs we will include; not sure how we import but let's assume it's
 %a numeric array of runs
-%included_runs_w1=[2,4];
-%included_runs_w2=[2,4];
-%included_runs_by_wave = {included_runs_w1,included_runs_w2};
+%included_runs_by_wave{1}=[2,4];
+%included_runs_by_wave{2}=[2,4];
+%included_runs_by_wave = {included_runs_by_wave{1},included_runs_by_wave{2}};
 included_runs_by_wave = jsondecode(runs_json);
 
 if ismatrix(included_runs_by_wave)
@@ -16,8 +16,8 @@ end
 % spm SPM - SPM12 (7771)
 % cfg_basicio BasicIO - Unknown
 %-----------------------------------------------------------------------
-for run_i = 1:length(included_runs_w1)
-    run_name = included_runs_w1(run_i);
+for run_i = 1:length(included_runs_by_wave{1})
+    run_name = included_runs_by_wave{1}(run_i);
     %just use the index because this is the first part of content in
     %matlabbatch
     matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV023/ses-wave1/func/'};
@@ -35,8 +35,8 @@ for run_i = 1:length(included_runs_w1)
 end
 
 wave_file_selector_first_mlb_index{1} = length(matlabbatch)+1;
-for run_i = 1:length(included_runs_w1)
-    run_name = included_runs_w1(run_i);
+for run_i = 1:length(included_runs_by_wave{1})
+    run_name = included_runs_by_wave{1}(run_i);
     file_selector_string = sprintf('File Selector (Batch Mode): Selected Files (s6_sub-DEV023_ses-wave1_task-WTP_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)',run_name);
     matlabbatch{length(matlabbatch)+1}.spm.util.exp_frames.files(1) = cfg_dep(file_selector_string, substruct('.','val', '{}',{run_i}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
     matlabbatch{length(matlabbatch)}.spm.util.exp_frames.frames = Inf;
@@ -48,8 +48,8 @@ for run_i = 1:length(included_runs_w1)
 %     matlabbatch{8}.spm.util.exp_frames.frames = Inf;
 end
 
-for run_i = 1:length(included_runs_w2)
-    run_name = included_runs_w2(run_i);
+for run_i = 1:length(included_runs_by_wave{2})
+    run_name = included_runs_by_wave{2}(run_i);
     matlabbatch{length(matlabbatch)+1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV023/ses-wave2/func'};
     matlabbatch{length(matlabbatch)}.cfg_basicio.file_dir.file_ops.file_fplist.filter = sprintf('s6_sub-DEV023_ses-wave2_task-WTP_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii',run_name);
     matlabbatch{length(matlabbatch)}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
@@ -65,8 +65,8 @@ for run_i = 1:length(included_runs_w2)
 end
 
 wave_file_selector_first_mlb_index{2} = length(matlabbatch)+1;
-for run_i = 1:length(included_runs_w2)
-    run_name = included_runs_w2(run_i);
+for run_i = 1:length(included_runs_by_wave{2})
+    run_name = included_runs_by_wave{2}(run_i);
     mlb_iterator = length(matlabbatch)+1;
     mlb_lookback = mlb_iterator - 4; %this is a reference back to the file filter.
     file_selector_string = sprintf('File Selector (Batch Mode): Selected Files (s6_sub-DEV023_ses-wave2_task-WTP_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)',run_name);
