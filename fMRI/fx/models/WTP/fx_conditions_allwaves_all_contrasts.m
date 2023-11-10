@@ -1,9 +1,16 @@
 addpath('../SST')
 %list of runs we will include; not sure how we import but let's assume it's
 %a numeric array of runs
+<<<<<<< HEAD
 %included_runs_by_wave{1}=[2,4];
 %included_runs_by_wave{2}=[2,4];
 %included_runs_by_wave = {included_runs_by_wave{1},included_runs_by_wave{2}};
+=======
+%included_runs_w1=[2,4];
+%included_runs_w2=[2,4];
+%included_runs_by_wave = {included_runs_w1,included_runs_w2};
+disp(runs_json);
+>>>>>>> master
 included_runs_by_wave = jsondecode(runs_json);
 
 if ismatrix(included_runs_by_wave)
