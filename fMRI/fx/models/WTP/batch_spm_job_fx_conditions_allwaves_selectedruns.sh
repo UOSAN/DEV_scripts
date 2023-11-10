@@ -45,7 +45,7 @@ mempercpu=8G
 
 
 # Create and execute batch job
-while IFS=',' read -r DEVID SELECTEDRUNS
+while IFS=$'\t' read -r DEVID SELECTEDRUNS
 do
 	#an ID on its own. need this for certain parts of the script
 	#SUBID=$(sed "s/DEV//" <<< $SUB)
