@@ -41,12 +41,13 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     #ml_data_folderpath = ml_data_folderpath,
     ml_scripting_path = ml_scripting_path,
     dropbox_datapath=dropbox_datapath,
-    exclude_test_subjs=False
+    exclude_test_subjs=False,
+    task = "WTP"
 )
 
 train_betas_with_data_w_groups = train_betas_with_data.merge(group_codes, left_on='SID', right_on='dev_id', how='inner')
 
-betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data_w_groups[0:5])
+betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data_w_groups)
 #betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 
 
