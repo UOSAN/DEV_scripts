@@ -10,6 +10,9 @@ addpath('../SST')
 %included_runs_w2=[2,4];
 %included_runs_by_wave = {included_runs_w1,included_runs_w2};
 disp(runs_json);
+<<<<<<< HEAD
+>>>>>>> master
+=======
 >>>>>>> master
 included_runs_by_wave = jsondecode(runs_json);
 
