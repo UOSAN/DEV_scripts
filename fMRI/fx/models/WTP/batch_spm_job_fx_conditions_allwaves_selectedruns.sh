@@ -42,7 +42,7 @@ fi
 cpuspertask=1
 mempercpu=8G
 
-
+set -x
 
 # Create and execute batch job
 while IFS=',' read -r DEVID SELECTEDRUNS
@@ -51,11 +51,11 @@ do
 	#SUBID=$(sed "s/DEV//" <<< $SUB)
 	#BJS added 2021-06-09
 	
-    echo "script to run is ${SCRIPT} for $SUBID"
+    echo "script to run is ${SCRIPT} for $DEVID for runs $SELECTEDRUNS using ${SHELL_SCRIPT}"
     
-    sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$DEVID,SUBID=$DEVID,RUN_JSON=$SELECTEDRUNS SPM_PATH=$SPM_PATH,  \
+    sbatch --export ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$DEVID,SUBID=$DEVID,RUN_JSON=$SELECTEDRUNS,SPM_PATH=$SPM_PATH  \
 	 	--job-name=${RESULTS_INFIX} \
-	 	-o ${OUTPUTDIR}/${SUBID}_${RESULTS_INFIX}.log \
+	 	-o ${OUTPUTDIR}/${DEVID}_${RESULTS_INFIX}.log \
 	 	--cpus-per-task=${cpuspertask} \
 	 	--mem-per-cpu=${mempercpu} \
 	 	--account=sanlab \
