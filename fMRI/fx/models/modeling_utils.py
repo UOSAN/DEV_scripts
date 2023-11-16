@@ -365,6 +365,19 @@ def get_session_data_quality(
     })
 
     #now combine:
+    all_data_by_session = get_overall_session_data_quality(
+        dropbox_datapath,
+        beta_df = beta_df
+    )
+    return(all_data_by_session)
+
+
+
+def get_overall_session_data_quality(dropbox_datapath, beta_df=None):
+    """
+    Gets session data quality but unspecific to the specific task, so, does not check for the presence of beta files.
+
+    """
 
 
     #other data for inclusion
@@ -379,8 +392,8 @@ def get_session_data_quality(
     #also want to exclude subjects whose data was marked questionable in Redcap/Teams
 
     #scan room data quality
-    if task != 'SST':
-        raise NotImplementedError("need to code this to handle exclusions of individual runs.")
+    # if task != 'SST':
+    #     raise NotImplementedError("need to code this to handle exclusions of individual runs.")
     
     redcap_data_quality = pd.read_excel(dropbox_datapath + "/DEV-BothSessionsSeparateRunsDataQualityC_DATA.xlsx", engine = 'openpyxl')
     #append column names with 'redcap_' to avoid confusion with other data
@@ -438,11 +451,15 @@ def get_session_data_quality(
     # data_missing_includes: columns preceded with 'manual_exclude_{Task}'
     # motion_exclusions: motion_exclusions_Exclude, motion_exclusions_{Task}_Exclude
     #first merge by-participant data
-    beta_df.rename(columns={'subject_id':'beta_subject_id'}, inplace=True)
-    data_by_ppt_all = beta_df.merge(data_by_ppt, left_on='beta_subject_id', right_on='SID', how='outer')
-    print(beta_df.shape, data_by_ppt.shape, data_by_ppt_all.shape)
-    #make sure there's a column that stores IDs across the merged columns
-    data_by_ppt_all['subject_id'] = [r['beta_subject_id'] if not pd.isna(r['beta_subject_id']) else r['SID'] for i, r in data_by_ppt_all.iterrows()]
+    if beta_df is not None:
+        beta_df.rename(columns={'subject_id':'beta_subject_id'}, inplace=True)
+        data_by_ppt_all = beta_df.merge(data_by_ppt, left_on='beta_subject_id', right_on='SID', how='outer')
+        print(beta_df.shape, data_by_ppt.shape, data_by_ppt_all.shape)
+        #make sure there's a column that stores IDs across the merged columns
+        data_by_ppt_all['subject_id'] = [r['beta_subject_id'] if not pd.isna(r['beta_subject_id']) else r['SID'] for i, r in data_by_ppt_all.iterrows()]
+    else: #no session data; create a table that stores everything except beta data about useable sessions.
+        data_by_ppt_all = data_by_ppt
+        data_by_ppt_all['subject_id'] = data_by_ppt_all['SID']
     #now merge by-session data
     data_by_session_merge1=redcap_data_quality.merge(motion_exclusions, left_on=['redcap_dev_id','redcap_wave'], right_on=['motion_exclude_subjectID','motion_exclude_wave'], how='outer')
     #make sure there's a column that stores IDs across the merged columns

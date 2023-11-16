@@ -34,6 +34,7 @@ Benjamins-MacBook-Pro-3.local:
   nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii
   mask_location: /Users/benjaminsmith/Google Drive/oregon/data/DEV/brainmaps/
   ben_dev_data_analysis: /Users/benjaminsmith/Google Drive/oregon/code/bsmith_dev_data_analysis/
+  nonbids_data_path: /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/
 n137:
   dropbox_data_dir: /gpfs/projects/sanlab/bsmith16/data
   fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/
