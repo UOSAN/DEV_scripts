@@ -35,6 +35,8 @@ Benjamins-MacBook-Pro-3.local:
   mask_location: /Users/benjaminsmith/Google Drive/oregon/data/DEV/brainmaps/
   ben_dev_data_analysis: /Users/benjaminsmith/Google Drive/oregon/code/bsmith_dev_data_analysis/
   nonbids_data_path: /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/
+  talapas_pkey: /Users/benjaminsmith/.ssh/id_rsa
+  talapas_uname: bsmith16
 n137:
   dropbox_data_dir: /gpfs/projects/sanlab/bsmith16/data
   fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/

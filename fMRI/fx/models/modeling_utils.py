@@ -6,6 +6,8 @@ import json
 import pandas as pd
 from yaml import SafeLoader
 import yaml
+import paramiko
+import numpy as np
 
 def load_config(config_path = None):
     if config_path is None: config_path = 'config.yml'
@@ -265,13 +267,11 @@ def get_subject_wise_table_with_task_counts(full_table):
         task_quality_list_col =task + '_quality_list'
         #create a list of the indices of the runs that are not zero
         active_run_list_function = lambda run_binary: [i + 1 for i, x in enumerate(run_binary.tolist()) if x != 0]
-        full_table[task_quality_list_col] = full_table.filter(regex='redcap_' + task + '\d_quality').apply(active_run_list_function,axis=1).tolist()
+        full_table[task_quality_list_col] = full_table.filter(regex='(combined)_' + task + '\d_quality').apply(active_run_list_function,axis=1).tolist()
 
         #now create a list of the lists, grouping by subID
         quality_list_by_sid = full_table.groupby('SID')[task_quality_list_col].apply(list).apply(lambda x: json.dumps(x)).reset_index(name=task_quality_list_col)
         subject_wise_table = subject_wise_table.merge(quality_list_by_sid, left_on='SID', right_on='SID', how='left')
-
-    
     
     return (subject_wise_table)
 
@@ -284,7 +284,11 @@ def get_subject_wise_table(full_table):
     max_unique_value_count = full_table.groupby('SID').nunique(dropna=False).max()
     subject_wise_cols = ['SID'] + max_unique_value_count[max_unique_value_count==1].index.tolist()
     #cols_to_remove = full_table.columns.difference(subject_wise_cols)
-    assert ('spm_l2_path' in subject_wise_cols)
+    if 'spm_l2_path' not in subject_wise_cols:
+        #print a warning using Warning
+        Warning('spm_l2_path not in subject_wise_cols')
+        
+    #assert ('spm_l2_path' in subject_wise_cols)
     subject_wise_table = full_table.loc[:,subject_wise_cols].drop_duplicates(inplace=False)
     subject_wise_table.reset_index(inplace=True, drop=True)
     return(subject_wise_table)
@@ -336,8 +340,14 @@ def get_sst_subj_folder_paths_for_subjs_w_two_sessions(
     return(subject_wise_table)
 
 
-
 def get_session_data_quality(
+        beta_glob,
+        dropbox_datapath,
+        task='SST'
+        ):
+    raise Exception("function get_session_data_quality is deprecated. Use get_session_data_quality_l2 instead, or if you want to get data for level 1, try get_session_data_quality_l1.")
+
+def get_session_data_quality_l2(
         beta_glob,
         dropbox_datapath,
         task='SST'
@@ -367,13 +377,48 @@ def get_session_data_quality(
     #now combine:
     all_data_by_session = get_overall_session_data_quality(
         dropbox_datapath,
-        beta_df = beta_df
+        image_folder_df = beta_df
+    )
+    return(all_data_by_session)
+
+
+def get_session_data_quality_l1(
+        image_folder_glob,
+        dropbox_datapath,
+        task='SST'
+        ):
+    """
+    Based on get_data_for_confirmed_train_subjs
+    I've taken out the code to exclude subjects based on the train/test split because this is no longer relevant
+    However, this now includes code to decide which group of subjects to examine: wave 1, wave 2, or both waves.
+    subj_wave_inclusion can be "all" to only include subjects where ALL waves are present or "any" to include subjects 
+    where any wave is present.
+    """
+    image_folder_paths = glob(
+        image_folder_glob)
+    #scan_list = ["'" + bp + ",1'" for bp in image_folder_paths]
+
+    # for sli in scan_list:
+    #     print(sli)
+
+    # turn the scan list into a dataframe we can match on.
+    subj_image_folder_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in image_folder_paths]
+    image_folder_df = pd.DataFrame({
+        'subject_id': subj_image_folder_list,
+        'spm_l1_path': image_folder_paths#,
+        #'spm_l1_path_description': scan_list
+    })
+
+    #now combine:
+    all_data_by_session = get_overall_session_data_quality(
+        dropbox_datapath,
+        image_folder_df = image_folder_df
     )
     return(all_data_by_session)
 
 
 
-def get_overall_session_data_quality(dropbox_datapath, beta_df=None):
+def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None):
     """
     Gets session data quality but unspecific to the specific task, so, does not check for the presence of beta files.
 
@@ -451,10 +496,10 @@ def get_overall_session_data_quality(dropbox_datapath, beta_df=None):
     # data_missing_includes: columns preceded with 'manual_exclude_{Task}'
     # motion_exclusions: motion_exclusions_Exclude, motion_exclusions_{Task}_Exclude
     #first merge by-participant data
-    if beta_df is not None:
-        beta_df.rename(columns={'subject_id':'beta_subject_id'}, inplace=True)
-        data_by_ppt_all = beta_df.merge(data_by_ppt, left_on='beta_subject_id', right_on='SID', how='outer')
-        print(beta_df.shape, data_by_ppt.shape, data_by_ppt_all.shape)
+    if image_folder_df is not None:
+        image_folder_df.rename(columns={'subject_id':'beta_subject_id'}, inplace=True)
+        data_by_ppt_all = image_folder_df.merge(data_by_ppt, left_on='beta_subject_id', right_on='SID', how='outer')
+        print(image_folder_df.shape, data_by_ppt.shape, data_by_ppt_all.shape)
         #make sure there's a column that stores IDs across the merged columns
         data_by_ppt_all['subject_id'] = [r['beta_subject_id'] if not pd.isna(r['beta_subject_id']) else r['SID'] for i, r in data_by_ppt_all.iterrows()]
     else: #no session data; create a table that stores everything except beta data about useable sessions.
@@ -484,29 +529,69 @@ def get_overall_session_data_quality(dropbox_datapath, beta_df=None):
     redcap_sst_cols = ['redcap_SST']
     redcap_wtp_cols = ['redcap_WTP' + str(i) for i in range(1,5)]
     redcap_roc_cols = ['redcap_ROC' + str(i) for i in range(1,5)]
+
+    motion_sst_cols = ['motion_exclude_SST_Exclude']
+    motion_wtp_cols = ['motion_exclude_WTP' + str(i) + '_Exclude' for i in range(1,5)]
+    motion_roc_cols = ['motion_exclude_ROC' + str(i) + '_Exclude' for i in range(1,5)]
+
+    
     exclusion_columns =  (['data_by_ppt_merge_status'] + redcap_sst_cols + 
                           redcap_wtp_cols + 
                           redcap_roc_cols + 
-                          [c for c in all_data_by_session.columns if re.match(r'motion_exclude.*(Exclude).*', c)]
+                          #[c for c in all_data_by_session.columns if re.match(r'motion_exclude.*(Exclude).*', c)]
+                            motion_sst_cols +
+                            motion_wtp_cols +
+                            motion_roc_cols
     )
 
     other_cols = [c for c in all_data_by_session.columns if c not in indicator_cols + exclusion_columns]
 
     all_data_by_session = all_data_by_session[indicator_cols + exclusion_columns + other_cols]
 
-    #quantifying columns indicating quality for each ROC and WTP session
+    #quantifying columns indicating quality from the redcap (scan room data) for each ROC and WTP session
     for task, task_cols in {
         'ROC': redcap_roc_cols, 
         'WTP': redcap_wtp_cols, 
         'SST': redcap_sst_cols
     }.items():
         for col in task_cols:
-            all_data_by_session[col + '_quality'] = all_data_by_session[col].apply(lambda x: 1 if x=='No reported problems' else 0)
+            all_data_by_session.loc[:,col + '_quality'] = all_data_by_session[col].apply(lambda x: 1 if x=='No reported problems' else 0)
 
         task_cols_quality = [col + '_quality' for col in task_cols]
         #now quantify the overall quality, indicating whether, 
         # across all cols in task_cols, at least one column has quality
         all_data_by_session['redcap_' + task + '_quality_any'] = all_data_by_session[task_cols_quality].apply(lambda x: 1 if x.sum()>0 else 0, axis=1)
+
+    #now do the same for motion.
+    for task, task_cols in {
+        'ROC': motion_roc_cols, 
+        'WTP': motion_wtp_cols, 
+        'SST': motion_sst_cols
+    }.items():
+        for col in task_cols:
+            all_data_by_session[col + '_quality'] = all_data_by_session[col].apply(lambda x: 1 if pd.isna(x) or x=="" else 0)
+
+        task_cols_quality = [col + '_quality' for col in task_cols]
+        #now quantify the overall quality, indicating whether, 
+        # across all cols in task_cols, at least one column has quality
+        all_data_by_session['motion_' + task + '_quality_any'] = all_data_by_session[task_cols_quality].apply(lambda x: 1 if x.sum()>0 else 0, axis=1)
+
+    #now combine across redcap and motion exclusion
+    task_run_counts = {
+        'ROC': 4,
+        'WTP': 4,
+        'SST': 1
+    }
+    for task, task_run_count in task_run_counts.items():
+        if task=='SST':
+            all_data_by_session['combined_' + task + '_quality'] = (
+                all_data_by_session[['redcap_' + task + '_quality', 'motion_exclude_' + task + '_Exclude_quality']].apply(lambda x: 1 if x.sum()==2 else 0, axis=1)
+            )
+        else:
+            for run_i in range(1, task_run_count+1):
+                all_data_by_session['combined_' + task + str(run_i) + '_quality' + str(run_i)] = (
+                    all_data_by_session[['redcap_' + task + str(run_i) + '_quality', 'motion_exclude_' + task + str(run_i) + '_Exclude_quality']].apply(lambda x: 1 if x.sum()==2 else 0, axis=1)
+                )
 
 
     return all_data_by_session
