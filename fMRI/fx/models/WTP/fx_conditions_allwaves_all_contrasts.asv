@@ -71,8 +71,9 @@ for wave_i = 1:length(included_runs_by_wave)
         matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
         matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).multi = {sprintf('/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/ROC/conditions/DEV001_%d_WTP%d.mat',wave_i,run_name)};
         matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).regress = struct('name', {}, 'val', {});
-        matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).multi_reg = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV001/sub-DEV001_ses-wave%d_task-ROC_acq-%d_run-1_desc-motion_regressors.txt',wave_i,run_name)};
+        matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).multi_reg = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV001/sub-DEV001_ses-wave%d_task-WTP_acq-%d_run-1_desc-motion_regressors.txt',wave_i,run_name)};
         matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).hpf = 128;
+
     end
 end 
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.fact = struct('name', {}, 'levels', {});
