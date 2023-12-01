@@ -55,7 +55,7 @@ for run_i = 1:length(included_runs_by_wave{2})
 
 end
 
-matlabbatch{length(matlabbatch)+1}.spm.stats.fmri_spec.dir = {'/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/ROC/all_waves/conditions/sub-DEV001'};
+matlabbatch{length(matlabbatch)+1}.spm.stats.fmri_spec.dir = {'/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/all_waves/conditions/sub-DEV001'};
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.RT = 2;
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.fmri_t = 72;
