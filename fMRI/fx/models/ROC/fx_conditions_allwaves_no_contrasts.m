@@ -58,7 +58,7 @@ end
 
 
 
-matlabbatch{9}.spm.stats.fmri_spec.dir = {'/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/ROC/wave1/conditions/sub-DEV001'};
+matlabbatch{9}.spm.stats.fmri_spec.dir = {'/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/ROC/all_waves/conditions/sub-DEV001'};
 matlabbatch{9}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{9}.spm.stats.fmri_spec.timing.RT = 2;
 matlabbatch{9}.spm.stats.fmri_spec.timing.fmri_t = 72;
