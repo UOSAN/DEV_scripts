@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST="roc_run_data_quality_20231110.tsv"
+SUBJLIST="roc_run_data_quality_20231121.tsv"
 
 # Which SID should be replaced?
 REPLACESID=DEV001
@@ -21,7 +21,7 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/ROC/fx_conditions_allwaves_all_contrasts.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/ROC/fx_conditions_allwaves_no_contrasts.m
 
 TASK=ROC
 
