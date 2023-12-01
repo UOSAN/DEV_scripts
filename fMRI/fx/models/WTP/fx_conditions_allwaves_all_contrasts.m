@@ -60,12 +60,14 @@ matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.RT = 2;
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.fmri_t = 72;
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.fmri_t0 = 36;
+spec_i = 0;
 for wave_i = 1:length(included_runs_by_wave)
     for run_i = 1:length(included_runs_by_wave{wave_i})
         run_name = included_runs_by_wave{wave_i}(run_i);
         %we don't need to specify wave names because for this analysis
         %there are always exactly 2 waves
-        spec_i = (wave_i - 1) + run_i; %going from 1 to 8 assuming all runs present
+        %spec_i = (wave_i - 1) + run_i; %going from 1 to 8 assuming all runs present
+        spec_i = spec_i + 1; %going through all of the runs. don't assume presence of any
         file_selector_mlb_index = wave_file_selector_first_mlb_index{wave_i} + (run_i-1);
         matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).scans(1) = cfg_dep('Expand image frames: Expanded filename list.', substruct('.','val', '{}',{file_selector_mlb_index}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
         matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
