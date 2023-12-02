@@ -66,6 +66,8 @@ motion_filepaths = {
 %	'Unhealthy_FailedStop',
 %	'Unhealthy_FailedGo',
 %	'Null_Cue'}
+%'NoGo' includes both correct and failed NoGo trials
+%'Go' includes both correct and failed Go trials
 main_betas = {'Healthy_Go',	'Healthy_NoGo',	'Unhealthy_Go',	'Unhealthy_NoGo', 'Null_Cue'}
 
 
@@ -77,9 +79,11 @@ for mb_i = 1:length(main_betas)
 end
 wave_matrix = [];
 
-%matrices for the contrasts we're interested in
+%matrices for the contrasts we are interested in
 HmUh_Stop_matrix=[];
 HmUh_Go_matrix = [];
+Stop_matrix = [];
+Go_matrix = [];
 
 for i = 1:numel(condition_filepaths) %iterate through the two sessiosn
     % for this session
@@ -106,7 +110,18 @@ for i = 1:numel(condition_filepaths) %iterate through the two sessiosn
     multicond_array{i} = multicond_mat;
 
 
-    %only adds this session to the matrix if it has both of the relevant
+    %adds this session to the matrix if it has EITHER of the relevant
+    %items
+
+    %'Stop'
+    session_Stop = (multicond_mat.Healthy_NoGo+multicond_mat.Unhealthy_NoGo) * (has_mb.('Healthy_NoGo') | has_mb.('Unhealthy_NoGo'));
+    Stop_matrix  = [Stop_matrix session_Stop motion_matrix];
+    %'Go'
+    session_Go = (multicond_mat.Healthy_Go+multicond_mat.Unhealthy_Go) * (has_mb.('Healthy_Go') | has_mb.('Unhealthy_Go'));
+    Go_matrix  = [Go_matrix session_Go motion_matrix];
+
+
+    %only adds this session to the matrix if it has BOTH of the relevant
     %items
     %'HmUh_Stop'
     session_HmUh_Stop = (multicond_mat.Healthy_NoGo-multicond_mat.Unhealthy_NoGo) * has_mb.('Healthy_NoGo') * has_mb.('Unhealthy_NoGo'); 
@@ -134,6 +149,14 @@ for mb_i = 1:length(main_betas)
     mb = main_betas{mb_i};
     simple_condition_aggregates = [simple_condition_aggregates; struct('name', mb, 'weights', beta_matrix.(mb))];
 end
+
+
+combined_condition_contrasts = {
+    struct('name', 'Stop', 'weights', Stop_matrix),
+    struct('name', 'Go', 'weights', Go_matrix)
+
+}
+
 % contrasts between conditions
 condition_contrasts = {
     struct('name', 'Stop(Healthy>Unhealthy)', 'weights', HmUh_Stop_matrix),
@@ -158,6 +181,7 @@ HmUh_Stop_1_2_contrast = {struct('name','Stop(Healthy>Unhealthy)(W1-W2)','weight
 
 contrasts = [
     simple_condition_aggregates, %simple conditions (aggregated across multiple waves if available)
+    combined_condition_contrasts, %combined Stop/Go conditions across healthy and unhealthy (aggregated across multiple waves if available)
     condition_contrasts, %contrasts between conditions
     wave_contrasts, %contrasts between waves
     HmUh_Stop_2_1_contrast,
@@ -168,8 +192,8 @@ contrasts = [
 use_contrast = logical([]);
 % for each set of contrast weights, normalize to zero
 % and also mark whether we will use the contrasts
-%some of the contrasts might e completely zero (because there wasn't data
-%avilable) and in that case, we'd exclude them
+%some of the contrasts might e completely zero (because there was not data
+%avilable) and in that case, we would exclude them
 for i = 1:length(contrasts)
     % Normalize the weights so that the positive weights and negative
     % weights each sum to 1
@@ -177,7 +201,7 @@ for i = 1:length(contrasts)
     use_contrast = [use_contrast sum(abs(contrasts{i}.weights))>0];
 end
 
-%filter to only the contrasts we'll use
+%filter to only the contrasts we will use
 contrasts_filtered = contrasts(use_contrast);
 
 %now add the contrasts

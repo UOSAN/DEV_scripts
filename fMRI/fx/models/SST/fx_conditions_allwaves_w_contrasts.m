@@ -71,6 +71,7 @@ motion_filepaths = {
 CS_matrix =[];
 CG_matrix = [];
 FS_matrix = [];
+FG_matrix = [];
 CS_CG_matrix = [];
 CS_FS_matrix = [];
 wave_matrix = [];
@@ -88,9 +89,11 @@ for i = 1:numel(condition_filepaths)
     multicond_mat.CS_matrix = cellfun(@(x) strcmp(x,'CorrectStop'), multicond_mat.names, 'UniformOutput', 1);
     multicond_mat.CG_matrix = cellfun(@(x) strcmp(x,'CorrectGo'), multicond_mat.names, 'UniformOutput', 1);
     multicond_mat.FS_matrix = cellfun(@(x) strcmp(x,'FailedStop'), multicond_mat.names, 'UniformOutput', 1);
+    multicond_mat.FG_matrix = cellfun(@(x) strcmp(x,'FailedGo'), multicond_mat.names, 'UniformOutput', 1);
     has_CS = sum(multicond_mat.CS_matrix);
     has_CG = sum(multicond_mat.CG_matrix);
     has_FS = sum(multicond_mat.FS_matrix);
+    has_FG = sum(multicond_mat.FG_matrix);
     
     
 
@@ -103,6 +106,7 @@ for i = 1:numel(condition_filepaths)
     CS_matrix =[CS_matrix multicond_mat.CS_matrix motion_matrix];
     CG_matrix = [CG_matrix multicond_mat.CG_matrix motion_matrix];
     FS_matrix = [FS_matrix multicond_mat.FS_matrix motion_matrix];
+    FG_matrix = [FG_matrix multicond_mat.FG_matrix motion_matrix];
 
     %only adds this session to the matrix if it has both of the relevant
     %items
@@ -122,6 +126,11 @@ CS2_CS1 = CS_matrix.*(wave_matrix==2) - CS_matrix.*(wave_matrix==1);
 CG2_CG1 = CG_matrix.*(wave_matrix==2) - CG_matrix.*(wave_matrix==1);
 FS2_FS1 = FS_matrix.*(wave_matrix==2) - FS_matrix.*(wave_matrix==1);
 
+%across responses
+
+StopCondition = CS_matrix + FS_matrix;
+GoCondition = CG_matrix + FG_matrix;
+
 %now do wave and condition contrasts
 CS_CG_W21_matrix = CS_CG_matrix.*(wave_matrix==2) - CS_CG_matrix.*(wave_matrix==1);
 CS_FS_W21_matrix = CS_FS_matrix.*(wave_matrix==2) - CS_FS_matrix.*(wave_matrix==1);
@@ -136,7 +145,13 @@ contrasts = {
     struct('name', 'CG', 'weights', CG_matrix),
     struct('name', 'FS', 'weights', FS_matrix),
     %contrasts between conditions
-x
+    struct('name', 'CS>CG', 'weights', CS_CG_matrix),
+    struct('name', 'CG>CS', 'weights', -CS_CG_matrix),
+    struct('name', 'CS>FS', 'weights', CS_FS_matrix),
+    struct('name', 'FS>CS', 'weights', -CS_FS_matrix),
+    %contrasts ignoring response (for comparison with health analysis)
+    struct('name', 'Stop', 'weights', StopCondition),
+    struct('name', 'Go', 'weights', GoCondition),
     %contrasts between waves
     struct('name', 'CS(W2-W1)', 'weights', CS2_CS1),
     struct('name', 'CG(W2-W1)', 'weights', CG2_CG1),

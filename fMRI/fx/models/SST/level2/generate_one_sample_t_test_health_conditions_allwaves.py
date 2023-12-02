@@ -31,7 +31,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     ml_scripting_path = ml_scripting_path,
     dropbox_datapath=dropbox_datapath,
     exclude_test_subjs=False
-)
+)[0:10]
 
 
 
@@ -42,6 +42,12 @@ betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 
 print(betas_with_contrasts.columns)
 contrast_name_list = [
+    'Go',
+    'NoGo',
+    'Healthy_Go',
+    'Healthy_NoGo',
+    'Unhealthy_Go',
+    'Unhealthy_NoGo',
     'Unhealthy_Go(W2-W1)',
     'Unhealthy_NoGo(W2-W1)',
     'Unhealthy_Go(W1-W2)',
