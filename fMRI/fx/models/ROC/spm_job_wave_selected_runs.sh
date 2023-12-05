@@ -19,7 +19,7 @@ fi
 
 # create and execute job
 echo -------------------------------------------------------------------------------
-echo "${SUB} with $RUN_JSON"
+echo "${SUB} with $RUN_JSON for wave $WAVE"
 echo "Running ${SCRIPT}"
 echo -------------------------------------------------------------------------------
 

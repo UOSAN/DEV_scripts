@@ -29,7 +29,7 @@ for run_i = 1:length(included_runs_for_wave)
     % matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
 end
 
-%wave_file_selector_first_mlb_index{1} = length(matlabbatch)+1;
+wave_file_selector_first_mlb_index{1} = length(matlabbatch)+1;
 
 for run_i = 1:length(included_runs_for_wave)
     run_name = included_runs_for_wave(run_i);
@@ -54,7 +54,7 @@ for run_i = 1:length(included_runs_for_wave)
     %we don't need to specify wave names because for this analysis
     %there are always exactly 2 waves
     spec_i = spec_i + 1; %going through all of the runs. don't assume presence of any
-    %file_selector_mlb_index = wave_file_selector_first_mlb_index{wave_i} + (run_i-1);
+    file_selector_mlb_index = wave_file_selector_first_mlb_index{wave_i} + (run_i-1);
     matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).scans(1) = cfg_dep('Expand image frames: Expanded filename list.', substruct('.','val', '{}',{file_selector_mlb_index}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
     matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
     matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).multi = {sprintf('/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries/DEV001_%d_ROC%d.mat',wave_i,run_name)};
