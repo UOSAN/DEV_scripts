@@ -275,6 +275,25 @@ def get_subject_wise_table_with_task_counts(full_table):
     
     return (subject_wise_table)
 
+def get_subject_wave_wise_table_with_task_counts(full_table):
+    subject_wise_table = get_subject_wise_table(full_table)
+    #create a double subject_wise_table, with every row repeated for each of the two waves
+    subject_wave_wise_table = pd.concat([subject_wise_table.copy(),subject_wise_table.copy()],axis=0)
+    subject_wave_wise_table['wave_id'] = subject_wave_wise_table.groupby('subject_id').cumcount() + 1
+    
+
+    for task in ['ROC','WTP']:
+        task_quality_list_col =task + '_quality_list'
+        #create a list of the indices of the runs that are not zero
+        active_run_list_function = lambda run_binary: [i + 1 for i, x in enumerate(run_binary.tolist()) if x != 0]
+        full_table[task_quality_list_col] = full_table.filter(regex='(combined)_' + task + '\d_quality').apply(active_run_list_function,axis=1).tolist()
+
+        #now create a list of the lists, grouping by subID
+        quality_list_by_sid = full_table[['SID','wave_id',task_quality_list_col]].copy()#.apply(lambda x: json.dumps(x)).reset_index(name=task_quality_list_col)
+        quality_list_by_sid[task_quality_list_col] = quality_list_by_sid[task_quality_list_col].apply(lambda x: json.dumps(x))
+        subject_wave_wise_table = subject_wave_wise_table.merge(quality_list_by_sid, left_on=['subject_id','wave_id'], right_on=['SID','wave_id'], how='left')
+    
+    return (subject_wave_wise_table)
 
 
 def get_subject_wise_table(full_table):

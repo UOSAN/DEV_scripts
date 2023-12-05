@@ -44,6 +44,16 @@ mempercpu=8G
 
 set -x
 
+
+
+
+
+
+
+
+
+
+
 # Create and execute batch job
 while IFS=$'\t' read -r DEVID SELECTEDRUNS
 do
@@ -62,4 +72,5 @@ do
 	 	${SHELL_SCRIPT}
  	sleep .25
 done < "$SUBJLIST"
+
 
