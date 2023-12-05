@@ -24,7 +24,7 @@ TASK=ROC
 SHELL_SCRIPT=spm_job_wave_selected_runs.sh
 
 # RRV the results files
-RESULTS_INFIX=fx_conditions
+RESULTS_INFIX=fx_betaseries
 
 # Set output dir and make it if it doesn't exist
 OUTPUTDIR=${SCRIPTS_DIR}/fMRI/fx/models/output/${TASK}_${RESULTS_INFIX}
