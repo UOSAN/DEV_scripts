@@ -21,7 +21,7 @@ for run_i = 1:length(included_runs_for_wave)
     run_name = included_runs_for_wave(run_i);
     %just use the index because this is the first part of content in
     %matlabbatch
-    matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV001/ses-wave1/func/'};
+    matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV001/ses-wave%s/func/',wave)};
     matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.filter = sprintf('s6_sub-DEV001_ses-wave%s_task-ROC_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii',wave, run_name);
     matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
     %     matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave1/func/'};
@@ -41,7 +41,7 @@ for run_i = 1:length(included_runs_for_wave)
 
 end
 
-matlabbatch{length(matlabbatch)+1}.spm.stats.fmri_spec.dir = {sprintf('/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/ROC/wave%d/betaseries/sub-DEV001',wave)};
+matlabbatch{length(matlabbatch)+1}.spm.stats.fmri_spec.dir = {sprintf('/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/ROC/wave%s/betaseries/sub-DEV001',wave)};
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.RT = 2;
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.fmri_t = 72;
