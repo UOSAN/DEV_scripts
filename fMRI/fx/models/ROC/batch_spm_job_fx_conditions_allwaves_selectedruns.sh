@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST="roc_run_data_quality_20231121.tsv"
+SUBJLIST="roc_run_data_quality_20231206.tsv"
 
 # Which SID should be replaced?
 REPLACESID=DEV001
