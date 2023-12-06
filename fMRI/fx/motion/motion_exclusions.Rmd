@@ -33,6 +33,21 @@ library(tidyverse)
 motion = read.csv("/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/auto-motion-fmriprep/DEV_summaryRun.csv")
 
 ```
+Clean the data--didn't come through quite right.
+```{r}
+motion[,c("task","run")] <- str_match(motion$task,pattern = "(.*)_acq-(\\d)")[,2:3]
+motion <- motion %>% mutate(
+  wave =stringr::str_replace(motion$wave,"wave","")%>% as.integer()
+)
+
+```
+
+
+
+```{r}
+motion
+```
+
 
 # summarize by task
 ```{r}
@@ -135,7 +150,7 @@ motion %>% group_by(subjectID) %>%
 
 motion_table <- motion %>%
   mutate(scan= paste0(task, run)) %>%
-  select(-run, -task,-nVols) %>%
+  select(-run, -task,-nVols,-nVols_factor) %>%
   tidyr::spread(scan,percent) %>% 
   arrange(wave, subjectID)
 
