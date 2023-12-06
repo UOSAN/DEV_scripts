@@ -477,6 +477,7 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
     # motion exclude this is arranged by-participant, not by session
     automotion_exclude = pd.read_csv(automotion_datapath)
     automotion_exclude.columns = ['automotion_exclude_' + c for c in automotion_exclude.columns]
+
     
 
     # general_motion_exclusion_binvec = motion_exclusions['Exclude'].str.contains('exclude', flags=re.IGNORECASE)
@@ -496,8 +497,8 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
     #  = redcap_data_quality
     # [redcap_data_quality
     # ['subjectID'].isna()]
-    print(str(len(redcap_data_quality
-    )) + " sessions remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
+    # print(str(len(redcap_data_quality
+    # )) + " sessions remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
 
     #raise NotImplementedError("this still ruels out whole sets of ROC and WTP for single runs that are out; we should be more precise than this.")
     #raise NotImplementedError("need to re-write this to handle exclusion for WTP and ROC as well as SST, depnding on task passed in to the function")
@@ -547,7 +548,7 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
 
     
 
-    all_data_by_session = data_by_session_merge2
+    all_data_by_session = data_by_session_merge3
 
     all_data_by_session.sort_values(['subject_id','wave_id'], inplace=True)
     all_data_by_session.reset_index(inplace=True, drop=True)
@@ -566,9 +567,9 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
     labelled_wtp_cols = ['labelled_exclusion_WTP' + str(i) + '_Exclude' for i in range(1,5)]
     labelled_roc_cols = ['labelled_exclusion_ROC' + str(i) + '_Exclude' for i in range(1,5)]
 
-    motion_sst_cols = ['automotion_exclude_SST_Exclude']
-    motion_wtp_cols = ['automotion_exclude_WTP' + str(i) + '_Exclude' for i in range(1,5)]
-    motion_roc_cols = ['automotion_exclude_ROC' + str(i) + '_Exclude' for i in range(1,5)]
+    motion_sst_cols = ['automotion_exclude_SST1']
+    motion_wtp_cols = ['automotion_exclude_WTP' + str(i) + '' for i in range(1,5)]
+    motion_roc_cols = ['automotion_exclude_ROC' + str(i) + '' for i in range(1,5)]
 
     
     exclusion_columns =  (['data_by_ppt_merge_status'] + redcap_sst_cols + 
@@ -622,16 +623,16 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
             'ROC': motion_roc_cols
         }.items():
         for col in task_cols:
-            raise NotImplementedError("Need to implement motion exclusion col standarisations")
-            all_data_by_session[col + '_quality'] = all_data_by_session[col].apply(lambda x: 1 if pd.isna(x) or x=="" else 0)
+            all_data_by_session[col + '_quality'] = all_data_by_session[col].apply(lambda x: 0 if pd.isnull(x) or x>10 else 1)
 
         task_cols_quality = [col + '_quality' for col in task_cols]
         #now quantify the overall quality, indicating whether, 
         # across all cols in task_cols, at least one column has quality
-        all_data_by_session['motion_' + task + '_quality_any'] = all_data_by_session[task_cols_quality].apply(lambda x: 1 if x.sum()>0 else 0, axis=1)
+        all_data_by_session['automotion_' + task + '_quality_any'] = all_data_by_session[task_cols_quality].apply(lambda x: 1 if x.sum()>0 else 0, axis=1)
 
 
-
+    #find columns with 'redcap' in the name
+    [c for c in all_data_by_session.columns if re.match(r'.*(redcap).*', c)]
 
     #now combine across the three quality indicators
     task_run_counts = {
@@ -644,16 +645,16 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
             all_data_by_session['combined_' + task + '_quality'] = (
                 all_data_by_session[[
                     'redcap_' + task + '_quality', 
-                    'labelled_' + task + '_Exclude_quality',  #changed from 'Exclude_quality'; why is this?
-                    'motion_' + task + '_Exclude_quality']].apply(lambda x: 1 if x.sum()==3 else 0, axis=1)
+                    'labelled_exclusion_' + task + '_Exclude_quality',  #changed from 'Exclude_quality'; why is this?
+                    'automotion_exclude_' + task + '1_quality']].apply(lambda x: 1 if x.sum()==3 else 0, axis=1)
             )
         else:
             for run_i in range(1, task_run_count+1):
                 all_data_by_session['combined_' + task + str(run_i) + '_quality' + str(run_i)] = (
                     all_data_by_session[[
                         'redcap_' + task + str(run_i) + '_quality', 
-                        'labelled_' + task + str(run_i) + '_Exclude_quality',
-                        'motion_' + task + str(run_i) + '_Exclude_quality'
+                        'labelled_exclusion_' + task + str(run_i) + '_Exclude_quality',
+                        'automotion_exclude_' + task + str(run_i) + '_quality'
                         ]].apply(lambda x: 1 if x.sum()==3 else 0, axis=1)
                 )
 
