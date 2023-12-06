@@ -437,11 +437,13 @@ def get_session_data_quality_l1(
 
 
 
-def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None):
+def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, automotion_datapath=None):
     """
     Gets session data quality but unspecific to the specific task, so, does not check for the presence of beta files.
 
     """
+    if automotion_datapath is None:
+        raise Exception("automotion_datapath must be specified")
 
 
     #other data for inclusion
@@ -467,10 +469,16 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None):
     redcap_data_quality['redcap_wave'] = redcap_data_quality['redcap_redcap_event_name'].str.extract(r'session_(\d)_arm_\d').astype(int)
 
 
-    motion_exclusions = pd.read_csv(dropbox_datapath + '/DEVQC_all_subjects - All.csv', header=1)
+    operator_exclusions = pd.read_csv(dropbox_datapath + '/DEVQC_all_subjects - All.csv', header=1)
     #motion_exclusions_w1 = motion_exclusions[motion_exclusions['wave']==1]
 
-    motion_exclusions.columns = ['motion_exclude_' + c for c in motion_exclusions.columns]
+    operator_exclusions.columns = ['operator_exclusion_' + c for c in operator_exclusions.columns]
+
+    # motion exclude this is arranged by-participant, not by session
+    automotion_exclude = pd.read_csv(automotion_datapath)
+    automotion_exclude.columns = ['automotion_exclude_' + c for c in automotion_exclude.columns]
+    
+
     # general_motion_exclusion_binvec = motion_exclusions['Exclude'].str.contains('exclude', flags=re.IGNORECASE)
     # task_motion_exclusions_binvec = motion_exclusions[task + "_Exclude"].str.contains('exclude', flags=re.IGNORECASE)
     # motion_exclusions2 = motion_exclusions.loc[:,['subjectID','wave']][general_motion_exclusion_binvec | task_motion_exclusions_binvec]
@@ -525,14 +533,19 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None):
         data_by_ppt_all = data_by_ppt
         data_by_ppt_all['subject_id'] = data_by_ppt_all['SID']
     #now merge by-session data
-    data_by_session_merge1=redcap_data_quality.merge(motion_exclusions, left_on=['redcap_dev_id','redcap_wave'], right_on=['motion_exclude_subjectID','motion_exclude_wave'], how='outer')
+    data_by_session_merge1=redcap_data_quality.merge(operator_exclusions, left_on=['redcap_dev_id','redcap_wave'], right_on=['operator_exclusion_subjectID','operator_exclusion_wave'], how='outer')
     #make sure there's a column that stores IDs across the merged columns
-    data_by_session_merge1['subject_id'] = [r['redcap_dev_id'] if not pd.isna(r['redcap_dev_id']) else r['motion_exclude_subjectID'] for i, r in data_by_session_merge1.iterrows()]
-    data_by_session_merge1['wave_id'] = [r['redcap_wave'] if not pd.isna(r['redcap_wave']) else r['motion_exclude_wave'] for i, r in data_by_session_merge1.iterrows()]
-    print(redcap_data_quality.shape, motion_exclusions.shape, data_by_session_merge1.shape)
+    data_by_session_merge1['subject_id'] = [r['redcap_dev_id'] if not pd.isna(r['redcap_dev_id']) else r['operator_exclusion_subjectID'] for i, r in data_by_session_merge1.iterrows()]
+    data_by_session_merge1['wave_id'] = [r['redcap_wave'] if not pd.isna(r['redcap_wave']) else r['operator_exclusion_wave'] for i, r in data_by_session_merge1.iterrows()]
+    print(redcap_data_quality.shape, operator_exclusions.shape, data_by_session_merge1.shape)
     #now merge in teh by-session data with the by-ppt data
     data_by_session_merge2 = data_by_ppt_all.merge(data_by_session_merge1, left_on=['subject_id'], right_on=['subject_id'], how='outer')
     print(data_by_ppt_all.shape, data_by_session_merge1.shape, data_by_session_merge2.shape)
+
+    # now merge in the by-session data with automotion_exclude data
+    data_by_session_merge3 = data_by_session_merge2.merge(automotion_exclude, left_on=['subject_id','wave_id'], right_on=['automotion_exclude_subjectID','automotion_exclude_wave'], how='outer')
+
+    
 
     all_data_by_session = data_by_session_merge2
 
@@ -549,9 +562,9 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None):
     redcap_wtp_cols = ['redcap_WTP' + str(i) for i in range(1,5)]
     redcap_roc_cols = ['redcap_ROC' + str(i) for i in range(1,5)]
 
-    motion_sst_cols = ['motion_exclude_SST_Exclude']
-    motion_wtp_cols = ['motion_exclude_WTP' + str(i) + '_Exclude' for i in range(1,5)]
-    motion_roc_cols = ['motion_exclude_ROC' + str(i) + '_Exclude' for i in range(1,5)]
+    motion_sst_cols = ['operator_exclusion_SST_Exclude']
+    motion_wtp_cols = ['operator_exclusion_WTP' + str(i) + '_Exclude' for i in range(1,5)]
+    motion_roc_cols = ['operator_exclusion_ROC' + str(i) + '_Exclude' for i in range(1,5)]
 
     
     exclusion_columns =  (['data_by_ppt_merge_status'] + redcap_sst_cols + 
@@ -604,12 +617,12 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None):
     for task, task_run_count in task_run_counts.items():
         if task=='SST':
             all_data_by_session['combined_' + task + '_quality'] = (
-                all_data_by_session[['redcap_' + task + '_quality', 'motion_exclude_' + task + '_Exclude_quality']].apply(lambda x: 1 if x.sum()==2 else 0, axis=1)
+                all_data_by_session[['redcap_' + task + '_quality', 'operator_exclusion_' + task + '_Exclude_quality']].apply(lambda x: 1 if x.sum()==2 else 0, axis=1)
             )
         else:
             for run_i in range(1, task_run_count+1):
                 all_data_by_session['combined_' + task + str(run_i) + '_quality' + str(run_i)] = (
-                    all_data_by_session[['redcap_' + task + str(run_i) + '_quality', 'motion_exclude_' + task + str(run_i) + '_Exclude_quality']].apply(lambda x: 1 if x.sum()==2 else 0, axis=1)
+                    all_data_by_session[['redcap_' + task + str(run_i) + '_quality', 'operator_exclusion_' + task + str(run_i) + '_Exclude_quality']].apply(lambda x: 1 if x.sum()==2 else 0, axis=1)
                 )
 
 

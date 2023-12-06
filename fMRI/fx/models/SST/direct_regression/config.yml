@@ -10,6 +10,7 @@ UO-2010763:
   dev_scripts_path: /Users/bensmith/Documents/code/DEV_scripts/
 Benjamins-MacBook-Pro-2.local:
   dev_scripts_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/
+  automotion_output_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/motion_percent_summary.csv
   level2_output_path: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/level2/SST/
   rural_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
   rubric_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/DEV_scoring_rubrics
@@ -24,6 +25,7 @@ Benjamins-MacBook-Pro-2.local:
   nonbids_data_path: /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/
 Benjamins-MacBook-Pro-3.local:
   dev_scripts_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/
+  automotion_output_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/motion_percent_summary.csv
   rural_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
   rubric_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/DEV_scoring_rubrics
   dev_analysis_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/

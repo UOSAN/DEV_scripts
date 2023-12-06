@@ -28,7 +28,10 @@ library(tidyverse)
 # load data
 ```{r}
 #motion = read.csv("~/Users/deniciaaragon/Desktop/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
-motion = read.csv("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
+#motion = read.csv("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
+#motion = read.csv("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
+motion = read.csv("/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/auto-motion-fmriprep/DEV_summaryRun.csv")
+
 ```
 
 # summarize by task

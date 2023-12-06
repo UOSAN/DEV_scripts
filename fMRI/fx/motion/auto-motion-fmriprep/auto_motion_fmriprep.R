@@ -63,7 +63,7 @@ columnNames = c("subjectID", "wave", "task", "run", "volume", "CSF", "WhiteMatte
                 "aCompCor02", "aCompCor03", "aCompCor04", "aCompCor05", "Cosine00", 
                 "X", "Y", "Z", "RotX", "RotY", "RotZ")
 
-fileRegex = '.*func/sub-(.*)_ses-(.*)_task-(.*)_run-(.*)_desc-.*.tsv'
+fileRegex = '.*func/sub-(.*)_ses-wave(.*)_task-(.*)_acq-(.*)_desc-.*.tsv'
 fileVars = c('subjectID', 'wave', 'task', 'run')
 
 filter_check_func <- function(f){
