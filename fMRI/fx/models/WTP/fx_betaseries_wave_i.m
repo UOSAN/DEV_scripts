@@ -22,10 +22,10 @@ for run_i = 1:length(included_runs_for_wave)
     %just use the index because this is the first part of content in
     %matlabbatch
     matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV001/ses-wave%s/func/',wave)};
-    matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.filter = sprintf('s6_sub-DEV001_ses-wave%s_task-ROC_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii',wave, run_name);
+    matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.filter = sprintf('s6_sub-DEV001_ses-wave%s_task-WTP_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii',wave, run_name);
     matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
     %     matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/sub-DEV001/ses-wave1/func/'};
-    % matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV001_ses-wave1_task-ROC_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii';
+    % matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.filter = 's6_sub-DEV001_ses-wave1_task-WTP_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii';
     % matlabbatch{1}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
 end
 
@@ -33,15 +33,15 @@ wave_file_selector_first_mlb_index = length(matlabbatch)+1;
 
 for run_i = 1:length(included_runs_for_wave)
     run_name = included_runs_for_wave(run_i);
-    file_selector_string = sprintf('File Selector (Batch Mode): Selected Files (s6_sub-DEV001_ses-wave%s_task-ROC_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)',wave, run_name);
+    file_selector_string = sprintf('File Selector (Batch Mode): Selected Files (s6_sub-DEV001_ses-wave%s_task-WTP_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii)',wave, run_name);
     matlabbatch{length(matlabbatch)+1}.spm.util.exp_frames.files(1) = cfg_dep(file_selector_string, substruct('.','val', '{}',{run_i}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
     matlabbatch{length(matlabbatch)}.spm.util.exp_frames.frames = Inf;
-% matlabbatch{5}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV001_ses-wave1_task-ROC_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
+% matlabbatch{5}.spm.util.exp_frames.files(1) = cfg_dep('File Selector (Batch Mode): Selected Files (s6_sub-DEV001_ses-wave1_task-WTP_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii)', substruct('.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
 % matlabbatch{5}.spm.util.exp_frames.frames = Inf;
 
 end
 
-matlabbatch{length(matlabbatch)+1}.spm.stats.fmri_spec.dir = {sprintf('/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/ROC/wave%s/betaseries/sub-DEV001',wave)};
+matlabbatch{length(matlabbatch)+1}.spm.stats.fmri_spec.dir = {sprintf('/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave%s/betaseries/sub-DEV001',wave)};
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.units = 'secs';
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.RT = 2;
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.timing.fmri_t = 72;
@@ -57,9 +57,9 @@ for run_i = 1:length(included_runs_for_wave)
     file_selector_mlb_index = wave_file_selector_first_mlb_index + (run_i-1);
     matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).scans(1) = cfg_dep('Expand image frames: Expanded filename list.', substruct('.','val', '{}',{file_selector_mlb_index}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','files'));
     matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).cond = struct('name', {}, 'onset', {}, 'duration', {}, 'tmod', {}, 'pmod', {}, 'orth', {});
-    matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).multi = {sprintf('/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries/DEV001_%s_ROC%d.mat',wave,run_name)};
+    matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).multi = {sprintf('/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/multiconds/WTP/betaseries/DEV001_%s_WTP%d.mat',wave,run_name)};
     matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).regress = struct('name', {}, 'val', {});
-    matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).multi_reg = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV001/sub-DEV001_ses-wave%s_task-ROC_acq-%d_run-1_desc-motion_regressors.txt',wave,run_name)};
+    matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).multi_reg = {sprintf('/projects/sanlab/shared/DEV/bids_data/derivatives/auto-motion-fmriprep/sub-DEV001/sub-DEV001_ses-wave%s_task-WTP_acq-%d_run-1_desc-motion_regressors.txt',wave,run_name)};
     matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.sess(spec_i).hpf = 128;
 end
 

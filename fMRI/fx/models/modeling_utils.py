@@ -626,6 +626,10 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
             all_data_by_session[col + '_quality'] = all_data_by_session[col].apply(lambda x: 0 if pd.isnull(x) or x>10 else 1)
 
         task_cols_quality = [col + '_quality' for col in task_cols]
+
+        #now exclude any rows where the sum of the quality columns is less than 2
+        exclude_set = all_data_by_session[task_cols_quality].sum(axis=1)<2
+        all_data_by_session.loc[exclude_set, task_cols_quality] = 0
         #now quantify the overall quality, indicating whether, 
         # across all cols in task_cols, at least one column has quality
         all_data_by_session['automotion_' + task + '_quality_any'] = all_data_by_session[task_cols_quality].apply(lambda x: 1 if x.sum()>0 else 0, axis=1)
