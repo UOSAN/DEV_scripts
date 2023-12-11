@@ -18,7 +18,7 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 
-TASK=ROC
+TASK=WTP
 
 # Set shell script to execute
 SHELL_SCRIPT=spm_job_wave_selected_runs.sh
@@ -39,15 +39,14 @@ mempercpu=8G
 
 
 
-
 for W in 1 2; do
     echo "wave: $W"
 
     # Set MATLAB script path
-    SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/ROC/fx_betaseries_wave_i.m
+    SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_betaseries_wave_i.m
 
     # Set subject list
-    SUBJLIST="roc_run_data_quality_w${W}_20231206.tsv"
+    SUBJLIST="wtp_run_data_quality_w${W}_20231211.tsv"
 
 
     #set -x
