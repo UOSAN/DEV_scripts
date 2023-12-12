@@ -6,7 +6,7 @@ from level2_utils import get_data_for_confirmed_train_subjs, read_yaml_for_host
 from level2_utils import *
 #beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
 
-#beta_df['spm_l2_path_description'] =beta_df.beta_filepath
+
 #paths
 # nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
 # dropbox_data_path = "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data"

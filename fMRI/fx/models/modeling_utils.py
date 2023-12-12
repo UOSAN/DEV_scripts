@@ -50,8 +50,8 @@ def get_data_for_confirmed_task_session(
     subj_beta_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in scan_list]
     beta_df = pd.DataFrame({
         'subject_id': subj_beta_list,
-        'spm_l2_path': beta_paths,
-        'spm_l2_path_description': scan_list
+        'spm_output_path': beta_paths,
+        'spm_output_path_description': scan_list
     })
 
     # beta_df['spm_l2_path_description'] =beta_df.beta_filepath
@@ -164,8 +164,8 @@ def get_data_for_confirmed_task_session(
 def filter_for_selected_data(session_quality_data, scanner_room_report_pass, motion_check_pass, subj_wave_inclusion='all'):
 
     beta_exists = (
-        (session_quality_data.spm_l2_path.isna()==False)
-            & (session_quality_data.spm_l2_path != '')
+        (session_quality_data.spm_output_path.isna()==False)
+            & (session_quality_data.spm_output_path != '')
     )
     print("subjects who did or did not have beta data:")
     print(beta_exists.value_counts())
@@ -211,25 +211,40 @@ def get_data_appearing_across_waves(selected_data, subj_wave_inclusion='all'):
 def get_sst_data_for_confirmed_sessions_across_tasks(
         beta_glob,
         dropbox_datapath,
+        automotion_datapath,
         subj_wave_inclusion = 'all'
     ):
-    session_quality_data = get_session_data_quality(beta_glob=beta_glob, dropbox_datapath=dropbox_datapath)
+    session_quality_data = get_session_data_quality_l1(image_folder_glob=beta_glob, dropbox_datapath=dropbox_datapath, automotion_datapath = automotion_datapath)
 
-    scanner_room_report_pass = (session_quality_data.redcap_SST=='No reported problems')
+    scanner_room_report_pass = (session_quality_data.redcap_SST_quality)
     print("subjects who did or did not pass the scanner room report check:")
     print(session_quality_data.groupby('redcap_SST').size())
     print(scanner_room_report_pass.value_counts())
 
 
     motion_check_pass = (
-        (session_quality_data.motion_exclude_SST_Exclude.isna()==True)
-        & (session_quality_data.motion_exclude_SST_Exclude != '')
+        (session_quality_data.automotion_exclude_SST1_quality)
     )
-    print('subjects who did or did not pass the motion check:')
+    print('subjects who did or did not pass the auto motion check:')
     print(motion_check_pass.value_counts())
+
+    print('subjects who did or did not pass the labelled data check motion check:')
+    labelled_exclusion = (
+        (session_quality_data.labelled_exclusion_SST_Exclude_quality)
+    )
+    print(labelled_exclusion.value_counts())
+
+    
+    
     
     #with a set of filters we have just extracted, filter the wave data 
-    selected_data = filter_for_selected_data(session_quality_data, scanner_room_report_pass, motion_check_pass, subj_wave_inclusion=subj_wave_inclusion)
+    #selected_data = filter_for_selected_data(session_quality_data, scanner_room_report_pass, motion_check_pass, subj_wave_inclusion=subj_wave_inclusion)
+    beta_exists = (
+        (session_quality_data.spm_output_path.isna()==False)
+            & (session_quality_data.spm_output_path != '')
+    )
+    selected_data = session_quality_data.loc[,(session_quality_data.combined_SST_quality & beta_exists)].copy()
+
     selected_data_with_all_waves = get_data_appearing_across_waves(selected_data, subj_wave_inclusion=subj_wave_inclusion)
 
     return(selected_data_with_all_waves)
@@ -303,11 +318,11 @@ def get_subject_wise_table(full_table):
     max_unique_value_count = full_table.groupby('SID').nunique(dropna=False).max()
     subject_wise_cols = ['SID'] + max_unique_value_count[max_unique_value_count==1].index.tolist()
     #cols_to_remove = full_table.columns.difference(subject_wise_cols)
-    if 'spm_l2_path' not in subject_wise_cols:
+    if 'spm_output_path' not in subject_wise_cols:
         #print a warning using Warning
-        Warning('spm_l2_path not in subject_wise_cols')
+        Warning('spm_output_path not in subject_wise_cols')
         
-    #assert ('spm_l2_path' in subject_wise_cols)
+    #assert ('spm_output_path' in subject_wise_cols)
     subject_wise_table = full_table.loc[:,subject_wise_cols].drop_duplicates(inplace=False)
     subject_wise_table.reset_index(inplace=True, drop=True)
     return(subject_wise_table)
@@ -339,7 +354,8 @@ def get_task_subj_folder_paths_for_subjs_w_two_sessions(
 
 def get_sst_subj_folder_paths_for_subjs_w_two_sessions(
         beta_glob,
-        dropbox_datapath
+        dropbox_datapath,
+        automotion_datapath
 ):
     """
     gets a list of subject folders for subjects with two SST sessions
@@ -350,6 +366,7 @@ def get_sst_subj_folder_paths_for_subjs_w_two_sessions(
     full_table = get_sst_data_for_confirmed_sessions_across_tasks(
         beta_glob=beta_glob,
         dropbox_datapath=dropbox_datapath,
+        automotion_datapath = automotion_datapath,
         subj_wave_inclusion='all'
     )
 
@@ -389,8 +406,8 @@ def get_session_data_quality_l2(
     subj_beta_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in scan_list]
     beta_df = pd.DataFrame({
         'subject_id': subj_beta_list,
-        'spm_l2_path': beta_paths,
-        'spm_l2_path_description': scan_list
+        'spm_output_path': beta_paths,
+        'spm_output_path_description': scan_list
     })
 
     #now combine:
@@ -404,6 +421,7 @@ def get_session_data_quality_l2(
 def get_session_data_quality_l1(
         image_folder_glob,
         dropbox_datapath,
+        automotion_datapath,
         task='SST'
         ):
     """
@@ -424,14 +442,15 @@ def get_session_data_quality_l1(
     subj_image_folder_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in image_folder_paths]
     image_folder_df = pd.DataFrame({
         'subject_id': subj_image_folder_list,
-        'spm_l1_path': image_folder_paths#,
-        #'spm_l1_path_description': scan_list
+        'spm_output_path': image_folder_paths#,
+        #'spm_output_path_description': scan_list
     })
 
     #now combine:
     all_data_by_session = get_overall_session_data_quality(
         dropbox_datapath,
-        image_folder_df = image_folder_df
+        image_folder_df = image_folder_df,
+        automotion_datapath = automotion_datapath
     )
     return(all_data_by_session)
 
@@ -626,6 +645,11 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
             all_data_by_session[col + '_quality'] = all_data_by_session[col].apply(lambda x: 0 if pd.isnull(x) or x>10 else 1)
 
         task_cols_quality = [col + '_quality' for col in task_cols]
+
+        #now exclude any rows where the sum of the quality columns is less than 2, but ONLY IF they are WTP or ROC.
+        if task in ['WTP', 'ROC']:
+            exclude_set = all_data_by_session[task_cols_quality].sum(axis=1)<2
+            all_data_by_session.loc[exclude_set, task_cols_quality] = 0
         #now quantify the overall quality, indicating whether, 
         # across all cols in task_cols, at least one column has quality
         all_data_by_session['automotion_' + task + '_quality_any'] = all_data_by_session[task_cols_quality].apply(lambda x: 1 if x.sum()>0 else 0, axis=1)

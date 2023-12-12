@@ -25,7 +25,7 @@ for s_i, s in enumerate(subject_list):
     s_index = s_i+1
     print("%" + s)
     print("matlabbatch{1}.spm.stats.factorial_design.des.pt.pair(" + str(s_index) + ").scans = {")
-    beta_paths = train_betas_with_data.spm_l2_path_description[train_betas_with_data.SID==s]
+    beta_paths = train_betas_with_data.spm_output_path_description[train_betas_with_data.SID==s]
     # we need specifically the beta_0001 and then the beta_0002. need to make sure they're in order.
     [re.match("beta\_0001", bp) for bp in beta_paths]
 

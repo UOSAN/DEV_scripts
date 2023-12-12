@@ -9,6 +9,8 @@ import sys
 #sys.path.append('/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/analyses/intervention_moderation/')
 sys.path.append('/Users/bensmith/Documents/code/DEV_scripts/analyses/intervention_moderation/')
 from dev_interaction_util import load_groups_from_mastersheet
+sys.path.append('../../')
+from modeling_utils import get_sst_subj_folder_paths_for_subjs_w_two_sessions
 #beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
 
 #beta_df['spm_l2_path_description'] =beta_df.beta_filepath
@@ -49,7 +51,8 @@ group_codes = pd.concat([groups_by_name.dev_id, pd.get_dummies(groups_by_name.in
 
 train_betas_with_data = get_sst_subj_folder_paths_for_subjs_w_two_sessions(
     beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/" + analysis_name + "/sub-DEV*/",
-    dropbox_datapath=dropbox_datapath
+    dropbox_datapath=dropbox_datapath,
+    automotion_datapath = config_data['automotion_output_path']
 )
 #get unique rows for a subset of the cols
 

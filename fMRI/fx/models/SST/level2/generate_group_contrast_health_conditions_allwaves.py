@@ -10,7 +10,7 @@ sys.path.append('/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/analy
 from dev_interaction_util import load_groups_from_mastersheet
 #beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
 
-#beta_df['spm_l2_path_description'] =beta_df.beta_filepath
+
 #paths
 # nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
 # dropbox_data_path = "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data"
