@@ -50,7 +50,8 @@ group_codes = pd.concat([groups_by_name.dev_id, pd.get_dummies(groups_by_name.in
 
 train_betas_with_data = get_sst_subj_folder_paths_for_subjs_w_two_sessions(
     beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/" + analysis_name + "/sub-DEV*/",
-    dropbox_datapath=dropbox_datapath
+    dropbox_datapath=dropbox_datapath,
+    automotion_datapath = config_data['automotion_output_path']
 )
 #get unique rows for a subset of the cols
 

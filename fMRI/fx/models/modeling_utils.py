@@ -211,9 +211,10 @@ def get_data_appearing_across_waves(selected_data, subj_wave_inclusion='all'):
 def get_sst_data_for_confirmed_sessions_across_tasks(
         beta_glob,
         dropbox_datapath,
+        automotion_datapath,
         subj_wave_inclusion = 'all'
     ):
-    session_quality_data = get_session_data_quality(beta_glob=beta_glob, dropbox_datapath=dropbox_datapath)
+    session_quality_data = get_session_data_quality_l1(image_folder_glob=beta_glob, dropbox_datapath=dropbox_datapath, automotion_datapath = automotion_datapath)
 
     scanner_room_report_pass = (session_quality_data.redcap_SST=='No reported problems')
     print("subjects who did or did not pass the scanner room report check:")
@@ -222,11 +223,18 @@ def get_sst_data_for_confirmed_sessions_across_tasks(
 
 
     motion_check_pass = (
-        (session_quality_data.motion_exclude_SST_Exclude.isna()==True)
-        & (session_quality_data.motion_exclude_SST_Exclude != '')
+        (session_quality_data.automotion_exclude_SST1_quality)
     )
-    print('subjects who did or did not pass the motion check:')
+    print('subjects who did or did not pass the auto motion check:')
     print(motion_check_pass.value_counts())
+
+    print('subjects who did or did not pass the labelled data check motion check:')
+    labelled_exclusion_path = (
+        (session_quality_data.labelled_exclusion_SST_Exclude_quality)
+    )
+    print(labelled_exclusion_path.value_counts())
+
+    
     
     #with a set of filters we have just extracted, filter the wave data 
     selected_data = filter_for_selected_data(session_quality_data, scanner_room_report_pass, motion_check_pass, subj_wave_inclusion=subj_wave_inclusion)
@@ -339,7 +347,8 @@ def get_task_subj_folder_paths_for_subjs_w_two_sessions(
 
 def get_sst_subj_folder_paths_for_subjs_w_two_sessions(
         beta_glob,
-        dropbox_datapath
+        dropbox_datapath,
+        automotion_datapath
 ):
     """
     gets a list of subject folders for subjects with two SST sessions
@@ -350,6 +359,7 @@ def get_sst_subj_folder_paths_for_subjs_w_two_sessions(
     full_table = get_sst_data_for_confirmed_sessions_across_tasks(
         beta_glob=beta_glob,
         dropbox_datapath=dropbox_datapath,
+        automotion_datapath = automotion_datapath,
         subj_wave_inclusion='all'
     )
 
@@ -404,6 +414,7 @@ def get_session_data_quality_l2(
 def get_session_data_quality_l1(
         image_folder_glob,
         dropbox_datapath,
+        automotion_datapath,
         task='SST'
         ):
     """
@@ -431,7 +442,8 @@ def get_session_data_quality_l1(
     #now combine:
     all_data_by_session = get_overall_session_data_quality(
         dropbox_datapath,
-        image_folder_df = image_folder_df
+        image_folder_df = image_folder_df,
+        automotion_datapath = automotion_datapath
     )
     return(all_data_by_session)
 
@@ -627,9 +639,10 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
 
         task_cols_quality = [col + '_quality' for col in task_cols]
 
-        #now exclude any rows where the sum of the quality columns is less than 2
-        exclude_set = all_data_by_session[task_cols_quality].sum(axis=1)<2
-        all_data_by_session.loc[exclude_set, task_cols_quality] = 0
+        #now exclude any rows where the sum of the quality columns is less than 2, but ONLY IF they are WTP or ROC.
+        if task in ['WTP', 'ROC']:
+            exclude_set = all_data_by_session[task_cols_quality].sum(axis=1)<2
+            all_data_by_session.loc[exclude_set, task_cols_quality] = 0
         #now quantify the overall quality, indicating whether, 
         # across all cols in task_cols, at least one column has quality
         all_data_by_session['automotion_' + task + '_quality_any'] = all_data_by_session[task_cols_quality].apply(lambda x: 1 if x.sum()>0 else 0, axis=1)
