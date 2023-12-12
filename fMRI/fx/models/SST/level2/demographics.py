@@ -5,7 +5,7 @@ import numpy as np
 from level2_utils import *
 #beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
 
-#beta_df['spm_l2_path_description'] =beta_df.beta_filepath
+
 #paths
 # nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
 # ml_data_folderpath = nonbids_data_path + "fMRI/ml"

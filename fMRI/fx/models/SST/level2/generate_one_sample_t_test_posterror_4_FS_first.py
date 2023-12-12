@@ -6,7 +6,7 @@ from level2_utils import *
 print("running generate_one_sample_t_test_posterror_4_FS_first.py")
 #beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
 #now 
-#beta_df['spm_l2_path_description'] =beta_df.beta_filepath
+
 #paths
 nonbids_data_path = "/Users/bensmith/Documents/data/DEV/nonbids_data/"
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
@@ -28,10 +28,10 @@ for contrast_name in ['CorrectGoFollowing(CS>FS)','CorrectGoFollowing(FS>CS)']:
     if contrast_colname in betas_with_contrasts.columns:
         for i, r in betas_with_contrasts.iterrows():
             if pd.isnull(r[contrast_colname]) is False:
-                tmap_filepath = r.loc['spm_l2_path'] + r.loc[contrast_colname]
+                tmap_filepath = r.loc['spm_output_path'] + r.loc[contrast_colname]
                 print("'" + tmap_filepath + ",1'")
     else:
         print('contrast ' + contrast_name + ' not found.')
 
 
-#[print(s) for s in train_betas_with_data.spm_l2_path_description]
+

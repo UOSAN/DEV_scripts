@@ -7,7 +7,7 @@ from level2_utils import *
 
 config_data = read_yaml_for_host("l2_config.yml")
 
-#beta_df['spm_l2_path_description'] =beta_df.beta_filepath
+
 #paths
 nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
 dropbox_data_path = "/Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data"
@@ -40,13 +40,13 @@ contrast_name_list = ['CorrectGoFollowing(CS>FS)','CorrectGoFollowing(FS>CS)','C
 #     if contrast_colname in betas_with_contrasts.columns:
 #         for i, r in betas_with_contrasts.iterrows():
 #             if pd.isnull(r[contrast_colname]) is False:
-#                 tmap_filepath = r.loc['spm_l2_path'] + r.loc[contrast_colname]
+#                 tmap_filepath = r.loc['spm_output_path'] + r.loc[contrast_colname]
 #                 print("'" + tmap_filepath + ",1'")
 #     else:
 #         print('contrast ' + contrast_name + ' not found.')
 
 
-# #[print(s) for s in train_betas_with_data.spm_l2_path_description]
+# #[print(s) for s in train_betas_with_data.spm_output_path_description]
 
 iterate_over_l1_images_and_run_l2_scripts(
     contrast_name_list, 

@@ -31,7 +31,7 @@ def get_contrasts_for_betas(
     betas.reset_index(inplace=True,drop=True)
 
 
-    for beta_i, beta_folderpath in enumerate(betas.spm_l2_path):
+    for beta_i, beta_folderpath in enumerate(betas.spm_output_path):
         print(beta_folderpath)
         # load the mat file associated with the current run
         subj_l1_mat_config = scipy.io.loadmat(str(
@@ -68,7 +68,7 @@ def get_beta_fnames_for_beta_dirs(
 
     beta_dir_df.reset_index(inplace=True,drop=True)
 
-    for beta_i, beta_folderpath in enumerate(beta_dir_df.spm_l2_path):
+    for beta_i, beta_folderpath in enumerate(beta_dir_df.spm_output_path):
         print(beta_folderpath)
         # load the mat file associated with the current run
         subj_l1_mat_config = scipy.io.loadmat(str(
@@ -113,7 +113,7 @@ def get_beta_fname_list_for_beta_dirs(
 
     beta_roi_list = []
 
-    for beta_i, beta_folderpath in enumerate(beta_dir_df.spm_l2_path):
+    for beta_i, beta_folderpath in enumerate(beta_dir_df.spm_output_path):
         print(beta_folderpath)
         # load the mat file associated with the current run
         #try to load the file; if it doesn't load, through a warning and move on
@@ -150,8 +150,8 @@ def get_beta_fname_list_for_beta_dirs(
 
             beta_roi_list.append({
                 'subject_id': beta_dir_df.loc[beta_i, 'subject_id'],
-                'spm_l2_path': beta_dir_df.loc[beta_i, 'spm_l2_path'],
-                'spm_l2_path_description': beta_dir_df.loc[beta_i, 'spm_l2_path_description'],
+                'spm_output_path': beta_dir_df.loc[beta_i, 'spm_output_path'],
+                'spm_output_path_description': beta_dir_df.loc[beta_i, 'spm_output_path_description'],
                 'wave': beta_dir_df.loc[beta_i, 'wave'],
                 'spm_l2_targeted_contrast_filepath': beta_dir_df.loc[beta_i, 'spm_l2_targeted_contrast_filepath'],
                 'task_run':beta_run,
@@ -187,11 +187,11 @@ def get_data_for_confirmed_train_subjs(
     subj_beta_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in scan_list]
     beta_df = pd.DataFrame({
         'subject_id': subj_beta_list,
-        'spm_l2_path': beta_paths,
-        'spm_l2_path_description': scan_list
+        'spm_output_path': beta_paths,
+        'spm_output_path_description': scan_list
     })
 
-    # beta_df['spm_l2_path_description'] =beta_df.beta_filepath
+    # beta_df['spm_output_path_description'] =beta_df.beta_filepath
 
     #other data for inclusion
     data_by_ppt = pd.read_csv(dropbox_datapath + "/data_by_ppt.csv")
@@ -463,7 +463,7 @@ def populate_filepath_list(l1_images_with_paths,colname):
     img_filepath_list = ""
     for i, r in l1_images_with_paths.iterrows():
         if pd.isnull(r[colname]) is False:
-            tmap_filepath = r.loc['spm_l2_path'] + r.loc[colname]
+            tmap_filepath = r.loc['spm_output_path'] + r.loc[colname]
             tmap_spm_command = "'" + tmap_filepath + ",1'"
             print(tmap_spm_command)
             img_filepath_list += tmap_spm_command + "\n"

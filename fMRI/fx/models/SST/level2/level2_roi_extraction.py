@@ -10,14 +10,14 @@ from direct_regression.get_all_series import get_beta_img, mask_3d_subject_image
 def get_roi_data_for_beta(
             subject_id,
             wave,
-            spm_l2_path,
+            spm_output_path,
             condition,
             beta_name,
             raw_roi_list, roi_df, active_img_cleaned):
     return level2_roi_extractor().get_roi_data_for_beta(
             subject_id,
             wave,
-            spm_l2_path,
+            spm_output_path,
             condition,
             beta_name,
             raw_roi_list, roi_df, active_img_cleaned)
@@ -95,7 +95,7 @@ class level2_roi_extractor:
     def get_roi_data_for_beta(self, 
             subject_id,
             wave,
-            spm_l2_path,
+            spm_output_path,
             condition,
             beta_name,
             raw_roi_list, roi_df, active_img_cleaned):
@@ -143,7 +143,7 @@ class level2_roi_extractor:
             roi_data_for_beta.append(pd.DataFrame(index=[0]*len(activity_scalar),data={
                 'subject_id': subject_id,#r['subject_id'],
                 'wave':wave,# r['wave'],
-                'spm_l2_path':spm_l2_path,#r['spm_l2_path'],
+                'spm_output_path':spm_output_path,#r['spm_output_path'],
                 'condition' : condition,
                 'beta_name': beta_name,#r[colname],
                 'mask_label': m_set['mask_label'],
@@ -194,7 +194,7 @@ class level2_roi_extractor:
                         
                     
                         #get the beta image from which to pull an ROI
-                        beta_img_filepath = r['spm_l2_path'] + r['beta_fname']
+                        beta_img_filepath = r['spm_output_path'] + r['beta_fname']
                         active_img_cleaned = get_beta_img(beta_img_filepath)
                         if active_img_cleaned is None:
                             continue
@@ -214,7 +214,7 @@ class level2_roi_extractor:
                         roi_data_from_masks = get_roi_data_for_beta(
                                 r['subject_id'],
                                 r['wave'],
-                                r['spm_l2_path'],
+                                r['spm_output_path'],
                                 condition,
                                 r['beta_fname'],
                                 raw_mask_list, mask_df, active_img_cleaned)
@@ -253,7 +253,7 @@ class level2_roi_extractor:
     
     def get_image_series(self, beta_list,colname):
             
-        beta_filepaths = [r['spm_l2_path'] + r[colname] for i, r in beta_list.iterrows()]
+        beta_filepaths = [r['spm_output_path'] + r[colname] for i, r in beta_list.iterrows()]
         #strip out the filepaths that don't exist
         filepath_exists = [os.path.exists(b) for b in beta_filepaths]
         beta_list_exists = beta_list[filepath_exists].reset_index(drop=True,inplace=False)
@@ -293,7 +293,7 @@ class level2_roi_extractor:
         roi_data_for_beta = self.get_roi_data_for_beta(
                     beta_list_exists['subject_id'].tolist(),
                     beta_list_exists['wave'].tolist(),
-                    beta_list_exists['spm_l2_path'].tolist(),
+                    beta_list_exists['spm_output_path'].tolist(),
                     condition,
                     beta_list_exists[colname].tolist(),
                     raw_roi_list, roi_df, image_series_cleaned)
@@ -328,7 +328,7 @@ class level2_roi_extractor:
             
         
             #get the beta image from which to pull an ROI
-            beta_img_filepath = r['spm_l2_path'] + r[colname]
+            beta_img_filepath = r['spm_output_path'] + r[colname]
             active_img_cleaned = get_beta_img(beta_img_filepath)
 
             if self.center_data or self.scale_data:
@@ -341,7 +341,7 @@ class level2_roi_extractor:
             roi_data_for_beta = self.get_roi_data_for_beta(
                     r['subject_id'],
                     r['wave'],
-                    r['spm_l2_path'],
+                    r['spm_output_path'],
                     condition,
                     r[colname],
                     raw_roi_list, roi_df, active_img_cleaned)

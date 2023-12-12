@@ -4,7 +4,6 @@ from glob import glob
 from level2_utils import get_data_for_confirmed_train_subjs
 beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
 
-#beta_df['spm_l2_path_description'] =beta_df.beta_filepath
 #paths
 nonbids_data_path = "/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/"
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
@@ -18,4 +17,4 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     ml_scripting_path = ml_scripting_path
 )
 
-[print(s) for s in train_betas_with_data.spm_l2_path_description]
+[print(s) for s in train_betas_with_data.spm_output_path_description]

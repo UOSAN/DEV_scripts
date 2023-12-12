@@ -50,8 +50,8 @@ def get_data_for_confirmed_task_session(
     subj_beta_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in scan_list]
     beta_df = pd.DataFrame({
         'subject_id': subj_beta_list,
-        'spm_l2_path': beta_paths,
-        'spm_l2_path_description': scan_list
+        'spm_output_path': beta_paths,
+        'spm_output_path_description': scan_list
     })
 
     # beta_df['spm_l2_path_description'] =beta_df.beta_filepath
@@ -164,8 +164,8 @@ def get_data_for_confirmed_task_session(
 def filter_for_selected_data(session_quality_data, scanner_room_report_pass, motion_check_pass, subj_wave_inclusion='all'):
 
     beta_exists = (
-        (session_quality_data.spm_l2_path.isna()==False)
-            & (session_quality_data.spm_l2_path != '')
+        (session_quality_data.spm_output_path.isna()==False)
+            & (session_quality_data.spm_output_path != '')
     )
     print("subjects who did or did not have beta data:")
     print(beta_exists.value_counts())
@@ -311,11 +311,11 @@ def get_subject_wise_table(full_table):
     max_unique_value_count = full_table.groupby('SID').nunique(dropna=False).max()
     subject_wise_cols = ['SID'] + max_unique_value_count[max_unique_value_count==1].index.tolist()
     #cols_to_remove = full_table.columns.difference(subject_wise_cols)
-    if 'spm_l2_path' not in subject_wise_cols:
+    if 'spm_output_path' not in subject_wise_cols:
         #print a warning using Warning
-        Warning('spm_l2_path not in subject_wise_cols')
+        Warning('spm_output_path not in subject_wise_cols')
         
-    #assert ('spm_l2_path' in subject_wise_cols)
+    #assert ('spm_output_path' in subject_wise_cols)
     subject_wise_table = full_table.loc[:,subject_wise_cols].drop_duplicates(inplace=False)
     subject_wise_table.reset_index(inplace=True, drop=True)
     return(subject_wise_table)
@@ -399,8 +399,8 @@ def get_session_data_quality_l2(
     subj_beta_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in scan_list]
     beta_df = pd.DataFrame({
         'subject_id': subj_beta_list,
-        'spm_l2_path': beta_paths,
-        'spm_l2_path_description': scan_list
+        'spm_output_path': beta_paths,
+        'spm_output_path_description': scan_list
     })
 
     #now combine:
@@ -435,8 +435,8 @@ def get_session_data_quality_l1(
     subj_image_folder_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in image_folder_paths]
     image_folder_df = pd.DataFrame({
         'subject_id': subj_image_folder_list,
-        'spm_l1_path': image_folder_paths#,
-        #'spm_l1_path_description': scan_list
+        'spm_output_path': image_folder_paths#,
+        #'spm_output_path_description': scan_list
     })
 
     #now combine:
