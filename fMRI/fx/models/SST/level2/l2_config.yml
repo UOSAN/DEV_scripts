@@ -1,8 +1,16 @@
+default:
+
 UO-2010763:
   sst_wave1_path:  /Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/
   nonbids_data_path: /Users/bensmith/Documents/data/DEV/nonbids_data/
   dev_scripts_path: '/Users/bensmith/Documents/code/DEV_scripts'
   dropbox_datapath: /Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
+  sst_level_2_path: /Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/level2/SST/
+  spm_path: /Users/bensmith/spm12
+  template_mlr_main: /Users/bensmith/Documents/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_main.m
+  template_mlr_confounder_no_centering: /Users/bensmith/Documents/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_confounder_no_centering.m
+  template_mlr_consess: /Users/bensmith/Documents/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_consess.m
+  template_mlr_conspec: /Users/bensmith/Documents//code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_conspec.m
 UO-2010765:
   nonbids_data_path: /Users/denicia/DEV/nonbids_data/
   dropbox_data_path: /Users/denicia/Dropbox (University of Oregon)/Berkman Lab/Devaluation/analysis_files/data
