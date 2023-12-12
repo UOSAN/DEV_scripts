@@ -216,7 +216,7 @@ def get_sst_data_for_confirmed_sessions_across_tasks(
     ):
     session_quality_data = get_session_data_quality_l1(image_folder_glob=beta_glob, dropbox_datapath=dropbox_datapath, automotion_datapath = automotion_datapath)
 
-    scanner_room_report_pass = (session_quality_data.redcap_SST=='No reported problems')
+    scanner_room_report_pass = (session_quality_data.redcap_SST_quality)
     print("subjects who did or did not pass the scanner room report check:")
     print(session_quality_data.groupby('redcap_SST').size())
     print(scanner_room_report_pass.value_counts())
@@ -229,15 +229,22 @@ def get_sst_data_for_confirmed_sessions_across_tasks(
     print(motion_check_pass.value_counts())
 
     print('subjects who did or did not pass the labelled data check motion check:')
-    labelled_exclusion_path = (
+    labelled_exclusion = (
         (session_quality_data.labelled_exclusion_SST_Exclude_quality)
     )
-    print(labelled_exclusion_path.value_counts())
+    print(labelled_exclusion.value_counts())
 
     
     
+    
     #with a set of filters we have just extracted, filter the wave data 
-    selected_data = filter_for_selected_data(session_quality_data, scanner_room_report_pass, motion_check_pass, subj_wave_inclusion=subj_wave_inclusion)
+    #selected_data = filter_for_selected_data(session_quality_data, scanner_room_report_pass, motion_check_pass, subj_wave_inclusion=subj_wave_inclusion)
+    beta_exists = (
+        (session_quality_data.spm_output_path.isna()==False)
+            & (session_quality_data.spm_output_path != '')
+    )
+    selected_data = session_quality_data.loc[,(session_quality_data.combined_SST_quality & beta_exists)].copy()
+
     selected_data_with_all_waves = get_data_appearing_across_waves(selected_data, subj_wave_inclusion=subj_wave_inclusion)
 
     return(selected_data_with_all_waves)
