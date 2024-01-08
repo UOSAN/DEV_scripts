@@ -35,6 +35,11 @@ Benjamins-MacBook-Pro-3.local:
   dropbox_datapath: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
   spm_path: /Users/benjaminsmith/spm12
   automotion_output_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/motion_percent_summary.csv
+  template_mlr_main: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_main.m
+  template_mlr_confounder_no_centering: /Users/benjaminsmith/Google Drive/oregon//code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_confounder_no_centering.m
+  template_mlr_consess: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_consess.m
+  template_mlr_conspec: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_conspec.m
+  mask_location: /Users/benjaminsmith/Google Drive/oregon/data/DEV/brainmaps/
 Benjamins-MacBook-Pro-2.local:
   rubric_dir:             /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/DEV_scoring_rubrics
   dropbox_datapath:       /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/

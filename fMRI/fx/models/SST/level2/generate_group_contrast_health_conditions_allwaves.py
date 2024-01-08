@@ -8,6 +8,9 @@ import sys
 
 sys.path.append('/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/analyses/intervention_moderation/')
 from dev_interaction_util import load_groups_from_mastersheet
+sys.path.append('../../')
+from modeling_utils import get_sst_subj_folder_paths_for_subjs_w_two_sessions
+
 #beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
 
 
@@ -46,7 +49,8 @@ group_codes = pd.concat([groups_by_name.dev_id, pd.get_dummies(groups_by_name.in
 
 train_betas_with_data = get_sst_subj_folder_paths_for_subjs_w_two_sessions(
     beta_glob = nonbids_data_path + "fMRI/fx/models/SST/all_waves/" + analysis_name + "/sub-DEV*/",
-    dropbox_datapath=dropbox_datapath
+    dropbox_datapath=dropbox_datapath,
+    automotion_datapath = config_data['automotion_output_path']
 )
 #get unique rows for a subset of the cols
 
@@ -54,12 +58,24 @@ train_betas_with_data = get_sst_subj_folder_paths_for_subjs_w_two_sessions(
 
 train_betas_with_data_w_groups = train_betas_with_data.merge(group_codes, left_on='SID', right_on='dev_id', how='inner')
 
-betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data_w_groups)
+#extract numeric IDs from DEV IDs
+numeric_ids = train_betas_with_data_w_groups['SID'].str.extract('DEV(\\d+)', expand=False).astype(int)
+#train_betas_with_data_w_groups['SID_numeric'] = numeric_ids
+
+betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data_w_groups,
+                                               use_tmaps=False)
 #betas_with_paths = get_beta_fnames_for_beta_dirs(train_betas_with_data)
 
 
 print(betas_with_contrasts.columns)
+
 contrast_name_list = [
+    'Go',
+    'Stop',
+    'Healthy_Go',
+    'Healthy_NoGo',
+    'Unhealthy_Go',
+    'Unhealthy_NoGo',
     'Unhealthy_Go(W2-W1)',
     'Unhealthy_NoGo(W2-W1)',
     'Unhealthy_Go(W1-W2)',

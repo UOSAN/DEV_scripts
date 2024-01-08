@@ -6,8 +6,8 @@ from level2_utils import get_data_for_confirmed_train_subjs, read_yaml_for_host
 from level2_utils import *
 import sys
 
-#sys.path.append('/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/analyses/intervention_moderation/')
-sys.path.append('/Users/bensmith/Documents/code/DEV_scripts/analyses/intervention_moderation/')
+sys.path.append('/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/analyses/intervention_moderation/')
+#sys.path.append('/Users/bensmith/Documents/code/DEV_scripts/analyses/intervention_moderation/')
 from dev_interaction_util import load_groups_from_mastersheet
 sys.path.append('../../')
 from modeling_utils import get_sst_subj_folder_paths_for_subjs_w_two_sessions

@@ -24,7 +24,8 @@ def read_yaml_for_host(file_path):
             return yaml.safe_load(f)['default']
 
 def get_contrasts_for_betas(
-        betas
+        betas,
+        use_tmaps
 ):
     betas['spm_l2_targeted_contrast_filepath'] = None
 
@@ -46,8 +47,10 @@ def get_contrasts_for_betas(
         #                   ][0]
 
         for c_i, contrast in enumerate(subj_l1_mat_config['SPM']['xCon']):
-            print(str(c_i) + ": " + contrast['name'] + " " + contrast['Vspm']['fname'])
-            betas.loc[beta_i, 'contrast_' + contrast['name'] + "_fname"] =contrast['Vspm']['fname']
+            img_type = 'Vspm' if use_tmaps else 'Vcon'
+                
+            print(str(c_i) + ": " + contrast['name'] + " " + contrast[img_type]['fname'])
+            betas.loc[beta_i, 'contrast_' + contrast['name'] + "_fname"] =contrast[img_type]['fname']
 
         # if contrast_index is None:
         #     print("this run does not contain the targeted contrast.")

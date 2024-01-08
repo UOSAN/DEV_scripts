@@ -243,7 +243,7 @@ def get_sst_data_for_confirmed_sessions_across_tasks(
         (session_quality_data.spm_output_path.isna()==False)
             & (session_quality_data.spm_output_path != '')
     )
-    selected_data = session_quality_data.loc[,(session_quality_data.combined_SST_quality & beta_exists)].copy()
+    selected_data = session_quality_data[(session_quality_data.combined_SST_quality & beta_exists)].copy()
 
     selected_data_with_all_waves = get_data_appearing_across_waves(selected_data, subj_wave_inclusion=subj_wave_inclusion)
 
