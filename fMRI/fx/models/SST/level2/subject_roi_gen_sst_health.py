@@ -63,7 +63,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     ml_scripting_path = config['dev_scripts_path'] + "/fMRI/ml",
     dropbox_datapath=config['dropbox_data_dir'],
     exclude_test_subjs=False
-)[0:20]
+)
 train_betas_with_data['wave']=1
 
 #we're not interestd in getting contrasts; comment this out.

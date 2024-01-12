@@ -38,12 +38,6 @@ def get_beta_img(beta_img_filepath):
         
     return active_img
 
-def mask_4d_subject_image(mask_raw, active_img_cleaned,bin_threshold=None):
-    mask_in_subj_space = nil.image.resample_img(
-        mask_raw, 
-        target_affine=active_img_cleaned.affine,
-        target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
-    return(subject_space_mask_image(mask_in_subj_space, active_img_cleaned, bin_threshold=bin_threshold))
 
 def signature_weight_3d_subject_image(signature_raw, active_img_cleaned):
     signature_in_subj_space = nil.image.resample_img(signature_raw, 
@@ -54,6 +48,34 @@ def signature_weight_3d_subject_image(signature_raw, active_img_cleaned):
     signature_weighted_voxels = nifti_weighted.get_fdata()[~np.isnan(nifti_weighted.get_fdata())]
     return(signature_weighted_voxels)
 
+def signature_weight_4d_subject_image(signature_raw, active_img_cleaned):
+    signature_in_subj_space = nil.image.resample_img(
+        signature_raw, 
+        target_affine=active_img_cleaned.affine,
+        target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
+    
+    #check how much memory this variable is using
+    #print(signature_in_subj_space.get_fdata().nbytes)
+    #repe
+    signature_full_series = nil.image.concat_imgs([signature_in_subj_space]*active_img_cleaned.shape[3])
+    
+    nifti_weighted = nil.image.math_img("img1*img2", img1=signature_full_series, img2=active_img_cleaned)
+    del signature_full_series
+    
+    #signature_weighted_voxels = nifti_weighted.get_fdata()[~np.isnan(nifti_weighted.get_fdata())]
+    swv=[nifti_weighted.slicer[:,:,:,t].get_fdata()[~np.isnan(nifti_weighted.slicer[:,:,:,t].get_fdata())] for t in range(nifti_weighted.shape[3])]
+    del nifti_weighted
+    #concatenate the list of arrays into a 2D array
+    signature_weighted_voxels = np.vstack(swv)#.T
+    return(signature_weighted_voxels)
+
+
+def mask_4d_subject_image(mask_raw, active_img_cleaned,bin_threshold=None):
+    mask_in_subj_space = nil.image.resample_img(
+        mask_raw, 
+        target_affine=active_img_cleaned.affine,
+        target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
+    return(subject_space_mask_image(mask_in_subj_space, active_img_cleaned, bin_threshold=bin_threshold))
 
 def mask_3d_subject_image(mask_raw, active_img_cleaned, bin_threshold=None):
     mask_in_subj_space = nil.image.resample_img(mask_raw, 

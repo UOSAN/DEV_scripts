@@ -49,6 +49,7 @@ Benjamins-MacBook-Pro-2.local:
   spm_l2_script_template_filepath: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_design_estimate.m
   spm_l2_script_w_confounders_template_filepath: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_design_estimate.m
   confounder_template_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_confounder.m
+  automotion_output_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/motion_percent_summary.csv
   confounder_consess_template_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_consess.m
   confounder_conspec_template_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_conspec.m
   input_mat_path:                 /Users/benjaminsmith/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions

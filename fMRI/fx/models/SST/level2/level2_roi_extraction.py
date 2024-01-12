@@ -3,7 +3,7 @@ import nilearn as nil
 import nibabel as nib
 import pandas as pd
 import numpy as np
-from direct_regression.get_all_series import get_beta_img, mask_3d_subject_image, mask_4d_subject_image, signature_weight_3d_subject_image
+from direct_regression.get_all_series import get_beta_img, mask_3d_subject_image, mask_4d_subject_image, signature_weight_3d_subject_image, signature_weight_4d_subject_image
 
 #for backwards compatibility, we expose some functions that work without the class
 
@@ -83,6 +83,13 @@ class level2_roi_extractor:
         return(image_series_normed)
 
 
+    def get_signature_signal(self, signature_raw, active_img_cleaned):
+        if len(active_img_cleaned.shape)==3 or active_img_cleaned.shape[3]==1:
+            weighted_voxels = signature_weight_3d_subject_image(signature_raw, active_img_cleaned)
+        elif len(active_img_cleaned.shape)==4:
+            weighted_voxels = signature_weight_4d_subject_image(signature_raw, active_img_cleaned)
+        return(weighted_voxels)
+
     
     def mask_subject_image(self,roi_raw, active_img_cleaned, bin_threshold):
         if len(active_img_cleaned.shape)==3 or active_img_cleaned.shape[3]==1:
@@ -128,7 +135,7 @@ class level2_roi_extractor:
                 active_img_masked = self.mask_subject_image(roi_raw, active_img_cleaned, bin_threshold=np.max(roi_raw.get_fdata())/1000)
             elif m_set['image_type'] == 'signature':
                 #handles a bit differently; for signatures we don't set a binary threshold; the images are simply multiplied together.
-                active_img_masked = signature_weight_3d_subject_image(roi_raw, active_img_cleaned)
+                active_img_masked = self.get_signature_signal(roi_raw, active_img_cleaned)
             else:
                 raise ValueError("image type not recognized")
             
@@ -289,10 +296,16 @@ class level2_roi_extractor:
         # img_mean = nil.image.mean_img(image_series_cleaned)
         # #plot
         # nil.plotting.plot_img(img_mean)
+        
+        #generally there'll be no wave marker if the data is a combined dataset across waves
+        if 'wave' in beta_list_exists.keys():
+            wave_list = beta_list_exists['wave'].tolist()
+        else:
+            wave_list = None
 
         roi_data_for_beta = self.get_roi_data_for_beta(
                     beta_list_exists['subject_id'].tolist(),
-                    beta_list_exists['wave'].tolist(),
+                    wave_list,
                     beta_list_exists['spm_output_path'].tolist(),
                     condition,
                     beta_list_exists[colname].tolist(),
@@ -373,4 +386,4 @@ class level2_roi_extractor:
         col_function=lambda img_name: "beta_" + img_name + "_fname"
         #iterate through each mask
         return(self.get_roi_data_for_l2(beta_list,condition_list,roi_df,col_function))
-
+    
