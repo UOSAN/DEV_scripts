@@ -59,10 +59,11 @@ signature_locations = [
 roi_df = get_mask_df_from_mask_locations(mask_locations)
 signature_df = get_mask_df_from_mask_locations(signature_locations)
 roi_df['image_type'] = 'mask'
-signature_df['image_type'] = 'signature'
+signature_df['image_type'] = 'rsa_signature'
 
 #combine the two dfs
-roi_df = pd.concat([signature_df, roi_df])
+#roi_df = pd.concat([signature_df, roi_df])
+roi_df = signature_df
 #get the list of raw nii files
 glob_path = config['fmriprep_dir'] + config['nii_raw_path']
 dropbox_datapath = config['dropbox_data_dir']
@@ -115,9 +116,9 @@ contrast_name_list = [
 
 #get the ROI data
 l2_roi_extractor = level2_roi_extractor()
-l2_roi_extractor.image_standardize=True
+l2_roi_extractor.image_standardize=False
 l2_roi_extractor.load_all_images_simultaneously=True
-l2_roi_extractor.similarity_metric = 'simple_multiplication' # this is fine because simple multiplication is the same as a dot product for a 1D array, and we consider each image to be a 1D vector by flattening it.
+l2_roi_extractor.similarity_metric = 'dot_product'
 #l2_roi_extractor = level2_roi_extractor(center_data=True, scale_data=True)
 
 #one of:
@@ -130,7 +131,7 @@ roi_data_sst_health = l2_roi_extractor.get_roi_data_for_l2_contrasts(betas_with_
 
 
 #roi_data_sst_health.to_csv(config['dropbox_data_dir'] + '/subject_sst_health_avg_roi_data_raw.csv')
-roi_data_sst_health.to_csv(config['dropbox_data_dir'] + '/subject_sst_health_avg_roi_data_zscored2_w_sigs.csv')
+roi_data_sst_health.to_csv(config['dropbox_data_dir'] + '/subject_sst_health_avg_dot_prod_data_raw_zscored2.csv')
 
 
 #raise NotImplementedError("the code after this line hasn't been updated from the notebook yet.")

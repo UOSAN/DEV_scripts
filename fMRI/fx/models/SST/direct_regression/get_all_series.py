@@ -70,6 +70,23 @@ def signature_weight_4d_subject_image(signature_raw, active_img_cleaned):
     return(signature_weighted_voxels)
 
 
+def get_dot_product_4d_series(comparison_3d_img, image_4d_series):
+    comparison_3d_img_resampled = nil.image.resample_img(
+        comparison_3d_img, 
+        target_affine=image_4d_series.affine,
+        target_shape = image_4d_series.slicer[:,:,:,0].shape)
+    
+    dot_product_series = np.zeros(image_4d_series.shape[3])
+
+    for i in range(image_4d_series.shape[3]):
+        dot_product_i = np.dot(image_4d_series.slicer[:,:,:,i].get_fdata(),comparison_3d_img_resampled.get_fdata())
+        dot_product_series[i] = dot_product_i
+
+    return(dot_product_series)
+
+
+
+
 def mask_4d_subject_image(mask_raw, active_img_cleaned,bin_threshold=None):
     mask_in_subj_space = nil.image.resample_img(
         mask_raw, 

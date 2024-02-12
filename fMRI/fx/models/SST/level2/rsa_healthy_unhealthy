@@ -1,0 +1,18 @@
+# analysis 1:
+#Take the  interaction image we already have, and rather htan calculating its similarity to CS images across all subjects,
+#calculate its similarity to the CS image from the same subject
+#we'll get one similarity score per subject.
+#then, compare the similarity score sample means for each group
+
+
+
+
+# analysis 2
+#Decompose the interaction image we have into:
+#(W1|W2)*(Healthy|Unhealthy)
+#that's 4 images
+#then, calculate the similarity of each of those images to the CS image from the same subject
+#we'll get 4 similarity scores per subject.
+#the most straightforward analsyis then is to measure change over time
+#but we could also do a linear model or mixed effects model
+

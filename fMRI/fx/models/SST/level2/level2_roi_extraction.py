@@ -3,7 +3,7 @@ import nilearn as nil
 import nibabel as nib
 import pandas as pd
 import numpy as np
-from direct_regression.get_all_series import get_beta_img, mask_3d_subject_image, mask_4d_subject_image, signature_weight_3d_subject_image, signature_weight_4d_subject_image
+from direct_regression.get_all_series import get_beta_img, mask_3d_subject_image, mask_4d_subject_image, signature_weight_3d_subject_image, signature_weight_4d_subject_image, get_dot_product_4d_series
 
 #for backwards compatibility, we expose some functions that work without the class
 
@@ -43,6 +43,7 @@ class level2_roi_extractor:
         self.image_cleaning = False
         self.image_standardize = False
         self.brain_mask_path = None
+        self.similarity_metric = None
 
 
     def load_rois(self, mask_df):
@@ -90,6 +91,12 @@ class level2_roi_extractor:
             weighted_voxels = signature_weight_4d_subject_image(signature_raw, active_img_cleaned)
         return(weighted_voxels)
 
+    def get_dot_product(self,img1, img_series_2):
+        if len(img_series_2.shape)==3 or img_series_2.shape[3]==1:
+            raise NotImplementedError('not implemented for 3d images yet')
+        elif len(img_series_2.shape)==4:
+            dot_product = get_dot_product_4d_series(img1, img_series_2)
+        return(dot_product)
     
     def mask_subject_image(self,roi_raw, active_img_cleaned, bin_threshold):
         if len(active_img_cleaned.shape)==3 or active_img_cleaned.shape[3]==1:
@@ -126,24 +133,34 @@ class level2_roi_extractor:
             
             roi_raw = raw_roi_list[m_i]
 
-            if 'image_type' not in m_set.keys():
+            if ('image_type' not in m_set.keys()) or (m_set['image_type'] == 'mask'):
                 #no image type set. need to handle this case first in order to avoid errors.
-                active_img_masked = self.mask_subject_image(roi_raw, active_img_cleaned, bin_threshold=np.max(roi_raw.get_fdata())/1000)
-            elif m_set['image_type'] == 'mask':
                 #binary threshold has to be not quite zero because, with the dtype transform, 
                 # some zeros get rounded up to a very-close-to-zero amount.
                 active_img_masked = self.mask_subject_image(roi_raw, active_img_cleaned, bin_threshold=np.max(roi_raw.get_fdata())/1000)
-            elif m_set['image_type'] == 'signature':
-                #handles a bit differently; for signatures we don't set a binary threshold; the images are simply multiplied together.
-                active_img_masked = self.get_signature_signal(roi_raw, active_img_cleaned)
+                if len(active_img_masked.shape)==1:
+                    activity_scalar = active_img_masked.mean()
+                elif len(active_img_masked.shape)==2:
+                    #get row means of the masked image
+                    activity_scalar = active_img_masked.mean(axis=1)
+            elif m_set['image_type'] == 'rsa_signature':
+                if self.similarity_metric == 'simple_multiplication':
+                    #handles a bit differently; for signatures we don't set a binary threshold; the images are simply multiplied together.
+                    active_img_masked = self.get_signature_signal(roi_raw, active_img_cleaned)
+                    if len(active_img_masked.shape)==1:
+                        activity_scalar = active_img_masked.mean()
+                    elif len(active_img_masked.shape)==2:
+                        #get row means of the masked image
+                        activity_scalar = active_img_masked.mean(axis=1)
+                elif self.similarity_metric == 'dot_product':
+                    active_img_masked = self.get_dot_product(roi_raw, active_img_cleaned)
+                else:
+                    raise ValueError("similarity metric not recognized")
+
+            
             else:
                 raise ValueError("image type not recognized")
             
-            if len(active_img_masked.shape)==1:
-                activity_scalar = active_img_masked.mean()
-            elif len(active_img_masked.shape)==2:
-                #get row means of the masked image
-                activity_scalar = active_img_masked.mean(axis=1)
 
 
             print("activity scalar is " + str(activity_scalar))

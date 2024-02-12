@@ -115,9 +115,8 @@ contrast_name_list = [
 
 #get the ROI data
 l2_roi_extractor = level2_roi_extractor()
-l2_roi_extractor.image_standardize=True
+l2_roi_extractor.image_standardize=False
 l2_roi_extractor.load_all_images_simultaneously=True
-l2_roi_extractor.similarity_metric = 'simple_multiplication' # this is fine because simple multiplication is the same as a dot product for a 1D array, and we consider each image to be a 1D vector by flattening it.
 #l2_roi_extractor = level2_roi_extractor(center_data=True, scale_data=True)
 
 #one of:
@@ -130,7 +129,7 @@ roi_data_sst_health = l2_roi_extractor.get_roi_data_for_l2_contrasts(betas_with_
 
 
 #roi_data_sst_health.to_csv(config['dropbox_data_dir'] + '/subject_sst_health_avg_roi_data_raw.csv')
-roi_data_sst_health.to_csv(config['dropbox_data_dir'] + '/subject_sst_health_avg_roi_data_zscored2_w_sigs.csv')
+roi_data_sst_health.to_csv(config['dropbox_data_dir'] + '/subject_sst_health_avg_roi_data_raw_zscored2_w_sigs.csv')
 
 
 #raise NotImplementedError("the code after this line hasn't been updated from the notebook yet.")
