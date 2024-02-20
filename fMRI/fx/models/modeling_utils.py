@@ -494,6 +494,8 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
     labelled_exclusions.columns = ['labelled_exclusion_' + c for c in labelled_exclusions.columns]
 
     # motion exclude this is arranged by-participant, not by session
+    #automotion_exclude_raw = pd.read_csv(automotion_datapath)
+    #automotion_exclude = automotion_exclude_raw.loc[automotion_exclude_raw.excluded_run==False,]
     automotion_exclude = pd.read_csv(automotion_datapath)
     automotion_exclude.columns = ['automotion_exclude_' + c for c in automotion_exclude.columns]
 

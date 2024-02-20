@@ -30,7 +30,7 @@ library(tidyverse)
 #motion = read.csv("~/Users/deniciaaragon/Desktop/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
 #motion = read.csv("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
 #motion = read.csv("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
-motion = read.csv("/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/auto-motion-fmriprep/DEV_summaryRun.csv")
+motion = read.csv("/Users/benjaminsmith/Library/CloudStorage/GoogleDrive-benjsmith@gmail.com/My Drive/oregon/data/DEV/bids_data/derivatives/auto-motion-fmriprep/DEV_summaryRun.csv")
 
 ```
 Clean the data--didn't come through quite right.
@@ -156,7 +156,19 @@ motion_table <- motion %>%
 
 
 motion_table %>% readr::write_csv("motion_percent_summary.csv")
-  
 ```
 
+
+
+```{r}
+
+motion_table <- motion %>%
+  mutate(scan= paste0(task, run)) %>%
+  select(-run, -task,-nVols,-nVols_factor,-excluded_run) %>%
+  tidyr::spread(scan,percent) %>% 
+  arrange(wave, subjectID)
+
+
+motion_table %>% readr::write_csv("motion_percent_summary_by_wave.csv")
+```
 

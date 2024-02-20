@@ -49,7 +49,7 @@ if (exists("filter_list")){
 # define output path
 #------------------------------------------------------
 outputDir = file.path(outputDir, "auto-motion-fmriprep")
-
+  
 #------------------------------------------------------
 # load confound files
 #------------------------------------------------------
