@@ -118,6 +118,7 @@ for c_i = 1:length(contrasts_time)
     contrasts_time{c_i}.weights = [ w1_weights w2_weights];
 end 
 
+
 %OK, now let's create the contrasts for the last four sets, contrasting
 %healthy v. unhealthy and liked vs. disliked
 %these are across sessions
@@ -139,8 +140,9 @@ end
 
 contrasts_all = [contrasts_time; contrasts_conditions];
 
+disp(contrasts_all)
 for c_i = 1:length(contrasts_all)
-
+    disp(c_i)
     matlabbatch{mlb_contrasts_index}.spm.stats.con.consess{1}.tcon.name = contrasts_all{c_i}.name;
     matlabbatch{mlb_contrasts_index}.spm.stats.con.consess{1}.tcon.weights = normalizePosAndNeg(contrasts_all{c_i}.weights);
     matlabbatch{mlb_contrasts_index}.spm.stats.con.consess{1}.tcon.sessrep = 'none';
@@ -149,3 +151,6 @@ end
 
 %contrast postamble
 matlabbatch{mlb_contrasts_index}.spm.stats.con.delete = 1;
+
+
+throw_error = 1/0;
