@@ -20,7 +20,7 @@ for run_i = 1:length(included_runs_w1)
     run_name = included_runs_w1(run_i);
     %just use the index because this is the first part of content in
     %matlabbatch
-    matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV023/ses-wave1/func/'};
+    matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/Users/benjaminsmith/Documents/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV023/ses-wave1/func/'};
     matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.filter = sprintf('s6_sub-DEV023_ses-wave1_task-WTP_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii',run_name);
     matlabbatch{run_i}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
 % matlabbatch{2}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV023/ses-wave1/func/'};
@@ -50,7 +50,7 @@ end
 
 for run_i = 1:length(included_runs_w2)
     run_name = included_runs_w2(run_i);
-    matlabbatch{length(matlabbatch)+1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV023/ses-wave2/func'};
+    matlabbatch{length(matlabbatch)+1}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/Users/benjaminsmith/Documents/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV023/ses-wave2/func'};
     matlabbatch{length(matlabbatch)}.cfg_basicio.file_dir.file_ops.file_fplist.filter = sprintf('s6_sub-DEV023_ses-wave2_task-WTP_acq-%d_space-MNI152NLin2009cAsym_desc-preproc_bold.nii',run_name);
     matlabbatch{length(matlabbatch)}.cfg_basicio.file_dir.file_ops.file_fplist.rec = 'FPList';
 % matlabbatch{10}.cfg_basicio.file_dir.file_ops.file_fplist.dir = {'/Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV023/ses-wave2/func'};
@@ -147,7 +147,7 @@ matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.bases.hrf.derivs = [0 0];
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.volt = 1;
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.global = 'None';
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.mthresh = -Inf;
-matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.mask = {'/Users/benjaminsmith/Google Drive/oregon/data/MNI152_T1_1mm_brain_mask.nii,1'};
+matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.mask = {'/Users/benjaminsmith/Documents/oregon/data/MNI152_T1_1mm_brain_mask.nii,1'};
 matlabbatch{length(matlabbatch)}.spm.stats.fmri_spec.cvi = 'FAST';
 mlb_spec_index = length(matlabbatch);
 matlabbatch{length(matlabbatch)+1}.spm.stats.fmri_est.spmmat(1) = cfg_dep('fMRI model specification: SPM.mat File', substruct('.','val', '{}',{mlb_spec_index}, '.','val', '{}',{1}, '.','val', '{}',{1}), substruct('.','spmmat'));
