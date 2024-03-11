@@ -1,6 +1,8 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output:
+  html_document:
+    df_print: paged
 ---
 
 ```{r}
@@ -330,19 +332,34 @@ trial_tps_compare_conditions$CS_minus_FS<-trial_tps_compare_conditions$CorrectSt
 
 ```{r}
 library(directlabels)
+library(ggrepel)
 
-labels <- trial_tps_compare_conditions %>% filter(offset_start==7) %>% group_by(ROI_bilat) %>% 
+labels <- trial_tps_compare_conditions %>% filter(offset_start==9) %>% group_by(ROI_bilat) %>% 
   slice(1)
-ggplot(trial_tps_compare_conditions,
-       aes(x=offset_start, y=CS_minus_FS,color=ROI_bilat))+
-  #geom_tile(data = next_trial_gradient, aes(x=tp,alpha=pct_in_range,y=0),fill="#000000",color="transparent")+
+#labels <- labels %>% mutate(y_pos=CS_minus_FS+(CS_minus_FS-mean(CS_minus_FS))*3)
+labels$ROI_labels <- gsub(" ","\n",labels$ROI_bilat)
+labels$ROI_labels <- gsub("Cingulate\nGyrus,\nanterior\ndivision", "Anterior\nCingulate\nGyrus",labels$ROI_labels)
+
+
+labels <- labels %>% arrange(ROI_labels)
+labels$xpos <- c(10,6,13,10,11)
+labels$ypos <- c(0.2,-0.07,0.1,-0.07,0.15)
+
+ggplot(trial_tps_compare_conditions, aes(x=offset_start, y=CS_minus_FS,color=ROI_bilat))+
   geom_tile(data = next_trial_gradient, aes(x=hrf_tp,alpha=pct_in_range,y=0),fill="#77ff77",color="transparent")+
-  #annotate("text",x=4,y=0.25,label="Subsequent Go Trial\nTime Range",size=2)+
-  annotate("text",x=10,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
+  
+  annotate("text",x=5,y=0.22,label="Subsequent Go Trial\nExpected HRF",size=2)+
   scale_alpha_continuous(name="Subsequent go trial range", range=c(0,0.7),labels=scales::percent_format())+
   geom_line(size=1,alpha=0.5)+
-  #geom_dl(aes(label=ROI_bilat,x=7),size=1,method="last.qp")+
-  geom_text(data=labels,mapping= aes(x=offset_start,y=CS_minus_FS,color=ROI_bilat,label=ROI_bilat))+
+  #geom_text(data=labels,mapping= aes(x=offset_start,y=CS_minus_FS,color=ROI_bilat,label=ROI_bilat))+
+  # geom_text_repel(data = labels,  aes(x=offset_start,y=CS_minus_FS,label=ROI_labels),color="#333333",
+  #                 size = 3, fontface = "bold",force=2,box.padding=0.1, point.padding = 10, nudge_x = -3*1.01,nudge_y = 0.01*1.1)+
+  geom_label_repel(data = labels,
+                   #aes(x=offset_start,y=y_pos,color=ROI_bilat,label=ROI_labels),
+                   aes(x=xpos,y=ypos,color=ROI_bilat,label=ROI_labels),
+                   size = 3, fontface = "bold",force=2,box.padding=0.1, label.size =0,
+                   nudge_x = 1,nudge_y = 0.01,fill=rgb(0.3,0.3,0.3,alpha=0.3)
+                   )+
   scale_color_viridis_d(option = "C")+
   ggplot_time_points_extras+
   coord_cartesian(ylim=c(-0.1,0.25))+
@@ -562,6 +579,4 @@ There are a different distribution of the number of trials for each condition, b
 ```{r}
 time_points_c %>% filter(trial_bucket!="") %>% group_by(condition,trial_bucket) %>% summarize(trial_count=n())
 ```
-
-
 

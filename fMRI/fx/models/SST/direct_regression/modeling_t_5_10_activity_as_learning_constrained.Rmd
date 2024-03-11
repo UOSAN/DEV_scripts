@@ -260,48 +260,59 @@ I think if you're going to do P_stop
 ## all conditions, without condition
 
 ```{r}
-model_full_effects <- lme4::lmer(
+model_full_effects_allc <- lme4::lmer(
    med_post_trial_z ~ trial_n_s + P_stop_trial_change+ post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50)
   )
-summary(model_full_effects)
+summary(model_full_effects_allc)
 
 ```
 
 ## stop conditions, without condition
 
 ```{r}
-model_full_effects <- lme4::lmer(
+model_full_effects_stopc <- lme4::lmer(
    med_post_trial_z ~ trial_n_s + P_stop_trial_change+ post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
   )
-summary(model_full_effects)
+summary(model_full_effects_stopc)
 
 ```
 
 ## stop conditions, with condition
 
+
 ```{r}
-model_full_effects <- lme4::lmer(
+model_full_effects_incc <- lme4::lmer(
    med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
   )
-summary(model_full_effects)
+summary(model_full_effects_incc)
 
 model_no_rt<- lme4::lmer(
    med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
   )
 
-anova(model_full_effects,model_no_rt)
+anova(model_full_effects_incc,model_no_rt)
 model_no_p_stop<- lme4::lmer(
    med_post_trial_z ~ trial_n_s+ condition + post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
   )
 
-anova(model_full_effects,model_no_p_stop)
+anova(model_full_effects_incc,model_no_p_stop)
 
 ```
+
+
+```{r}
+model_full_effects_incc_abs <- lme4::lmer(
+   med_post_trial ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+summary(model_full_effects_incc_abs)
+```
+
 
 ### condition RT interaction
 ```{r}
@@ -755,22 +766,38 @@ data_by_ppt_w_neural <- merge(data_by_ppt, by_subj_striatum_no_outliers)
 ```
 
 
-
-# Graph it
+# Save data
 
 ```{r}
-# selected_points <- trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
-# ggplot(
-#   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop")),
-#        aes(x=med_post_trial_z,y=post_pre_rt_change_z,color=condition)
-#        )+geom_point(alpha=0.05)
-# 
-# cor.test(selected_points$med_post_trial_z,selected_points$post_pre_rt_change_z)
+save.image(file="modeling_t_5_10-activity.RData")
 ```
 
+
+
+# Draw table
+
+
 ```{r}
+trial_neural_behav_roi_stop<-trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+
+trial_neural_behav_roi_stop<- trial_neural_behav_roi_stop %>% 
+  mutate(P_stop_trial_change_z_stop = (P_stop_trial_change-mean(P_stop_trial_change))/sd(P_stop_trial_change),
+         post_pre_rt_change_z_stop = (post_pre_rt_change_z-mean(post_pre_rt_change_z))/sd(post_pre_rt_change_z)
+         )
+
+model_full_effects_x_zs <- lme4::lmer(
+   med_post_trial ~ trial_n_z+ condition + P_stop_trial_change_z_stop+ post_pre_rt_change_z_stop + (1 +P_stop_trial_change_z_stop  + post_pre_rt_change_z_stop  | subid),
+  trial_neural_behav_roi_stop)
+summary(model_full_effects_x_zs)
+
+```
 
 
-# cor.test(by_subj_striatum_no_outliers$post_pre_rt_CSMinusFS,by_subj_striatum_no_outliers$rtfs,method = "spearman")
+
+```{r}
+library(papaja)
+
+apa_table = papaja::apa_print(model_full_effects_x_zs)
+apa_table
 ```
 

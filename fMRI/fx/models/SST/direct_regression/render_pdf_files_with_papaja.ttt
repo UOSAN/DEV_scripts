@@ -1,0 +1,27 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:unnamed-chunk-4}}
+
+\begin{tabular}{llll}
+\toprule
+Term & \multicolumn{1}{c}{$\hat{\beta}$} & \multicolumn{1}{c}{95\% CI} & \multicolumn{1}{c}{$t$}\\
+\midrule
+Intercept & -0.34 & {}[-0.49, -0.19] & -4.43\\
+Trial n s & -0.20 & {}[-0.28, -0.13] & -5.36\\
+ConditionFailedStop & -0.43 & {}[-0.48, -0.38] & -17.21\\
+P stop trial change & 37.24 & {}[26.96, 47.52] & 7.10\\
+Post pre rt change & -0.25 & {}[-0.41, -0.08] & -2.96\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}
+\efloatseparator
+ 

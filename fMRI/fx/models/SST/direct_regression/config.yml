@@ -1,7 +1,7 @@
 default:
   dropbox_data_dir: /gpfs/projects/sanlab/bsmith16/data
-  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/
-  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/
+  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii
   mask_location: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/
 UO-2010763:
   rubric_dir: /Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/DEV_scoring_rubrics
@@ -10,22 +10,42 @@ UO-2010763:
   dev_scripts_path: /Users/bensmith/Documents/code/DEV_scripts/
 Benjamins-MacBook-Pro-2.local:
   dev_scripts_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/
+  automotion_output_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/motion_percent_summary.csv
+  level2_output_path: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/level2/SST/
+  rural_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
+  rubric_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/DEV_scoring_rubrics
+  l2_analysis_files: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/level2/
+  input_mat_path: /Users/benjaminsmith/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions
+  dropbox_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
+  dev_analysis_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
+  fmriprep_dir: /Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/
+  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii
+  mask_location: /Users/benjaminsmith/Google Drive/oregon/data/DEV/brainmaps/
+  ben_dev_data_analysis: /Users/benjaminsmith/Google Drive/oregon/code/bsmith_dev_data_analysis/
+  nonbids_data_path: /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/
+Benjamins-MacBook-Pro-3.local:
+  dev_scripts_path: /Users/benjaminsmith/Documents/oregon/code/DEV_scripts
+  automotion_output_path: /Users/benjaminsmith/Documents/oregon/code/DEV_scripts/fMRI/fx/motion/motion_percent_summary_by_wave.csv
   rural_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
   rubric_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/DEV_scoring_rubrics
   dev_analysis_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
-  input_mat_path: /Users/benjaminsmith/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions
+  input_mat_path: /Users/benjaminsmith/Documents/oregon/code/DEV_scriptsfMRI/fx/multiconds/SST/full_duration/conditions
   dropbox_data_dir: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
-  fmriprep_dir: /Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/fmriprep/
-  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
-  mask_location: /Users/benjaminsmith/Google Drive/oregon/data/DEV/brainmaps/
-  ben_dev_data_analysis: /Users/benjaminsmith/Google Drive/oregon/code/bsmith_dev_data_analysis/
+  l2_analysis_files: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/level2/
+  fmriprep_dir: /Users/benjaminsmith/Documents/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/
+  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii
+  mask_location: /Users/benjaminsmith/Documents/oregon/data/DEV/brainmaps/
+  ben_dev_data_analysis: /Users/benjaminsmith/Documents/oregon/code/bsmith_dev_data_analysis/
+  nonbids_data_path: /Users/benjaminsmith/Documents/oregon/data/DEV/nonbids_data/
+  talapas_pkey: /Users/benjaminsmith/.ssh/id_rsa
+  talapas_uname: bsmith16
 n137:
   dropbox_data_dir: /gpfs/projects/sanlab/bsmith16/data
-  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/
-  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/
+  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii
   mask_location: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/
 n222:
   dropbox_data_dir: /gpfs/projects/sanlab/bsmith16/data
-  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep/
-  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+  fmriprep_dir: /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/
+  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii
   mask_location: /gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/

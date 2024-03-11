@@ -1,0 +1,79 @@
+##########################################################
+
+For MacOS or Linux, use this command to create SSH tunnel:
+
+    ssh -N -L localhost:36199:n137:18598 bsmith16@talapas-ln2.uoregon.edu
+
+Or try this if that doesn't work:
+
+    ssh -N -L localhost:36199:n137:18598 bsmith16@talapas-ln2.uoregon.edu
+
+For Windows/MobaXterm, use this info:
+
+    Forwarded port: 36199
+    Remote server: n137
+    Remote port: 18598
+    SSH server: talapas-ln2.uoregon.edu
+    SSH login: bsmith16
+    SSH port: 22
+
+Then use this URL to access Jupyter (NOT the one in the log below):
+
+    http://localhost:36199
+
+##########################################################
+[I 16:04:31.013 NotebookApp] [nb_conda_kernels] enabled, 13 kernels found
+[W 16:04:36.086 NotebookApp] WARNING: The notebook server is listening on all IP addresses and not using encryption. This is not recommended.
+[I 16:04:36.400 NotebookApp] [jupyter_nbextensions_configurator] enabled 0.4.1
+/home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyter_server/transutils.py:13: FutureWarning: The alias `_()` will be deprecated. Use `_i18n()` instead.
+  warnings.warn(warn_msg, FutureWarning)
+[W 2023-05-04 16:04:38.884 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
+[W 2023-05-04 16:04:38.892 LabApp] 'port' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-05-04 16:04:38.892 LabApp] 'port_retries' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-05-04 16:04:38.892 LabApp] 'ip' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-05-04 16:04:38.892 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-05-04 16:04:38.892 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-05-04 16:04:38.892 LabApp] 'shutdown_no_activity_timeout' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-05-04 16:04:38.892 LabApp] 'password' has moved from NotebookApp to ServerApp. This config will be passed to ServerApp. Be sure to update your config before our next release.
+[W 2023-05-04 16:04:38.894 LabApp] Config option `kernel_spec_manager_class` not recognized by `LabApp`.
+[I 2023-05-04 16:04:38.913 LabApp] JupyterLab extension loaded from /home/bsmith16/.conda/envs/jupyter_base_env/lib/python3.9/site-packages/jupyterlab
+[I 2023-05-04 16:04:38.914 LabApp] JupyterLab application directory is /gpfs/projects/sanlab/bsmith16/.conda/envs/jupyter_base_env/share/jupyter/lab
+[I 16:04:38.930 NotebookApp] Will shut down after 600 seconds with no kernels or terminals.
+[I 16:04:38.931 NotebookApp] Serving notebooks from local directory: /gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/ppc/smooth
+[I 16:04:38.931 NotebookApp] Jupyter Notebook 6.3.0 is running at:
+[I 16:04:38.931 NotebookApp] http://n137:18598/
+[I 16:04:38.931 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[I 16:04:47.091 NotebookApp] 302 GET /notebooks/smoothing_success_check_2022.ipynb (172.20.13.244) 1.890000ms
+[I 16:04:53.163 NotebookApp] 302 POST /login?next=%2Fnotebooks%2Fsmoothing_success_check_2022.ipynb (172.20.13.244) 2.510000ms
+[W 16:04:54.292 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.337 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.428 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.444 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.500 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.527 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.567 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.594 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.677 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.693 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.969 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:54.982 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.140 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.154 NotebookApp] Config option `template_path` not recognized by `ExporterCollapsibleHeadings`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.214 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.224 NotebookApp] Config option `template_path` not recognized by `TocExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.243 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.261 NotebookApp] Config option `template_path` not recognized by `LenvsHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.287 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.304 NotebookApp] Config option `template_path` not recognized by `LenvsTocHTMLExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.357 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.366 NotebookApp] Config option `template_path` not recognized by `LenvsLatexExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.523 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:55.531 NotebookApp] Config option `template_path` not recognized by `LenvsSlidesExporter`.  Did you mean one of: `extra_template_paths, template_name, template_paths`?
+[W 16:04:57.308 NotebookApp] Notebook smoothing_success_check_2022.ipynb is not trusted
+[I 16:05:00.300 NotebookApp] Kernel started: 727b48a9-af8c-4b08-8972-3bee22c0393b, name: conda-env-.conda-DEV_general_py3-py
+[I 16:05:01.224 NotebookApp] 302 GET / (172.20.13.244) 0.840000ms
+CONDA_PREFIX=/home/bsmith16/.conda/envs/DEV_general_py3
+[W 16:05:01.838 NotebookApp] 404 GET /nbextensions/widgets/notebook/js/extension.js?v=20230504160431 (172.20.13.244) 17.250000ms referer=http://localhost:36199/notebooks/smoothing_success_check_2022.ipynb
+[I 16:07:00.512 NotebookApp] Saving file at /smoothing_success_check_2022.ipynb
+[I 16:09:32.752 NotebookApp] Starting buffering for 727b48a9-af8c-4b08-8972-3bee22c0393b:562074033c1b47d085d4b35b599b9b24
+slurmstepd: error: *** JOB 25974795 ON n137 CANCELLED AT 2023-05-04T20:04:34 DUE TO TIME LIMIT ***

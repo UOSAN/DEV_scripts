@@ -25,7 +25,12 @@ all = read.csv("org/dicom_check/dicoms_cleaned_20230202.csv", header = FALSE) %>
 completed = read.csv("org/bidsQC/conversion/subject_list.txt", header = FALSE)
 
 early_exclusions <-c(
-  "DEV295_20220809_113422" #excluded because this was a an aborted session replaced by a later, better one
+      "DEV018_20181025_190858", #redcap's first date for session 1 is 10-09-2018, followed by 10-17-2018, 11-21-2018; the latter two have corresponding LCNI scans. So 20181025 is an odd date. In fact, it is likely to be a copy of DEV017_20181025_190858 -- note the identical timestamps.
+  "DEV295_20220809_113422", #excluded because this was a an aborted session replaced by a later, better one
+  "DEV068_20181128_101017", #This is a bad data-point. It was an earlier subject who has been excluded. The ID has been re-used for a later subject who is included. Personal communication between BJS and VB 2023-05-05.
+  "DEV_20210714_173417", # we can conclude based on the filename timestamp that this is a duplicate of DEV205_20210714_173417. Since we have DEV205_20210714_173417, we don't need to also include DEV_20210714_173417.
+  "DEV255_20220130_123112", # seems to be a duplicate of DEV258_20220130_123112. Based on the Mastersheet, this particular scan is actually DEV258, not DEV255.
+  "DEV_20210608_170401" # HIGHLY UNCERTAIN. DEV_20210608_170401 and DEV198_20210608_170401 *seem* to be simple duplicates, but all the dcm files inside differ. I suspect it's just different export times from the lcni software but I need confirmation.
 )
 #2023-01-31 VB says both of these are actually DEV277. 
 #naturally the one with the earlier date is actually wave1, and the later one is wave2 (and needs to be corrected as such)
@@ -35,6 +40,7 @@ early_exclusions <-c(
 full_list = all %>%
   mutate(folder_upper = toupper(folder)) %>% #need to do the _extract_ case-invariant, but still retain the case-sensitive folder names
   extract(folder_upper, "subjectID", "(DEV[0-9]{3}).*", remove = FALSE) %>%
+  extract(folder,"timestamp","(?<=_)(\\d+_\\d+)",remove=FALSE) %>%
   mutate(subjectID = case_when(
     folder == "DEV0903_20190607_090700" ~ "DEV093",
     folder == "DEV_20210714_173417" ~ "DEV205",
@@ -44,34 +50,35 @@ full_list = all %>%
     TRUE ~ subjectID
   )) %>%
   filter((folder %in% early_exclusions)==FALSE) %>%
+  arrange(subjectID,timestamp) %>%
   group_by(subjectID) %>%
-  arrange(subjectID) %>%
   mutate(wave = sprintf("wave%s",row_number())) #surely this needs to be arranged in a certain way
 ```
 
-Exclude entries that we have determined not to process...
+Exclude entries that we have determined not to process...these exclusions are applied AFTER the wave labels are applied.
 ```{r}
 exclusions = c(
-    "DEV018_20181025_190858",
-    "DEV012_20190111_090124",
-    "DEV068_20181128_101017",
-   "DEV073_20190312_085608",
-    "DEV084_20190314_165822",
-    "159_20200126_115140" # not sure why this one is excluded.
+    "DEV012_20190111_090124", #This folder no longer exists! redcap session 0: 2018-05-30, session 1: 2018-06-26, session 2: 2018-08-06. Session 4 is on 01-11-2019.
+    
+   "DEV073_20190312_085608", # This date doesn't orrespond to a date in redcap. Redcap sessions seem to be 03-05-2019; 03-07-2019; 04-12-2019. 20190312 doesn't match any of these. We have DEV073_20190307_090744 and DEV073_20190412_085554.
+    "DEV084_20190314_165822", # this date doesn't correspond to a date in redcap, however it is one day after this subject's session 0. LCNI dates are DEV084_20190422_153353 and DEV084_20190321_163436 so...we are not actually excluding anything in the dataset!
+    "159_20200126_115140" # it actually seems to be that there are two separate folders from LCNI for DEV159 on 20200126. I assume they’re duplicates, one with bad naming structure and one with it corrected. So the code above which excludes the folder with the wrong naming structure is correct.
 )
 
 full_list = full_list %>%
     filter((folder %in% exclusions)==FALSE)
 
+full_list_outcols <- full_list %>% select(-timestamp)
+
 ```
 
 # check number of files per sub
 ```{r}
-full_list %>%
+full_list_outcols %>%
   group_by(subjectID) %>%
   summarize(n = n())
 
-full_list %>%
+full_list_outcols %>%
   group_by(wave) %>%
   summarize(n = n()) %>%
   spread(wave, n)
@@ -80,12 +87,12 @@ full_list %>%
 # write lists
 ```{r}
 setwd("../../../")
-full_list %>%
+full_list_outcols %>%
   select(-folder_upper) %>%
   filter(!folder %in% completed$V1) %>%
   write.table("org/bidsQC/conversion/new_subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
 
-full_list %>%
+full_list_outcols %>%
   select(-folder_upper) %>%
   write.table("org/bidsQC/conversion/subject_list.txt", sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
 ```
@@ -95,9 +102,9 @@ full_list %>%
 
 setwd("../../../")
 
-for(w in unique(full_list$wave)){
+for(w in unique(full_list_outcols$wave)){
   #this code is untested! we need output files with just the subject names in them. this is what these do.
-full_list %>%
+full_list_outcols %>%
   filter(!folder %in% completed$V1) %>%
   filter(wave==w) %>%
   group_by(subjectID) %>%
@@ -117,10 +124,10 @@ full_list %>%
 
 setwd("../../../")
 
-for(w in unique(full_list$wave)){
+for(w in unique(full_list_outcols$wave)){
   #this code is untested! we need output files with just the subject names in them. this is what these do.
 
-full_list %>%
+full_list_outcols %>%
   filter(!is.na(subjectID)) %>%
   filter(wave==w) %>%
   select(subjectID) %>%
@@ -130,3 +137,26 @@ full_list %>%
 }
 
 ```
+
+
+
+
+```{r}
+
+setwd("../../../")
+
+# for(w in unique(full_list_outcols$wave)){
+#   #this code is untested! we need output files with just the subject names in them. this is what these do.
+
+full_list_outcols %>%
+  filter(!is.na(subjectID)) %>%
+  filter(wave %in% c("wave1","wave2")) %>%
+  select(subjectID) %>%
+  unique %>%
+  write.table(
+    paste0("org/bidsQC/conversion/subject_list_single_col.txt"),
+    sep = ",", quote = FALSE, col.names = FALSE, row.names = FALSE)
+# }
+
+```
+

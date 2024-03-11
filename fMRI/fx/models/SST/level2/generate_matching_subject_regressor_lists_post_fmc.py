@@ -8,7 +8,7 @@ from level2_utils import get_data_for_confirmed_train_subjs
 config_data = read_yaml_for_host("l2_config.yml")
 # beta_paths = glob(config_data['sst_wave1_path'] + 'conditions/sub-DEV*/beta_0002.nii')
 
-#beta_df['spm_l2_path_description'] =beta_df.beta_filepath
+
 #paths
 nonbids_data_path = config_data['nonbids_data_path']
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
@@ -25,7 +25,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
     ml_scripting_path = ml_scripting_path
 )
 
-[print(s) for s in train_betas_with_data.spm_l2_path_description]
+[print(s) for s in train_betas_with_data.spm_output_path_description]
 
 #now we can get out the regressors we want to regress on...
 #going to be...
@@ -47,7 +47,7 @@ primary_vars = ['SST_PostErrorSlowW1_median']
 for pv in primary_vars:
     #os.mkdir(nonbids_data_path + '/fMRI/fx/models/SST/level2' + "/" + pv + "_vars")
     pv_table = train_betas_with_data.loc[:,[pv,#'age365','birthsex',
-    'spm_l2_path_description']]
+    'spm_output_path_description']]
     row_is_full = pv_table.isna().any(axis=1)==False
     pv_table_complete = pv_table.loc[row_is_full,:]
     pv_table_complete.to_csv(nonbids_data_path+ 'fMRI/fx/models/SST/level2' + "/" + pv + "_vars.csv")

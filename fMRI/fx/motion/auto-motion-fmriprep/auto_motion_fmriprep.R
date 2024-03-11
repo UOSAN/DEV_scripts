@@ -1,6 +1,6 @@
 # This script loads the fmriprep confound files, applies a machine learning classifier to 
 # predict motion artifacts, and returns summaries by task, task and run, and trash volumes only. 
-# It will also export new rp_txt files if writeRP = TRUE and plots if writePlots = TRUE.
+# It will also export new motion regressor files if writeRP = TRUE and plots if writePlots = TRUE.
 
 # Inputs:
 # * config.R = configuration file with user defined variables and paths
@@ -9,8 +9,8 @@
 # * study_summaryRun.csv = CSV file with summary by task and run
 # * study_summaryTask.csv = CSV file with summary by task only
 # * study_trashVols.csv = CSV file with trash volumes only
-# * if writeRP = TRUE, rp_txt files will be written to rpDir
-# * if writePlots = TRUE, plots for each subjects will be written to plotDir
+# * if writeRP = TRUE, rp_txt files will be written to outputDir/auto-motion-fmriprep/sub-[subject ID]
+# * if writePlots = TRUE, plots for each subjects will be written to outputDir/auto-motion-fmriprep/sub-[subject ID]
 
 #------------------------------------------------------
 # load/install packages
@@ -21,120 +21,178 @@ if (!require(tidyverse)) {
   install.packages('tidyverse', repos = osuRepo)
 }
 
-required_packages <- c('tidyverse','caret','randomForest')
-for (package in required_packages){
-  if (!require(package,character.only = TRUE)) {
-    cat(paste0("installing ",package,"\n"))
-    flush.console()
-    install.packages(package, repos = osuRepo)
-  }
+if (!require(snakecase)) {
+  install.packages('snakecase', repos = osuRepo)
 }
 
+if (!require(caret)) {
+  install.packages('caret', repos = osuRepo)
+}
+
+if (!require(randomForest)) {
+  install.packages('randomForest', repos = osuRepo)
+}
 
 #------------------------------------------------------
 # source the config file
 #------------------------------------------------------
-cat("loading config...")
 source('config.R')
-cat("config loaded.\n")
+
+# filter to just selected subjects
+if (exists("filter_list")){
+	print("filtering to the following subjects:")
+	print(filter_list)
+}
+
+
+#------------------------------------------------------
+# define output path
+#------------------------------------------------------
+outputDir = file.path(outputDir, "auto-motion-fmriprep")
+  
 #------------------------------------------------------
 # load confound files
 #------------------------------------------------------
-fileList = list.files(confoundDir, pattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_"), recursive = TRUE)
+message('--------Loading confound files--------')
 
-cat("files listed.\n")
-#check there aren't duplicates. This can happpen if e.g., someone has added archives of files within this directory. this shouldn't really happen.
-filenameList=basename(fileList)
-if (max(table(filenameList)>1)){
-  print("duplicate filenames found. here is a list of the duplicates:")
-  duplicated_filename_count<-table(filenameList)
-  duplicated_filenames = names(duplicated_filename_count)[duplicated_filename_count>1]
-  print(fileList[filenameList %in% duplicated_filenames])
-  print("The suggested fix for this error is to examine where the duplicates are, identify the redundant files, and then remove them.")
-  stop("unique TSV confound files expected, but duplicates found.")
+dataset = data.frame()
+columnNames = c("subjectID", "wave", "task", "run", "volume", "CSF", "WhiteMatter", 
+                "GlobalSignal", "stdDVARS", "non.stdDVARS", "vx.wisestdDVARS", 
+                "FramewiseDisplacement", "tCompCor00", "tCompCor01", "tCompCor02", 
+                "tCompCor03", "tCompCor04", "tCompCor05", "aCompCor00", "aCompCor01", 
+                "aCompCor02", "aCompCor03", "aCompCor04", "aCompCor05", "Cosine00", 
+                "X", "Y", "Z", "RotX", "RotY", "RotZ")
+
+fileRegex = '.*func/sub-(.*)_ses-wave(.*)_task-(.*)_acq-(.*)_desc-.*.tsv'
+fileVars = c('subjectID', 'wave', 'task', 'run')
+
+filter_check_func <- function(f){
+  return(any(sapply(filter_list,function(x){grepl(x,f)})))
 }
+if (gsub("\\.", "", version) <= 118) {
+  fileList = list.files(confoundDir, pattern = 'bold_confounds.tsv', recursive = TRUE)
+  
+  for (file in fileList) {
+    print(file)
+    if (exists("filter_list")){
+    	#we have a filter list; only process this file if it's in the filter list
+    	if (filter_check_func(file)==FALSE){
+    		#there's a filter list and this file isn't on it.
+    		#so go to the next.
+    		next
+    		print("file not in filter. skipping.")
+    	}else{
+    		print("file is in filter. processing.")
+    	}
+    }
 
+    tmp = tryCatch(read_tsv(file.path(confoundDir, file)) %>% 
+                     mutate(file = ifelse(!grepl("desc", file), gsub("bold", "desc-bold", file), file),
+                            file = ifelse(!grepl("ses", file), gsub("task", "ses-1_task", file), file),
+                            file = ifelse(!grepl("run", file), gsub("desc", "run-1_desc", file), file)) %>%
+                     extract(file, fileVars,
+                             fileRegex) %>%
+                     mutate(wave = str_extract(wave, "[[:digit:]]+"),
+                            run = str_extract(run, "[[:digit:]]+"),
+                            wave = as.integer(wave),
+                            run = as.integer(run),
+                            stdDVARS = as.numeric(ifelse(stdDVARS %in% "n/a", 0, stdDVARS)),
+                            `non-stdDVARS` = as.numeric(ifelse(`non-stdDVARS` %in% "n/a", 0, `non-stdDVARS`)),
+                            `vx-wisestdDVARS` = as.numeric(ifelse(`vx-wisestdDVARS` %in% "n/a", 0, `vx-wisestdDVARS`)),
+                            FramewiseDisplacement = as.numeric(ifelse(FramewiseDisplacement %in% "n/a", 0, FramewiseDisplacement)),
+                            volume = row_number()) %>%
+                     select(subjectID, wave, task, run, volume, everything()), error = function(e) message(file))
 
-for (file_i in 1:length(fileList)) {
-  file=fileList[file_i]
-  if(file_i%%10==0){
-  #if(file_i==0){
-    cat(". ")
-    flush.console()
+    # add missing columns and select subset classifier columns
+    missingColumns = setdiff(columnNames, names(tmp))
+    tmp[missingColumns] = 0 
+    
+    tmp = tmp  %>%
+      select(subjectID, wave, task, run, volume, CSF, WhiteMatter, 
+             GlobalSignal, stdDVARS, non.stdDVARS, vx.wisestdDVARS, 
+             FramewiseDisplacement, tCompCor00, tCompCor01, tCompCor02, 
+             tCompCor03, tCompCor04, tCompCor05, aCompCor00, aCompCor01, 
+             aCompCor02, aCompCor03, aCompCor04, aCompCor05, Cosine00, 
+             X, Y, Z, RotX, RotY, RotZ)
+    
+    if (length(tmp) > 0) {
+      colnames(tmp) = gsub('-', '.', colnames(tmp))
+      dataset = bind_rows(dataset, tmp)
+      rm(tmp)
+    }
   }
   
-  # if the merged dataset doesn't exist, create it
-  if (!exists('dataset')) {
-    filePattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_")
-    dataset = read_tsv(file.path(confoundDir, file),col_types="dddccc") %>% 
-      mutate(file = file) %>%
-      extract(file, c('subjectID', 'wave', 'task', 'run'),
-              file.path('sub-.*','ses-.*', 'func', filePattern)) %>%
-      mutate(wave = as.integer(wave),
-             run = as.integer(run),
-             stdDVARS = as.numeric(ifelse(stdDVARS %in% "n/a", 0, stdDVARS)),
-             `non-stdDVARS` = as.numeric(ifelse(`non-stdDVARS` %in% "n/a", 0, `non-stdDVARS`)),
-             `vx-wisestdDVARS` = as.numeric(ifelse(`vx-wisestdDVARS` %in% "n/a", 0, `vx-wisestdDVARS`)),
-             FramewiseDisplacement = as.numeric(ifelse(FramewiseDisplacement %in% "n/a", 0, FramewiseDisplacement)),
-             volume = row_number()) %>%
-      select(subjectID, wave, task, run, volume, everything())
-    colnames(dataset) = gsub('-', '.', colnames(dataset))
-  }
+} else {
   
-  # if the merged dataset does exist, append to it
-  else {
-    filePattern = paste(subPattern, wavePattern, taskPattern, runPattern, 'bold_confounds.tsv', sep = "_")
-    tmp = read_tsv(file.path(confoundDir, file),col_types="dddccc")  %>% 
-      mutate(file = file) %>%
-      extract(file, c('subjectID', 'wave', 'task', 'run'),
-              file.path('sub-.*','ses-.*', 'func', filePattern)) %>%
-      mutate(wave = as.integer(wave),
-             run = as.integer(run),
-             stdDVARS = as.numeric(ifelse(stdDVARS %in% "n/a", 0, stdDVARS)),
-             `non-stdDVARS` = as.numeric(ifelse(`non-stdDVARS` %in% "n/a", 0, `non-stdDVARS`)),
-             `vx-wisestdDVARS` = as.numeric(ifelse(`vx-wisestdDVARS` %in% "n/a", 0, `vx-wisestdDVARS`)),
-             FramewiseDisplacement = as.numeric(ifelse(FramewiseDisplacement %in% "n/a", 0, FramewiseDisplacement)),
-             volume = row_number()) %>%
-      select(subjectID, wave, task, run, volume, everything())
-    colnames(tmp) = gsub('-', '.', colnames(tmp))
-    dataset = bind_rows(dataset, tmp)
-    rm(tmp)
-  }
+  fileList = list.files(confoundDir, pattern = '.*confounds.*.tsv', recursive = TRUE)
+
+  for (file in fileList) {
+      print(file)
+      if (exists("filter_list")){
+        #we have a filter list; only process this file if it's in the filter list
+        if (filter_check_func(file)==FALSE){
+          #there's a filter list and this file isn't on it.
+          #so go to the next.
+          next
+          print("file not in filter. skipping.")
+        }else{
+          print("file is in filter. processing.")
+        }
+      }
+      tmp = tryCatch(read_tsv(file.path(confoundDir, file)) %>%
+                       setNames(snakecase::to_upper_camel_case(names(.))) %>%
+                       setNames(gsub("AComp", "aComp", names(.))) %>%
+                       setNames(gsub("TComp", "tComp", names(.))) %>%
+                       setNames(gsub("Trans", "", names(.))) %>%
+                       mutate(file = ifelse(!grepl("ses", file), gsub("task", "ses-1_task", file), file),
+                              file = ifelse(!grepl("run", file), gsub("desc", "run-1_desc", file), file)) %>%
+                       extract(file, fileVars,
+                               fileRegex) %>%
+                       rename("CSF" = Csf,
+                              "stdDVARS" = StdDvars,
+                              "non.stdDVARS" = Dvars) %>%
+                       mutate(run = str_extract(run, "[[:digit:]]+"),
+                              run = as.integer(run),
+                              volume = row_number()) %>%
+                       mutate_if(is.character, list(~ ifelse(. == "n/a", 0, .))) %>%
+                       mutate_at(vars(contains("DVARS"), contains("Framewise")), as.numeric), error = function(e) message(file))
+    
+    # add missing columns and select subset classifier columns
+    missingColumns = setdiff(columnNames, names(tmp))
+    tmp[missingColumns] = 0 
+    
+    tmp = tmp  %>%
+      select(subjectID, wave, task, run, volume, CSF, WhiteMatter, 
+             GlobalSignal, stdDVARS, non.stdDVARS, vx.wisestdDVARS, 
+             FramewiseDisplacement, tCompCor00, tCompCor01, tCompCor02, 
+             tCompCor03, tCompCor04, tCompCor05, aCompCor00, aCompCor01, 
+             aCompCor02, aCompCor03, aCompCor04, aCompCor05, Cosine00, 
+             X, Y, Z, RotX, RotY, RotZ)
+    
+    if (length(tmp) > 0) {
+      dataset = bind_rows(dataset, tmp)
+      rm(tmp)
+    }
+  }  
 }
 
-#remove runs that have NA values for some reason. they will crash the analysis.
-#BJS 2021-10-06
-check_cols <- c("tCompCor00","tCompCor01","tCompCor02","tCompCor03","tCompCor04","tCompCor05","aCompCor00","aCompCor01","aCompCor02","aCompCor03","aCompCor04","aCompCor05")
-row_has_na_val <- rowSums(is.na(dataset[,check_cols]))>0
-rows_with_na_vals<-dataset[row_has_na_val,]
+print(dataset$subjectID)
+# filter if we're doing that.
+if (exists("filter_list")){
+  dataset <- dataset[dataset$subjectID %in% filter_list,]
+}
 
-runs_to_remove <- unique(rows_with_na_vals[c("subjectID","wave","task","run")])
-if (nrow(runs_to_remove)>0){
-print(nrow(runs_to_remove))
-for (r in 1:nrow(runs_to_remove)){
-  
-  rows_to_remove_for_run <- (dataset$subjectID==runs_to_remove[[r,"subjectID"]] & 
-          dataset$wave==runs_to_remove[[r,"wave"]] & 
-          dataset$task==runs_to_remove[[r,"task"]] & 
-          dataset$run==runs_to_remove[[r,"run"]])
-  
-  print(paste0("removing ",sum(rows_to_remove_for_run)," rows relate to the following run"))
-  print(runs_to_remove[r,])
-  
-  dataset <- dataset[!rows_to_remove_for_run,]
-  
-}
-}
-#add the current image state for debugging
-state_filename <- "confounds_loaded_state.RData"
-save.image(state_filename)
+
+
+print(dataset$subjectID)
+
 #------------------------------------------------------
 # apply classifier
 #------------------------------------------------------
+message('--------Applying classifier--------')
+
 # load classifier
 mlModel = readRDS('motion_classifier.rds')
-
-
 
 # apply model
 dataset$trash = predict(mlModel, dataset)
@@ -144,9 +202,12 @@ dataset = dataset %>%
   mutate(trash = ifelse(trash == "yes", 1, 0),
          trash = ifelse(is.na(trash), 0, trash))
 
+
 #------------------------------------------------------
 # summarize data and write csv files
 #------------------------------------------------------
+message(sprintf('--------Writing summaries to %s--------', outputDir))
+
 # summarize by task and run
 summaryRun = dataset %>% 
   group_by(subjectID, wave, task, run) %>% 
@@ -165,15 +226,15 @@ summaryTrash = dataset %>%
   select(subjectID, wave, task, run, volume, trash)
 
 # create the summary directory if it does not exist
-if (!file.exists(summaryDir)) {
-  message(paste0(summaryDir, ' does not exist. Creating it now.'))
-  dir.create(summaryDir)
+if (!file.exists(outputDir)) {
+  message(paste0(outputDir, ' does not exist. Creating it now.'))
+  dir.create(outputDir, recursive = TRUE)
 }
 
 # write files
-write.csv(summaryRun, file.path(summaryDir, paste0(study, '_summaryRun.csv')), row.names = FALSE)
-write.csv(summaryTask, file.path(summaryDir, paste0(study, '_summaryTask.csv')), row.names = FALSE)
-write.csv(summaryTrash, file.path(summaryDir, paste0(study, '_trashVols.csv')), row.names = FALSE)
+write.csv(summaryRun, file.path(outputDir, paste0(study, '_summaryRun.csv')), row.names = FALSE)
+write.csv(summaryTask, file.path(outputDir, paste0(study, '_summaryTask.csv')), row.names = FALSE)
+write.csv(summaryTrash, file.path(outputDir, paste0(study, '_trashVols.csv')), row.names = FALSE)
 
 #------------------------------------------------------
 # write rps
@@ -182,75 +243,122 @@ write.csv(summaryTrash, file.path(summaryDir, paste0(study, '_trashVols.csv')), 
 rps = dataset %>%
   select(subjectID, wave, task, run, volume, X, Y, Z, RotX, RotY, RotZ, trash)
 
-# write files
-if (writeRP) {
-  if (writeEuclidean) {
-    # ouput Euclidean distance and it's derivative rather than the original realignment parameters
-    
-    # define function to calculate Euclidean distance (i.e. the L2 norm)
-    l2norm3ddf = function(a,b,c){
-      aDF = data.frame(a,b,c)
-      apply(aDF, 1, function(vect) norm(matrix(vect), 'f'))
-    }
-    
-    # For the radian to arc-length conversion, remember: "An angle of 1 radian 
-    # refers to a central angle whose subtending arc is equal in length to the 
-    # radius." http://www.themathpage.com/aTrig/arc-length.htm
-    # If we multiply the radian output of the realignment parameters by the average 
-    # head radius of 50mm, we get a rotational displacement from the origin at the 
-    # outside of an average skull.
-    rps = rps %>%
-      group_by(subjectID, wave, task, run) %>%
-      mutate(RotX = 50*RotX,
-             RotY = 50*RotY,
-             RotZ = 50*RotZ,
-             trans = l2norm3ddf(X, Y, Z),
-             rot = l2norm3ddf(RotX, RotY, RotZ),
-             deriv.trans = c(0, diff(trans)),
-             deriv.rot = c(0, diff(rot))) %>%
-      select(subjectID, wave, task, run, volume, trans, rot, deriv.trans, deriv.rot, trash)
-    
+if (noEuclidean == FALSE) {
+  message('Transforming realignment parameters to Euclidean distance')
+  # ouput Euclidean distance and it's derivative rather than the original realignment parameters
+  
+  # define function to calculate Euclidean distance (i.e. the L2 norm)
+  l2norm3ddf = function(a,b,c){
+    aDF = data.frame(a,b,c)
+    apply(aDF, 1, function(vect) norm(matrix(vect), 'f'))
   }
   
-  # create the rp directory if it does not exist
-  if (!file.exists(rpDir)) {
-    message(paste0(rpDir, ' does not exist. Creating it now.'))
-    dir.create(rpDir)
+  # For the radian to arc-length conversion, remember: "An angle of 1 radian 
+  # refers to a central angle whose subtending arc is equal in length to the 
+  # radius." http://www.themathpage.com/aTrig/arc-length.htm
+  # If we multiply the radian output of the realignment parameters by the average 
+  # head radius of 50mm, we get a rotational displacement from the origin at the 
+  # outside of an average skull.
+  rps = rps %>%
+    group_by(subjectID, wave, task, run) %>%
+    mutate(RotX = 50*RotX,
+           RotY = 50*RotY,
+           RotZ = 50*RotZ,
+           euclidean_trans = l2norm3ddf(X, Y, Z),
+           euclidean_rot = l2norm3ddf(RotX, RotY, RotZ),
+           euclidean_trans_deriv = c(0, diff(euclidean_trans)),
+           euclidean_rot_deriv = c(0, diff(euclidean_rot))) %>%
+    select(subjectID, wave, task, run, volume, euclidean_trans, euclidean_rot, euclidean_trans_deriv, euclidean_rot_deriv, trash)
+  
+}
+
+# write files
+if (noRP == FALSE) {
+  message(sprintf('--------Writing text files to %s--------', outputDir))
+  
+  # create the subject output directories if they do not exist
+  for (sub in unique(rps$subjectID)) {
+    subDir = file.path(outputDir, sprintf("sub-%s", sub))
+    if (!file.exists(subDir)) {
+      message(paste0(subDir, ' does not exist. Creating it now.'))
+      dir.create(subDir, recursive = TRUE)
+    }
   }
   
   # write the files
-  rp_files_written = rps %>%
-    arrange(subjectID, wave, task, run, volume) %>%
-    group_by(subjectID, wave, task, run) %>%
-    do({
-      fname = file.path(rpDir, paste('rp_', .$subjectID[[1]], '_', .$wave[[1]], '_', .$task[[1]], '_', .$run[[1]], '.txt', sep = ''))
-      write.table(
-        .[,-c(1:5)],
-        fname,
-        quote = F,
-        sep = '   ',
-        row.names = F,
-        col.names = F)
-      data.frame(rp_file_name = fname)
-    })
+  if (ses == TRUE) {
+    fnameString = "file.path(.$subDir[[1]], sprintf('sub-%s_ses-%s_task-%s_run-%s_desc-motion_regressors.txt', .$subjectID[[1]], .$wave[[1]], .$task[[1]], .$run[[1]]))" 
+  } else {
+    fnameString = "file.path(.$subDir[[1]], sprintf('sub-%s_task-%s_run-%s_desc-motion_regressors.txt', .$subjectID[[1]], .$task[[1]], .$run[[1]]))" 
+  }
+  
+  if (noNames == TRUE) {
+    rp_files_written = rps %>%
+      mutate(subDir = file.path(outputDir, sprintf("sub-%s", subjectID))) %>%
+      select(subDir, everything()) %>%
+      arrange(subjectID, wave, task, run, volume) %>%
+      group_by(subjectID, wave, task, run, subDir) %>%
+      do({
+        fname = eval(parse(text = fnameString))
+        write.table(
+          .[,-c(1:6)],
+          fname,
+          quote = F,
+          sep = '\t',
+          row.names = F,
+          col.names = F)
+        data.frame(rp_file_name = fname)
+      })
+  } else {
+    rp_files_written = rps %>%
+      mutate(subDir = file.path(outputDir, sprintf("sub-%s", subjectID))) %>%
+      select(subDir, everything()) %>%
+      arrange(subjectID, wave, task, run, volume) %>%
+      group_by(subjectID, wave, task, run, subDir) %>%
+      do({
+        fname = eval(parse(text = fnameString))
+        write.table(
+          .[,-c(1:6)],
+          fname,
+          quote = F,
+          sep = '\t',
+          row.names = F,
+          col.names = T)
+        data.frame(rp_file_name = fname)
+      })
+  }
 }
 
 #------------------------------------------------------
 # write plots
 #------------------------------------------------------
 # plot indicators values as a function of time for the motion indicators specified in config.R
-if (writePlot) {
+if (noPlot == FALSE) {
+  message(sprintf('--------Writing plots to %s--------', outputDir))
   
-  # create the plot directory if it does not exist
-  if (!file.exists(plotDir)) {
-    message(paste0(plotDir, ' does not exist. Creating it now.'))
-    dir.create(plotDir)
+  # create the subject output directories if they do not exist
+  for (sub in unique(rps$subjectID)) {
+    subDir = file.path(outputDir, sprintf("sub-%s", sub))
+    if (!file.exists(subDir)) {
+      message(paste0(subDir, ' does not exist. Creating it now.'))
+      dir.create(subDir, recursive = TRUE)
+    }
   }
   
   # save the plots
+  if (ses == TRUE) {
+    fnameString = "file.path(.$subDir[[1]], sprintf('sub-%s_ses-%s_task-%s_run-%s%s', .$subjectID[[1]], .$wave[[1]], .$task[[1]], .$run[[1]], figFormat))" 
+    pnameString = "sprintf('%s  %s  %s  %s', .$subjectID[[1]], .$wave[[1]], .$task[[1]], .$run[[1]])"
+  } else {
+    fnameString = "file.path(.$subDir[[1]], sprintf('sub-%s_task-%s_run-%s%s', .$subjectID[[1]], .$task[[1]], .$run[[1]], figFormat))" 
+    pnameString = "sprintf('%s  %s  %s', .$subjectID[[1]], .$task[[1]], .$run[[1]])"
+  }
+  
+  
   plots_written = dataset %>% 
     mutate(label = ifelse(grepl(1, trash), as.character(volume), ''),
-           code = ifelse(trash == 1, 'trash', NA)) %>%
+           code = ifelse(trash == 1, 'trash', NA),
+           subDir = file.path(outputDir, sprintf("sub-%s", subjectID))) %>%
     gather(indicator, value, figIndicators) %>%
     group_by(subjectID, wave, task, run) %>%
     do({
@@ -260,17 +368,12 @@ if (writePlot) {
         geom_text(data = filter(., subjectID == .$subjectID[[1]] & wave == .$wave[[1]] & task == .$task[[1]] & run == .$run[[1]]), aes(label = label), size = 2) +
         facet_grid(indicator ~ ., scales = 'free') +
         scale_color_manual(values = "#E4B80E") +
-        labs(title = paste0(.$subjectID[[1]], "  ", .$wave[[1]], "  ", .$task[[1]], "  ", .$run[[1]]),
-          y = "value\n",
-          x = "\nvolume") +
+        labs(title = eval(parse(text = pnameString)),
+             y = "value\n",
+             x = "\nvolume") +
         theme_minimal(base_size = 10) +
         theme(legend.position = "none")
-      ggsave(plot, file = file.path(plotDir, paste0(.$subjectID[[1]], '_', .$wave[[1]], '_', .$task[[1]], '_', .$run[[1]], figFormat)), height = figHeight, width = figWidth, dpi = figDPI)
+      ggsave(plot, file = eval(parse(text = fnameString)), height = figHeight, width = figWidth, dpi = figDPI)
       data.frame()
     })
-}
-
-if (file.exists(state_filename)) {
-  #Delete file if it exists
-  file.remove(state_filename)
 }

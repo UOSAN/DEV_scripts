@@ -1,0 +1,341 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  man]{apa6}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+% Manuscript styling
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+% Table formatting
+\usepackage{longtable}
+\usepackage{lscape}
+% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
+\usepackage{multirow}		% Table styling
+\usepackage{tabularx}		% Control Column width
+\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
+\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+
+% Create new environments so endfloat can handle them
+% \newenvironment{ltable}
+%   {\begin{landscape}\centering\begin{threeparttable}}
+%   {\end{threeparttable}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\centering\begin{ThreePartTable}}{\end{ThreePartTable}\end{landscape}}
+
+% Enables adjusting longtable caption width to table width
+% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+% \setlength{\parindent}{0.5in}
+% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
+% See https://github.com/crsh/papaja/issues/292
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\HyOrg@maketitle}
+  {\section{\normalfont\normalsize\abstractname}}
+  {\section*{\normalfont\normalsize\abstractname}}
+  {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
+\makeatother
+
+\usepackage{xpatch}
+\makeatletter
+\xapptocmd\appendix
+  {\xapptocmd\section
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
+    {}{\InnerPatchFailed}%
+  }
+{}{\PatchFailed}
+\keywords{keywords\newline\indent Word count: X}
+\DeclareDelayedFloatFlavor{ThreePartTable}{table}
+\DeclareDelayedFloatFlavor{lltable}{table}
+\DeclareDelayedFloatFlavor*{longtable}{table}
+\makeatletter
+\renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
+\makeatother
+\usepackage{lineno}
+
+\linenumbers
+\usepackage{csquotes}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={The title},
+  pdfauthor={First Author1 \& Ernst-August Doelle1,2},
+  pdflang={en-EN},
+  pdfkeywords={keywords},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{The title}
+\author{First Author\textsuperscript{1} \& Ernst-August Doelle\textsuperscript{1,2}}
+\date{}
+
+
+\shorttitle{Title}
+
+\authornote{
+
+Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+
+Enter author note here.
+
+The authors made the following contributions. First Author: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing; Ernst-August Doelle: Writing - Review \& Editing, Supervision.
+
+Correspondence concerning this article should be addressed to First Author, Postal address. E-mail: \href{mailto:my@email.com}{\nolinkurl{my@email.com}}
+
+}
+
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Wilhelm-Wundt-University\\\textsuperscript{2} Konstanz Business School}
+
+\abstract{%
+One or two sentences providing a \textbf{basic introduction} to the field, comprehensible to a scientist in any discipline.
+
+Two to three sentences of \textbf{more detailed background}, comprehensible to scientists in related disciplines.
+
+One sentence clearly stating the \textbf{general problem} being addressed by this particular study.
+
+One sentence summarizing the main result (with the words ``\textbf{here we show}'' or their equivalent).
+
+Two or three sentences explaining what the \textbf{main result} reveals in direct comparison to what was thought to be the case previously, or how the main result adds to previous knowledge.
+
+One or two sentences to put the results into a more \textbf{general context}.
+
+Two or three sentences to provide a \textbf{broader perspective}, readily comprehensible to a scientist in any discipline.
+}
+
+
+
+\begin{document}
+\maketitle
+
+\begin{verbatim}
+## Linear mixed model fit by REML ['lmerMod']
+## Formula: med_post_trial_z ~ trial_n_s + condition + P_stop_trial_change +  
+##     post_pre_rt_change + (1 + post_pre_rt_change + P_stop_trial_change |  
+##     subid)
+##    Data: trial_neural_behav_roi %>% filter(trial_n > 50 & condition %in%  
+##     c("CorrectStop", "FailedStop"))
+## 
+## REML criterion at convergence: 18731.9
+## 
+## Scaled residuals: 
+##      Min       1Q   Median       3Q      Max 
+## -10.2598  -0.5902   0.0341   0.6130   3.8742 
+## 
+## Random effects:
+##  Groups   Name                Variance  Std.Dev. Corr       
+##  subid    (Intercept)           0.04270  0.2067             
+##           post_pre_rt_change    0.04519  0.2126   0.31      
+##           P_stop_trial_change 385.76413 19.6409  -0.96 -0.42
+##  Residual                       0.99305  0.9965             
+## Number of obs: 6578, groups:  subid, 266
+## 
+## Fixed effects:
+##                     Estimate Std. Error t value
+## (Intercept)         -0.34472    0.07900  -4.363
+## trial_n_s           -0.21746    0.03864  -5.627
+## conditionFailedStop -0.43681    0.02527 -17.286
+## P_stop_trial_change 38.13803    5.48732   6.950
+## post_pre_rt_change  -0.22885    0.08409  -2.721
+## 
+## Correlation of Fixed Effects:
+##             (Intr) trl_n_ cndtFS P_st__
+## trial_n_s    0.906                     
+## cndtnFldStp -0.098  0.037              
+## P_stp_trl_c -0.972 -0.888 -0.034       
+## pst_pr_rt_c  0.003  0.021 -0.137 -0.031
+\end{verbatim}
+
+\begin{verbatim}
+## Data: trial_neural_behav_roi %>% filter(trial_n > 50 & condition %in%  ...
+## Models:
+## model_no_rt: med_post_trial_z ~ trial_n_s + condition + P_stop_trial_change + (1 + post_pre_rt_change + P_stop_trial_change | subid)
+## model_full_effects_incc: med_post_trial_z ~ trial_n_s + condition + P_stop_trial_change + post_pre_rt_change + (1 + post_pre_rt_change + P_stop_trial_change | subid)
+##                         npar   AIC   BIC  logLik deviance  Chisq Df Pr(>Chisq)
+## model_no_rt               11 18753 18828 -9365.4    18731                     
+## model_full_effects_incc   12 18739 18821 -9357.7    18715 15.475  1  8.359e-05
+##                            
+## model_no_rt                
+## model_full_effects_incc ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\begin{verbatim}
+## Data: trial_neural_behav_roi %>% filter(trial_n > 50 & condition %in%  ...
+## Models:
+## model_no_p_stop: med_post_trial_z ~ trial_n_s + condition + post_pre_rt_change + (1 + post_pre_rt_change + P_stop_trial_change | subid)
+## model_full_effects_incc: med_post_trial_z ~ trial_n_s + condition + P_stop_trial_change + post_pre_rt_change + (1 + post_pre_rt_change + P_stop_trial_change | subid)
+##                         npar   AIC   BIC  logLik deviance  Chisq Df Pr(>Chisq)
+## model_no_p_stop           11 18785 18860 -9381.5    18763                     
+## model_full_effects_incc   12 18739 18821 -9357.7    18715 47.508  1  5.477e-12
+##                            
+## model_no_p_stop            
+## model_full_effects_incc ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+\end{verbatim}
+
+\$estimate
+\(estimate\)Intercept
+{[}1{]} ``\(\\hat{\\beta} = -0.34\), 95\textbackslash\% CI \([-0.50, -0.19]\)''
+
+\(estimate\)trial\_n\_s
+{[}1{]} ``\(\\hat{\\beta} = -0.22\), 95\textbackslash\% CI \([-0.29, -0.14]\)''
+
+\(estimate\)conditionFailedStop
+{[}1{]} ``\(\\hat{\\beta} = -0.44\), 95\textbackslash\% CI \([-0.49, -0.39]\)''
+
+\(estimate\)P\_stop\_trial\_change
+{[}1{]} ``\(\\hat{\\beta} = 38.14\), 95\textbackslash\% CI \([27.38, 48.89]\)''
+
+\(estimate\)post\_pre\_rt\_change
+{[}1{]} ``\(\\hat{\\beta} = -0.23\), 95\textbackslash\% CI \([-0.39, -0.06]\)''
+
+\$statistic
+\(statistic\)Intercept
+{[}1{]} ``\(t = -4.36\)''
+
+\(statistic\)trial\_n\_s
+{[}1{]} ``\(t = -5.63\)''
+
+\(statistic\)conditionFailedStop
+{[}1{]} ``\(t = -17.29\)''
+
+\(statistic\)P\_stop\_trial\_change
+{[}1{]} ``\(t = 6.95\)''
+
+\(statistic\)post\_pre\_rt\_change
+{[}1{]} ``\(t = -2.72\)''
+
+\$full\_result
+\(full_result\)Intercept
+{[}1{]} ``\(\\hat{\\beta} = -0.34\), 95\textbackslash\% CI \([-0.50, -0.19]\), \(t = -4.36\)''
+
+\(full_result\)trial\_n\_s
+{[}1{]} ``\(\\hat{\\beta} = -0.22\), 95\textbackslash\% CI \([-0.29, -0.14]\), \(t = -5.63\)''
+
+\(full_result\)conditionFailedStop
+{[}1{]} ``\(\\hat{\\beta} = -0.44\), 95\textbackslash\% CI \([-0.49, -0.39]\), \(t = -17.29\)''
+
+\(full_result\)P\_stop\_trial\_change
+{[}1{]} ``\(\\hat{\\beta} = 38.14\), 95\textbackslash\% CI \([27.38, 48.89]\), \(t = 6.95\)''
+
+\(full_result\)post\_pre\_rt\_change
+{[}1{]} ``\(\\hat{\\beta} = -0.23\), 95\textbackslash\% CI \([-0.39, -0.06]\), \(t = -2.72\)''
+
+\$table
+A data.frame with 4 labelled columns:
+
+\begin{verbatim}
+             term estimate       conf.int statistic
+\end{verbatim}
+
+1 Intercept -0.34 {[}-0.50, -0.19{]} -4.36
+2 Trial n s -0.22 {[}-0.29, -0.14{]} -5.63
+3 ConditionFailedStop -0.44 {[}-0.49, -0.39{]} -17.29
+4 P stop trial change 38.14 {[}27.38, 48.89{]} 6.95
+5 Post pre rt change -0.23 {[}-0.39, -0.06{]} -2.72
+
+term : Term
+estimate : \(\\hat{\\beta}\)
+conf.int : 95\textbackslash\% CI
+statistic: \(t\)
+attr(,``class'')
+{[}1{]} ``apa\_results'' ``list''
+
+\newpage
+
+
+\end{document}

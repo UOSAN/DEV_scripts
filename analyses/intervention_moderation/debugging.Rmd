@@ -1,0 +1,39 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(readr)
+```
+
+```{r}
+outcomes<-readr::read_csv("outcome_data.csv")
+predictions<-readr::read_csv("prediction_data.csv")
+group<-readr::read_csv("group_assignments.csv")
+colnames(group)<-c("group_i","group_name")
+```
+
+```{r}
+data<-cbind(group,outcomes,predictions)
+data$...1<-NULL
+
+```
+
+```{r}
+summary(lm(d_bf~EDM*group_name+BSCS*group_name,data))
+```
+
+```{r}
+summary(lm(d_bf~EDM  + BSCS + group_name + `EDM*ni`+`EDM*san`+ `BSCS*ni`+`BSCS*san`,data))
+```
+
+```{r}
+library(dplyr)
+
+data %>% group_by(group_name) %>% summarise(mean_change=mean(d_bf,na.rm=TRUE))
+```
+```{r}
+hist(data$d_bf)
+```
+

@@ -1,0 +1,17 @@
+loading anaconda
+/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/nilearn/datasets/__init__.py:93: FutureWarning: Fetchers from the nilearn.datasets module will be updated in version 0.9 to return python strings instead of bytes and Pandas dataframes instead of Numpy arrays.
+  warn("Fetchers from the nilearn.datasets module will be "
+n222
+{'dropbox_data_dir': '/gpfs/projects/sanlab/bsmith16/data', 'fmriprep_dir': '/gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/', 'nii_raw_path': 'sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii', 'mask_location': '/gpfs/projects/sanlab/shared/DEV/nonbids_data/fMRI/ml/masks/'}
+looking up /gpfs/projects/sanlab/shared/DEV/bids_data/derivatives/fmriprep_2022/sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_bold_space-MNI152NLin2009cAsym_preproc.nii
+Traceback (most recent call last):
+  File "get_all_series_main.py", line 99, in <module>
+    all_subj_df = get_all_subj_df(roi_data, sst_all_behavioral_data)
+  File "/gpfs/projects/sanlab/shared/DEV/DEV_scripts/fMRI/fx/models/SST/direct_regression/get_all_series.py", line 174, in get_all_subj_df
+    all_subj_df = pd.concat(all_subj_df_list)
+  File "/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/pandas/core/reshape/concat.py", line 274, in concat
+    op = _Concatenator(
+  File "/home/bsmith16/.conda/envs/neuralsignature/lib/python3.8/site-packages/pandas/core/reshape/concat.py", line 331, in __init__
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
+finished

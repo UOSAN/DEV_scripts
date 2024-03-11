@@ -13,7 +13,7 @@ from socket import gethostname
 from get_all_series import get_roi_data, get_moment_trial_type_revealed, get_behavioral_data_with_moment_trial_type_revealed
 from get_all_series import get_all_subj_df
 
-print(gethostname())
+print(gethostname(),flush=True)
 # Open the file and load the file
 with open('config.yml') as f:
     all_yaml = yaml.load(f, Loader=SafeLoader)
@@ -22,7 +22,7 @@ with open('config.yml') as f:
     else:
         config = all_yaml['default']
         
-print(config)
+print(config,flush=True)
         
         
 # #need to replace these with references to the config yml
@@ -82,11 +82,11 @@ roi_data = get_roi_data(nii_raw_files,mask_df)
 
 
 for s in roi_data.keys():
-    print(s)
+    print(s,flush=True)
     for wave in roi_data[s].keys():
         print(wave)
         print(roi_data[s][wave].shape)
-        print(roi_data[s][wave].columns)
+        print(roi_data[s][wave].columns,flush=True)
         
 
 

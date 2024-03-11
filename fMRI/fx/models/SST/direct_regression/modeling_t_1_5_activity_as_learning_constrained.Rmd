@@ -142,7 +142,6 @@ sst_all_data <- get_expected_tone_time(sst_all_data)
 sst_all_data<-calculate_response_latency(sst_all_data)
 sst_all_data<-calculate_rpe(sst_all_data)
 
-
 # sst_all_data %>% select(
 #   subid, waveid, runid, reaction_time_clean, SSD_recorded,condition, last_tone_delay, trials_since_last_SSD,last_correct_go)# %>%
 #   #View()
@@ -432,6 +431,14 @@ anova(model_P_stop_trial_w_change, model_P_stop_trial_w_change_no_p_stop_d)
 
 
 # Just FS Trials
+
+
+```{r}
+length(unique(trial_summary_data$subid))
+subjects_in_table_3_analysis <- unique(trial_neural_behav_roi$subid)
+length(subjects_in_table_3_analysis)
+print(subjects_in_table_3_analysis)
+```
 
 ```{r}
 

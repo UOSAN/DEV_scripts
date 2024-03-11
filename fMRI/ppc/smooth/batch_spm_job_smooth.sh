@@ -9,13 +9,13 @@
 STUDY=/projects/sanlab/shared/DEV/DEV_scripts
 
 # Set subject list
-SUBJLIST=`cat missing_subj_list_20230220_w2.txt`
+SUBJLIST=`cat subject_list_single_col_20230720.txt`
 
 # Which SID should be replaced?
 REPLACESID=DEV001
 
 # Which wave(s) to run? (e.g. WAVE=1:2 or WAVE=2)
-WAVE=2
+WAVE=1:2
 
 # SPM Path
 SPM_PATH=/projects/sanlab/shared/spm12
@@ -46,6 +46,7 @@ for SUB in $SUBJLIST; do
 	# Set MATLAB script path
 	for TASK in ${TASKS[@]}; do
 		SCRIPT=${STUDY}/fMRI/ppc/smooth/smooth_${TASK}.m # update script name if applicable
+		echo "running script ${SCRIPT} for ${SUB}, and task ${TASK}"
 
 		# Run task job
 	 	sbatch --dependency=singleton --export ALL,REPLACESID=$REPLACESID,WAVE=$WAVE,SCRIPT=$SCRIPT,SUB=$SUB,SPM_PATH=$SPM_PATH,  \

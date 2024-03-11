@@ -28,8 +28,26 @@ library(tidyverse)
 # load data
 ```{r}
 #motion = read.csv("~/Users/deniciaaragon/Desktop/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
-motion = read.csv("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
+#motion = read.csv("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
+#motion = read.csv("~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/auto-motion-fmriprep/summary/DEV_summaryRun.csv")
+motion = read.csv("/Users/benjaminsmith/Library/CloudStorage/GoogleDrive-benjsmith@gmail.com/My Drive/oregon/data/DEV/bids_data/derivatives/auto-motion-fmriprep/DEV_summaryRun.csv")
+
 ```
+Clean the data--didn't come through quite right.
+```{r}
+motion[,c("task","run")] <- str_match(motion$task,pattern = "(.*)_acq-(\\d)")[,2:3]
+motion <- motion %>% mutate(
+  wave =stringr::str_replace(motion$wave,"wave","")%>% as.integer()
+)
+
+```
+
+
+
+```{r}
+motion
+```
+
 
 # summarize by task
 ```{r}
@@ -132,13 +150,25 @@ motion %>% group_by(subjectID) %>%
 
 motion_table <- motion %>%
   mutate(scan= paste0(task, run)) %>%
-  select(-run, -task,-nVols) %>%
+  select(-run, -task,-nVols,-nVols_factor) %>%
   tidyr::spread(scan,percent) %>% 
   arrange(wave, subjectID)
 
 
 motion_table %>% readr::write_csv("motion_percent_summary.csv")
-  
 ```
 
+
+
+```{r}
+
+motion_table <- motion %>%
+  mutate(scan= paste0(task, run)) %>%
+  select(-run, -task,-nVols,-nVols_factor,-excluded_run) %>%
+  tidyr::spread(scan,percent) %>% 
+  arrange(wave, subjectID)
+
+
+motion_table %>% readr::write_csv("motion_percent_summary_by_wave.csv")
+```
 

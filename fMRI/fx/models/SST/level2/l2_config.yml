@@ -1,16 +1,67 @@
+default:
+
 UO-2010763:
   sst_wave1_path:  /Users/bensmith/Documents/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/
   nonbids_data_path: /Users/bensmith/Documents/data/DEV/nonbids_data/
   dev_scripts_path: '/Users/bensmith/Documents/code/DEV_scripts'
   dropbox_datapath: /Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
-Benjamins-MacBook-Pro-2.local:
+  sst_level_2_path: /Users/bensmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/level2/SST/
+  spm_path: /Users/bensmith/spm12
+  template_mlr_main: /Users/bensmith/Documents/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_main.m
+  template_mlr_confounder_no_centering: /Users/bensmith/Documents/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_confounder_no_centering.m
+  template_mlr_consess: /Users/bensmith/Documents/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_consess.m
+  template_mlr_conspec: /Users/bensmith/Documents//code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_conspec.m
+UO-2010765:
+  nonbids_data_path: /Users/denicia/DEV/nonbids_data/
+  dropbox_data_path: /Users/denicia/Dropbox (University of Oregon)/Berkman Lab/Devaluation/analysis_files/data
+  ml_data_folderpath: /Users/denicia/DEV/nonbids_data/fMRI/ml
+  dev_scripts_path: /Users/denicia/DEV/DEV_scripts
+  ml_scripting_path: /Users/denicia/DEV/DEV_scripts/fMRI/ml
+  wtp_level1_path: /Users/denicia/DEV/nonbids_data/fMRI/fx/models/WTP/all_waves/conditions
+  wtp_level2_path: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/WTP/level2/
+  spm_l2_script_template_filepath: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_design_estimate.m
+  spm_path: /Users/denicia/spm12
+  spm_l2_script_w_confounders_template_filepath: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_design_estimate.m
+  confounder_template_path: /Users/denicia/DEV/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_confounder.m
+Benjamins-MacBook-Pro-3.local:
   sst_wave1_path:  /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/
+  sst_allwaves_path: /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/all_waves/
   spm_l2_script_template_filepath: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_design_estimate.m
+  spm_l2_script_w_confounders_template_filepath: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_design_estimate.m
+  confounder_template_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_confounder.m
   nonbids_data_path: /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/
   dev_scripts_path: '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts'
-  sst_level_2_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/
+  sst_level_2_path: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/level2/SST/
   dropbox_datapath: /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
   spm_path: /Users/benjaminsmith/spm12
+  automotion_output_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/motion_percent_summary.csv
+  template_mlr_main: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_main.m
+  template_mlr_confounder_no_centering: /Users/benjaminsmith/Google Drive/oregon//code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_confounder_no_centering.m
+  template_mlr_consess: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_consess.m
+  template_mlr_conspec: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_conspec.m
+  mask_location: /Users/benjaminsmith/Google Drive/oregon/data/DEV/brainmaps/
+Benjamins-MacBook-Pro-2.local:
+  rubric_dir:             /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/DEV_scoring_rubrics
+  dropbox_datapath:       /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/data/
+  nonbids_data_path: /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/
+  sst_wave1_path:  /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/
+  fmriprep_dir: /Users/benjaminsmith/Google Drive/oregon/data/DEV/bids_data/derivatives/fmriprep_2022/
+  spm_l2_script_template_filepath: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_design_estimate.m
+  spm_l2_script_w_confounders_template_filepath: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_design_estimate.m
+  confounder_template_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_confounder.m
+  automotion_output_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/motion/motion_percent_summary.csv
+  confounder_consess_template_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_consess.m
+  confounder_conspec_template_path: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_with_confounders_conspec.m
+  input_mat_path:                 /Users/benjaminsmith/oregon/code/DEV_scripts/fMRI/fx/multiconds/SST/full_duration/conditions
+  dev_scripts_path:               '/Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts'
+  sst_level_2_path:               /Users/benjaminsmith/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/analysis_files/level2/SST/
+  spm_path: /Users/benjaminsmith/spm12
+  nii_raw_path: sub-DEV*/ses-wave*/func/s6_sub-DEV*_ses-wave*_task-SST_acq-1_space-MNI152NLin2009cAsym_desc-preproc_bold.nii
+  mask_location: /Users/benjaminsmith/Google Drive/oregon/data/DEV/brainmaps/
+  template_mlr_main: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_main.m
+  template_mlr_confounder_no_centering: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_confounder_no_centering.m
+  template_mlr_consess: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_consess.m
+  template_mlr_conspec: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/templates/multiple_regression/template_conspec.m
 dyn-10-109-32-78.wless.uoregon.edu:
   sst_wave1_path:  /Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/
   spm_l2_script_template_filepath: /Users/benjaminsmith/Google Drive/oregon/code/DEV_scripts/fMRI/fx/models/SST/level2/template_one_sample_design_estimate.m

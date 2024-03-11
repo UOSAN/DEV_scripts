@@ -1,4 +1,5 @@
 import glob
+import os
 import pandas as pd
 import re
 import nilearn as nil
@@ -24,6 +25,102 @@ from socket import gethostname
 # then create n_{ROI}*n_{trial classes} graphs of samples, where x is the time from trial class reveal to image, and y is the measurement. plot a lowess curve.
 # potentially overlay the lowess curves for each trial type so that the response within each ROI can be easily compared.
 
+def get_beta_img(beta_img_filepath):
+    #first check if the file exists
+    if not os.path.isfile(beta_img_filepath):
+        print("file " + beta_img_filepath + " does not exist")
+        return(None)
+        
+    active_img = image.load_img(beta_img_filepath)
+    if len(active_img.shape) == 4:
+        #this only applies for image series; it's not relevant for individual beta images
+        active_img = nil.image.clean_img(active_img)
+        
+    return active_img
+
+
+def signature_weight_3d_subject_image(signature_raw, active_img_cleaned):
+    signature_in_subj_space = nil.image.resample_img(signature_raw, 
+        target_affine=active_img_cleaned.affine,target_shape = active_img_cleaned.shape)
+    
+    nifti_weighted = nil.image.math_img("img1*img2", img1=signature_in_subj_space, img2=active_img_cleaned)
+    
+    signature_weighted_voxels = nifti_weighted.get_fdata()[~np.isnan(nifti_weighted.get_fdata())]
+    return(signature_weighted_voxels)
+
+def signature_weight_4d_subject_image(signature_raw, active_img_cleaned):
+    signature_in_subj_space = nil.image.resample_img(
+        signature_raw, 
+        target_affine=active_img_cleaned.affine,
+        target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
+    
+    #check how much memory this variable is using
+    #print(signature_in_subj_space.get_fdata().nbytes)
+    #repe
+    signature_full_series = nil.image.concat_imgs([signature_in_subj_space]*active_img_cleaned.shape[3])
+    
+    nifti_weighted = nil.image.math_img("img1*img2", img1=signature_full_series, img2=active_img_cleaned)
+    del signature_full_series
+    
+    #signature_weighted_voxels = nifti_weighted.get_fdata()[~np.isnan(nifti_weighted.get_fdata())]
+    swv=[nifti_weighted.slicer[:,:,:,t].get_fdata()[~np.isnan(nifti_weighted.slicer[:,:,:,t].get_fdata())] for t in range(nifti_weighted.shape[3])]
+    del nifti_weighted
+    #concatenate the list of arrays into a 2D array
+    signature_weighted_voxels = np.vstack(swv)#.T
+    return(signature_weighted_voxels)
+
+
+def get_dot_product_4d_series(comparison_3d_img, image_4d_series):
+    comparison_3d_img_resampled = nil.image.resample_img(
+        comparison_3d_img, 
+        target_affine=image_4d_series.affine,
+        target_shape = image_4d_series.slicer[:,:,:,0].shape)
+    
+    dot_product_series = np.zeros(image_4d_series.shape[3])
+
+    for i in range(image_4d_series.shape[3]):
+        dot_product_i = np.dot(image_4d_series.slicer[:,:,:,i].get_fdata(),comparison_3d_img_resampled.get_fdata())
+        dot_product_series[i] = dot_product_i
+
+    return(dot_product_series)
+
+
+
+
+def mask_4d_subject_image(mask_raw, active_img_cleaned,bin_threshold=None):
+    mask_in_subj_space = nil.image.resample_img(
+        mask_raw, 
+        target_affine=active_img_cleaned.affine,
+        target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
+    return(subject_space_mask_image(mask_in_subj_space, active_img_cleaned, bin_threshold=bin_threshold))
+
+def mask_3d_subject_image(mask_raw, active_img_cleaned, bin_threshold=None):
+    mask_in_subj_space = nil.image.resample_img(mask_raw, 
+        target_affine=active_img_cleaned.affine,target_shape = active_img_cleaned.shape)
+    return(subject_space_mask_image(mask_in_subj_space, active_img_cleaned, bin_threshold=bin_threshold))
+
+
+def subject_space_mask_image(mask_in_subj_space, active_img_cleaned,bin_threshold=None):
+    mask_data = mask_in_subj_space.get_fdata()
+
+    if len(np.unique(mask_data))==2:
+        print("mask is already binarized; skipping binarization step")
+        active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_in_subj_space)
+    else:
+        if bin_threshold is None:
+            #middle of the range of greatest and least;
+            #useful when the image is _almost_ binary but not quite, say, because a transform has created
+            #a few voxels on the border that are mixed
+            bin_threshold = (mask_in_subj_space.get_fdata().max()-mask_in_subj_space.get_fdata().min())/2
+            print("binarizing mask with threshold " + str(bin_threshold))
+
+        mask_binarized = nil.image.binarize_img(mask_in_subj_space,threshold=bin_threshold)
+        mask_binarized_fdata = mask_binarized.get_fdata()
+        print("proportion of image active: " + str(np.sum(mask_binarized_fdata==np.max(mask_binarized_fdata))/np.prod(mask_binarized_fdata.shape)))
+        active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_binarized)
+
+    return(active_img_masked)
+
 
 def get_roi_data(nii_raw_files, mask_df):
     roi_data = {}
@@ -35,7 +132,7 @@ def get_roi_data(nii_raw_files, mask_df):
         dev_wave = match_data[2]
 
         #print(basename(nii))
-        print(dev_name + ", " + dev_wave)
+        print(dev_name + ", " + dev_wave,flush=True)
 
         active_img = image.load_img(nii)
         active_img_cleaned = nil.image.clean_img(active_img)
@@ -47,10 +144,6 @@ def get_roi_data(nii_raw_files, mask_df):
             roi_data[dev_name]={}
         
         run_df = pd.DataFrame(index=range(0,run_len))
-        #run_df = pd.DataFrame({'image_id':range(0,run_len)})
-        #run_df['TR_onset']=run_df.image_id*TR
-
-
         
         for m_i, m_set in mask_df.iterrows():
             print(m_set['mask_label'])
@@ -58,16 +151,8 @@ def get_roi_data(nii_raw_files, mask_df):
             
             #active_mask = nilearn.masking.compute_brain_mask(m_set['mask_path'])
             mask_raw = nil.image.load_img(m_set['mask_path'])
-            mask_in_subj_space = nil.image.resample_img(mask_raw, target_affine=active_img_cleaned.affine,target_shape = active_img_cleaned.slicer[:,:,:,0].shape)
-            #work out whether the mask is already binarized
-            mask_raw_data = mask_raw.get_fdata()
-            if len(np.unique(mask_raw_data))==2:
-                print("mask is already binarized; skipping binarization step")
-                active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_in_subj_space)
-            else:
-                
-                mask_binarized = nil.image.binarize_img(mask_in_subj_space,threshold=50)
-                active_img_masked = nil.masking.apply_mask(active_img_cleaned, mask_binarized)
+
+            active_img_masked = mask_4d_subject_image(mask_raw,active_img_cleaned)
 
             activity_vector = active_img_masked.mean(axis=1)
             run_df[m_set['mask_label']]=activity_vector
@@ -127,7 +212,7 @@ def get_all_subj_df(roi_data, sst_all_behavioral_data):
     # tend to think looping through subjects makes more sense.)
     all_subj_df_list = [] 
     for s in roi_data.keys():
-        print(s)
+        print(s,flush=True)
         for wave in roi_data[s].keys():
             run_length = roi_data[s][wave].shape[0]
 

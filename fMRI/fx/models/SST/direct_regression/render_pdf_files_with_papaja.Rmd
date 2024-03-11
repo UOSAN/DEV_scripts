@@ -1,0 +1,94 @@
+---
+title: "Render PDF tables"
+author:
+  - name  : "Ben Smith"
+    affiliation: 1
+affiliation:
+  - id  : "1"
+    institution: "University of Oregon"    
+date: "2023-04-24"
+class: man
+output: 
+  papaja::apa6_pdf:
+    keep_tex: yes
+header-includes   :
+  - \usepackage{setspace}
+  - \doublespacing
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(papaja)
+```
+
+
+
+```{r}
+library(tidyverse)
+Sys.setenv(R_CONFIG_ACTIVE = Sys.info()["nodename"])
+print(Sys.info()["nodename"])
+library(stargazer)
+library(tidyverse)
+
+dropbox_dir <- config::get("dev_analysis_data_dir")
+
+#load(paste0(dropbox_dir,"/sst_paper_generation.Rdata"))
+```
+
+
+
+```{r}
+# trial_neural_behav_roi_stop<-trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+# 
+# trial_neural_behav_roi_stop<- trial_neural_behav_roi_stop %>% 
+#   mutate(P_stop_trial_change_z_stop = (P_stop_trial_change-mean(P_stop_trial_change))/sd(P_stop_trial_change),
+#          post_pre_rt_change_z_stop = (post_pre_rt_change_z-mean(post_pre_rt_change_z))/sd(post_pre_rt_change_z)
+#          )
+# 
+# model_full_effects <- lme4::lmer(
+#    med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
+#   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+#   )
+# summary(model_full_effects)
+# 
+# model_no_rt<- lme4::lmer(
+#    med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
+#   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+#   )
+# 
+# anova(model_full_effects,model_no_rt)
+# model_no_p_stop<- lme4::lmer(
+#    med_post_trial_z ~ trial_n_s+ condition + post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
+#   trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+#   )
+# 
+# anova(model_full_effects,model_no_p_stop)
+# 
+# save(model_full_effects, model_no_p_stop, model_no_rt, file=paste0(dropbox_dir,"/sample_models.Rdata"))
+
+```
+
+
+```{r}
+load(paste0(dropbox_dir,"/sample_models.Rdata"))
+```
+
+
+```{r}
+
+
+table_full_effects = apa_table(papaja::apa_print(model_full_effects))
+table_full_effects
+
+```
+
+OK, seems like papaja won't compare two models.
+
+```{r}
+#knitr::kable(trial_neural_behav_roi_stop[1:5,1:5])
+```
+
+
+
+

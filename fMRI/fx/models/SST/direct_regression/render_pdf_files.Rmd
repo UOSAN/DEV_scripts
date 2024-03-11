@@ -1,0 +1,162 @@
+---
+title: "Try stargazer"
+author: "Ben Smith"
+output:
+  pdf_document: 
+    toc: yes
+    keep_tex: yes
+  html_document:
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+    theme: spacelab
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(stargazer)
+```
+
+
+
+```{r}
+load("modeling_t_5_10-activity.RData")
+```
+
+
+
+```{r}
+#create nomred versions of these columns
+trial_neural_behav_roi_stop<-trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+
+trial_neural_behav_roi_stop<- trial_neural_behav_roi_stop %>% 
+  mutate(P_stop_trial_change_z_stop = (P_stop_trial_change-mean(P_stop_trial_change))/sd(P_stop_trial_change),
+         post_pre_rt_change_z_stop = (post_pre_rt_change_z-mean(post_pre_rt_change_z))/sd(post_pre_rt_change_z)
+         )
+
+friendly_name_transform_table<-read_csv("friendly_names.csv")
+
+
+```
+
+
+```{r}
+
+model_full_effects_x_zs <- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change_z_stop+ post_pre_rt_change_z_stop + (1 +post_pre_rt_change_z_stop+P_stop_trial_change_z_stop  | subid),
+  trial_neural_behav_roi_stop)
+#summary(model_full_effects_x_zs)
+
+
+model_no_rt_x_zs<- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change_z_stop + (1 +post_pre_rt_change_z_stop  + P_stop_trial_change_z_stop  | subid),
+  trial_neural_behav_roi_stop)
+
+anova(model_full_effects_x_zs,model_no_rt_x_zs)
+model_no_p_stop_zs<- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + post_pre_rt_change_z_stop + (1 +post_pre_rt_change_z_stop  + P_stop_trial_change_z_stop  | subid),
+  trial_neural_behav_roi_stop)
+
+anova(model_full_effects_x_zs,model_no_p_stop_zs)
+
+
+model_base<- lme4::lmer(
+   med_post_trial_z ~ condition + (1 +post_pre_rt_change_z_stop  + P_stop_trial_change_z_stop  | subid),
+  trial_neural_behav_roi_stop)
+
+```
+
+```{r results="asis"}
+table_normed <- stargazer(model_base, model_no_rt_x_zs, model_no_p_stop_zs, model_full_effects_x_zs,title="asis Markdown")
+# 
+```
+
+```{r}
+allmodelsanova <- anova(model_base, model_no_rt_x_zs, model_no_p_stop_zs, model_full_effects_x_zs)
+allmodelsanova
+```
+
+
+```{r results="asis"}
+library(xtable)
+xtable(data.frame(allmodelsanova))
+
+```
+
+# without norming.
+
+For some reason the ANOVA and stargazer packages do different estimates. Maybe it's because these models are not well specified because of the scales. Let's try the original scale model I was working with.
+
+
+
+
+```{r}
+model_full_effects_incc <- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change+ post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+summary(model_full_effects_incc)
+
+model_no_rt<- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + P_stop_trial_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+
+anova(model_full_effects_incc,model_no_rt)
+model_no_p_stop<- lme4::lmer(
+   med_post_trial_z ~ trial_n_s+ condition + post_pre_rt_change + (1 +post_pre_rt_change  + P_stop_trial_change  | subid),
+  trial_neural_behav_roi %>% filter(trial_n>50 & condition %in% c("CorrectStop","FailedStop"))
+  )
+
+anova(model_full_effects_incc,model_no_p_stop)
+
+```
+
+```{r results="asis"}
+data_unscaled_anova<-anova(model_no_p_stop,model_no_rt,model_full_effects_incc)
+xtable(data.frame(data_unscaled_anova))
+```
+
+
+```{r results="asis"}
+data_unscaled <- stargazer(
+  model_no_p_stop, 
+  model_no_rt, 
+  model_full_effects_incc,
+  title="asis Markdown",
+  p=c(rep(list(rep(1,4)),2),list(rep(1,5)))
+  
+  )
+for (i in 1:nrow(friendly_name_transform_table)){
+  # data_unscaled <- lapply(data_unscaled,function(data_line){
+  #   gsub(
+  #     gsub("\\_", "\\\\\\\\_",friendly_name_transform_table$originalname[i]), 
+  #     friendly_name_transform_table$replacementname[i], data_line)
+  # }
+  # )
+  print(friendly_name_transform_table$originalname[i])
+  data_unscaled <- gsub(
+    gsub("\\_", "\\\\\\\\_",friendly_name_transform_table$originalname[i]),
+    friendly_name_transform_table$replacementname[i], data_unscaled)
+}
+
+```
+
+
+
+```{r}
+data_unscaled[[13]] <- "Fixed effects & (1) & (2) & (3)\\\\ "
+data_unscaled[[37]]<-"\\multicolumn{4}{r}{\\textit{Note:} Random effects of Post-Pre RT Change and P(Stop Trial) Change not shown} \\\\ "
+```
+
+
+
+
+```{r results='asis'}
+
+cat(data_unscaled,sep = "\n")
+
+```
+
