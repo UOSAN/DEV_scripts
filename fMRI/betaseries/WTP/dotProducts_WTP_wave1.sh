@@ -9,8 +9,7 @@ module load afni
 # Set paths and variables
 # ------------------------------------------------------------------------------------------
 # variables
-maps=$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
-template=/projects/sanlab/shared/DEV/nonbids_data/rois_patterns/craving_regulation_signature.nii
+maps=(/projects/sanlab/shared/DEV/nonbids_data/rois_patterns/nsc_koban_2mm.nii) #$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
 betasALL=`echo $(printf "beta_%04d.nii\n" {1..16}) $(printf "beta_%04d.nii\n" {22..37}) $(printf "beta_%04d.nii\n" {43..58}) $(printf "beta_%04d.nii\n" {64..79})`
 betasDEV125=`echo $(printf "beta_%04d.nii\n" {1..16}) $(printf "beta_%04d.nii\n" {22..36}) $(printf "beta_%04d.nii\n" {42..57}) $(printf "beta_%04d.nii\n" {63..78})`
 betasDEV172=`echo $(printf "beta_%04d.nii\n" {1..16}) $(printf "beta_%04d.nii\n" {22..22}) $(printf "beta_%04d.nii\n" {28..43}) $(printf "beta_%04d.nii\n" {49..64})`
@@ -42,14 +41,19 @@ betas=$betasDEV234
 else
 betas=$betasALL
 fi
-for beta in ${betas[@]}; do
-3dAllineate -source ${subdir}/${beta} -master ${template} -final NN -1Dparam_apply '1D: 12@0'\' -prefix ${subdir}/aligned_${beta}
+
+rm ${subdir}/aligned_*
 for map in ${maps[@]}; do
 map_name=$(echo ${map: 55})
+for beta in ${betas[@]}; do
+3dAllineate -source ${subdir}/${beta} -master ${map} -final NN -1Dparam_apply '1D: 12@0'\' -prefix ${subdir}/aligned_${beta}
 echo ${SUB} ${beta} ${map_name} `3ddot -dodot ${subdir}/aligned_${beta} ${map}` >> "${output_dir}"/"${SUB}"_dotProducts.txt
 done
+rm ${subdir}/aligned_*
 done
+
 done
+
 
 # Calculate volume mean intensities
 # ------------------------------------------------------------------------------------------

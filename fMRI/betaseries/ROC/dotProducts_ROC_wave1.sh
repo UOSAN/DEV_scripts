@@ -9,8 +9,7 @@ module load afni
 # Set paths and variables
 # ------------------------------------------------------------------------------------------
 # variables
-maps=$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
-template=/projects/sanlab/shared/DEV/nonbids_data/rois_patterns/craving_regulation_signature.nii
+maps=(/projects/sanlab/shared/DEV/nonbids_data/rois_patterns/nsc_koban_2mm.nii) #$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
 betasALL=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..47}) $(printf "beta_%04d.nii\n" {55..74}) $(printf "beta_%04d.nii\n" {82..101})`
 betasDEV022=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..47}) $(printf "beta_%04d.nii\n" {55..74}) $(printf "beta_%04d.nii\n" {82..89})`
 betasDEV060=`echo $(printf "beta_%04d.nii\n" {1..19}) $(printf "beta_%04d.nii\n" {27..46}) $(printf "beta_%04d.nii\n" {54..73}) $(printf "beta_%04d.nii\n" {81..100})`
@@ -31,30 +30,33 @@ fi
 cd ${image_dir}
 
 for subname in $(ls -d sub*); do
-	SUB=$(echo ${subname:4:6})
-	echo ${SUB}
-	subdir=${image_dir}/sub-${SUB}
-	if [ $subname == sub-DEV022 ]; then
-		betas=$betasDEV022
-	elif [ $subname == sub-DEV060 ]; then
-		betas=$betasDEV060
-	elif [ $subname == sub-DEV061 ]; then
-		betas=$betasDEV061
-	elif [ $subname == sub-DEV063 ]; then
-		betas=$betasDEV063
-	elif [ $subname == sub-DEV082 ]; then
-		betas=$betasDEV082
-	else
-		betas=$betasALL
-	fi
-	for beta in ${betas[@]}; do
-		3dAllineate -source ${subdir}/${beta} -master ${template} -final NN -1Dparam_apply '1D: 12@0'\' -prefix ${subdir}/aligned_${beta}
-		for map in ${maps[@]}; do
-			map_name=$(echo ${map: 55})
-			echo ${SUB} ${beta} ${map_name} `3ddot -dodot ${subdir}/aligned_${beta} ${map}` >> "${output_dir}"/"${SUB}"_dotProducts.txt
-		done
-	done
+SUB=$(echo ${subname:4:6})
+echo ${SUB}
+subdir=${image_dir}/sub-${SUB}
+if [ $subname == sub-DEV022 ]; then
+betas=$betasDEV022
+elif [ $subname == sub-DEV060 ]; then
+betas=$betasDEV060
+elif [ $subname == sub-DEV061 ]; then
+betas=$betasDEV061
+elif [ $subname == sub-DEV063 ]; then
+betas=$betasDEV063
+elif [ $subname == sub-DEV082 ]; then
+betas=$betasDEV082
+else
+betas=$betasALL
+fi
+rm ${subdir}/aligned_*
+for map in ${maps[@]}; do
+map_name=$(echo ${map: 55})
+for beta in ${betas[@]}; do
+3dAllineate -source ${subdir}/${beta} -master ${map} -final NN -1Dparam_apply '1D: 12@0'\' -prefix ${subdir}/aligned_${beta}
+echo ${SUB} ${beta} ${map_name} `3ddot -dodot ${subdir}/aligned_${beta} ${map}` >> "${output_dir}"/"${SUB}"_dotProducts.txt
 done
+rm ${subdir}/aligned_*
+done
+done
+
 
 # Calculate volume mean intensities
 # ------------------------------------------------------------------------------------------

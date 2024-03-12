@@ -5,13 +5,13 @@
 
 %% Load data and intialize variables
 %inputDir = '~/Dropbox (PfeiBer Lab)/Devaluation/Tasks/ROC/output';
-inputDir = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/ROC/output';
-%inputDir = '~/Dropbox (University of Oregon)/Berkman Lab/Devaluation/Tasks/ROC/output';
+%inputDir = '~/Dropbox (University of Oregon)/UO-SAN Lab/Berkman Lab/Devaluation/Tasks/ROC/output';
+inputDir = '~/Dropbox (University of Oregon)/Berkman Lab/Devaluation/Tasks/ROC/output';
 runNames = {'run1', 'run2', 'run3', 'run4'};
 waveNames = {'1', '2'};
 
-%writeDir = '~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
-writeDir = '~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
+writeDir = '~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
+%writeDir = '~/Google Drive/oregon/code/DEV_scripts/fMRI/fx/multiconds/ROC/betaseries';
 studyName = 'DEV';
 filePattern = 'run'; 
 nTrials = 20;
@@ -33,6 +33,9 @@ fprintf(1, 'Excluded: %s\n', excluded{:})
 eventtable  = cell2table(cell(0,7), 'VariableNames', {'file', 'subjectID', 'wave', 'run', 'rating', 'rt', 'condition'});
 
 trials = {};
+
+task_files = {};
+
 %% Loop through subjects and runs and save names, onsets, and durations as .mat files
 for i = 1:numel(subjectID)
     sub = subjectID{i};
@@ -41,25 +44,36 @@ for i = 1:numel(subjectID)
         wave = waveNames{j};
         files = dir(fullfile(inputDir, sprintf('%s_%s_*%s*.mat', sub, wave, filePattern)));
 
-        % warn if there are not the correct number of files
-        if numel(files) > length(runNames)
-            warning('Excess of files. Subject %s has %d files for wave %s. Expected %d. If there are duplicate files the last one will be selected.', sub, numel(files), wave,length(runNames))
-        end
-        if numel(files) < length(runNames)
-            warning('Run files missing. Subject %s has %d files for wave %s. Expected %d', sub, numel(files), wave,length(runNames))
-        end
+%         % warn if there are not the correct number of files
+%         if numel(files) > length(runNames)
+%             warning('Excess of files. Subject %s has %d files for wave %s. Expected %d. If there are duplicate files the last one will be selected.', sub, numel(files), wave,length(runNames))
+%         end
+%         if numel(files) < length(runNames)
+%             warning('Run files missing. Subject %s has %d files for wave %s. Expected %d', sub, numel(files), wave,length(runNames))
+%         end
 
         % log missing trial info
         trials{i+j+rowNum,1} = sub;
         trials{i+j+rowNum,2} = wave;
+        
+        % load task file info
+        task_files{i+j+rowNum,1} = sub;
+        task_files{i+j+rowNum,2} = wave;
 
         for k = 1:numel(runNames)
             %% Load text file
             run = runNames{k};
             runFile = dir(fullfile(inputDir, sprintf('%s_%s_*%s*.mat', sub, wave, run)));
             subFileName = {runFile.name};
+            
+            % log number of task files for the run
+            task_files{i+j+rowNum,k+2} = numel(runFile);
 
             if ~isempty(subFileName)
+                if numel(runFile) > 1
+                    warning('Duplicate runs. Subject %s has %d files for run %d wave %s.', sub, numel(runFile), k, wave)
+                end
+
                 subFile = sprintf('%s/%s', inputDir, subFileName{end}); %select the last file
 
                 if exist(subFile)
@@ -117,7 +131,7 @@ for i = 1:numel(subjectID)
                         if ~exist(writeDir); mkdir(writeDir); end
 
                         if ~(isempty(onsets{1}) && isempty(onsets{2}))
-                            save(fullfile(writeDir,outputName),'names','onsets','durations');
+                             save(fullfile(writeDir,outputName),'names','onsets','durations');
                         else
                             warning('File is empty. Did not save %s.', outputName);
                         end
@@ -157,17 +171,24 @@ for i = 1:numel(subjectID)
                 else
                     warning('Unable to load subject %s run %s.', sub, run);
                 end
+            else
+                warning('Missing runs. Subject %s has %d files for run %d wave %s.', sub, numel(runFile), k, wave)
             end
         end
     end
     rowNum = rowNum+1;
 end
-  
-% save missing trial inf
+
+% save missing trial inf0
 %trials(cellfun('isempty', trials)) = {NaN};
 table = cell2table(trials,'VariableNames',[{'subjectID'}, {'wave'}, runNames{:}]);
 writetable(table,fullfile(writeDir, 'trials.csv'),'Delimiter',',')
 fprintf('\nTrial info saved in %s\n', fullfile(writeDir, 'trials.csv'))
+
+% save task file inf0
+table = cell2table(task_files,'VariableNames',[{'subjectID'}, {'wave'}, runNames{:}]);
+writetable(table,fullfile(writeDir, 'task_files.csv'),'Delimiter',',')
+fprintf('\nTask file info saved in %s\n', fullfile(writeDir, 'task_files.csv'))
 
 % save event info
 writetable(eventtable,fullfile(writeDir, 'events.csv'),'Delimiter',',')
