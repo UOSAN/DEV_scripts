@@ -47,7 +47,7 @@ for W in 1 2; do
     SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/ROC/fx_betaseries_wave_i.m
 
     # Set subject list
-    SUBJLIST="roc_run_data_quality_w${W}_20240311.tsv"
+    SUBJLIST="roc_run_data_quality_w${W}_20240312.tsv"
 
 
     #set -x

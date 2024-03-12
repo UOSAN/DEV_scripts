@@ -522,7 +522,8 @@ def get_session_data_quality_l1(
     )
     return(all_data_by_session)
 
-def get_overall_session_data_quality(dropbox_datapath, image_folder_df = None, task_data_df=None, automotion_datapath=None):
+def get_overall_session_data_quality(dropbox_datapath, image_folder_df = None, task_data_df=None, automotion_datapath=None,
+                                     exclude_automotion_quality_less_than_2=True):
     """
     Gets session data quality but unspecific to the specific task, so, does not check for the presence of beta files.
 
@@ -622,7 +623,7 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df = None, t
         data_by_session_merge4 = data_by_session_merge3
     
 
-    all_data_by_session = data_by_session_merge3
+    all_data_by_session = data_by_session_merge4
 
     all_data_by_session.sort_values(['subject_id','wave_id'], inplace=True)
     all_data_by_session.reset_index(inplace=True, drop=True)
@@ -645,6 +646,11 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df = None, t
     motion_wtp_cols = ['automotion_exclude_WTP' + str(i) + '' for i in range(1,5)]
     motion_roc_cols = ['automotion_exclude_ROC' + str(i) + '' for i in range(1,5)]
 
+    if task_data_df is not None:
+        behav_task_cols = [c for c in task_data_df.columns if re.match(r'(behav_present)_(ROC|WTP|SST)_\d', c)]
+    else:
+        behav_task_cols = []
+
     
     exclusion_columns =  (['data_by_ppt_merge_status'] + redcap_sst_cols + 
                           redcap_wtp_cols + 
@@ -655,7 +661,8 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df = None, t
                             labelled_roc_cols + 
                             motion_sst_cols +
                             motion_wtp_cols +
-                            motion_roc_cols
+                            motion_roc_cols + 
+                            behav_task_cols
     )
 
     other_cols = [c for c in all_data_by_session.columns if c not in indicator_cols + exclusion_columns]
@@ -702,16 +709,27 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df = None, t
         task_cols_quality = [col + '_quality' for col in task_cols]
 
         #now exclude any rows where the sum of the quality columns is less than 2, but ONLY IF they are WTP or ROC.
-        if task in ['WTP', 'ROC']:
-            exclude_set = all_data_by_session[task_cols_quality].sum(axis=1)<2
-            all_data_by_session.loc[exclude_set, task_cols_quality] = 0
+        if exclude_automotion_quality_less_than_2:
+            if task in ['WTP', 'ROC']:
+                exclude_set = all_data_by_session[task_cols_quality].sum(axis=1)<2
+                all_data_by_session.loc[exclude_set, task_cols_quality] = 0
         #now quantify the overall quality, indicating whether, 
         # across all cols in task_cols, at least one column has quality
         all_data_by_session['automotion_' + task + '_quality_any'] = all_data_by_session[task_cols_quality].apply(lambda x: 1 if x.sum()>0 else 0, axis=1)
 
+    #behavioral; this may not have all tasks included.
+    if len(behav_task_cols)>0:
+        for col in behav_task_cols:
+            #0 for exclude, 1 for include
+            btc_copy = all_data_by_session[col].copy()
+            btc_copy.loc[btc_copy.isna()]=False
+            all_data_by_session[col + '_quality'] = btc_copy.apply(lambda x: int(x))
+
+        #all_data_by_session['behav_present_' + task + '_quality_any'] = all_data_by_session[task_cols_quality].apply(lambda x: 1 if x.sum()>0 else 0, axis=1)
+
 
     #find columns with 'redcap' in the name
-    [c for c in all_data_by_session.columns if re.match(r'.*(redcap).*', c)]
+    #[c for c in all_data_by_session.columns if re.match(r'.*(redcap).*', c)]
 
     #now combine across the three quality indicators
     task_run_counts = {
@@ -729,23 +747,22 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df = None, t
             )
         else:
             for run_i in range(1, task_run_count+1):
-                all_data_by_session['combined_' + task + str(run_i) + '_quality' + str(run_i)] = (
-                    all_data_by_session[[
+                cols = [
                         'redcap_' + task + str(run_i) + '_quality', 
                         'labelled_exclusion_' + task + str(run_i) + '_Exclude_quality',
-                        'automotion_exclude_' + task + str(run_i) + '_quality'
-                        ]].apply(lambda x: 1 if x.sum()==3 else 0, axis=1)
+                        'automotion_exclude_' + task + str(run_i) + '_quality']
+                behav_col = 'behav_present_' + task + "_" + str(run_i) + '_quality'
+                if behav_col in all_data_by_session.columns:
+                    cols.append(behav_col)
+                all_data_by_session['combined_' + task + str(run_i) + '_quality' + str(run_i)] = (
+                    all_data_by_session[cols].apply(lambda x: 1 if x.sum()==len(cols) else 0, axis=1)
                 )
                 #build a string array for the reasons for exclusion
                 
 
                 xrcn= 'combined_' + task + str(run_i) + '_quality_exclusion_reasons'
 
-                all_data_by_session[xrcn] = all_data_by_session[[
-                    'redcap_' + task + str(run_i) + '_quality', 
-                    'labelled_exclusion_' + task + str(run_i) + '_Exclude_quality',
-                    'automotion_exclude_' + task + str(run_i) + '_quality'
-                    ]].apply(lambda x: ", ".join(x.index[x==0].tolist()),axis=1)
+                all_data_by_session[xrcn] = all_data_by_session[cols].apply(lambda x: ", ".join(x.index[x==0].tolist()),axis=1)
 
 
 
