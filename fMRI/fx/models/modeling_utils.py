@@ -1,4 +1,4 @@
-
+import warnings
 from glob import glob
 import re
 from socket import gethostname
@@ -8,6 +8,7 @@ from yaml import SafeLoader
 import yaml
 import paramiko
 import numpy as np
+
 
 def load_config(config_path = None):
     if config_path is None: config_path = 'config.yml'
@@ -291,6 +292,7 @@ def get_subject_wise_table_with_task_counts(full_table):
     return (subject_wise_table)
 
 def get_subject_wave_wise_table_with_task_counts(full_table):
+    full_table = full_table.copy()
     subject_wise_table = get_subject_wise_table(full_table)
     #create a double subject_wise_table, with every row repeated for each of the two waves
     subject_wave_wise_table = pd.concat([subject_wise_table.copy(),subject_wise_table.copy()],axis=0)
@@ -301,7 +303,7 @@ def get_subject_wave_wise_table_with_task_counts(full_table):
         task_quality_list_col =task + '_quality_list'
         #create a list of the indices of the runs that are not zero
         active_run_list_function = lambda run_binary: [i + 1 for i, x in enumerate(run_binary.tolist()) if x != 0]
-        full_table[task_quality_list_col] = full_table.filter(regex='(combined)_' + task + '\d_quality').apply(active_run_list_function,axis=1).tolist()
+        full_table[task_quality_list_col] = full_table.filter(regex='(combined)_' + task + '\d_quality\d*$').apply(active_run_list_function,axis=1).tolist()
 
         #now create a list of the lists, grouping by subID
         quality_list_by_sid = full_table[['SID','wave_id',task_quality_list_col]].copy()#.apply(lambda x: json.dumps(x)).reset_index(name=task_quality_list_col)
@@ -413,15 +415,35 @@ def get_session_data_quality_l2(
     #now combine:
     all_data_by_session = get_overall_session_data_quality(
         dropbox_datapath,
-        image_folder_df = beta_df
+        task_data_df = beta_df
     )
     return(all_data_by_session)
+def get_available_mat_files(mat_dir):
+    
+    mat_files = glob(mat_dir + "DEV*.mat")
+    #now use regex extract to extract DEV ID, wave ID, and run ID
+    mat_files_df = pd.DataFrame({'behav_mat_raw_filepath':mat_files})
+
+    #get just hte filenames form the paths
+    mat_files_df['behav_mat_raw_filename'] = mat_files_df.behav_mat_raw_filepath.str.extract(r'([^\/]+$)')
+
+    # extract DEV ID, wave ID, task type, and run ID using regex from each row with a single extract command extracting multiple groups
+    mat_files_df[['subject_id','wave_id','task_type','run_id']] = mat_files_df.behav_mat_raw_filename.str.extract(r'(DEV\d+)_(\d)_(\w+)(\d+).mat')
+    #now sort
+    mat_files_df.sort_values(by=['subject_id','wave_id','task_type','run_id'], inplace=True)
+
+    mat_files_df.wave_id = mat_files_df.wave_id.astype(int)
+    #return
+    return(mat_files_df)
+
+
 
 
 def get_session_data_quality_l1(
-        image_folder_glob,
         dropbox_datapath,
         automotion_datapath,
+        image_folder_glob = None,
+        behavioral_data_folderpath = None,
         task='SST'
         ):
     """
@@ -431,32 +453,76 @@ def get_session_data_quality_l1(
     subj_wave_inclusion can be "all" to only include subjects where ALL waves are present or "any" to include subjects 
     where any wave is present.
     """
-    image_folder_paths = glob(
-        image_folder_glob)
-    #scan_list = ["'" + bp + ",1'" for bp in image_folder_paths]
+    if image_folder_glob is None:
+        #warn but do not stop execution
+        warnings.warn("image_folder_glob is None; not checking for presence of images.")
 
-    # for sli in scan_list:
-    #     print(sli)
+        
+        image_folder_df = None
+    else:
+        image_folder_paths = glob(
+            image_folder_glob)
+        #scan_list = ["'" + bp + ",1'" for bp in image_folder_paths]
 
-    # turn the scan list into a dataframe we can match on.
-    subj_image_folder_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in image_folder_paths]
-    image_folder_df = pd.DataFrame({
-        'subject_id': subj_image_folder_list,
-        'spm_output_path': image_folder_paths#,
-        #'spm_output_path_description': scan_list
-    })
+        # for sli in scan_list:
+        #     print(sli)
+
+        # turn the scan list into a dataframe we can match on.
+        subj_image_folder_list = [re.match(".*sub-(DEV\d*)/", sli)[1] for sli in image_folder_paths]
+        image_folder_df = pd.DataFrame({
+            'subject_id': subj_image_folder_list,
+            'spm_output_path': image_folder_paths#,
+            #'spm_output_path_description': scan_list
+        })
+
+    if behavioral_data_folderpath is None:
+        raise Warning("behavioral_data_folderpath is None; not checking for presence of behavioral data.")
+        mat_files_wide = None
+    else:
+        mat_files = get_available_mat_files(behavioral_data_folderpath)
+        mat_files['file_present'] = True
+        #prepend 'behav_' to the column names of the mat_files
+        
+        #only get the rows where the task type matches the task
+        mat_files = mat_files[mat_files.task_type==task]
+        
+        #now pivot long so that we have a row for each subject/wave; fill in the file_present column with False where it is missing
+        mat_files_wide = mat_files.pivot(index=['subject_id','wave_id'], columns=['task_type','run_id'], values='file_present').reset_index()
+        #and flatten the column names
+        mat_files_wide.columns = ['_'.join(col).strip().strip("_") for col in mat_files_wide.columns.values]
+        for c in mat_files_wide.columns[2:]:   
+            mat_files_wide.loc[mat_files_wide[c].isna(),c]=False
+
+        mat_files_wide.columns = ['behav_present_' + c for c in mat_files_wide.columns]
+
+    # if image_folder_glob is None and behavioral_data_folderpath is None:
+    #     raise Exception("either image_folder_glob or behavioral_data_folderpath must be specified. Otherwise this function does nothing in particular.")
+    # elif image_folder_glob is not None and behavioral_data_folderpath is None:
+    #     combined_task_data = image_folder_df
+    # elif image_folder_glob is None and behavioral_data_folderpath is not None:
+    #     combined_task_data = mat_files_wide
+    #     #rename subject ID column to match the other dataframes
+        
+    #     combined_task_data.rename(columns={'behav_present_subject_id':'task_data_subject_id'}, inplace=True)
+    # else:
+    #     #merge the two dataframes
+    #     combined_task_data = image_folder_df.merge(mat_files_wide, left_on='subject_id', right_on='behav_present_subject_id', how='outer')
+    #     combined_task_data['task_data_subject_id'] = [r['beta_subject_id'] if not pd.isna(r['beta_subject_id']) else r['behav_present_subject_id'] for i, r in combined_task_data.iterrows()]
+    #     raise NotImplementedError("before merging these dataframes, check whether image_folder_df has wave IDs, and iif it does, merge on those too.")
+
+        
+
 
     #now combine:
     all_data_by_session = get_overall_session_data_quality(
         dropbox_datapath,
         image_folder_df = image_folder_df,
+        task_data_df = mat_files_wide,
         automotion_datapath = automotion_datapath
     )
     return(all_data_by_session)
 
-
-
-def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, automotion_datapath=None):
+def get_overall_session_data_quality(dropbox_datapath, image_folder_df = None, task_data_df=None, automotion_datapath=None):
     """
     Gets session data quality but unspecific to the specific task, so, does not check for the presence of beta files.
 
@@ -500,30 +566,6 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
     automotion_exclude.columns = ['automotion_exclude_' + c for c in automotion_exclude.columns]
 
     
-
-    # general_motion_exclusion_binvec = motion_exclusions['Exclude'].str.contains('exclude', flags=re.IGNORECASE)
-    # task_motion_exclusions_binvec = motion_exclusions[task + "_Exclude"].str.contains('exclude', flags=re.IGNORECASE)
-    # motion_exclusions2 = motion_exclusions.loc[:,['subjectID','wave']][general_motion_exclusion_binvec | task_motion_exclusions_binvec]
-    #get thes ubset of redcap_data_quality
-    #  where dev_id, wave pairs are not in motion_exclusions2
-    #convert motion_exclusions2 into a list of tuples
-    # motion_exclusions2_tuples = [tuple(x) for x in motion_exclusions2[['subjectID','wave']].to_numpy()]
-    # usable_sessions_tuples = [tuple(x) for x in redcap_data_quality
-    # [['dev_id','wave']].to_numpy()]
-    # usable_sessions2= redcap_data_quality
-    # [[(r not in motion_exclusions2_tuples) for r in usable_sessions_tuples]]
-
-
-    #redcap_data_quality
-    #  = redcap_data_quality
-    # [redcap_data_quality
-    # ['subjectID'].isna()]
-    # print(str(len(redcap_data_quality
-    # )) + " sessions remaining on the provisional useable_dev_id list from the redcap list after excluding subjects excluded by motion quality process.")
-
-    #raise NotImplementedError("this still ruels out whole sets of ROC and WTP for single runs that are out; we should be more precise than this.")
-    #raise NotImplementedError("need to re-write this to handle exclusion for WTP and ROC as well as SST, depnding on task passed in to the function")
-
     #data quality cols are: 
     # data_by_ppt:  data_by_ppt_merge_status
     # redcap_data_quality: redcap_SST
@@ -545,6 +587,7 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
     # data_missing_includes: columns preceded with 'manual_exclude_{Task}'
     # motion_exclusions: motion_exclusions_Exclude, motion_exclusions_{Task}_Exclude
     #first merge by-participant data
+
     if image_folder_df is not None:
         image_folder_df.rename(columns={'subject_id':'beta_subject_id'}, inplace=True)
         data_by_ppt_all = image_folder_df.merge(data_by_ppt, left_on='beta_subject_id', right_on='SID', how='outer')
@@ -554,6 +597,7 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
     else: #no session data; create a table that stores everything except beta data about useable sessions.
         data_by_ppt_all = data_by_ppt
         data_by_ppt_all['subject_id'] = data_by_ppt_all['SID']
+
     #now merge by-session data
     data_by_session_merge1=redcap_data_quality.merge(labelled_exclusions, left_on=['redcap_dev_id','redcap_wave'], right_on=['labelled_exclusion_subjectID','labelled_exclusion_wave'], how='outer')
     #make sure there's a column that stores IDs across the merged columns
@@ -567,6 +611,15 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
     # now merge in the by-session data with automotion_exclude data
     data_by_session_merge3 = data_by_session_merge2.merge(automotion_exclude, left_on=['subject_id','wave_id'], right_on=['automotion_exclude_subjectID','automotion_exclude_wave'], how='outer')
 
+    if task_data_df is not None:
+        #this merges in session data. 
+        data_by_session_merge4 = data_by_session_merge3.merge(task_data_df, left_on=['subject_id','wave_id'], right_on=['behav_present_subject_id','behav_present_wave_id'], how='outer')
+        print(data_by_session_merge4.shape, data_by_session_merge4.shape, data_by_session_merge4.shape)
+        #make sure there's a column that stores IDs across the merged columns
+        data_by_session_merge4['subject_id'] = [r['behav_present_subject_id'] if not pd.isna(r['behav_present_subject_id']) else r['subject_id'] for i, r in data_by_session_merge4.iterrows()]
+        data_by_session_merge4['wave_id'] = [r['behav_present_wave_id'] if not pd.isna(r['behav_present_wave_id']) else r['wave_id'] for i, r in data_by_session_merge4.iterrows()]
+    else: #no session data; create a table that stores everything except beta data about useable sessions.
+        data_by_session_merge4 = data_by_session_merge3
     
 
     all_data_by_session = data_by_session_merge3
@@ -683,6 +736,18 @@ def get_overall_session_data_quality(dropbox_datapath, image_folder_df=None, aut
                         'automotion_exclude_' + task + str(run_i) + '_quality'
                         ]].apply(lambda x: 1 if x.sum()==3 else 0, axis=1)
                 )
+                #build a string array for the reasons for exclusion
+                
+
+                xrcn= 'combined_' + task + str(run_i) + '_quality_exclusion_reasons'
+
+                all_data_by_session[xrcn] = all_data_by_session[[
+                    'redcap_' + task + str(run_i) + '_quality', 
+                    'labelled_exclusion_' + task + str(run_i) + '_Exclude_quality',
+                    'automotion_exclude_' + task + str(run_i) + '_quality'
+                    ]].apply(lambda x: ", ".join(x.index[x==0].tolist()),axis=1)
+
 
 
     return all_data_by_session
+
