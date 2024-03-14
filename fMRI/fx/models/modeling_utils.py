@@ -523,7 +523,7 @@ def get_session_data_quality_l1(
     return(all_data_by_session)
 
 def get_overall_session_data_quality(dropbox_datapath, image_folder_df = None, task_data_df=None, automotion_datapath=None,
-                                     exclude_automotion_quality_less_than_2=True):
+                                     exclude_automotion_quality_less_than_2=False):
     """
     Gets session data quality but unspecific to the specific task, so, does not check for the presence of beta files.
 
