@@ -63,7 +63,7 @@ for W in 1 2; do
         
         sbatch --export "ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$DEVID,WAVE=$W,SUBID=$DEVID,RUN_JSON=\"${SELECTEDRUNS}\",SPM_PATH=$SPM_PATH"  \
             --job-name=${RESULTS_INFIX} \
-            -o ${OUTPUTDIR}/${DEVID}_{${W}_${RESULTS_INFIX}.log \
+            -o ${OUTPUTDIR}/${DEVID}_${W}_${RESULTS_INFIX}.log \
             --cpus-per-task=${cpuspertask} \
             --mem-per-cpu=${mempercpu} \
             --account=sanlab \
