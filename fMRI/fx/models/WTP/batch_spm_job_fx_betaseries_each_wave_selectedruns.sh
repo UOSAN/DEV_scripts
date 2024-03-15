@@ -46,7 +46,7 @@ for W in 1 2; do
     SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/WTP/fx_betaseries_wave_i.m
 
     # Set subject list
-    SUBJLIST="wtp_run_data_quality_w${W}_20231211.tsv"
+    SUBJLIST="wtp_run_data_quality_w${W}_20240315.tsv"
 
 
     #set -x
@@ -62,7 +62,7 @@ for W in 1 2; do
         
         sbatch --export "ALL,REPLACESID=$REPLACESID,SCRIPT=$SCRIPT,SUB=$DEVID,WAVE=$W,SUBID=$DEVID,RUN_JSON=\"${SELECTEDRUNS}\",SPM_PATH=$SPM_PATH"  \
             --job-name=${RESULTS_INFIX} \
-            -o ${OUTPUTDIR}/${DEVID}_${RESULTS_INFIX}.log \
+            -o ${OUTPUTDIR}/${DEVID}_${W}_${RESULTS_INFIX}.log \
             --cpus-per-task=${cpuspertask} \
             --mem-per-cpu=${mempercpu} \
             --account=sanlab \
