@@ -9,12 +9,7 @@ module load afni
 # Set paths and variables
 # ------------------------------------------------------------------------------------------
 # variables
-maps=(/projects/sanlab/shared/DEV/nonbids_data/rois_patterns/nsc_koban_2mm.nii) #$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
-betasALL=`echo $(printf "beta_%04d.nii\n" {1..16}) $(printf "beta_%04d.nii\n" {22..37}) $(printf "beta_%04d.nii\n" {43..58}) $(printf "beta_%04d.nii\n" {64..79})`
-betasDEV125=`echo $(printf "beta_%04d.nii\n" {1..16}) $(printf "beta_%04d.nii\n" {22..36}) $(printf "beta_%04d.nii\n" {42..57}) $(printf "beta_%04d.nii\n" {63..78})`
-betasDEV172=`echo $(printf "beta_%04d.nii\n" {1..16}) $(printf "beta_%04d.nii\n" {22..22}) $(printf "beta_%04d.nii\n" {28..43}) $(printf "beta_%04d.nii\n" {49..64})`
-betasDEV234=`echo $(printf "beta_%04d.nii\n" {1..16}) $(printf "beta_%04d.nii\n" {22..29}) $(printf "beta_%04d.nii\n" {35..50}) $(printf "beta_%04d.nii\n" {56..71})`
-
+maps=$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
 
 # paths
 image_dir=/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/WTP/wave1/betaseries
@@ -32,26 +27,16 @@ for subname in $(ls -d sub*); do
 SUB=$(echo ${subname:4:6})
 echo ${SUB}
 subdir=${image_dir}/sub-${SUB}
-if [ $subname == sub-DEV125 ]; then
-betas=$betasDEV125
-elif [ $subname == sub-DEV172 ]; then
-betas=$betasDEV172
-elif [ $subname == sub-DEV234 ]; then
-betas=$betasDEV234
-else
-betas=$betasALL
-fi
-
+betas=$(ls ${subdir}/beta* | rev | cut -c 1-13 | rev)
 rm ${subdir}/aligned_*
 for map in ${maps[@]}; do
 map_name=$(echo ${map: 55})
 for beta in ${betas[@]}; do
 3dAllineate -source ${subdir}/${beta} -master ${map} -final NN -1Dparam_apply '1D: 12@0'\' -prefix ${subdir}/aligned_${beta}
-echo ${SUB} ${beta} ${map_name} `3ddot -dodot ${subdir}/aligned_${beta} ${map}` >> "${output_dir}"/"${SUB}"_dotProducts.txt
+echo ${SUB} ${beta} `fslhd ${subdir}/${beta} | sed -n '66p' | cut -c 16-`  ${map_name} `3ddot -dodot ${subdir}/aligned_${beta} ${map}` >> "${output_dir}"/"${SUB}"_dotProducts.txt
 done
 rm ${subdir}/aligned_*
 done
-
 done
 
 
@@ -61,15 +46,7 @@ for subname in $(ls -d sub*); do
 SUB=$(echo ${subname:4:6})
 echo ${SUB}
 subdir=${image_dir}/sub-${SUB}
-if [ $subname == sub-DEV125 ]; then
-betas=$betasDEV125
-elif [ $subname == sub-DEV172 ]; then
-betas=$betasDEV172
-elif [ $subname == sub-DEV234 ]; then
-betas=$betasDEV234
-else
-betas=$betasALL
-fi
+betas=$(ls ${subdir}/beta* | rev | cut -c 1-13 | rev)
 for beta in ${betas[@]}; do
 echo ${SUB} ${beta} `3dBrickStat -mean ${subdir}/${beta}` >> "${output_dir}"/"${SUB}"_meanIntensity.txt
 done
