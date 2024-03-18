@@ -265,6 +265,8 @@ Exclusions
 > NB! NEED TO GO THROUGH NEW PARTICPANTS/WAVES
 
 ```{r}
+conditions = read.csv("~/Desktop/dev_conditions.csv")
+
 data_all = left_join(dots.ex, data.ex, by = c("subjectID", "wave", "trial")) %>%
   filter(!subjectID %in% c("DEV002", "DEV007", "DEV001", "DEV020", "DEV032", "DEV047", "DEV063", "DEV067", "DEV078", "DEV017", "DEV019", "DEV054")) %>%
   filter(!(subjectID == "DEV028" & run == "run1" & wave == 1) & !(subjectID == "DEV048" & run == "run3" & wave == 1) &
@@ -275,7 +277,10 @@ data_all = left_join(dots.ex, data.ex, by = c("subjectID", "wave", "trial")) %>%
          wave = as.character(wave),
          liking = ifelse(liking_rating > 2, "liked",
                   ifelse(liking_rating < 3, "disliked", NA))) %>%
-  filter(!is.na(health))
+  filter(!is.na(health)) %>%
+  left_join(., conditions) %>%
+  filter(condition %in% c("Cognitive", "Control", "Behavioral")) %>%
+  mutate(condition = factor(condition, levels = c("Control", "Cognitive", "Behavioral")))
 
 data = data_all %>%
   filter(liking == "liked")
@@ -386,6 +391,19 @@ data %>%
   dc_bw
 ```
 
+### by condition
+```{r}
+data %>% 
+  filter(algorithm == "craving") %>%
+  ggplot(aes(health, bid, fill = wave)) +
+  stat_summary(fun = mean, geom = "bar", position = position_dodge(.95)) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(.95), width = 0) +
+  facet_grid(~condition) +
+  scale_fill_manual(values = algorithm) +
+  labs(y = "bid value ($)\n", x = "\nfood type") +
+  dc_bw
+```
+
 ## bar plots {.tabset}
 ### health {.tabset}
 #### across waves
@@ -409,6 +427,18 @@ data %>%
   stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(.95), width = 0) +
   scale_fill_manual(values = algorithm) +
   facet_grid(~algorithm) +
+  labs(y = "signature expression\n", x = "\nfood type") +
+  dc_bw
+```
+
+#### by condition
+```{r}
+data %>% 
+  ggplot(aes(health, dotProduct, fill = wave)) +
+  stat_summary(fun = mean, geom = "bar", position = position_dodge(.95)) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(.95), width = 0) +
+  scale_fill_manual(values = algorithm) +
+  facet_grid(condition~algorithm) +
   labs(y = "signature expression\n", x = "\nfood type") +
   dc_bw
 ```
@@ -437,6 +467,18 @@ data %>%
   dc_bw
 ```
 
+#### by condition
+```{r}
+data %>% 
+  ggplot(aes(bid, dotProduct, fill = wave)) +
+  stat_summary(fun = mean, geom = "bar", position = position_dodge(.5)) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(.5), width = 0) +
+  facet_grid(condition~algorithm) +
+  scale_fill_manual(values = algorithm) +
+  labs(y = "signature expression\n", x = "\nbid value ($)") +
+  dc_bw
+```
+
 ### bid x health {.tabset}
 #### across waves
 ```{r}
@@ -458,6 +500,18 @@ data %>%
   stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(.5), width = 0) +
   scale_fill_manual(values = algorithm) +
   facet_grid(health~algorithm) +
+  labs(y = "signature expression\n", x = "\nbid value ($)") +
+  dc_bw
+```
+
+#### by condition
+```{r}
+data %>% 
+  ggplot(aes(bid, dotProduct, fill = wave)) +
+  stat_summary(fun = mean, geom = "bar", position = position_dodge(.5)) +
+  stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(.5), width = 0) +
+  scale_fill_manual(values = algorithm) +
+  facet_grid(condition~algorithm + health) +
   labs(y = "signature expression\n", x = "\nbid value ($)") +
   dc_bw
 ```
@@ -490,6 +544,19 @@ data %>%
   dc_bw
 ```
 
+#### by condition
+```{r, fig.width=12, fig.height=7}
+data %>% 
+  ggplot(aes(dotProduct, bid, color = condition, fill = condition)) +
+  geom_smooth(aes(group = interaction(subjectID, wave)), method = "lm", se = FALSE, size = .1) +
+  geom_smooth(method = "lm") +
+  scale_color_manual(values = algorithm) +
+  scale_fill_manual(values = algorithm) +
+  facet_grid(wave~algorithm + health, scales = "free") +
+  labs(x = "\nsignature expression", y = "bid value ($)\n") +
+  dc_bw
+```
+
 ### liking {.tabset}
 ```{r, fig.width=12}
 data_all %>% 
@@ -512,7 +579,7 @@ Disaggregate within and between person relationships
 
 ```{r}
 between = data %>%
-  group_by(wave, subjectID, algorithm) %>%
+  group_by(condition, wave, subjectID, algorithm) %>%
   summarize(dot_between = mean(dotProduct, na.rm = TRUE)) %>%
   ungroup() %>%
   mutate(dot_between = scale(dot_between, center = TRUE, scale = TRUE))
@@ -521,7 +588,7 @@ data_diss = data %>%
   group_by(wave, subjectID, algorithm) %>%
   mutate(dot_within = scale(dotProduct, center = TRUE, scale = TRUE)) %>%
   left_join(., between) %>%
-  select(subjectID, wave, trial, health, bid, liking_rating, algorithm, dotProduct, dot_within, dot_between)
+  select(condition, subjectID, wave, trial, health, bid, liking_rating, algorithm, dotProduct, dot_within, dot_between)
 
 data_diss_craving = data_diss %>%
   filter(algorithm == "craving")
@@ -536,7 +603,7 @@ data_diss_liking = data_all %>%
   group_by(wave, subjectID, algorithm) %>%
   mutate(dot_within = scale(dotProduct, center = TRUE, scale = TRUE)) %>%
   left_join(., between) %>%
-  select(subjectID, wave, trial, health, bid, liking_rating, algorithm, dotProduct, dot_within, dot_between)
+  select(condition, subjectID, wave, trial, health, bid, liking_rating, algorithm, dotProduct, dot_within, dot_between)
 
 data_diss_liking_craving = data_diss_liking %>%
   filter(algorithm == "craving")
@@ -555,7 +622,7 @@ data_diss_liking_regulation = data_diss_liking %>%
 
 ### tidytable
 ```{r}
-mod_bid_health = lmer(bid ~ health * wave + (1 | subjectID),
+mod_bid_health = lmer(bid ~ health * wave * condition + (1 | subjectID),
                   data = data_diss_craving,
                   control = lmerControl(optimizer = "bobyqa"))
 table_model(mod_bid_health)
@@ -563,11 +630,12 @@ table_model(mod_bid_health)
 
 ### plot
 ```{r}
-ggeffects::ggpredict(mod_bid_health, terms = c("wave", "health")) %>%
+ggeffects::ggpredict(mod_bid_health, terms = c("wave", "health", "condition")) %>%
   data.frame() %>%
   ggplot(aes(x, predicted, color = group, fill = group)) +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
   geom_line(aes(group = group)) +
+  facet_grid(~facet) +
   scale_color_manual(name = "", values = food) + 
   scale_fill_manual(name = "", values = food) + 
   labs(x = "\nwave", y = "predicted bid value\n") + 
@@ -586,7 +654,7 @@ summary(mod_bid_health)
 
 ### tidytable
 ```{r}
-mod_health = lmer(dotProduct ~ health * wave + (1 | subjectID),
+mod_health = lmer(dotProduct ~ health * wave * condition+ (1 | subjectID),
                   data = data_diss_craving,
                   control = lmerControl(optimizer = "bobyqa"))
 table_model(mod_health)
@@ -594,11 +662,12 @@ table_model(mod_health)
 
 ### plot
 ```{r}
-ggeffects::ggpredict(mod_health, terms = c("wave", "health")) %>%
+ggeffects::ggpredict(mod_health, terms = c("wave", "health", "condition")) %>%
   data.frame() %>%
   ggplot(aes(x, predicted, color = group, fill = group)) +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
   geom_line(aes(group = group)) +
+  facet_grid(~facet) +
   scale_color_manual(name = "", values = food) + 
   scale_fill_manual(name = "", values = food) + 
   labs(x = "\nwave", y = "predicted pattern expression value\n") + 
@@ -620,7 +689,7 @@ summary(mod_health)
 
 ### tidy table
 ```{r}
-mod_bid = lmer(bid ~ dot_between * wave + dot_within * wave + (1 | subjectID),
+mod_bid = lmer(bid ~ dot_between * wave * condition + dot_within * wave * condition + (1 | subjectID),
                data = data_diss_craving,
                control = lmerControl(optimizer = "bobyqa"))
 table_model(mod_bid)
@@ -630,16 +699,16 @@ table_model(mod_bid)
 #### by wave
 ```{r}
 vals = seq(-6, 6, .2)
-ggeffects::ggpredict(mod_bid, terms = c("dot_between[vals]", "wave")) %>%
+ggeffects::ggpredict(mod_bid, terms = c("dot_between[vals]", "wave", "condition")) %>%
   data.frame() %>%
   mutate(type = "between-person") %>%
-  bind_rows(ggeffects::ggpredict(mod_bid, terms = c("dot_within[vals]", "wave")) %>%
+  bind_rows(ggeffects::ggpredict(mod_bid, terms = c("dot_within[vals]", "wave", "condition")) %>%
               data.frame() %>%
               mutate(type = "within-person")) %>%
   ggplot(aes(x, predicted, color = group, fill = group)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
   geom_line(aes(group = group)) +
-  facet_grid(~type) +
+  facet_grid(facet~type) +
   scale_color_manual(name = "wave", values = algorithm) + 
   scale_fill_manual(name = "wave", values = algorithm) + 
   labs(x = "\npattern expression value", y = "predicted bid value\n") + 
@@ -648,16 +717,16 @@ ggeffects::ggpredict(mod_bid, terms = c("dot_between[vals]", "wave")) %>%
 
 #### by expression
 ```{r}
-ggeffects::ggpredict(mod_bid, terms = c("wave", "dot_between [-1, 0, 1]")) %>%
+ggeffects::ggpredict(mod_bid, terms = c("wave", "dot_between [-1, 0, 1]", "condition")) %>%
   data.frame() %>%
   mutate(type = "between-person") %>%
-  bind_rows(ggeffects::ggpredict(mod_bid, terms = c("wave", "dot_within [-1, 0, 1]")) %>%
+  bind_rows(ggeffects::ggpredict(mod_bid, terms = c("wave", "dot_within [-1, 0, 1]", "condition")) %>%
               data.frame() %>%
               mutate(type = "within-person")) %>%
   ggplot(aes(x, predicted, color = group, fill = group)) +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
   geom_line(aes(group = group)) +
-  facet_grid(~type) +
+  facet_grid(facet~type) +
   scale_color_manual(name = "expression", values = algorithm) + 
   scale_fill_manual(name = "expression", values = algorithm) + 
   labs(x = "\nwave", y = "predicted bid value\n") + 
@@ -944,7 +1013,7 @@ summary(mod_liking)
 
 ### tidytable
 ```{r}
-mod_health = lmer(dotProduct ~ health * wave + (1 + health | subjectID),
+mod_health = lmer(dotProduct ~ health * wave * condition + (1 + health | subjectID),
                   data = data_diss_regulation,
                   control = lmerControl(optimizer = "bobyqa"))
 table_model(mod_health)
@@ -952,11 +1021,12 @@ table_model(mod_health)
 
 ### plot
 ```{r}
-ggeffects::ggpredict(mod_health, terms = c("wave", "health")) %>%
+ggeffects::ggpredict(mod_health, terms = c("wave", "health", "condition")) %>%
   data.frame() %>%
   ggplot(aes(x, predicted, color = group, fill = group)) +
   geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
   geom_line(aes(group = group)) +
+  facet_grid(~facet) +
   scale_color_manual(name = "", values = food) + 
   scale_fill_manual(name = "", values = food) + 
   labs(x = "\nwave", y = "predicted pattern expression value\n") + 
@@ -978,7 +1048,7 @@ summary(mod_health)
 
 ### tidy table
 ```{r}
-mod_bid = lmer(bid ~ dot_between * wave + dot_within * wave + (1 + dot_within | subjectID),
+mod_bid = lmer(bid ~ dot_between * wave * condition + dot_within * wave * condition + (1 + dot_within | subjectID),
                data = data_diss_regulation,
                control = lmerControl(optimizer = "bobyqa"))
 table_model(mod_bid)
@@ -988,16 +1058,16 @@ table_model(mod_bid)
 #### by wave
 ```{r}
 vals = seq(-6, 6, .2)
-ggeffects::ggpredict(mod_bid, terms = c("dot_between[vals]", "wave")) %>%
+ggeffects::ggpredict(mod_bid, terms = c("dot_between[vals]", "wave", "condition")) %>%
   data.frame() %>%
   mutate(type = "between-person") %>%
-  bind_rows(ggeffects::ggpredict(mod_bid, terms = c("dot_within[vals]", "wave")) %>%
+  bind_rows(ggeffects::ggpredict(mod_bid, terms = c("dot_within[vals]", "wave", "condition")) %>%
               data.frame() %>%
               mutate(type = "within-person")) %>%
   ggplot(aes(x, predicted, color = group, fill = group)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
   geom_line(aes(group = group)) +
-  facet_grid(~type) +
+  facet_grid(facet~type) +
   scale_color_manual(name = "wave", values = algorithm) + 
   scale_fill_manual(name = "wave", values = algorithm) + 
   labs(x = "\npattern expression value", y = "predicted bid value\n") + 
@@ -1034,7 +1104,7 @@ summary(mod_bid)
 
 ### tidy table
 ```{r}
-mod_bid_health = lmer(bid ~ dot_between*health*wave + dot_within*health*wave + (1 + health | subjectID),
+mod_bid_health = lmer(bid ~ dot_between*health*wave*condition + dot_within*health*wave*condition + (1 + health | subjectID),
                       data = data_diss_regulation,
                       control = lmerControl(optimizer = "bobyqa"))
 table_model(mod_bid_health)
@@ -1044,16 +1114,16 @@ table_model(mod_bid_health)
 #### by wave
 ```{r, fig.width=7, fig.height=7}
 vals = seq(-6, 6, .2)
-ggeffects::ggpredict(mod_bid_health, terms = c("dot_between[vals]", "wave", "health")) %>%
+ggeffects::ggpredict(mod_bid_health, terms = c("dot_between[vals]", "wave", "health", "condition")) %>%
   data.frame() %>%
   mutate(type = "between-person") %>%
-  bind_rows(ggeffects::ggpredict(mod_bid_health, terms = c("dot_within[vals]", "wave", "health")) %>%
+  bind_rows(ggeffects::ggpredict(mod_bid_health, terms = c("dot_within[vals]", "wave", "health", "condition")) %>%
               data.frame() %>%
               mutate(type = "within-person")) %>%
   ggplot(aes(x, predicted, color = group, fill = group)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
   geom_line(aes(group = group)) +
-  facet_grid(type~facet) +
+  facet_grid(panel ~ type + facet) +
   scale_color_manual(name = "wave", values = algorithm) + 
   scale_fill_manual(name = "wave", values = algorithm) + 
   labs(x = "\npattern expression value", y = "predicted bid value\n") + 
@@ -1089,7 +1159,7 @@ summary(mod_bid_health)
 
 ### tidy table
 ```{r}
-mod_liking = lmer(dotProduct ~ liking_rating * health + (1 | subjectID),
+mod_liking = lmer(dotProduct ~ liking_rating * health * condition + (1 | subjectID),
                   data = data_diss_liking_regulation,
                   control = lmerControl(optimizer = "bobyqa"))
 table_model(mod_liking)
@@ -1097,11 +1167,12 @@ table_model(mod_liking)
 
 ### plot
 ```{r}
-ggeffects::ggpredict(mod_liking, terms = c("liking_rating", "health")) %>%
+ggeffects::ggpredict(mod_liking, terms = c("liking_rating", "health", "condition")) %>%
   data.frame() %>%
   ggplot(aes(x, predicted, color = group, fill = group)) +
   geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
   geom_line() +
+  facet_grid(~facet) +
   scale_color_manual(name = "", values = food) + 
   scale_fill_manual(name = "", values = food) + 
   labs(x = "\nliking rating (session 0)", y = "signature expression\n") + 

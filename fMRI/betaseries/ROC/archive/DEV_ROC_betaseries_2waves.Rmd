@@ -1,0 +1,1208 @@
+---
+title: "DEV ROC betaseries"
+author: "Dani Cosme"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    df_print: paged
+    highlight: tango
+    theme: united
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+options(scipen = 999)
+```
+
+# prep {.tabset}
+## load packages
+```{r}
+library(tidyverse)
+library(lme4)
+library(lmerTest)
+library(knitr)
+library(cowplot)
+library(caret)
+library(ROCR)
+```
+
+## define aesthetics
+```{r}
+algorithm = c("#006989", "#FEC601", "#F43C13", "#00A5CF", "#00A878")
+instruction = wesanderson::wes_palette("Darjeeling1", 2, "continuous")
+craving = wesanderson::wes_palette("Darjeeling1", 3, "continuous")
+rating = c("#00A08A", "#F2AD00", "#F98400", "#FF0000")
+dc_bw = plot_aes = theme_minimal() +
+  theme(legend.position = "top",
+        legend.text = element_text(size = 12),
+        text = element_text(size = 16, family = "Futura Medium"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text = element_text(color = "black"),
+        axis.line = element_line(colour = "black"),
+        axis.ticks.y = element_blank())
+```
+
+## define functions
+```{r}
+table_model = function(model_data) {
+  model_data %>%
+    broom.mixed::tidy(., conf.int = TRUE) %>%
+    rename("SE" = std.error,
+           "t" = statistic,
+           "p" = p.value) %>%
+    filter(effect == "fixed") %>%
+    select(-group, -effect) %>%
+    mutate_at(vars(-contains("term"), -contains("value")), round, 2) %>%
+    mutate(term = gsub(":", " x ", term),
+           term = gsub("dot_", "", term),
+           term = gsub("wave2", " wave (post)", term),
+           term = gsub("instructionregulate", "instruction (regulate)", term),
+           p = ifelse(p < .001, "< .001",
+                      ifelse(p == 1, "1.000", gsub("0.(.*)", ".\\1", sprintf("%.3f", p)))),
+           `b [95% CI]` = sprintf("%.2f [%0.2f, %.2f]", estimate, conf.low, conf.high)) %>%
+    select(term, `b [95% CI]`, df, t, p) %>%
+    kable()
+}
+```
+
+## load tidied data
+```{r}
+source("load_data.R")
+```
+
+## check ratings
+Check if wrong buttons were used (i.e., not 5-8)
+
+* DEV001 = code normally
+* DEV011 = code normally
+* DEV016 = code normally
+* DEV017 = exclude; can't tell if they're missed ratings or incorrect placement of fingers
+* DEV019 = exclude; can't tell if they're missed ratings or incorrect placement of fingers
+* DEV020 = code normally
+* DEV022 = code normally
+* DEV028 = code normally
+* DEV032 = incorrect placement of fingers; recode runs 1-2 (LOOK INTO WTP)
+* DEV037 = exclude; technical error?
+* DEV054 = exclude; technical error?
+* DEV060 = code normally; task ended early
+* DEV061 = code normally; task ended early
+* DEV063 = code normally; task ended early
+* DEV069 = incorrect placement of fingers in run1
+* DEV075 = code normally
+* DEV082 = code normally
+* DEV083 = code normally
+
+> NB! NEED TO GO THROUGH NEW PARTICPANTS/WAVES
+
+```{r}
+subs = data.all %>%
+  group_by(subjectID, wave, run, rating) %>%
+  summarize(n = n()) %>%
+  spread(rating, n) %>%
+  mutate(messed = ifelse(is.na(`5`) & !is.na(`<NA>`), "yes", NA)) %>%
+  filter(messed == "yes") %>% 
+  ungroup() %>% 
+  select(subjectID, wave) %>% 
+  unique()
+
+data.all %>%
+  group_by(subjectID, run, rating) %>%
+  summarize(n = n()) %>%
+  spread(rating, n) %>%
+  mutate(messed = ifelse(is.na(`5`) & !is.na(`<NA>`), "yes", NA)) %>%
+  filter(subjectID %in% subs$subjectID)
+```
+
+## recode and exclude
+Recoding  
+* DEV069: recode runs1
+
+> NB! NEED TO GO THROUGH NEW PARTICPANTS/WAVES
+
+```{r}
+data.ex = data.all %>%
+  mutate(rating = ifelse(subjectID == "DEV069" & run == "run1", rating - 1, rating),
+         rating = ifelse(subjectID == "DEV069" & run == "run1" & is.na(rating), 8, rating),
+         rating = rating - 4) %>%
+  group_by(subjectID, wave) %>%
+  arrange(subjectID, run) %>%
+  mutate(trial = row_number())
+```
+
+## load mean intensity values
+```{r}
+file_dir = "dotProducts_ROC_wave1/"
+file_pattern = "DEV[0-9]{3}_meanIntensity.txt"
+file_list = list.files(file_dir, pattern = file_pattern)
+
+intensities = data.frame()
+
+for (file in file_list) {
+  temp = tryCatch(read.table(file.path(file_dir,file), fill = TRUE) %>%
+                    rename("subjectID" = V1,
+                           "meanIntensity" = V3) %>%
+                    extract(V2, "beta", "beta_([0-9]{4}).nii") %>%
+                    mutate(beta = as.integer(beta),
+                           wave = 1), error = function(e) message(file))
+  intensities = rbind(intensities, temp)
+  rm(temp)
+}
+
+file_dir = "dotProducts_ROC_wave2/"
+file_list = list.files(file_dir, pattern = file_pattern)
+for (file in file_list) {
+  temp = tryCatch(read.table(file.path(file_dir,file), fill = TRUE) %>%
+                    rename("subjectID" = V1,
+                           "meanIntensity" = V3) %>%
+                    extract(V2, "beta", "beta_([0-9]{4}).nii") %>%
+                    mutate(beta = as.integer(beta),
+                           wave = 2), error = function(e) message(file))
+  intensities = rbind(intensities, temp)
+  rm(temp)
+}
+```
+
+## load dot products
+```{r}
+file_dir = "dotProducts_ROC_wave1/"
+file_pattern = "DEV[0-9]{3}_dotProducts.txt"
+file_list = list.files(file_dir, pattern = file_pattern)
+
+dots = data.frame()
+
+for (file in file_list) {
+  temp = tryCatch(read.table(file.path(file_dir,file), fill = TRUE) %>%
+                    rename("subjectID" = V1,
+                           "map" = V3,
+                           "dotProduct" = V4) %>%
+                    extract(V2, "beta", "beta_([0-9]{4}).nii") %>%
+                    extract(map, "algorithm", "(.*)_.*.nii") %>%
+                    mutate(beta = as.integer(beta),
+                            wave = 1), error = function(e) message(file))
+  dots = rbind(dots, temp)
+  rm(temp)
+}
+
+file_dir = "dotProducts_ROC_wave2/"
+file_list = list.files(file_dir, pattern = file_pattern)
+
+for (file in file_list) {
+  temp = tryCatch(read.table(file.path(file_dir,file), fill = TRUE) %>%
+                    rename("subjectID" = V1,
+                           "map" = V3,
+                           "dotProduct" = V4) %>%
+                    extract(V2, "beta", "beta_([0-9]{4}).nii") %>%
+                    extract(map, "algorithm", "(.*)_.*.nii") %>%
+                    mutate(beta = as.integer(beta),
+                            wave = 2), error = function(e) message(file))
+  dots = rbind(dots, temp)
+  rm(temp)
+}
+```
+
+## join intensities and dots
+* recode trials with extreme intensities as NA
+
+```{r}
+dots.merged = dots %>%
+  left_join(., intensities, by = c("subjectID", "wave", "beta")) %>%
+  group_by(subjectID, wave, algorithm) %>%
+  mutate(rownum = row_number())
+
+# plot original
+dots.merged %>%
+  filter(algorithm == "craving_regulation") %>%
+  ggplot(aes(1, meanIntensity)) +
+    geom_boxplot()
+
+# assess extreme values and exclude when calculating SDs
+dots.merged %>%
+  filter(algorithm == "craving_regulation") %>%
+  arrange(meanIntensity)
+
+dots.merged %>%
+  filter(algorithm == "craving_regulation") %>%
+  arrange(-meanIntensity)
+
+# recode outliers as NA
+dots.merged = dots.merged %>%
+  ungroup() %>%
+  mutate(meanIntensity = ifelse(meanIntensity > 1 | meanIntensity < -1, NA, meanIntensity),
+         median = median(meanIntensity, na.rm = TRUE),
+         sd3 = 3*sd(meanIntensity, na.rm = TRUE),
+         outlier = ifelse(meanIntensity > median + sd3 | meanIntensity < median - sd3, "yes", "no"),
+         dotProduct = ifelse(outlier == "yes", NA, dotProduct))
+  
+# plot after
+dots.merged %>%
+  filter(algorithm == "craving_regulation") %>%
+  ggplot(aes(1, meanIntensity)) +
+    geom_boxplot()
+```
+
+## recode subs
+* DEV022 = run4 has 8 trials
+* DEV037 = ???
+* DEV048 = run4 missing
+* DEV060 = run1 has 19 trials; couldn't estimate run1 trial 19, run3 trial 20
+* DEV061 = run3 has 19 trials; couldn't estimate run3 trial 19
+* DEV063 = run2 has 11 trials
+* DEV081 = run2 missing (run1 was run twice)
+* DEV082 = run2 has 15 trials; couldn't estimate run1 trial 19, run1 trial 20
+
+> NB! NEED TO GO THROUGH NEW PARTICPANTS/WAVES
+
+```{r}
+trial.numbers = data.frame(subjectID = c(rep("DEV060", 79), rep("DEV061", 79), rep("DEV063", 71), rep("DEV081", 80), rep("DEV082", 75)),
+                           wave = 1,
+                           rownum = c(1:79, 1:79, 1:71, 1:80, 1:75),
+                           trial = c(1:19, 21:80, 1:59, 61:80, 1:31, 41:80, 1:20, 41:80, 21:40, 1:35, 41:80))
+
+dots.check = dots.merged %>%
+  group_by(subjectID, wave, algorithm) %>%
+  mutate(rownum = row_number()) %>%
+  left_join(., trial.numbers, by = c("subjectID", "wave", "rownum")) %>%
+  mutate(trial = ifelse(is.na(trial), rownum, trial),
+         dotProduct = ifelse(subjectID == "DEV060" & wave == 1 & trial %in% 19:20, NA,
+                      ifelse(subjectID == "DEV061" & wave == 1 & trial == 59, NA,
+                      ifelse(subjectID == "DEV082" & wave == 1 & trial %in% 19:20, NA, dotProduct)))) %>%
+  select(-rownum) #%>%
+  #left_join(., striping, by = c("subjectID", "beta")) %>%
+  #mutate(dotProduct = ifelse(!is.na(striping), NA, dotProduct))
+```
+
+## merge data and exclude subs
+Exclusions
+
+* MRI motion and data quality exclusions: DEV001, DEV020, DEV032, DEV047, DEV055, DEV064, DEV066
+* Button box exclusions: DEV017, DEV019, DEV037, DEV054
+* Run exclusions: DEV029 (run3), DEV037 (run1), DEV042 (run4), DEV067 (run4)
+
+Other  
+* select only craved trials
+
+> NB! NEED TO GO THROUGH NEW PARTICPANTS/WAVES
+
+```{r}
+data_all = left_join(dots.check, data.ex, by = c("subjectID", "wave", "trial")) %>%
+  filter(!(subjectID %in% c("DEV001","DEV020","DEV032","DEV047","DEV055","DEV064","DEV066", "DEV017", "DEV019", "DEV037", "DEV054") & wave == 1)) %>%
+  filter(!(subjectID == "DEV029" & wave == 1 & run == "run3") & !(subjectID == "DEV037" & wave == 1 & run == "run1") & !(subjectID == "DEV042" & wave == 1 & run == "run4") & !(subjectID == "DEV067" & wave == 1 & run == "run4")) %>%
+  ungroup() %>%
+  mutate(algorithm = gsub("_signature", "", algorithm),
+         wave = as.character(wave))
+
+data = data_all %>%
+  filter(craving == "craved")
+```
+
+# summarize {.tabset}
+## n participants by wave
+```{r}
+data %>%
+  select(subjectID, wave) %>%
+  unique() %>%
+  group_by(wave) %>%
+  summarize(n = n())
+```
+
+## n trials
+```{r}
+data %>%
+  filter(algorithm == "craving_regulation") %>%
+  group_by(subjectID) %>%
+  summarize(n = n()) %>%
+  arrange(n)
+```
+
+# roc {.tabset}
+## craving regulation signature
+```{r}
+# roc curve
+perf.df = data %>%
+  filter(algorithm == "craving_regulation") %>%
+  filter(!is.na(dotProduct) & !is.na(craving)) %>%
+  mutate(instruction = ifelse(instruction == "regulate", 1, 0)) %>%
+  group_by(wave) %>%
+  do({
+    wave = .$wave
+    pred = prediction(.$dotProduct, .$instruction, label.ordering = NULL)
+    perf = performance(pred, measure = "tpr", x.measure = "fpr")
+    data.frame(cut=perf@alpha.values[[1]],fpr=perf@x.values[[1]],tpr=perf@y.values[[1]])
+  })
+
+ggplot(perf.df, aes(fpr, tpr, color = as.factor(wave))) +
+  geom_line() +
+  scale_color_manual(values = algorithm) +
+  xlab("false positive rate") +
+  ylab("true positive rate")
+
+roc = data %>%
+  filter(algorithm == "craving_regulation") %>%
+  select(subjectID, trial, instruction, rating, dotProduct) %>%
+  mutate(guess.instruction = ifelse(dotProduct > 0, "regulate", "look"),
+         guess.rating = ifelse(dotProduct > 0, "low", "high"),
+         rating.bin = ifelse(rating >= 3, "high", "low"),
+         instruction = as.factor(instruction),
+         guess.instruction = as.factor(guess.instruction),
+         rating.bin = as.factor(rating.bin),
+         guess.rating = as.factor(guess.rating))
+
+confusionMatrix(roc$guess.instruction, roc$instruction)
+#confusionMatrix(roc$guess.rating, roc$rating.bin)
+```
+
+## craving signature {.tabset}
+### crave regulate v craved look
+```{r}
+# roc curve
+perf.df = data %>%
+  filter(algorithm == "craving") %>%
+  filter(!is.na(dotProduct) & !is.na(craving)) %>%
+  mutate(instruction = ifelse(instruction == "regulate", 1, 0)) %>%
+  group_by(wave) %>%
+  do({
+    wave = .$wave
+    pred = prediction(.$dotProduct, .$instruction, label.ordering = NULL)
+    perf = performance(pred, measure = "tpr", x.measure = "fpr")
+    data.frame(cut=perf@alpha.values[[1]],fpr=perf@x.values[[1]],tpr=perf@y.values[[1]])
+  })
+
+ggplot(perf.df, aes(fpr, tpr, color = as.factor(wave))) +
+  geom_line() +
+  scale_color_manual(values = algorithm) +
+  xlab("false positive rate") +
+  ylab("true positive rate")
+
+roc = data %>%
+  filter(algorithm == "craving") %>%
+  select(subjectID, trial, instruction, rating, dotProduct) %>%
+  mutate(guess.instruction = ifelse(dotProduct > 0, "regulate", "look"),
+         guess.rating = ifelse(dotProduct > 0, "low", "high"),
+         rating.bin = ifelse(rating >= 3, "high", "low"),
+         instruction = as.factor(instruction),
+         guess.instruction = as.factor(guess.instruction),
+         rating.bin = as.factor(rating.bin),
+         guess.rating = as.factor(guess.rating))
+
+confusionMatrix(roc$guess.instruction, roc$instruction)
+#confusionMatrix(roc$guess.rating, roc$rating.bin)
+```
+
+### craving v neutral
+```{r}
+# roc curve
+perf.df = data_all %>%
+  filter(algorithm == "craving") %>%
+  filter(!is.na(dotProduct)) %>%
+  filter(craving %in% c("neutral", "craved")) %>%
+  mutate(craving = ifelse(craving == "craved", 1, 0)) %>%
+  group_by(wave) %>%
+  do({
+    wave = .$wave
+    pred = prediction(.$dotProduct, .$craving, label.ordering = NULL)
+    perf = performance(pred, measure = "tpr", x.measure = "fpr")
+    data.frame(cut=perf@alpha.values[[1]],fpr=perf@x.values[[1]],tpr=perf@y.values[[1]])
+  })
+
+ggplot(perf.df, aes(fpr, tpr, color = as.factor(wave))) +
+  geom_line() +
+  scale_color_manual(values = algorithm) +
+  xlab("false positive rate") +
+  ylab("true positive rate")
+
+roc = data_all %>%
+  filter(algorithm == "craving") %>%
+  filter(craving %in% c("neutral", "craved")) %>%
+  select(subjectID, trial, craving, rating, dotProduct) %>%
+  mutate(guess.craving = ifelse(dotProduct > 0, "craved", "neutral"),
+         guess.rating = ifelse(dotProduct > 0, "low", "high"),
+         rating.bin = ifelse(rating >= 3, "high", "low"),
+         craving = as.factor(craving),
+         guess.craving = as.factor(guess.craving),
+         rating.bin = as.factor(rating.bin),
+         guess.rating = as.factor(guess.rating))
+
+confusionMatrix(roc$guess.craving, roc$craving)
+#confusionMatrix(roc$guess.rating, roc$rating.bin)
+```
+
+## Koban craving signature {.tabset}
+### crave regulate v craved look
+```{r}
+# roc curve
+perf.df = data %>%
+  filter(algorithm == "nsc_koban") %>%
+  filter(!is.na(dotProduct) & !is.na(craving)) %>%
+  mutate(instruction = ifelse(instruction == "regulate", 1, 0)) %>%
+  group_by(wave) %>%
+  do({
+    wave = .$wave
+    pred = prediction(.$dotProduct, .$instruction, label.ordering = NULL)
+    perf = performance(pred, measure = "tpr", x.measure = "fpr")
+    data.frame(cut=perf@alpha.values[[1]],fpr=perf@x.values[[1]],tpr=perf@y.values[[1]])
+  })
+
+ggplot(perf.df, aes(fpr, tpr, color = as.factor(wave))) +
+  geom_line() +
+  scale_color_manual(values = algorithm) +
+  xlab("false positive rate") +
+  ylab("true positive rate")
+
+roc = data %>%
+  filter(algorithm == "nsc_koban") %>%
+  select(subjectID, trial, instruction, rating, dotProduct) %>%
+  mutate(guess.instruction = ifelse(dotProduct > 0, "regulate", "look"),
+         guess.rating = ifelse(dotProduct > 0, "low", "high"),
+         rating.bin = ifelse(rating >= 3, "high", "low"),
+         instruction = as.factor(instruction),
+         guess.instruction = as.factor(guess.instruction),
+         rating.bin = as.factor(rating.bin),
+         guess.rating = as.factor(guess.rating))
+
+confusionMatrix(roc$guess.instruction, roc$instruction)
+#confusionMatrix(roc$guess.rating, roc$rating.bin)
+```
+
+### craving v neutral
+```{r}
+# roc curve
+perf.df = data_all %>%
+  filter(algorithm == "nsc_koban") %>%
+  filter(!is.na(dotProduct)) %>%
+  filter(craving %in% c("neutral", "craved")) %>%
+  mutate(craving = ifelse(craving == "craved", 1, 0)) %>%
+  group_by(wave) %>%
+  do({
+    wave = .$wave
+    pred = prediction(.$dotProduct, .$craving, label.ordering = NULL)
+    perf = performance(pred, measure = "tpr", x.measure = "fpr")
+    data.frame(cut=perf@alpha.values[[1]],fpr=perf@x.values[[1]],tpr=perf@y.values[[1]])
+  })
+
+ggplot(perf.df, aes(fpr, tpr, color = as.factor(wave))) +
+  geom_line() +
+  scale_color_manual(values = algorithm) +
+  xlab("false positive rate") +
+  ylab("true positive rate")
+
+roc = data_all %>%
+  filter(algorithm == "nsc_koban") %>%
+  filter(craving %in% c("neutral", "craved")) %>%
+  select(subjectID, trial, craving, rating, dotProduct) %>%
+  mutate(guess.craving = ifelse(dotProduct > 0, "craved", "neutral"),
+         guess.rating = ifelse(dotProduct > 0, "low", "high"),
+         rating.bin = ifelse(rating >= 3, "high", "low"),
+         craving = as.factor(craving),
+         guess.craving = as.factor(guess.craving),
+         rating.bin = as.factor(rating.bin),
+         guess.rating = as.factor(guess.rating))
+
+confusionMatrix(roc$guess.craving, roc$craving)
+#confusionMatrix(roc$guess.rating, roc$rating.bin)
+```
+
+# correlations among signatures {.tabset}
+## craving & Koban craving
+```{r}
+data %>%
+  select(subjectID, wave, trial, algorithm, dotProduct) %>%
+  spread(algorithm, dotProduct) %>%
+  mutate(sub_wave = sprintf("%s_%s", subjectID, wave)) %>%
+  rmcorr::rmcorr(as.factor(sub_wave), craving, nsc_koban, data = .)
+```
+
+## craving & craving regulation
+```{r}
+data %>%
+  select(subjectID, wave, trial, algorithm, dotProduct) %>%
+  spread(algorithm, dotProduct) %>%
+  mutate(sub_wave = sprintf("%s_%s", subjectID, wave)) %>%
+  rmcorr::rmcorr(as.factor(sub_wave), craving, craving_regulation, data = .)
+```
+
+## Koban craving & craving regulation
+```{r}
+data %>%
+  select(subjectID, wave, trial, algorithm, dotProduct) %>%
+  spread(algorithm, dotProduct) %>%
+  mutate(sub_wave = sprintf("%s_%s", subjectID, wave)) %>%
+  rmcorr::rmcorr(as.factor(sub_wave), nsc_koban, craving_regulation, data = .)
+```
+
+# visualize raw data {.tabset}
+## instruction {.tabset}
+### across waves
+```{r}
+data %>%
+  filter(!is.na(rating)) %>%
+  ggplot(aes(algorithm, dotProduct, fill = instruction)) +
+    stat_summary(fun.y = mean, geom = "bar", position = position_dodge(width = 0.95)) +
+    stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(width = 0.95), width = 0) +
+    scale_fill_manual(name = "", values = instruction) + 
+    labs(y = "pattern expression value\n", x = "") + 
+    dc_bw
+
+data %>%
+  filter(!is.na(rating)) %>%
+  ggplot(aes(instruction, dotProduct)) +
+    stat_summary(aes(group = subjectID), fun.y = mean, geom = "line", alpha = .1, size = .5) +
+    stat_summary(aes(group = 1), fun.y = mean, geom = "line", size = .75) +
+    stat_summary(aes(color = instruction), fun.data = "mean_cl_boot",  geom = "pointrange", width = 0, size = .75) + 
+    facet_grid(~algorithm) +
+    scale_color_manual(name = "", values = instruction) + 
+    labs(y = "pattern expression value\n", x = "") + 
+    dc_bw
+```
+
+### by waves
+```{r}
+data %>%
+  filter(!is.na(rating)) %>%
+  ggplot(aes(instruction, dotProduct, fill = wave)) +
+    stat_summary(fun.y = mean, geom = "bar", position = position_dodge(width = 0.95)) +
+    stat_summary(fun.data = mean_cl_boot, geom = "errorbar", position = position_dodge(width = 0.95), width = 0) +
+    facet_grid(~algorithm) +
+    scale_fill_manual(name = "wave", values = algorithm) + 
+    labs(y = "pattern expression value\n", x = "") + 
+    dc_bw
+
+data %>%
+  filter(!is.na(rating)) %>%
+  ggplot(aes(wave, dotProduct, color = instruction)) +
+    stat_summary(aes(group = interaction(subjectID, instruction)), fun.y = mean, geom = "line", alpha = .1, size = .5) +
+    stat_summary(aes(group = instruction), fun.y = mean, geom = "line", size = .75) +
+    stat_summary(fun.data = "mean_cl_boot",  geom = "pointrange", width = 0, size = .75) + 
+    facet_grid(~algorithm) +
+    scale_color_manual(name = "", values = instruction) + 
+    labs(y = "pattern expression value\n", x = "") + 
+    dc_bw
+```
+
+## rating {.tabset}
+### across waves
+```{r}
+data %>%
+  ggplot(aes(dotProduct, rating, color = algorithm, fill = algorithm)) +
+  geom_smooth(aes(group = interaction(subjectID, algorithm)), method = "lm", se = FALSE, size = .1) +
+  geom_smooth(method = "lm") +
+  scale_color_manual(name = "signature", values = algorithm) + 
+  scale_fill_manual(name = "signature", values = algorithm) + 
+  labs(y = "craving rating\n", x = "\npattern expression value") + 
+  dc_bw
+```
+
+### by wave
+```{r, fig.width = 10}
+data %>%
+  ggplot(aes(dotProduct, rating, color = wave, fill = wave)) +
+  geom_smooth(aes(group = interaction(subjectID, wave)), method = "lm", se = FALSE, size = .1) +
+  geom_smooth(method = "lm") +
+  facet_grid(~algorithm) +
+  scale_color_manual(name = "wave", values = algorithm) + 
+  scale_fill_manual(name = "wave", values = algorithm) + 
+  labs(y = "craving rating\n", x = "\npattern expression value") + 
+  dc_bw
+```
+
+## rating and instruction {.tabset}
+### across waves
+```{r, fig.width = 10}
+data %>%
+  ggplot(aes(dotProduct, rating, color = instruction, fill = instruction)) +
+  geom_smooth(aes(group = interaction(subjectID, instruction)), method = "lm", se = FALSE, size = .1) +
+  geom_smooth(method = "lm") +
+  facet_grid(~algorithm) +
+  scale_color_manual(name = "instruction", values = instruction) + 
+  scale_fill_manual(name = "instruction", values = instruction) + 
+  labs(y = "craving rating\n", x = "\npattern expression value") + 
+  dc_bw
+```
+
+### by wave
+```{r, fig.width = 10, fig.height=8}
+data %>%
+  ggplot(aes(dotProduct, rating, color = wave, fill = wave)) +
+  geom_smooth(aes(group = interaction(subjectID, instruction, wave)), method = "lm", se = FALSE, size = .1) +
+  geom_smooth(method = "lm") +
+  facet_grid(instruction~algorithm) +
+  scale_color_manual(name = "wave", values = algorithm) + 
+  scale_fill_manual(name = "wave", values = algorithm) + 
+  labs(y = "craving rating\n", x = "\npattern expression value") + 
+  dc_bw
+```
+
+## RT {.tabset}
+## craving
+### across waves
+```{r}
+data %>%
+  filter(!is.na(rating)) %>%
+  filter(algorithm == "craving_regulation") %>%
+  ggplot(aes(rating, rt, color = instruction, fill = instruction)) +
+  geom_smooth(aes(group = interaction(subjectID, instruction)), method = "lm", se = FALSE, size = .1) +
+  geom_smooth(method = "lm", alpha = .2) + 
+  facet_grid(~algorithm) + 
+  scale_color_manual(name = "", values = instruction) + 
+  scale_fill_manual(name = "", values = instruction) + 
+  labs(x = "\ncraving rating", y = "reaction time (seconds)\n") + 
+  dc_bw
+```
+
+### by wave
+```{r}
+data %>%
+  filter(!is.na(rating)) %>%
+  filter(algorithm == "craving_regulation") %>%
+  ggplot(aes(rating, rt, color = wave, fill = wave)) +
+  geom_smooth(aes(group = interaction(subjectID, wave, instruction)), method = "lm", se = FALSE, size = .1) +
+  geom_smooth(method = "lm", alpha = .2) + 
+  facet_grid(~instruction) + 
+  scale_color_manual(name = "", values = algorithm) + 
+  scale_fill_manual(name = "", values = algorithm) + 
+  labs(x = "\ncraving rating", y = "reaction time (seconds)\n") + 
+  dc_bw
+```
+
+## pattern expression
+### across waves
+```{r}
+data %>%
+  filter(!is.na(rating)) %>%
+  ggplot(aes(dotProduct, rt, color = instruction, fill = instruction)) +
+  geom_smooth(aes(group = interaction(subjectID, instruction)), method = "lm", se = FALSE, size = .1) +
+  geom_smooth(method = "lm", alpha = .2) + 
+  facet_grid(~algorithm) + 
+  scale_color_manual(name = "", values = instruction) + 
+  scale_fill_manual(name = "", values = instruction) + 
+  labs(x = "\npattern expression value", y = "reaction time (seconds)\n") + 
+  dc_bw
+```
+
+### by wave
+```{r}
+data %>%
+  filter(!is.na(rating)) %>%
+  ggplot(aes(dotProduct, rt, color = wave, fill = wave)) +
+  geom_smooth(aes(group = interaction(subjectID, instruction, wave)), method = "lm", se = FALSE, size = .1) +
+  geom_smooth(method = "lm", alpha = .2) + 
+  facet_grid(instruction~algorithm) + 
+  scale_color_manual(name = "", values = algorithm) + 
+  scale_fill_manual(name = "", values = algorithm) + 
+  labs(x = "\npattern expression value", y = "reaction time (seconds)\n") + 
+  dc_bw
+```
+
+# MLM {.tabset}
+Disaggregate within and between person relationships
+
+* `dot_between` = grand mean centered person average signature expression
+* `dot_within` = person-centered signature expression
+
+```{r}
+between = data %>%
+  group_by(wave, subjectID, algorithm) %>%
+  summarize(dot_between = mean(dotProduct, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(dot_between = scale(dot_between, center = TRUE, scale = TRUE))
+
+data_diss = data %>%
+  group_by(wave, subjectID, algorithm) %>%
+  mutate(dot_within = scale(dotProduct, center = TRUE, scale = TRUE)) %>%
+  left_join(., between) %>%
+  select(subjectID, wave, trial, instruction, rating, algorithm, dotProduct, dot_within, dot_between)
+
+data_diss_regulation = data_diss %>%
+  filter(algorithm == "craving_regulation")
+
+data_diss_craving = data_diss %>%
+  filter(algorithm == "craving")
+
+data_diss_craving_koban = data_diss %>%
+  filter(algorithm == "nsc_koban")
+```
+
+# no brain
+## craving ~ wave x instruction {.tabset}
+
+> the intervention decreased cravings; this effect is slightly weaker when regulating 
+
+### tidytable
+```{r}
+mod_insruction = lmer(rating ~ instruction * wave + (1 + instruction * wave | subjectID),
+                  data = data_diss_craving,
+                  control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_insruction)
+```
+
+### plot
+```{r}
+ggeffects::ggpredict(mod_insruction, terms = c("wave", "instruction")) %>%
+  data.frame() %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  scale_color_manual(name = "", values = instruction) + 
+  scale_fill_manual(name = "", values = instruction) + 
+  labs(x = "\nwave", y = "predicted bid value\n") + 
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_insruction)
+```
+
+# craving {.tabset}
+## brain ~ instruction x wave {.tabset}
+
+> expression is weaker when regulating
+
+> the intervention decreased expression
+
+### tidytable
+```{r}
+mod_instruction = lmer(dotProduct ~ instruction * wave + (1 + instruction * wave | subjectID),
+                  data = data_diss_craving,
+                  control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_instruction)
+```
+
+### plot
+```{r}
+ggeffects::ggpredict(mod_instruction, terms = c("wave", "instruction")) %>%
+  data.frame() %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  scale_color_manual(name = "", values = instruction) + 
+  scale_fill_manual(name = "", values = instruction) + 
+  labs(x = "\nwave", y = "predicted pattern expression value\n") + 
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_instruction)
+```
+
+## craving ~ brain x wave {.tabset}
+
+> between-person: people who on average have higher expression, tend to report higher cravings
+
+> within-person: trials with higher than average expression are associated with higher craving ratings
+
+
+### tidy table
+```{r}
+mod_craving = lmer(rating ~ dot_between * wave + dot_within * wave + (1 + dot_within * wave | subjectID),
+               data = data_diss_craving,
+               control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_craving)
+```
+
+### plot {.tabset}
+#### by wave
+```{r}
+vals = seq(-6, 6, .2)
+ggeffects::ggpredict(mod_craving, terms = c("dot_between[vals]", "wave")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_craving, terms = c("dot_within[vals]", "wave")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
+  geom_line(aes(group = group)) +
+  facet_grid(~type) +
+  scale_color_manual(name = "wave", values = algorithm) + 
+  scale_fill_manual(name = "wave", values = algorithm) + 
+  labs(x = "\npredicted pattern expression value", y = "predicted craving rating\n") + 
+  dc_bw
+```
+
+#### by expression
+```{r}
+ggeffects::ggpredict(mod_craving, terms = c("wave", "dot_between [-1, 0, 1]")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_craving, terms = c("wave", "dot_within [-1, 0, 1]")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  facet_grid(~type) +
+  scale_color_manual(name = "expression", values = algorithm) + 
+  scale_fill_manual(name = "expression", values = algorithm) + 
+  labs(x = "\nwave", y = "predicted craving rating\n") + 
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_craving)
+```
+
+
+## craving ~ brain x instruction x wave {.tabset}
+
+> no 3-way interactions
+
+### tidy table
+```{r}
+mod_rating_craving = lmer(rating ~ dot_between*instruction*wave + dot_within*instruction*wave +
+                            (1 + dot_within * instruction + instruction * wave | subjectID),
+                      data = data_diss_craving,
+                      control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_rating_craving)
+```
+
+### plot {.tabset}
+#### by wave
+```{r, fig.width=7, fig.height=7}
+vals = seq(-6, 6, .2)
+ggeffects::ggpredict(mod_rating_craving, terms = c("dot_between[vals]", "wave", "instruction")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_rating_craving, terms = c("dot_within[vals]", "wave", "instruction")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
+  geom_line(aes(group = group)) +
+  facet_grid(type~facet) +
+  scale_color_manual(name = "wave", values = algorithm) + 
+  scale_fill_manual(name = "wave", values = algorithm) + 
+  labs(x = "\npattern expression value", y = "predicted craving rating\n") + 
+  dc_bw
+```
+
+#### by expression
+```{r, fig.width=7, fig.height=7}
+ggeffects::ggpredict(mod_rating_craving, terms = c("wave", "dot_between [-1, 0, 1]", "instruction")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_rating_craving, terms = c("wave", "dot_within [-1, 0, 1]", "instruction")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  facet_grid(type~facet) +
+  scale_color_manual(name = "expression", values = algorithm) + 
+  scale_fill_manual(name = "expression", values = algorithm) + 
+  labs(x = "\nwave", y = "predicted bid value\n") + 
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_rating_craving)
+```
+
+# Koban craving {.tabset}
+## brain ~ instruction x wave {.tabset}
+
+> expression is weaker when regulating
+
+> the intervention decreased expression when looking, but not when regulating
+
+### tidytable
+```{r}
+mod_instruction = lmer(dotProduct ~ instruction * wave + (1 + instruction * wave | subjectID),
+                  data = data_diss_craving_koban,
+                  control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_instruction)
+```
+
+### plot
+```{r}
+ggeffects::ggpredict(mod_instruction, terms = c("wave", "instruction")) %>%
+  data.frame() %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  scale_color_manual(name = "", values = instruction) + 
+  scale_fill_manual(name = "", values = instruction) + 
+  labs(x = "\nwave", y = "predicted pattern expression value\n") + 
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_instruction)
+```
+
+## craving ~ brain x wave {.tabset}
+
+> between-person: average expression isn't associated with craving ratings
+
+> within-person: trials with higher than average expression are associated with higher craving ratings
+
+> people with higher than average expression show weaker intervention effects (i.e., smaller decreases)
+
+### tidy table
+```{r}
+mod_craving = lmer(rating ~ dot_between * wave + dot_within * wave + (1 + dot_within * wave | subjectID),
+               data = data_diss_craving_koban,
+               control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_craving)
+```
+
+### plot {.tabset}
+#### by wave
+```{r}
+vals = seq(-6, 6, .2)
+ggeffects::ggpredict(mod_craving, terms = c("dot_between[vals]", "wave")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_craving, terms = c("dot_within[vals]", "wave")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
+  geom_line(aes(group = group)) +
+  facet_grid(~type) +
+  scale_color_manual(name = "wave", values = algorithm) + 
+  scale_fill_manual(name = "wave", values = algorithm) + 
+  labs(x = "\npredicted pattern expression value", y = "predicted craving rating\n") + 
+  dc_bw
+```
+
+#### by expression
+```{r}
+ggeffects::ggpredict(mod_craving, terms = c("wave", "dot_between [-1, 0, 1]")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_craving, terms = c("wave", "dot_within [-1, 0, 1]")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  facet_grid(~type) +
+  scale_color_manual(name = "expression", values = algorithm) + 
+  scale_fill_manual(name = "expression", values = algorithm) + 
+  labs(x = "\nwave", y = "predicted craving rating\n") + 
+  dc_bw
+```
+
+
+### model summary
+```{r}
+summary(mod_craving)
+```
+
+
+## craving ~ brain x instruction x wave {.tabset}
+
+> no 3-way interactions
+
+### tidy table
+```{r}
+mod_rating_craving = lmer(rating ~ dot_between*instruction*wave + dot_within*instruction*wave +
+                            (1 + dot_within * instruction + instruction * wave | subjectID),
+                      data = data_diss_craving_koban,
+                      control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_rating_craving)
+```
+
+### plot {.tabset}
+#### by wave
+```{r, fig.width=7, fig.height=7}
+vals = seq(-6, 6, .2)
+ggeffects::ggpredict(mod_rating_craving, terms = c("dot_between[vals]", "wave", "instruction")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_rating_craving, terms = c("dot_within[vals]", "wave", "instruction")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
+  geom_line(aes(group = group)) +
+  facet_grid(type~facet) +
+  scale_color_manual(name = "wave", values = algorithm) + 
+  scale_fill_manual(name = "wave", values = algorithm) + 
+  labs(x = "\npattern expression value", y = "predicted craving rating\n") + 
+  dc_bw
+```
+
+#### by expression
+```{r, fig.width=7, fig.height=7}
+ggeffects::ggpredict(mod_rating_craving, terms = c("wave", "dot_between [-1, 0, 1]", "instruction")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_rating_craving, terms = c("wave", "dot_within [-1, 0, 1]", "instruction")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  facet_grid(type~facet) +
+  scale_color_manual(name = "expression", values = algorithm) + 
+  scale_fill_manual(name = "expression", values = algorithm) + 
+  labs(x = "\nwave", y = "predicted bid value\n") + 
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_rating_craving)
+```
+
+# craving regulation {.tabset}
+## brain ~ instruction x wave {.tabset}
+
+> expression is stronger when regulating
+
+> the intervention increased expression when looking and decreased expression when regulating
+
+### tidytable
+```{r}
+mod_instruction = lmer(dotProduct ~ instruction * wave + (1 + instruction * wave | subjectID),
+                  data = data_diss_regulation,
+                  control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_instruction)
+```
+
+### plot
+```{r}
+ggeffects::ggpredict(mod_instruction, terms = c("wave", "instruction")) %>%
+  data.frame() %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  scale_color_manual(name = "", values = instruction) + 
+  scale_fill_manual(name = "", values = instruction) + 
+  labs(x = "\nwave", y = "predicted pattern expression value\n") + 
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_instruction)
+```
+
+## craving ~ brain x wave {.tabset}
+
+> between-person: average expression isn't related to craving ratings
+
+> within-person: trials with higher than average expression are associated with lower craving ratings
+
+
+### tidy table
+```{r}
+mod_craving = lmer(rating ~ dot_between * wave + dot_within * wave + (1 + dot_within * wave | subjectID),
+               data = data_diss_regulation,
+               control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_craving)
+```
+
+### plot {.tabset}
+#### by wave
+```{r}
+vals = seq(-6, 6, .2)
+ggeffects::ggpredict(mod_craving, terms = c("dot_between[vals]", "wave")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_craving, terms = c("dot_within[vals]", "wave")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
+  geom_line(aes(group = group)) +
+  facet_grid(~type) +
+  scale_color_manual(name = "wave", values = algorithm) + 
+  scale_fill_manual(name = "wave", values = algorithm) + 
+  labs(x = "\npredicted pattern expression value", y = "predicted craving rating\n") + 
+  dc_bw
+```
+
+#### by expression
+```{r}
+ggeffects::ggpredict(mod_craving, terms = c("wave", "dot_between [-1, 0, 1]")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_craving, terms = c("wave", "dot_within [-1, 0, 1]")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  facet_grid(~type) +
+  scale_color_manual(name = "expression", values = algorithm) + 
+  scale_fill_manual(name = "expression", values = algorithm) + 
+  labs(x = "\nwave", y = "predicted craving rating\n") + 
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_craving)
+```
+
+
+## craving ~ brain x instruction x wave {.tabset}
+
+> no 3-way interactions
+
+### tidy table
+```{r}
+mod_rating_craving = lmer(rating ~ dot_between*instruction*wave + dot_within*instruction*wave +
+                            (1 + dot_within * instruction + instruction * wave | subjectID),
+                      data = data_diss_regulation,
+                      control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_rating_craving)
+```
+
+### plot {.tabset}
+#### by wave
+```{r, fig.width=7, fig.height=7}
+vals = seq(-6, 6, .2)
+ggeffects::ggpredict(mod_rating_craving, terms = c("dot_between[vals]", "wave", "instruction")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_rating_craving, terms = c("dot_within[vals]", "wave", "instruction")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
+  geom_line(aes(group = group)) +
+  facet_grid(type~facet) +
+  scale_color_manual(name = "wave", values = algorithm) + 
+  scale_fill_manual(name = "wave", values = algorithm) + 
+  labs(x = "\npattern expression value", y = "predicted craving rating\n") + 
+  dc_bw
+```
+
+#### by expression
+```{r, fig.width=7, fig.height=7}
+ggeffects::ggpredict(mod_rating_craving, terms = c("wave", "dot_between [-1, 0, 1]", "instruction")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_rating_craving, terms = c("wave", "dot_within [-1, 0, 1]", "instruction")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  facet_grid(type~facet) +
+  scale_color_manual(name = "expression", values = algorithm) + 
+  scale_fill_manual(name = "expression", values = algorithm) + 
+  labs(x = "\nwave", y = "predicted bid value\n") + 
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_rating_craving)
+```
+

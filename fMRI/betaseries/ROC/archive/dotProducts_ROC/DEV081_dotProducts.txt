@@ -1,0 +1,2000 @@
+DEV081 beta_0001.nii logistic_map.nii.gz 8.48414
+DEV081 beta_0001.nii reg_look_train.nii.gz 228771
+DEV081 beta_0001.nii reg_train.nii.gz 85235.4
+DEV081 beta_0001.nii ridge_map.nii.gz 0.601137
+DEV081 beta_0001.nii svm_map.nii.gz 1.08941
+DEV081 beta_0002.nii logistic_map.nii.gz 3.0444
+DEV081 beta_0002.nii reg_look_train.nii.gz 107879
+DEV081 beta_0002.nii reg_train.nii.gz 93499.7
+DEV081 beta_0002.nii ridge_map.nii.gz 0.228337
+DEV081 beta_0002.nii svm_map.nii.gz 0.476512
+DEV081 beta_0003.nii logistic_map.nii.gz -9.29282
+DEV081 beta_0003.nii reg_look_train.nii.gz -78765.4
+DEV081 beta_0003.nii reg_train.nii.gz 99873.8
+DEV081 beta_0003.nii ridge_map.nii.gz -0.664205
+DEV081 beta_0003.nii svm_map.nii.gz -0.95674
+DEV081 beta_0004.nii logistic_map.nii.gz -5.85817
+DEV081 beta_0004.nii reg_look_train.nii.gz -123214
+DEV081 beta_0004.nii reg_train.nii.gz 65604.7
+DEV081 beta_0004.nii ridge_map.nii.gz -0.623971
+DEV081 beta_0004.nii svm_map.nii.gz -0.645267
+DEV081 beta_0005.nii logistic_map.nii.gz -6.08185
+DEV081 beta_0005.nii reg_look_train.nii.gz -110472
+DEV081 beta_0005.nii reg_train.nii.gz 81585.1
+DEV081 beta_0005.nii ridge_map.nii.gz -0.493123
+DEV081 beta_0005.nii svm_map.nii.gz -0.607717
+DEV081 beta_0006.nii logistic_map.nii.gz -8.83078
+DEV081 beta_0006.nii reg_look_train.nii.gz -55432.5
+DEV081 beta_0006.nii reg_train.nii.gz 76325.1
+DEV081 beta_0006.nii ridge_map.nii.gz -0.721571
+DEV081 beta_0006.nii svm_map.nii.gz -0.961899
+DEV081 beta_0007.nii logistic_map.nii.gz -6.71931
+DEV081 beta_0007.nii reg_look_train.nii.gz -82208.1
+DEV081 beta_0007.nii reg_train.nii.gz 114379
+DEV081 beta_0007.nii ridge_map.nii.gz -0.616129
+DEV081 beta_0007.nii svm_map.nii.gz -0.681159
+DEV081 beta_0008.nii logistic_map.nii.gz -2.50029
+DEV081 beta_0008.nii reg_look_train.nii.gz 154379
+DEV081 beta_0008.nii reg_train.nii.gz 82743.4
+DEV081 beta_0008.nii ridge_map.nii.gz -0.303806
+DEV081 beta_0008.nii svm_map.nii.gz -0.178774
+DEV081 beta_0009.nii logistic_map.nii.gz -4.77422
+DEV081 beta_0009.nii reg_look_train.nii.gz -124440
+DEV081 beta_0009.nii reg_train.nii.gz 91140.5
+DEV081 beta_0009.nii ridge_map.nii.gz -0.29736
+DEV081 beta_0009.nii svm_map.nii.gz -0.711581
+DEV081 beta_0010.nii logistic_map.nii.gz -5.85168
+DEV081 beta_0010.nii reg_look_train.nii.gz -47365
+DEV081 beta_0010.nii reg_train.nii.gz 72789.8
+DEV081 beta_0010.nii ridge_map.nii.gz -0.513303
+DEV081 beta_0010.nii svm_map.nii.gz -0.837718
+DEV081 beta_0011.nii logistic_map.nii.gz -1.20913
+DEV081 beta_0011.nii reg_look_train.nii.gz 61884.2
+DEV081 beta_0011.nii reg_train.nii.gz 93563.8
+DEV081 beta_0011.nii ridge_map.nii.gz -0.490798
+DEV081 beta_0011.nii svm_map.nii.gz -0.279895
+DEV081 beta_0012.nii logistic_map.nii.gz 6.32606
+DEV081 beta_0012.nii reg_look_train.nii.gz 67214.1
+DEV081 beta_0012.nii reg_train.nii.gz 93039.7
+DEV081 beta_0012.nii ridge_map.nii.gz 0.254169
+DEV081 beta_0012.nii svm_map.nii.gz 0.51531
+DEV081 beta_0013.nii logistic_map.nii.gz 0.0313719
+DEV081 beta_0013.nii reg_look_train.nii.gz -11453.8
+DEV081 beta_0013.nii reg_train.nii.gz 93255.4
+DEV081 beta_0013.nii ridge_map.nii.gz -0.182872
+DEV081 beta_0013.nii svm_map.nii.gz -0.0592603
+DEV081 beta_0014.nii logistic_map.nii.gz 2.40276
+DEV081 beta_0014.nii reg_look_train.nii.gz 47195.8
+DEV081 beta_0014.nii reg_train.nii.gz 79816.6
+DEV081 beta_0014.nii ridge_map.nii.gz 0.279588
+DEV081 beta_0014.nii svm_map.nii.gz 0.12712
+DEV081 beta_0015.nii logistic_map.nii.gz -1.62036
+DEV081 beta_0015.nii reg_look_train.nii.gz -15916.7
+DEV081 beta_0015.nii reg_train.nii.gz 78811
+DEV081 beta_0015.nii ridge_map.nii.gz -0.591833
+DEV081 beta_0015.nii svm_map.nii.gz -0.272058
+DEV081 beta_0016.nii logistic_map.nii.gz -0.384285
+DEV081 beta_0016.nii reg_look_train.nii.gz -8017.09
+DEV081 beta_0016.nii reg_train.nii.gz 98200
+DEV081 beta_0016.nii ridge_map.nii.gz -0.214117
+DEV081 beta_0016.nii svm_map.nii.gz -0.102331
+DEV081 beta_0017.nii logistic_map.nii.gz 2.67573
+DEV081 beta_0017.nii reg_look_train.nii.gz 110097
+DEV081 beta_0017.nii reg_train.nii.gz 92240.8
+DEV081 beta_0017.nii ridge_map.nii.gz 0.237252
+DEV081 beta_0017.nii svm_map.nii.gz 0.271993
+DEV081 beta_0018.nii logistic_map.nii.gz 0.776275
+DEV081 beta_0018.nii reg_look_train.nii.gz -70075.6
+DEV081 beta_0018.nii reg_train.nii.gz 69854.9
+DEV081 beta_0018.nii ridge_map.nii.gz 0.214044
+DEV081 beta_0018.nii svm_map.nii.gz -0.0246808
+DEV081 beta_0019.nii logistic_map.nii.gz 13.8848
+DEV081 beta_0019.nii reg_look_train.nii.gz 85483.4
+DEV081 beta_0019.nii reg_train.nii.gz 65927
+DEV081 beta_0019.nii ridge_map.nii.gz 1.39569
+DEV081 beta_0019.nii svm_map.nii.gz 1.34597
+DEV081 beta_0020.nii logistic_map.nii.gz 10.1153
+DEV081 beta_0020.nii reg_look_train.nii.gz 100241
+DEV081 beta_0020.nii reg_train.nii.gz 77619.7
+DEV081 beta_0020.nii ridge_map.nii.gz 0.759345
+DEV081 beta_0020.nii svm_map.nii.gz 1.01201
+DEV081 beta_0028.nii logistic_map.nii.gz 5.86255
+DEV081 beta_0028.nii reg_look_train.nii.gz 135343
+DEV081 beta_0028.nii reg_train.nii.gz 101459
+DEV081 beta_0028.nii ridge_map.nii.gz 0.404973
+DEV081 beta_0028.nii svm_map.nii.gz 0.687186
+DEV081 beta_0029.nii logistic_map.nii.gz -7.2057
+DEV081 beta_0029.nii reg_look_train.nii.gz -18916.2
+DEV081 beta_0029.nii reg_train.nii.gz 72608.2
+DEV081 beta_0029.nii ridge_map.nii.gz -0.978619
+DEV081 beta_0029.nii svm_map.nii.gz -0.773114
+DEV081 beta_0030.nii logistic_map.nii.gz 1.3487
+DEV081 beta_0030.nii reg_look_train.nii.gz -88665.4
+DEV081 beta_0030.nii reg_train.nii.gz 69454.5
+DEV081 beta_0030.nii ridge_map.nii.gz 0.102649
+DEV081 beta_0030.nii svm_map.nii.gz 0.145676
+DEV081 beta_0031.nii logistic_map.nii.gz 4.59056
+DEV081 beta_0031.nii reg_look_train.nii.gz -50892.5
+DEV081 beta_0031.nii reg_train.nii.gz 51238.5
+DEV081 beta_0031.nii ridge_map.nii.gz 0.526701
+DEV081 beta_0031.nii svm_map.nii.gz 0.546078
+DEV081 beta_0032.nii logistic_map.nii.gz 4.29858
+DEV081 beta_0032.nii reg_look_train.nii.gz 111843
+DEV081 beta_0032.nii reg_train.nii.gz 116092
+DEV081 beta_0032.nii ridge_map.nii.gz 0.154402
+DEV081 beta_0032.nii svm_map.nii.gz 0.472581
+DEV081 beta_0033.nii logistic_map.nii.gz 2.31654
+DEV081 beta_0033.nii reg_look_train.nii.gz 98537
+DEV081 beta_0033.nii reg_train.nii.gz 95369.1
+DEV081 beta_0033.nii ridge_map.nii.gz -0.057608
+DEV081 beta_0033.nii svm_map.nii.gz 0.328489
+DEV081 beta_0034.nii logistic_map.nii.gz -9.10159
+DEV081 beta_0034.nii reg_look_train.nii.gz -128988
+DEV081 beta_0034.nii reg_train.nii.gz 112308
+DEV081 beta_0034.nii ridge_map.nii.gz -0.902245
+DEV081 beta_0034.nii svm_map.nii.gz -0.988037
+DEV081 beta_0035.nii logistic_map.nii.gz -0.0935671
+DEV081 beta_0035.nii reg_look_train.nii.gz 19035.7
+DEV081 beta_0035.nii reg_train.nii.gz 95441.8
+DEV081 beta_0035.nii ridge_map.nii.gz -0.0655905
+DEV081 beta_0035.nii svm_map.nii.gz -0.082474
+DEV081 beta_0036.nii logistic_map.nii.gz 6.02312
+DEV081 beta_0036.nii reg_look_train.nii.gz -48286.9
+DEV081 beta_0036.nii reg_train.nii.gz 80476.9
+DEV081 beta_0036.nii ridge_map.nii.gz 0.686001
+DEV081 beta_0036.nii svm_map.nii.gz 0.497916
+DEV081 beta_0037.nii logistic_map.nii.gz -4.13767
+DEV081 beta_0037.nii reg_look_train.nii.gz -27032.4
+DEV081 beta_0037.nii reg_train.nii.gz 100085
+DEV081 beta_0037.nii ridge_map.nii.gz -0.582964
+DEV081 beta_0037.nii svm_map.nii.gz -0.553944
+DEV081 beta_0038.nii logistic_map.nii.gz -4.14151
+DEV081 beta_0038.nii reg_look_train.nii.gz -118036
+DEV081 beta_0038.nii reg_train.nii.gz 79408.4
+DEV081 beta_0038.nii ridge_map.nii.gz -0.480444
+DEV081 beta_0038.nii svm_map.nii.gz -0.383345
+DEV081 beta_0039.nii logistic_map.nii.gz -3.49323
+DEV081 beta_0039.nii reg_look_train.nii.gz -55508.4
+DEV081 beta_0039.nii reg_train.nii.gz 93693.1
+DEV081 beta_0039.nii ridge_map.nii.gz -0.476049
+DEV081 beta_0039.nii svm_map.nii.gz -0.399045
+DEV081 beta_0040.nii logistic_map.nii.gz -7.26702
+DEV081 beta_0040.nii reg_look_train.nii.gz -141955
+DEV081 beta_0040.nii reg_train.nii.gz 112578
+DEV081 beta_0040.nii ridge_map.nii.gz -0.641707
+DEV081 beta_0040.nii svm_map.nii.gz -0.688115
+DEV081 beta_0041.nii logistic_map.nii.gz 3.5538
+DEV081 beta_0041.nii reg_look_train.nii.gz 3612.27
+DEV081 beta_0041.nii reg_train.nii.gz 116601
+DEV081 beta_0041.nii ridge_map.nii.gz 0.669778
+DEV081 beta_0041.nii svm_map.nii.gz 0.356903
+DEV081 beta_0042.nii logistic_map.nii.gz -3.02578
+DEV081 beta_0042.nii reg_look_train.nii.gz 15668.4
+DEV081 beta_0042.nii reg_train.nii.gz 93512.6
+DEV081 beta_0042.nii ridge_map.nii.gz -0.272579
+DEV081 beta_0042.nii svm_map.nii.gz -0.230235
+DEV081 beta_0043.nii logistic_map.nii.gz -0.399655
+DEV081 beta_0043.nii reg_look_train.nii.gz 32165.9
+DEV081 beta_0043.nii reg_train.nii.gz 81978.4
+DEV081 beta_0043.nii ridge_map.nii.gz -0.0773161
+DEV081 beta_0043.nii svm_map.nii.gz 0.0222424
+DEV081 beta_0044.nii logistic_map.nii.gz -4.32134
+DEV081 beta_0044.nii reg_look_train.nii.gz 5526.88
+DEV081 beta_0044.nii reg_train.nii.gz 102688
+DEV081 beta_0044.nii ridge_map.nii.gz -0.336839
+DEV081 beta_0044.nii svm_map.nii.gz -0.252915
+DEV081 beta_0045.nii logistic_map.nii.gz 0.632952
+DEV081 beta_0045.nii reg_look_train.nii.gz -46277.6
+DEV081 beta_0045.nii reg_train.nii.gz 56443.1
+DEV081 beta_0045.nii ridge_map.nii.gz 0.0342074
+DEV081 beta_0045.nii svm_map.nii.gz -0.137949
+DEV081 beta_0046.nii logistic_map.nii.gz 7.26322
+DEV081 beta_0046.nii reg_look_train.nii.gz 72915.2
+DEV081 beta_0046.nii reg_train.nii.gz 58461.6
+DEV081 beta_0046.nii ridge_map.nii.gz 0.399921
+DEV081 beta_0046.nii svm_map.nii.gz 0.670316
+DEV081 beta_0047.nii logistic_map.nii.gz -7.19515
+DEV081 beta_0047.nii reg_look_train.nii.gz 13981
+DEV081 beta_0047.nii reg_train.nii.gz 88451.9
+DEV081 beta_0047.nii ridge_map.nii.gz -0.770471
+DEV081 beta_0047.nii svm_map.nii.gz -0.810021
+DEV081 beta_0055.nii logistic_map.nii.gz 4.36848
+DEV081 beta_0055.nii reg_look_train.nii.gz -29761.3
+DEV081 beta_0055.nii reg_train.nii.gz 51528.4
+DEV081 beta_0055.nii ridge_map.nii.gz 0.407329
+DEV081 beta_0055.nii svm_map.nii.gz 0.623545
+DEV081 beta_0056.nii logistic_map.nii.gz -1.47137
+DEV081 beta_0056.nii reg_look_train.nii.gz -161701
+DEV081 beta_0056.nii reg_train.nii.gz 76800.4
+DEV081 beta_0056.nii ridge_map.nii.gz -0.157375
+DEV081 beta_0056.nii svm_map.nii.gz -0.0846867
+DEV081 beta_0057.nii logistic_map.nii.gz -3.4467
+DEV081 beta_0057.nii reg_look_train.nii.gz -8393.14
+DEV081 beta_0057.nii reg_train.nii.gz 115471
+DEV081 beta_0057.nii ridge_map.nii.gz -0.431609
+DEV081 beta_0057.nii svm_map.nii.gz -0.460064
+DEV081 beta_0058.nii logistic_map.nii.gz -9.54491
+DEV081 beta_0058.nii reg_look_train.nii.gz -55034.7
+DEV081 beta_0058.nii reg_train.nii.gz 131316
+DEV081 beta_0058.nii ridge_map.nii.gz -0.931946
+DEV081 beta_0058.nii svm_map.nii.gz -1.04645
+DEV081 beta_0059.nii logistic_map.nii.gz 1.58984
+DEV081 beta_0059.nii reg_look_train.nii.gz -6889.68
+DEV081 beta_0059.nii reg_train.nii.gz 86391.6
+DEV081 beta_0059.nii ridge_map.nii.gz 0.17841
+DEV081 beta_0059.nii svm_map.nii.gz 0.128991
+DEV081 beta_0060.nii logistic_map.nii.gz -6.3732
+DEV081 beta_0060.nii reg_look_train.nii.gz -186198
+DEV081 beta_0060.nii reg_train.nii.gz 99717.7
+DEV081 beta_0060.nii ridge_map.nii.gz -0.803712
+DEV081 beta_0060.nii svm_map.nii.gz -0.798394
+DEV081 beta_0061.nii logistic_map.nii.gz 5.68059
+DEV081 beta_0061.nii reg_look_train.nii.gz -8369.48
+DEV081 beta_0061.nii reg_train.nii.gz 80722.7
+DEV081 beta_0061.nii ridge_map.nii.gz 0.224471
+DEV081 beta_0061.nii svm_map.nii.gz 0.59537
+DEV081 beta_0062.nii logistic_map.nii.gz 10.1748
+DEV081 beta_0062.nii reg_look_train.nii.gz 37828.4
+DEV081 beta_0062.nii reg_train.nii.gz 79533.2
+DEV081 beta_0062.nii ridge_map.nii.gz 0.964153
+DEV081 beta_0062.nii svm_map.nii.gz 1.14379
+DEV081 beta_0063.nii logistic_map.nii.gz 4.75513
+DEV081 beta_0063.nii reg_look_train.nii.gz -61665.2
+DEV081 beta_0063.nii reg_train.nii.gz 104843
+DEV081 beta_0063.nii ridge_map.nii.gz 0.410899
+DEV081 beta_0063.nii svm_map.nii.gz 0.417102
+DEV081 beta_0064.nii logistic_map.nii.gz 4.16744
+DEV081 beta_0064.nii reg_look_train.nii.gz -4783.69
+DEV081 beta_0064.nii reg_train.nii.gz 80813.2
+DEV081 beta_0064.nii ridge_map.nii.gz 0.512976
+DEV081 beta_0064.nii svm_map.nii.gz 0.39779
+DEV081 beta_0065.nii logistic_map.nii.gz 4.79863
+DEV081 beta_0065.nii reg_look_train.nii.gz 152547
+DEV081 beta_0065.nii reg_train.nii.gz 68235.6
+DEV081 beta_0065.nii ridge_map.nii.gz 0.365422
+DEV081 beta_0065.nii svm_map.nii.gz 0.491523
+DEV081 beta_0066.nii logistic_map.nii.gz 0.342597
+DEV081 beta_0066.nii reg_look_train.nii.gz -24649.7
+DEV081 beta_0066.nii reg_train.nii.gz 120703
+DEV081 beta_0066.nii ridge_map.nii.gz 0.221244
+DEV081 beta_0066.nii svm_map.nii.gz 0.0340761
+DEV081 beta_0067.nii logistic_map.nii.gz -0.79273
+DEV081 beta_0067.nii reg_look_train.nii.gz 100105
+DEV081 beta_0067.nii reg_train.nii.gz 69653
+DEV081 beta_0067.nii ridge_map.nii.gz -0.244364
+DEV081 beta_0067.nii svm_map.nii.gz 0.00477
+DEV081 beta_0068.nii logistic_map.nii.gz -9.19795
+DEV081 beta_0068.nii reg_look_train.nii.gz -93401.7
+DEV081 beta_0068.nii reg_train.nii.gz 124588
+DEV081 beta_0068.nii ridge_map.nii.gz -0.682344
+DEV081 beta_0068.nii svm_map.nii.gz -1.0027
+DEV081 beta_0069.nii logistic_map.nii.gz -1.64199
+DEV081 beta_0069.nii reg_look_train.nii.gz 36425.5
+DEV081 beta_0069.nii reg_train.nii.gz 108120
+DEV081 beta_0069.nii ridge_map.nii.gz -0.458141
+DEV081 beta_0069.nii svm_map.nii.gz -0.166505
+DEV081 beta_0070.nii logistic_map.nii.gz -0.76313
+DEV081 beta_0070.nii reg_look_train.nii.gz 32292.3
+DEV081 beta_0070.nii reg_train.nii.gz 130786
+DEV081 beta_0070.nii ridge_map.nii.gz -0.303194
+DEV081 beta_0070.nii svm_map.nii.gz -0.0597389
+DEV081 beta_0071.nii logistic_map.nii.gz 3.46458
+DEV081 beta_0071.nii reg_look_train.nii.gz 11154.3
+DEV081 beta_0071.nii reg_train.nii.gz 76665.7
+DEV081 beta_0071.nii ridge_map.nii.gz 0.311047
+DEV081 beta_0071.nii svm_map.nii.gz 0.385002
+DEV081 beta_0072.nii logistic_map.nii.gz 2.57111
+DEV081 beta_0072.nii reg_look_train.nii.gz -95024.6
+DEV081 beta_0072.nii reg_train.nii.gz 56923.1
+DEV081 beta_0072.nii ridge_map.nii.gz -0.20177
+DEV081 beta_0072.nii svm_map.nii.gz 0.387786
+DEV081 beta_0073.nii logistic_map.nii.gz -5.20836
+DEV081 beta_0073.nii reg_look_train.nii.gz -135836
+DEV081 beta_0073.nii reg_train.nii.gz 77690.6
+DEV081 beta_0073.nii ridge_map.nii.gz -0.426785
+DEV081 beta_0073.nii svm_map.nii.gz -0.556925
+DEV081 beta_0074.nii logistic_map.nii.gz 4.24769
+DEV081 beta_0074.nii reg_look_train.nii.gz -7834.08
+DEV081 beta_0074.nii reg_train.nii.gz 92808.2
+DEV081 beta_0074.nii ridge_map.nii.gz 0.16445
+DEV081 beta_0074.nii svm_map.nii.gz 0.499193
+DEV081 beta_0082.nii logistic_map.nii.gz -58.5228
+DEV081 beta_0082.nii reg_look_train.nii.gz 5.65607e+07
+DEV081 beta_0082.nii reg_train.nii.gz 3.42332e+06
+DEV081 beta_0082.nii ridge_map.nii.gz 0.918728
+DEV081 beta_0082.nii svm_map.nii.gz -11.2713
+DEV081 beta_0083.nii logistic_map.nii.gz -23.1624
+DEV081 beta_0083.nii reg_look_train.nii.gz 5.57594e+07
+DEV081 beta_0083.nii reg_train.nii.gz 3.38383e+06
+DEV081 beta_0083.nii ridge_map.nii.gz 4.48397
+DEV081 beta_0083.nii svm_map.nii.gz -8.47767
+DEV081 beta_0084.nii logistic_map.nii.gz -93.357
+DEV081 beta_0084.nii reg_look_train.nii.gz 5.53294e+07
+DEV081 beta_0084.nii reg_train.nii.gz 3.41513e+06
+DEV081 beta_0084.nii ridge_map.nii.gz -2.59353
+DEV081 beta_0084.nii svm_map.nii.gz -16.4827
+DEV081 beta_0085.nii logistic_map.nii.gz
+DEV081 beta_0085.nii reg_look_train.nii.gz
+DEV081 beta_0085.nii reg_train.nii.gz
+DEV081 beta_0085.nii ridge_map.nii.gz
+DEV081 beta_0085.nii svm_map.nii.gz
+DEV081 beta_0086.nii logistic_map.nii.gz
+DEV081 beta_0086.nii reg_look_train.nii.gz
+DEV081 beta_0086.nii reg_train.nii.gz
+DEV081 beta_0086.nii ridge_map.nii.gz
+DEV081 beta_0086.nii svm_map.nii.gz
+DEV081 beta_0087.nii logistic_map.nii.gz
+DEV081 beta_0087.nii reg_look_train.nii.gz
+DEV081 beta_0087.nii reg_train.nii.gz
+DEV081 beta_0087.nii ridge_map.nii.gz
+DEV081 beta_0087.nii svm_map.nii.gz
+DEV081 beta_0088.nii logistic_map.nii.gz
+DEV081 beta_0088.nii reg_look_train.nii.gz
+DEV081 beta_0088.nii reg_train.nii.gz
+DEV081 beta_0088.nii ridge_map.nii.gz
+DEV081 beta_0088.nii svm_map.nii.gz
+DEV081 beta_0089.nii logistic_map.nii.gz
+DEV081 beta_0089.nii reg_look_train.nii.gz
+DEV081 beta_0089.nii reg_train.nii.gz
+DEV081 beta_0089.nii ridge_map.nii.gz
+DEV081 beta_0089.nii svm_map.nii.gz
+DEV081 beta_0090.nii logistic_map.nii.gz
+DEV081 beta_0090.nii reg_look_train.nii.gz
+DEV081 beta_0090.nii reg_train.nii.gz
+DEV081 beta_0090.nii ridge_map.nii.gz
+DEV081 beta_0090.nii svm_map.nii.gz
+DEV081 beta_0091.nii logistic_map.nii.gz
+DEV081 beta_0091.nii reg_look_train.nii.gz
+DEV081 beta_0091.nii reg_train.nii.gz
+DEV081 beta_0091.nii ridge_map.nii.gz
+DEV081 beta_0091.nii svm_map.nii.gz
+DEV081 beta_0092.nii logistic_map.nii.gz
+DEV081 beta_0092.nii reg_look_train.nii.gz
+DEV081 beta_0092.nii reg_train.nii.gz
+DEV081 beta_0092.nii ridge_map.nii.gz
+DEV081 beta_0092.nii svm_map.nii.gz
+DEV081 beta_0093.nii logistic_map.nii.gz
+DEV081 beta_0093.nii reg_look_train.nii.gz
+DEV081 beta_0093.nii reg_train.nii.gz
+DEV081 beta_0093.nii ridge_map.nii.gz
+DEV081 beta_0093.nii svm_map.nii.gz
+DEV081 beta_0094.nii logistic_map.nii.gz
+DEV081 beta_0094.nii reg_look_train.nii.gz
+DEV081 beta_0094.nii reg_train.nii.gz
+DEV081 beta_0094.nii ridge_map.nii.gz
+DEV081 beta_0094.nii svm_map.nii.gz
+DEV081 beta_0095.nii logistic_map.nii.gz
+DEV081 beta_0095.nii reg_look_train.nii.gz
+DEV081 beta_0095.nii reg_train.nii.gz
+DEV081 beta_0095.nii ridge_map.nii.gz
+DEV081 beta_0095.nii svm_map.nii.gz
+DEV081 beta_0096.nii logistic_map.nii.gz
+DEV081 beta_0096.nii reg_look_train.nii.gz
+DEV081 beta_0096.nii reg_train.nii.gz
+DEV081 beta_0096.nii ridge_map.nii.gz
+DEV081 beta_0096.nii svm_map.nii.gz
+DEV081 beta_0097.nii logistic_map.nii.gz
+DEV081 beta_0097.nii reg_look_train.nii.gz
+DEV081 beta_0097.nii reg_train.nii.gz
+DEV081 beta_0097.nii ridge_map.nii.gz
+DEV081 beta_0097.nii svm_map.nii.gz
+DEV081 beta_0098.nii logistic_map.nii.gz
+DEV081 beta_0098.nii reg_look_train.nii.gz
+DEV081 beta_0098.nii reg_train.nii.gz
+DEV081 beta_0098.nii ridge_map.nii.gz
+DEV081 beta_0098.nii svm_map.nii.gz
+DEV081 beta_0099.nii logistic_map.nii.gz
+DEV081 beta_0099.nii reg_look_train.nii.gz
+DEV081 beta_0099.nii reg_train.nii.gz
+DEV081 beta_0099.nii ridge_map.nii.gz
+DEV081 beta_0099.nii svm_map.nii.gz
+DEV081 beta_0100.nii logistic_map.nii.gz
+DEV081 beta_0100.nii reg_look_train.nii.gz
+DEV081 beta_0100.nii reg_train.nii.gz
+DEV081 beta_0100.nii ridge_map.nii.gz
+DEV081 beta_0100.nii svm_map.nii.gz
+DEV081 beta_0101.nii logistic_map.nii.gz
+DEV081 beta_0101.nii reg_look_train.nii.gz
+DEV081 beta_0101.nii reg_train.nii.gz
+DEV081 beta_0101.nii ridge_map.nii.gz
+DEV081 beta_0101.nii svm_map.nii.gz
+DEV081 beta_0001.nii multivariate1_map.nii.gz -0.0539004
+DEV081 beta_0001.nii multivariate2_map.nii.gz -0.103575
+DEV081 beta_0001.nii multivariate3_map.nii.gz -0.1693
+DEV081 beta_0001.nii univariate1_map.nii.gz -980.575
+DEV081 beta_0001.nii univariate2_map.nii.gz 5636.96
+DEV081 beta_0001.nii univariate3_map.nii.gz -3660.55
+DEV081 beta_0002.nii multivariate1_map.nii.gz 0.935497
+DEV081 beta_0002.nii multivariate2_map.nii.gz 0.177744
+DEV081 beta_0002.nii multivariate3_map.nii.gz -1.40972
+DEV081 beta_0002.nii univariate1_map.nii.gz -3109.71
+DEV081 beta_0002.nii univariate2_map.nii.gz -1205.5
+DEV081 beta_0002.nii univariate3_map.nii.gz -3488.39
+DEV081 beta_0003.nii multivariate1_map.nii.gz -1.03132
+DEV081 beta_0003.nii multivariate2_map.nii.gz 2.26918
+DEV081 beta_0003.nii multivariate3_map.nii.gz -1.17352
+DEV081 beta_0003.nii univariate1_map.nii.gz -557.87
+DEV081 beta_0003.nii univariate2_map.nii.gz -5118.51
+DEV081 beta_0003.nii univariate3_map.nii.gz -389.551
+DEV081 beta_0004.nii multivariate1_map.nii.gz -1.731
+DEV081 beta_0004.nii multivariate2_map.nii.gz 1.4613
+DEV081 beta_0004.nii multivariate3_map.nii.gz -0.808911
+DEV081 beta_0004.nii univariate1_map.nii.gz 909.313
+DEV081 beta_0004.nii univariate2_map.nii.gz -1796.73
+DEV081 beta_0004.nii univariate3_map.nii.gz -7039.6
+DEV081 beta_0005.nii multivariate1_map.nii.gz -0.232726
+DEV081 beta_0005.nii multivariate2_map.nii.gz 2.24587
+DEV081 beta_0005.nii multivariate3_map.nii.gz -1.33528
+DEV081 beta_0005.nii univariate1_map.nii.gz -2755.32
+DEV081 beta_0005.nii univariate2_map.nii.gz 676.805
+DEV081 beta_0005.nii univariate3_map.nii.gz -5051.51
+DEV081 beta_0006.nii multivariate1_map.nii.gz 1.35201
+DEV081 beta_0006.nii multivariate2_map.nii.gz -0.469084
+DEV081 beta_0006.nii multivariate3_map.nii.gz -1.47499
+DEV081 beta_0006.nii univariate1_map.nii.gz -4860.97
+DEV081 beta_0006.nii univariate2_map.nii.gz 1443.57
+DEV081 beta_0006.nii univariate3_map.nii.gz -2761.08
+DEV081 beta_0007.nii multivariate1_map.nii.gz -0.245616
+DEV081 beta_0007.nii multivariate2_map.nii.gz -1.9799
+DEV081 beta_0007.nii multivariate3_map.nii.gz -2.97235
+DEV081 beta_0007.nii univariate1_map.nii.gz -8946.24
+DEV081 beta_0007.nii univariate2_map.nii.gz 2537.86
+DEV081 beta_0007.nii univariate3_map.nii.gz -6094.87
+DEV081 beta_0008.nii multivariate1_map.nii.gz 0.739072
+DEV081 beta_0008.nii multivariate2_map.nii.gz -1.49391
+DEV081 beta_0008.nii multivariate3_map.nii.gz -0.336963
+DEV081 beta_0008.nii univariate1_map.nii.gz -3932.65
+DEV081 beta_0008.nii univariate2_map.nii.gz 1820.63
+DEV081 beta_0008.nii univariate3_map.nii.gz -4706.99
+DEV081 beta_0009.nii multivariate1_map.nii.gz -0.393828
+DEV081 beta_0009.nii multivariate2_map.nii.gz -1.63211
+DEV081 beta_0009.nii multivariate3_map.nii.gz -2.73266
+DEV081 beta_0009.nii univariate1_map.nii.gz 6462.35
+DEV081 beta_0009.nii univariate2_map.nii.gz 312.405
+DEV081 beta_0009.nii univariate3_map.nii.gz -2075.19
+DEV081 beta_0010.nii multivariate1_map.nii.gz -1.05217
+DEV081 beta_0010.nii multivariate2_map.nii.gz -3.0507
+DEV081 beta_0010.nii multivariate3_map.nii.gz -0.583926
+DEV081 beta_0010.nii univariate1_map.nii.gz 5253.15
+DEV081 beta_0010.nii univariate2_map.nii.gz -1414.04
+DEV081 beta_0010.nii univariate3_map.nii.gz 3077.14
+DEV081 beta_0011.nii multivariate1_map.nii.gz -1.09571
+DEV081 beta_0011.nii multivariate2_map.nii.gz -1.85943
+DEV081 beta_0011.nii multivariate3_map.nii.gz 0.440432
+DEV081 beta_0011.nii univariate1_map.nii.gz 5647.3
+DEV081 beta_0011.nii univariate2_map.nii.gz -1963.27
+DEV081 beta_0011.nii univariate3_map.nii.gz 611.298
+DEV081 beta_0012.nii multivariate1_map.nii.gz -0.922928
+DEV081 beta_0012.nii multivariate2_map.nii.gz -0.497972
+DEV081 beta_0012.nii multivariate3_map.nii.gz 1.87881
+DEV081 beta_0012.nii univariate1_map.nii.gz 3339.63
+DEV081 beta_0012.nii univariate2_map.nii.gz -4979.63
+DEV081 beta_0012.nii univariate3_map.nii.gz 2969.75
+DEV081 beta_0013.nii multivariate1_map.nii.gz -1.54846
+DEV081 beta_0013.nii multivariate2_map.nii.gz -1.17634
+DEV081 beta_0013.nii multivariate3_map.nii.gz -0.440298
+DEV081 beta_0013.nii univariate1_map.nii.gz 4766.89
+DEV081 beta_0013.nii univariate2_map.nii.gz -794.933
+DEV081 beta_0013.nii univariate3_map.nii.gz -1886.69
+DEV081 beta_0014.nii multivariate1_map.nii.gz -1.62171
+DEV081 beta_0014.nii multivariate2_map.nii.gz -0.447697
+DEV081 beta_0014.nii multivariate3_map.nii.gz 1.42326
+DEV081 beta_0014.nii univariate1_map.nii.gz 4485.67
+DEV081 beta_0014.nii univariate2_map.nii.gz -3856.05
+DEV081 beta_0014.nii univariate3_map.nii.gz -1450.81
+DEV081 beta_0015.nii multivariate1_map.nii.gz -2.81433
+DEV081 beta_0015.nii multivariate2_map.nii.gz 1.66997
+DEV081 beta_0015.nii multivariate3_map.nii.gz 1.91201
+DEV081 beta_0015.nii univariate1_map.nii.gz 4477.88
+DEV081 beta_0015.nii univariate2_map.nii.gz -3064.31
+DEV081 beta_0015.nii univariate3_map.nii.gz -126.219
+DEV081 beta_0016.nii multivariate1_map.nii.gz -0.582953
+DEV081 beta_0016.nii multivariate2_map.nii.gz -0.79228
+DEV081 beta_0016.nii multivariate3_map.nii.gz 0.501695
+DEV081 beta_0016.nii univariate1_map.nii.gz 1056.39
+DEV081 beta_0016.nii univariate2_map.nii.gz -4444.43
+DEV081 beta_0016.nii univariate3_map.nii.gz -2327.24
+DEV081 beta_0017.nii multivariate1_map.nii.gz 0.108548
+DEV081 beta_0017.nii multivariate2_map.nii.gz -0.0388468
+DEV081 beta_0017.nii multivariate3_map.nii.gz 2.34882
+DEV081 beta_0017.nii univariate1_map.nii.gz -243.21
+DEV081 beta_0017.nii univariate2_map.nii.gz -4367.57
+DEV081 beta_0017.nii univariate3_map.nii.gz -4447.08
+DEV081 beta_0018.nii multivariate1_map.nii.gz 0.555032
+DEV081 beta_0018.nii multivariate2_map.nii.gz -1.56537
+DEV081 beta_0018.nii multivariate3_map.nii.gz -1.35987
+DEV081 beta_0018.nii univariate1_map.nii.gz 62.1146
+DEV081 beta_0018.nii univariate2_map.nii.gz -4135.75
+DEV081 beta_0018.nii univariate3_map.nii.gz -799.184
+DEV081 beta_0019.nii multivariate1_map.nii.gz -1.32592
+DEV081 beta_0019.nii multivariate2_map.nii.gz -2.5368
+DEV081 beta_0019.nii multivariate3_map.nii.gz 0.652956
+DEV081 beta_0019.nii univariate1_map.nii.gz 9188.43
+DEV081 beta_0019.nii univariate2_map.nii.gz -5430.4
+DEV081 beta_0019.nii univariate3_map.nii.gz 1805.62
+DEV081 beta_0020.nii multivariate1_map.nii.gz -1.81643
+DEV081 beta_0020.nii multivariate2_map.nii.gz -2.61815
+DEV081 beta_0020.nii multivariate3_map.nii.gz -0.389206
+DEV081 beta_0020.nii univariate1_map.nii.gz 4423.57
+DEV081 beta_0020.nii univariate2_map.nii.gz -4040.32
+DEV081 beta_0020.nii univariate3_map.nii.gz 3855.46
+DEV081 beta_0028.nii multivariate1_map.nii.gz -0.962526
+DEV081 beta_0028.nii multivariate2_map.nii.gz -0.31548
+DEV081 beta_0028.nii multivariate3_map.nii.gz -0.35313
+DEV081 beta_0028.nii univariate1_map.nii.gz -2488.78
+DEV081 beta_0028.nii univariate2_map.nii.gz 789.613
+DEV081 beta_0028.nii univariate3_map.nii.gz -9157.7
+DEV081 beta_0029.nii multivariate1_map.nii.gz -1.9853
+DEV081 beta_0029.nii multivariate2_map.nii.gz -1.02229
+DEV081 beta_0029.nii multivariate3_map.nii.gz -0.229383
+DEV081 beta_0029.nii univariate1_map.nii.gz -4027.1
+DEV081 beta_0029.nii univariate2_map.nii.gz 2251.76
+DEV081 beta_0029.nii univariate3_map.nii.gz -2179.56
+DEV081 beta_0030.nii multivariate1_map.nii.gz -1.67913
+DEV081 beta_0030.nii multivariate2_map.nii.gz -0.0931166
+DEV081 beta_0030.nii multivariate3_map.nii.gz -1.35574
+DEV081 beta_0030.nii univariate1_map.nii.gz -4878.24
+DEV081 beta_0030.nii univariate2_map.nii.gz 2409.85
+DEV081 beta_0030.nii univariate3_map.nii.gz -5700.47
+DEV081 beta_0031.nii multivariate1_map.nii.gz 0.600141
+DEV081 beta_0031.nii multivariate2_map.nii.gz -3.72928
+DEV081 beta_0031.nii multivariate3_map.nii.gz -3.06894
+DEV081 beta_0031.nii univariate1_map.nii.gz -5428.3
+DEV081 beta_0031.nii univariate2_map.nii.gz 718.865
+DEV081 beta_0031.nii univariate3_map.nii.gz -3673.01
+DEV081 beta_0032.nii multivariate1_map.nii.gz -1.50976
+DEV081 beta_0032.nii multivariate2_map.nii.gz 0.819663
+DEV081 beta_0032.nii multivariate3_map.nii.gz 0.0629769
+DEV081 beta_0032.nii univariate1_map.nii.gz 1611.37
+DEV081 beta_0032.nii univariate2_map.nii.gz 3583.35
+DEV081 beta_0032.nii univariate3_map.nii.gz -6365.18
+DEV081 beta_0033.nii multivariate1_map.nii.gz -0.624617
+DEV081 beta_0033.nii multivariate2_map.nii.gz -0.725025
+DEV081 beta_0033.nii multivariate3_map.nii.gz -3.83448
+DEV081 beta_0033.nii univariate1_map.nii.gz -2508.51
+DEV081 beta_0033.nii univariate2_map.nii.gz 109.791
+DEV081 beta_0033.nii univariate3_map.nii.gz -5496.38
+DEV081 beta_0034.nii multivariate1_map.nii.gz -0.246821
+DEV081 beta_0034.nii multivariate2_map.nii.gz -2.6821
+DEV081 beta_0034.nii multivariate3_map.nii.gz -5.34774
+DEV081 beta_0034.nii univariate1_map.nii.gz -2925.51
+DEV081 beta_0034.nii univariate2_map.nii.gz 4828.7
+DEV081 beta_0034.nii univariate3_map.nii.gz -3782.79
+DEV081 beta_0035.nii multivariate1_map.nii.gz 1.06169
+DEV081 beta_0035.nii multivariate2_map.nii.gz -1.55601
+DEV081 beta_0035.nii multivariate3_map.nii.gz -1.0315
+DEV081 beta_0035.nii univariate1_map.nii.gz -1284.19
+DEV081 beta_0035.nii univariate2_map.nii.gz 2733.22
+DEV081 beta_0035.nii univariate3_map.nii.gz -2934.79
+DEV081 beta_0036.nii multivariate1_map.nii.gz 2.35612
+DEV081 beta_0036.nii multivariate2_map.nii.gz -0.766055
+DEV081 beta_0036.nii multivariate3_map.nii.gz -2.15384
+DEV081 beta_0036.nii univariate1_map.nii.gz 3914.8
+DEV081 beta_0036.nii univariate2_map.nii.gz -108.823
+DEV081 beta_0036.nii univariate3_map.nii.gz 3836.67
+DEV081 beta_0037.nii multivariate1_map.nii.gz -0.131892
+DEV081 beta_0037.nii multivariate2_map.nii.gz -0.984926
+DEV081 beta_0037.nii multivariate3_map.nii.gz -1.39075
+DEV081 beta_0037.nii univariate1_map.nii.gz -3506.7
+DEV081 beta_0037.nii univariate2_map.nii.gz -2353.53
+DEV081 beta_0037.nii univariate3_map.nii.gz -2602.75
+DEV081 beta_0038.nii multivariate1_map.nii.gz -0.323127
+DEV081 beta_0038.nii multivariate2_map.nii.gz -1.75905
+DEV081 beta_0038.nii multivariate3_map.nii.gz -1.7397
+DEV081 beta_0038.nii univariate1_map.nii.gz -3885.42
+DEV081 beta_0038.nii univariate2_map.nii.gz 131.354
+DEV081 beta_0038.nii univariate3_map.nii.gz -890.177
+DEV081 beta_0039.nii multivariate1_map.nii.gz 0.0461192
+DEV081 beta_0039.nii multivariate2_map.nii.gz -0.849792
+DEV081 beta_0039.nii multivariate3_map.nii.gz -0.750564
+DEV081 beta_0039.nii univariate1_map.nii.gz -7065.32
+DEV081 beta_0039.nii univariate2_map.nii.gz -641.651
+DEV081 beta_0039.nii univariate3_map.nii.gz -3280.07
+DEV081 beta_0040.nii multivariate1_map.nii.gz -1.75557
+DEV081 beta_0040.nii multivariate2_map.nii.gz 1.83569
+DEV081 beta_0040.nii multivariate3_map.nii.gz -2.29278
+DEV081 beta_0040.nii univariate1_map.nii.gz -872.326
+DEV081 beta_0040.nii univariate2_map.nii.gz 497.965
+DEV081 beta_0040.nii univariate3_map.nii.gz -3520.44
+DEV081 beta_0041.nii multivariate1_map.nii.gz 1.10577
+DEV081 beta_0041.nii multivariate2_map.nii.gz -3.08866
+DEV081 beta_0041.nii multivariate3_map.nii.gz -0.961775
+DEV081 beta_0041.nii univariate1_map.nii.gz -914.414
+DEV081 beta_0041.nii univariate2_map.nii.gz -2482.08
+DEV081 beta_0041.nii univariate3_map.nii.gz -6083.67
+DEV081 beta_0042.nii multivariate1_map.nii.gz -3.85945
+DEV081 beta_0042.nii multivariate2_map.nii.gz -1.488
+DEV081 beta_0042.nii multivariate3_map.nii.gz 0.213238
+DEV081 beta_0042.nii univariate1_map.nii.gz -2522.3
+DEV081 beta_0042.nii univariate2_map.nii.gz -350.543
+DEV081 beta_0042.nii univariate3_map.nii.gz -2564.86
+DEV081 beta_0043.nii multivariate1_map.nii.gz -1.6596
+DEV081 beta_0043.nii multivariate2_map.nii.gz 0.536325
+DEV081 beta_0043.nii multivariate3_map.nii.gz -2.43423
+DEV081 beta_0043.nii univariate1_map.nii.gz -3128.77
+DEV081 beta_0043.nii univariate2_map.nii.gz 395.944
+DEV081 beta_0043.nii univariate3_map.nii.gz -407.456
+DEV081 beta_0044.nii multivariate1_map.nii.gz -1.31302
+DEV081 beta_0044.nii multivariate2_map.nii.gz -1.07783
+DEV081 beta_0044.nii multivariate3_map.nii.gz -2.04666
+DEV081 beta_0044.nii univariate1_map.nii.gz -4692.62
+DEV081 beta_0044.nii univariate2_map.nii.gz 5062.55
+DEV081 beta_0044.nii univariate3_map.nii.gz -4511.3
+DEV081 beta_0045.nii multivariate1_map.nii.gz -0.397157
+DEV081 beta_0045.nii multivariate2_map.nii.gz 0.400549
+DEV081 beta_0045.nii multivariate3_map.nii.gz -1.02849
+DEV081 beta_0045.nii univariate1_map.nii.gz -933.595
+DEV081 beta_0045.nii univariate2_map.nii.gz -2301.31
+DEV081 beta_0045.nii univariate3_map.nii.gz -783.989
+DEV081 beta_0046.nii multivariate1_map.nii.gz 1.10601
+DEV081 beta_0046.nii multivariate2_map.nii.gz -1.46982
+DEV081 beta_0046.nii multivariate3_map.nii.gz -1.69706
+DEV081 beta_0046.nii univariate1_map.nii.gz -961.628
+DEV081 beta_0046.nii univariate2_map.nii.gz -2983.63
+DEV081 beta_0046.nii univariate3_map.nii.gz -4310.92
+DEV081 beta_0047.nii multivariate1_map.nii.gz 1.43463
+DEV081 beta_0047.nii multivariate2_map.nii.gz -2.0761
+DEV081 beta_0047.nii multivariate3_map.nii.gz -0.719925
+DEV081 beta_0047.nii univariate1_map.nii.gz -4402.68
+DEV081 beta_0047.nii univariate2_map.nii.gz 1014.99
+DEV081 beta_0047.nii univariate3_map.nii.gz -3739.12
+DEV081 beta_0055.nii multivariate1_map.nii.gz 1.93612
+DEV081 beta_0055.nii multivariate2_map.nii.gz -3.25913
+DEV081 beta_0055.nii multivariate3_map.nii.gz -4.00886
+DEV081 beta_0055.nii univariate1_map.nii.gz -653.028
+DEV081 beta_0055.nii univariate2_map.nii.gz -159.878
+DEV081 beta_0055.nii univariate3_map.nii.gz 1869.84
+DEV081 beta_0056.nii multivariate1_map.nii.gz 2.86217
+DEV081 beta_0056.nii multivariate2_map.nii.gz -2.74839
+DEV081 beta_0056.nii multivariate3_map.nii.gz -5.65036
+DEV081 beta_0056.nii univariate1_map.nii.gz -4607.4
+DEV081 beta_0056.nii univariate2_map.nii.gz -2757.11
+DEV081 beta_0056.nii univariate3_map.nii.gz 3994.26
+DEV081 beta_0057.nii multivariate1_map.nii.gz 1.15836
+DEV081 beta_0057.nii multivariate2_map.nii.gz -1.77003
+DEV081 beta_0057.nii multivariate3_map.nii.gz -0.56021
+DEV081 beta_0057.nii univariate1_map.nii.gz -5949.5
+DEV081 beta_0057.nii univariate2_map.nii.gz -1288.31
+DEV081 beta_0057.nii univariate3_map.nii.gz -5589.56
+DEV081 beta_0058.nii multivariate1_map.nii.gz -0.585003
+DEV081 beta_0058.nii multivariate2_map.nii.gz 1.21191
+DEV081 beta_0058.nii multivariate3_map.nii.gz 0.705053
+DEV081 beta_0058.nii univariate1_map.nii.gz -3911.11
+DEV081 beta_0058.nii univariate2_map.nii.gz -3317.99
+DEV081 beta_0058.nii univariate3_map.nii.gz -3848.86
+DEV081 beta_0059.nii multivariate1_map.nii.gz 0.448159
+DEV081 beta_0059.nii multivariate2_map.nii.gz 1.86516
+DEV081 beta_0059.nii multivariate3_map.nii.gz -0.69826
+DEV081 beta_0059.nii univariate1_map.nii.gz -409.612
+DEV081 beta_0059.nii univariate2_map.nii.gz 2066.62
+DEV081 beta_0059.nii univariate3_map.nii.gz -6943.06
+DEV081 beta_0060.nii multivariate1_map.nii.gz -2.14371
+DEV081 beta_0060.nii multivariate2_map.nii.gz 1.08899
+DEV081 beta_0060.nii multivariate3_map.nii.gz -0.179424
+DEV081 beta_0060.nii univariate1_map.nii.gz -1892.66
+DEV081 beta_0060.nii univariate2_map.nii.gz 852.684
+DEV081 beta_0060.nii univariate3_map.nii.gz -5310.82
+DEV081 beta_0061.nii multivariate1_map.nii.gz -0.872486
+DEV081 beta_0061.nii multivariate2_map.nii.gz 2.16305
+DEV081 beta_0061.nii multivariate3_map.nii.gz -2.17209
+DEV081 beta_0061.nii univariate1_map.nii.gz -3200.4
+DEV081 beta_0061.nii univariate2_map.nii.gz -2283.56
+DEV081 beta_0061.nii univariate3_map.nii.gz -2897.33
+DEV081 beta_0062.nii multivariate1_map.nii.gz 0.881355
+DEV081 beta_0062.nii multivariate2_map.nii.gz -0.726984
+DEV081 beta_0062.nii multivariate3_map.nii.gz -0.433587
+DEV081 beta_0062.nii univariate1_map.nii.gz 989.068
+DEV081 beta_0062.nii univariate2_map.nii.gz -1398.59
+DEV081 beta_0062.nii univariate3_map.nii.gz 1193.2
+DEV081 beta_0063.nii multivariate1_map.nii.gz -0.942627
+DEV081 beta_0063.nii multivariate2_map.nii.gz -0.979035
+DEV081 beta_0063.nii multivariate3_map.nii.gz 0.446164
+DEV081 beta_0063.nii univariate1_map.nii.gz 7214.04
+DEV081 beta_0063.nii univariate2_map.nii.gz 1293.2
+DEV081 beta_0063.nii univariate3_map.nii.gz -1276.96
+DEV081 beta_0064.nii multivariate1_map.nii.gz 1.43574
+DEV081 beta_0064.nii multivariate2_map.nii.gz 0.591702
+DEV081 beta_0064.nii multivariate3_map.nii.gz -1.29466
+DEV081 beta_0064.nii univariate1_map.nii.gz 2465.12
+DEV081 beta_0064.nii univariate2_map.nii.gz -653.041
+DEV081 beta_0064.nii univariate3_map.nii.gz -631.638
+DEV081 beta_0065.nii multivariate1_map.nii.gz -0.950136
+DEV081 beta_0065.nii multivariate2_map.nii.gz -0.949629
+DEV081 beta_0065.nii multivariate3_map.nii.gz -1.82971
+DEV081 beta_0065.nii univariate1_map.nii.gz -276.67
+DEV081 beta_0065.nii univariate2_map.nii.gz -358.961
+DEV081 beta_0065.nii univariate3_map.nii.gz -2382.31
+DEV081 beta_0066.nii multivariate1_map.nii.gz 1.2737
+DEV081 beta_0066.nii multivariate2_map.nii.gz -0.912018
+DEV081 beta_0066.nii multivariate3_map.nii.gz -2.88745
+DEV081 beta_0066.nii univariate1_map.nii.gz -516.713
+DEV081 beta_0066.nii univariate2_map.nii.gz 184.082
+DEV081 beta_0066.nii univariate3_map.nii.gz -7520.72
+DEV081 beta_0067.nii multivariate1_map.nii.gz 2.00326
+DEV081 beta_0067.nii multivariate2_map.nii.gz 0.161385
+DEV081 beta_0067.nii multivariate3_map.nii.gz -0.253588
+DEV081 beta_0067.nii univariate1_map.nii.gz -8104.79
+DEV081 beta_0067.nii univariate2_map.nii.gz 2166.42
+DEV081 beta_0067.nii univariate3_map.nii.gz -291.316
+DEV081 beta_0068.nii multivariate1_map.nii.gz 0.964821
+DEV081 beta_0068.nii multivariate2_map.nii.gz 2.06299
+DEV081 beta_0068.nii multivariate3_map.nii.gz -2.41679
+DEV081 beta_0068.nii univariate1_map.nii.gz -2757.14
+DEV081 beta_0068.nii univariate2_map.nii.gz 1111.46
+DEV081 beta_0068.nii univariate3_map.nii.gz -7433.18
+DEV081 beta_0069.nii multivariate1_map.nii.gz 0.259419
+DEV081 beta_0069.nii multivariate2_map.nii.gz 1.01985
+DEV081 beta_0069.nii multivariate3_map.nii.gz -2.11788
+DEV081 beta_0069.nii univariate1_map.nii.gz -2310.09
+DEV081 beta_0069.nii univariate2_map.nii.gz -2099.97
+DEV081 beta_0069.nii univariate3_map.nii.gz -4787.78
+DEV081 beta_0070.nii multivariate1_map.nii.gz 1.12865
+DEV081 beta_0070.nii multivariate2_map.nii.gz 1.73554
+DEV081 beta_0070.nii multivariate3_map.nii.gz -1.47952
+DEV081 beta_0070.nii univariate1_map.nii.gz -3228.05
+DEV081 beta_0070.nii univariate2_map.nii.gz 907.347
+DEV081 beta_0070.nii univariate3_map.nii.gz -3930.97
+DEV081 beta_0071.nii multivariate1_map.nii.gz 1.47803
+DEV081 beta_0071.nii multivariate2_map.nii.gz 0.83866
+DEV081 beta_0071.nii multivariate3_map.nii.gz -2.08289
+DEV081 beta_0071.nii univariate1_map.nii.gz 4025.04
+DEV081 beta_0071.nii univariate2_map.nii.gz 1355.44
+DEV081 beta_0071.nii univariate3_map.nii.gz -5935.96
+DEV081 beta_0072.nii multivariate1_map.nii.gz 1.3912
+DEV081 beta_0072.nii multivariate2_map.nii.gz 2.76995
+DEV081 beta_0072.nii multivariate3_map.nii.gz -2.74165
+DEV081 beta_0072.nii univariate1_map.nii.gz -4195.44
+DEV081 beta_0072.nii univariate2_map.nii.gz 3625.75
+DEV081 beta_0072.nii univariate3_map.nii.gz -920.878
+DEV081 beta_0073.nii multivariate1_map.nii.gz 1.27533
+DEV081 beta_0073.nii multivariate2_map.nii.gz 2.36891
+DEV081 beta_0073.nii multivariate3_map.nii.gz -1.15725
+DEV081 beta_0073.nii univariate1_map.nii.gz -1130.67
+DEV081 beta_0073.nii univariate2_map.nii.gz 7544.89
+DEV081 beta_0073.nii univariate3_map.nii.gz -2031.64
+DEV081 beta_0074.nii multivariate1_map.nii.gz -0.556077
+DEV081 beta_0074.nii multivariate2_map.nii.gz 1.45719
+DEV081 beta_0074.nii multivariate3_map.nii.gz -2.02264
+DEV081 beta_0074.nii univariate1_map.nii.gz 2621.43
+DEV081 beta_0074.nii univariate2_map.nii.gz -1298.34
+DEV081 beta_0074.nii univariate3_map.nii.gz -5375.12
+DEV081 beta_0082.nii multivariate1_map.nii.gz -267.591
+DEV081 beta_0082.nii multivariate2_map.nii.gz -66.0951
+DEV081 beta_0082.nii multivariate3_map.nii.gz 329.39
+DEV081 beta_0082.nii univariate1_map.nii.gz -62001
+DEV081 beta_0082.nii univariate2_map.nii.gz 259528
+DEV081 beta_0082.nii univariate3_map.nii.gz 522040
+DEV081 beta_0083.nii multivariate1_map.nii.gz -267.72
+DEV081 beta_0083.nii multivariate2_map.nii.gz -68.4484
+DEV081 beta_0083.nii multivariate3_map.nii.gz 335.221
+DEV081 beta_0083.nii univariate1_map.nii.gz -56417.3
+DEV081 beta_0083.nii univariate2_map.nii.gz 263273
+DEV081 beta_0083.nii univariate3_map.nii.gz 516432
+DEV081 beta_0084.nii multivariate1_map.nii.gz -270.709
+DEV081 beta_0084.nii multivariate2_map.nii.gz -68.7567
+DEV081 beta_0084.nii multivariate3_map.nii.gz 334.035
+DEV081 beta_0084.nii univariate1_map.nii.gz -48485.6
+DEV081 beta_0084.nii univariate2_map.nii.gz 260235
+DEV081 beta_0084.nii univariate3_map.nii.gz 509018
+DEV081 beta_0085.nii multivariate1_map.nii.gz
+DEV081 beta_0085.nii multivariate2_map.nii.gz
+DEV081 beta_0085.nii multivariate3_map.nii.gz
+DEV081 beta_0085.nii univariate1_map.nii.gz
+DEV081 beta_0085.nii univariate2_map.nii.gz
+DEV081 beta_0085.nii univariate3_map.nii.gz
+DEV081 beta_0086.nii multivariate1_map.nii.gz
+DEV081 beta_0086.nii multivariate2_map.nii.gz
+DEV081 beta_0086.nii multivariate3_map.nii.gz
+DEV081 beta_0086.nii univariate1_map.nii.gz
+DEV081 beta_0086.nii univariate2_map.nii.gz
+DEV081 beta_0086.nii univariate3_map.nii.gz
+DEV081 beta_0087.nii multivariate1_map.nii.gz
+DEV081 beta_0087.nii multivariate2_map.nii.gz
+DEV081 beta_0087.nii multivariate3_map.nii.gz
+DEV081 beta_0087.nii univariate1_map.nii.gz
+DEV081 beta_0087.nii univariate2_map.nii.gz
+DEV081 beta_0087.nii univariate3_map.nii.gz
+DEV081 beta_0088.nii multivariate1_map.nii.gz
+DEV081 beta_0088.nii multivariate2_map.nii.gz
+DEV081 beta_0088.nii multivariate3_map.nii.gz
+DEV081 beta_0088.nii univariate1_map.nii.gz
+DEV081 beta_0088.nii univariate2_map.nii.gz
+DEV081 beta_0088.nii univariate3_map.nii.gz
+DEV081 beta_0089.nii multivariate1_map.nii.gz
+DEV081 beta_0089.nii multivariate2_map.nii.gz
+DEV081 beta_0089.nii multivariate3_map.nii.gz
+DEV081 beta_0089.nii univariate1_map.nii.gz
+DEV081 beta_0089.nii univariate2_map.nii.gz
+DEV081 beta_0089.nii univariate3_map.nii.gz
+DEV081 beta_0090.nii multivariate1_map.nii.gz
+DEV081 beta_0090.nii multivariate2_map.nii.gz
+DEV081 beta_0090.nii multivariate3_map.nii.gz
+DEV081 beta_0090.nii univariate1_map.nii.gz
+DEV081 beta_0090.nii univariate2_map.nii.gz
+DEV081 beta_0090.nii univariate3_map.nii.gz
+DEV081 beta_0091.nii multivariate1_map.nii.gz
+DEV081 beta_0091.nii multivariate2_map.nii.gz
+DEV081 beta_0091.nii multivariate3_map.nii.gz
+DEV081 beta_0091.nii univariate1_map.nii.gz
+DEV081 beta_0091.nii univariate2_map.nii.gz
+DEV081 beta_0091.nii univariate3_map.nii.gz
+DEV081 beta_0092.nii multivariate1_map.nii.gz
+DEV081 beta_0092.nii multivariate2_map.nii.gz
+DEV081 beta_0092.nii multivariate3_map.nii.gz
+DEV081 beta_0092.nii univariate1_map.nii.gz
+DEV081 beta_0092.nii univariate2_map.nii.gz
+DEV081 beta_0092.nii univariate3_map.nii.gz
+DEV081 beta_0093.nii multivariate1_map.nii.gz
+DEV081 beta_0093.nii multivariate2_map.nii.gz
+DEV081 beta_0093.nii multivariate3_map.nii.gz
+DEV081 beta_0093.nii univariate1_map.nii.gz
+DEV081 beta_0093.nii univariate2_map.nii.gz
+DEV081 beta_0093.nii univariate3_map.nii.gz
+DEV081 beta_0094.nii multivariate1_map.nii.gz
+DEV081 beta_0094.nii multivariate2_map.nii.gz
+DEV081 beta_0094.nii multivariate3_map.nii.gz
+DEV081 beta_0094.nii univariate1_map.nii.gz
+DEV081 beta_0094.nii univariate2_map.nii.gz
+DEV081 beta_0094.nii univariate3_map.nii.gz
+DEV081 beta_0095.nii multivariate1_map.nii.gz
+DEV081 beta_0095.nii multivariate2_map.nii.gz
+DEV081 beta_0095.nii multivariate3_map.nii.gz
+DEV081 beta_0095.nii univariate1_map.nii.gz
+DEV081 beta_0095.nii univariate2_map.nii.gz
+DEV081 beta_0095.nii univariate3_map.nii.gz
+DEV081 beta_0096.nii multivariate1_map.nii.gz
+DEV081 beta_0096.nii multivariate2_map.nii.gz
+DEV081 beta_0096.nii multivariate3_map.nii.gz
+DEV081 beta_0096.nii univariate1_map.nii.gz
+DEV081 beta_0096.nii univariate2_map.nii.gz
+DEV081 beta_0096.nii univariate3_map.nii.gz
+DEV081 beta_0097.nii multivariate1_map.nii.gz
+DEV081 beta_0097.nii multivariate2_map.nii.gz
+DEV081 beta_0097.nii multivariate3_map.nii.gz
+DEV081 beta_0097.nii univariate1_map.nii.gz
+DEV081 beta_0097.nii univariate2_map.nii.gz
+DEV081 beta_0097.nii univariate3_map.nii.gz
+DEV081 beta_0098.nii multivariate1_map.nii.gz
+DEV081 beta_0098.nii multivariate2_map.nii.gz
+DEV081 beta_0098.nii multivariate3_map.nii.gz
+DEV081 beta_0098.nii univariate1_map.nii.gz
+DEV081 beta_0098.nii univariate2_map.nii.gz
+DEV081 beta_0098.nii univariate3_map.nii.gz
+DEV081 beta_0099.nii multivariate1_map.nii.gz
+DEV081 beta_0099.nii multivariate2_map.nii.gz
+DEV081 beta_0099.nii multivariate3_map.nii.gz
+DEV081 beta_0099.nii univariate1_map.nii.gz
+DEV081 beta_0099.nii univariate2_map.nii.gz
+DEV081 beta_0099.nii univariate3_map.nii.gz
+DEV081 beta_0100.nii multivariate1_map.nii.gz
+DEV081 beta_0100.nii multivariate2_map.nii.gz
+DEV081 beta_0100.nii multivariate3_map.nii.gz
+DEV081 beta_0100.nii univariate1_map.nii.gz
+DEV081 beta_0100.nii univariate2_map.nii.gz
+DEV081 beta_0100.nii univariate3_map.nii.gz
+DEV081 beta_0101.nii multivariate1_map.nii.gz
+DEV081 beta_0101.nii multivariate2_map.nii.gz
+DEV081 beta_0101.nii multivariate3_map.nii.gz
+DEV081 beta_0101.nii univariate1_map.nii.gz
+DEV081 beta_0101.nii univariate2_map.nii.gz
+DEV081 beta_0101.nii univariate3_map.nii.gz
+DEV081 beta_0001.nii multivariate10_map.nii.gz -1.18733
+DEV081 beta_0001.nii multivariate4_map.nii.gz 2.26545
+DEV081 beta_0001.nii multivariate5_map.nii.gz -2.19884
+DEV081 beta_0001.nii multivariate6_map.nii.gz -0.0386344
+DEV081 beta_0001.nii multivariate7_map.nii.gz -1.10309
+DEV081 beta_0001.nii multivariate8_map.nii.gz 1.80207
+DEV081 beta_0001.nii multivariate9_map.nii.gz -0.663727
+DEV081 beta_0001.nii univariate10_map.nii.gz -5912.83
+DEV081 beta_0001.nii univariate4_map.nii.gz -3444.81
+DEV081 beta_0001.nii univariate5_map.nii.gz -3221.29
+DEV081 beta_0001.nii univariate6_map.nii.gz -1752.67
+DEV081 beta_0001.nii univariate7_map.nii.gz -2724.89
+DEV081 beta_0001.nii univariate8_map.nii.gz 4760.32
+DEV081 beta_0001.nii univariate9_map.nii.gz -2292.62
+DEV081 beta_0002.nii multivariate10_map.nii.gz -1.22479
+DEV081 beta_0002.nii multivariate4_map.nii.gz 0.615145
+DEV081 beta_0002.nii multivariate5_map.nii.gz 0.222753
+DEV081 beta_0002.nii multivariate6_map.nii.gz 1.93683
+DEV081 beta_0002.nii multivariate7_map.nii.gz 0.982497
+DEV081 beta_0002.nii multivariate8_map.nii.gz 1.79618
+DEV081 beta_0002.nii multivariate9_map.nii.gz -0.768197
+DEV081 beta_0002.nii univariate10_map.nii.gz -2341.13
+DEV081 beta_0002.nii univariate4_map.nii.gz -2496.43
+DEV081 beta_0002.nii univariate5_map.nii.gz -2020.14
+DEV081 beta_0002.nii univariate6_map.nii.gz -4185.3
+DEV081 beta_0002.nii univariate7_map.nii.gz 4510.94
+DEV081 beta_0002.nii univariate8_map.nii.gz 3232.68
+DEV081 beta_0002.nii univariate9_map.nii.gz -3694.73
+DEV081 beta_0003.nii multivariate10_map.nii.gz 0.181824
+DEV081 beta_0003.nii multivariate4_map.nii.gz 0.815283
+DEV081 beta_0003.nii multivariate5_map.nii.gz 2.23356
+DEV081 beta_0003.nii multivariate6_map.nii.gz 1.85648
+DEV081 beta_0003.nii multivariate7_map.nii.gz -0.805135
+DEV081 beta_0003.nii multivariate8_map.nii.gz 2.13793
+DEV081 beta_0003.nii multivariate9_map.nii.gz -0.862159
+DEV081 beta_0003.nii univariate10_map.nii.gz 1350.4
+DEV081 beta_0003.nii univariate4_map.nii.gz -1721.85
+DEV081 beta_0003.nii univariate5_map.nii.gz -892.073
+DEV081 beta_0003.nii univariate6_map.nii.gz -1802.94
+DEV081 beta_0003.nii univariate7_map.nii.gz -2320.57
+DEV081 beta_0003.nii univariate8_map.nii.gz 4034.53
+DEV081 beta_0003.nii univariate9_map.nii.gz -4169.29
+DEV081 beta_0004.nii multivariate10_map.nii.gz -1.19007
+DEV081 beta_0004.nii multivariate4_map.nii.gz 1.09214
+DEV081 beta_0004.nii multivariate5_map.nii.gz 1.90267
+DEV081 beta_0004.nii multivariate6_map.nii.gz 0.271577
+DEV081 beta_0004.nii multivariate7_map.nii.gz -0.453524
+DEV081 beta_0004.nii multivariate8_map.nii.gz 1.49989
+DEV081 beta_0004.nii multivariate9_map.nii.gz -0.617343
+DEV081 beta_0004.nii univariate10_map.nii.gz -3982.8
+DEV081 beta_0004.nii univariate4_map.nii.gz 1098.82
+DEV081 beta_0004.nii univariate5_map.nii.gz 665.272
+DEV081 beta_0004.nii univariate6_map.nii.gz 719.358
+DEV081 beta_0004.nii univariate7_map.nii.gz -3297.12
+DEV081 beta_0004.nii univariate8_map.nii.gz 27.6853
+DEV081 beta_0004.nii univariate9_map.nii.gz 627.983
+DEV081 beta_0005.nii multivariate10_map.nii.gz -0.169596
+DEV081 beta_0005.nii multivariate4_map.nii.gz -1.78708
+DEV081 beta_0005.nii multivariate5_map.nii.gz 2.47683
+DEV081 beta_0005.nii multivariate6_map.nii.gz -1.42297
+DEV081 beta_0005.nii multivariate7_map.nii.gz -0.776121
+DEV081 beta_0005.nii multivariate8_map.nii.gz 1.89571
+DEV081 beta_0005.nii multivariate9_map.nii.gz -0.238152
+DEV081 beta_0005.nii univariate10_map.nii.gz -2007.37
+DEV081 beta_0005.nii univariate4_map.nii.gz 1861.03
+DEV081 beta_0005.nii univariate5_map.nii.gz -228.264
+DEV081 beta_0005.nii univariate6_map.nii.gz -5586
+DEV081 beta_0005.nii univariate7_map.nii.gz -3926.04
+DEV081 beta_0005.nii univariate8_map.nii.gz -1154.78
+DEV081 beta_0005.nii univariate9_map.nii.gz -2542.29
+DEV081 beta_0006.nii multivariate10_map.nii.gz 1.19985
+DEV081 beta_0006.nii multivariate4_map.nii.gz -0.624437
+DEV081 beta_0006.nii multivariate5_map.nii.gz 0.228893
+DEV081 beta_0006.nii multivariate6_map.nii.gz -2.38159
+DEV081 beta_0006.nii multivariate7_map.nii.gz -1.39485
+DEV081 beta_0006.nii multivariate8_map.nii.gz -0.493781
+DEV081 beta_0006.nii multivariate9_map.nii.gz 0.200613
+DEV081 beta_0006.nii univariate10_map.nii.gz -926.669
+DEV081 beta_0006.nii univariate4_map.nii.gz 4976.22
+DEV081 beta_0006.nii univariate5_map.nii.gz -2111.65
+DEV081 beta_0006.nii univariate6_map.nii.gz 862.518
+DEV081 beta_0006.nii univariate7_map.nii.gz 1668.72
+DEV081 beta_0006.nii univariate8_map.nii.gz 20.2458
+DEV081 beta_0006.nii univariate9_map.nii.gz -2043.13
+DEV081 beta_0007.nii multivariate10_map.nii.gz -0.604446
+DEV081 beta_0007.nii multivariate4_map.nii.gz -0.36847
+DEV081 beta_0007.nii multivariate5_map.nii.gz 2.5553
+DEV081 beta_0007.nii multivariate6_map.nii.gz 1.38737
+DEV081 beta_0007.nii multivariate7_map.nii.gz -0.173825
+DEV081 beta_0007.nii multivariate8_map.nii.gz 0.846125
+DEV081 beta_0007.nii multivariate9_map.nii.gz -1.80907
+DEV081 beta_0007.nii univariate10_map.nii.gz 516.541
+DEV081 beta_0007.nii univariate4_map.nii.gz 968.797
+DEV081 beta_0007.nii univariate5_map.nii.gz -99.1915
+DEV081 beta_0007.nii univariate6_map.nii.gz -4625.71
+DEV081 beta_0007.nii univariate7_map.nii.gz -919.209
+DEV081 beta_0007.nii univariate8_map.nii.gz 919.137
+DEV081 beta_0007.nii univariate9_map.nii.gz -5647.12
+DEV081 beta_0008.nii multivariate10_map.nii.gz -0.325132
+DEV081 beta_0008.nii multivariate4_map.nii.gz -0.86413
+DEV081 beta_0008.nii multivariate5_map.nii.gz -0.162934
+DEV081 beta_0008.nii multivariate6_map.nii.gz -1.71246
+DEV081 beta_0008.nii multivariate7_map.nii.gz -3.58184
+DEV081 beta_0008.nii multivariate8_map.nii.gz -1.66003
+DEV081 beta_0008.nii multivariate9_map.nii.gz 0.350699
+DEV081 beta_0008.nii univariate10_map.nii.gz -1811.19
+DEV081 beta_0008.nii univariate4_map.nii.gz -4377.84
+DEV081 beta_0008.nii univariate5_map.nii.gz -1797.75
+DEV081 beta_0008.nii univariate6_map.nii.gz -1731.78
+DEV081 beta_0008.nii univariate7_map.nii.gz -455.057
+DEV081 beta_0008.nii univariate8_map.nii.gz -2540.09
+DEV081 beta_0008.nii univariate9_map.nii.gz 868.477
+DEV081 beta_0009.nii multivariate10_map.nii.gz -2.64971
+DEV081 beta_0009.nii multivariate4_map.nii.gz -1.98141
+DEV081 beta_0009.nii multivariate5_map.nii.gz 1.15638
+DEV081 beta_0009.nii multivariate6_map.nii.gz 0.430189
+DEV081 beta_0009.nii multivariate7_map.nii.gz -2.90376
+DEV081 beta_0009.nii multivariate8_map.nii.gz -3.36264
+DEV081 beta_0009.nii multivariate9_map.nii.gz 2.95454
+DEV081 beta_0009.nii univariate10_map.nii.gz -1670.51
+DEV081 beta_0009.nii univariate4_map.nii.gz 3087.79
+DEV081 beta_0009.nii univariate5_map.nii.gz 7303.5
+DEV081 beta_0009.nii univariate6_map.nii.gz 836.512
+DEV081 beta_0009.nii univariate7_map.nii.gz -2757.76
+DEV081 beta_0009.nii univariate8_map.nii.gz -1259.42
+DEV081 beta_0009.nii univariate9_map.nii.gz 757.838
+DEV081 beta_0010.nii multivariate10_map.nii.gz -0.774633
+DEV081 beta_0010.nii multivariate4_map.nii.gz -2.76736
+DEV081 beta_0010.nii multivariate5_map.nii.gz 0.264834
+DEV081 beta_0010.nii multivariate6_map.nii.gz -1.07611
+DEV081 beta_0010.nii multivariate7_map.nii.gz -6.84183
+DEV081 beta_0010.nii multivariate8_map.nii.gz -2.892
+DEV081 beta_0010.nii multivariate9_map.nii.gz 1.92554
+DEV081 beta_0010.nii univariate10_map.nii.gz -1319.76
+DEV081 beta_0010.nii univariate4_map.nii.gz 2733.88
+DEV081 beta_0010.nii univariate5_map.nii.gz 5090.69
+DEV081 beta_0010.nii univariate6_map.nii.gz 3559.99
+DEV081 beta_0010.nii univariate7_map.nii.gz -4280.19
+DEV081 beta_0010.nii univariate8_map.nii.gz -6322.15
+DEV081 beta_0010.nii univariate9_map.nii.gz 3688.98
+DEV081 beta_0011.nii multivariate10_map.nii.gz -1.4296
+DEV081 beta_0011.nii multivariate4_map.nii.gz -1.56426
+DEV081 beta_0011.nii multivariate5_map.nii.gz 0.224375
+DEV081 beta_0011.nii multivariate6_map.nii.gz -0.652867
+DEV081 beta_0011.nii multivariate7_map.nii.gz -3.14372
+DEV081 beta_0011.nii multivariate8_map.nii.gz -3.39667
+DEV081 beta_0011.nii multivariate9_map.nii.gz 1.82588
+DEV081 beta_0011.nii univariate10_map.nii.gz -1572.76
+DEV081 beta_0011.nii univariate4_map.nii.gz 3741.94
+DEV081 beta_0011.nii univariate5_map.nii.gz 1146.39
+DEV081 beta_0011.nii univariate6_map.nii.gz 6338.52
+DEV081 beta_0011.nii univariate7_map.nii.gz -5651.16
+DEV081 beta_0011.nii univariate8_map.nii.gz -4819.52
+DEV081 beta_0011.nii univariate9_map.nii.gz 1462.78
+DEV081 beta_0012.nii multivariate10_map.nii.gz -1.4973
+DEV081 beta_0012.nii multivariate4_map.nii.gz 1.3145
+DEV081 beta_0012.nii multivariate5_map.nii.gz -0.436529
+DEV081 beta_0012.nii multivariate6_map.nii.gz 1.01622
+DEV081 beta_0012.nii multivariate7_map.nii.gz 1.24146
+DEV081 beta_0012.nii multivariate8_map.nii.gz -1.46696
+DEV081 beta_0012.nii multivariate9_map.nii.gz 0.53023
+DEV081 beta_0012.nii univariate10_map.nii.gz -2132
+DEV081 beta_0012.nii univariate4_map.nii.gz 5774.31
+DEV081 beta_0012.nii univariate5_map.nii.gz 2101.77
+DEV081 beta_0012.nii univariate6_map.nii.gz 9477.01
+DEV081 beta_0012.nii univariate7_map.nii.gz -7893.72
+DEV081 beta_0012.nii univariate8_map.nii.gz -4260.46
+DEV081 beta_0012.nii univariate9_map.nii.gz -580.606
+DEV081 beta_0013.nii multivariate10_map.nii.gz -1.6626
+DEV081 beta_0013.nii multivariate4_map.nii.gz 0.472801
+DEV081 beta_0013.nii multivariate5_map.nii.gz 1.21146
+DEV081 beta_0013.nii multivariate6_map.nii.gz -1.35077
+DEV081 beta_0013.nii multivariate7_map.nii.gz -0.852393
+DEV081 beta_0013.nii multivariate8_map.nii.gz -1.74555
+DEV081 beta_0013.nii multivariate9_map.nii.gz 0.730556
+DEV081 beta_0013.nii univariate10_map.nii.gz 232.975
+DEV081 beta_0013.nii univariate4_map.nii.gz 8751.86
+DEV081 beta_0013.nii univariate5_map.nii.gz 2703.75
+DEV081 beta_0013.nii univariate6_map.nii.gz 6330.39
+DEV081 beta_0013.nii univariate7_map.nii.gz -12412.2
+DEV081 beta_0013.nii univariate8_map.nii.gz -2936.32
+DEV081 beta_0013.nii univariate9_map.nii.gz -176.6
+DEV081 beta_0014.nii multivariate10_map.nii.gz -0.656478
+DEV081 beta_0014.nii multivariate4_map.nii.gz 0.0397716
+DEV081 beta_0014.nii multivariate5_map.nii.gz 1.15102
+DEV081 beta_0014.nii multivariate6_map.nii.gz -2.66996
+DEV081 beta_0014.nii multivariate7_map.nii.gz -4.30163
+DEV081 beta_0014.nii multivariate8_map.nii.gz -0.955752
+DEV081 beta_0014.nii multivariate9_map.nii.gz 1.28185
+DEV081 beta_0014.nii univariate10_map.nii.gz -2910.15
+DEV081 beta_0014.nii univariate4_map.nii.gz 5232.12
+DEV081 beta_0014.nii univariate5_map.nii.gz 716.903
+DEV081 beta_0014.nii univariate6_map.nii.gz 139.386
+DEV081 beta_0014.nii univariate7_map.nii.gz -5583.49
+DEV081 beta_0014.nii univariate8_map.nii.gz 2895.89
+DEV081 beta_0014.nii univariate9_map.nii.gz -1520.33
+DEV081 beta_0015.nii multivariate10_map.nii.gz -0.439816
+DEV081 beta_0015.nii multivariate4_map.nii.gz 1.58877
+DEV081 beta_0015.nii multivariate5_map.nii.gz 1.85941
+DEV081 beta_0015.nii multivariate6_map.nii.gz -0.623343
+DEV081 beta_0015.nii multivariate7_map.nii.gz -1.85892
+DEV081 beta_0015.nii multivariate8_map.nii.gz -0.384932
+DEV081 beta_0015.nii multivariate9_map.nii.gz 0.886952
+DEV081 beta_0015.nii univariate10_map.nii.gz 651.415
+DEV081 beta_0015.nii univariate4_map.nii.gz 7958.5
+DEV081 beta_0015.nii univariate5_map.nii.gz 3479.8
+DEV081 beta_0015.nii univariate6_map.nii.gz 1871.49
+DEV081 beta_0015.nii univariate7_map.nii.gz -1281.54
+DEV081 beta_0015.nii univariate8_map.nii.gz -99.4968
+DEV081 beta_0015.nii univariate9_map.nii.gz 1481.8
+DEV081 beta_0016.nii multivariate10_map.nii.gz -0.447638
+DEV081 beta_0016.nii multivariate4_map.nii.gz 0.829701
+DEV081 beta_0016.nii multivariate5_map.nii.gz 1.09002
+DEV081 beta_0016.nii multivariate6_map.nii.gz -1.2627
+DEV081 beta_0016.nii multivariate7_map.nii.gz -0.897579
+DEV081 beta_0016.nii multivariate8_map.nii.gz -1.77184
+DEV081 beta_0016.nii multivariate9_map.nii.gz 1.2287
+DEV081 beta_0016.nii univariate10_map.nii.gz 1268.55
+DEV081 beta_0016.nii univariate4_map.nii.gz 5916.81
+DEV081 beta_0016.nii univariate5_map.nii.gz -2130.14
+DEV081 beta_0016.nii univariate6_map.nii.gz 2064.34
+DEV081 beta_0016.nii univariate7_map.nii.gz -2123.3
+DEV081 beta_0016.nii univariate8_map.nii.gz -1493.65
+DEV081 beta_0016.nii univariate9_map.nii.gz -1507.36
+DEV081 beta_0017.nii multivariate10_map.nii.gz 0.113264
+DEV081 beta_0017.nii multivariate4_map.nii.gz 0.151883
+DEV081 beta_0017.nii multivariate5_map.nii.gz 0.523477
+DEV081 beta_0017.nii multivariate6_map.nii.gz 1.97604
+DEV081 beta_0017.nii multivariate7_map.nii.gz -2.51772
+DEV081 beta_0017.nii multivariate8_map.nii.gz 1.49928
+DEV081 beta_0017.nii multivariate9_map.nii.gz 0.0898311
+DEV081 beta_0017.nii univariate10_map.nii.gz -2267.71
+DEV081 beta_0017.nii univariate4_map.nii.gz 2532.8
+DEV081 beta_0017.nii univariate5_map.nii.gz -353.933
+DEV081 beta_0017.nii univariate6_map.nii.gz -4065.15
+DEV081 beta_0017.nii univariate7_map.nii.gz 3869.55
+DEV081 beta_0017.nii univariate8_map.nii.gz 880.569
+DEV081 beta_0017.nii univariate9_map.nii.gz -942.325
+DEV081 beta_0018.nii multivariate10_map.nii.gz 1.13486
+DEV081 beta_0018.nii multivariate4_map.nii.gz -2.22415
+DEV081 beta_0018.nii multivariate5_map.nii.gz 1.48938
+DEV081 beta_0018.nii multivariate6_map.nii.gz 0.629695
+DEV081 beta_0018.nii multivariate7_map.nii.gz -2.26401
+DEV081 beta_0018.nii multivariate8_map.nii.gz -2.20383
+DEV081 beta_0018.nii multivariate9_map.nii.gz 3.73003
+DEV081 beta_0018.nii univariate10_map.nii.gz -5201.14
+DEV081 beta_0018.nii univariate4_map.nii.gz 2477.29
+DEV081 beta_0018.nii univariate5_map.nii.gz 2434.74
+DEV081 beta_0018.nii univariate6_map.nii.gz -88.4217
+DEV081 beta_0018.nii univariate7_map.nii.gz -402.087
+DEV081 beta_0018.nii univariate8_map.nii.gz -2522.09
+DEV081 beta_0018.nii univariate9_map.nii.gz -172.133
+DEV081 beta_0019.nii multivariate10_map.nii.gz 0.302752
+DEV081 beta_0019.nii multivariate4_map.nii.gz -3.57585
+DEV081 beta_0019.nii multivariate5_map.nii.gz -0.887308
+DEV081 beta_0019.nii multivariate6_map.nii.gz -1.19555
+DEV081 beta_0019.nii multivariate7_map.nii.gz -4.18766
+DEV081 beta_0019.nii multivariate8_map.nii.gz -1.7852
+DEV081 beta_0019.nii multivariate9_map.nii.gz 3.09768
+DEV081 beta_0019.nii univariate10_map.nii.gz -2423.17
+DEV081 beta_0019.nii univariate4_map.nii.gz 1863.83
+DEV081 beta_0019.nii univariate5_map.nii.gz 709.508
+DEV081 beta_0019.nii univariate6_map.nii.gz 7576.69
+DEV081 beta_0019.nii univariate7_map.nii.gz 2368.43
+DEV081 beta_0019.nii univariate8_map.nii.gz -4744.84
+DEV081 beta_0019.nii univariate9_map.nii.gz 2183.29
+DEV081 beta_0020.nii multivariate10_map.nii.gz -1.02242
+DEV081 beta_0020.nii multivariate4_map.nii.gz 0.12919
+DEV081 beta_0020.nii multivariate5_map.nii.gz -1.21073
+DEV081 beta_0020.nii multivariate6_map.nii.gz 0.160433
+DEV081 beta_0020.nii multivariate7_map.nii.gz -1.20291
+DEV081 beta_0020.nii multivariate8_map.nii.gz -1.5694
+DEV081 beta_0020.nii multivariate9_map.nii.gz 0.71557
+DEV081 beta_0020.nii univariate10_map.nii.gz -1064.64
+DEV081 beta_0020.nii univariate4_map.nii.gz 4089.18
+DEV081 beta_0020.nii univariate5_map.nii.gz 551.742
+DEV081 beta_0020.nii univariate6_map.nii.gz 10534.5
+DEV081 beta_0020.nii univariate7_map.nii.gz 3285.83
+DEV081 beta_0020.nii univariate8_map.nii.gz -5539.69
+DEV081 beta_0020.nii univariate9_map.nii.gz 1102.73
+DEV081 beta_0028.nii multivariate10_map.nii.gz -0.0211359
+DEV081 beta_0028.nii multivariate4_map.nii.gz -2.08565
+DEV081 beta_0028.nii multivariate5_map.nii.gz -0.0847864
+DEV081 beta_0028.nii multivariate6_map.nii.gz 2.40186
+DEV081 beta_0028.nii multivariate7_map.nii.gz 0.133004
+DEV081 beta_0028.nii multivariate8_map.nii.gz -0.156498
+DEV081 beta_0028.nii multivariate9_map.nii.gz 1.46444
+DEV081 beta_0028.nii univariate10_map.nii.gz 3168.07
+DEV081 beta_0028.nii univariate4_map.nii.gz -1960.13
+DEV081 beta_0028.nii univariate5_map.nii.gz 3545.29
+DEV081 beta_0028.nii univariate6_map.nii.gz -67.2669
+DEV081 beta_0028.nii univariate7_map.nii.gz 1309.68
+DEV081 beta_0028.nii univariate8_map.nii.gz 897.38
+DEV081 beta_0028.nii univariate9_map.nii.gz -3516.59
+DEV081 beta_0029.nii multivariate10_map.nii.gz -1.22798
+DEV081 beta_0029.nii multivariate4_map.nii.gz 2.24774
+DEV081 beta_0029.nii multivariate5_map.nii.gz 0.916028
+DEV081 beta_0029.nii multivariate6_map.nii.gz 1.63483
+DEV081 beta_0029.nii multivariate7_map.nii.gz 1.28113
+DEV081 beta_0029.nii multivariate8_map.nii.gz -0.410746
+DEV081 beta_0029.nii multivariate9_map.nii.gz -0.891131
+DEV081 beta_0029.nii univariate10_map.nii.gz 5051.28
+DEV081 beta_0029.nii univariate4_map.nii.gz 233.246
+DEV081 beta_0029.nii univariate5_map.nii.gz 1205.55
+DEV081 beta_0029.nii univariate6_map.nii.gz -2427
+DEV081 beta_0029.nii univariate7_map.nii.gz 3240.86
+DEV081 beta_0029.nii univariate8_map.nii.gz 2261.79
+DEV081 beta_0029.nii univariate9_map.nii.gz -83.3273
+DEV081 beta_0030.nii multivariate10_map.nii.gz -2.02917
+DEV081 beta_0030.nii multivariate4_map.nii.gz 1.34284
+DEV081 beta_0030.nii multivariate5_map.nii.gz 0.626753
+DEV081 beta_0030.nii multivariate6_map.nii.gz 1.00462
+DEV081 beta_0030.nii multivariate7_map.nii.gz 1.79123
+DEV081 beta_0030.nii multivariate8_map.nii.gz 0.778447
+DEV081 beta_0030.nii multivariate9_map.nii.gz -0.878989
+DEV081 beta_0030.nii univariate10_map.nii.gz -3985.81
+DEV081 beta_0030.nii univariate4_map.nii.gz 6890.42
+DEV081 beta_0030.nii univariate5_map.nii.gz -3031.36
+DEV081 beta_0030.nii univariate6_map.nii.gz -146.342
+DEV081 beta_0030.nii univariate7_map.nii.gz 1963.73
+DEV081 beta_0030.nii univariate8_map.nii.gz -3866.02
+DEV081 beta_0030.nii univariate9_map.nii.gz -370.537
+DEV081 beta_0031.nii multivariate10_map.nii.gz 0.715976
+DEV081 beta_0031.nii multivariate4_map.nii.gz -1.88194
+DEV081 beta_0031.nii multivariate5_map.nii.gz 3.09578
+DEV081 beta_0031.nii multivariate6_map.nii.gz -0.507515
+DEV081 beta_0031.nii multivariate7_map.nii.gz 0.346559
+DEV081 beta_0031.nii multivariate8_map.nii.gz 1.42598
+DEV081 beta_0031.nii multivariate9_map.nii.gz 2.35306
+DEV081 beta_0031.nii univariate10_map.nii.gz -8418.24
+DEV081 beta_0031.nii univariate4_map.nii.gz 3757.08
+DEV081 beta_0031.nii univariate5_map.nii.gz -1193.81
+DEV081 beta_0031.nii univariate6_map.nii.gz -1666.48
+DEV081 beta_0031.nii univariate7_map.nii.gz -2792.19
+DEV081 beta_0031.nii univariate8_map.nii.gz 4186.88
+DEV081 beta_0031.nii univariate9_map.nii.gz -5263.83
+DEV081 beta_0032.nii multivariate10_map.nii.gz -2.50947
+DEV081 beta_0032.nii multivariate4_map.nii.gz 1.30012
+DEV081 beta_0032.nii multivariate5_map.nii.gz -1.242
+DEV081 beta_0032.nii multivariate6_map.nii.gz 1.10295
+DEV081 beta_0032.nii multivariate7_map.nii.gz -0.0929238
+DEV081 beta_0032.nii multivariate8_map.nii.gz -0.214356
+DEV081 beta_0032.nii multivariate9_map.nii.gz -1.47777
+DEV081 beta_0032.nii univariate10_map.nii.gz 4946.45
+DEV081 beta_0032.nii univariate4_map.nii.gz 2341.12
+DEV081 beta_0032.nii univariate5_map.nii.gz 5589.39
+DEV081 beta_0032.nii univariate6_map.nii.gz -1643.32
+DEV081 beta_0032.nii univariate7_map.nii.gz -2749.52
+DEV081 beta_0032.nii univariate8_map.nii.gz 1014.82
+DEV081 beta_0032.nii univariate9_map.nii.gz -7187.95
+DEV081 beta_0033.nii multivariate10_map.nii.gz -0.529924
+DEV081 beta_0033.nii multivariate4_map.nii.gz 3.47795
+DEV081 beta_0033.nii multivariate5_map.nii.gz -0.623166
+DEV081 beta_0033.nii multivariate6_map.nii.gz 2.26029
+DEV081 beta_0033.nii multivariate7_map.nii.gz 0.653048
+DEV081 beta_0033.nii multivariate8_map.nii.gz -0.433459
+DEV081 beta_0033.nii multivariate9_map.nii.gz -0.878098
+DEV081 beta_0033.nii univariate10_map.nii.gz 1052.96
+DEV081 beta_0033.nii univariate4_map.nii.gz 1237.84
+DEV081 beta_0033.nii univariate5_map.nii.gz -420.811
+DEV081 beta_0033.nii univariate6_map.nii.gz -2871.49
+DEV081 beta_0033.nii univariate7_map.nii.gz -2636.46
+DEV081 beta_0033.nii univariate8_map.nii.gz -1054.19
+DEV081 beta_0033.nii univariate9_map.nii.gz -2052.34
+DEV081 beta_0034.nii multivariate10_map.nii.gz 0.594041
+DEV081 beta_0034.nii multivariate4_map.nii.gz 3.82004
+DEV081 beta_0034.nii multivariate5_map.nii.gz 3.77388
+DEV081 beta_0034.nii multivariate6_map.nii.gz 0.43533
+DEV081 beta_0034.nii multivariate7_map.nii.gz 1.79108
+DEV081 beta_0034.nii multivariate8_map.nii.gz 0.163624
+DEV081 beta_0034.nii multivariate9_map.nii.gz -0.209631
+DEV081 beta_0034.nii univariate10_map.nii.gz -1674.31
+DEV081 beta_0034.nii univariate4_map.nii.gz 81.7705
+DEV081 beta_0034.nii univariate5_map.nii.gz 3732.71
+DEV081 beta_0034.nii univariate6_map.nii.gz -4882.36
+DEV081 beta_0034.nii univariate7_map.nii.gz -1708.21
+DEV081 beta_0034.nii univariate8_map.nii.gz 5061.17
+DEV081 beta_0034.nii univariate9_map.nii.gz -3204.34
+DEV081 beta_0035.nii multivariate10_map.nii.gz 1.0128
+DEV081 beta_0035.nii multivariate4_map.nii.gz -0.860018
+DEV081 beta_0035.nii multivariate5_map.nii.gz 1.32339
+DEV081 beta_0035.nii multivariate6_map.nii.gz -0.322449
+DEV081 beta_0035.nii multivariate7_map.nii.gz -1.81681
+DEV081 beta_0035.nii multivariate8_map.nii.gz -0.581366
+DEV081 beta_0035.nii multivariate9_map.nii.gz 1.70425
+DEV081 beta_0035.nii univariate10_map.nii.gz -2662.56
+DEV081 beta_0035.nii univariate4_map.nii.gz 825.109
+DEV081 beta_0035.nii univariate5_map.nii.gz 205.684
+DEV081 beta_0035.nii univariate6_map.nii.gz 2871.89
+DEV081 beta_0035.nii univariate7_map.nii.gz -7213.91
+DEV081 beta_0035.nii univariate8_map.nii.gz -862.58
+DEV081 beta_0035.nii univariate9_map.nii.gz 350.665
+DEV081 beta_0036.nii multivariate10_map.nii.gz 0.498533
+DEV081 beta_0036.nii multivariate4_map.nii.gz 0.370083
+DEV081 beta_0036.nii multivariate5_map.nii.gz 1.9077
+DEV081 beta_0036.nii multivariate6_map.nii.gz 0.235254
+DEV081 beta_0036.nii multivariate7_map.nii.gz -0.720406
+DEV081 beta_0036.nii multivariate8_map.nii.gz -2.05616
+DEV081 beta_0036.nii multivariate9_map.nii.gz 1.93856
+DEV081 beta_0036.nii univariate10_map.nii.gz -6481.63
+DEV081 beta_0036.nii univariate4_map.nii.gz 1092.73
+DEV081 beta_0036.nii univariate5_map.nii.gz 3798.11
+DEV081 beta_0036.nii univariate6_map.nii.gz -30.7077
+DEV081 beta_0036.nii univariate7_map.nii.gz -8439.41
+DEV081 beta_0036.nii univariate8_map.nii.gz 2314.19
+DEV081 beta_0036.nii univariate9_map.nii.gz 191.155
+DEV081 beta_0037.nii multivariate10_map.nii.gz -4.6787
+DEV081 beta_0037.nii multivariate4_map.nii.gz 1.23637
+DEV081 beta_0037.nii multivariate5_map.nii.gz 1.07921
+DEV081 beta_0037.nii multivariate6_map.nii.gz 2.0597
+DEV081 beta_0037.nii multivariate7_map.nii.gz -0.942376
+DEV081 beta_0037.nii multivariate8_map.nii.gz 1.10985
+DEV081 beta_0037.nii multivariate9_map.nii.gz -0.887431
+DEV081 beta_0037.nii univariate10_map.nii.gz -46.7573
+DEV081 beta_0037.nii univariate4_map.nii.gz 1858.5
+DEV081 beta_0037.nii univariate5_map.nii.gz -392.837
+DEV081 beta_0037.nii univariate6_map.nii.gz -3653.74
+DEV081 beta_0037.nii univariate7_map.nii.gz -2727.99
+DEV081 beta_0037.nii univariate8_map.nii.gz -3220.29
+DEV081 beta_0037.nii univariate9_map.nii.gz -901.245
+DEV081 beta_0038.nii multivariate10_map.nii.gz 0.233409
+DEV081 beta_0038.nii multivariate4_map.nii.gz 1.63887
+DEV081 beta_0038.nii multivariate5_map.nii.gz 2.73607
+DEV081 beta_0038.nii multivariate6_map.nii.gz 1.36135
+DEV081 beta_0038.nii multivariate7_map.nii.gz 3.56044
+DEV081 beta_0038.nii multivariate8_map.nii.gz 0.263301
+DEV081 beta_0038.nii multivariate9_map.nii.gz -0.992886
+DEV081 beta_0038.nii univariate10_map.nii.gz -1577.79
+DEV081 beta_0038.nii univariate4_map.nii.gz 6987.11
+DEV081 beta_0038.nii univariate5_map.nii.gz 5097.17
+DEV081 beta_0038.nii univariate6_map.nii.gz -7459.57
+DEV081 beta_0038.nii univariate7_map.nii.gz -5681.6
+DEV081 beta_0038.nii univariate8_map.nii.gz 2701.99
+DEV081 beta_0038.nii univariate9_map.nii.gz -2996.85
+DEV081 beta_0039.nii multivariate10_map.nii.gz -1.13451
+DEV081 beta_0039.nii multivariate4_map.nii.gz 2.5201
+DEV081 beta_0039.nii multivariate5_map.nii.gz 1.75205
+DEV081 beta_0039.nii multivariate6_map.nii.gz 2.93851
+DEV081 beta_0039.nii multivariate7_map.nii.gz 3.75402
+DEV081 beta_0039.nii multivariate8_map.nii.gz -0.911769
+DEV081 beta_0039.nii multivariate9_map.nii.gz -0.149074
+DEV081 beta_0039.nii univariate10_map.nii.gz 3076.34
+DEV081 beta_0039.nii univariate4_map.nii.gz 3098.54
+DEV081 beta_0039.nii univariate5_map.nii.gz 345.213
+DEV081 beta_0039.nii univariate6_map.nii.gz -1631.79
+DEV081 beta_0039.nii univariate7_map.nii.gz -9486.89
+DEV081 beta_0039.nii univariate8_map.nii.gz 1930.93
+DEV081 beta_0039.nii univariate9_map.nii.gz -5498.75
+DEV081 beta_0040.nii multivariate10_map.nii.gz 0.844383
+DEV081 beta_0040.nii multivariate4_map.nii.gz 2.35539
+DEV081 beta_0040.nii multivariate5_map.nii.gz 2.10711
+DEV081 beta_0040.nii multivariate6_map.nii.gz -0.705962
+DEV081 beta_0040.nii multivariate7_map.nii.gz 1.66904
+DEV081 beta_0040.nii multivariate8_map.nii.gz 0.472678
+DEV081 beta_0040.nii multivariate9_map.nii.gz -1.4362
+DEV081 beta_0040.nii univariate10_map.nii.gz 1095.78
+DEV081 beta_0040.nii univariate4_map.nii.gz 7298.12
+DEV081 beta_0040.nii univariate5_map.nii.gz 197.095
+DEV081 beta_0040.nii univariate6_map.nii.gz -1057.36
+DEV081 beta_0040.nii univariate7_map.nii.gz -8128
+DEV081 beta_0040.nii univariate8_map.nii.gz 2494.44
+DEV081 beta_0040.nii univariate9_map.nii.gz -7099.31
+DEV081 beta_0041.nii multivariate10_map.nii.gz 0.250909
+DEV081 beta_0041.nii multivariate4_map.nii.gz -2.56119
+DEV081 beta_0041.nii multivariate5_map.nii.gz 1.57952
+DEV081 beta_0041.nii multivariate6_map.nii.gz -0.907149
+DEV081 beta_0041.nii multivariate7_map.nii.gz -2.15129
+DEV081 beta_0041.nii multivariate8_map.nii.gz 0.124302
+DEV081 beta_0041.nii multivariate9_map.nii.gz 4.54959
+DEV081 beta_0041.nii univariate10_map.nii.gz -3082.13
+DEV081 beta_0041.nii univariate4_map.nii.gz 1122.61
+DEV081 beta_0041.nii univariate5_map.nii.gz -3795.56
+DEV081 beta_0041.nii univariate6_map.nii.gz -1562.76
+DEV081 beta_0041.nii univariate7_map.nii.gz -2408.96
+DEV081 beta_0041.nii univariate8_map.nii.gz -1293.82
+DEV081 beta_0041.nii univariate9_map.nii.gz -2463.39
+DEV081 beta_0042.nii multivariate10_map.nii.gz -0.347313
+DEV081 beta_0042.nii multivariate4_map.nii.gz -0.555091
+DEV081 beta_0042.nii multivariate5_map.nii.gz 0.698957
+DEV081 beta_0042.nii multivariate6_map.nii.gz -0.844542
+DEV081 beta_0042.nii multivariate7_map.nii.gz -1.76715
+DEV081 beta_0042.nii multivariate8_map.nii.gz 1.81663
+DEV081 beta_0042.nii multivariate9_map.nii.gz 1.2918
+DEV081 beta_0042.nii univariate10_map.nii.gz 1900.61
+DEV081 beta_0042.nii univariate4_map.nii.gz 4883.92
+DEV081 beta_0042.nii univariate5_map.nii.gz -4678.72
+DEV081 beta_0042.nii univariate6_map.nii.gz -2724.39
+DEV081 beta_0042.nii univariate7_map.nii.gz -4887.7
+DEV081 beta_0042.nii univariate8_map.nii.gz 1223.14
+DEV081 beta_0042.nii univariate9_map.nii.gz -611.555
+DEV081 beta_0043.nii multivariate10_map.nii.gz -0.379782
+DEV081 beta_0043.nii multivariate4_map.nii.gz 0.223981
+DEV081 beta_0043.nii multivariate5_map.nii.gz 0.304859
+DEV081 beta_0043.nii multivariate6_map.nii.gz 0.776731
+DEV081 beta_0043.nii multivariate7_map.nii.gz 0.89204
+DEV081 beta_0043.nii multivariate8_map.nii.gz 1.53
+DEV081 beta_0043.nii multivariate9_map.nii.gz 0.459802
+DEV081 beta_0043.nii univariate10_map.nii.gz -1491.31
+DEV081 beta_0043.nii univariate4_map.nii.gz 3952.86
+DEV081 beta_0043.nii univariate5_map.nii.gz -1619.78
+DEV081 beta_0043.nii univariate6_map.nii.gz -3311.16
+DEV081 beta_0043.nii univariate7_map.nii.gz 18.6993
+DEV081 beta_0043.nii univariate8_map.nii.gz 1884.25
+DEV081 beta_0043.nii univariate9_map.nii.gz 2005.28
+DEV081 beta_0044.nii multivariate10_map.nii.gz -0.261677
+DEV081 beta_0044.nii multivariate4_map.nii.gz -0.715505
+DEV081 beta_0044.nii multivariate5_map.nii.gz 3.81898
+DEV081 beta_0044.nii multivariate6_map.nii.gz -1.02695
+DEV081 beta_0044.nii multivariate7_map.nii.gz 0.19877
+DEV081 beta_0044.nii multivariate8_map.nii.gz 2.99342
+DEV081 beta_0044.nii multivariate9_map.nii.gz -0.402971
+DEV081 beta_0044.nii univariate10_map.nii.gz 2773.06
+DEV081 beta_0044.nii univariate4_map.nii.gz 9470.47
+DEV081 beta_0044.nii univariate5_map.nii.gz -1902.37
+DEV081 beta_0044.nii univariate6_map.nii.gz -9809.69
+DEV081 beta_0044.nii univariate7_map.nii.gz 805.926
+DEV081 beta_0044.nii univariate8_map.nii.gz 6798.02
+DEV081 beta_0044.nii univariate9_map.nii.gz -5046.32
+DEV081 beta_0045.nii multivariate10_map.nii.gz -2.13979
+DEV081 beta_0045.nii multivariate4_map.nii.gz -0.760294
+DEV081 beta_0045.nii multivariate5_map.nii.gz 0.641154
+DEV081 beta_0045.nii multivariate6_map.nii.gz -0.10005
+DEV081 beta_0045.nii multivariate7_map.nii.gz -0.270041
+DEV081 beta_0045.nii multivariate8_map.nii.gz -0.125431
+DEV081 beta_0045.nii multivariate9_map.nii.gz -0.235206
+DEV081 beta_0045.nii univariate10_map.nii.gz -3205.06
+DEV081 beta_0045.nii univariate4_map.nii.gz 6093.85
+DEV081 beta_0045.nii univariate5_map.nii.gz 2552.41
+DEV081 beta_0045.nii univariate6_map.nii.gz 113.157
+DEV081 beta_0045.nii univariate7_map.nii.gz -1929.91
+DEV081 beta_0045.nii univariate8_map.nii.gz -3527.24
+DEV081 beta_0045.nii univariate9_map.nii.gz 123.017
+DEV081 beta_0046.nii multivariate10_map.nii.gz -3.34581
+DEV081 beta_0046.nii multivariate4_map.nii.gz 1.52577
+DEV081 beta_0046.nii multivariate5_map.nii.gz 0.845335
+DEV081 beta_0046.nii multivariate6_map.nii.gz 0.636999
+DEV081 beta_0046.nii multivariate7_map.nii.gz 1.46942
+DEV081 beta_0046.nii multivariate8_map.nii.gz -0.0244052
+DEV081 beta_0046.nii multivariate9_map.nii.gz -1.74174
+DEV081 beta_0046.nii univariate10_map.nii.gz -3372.15
+DEV081 beta_0046.nii univariate4_map.nii.gz 857.92
+DEV081 beta_0046.nii univariate5_map.nii.gz 464.012
+DEV081 beta_0046.nii univariate6_map.nii.gz 7997.43
+DEV081 beta_0046.nii univariate7_map.nii.gz -7840.84
+DEV081 beta_0046.nii univariate8_map.nii.gz -2663.25
+DEV081 beta_0046.nii univariate9_map.nii.gz -661.75
+DEV081 beta_0047.nii multivariate10_map.nii.gz -2.01656
+DEV081 beta_0047.nii multivariate4_map.nii.gz 2.37122
+DEV081 beta_0047.nii multivariate5_map.nii.gz 2.88613
+DEV081 beta_0047.nii multivariate6_map.nii.gz 0.409959
+DEV081 beta_0047.nii multivariate7_map.nii.gz 1.47173
+DEV081 beta_0047.nii multivariate8_map.nii.gz 4.15046
+DEV081 beta_0047.nii multivariate9_map.nii.gz -0.0739378
+DEV081 beta_0047.nii univariate10_map.nii.gz -3845.36
+DEV081 beta_0047.nii univariate4_map.nii.gz 3563.25
+DEV081 beta_0047.nii univariate5_map.nii.gz -2412.76
+DEV081 beta_0047.nii univariate6_map.nii.gz 812.193
+DEV081 beta_0047.nii univariate7_map.nii.gz -3444.94
+DEV081 beta_0047.nii univariate8_map.nii.gz -2599.79
+DEV081 beta_0047.nii univariate9_map.nii.gz -3689.64
+DEV081 beta_0055.nii multivariate10_map.nii.gz -1.35547
+DEV081 beta_0055.nii multivariate4_map.nii.gz 0.336029
+DEV081 beta_0055.nii multivariate5_map.nii.gz 0.0494737
+DEV081 beta_0055.nii multivariate6_map.nii.gz -0.0817174
+DEV081 beta_0055.nii multivariate7_map.nii.gz 4.14754
+DEV081 beta_0055.nii multivariate8_map.nii.gz 1.57561
+DEV081 beta_0055.nii multivariate9_map.nii.gz 2.45727
+DEV081 beta_0055.nii univariate10_map.nii.gz -124.621
+DEV081 beta_0055.nii univariate4_map.nii.gz -2727.63
+DEV081 beta_0055.nii univariate5_map.nii.gz -762.869
+DEV081 beta_0055.nii univariate6_map.nii.gz -755.177
+DEV081 beta_0055.nii univariate7_map.nii.gz -557.694
+DEV081 beta_0055.nii univariate8_map.nii.gz -2468.9
+DEV081 beta_0055.nii univariate9_map.nii.gz -4575.06
+DEV081 beta_0056.nii multivariate10_map.nii.gz -3.34199
+DEV081 beta_0056.nii multivariate4_map.nii.gz -0.983657
+DEV081 beta_0056.nii multivariate5_map.nii.gz 2.74118
+DEV081 beta_0056.nii multivariate6_map.nii.gz -0.33954
+DEV081 beta_0056.nii multivariate7_map.nii.gz 3.94076
+DEV081 beta_0056.nii multivariate8_map.nii.gz 1.14474
+DEV081 beta_0056.nii multivariate9_map.nii.gz 1.9415
+DEV081 beta_0056.nii univariate10_map.nii.gz -546.806
+DEV081 beta_0056.nii univariate4_map.nii.gz 5413.33
+DEV081 beta_0056.nii univariate5_map.nii.gz -2542.83
+DEV081 beta_0056.nii univariate6_map.nii.gz -2451.12
+DEV081 beta_0056.nii univariate7_map.nii.gz -84.0181
+DEV081 beta_0056.nii univariate8_map.nii.gz -218.001
+DEV081 beta_0056.nii univariate9_map.nii.gz -3088.56
+DEV081 beta_0057.nii multivariate10_map.nii.gz -3.4919
+DEV081 beta_0057.nii multivariate4_map.nii.gz -0.53595
+DEV081 beta_0057.nii multivariate5_map.nii.gz 1.10491
+DEV081 beta_0057.nii multivariate6_map.nii.gz 1.48014
+DEV081 beta_0057.nii multivariate7_map.nii.gz 0.110962
+DEV081 beta_0057.nii multivariate8_map.nii.gz 1.75355
+DEV081 beta_0057.nii multivariate9_map.nii.gz 0.981553
+DEV081 beta_0057.nii univariate10_map.nii.gz 80.2691
+DEV081 beta_0057.nii univariate4_map.nii.gz 2975.79
+DEV081 beta_0057.nii univariate5_map.nii.gz -1589.65
+DEV081 beta_0057.nii univariate6_map.nii.gz -2662.11
+DEV081 beta_0057.nii univariate7_map.nii.gz -2967.43
+DEV081 beta_0057.nii univariate8_map.nii.gz -3271.34
+DEV081 beta_0057.nii univariate9_map.nii.gz -2504.58
+DEV081 beta_0058.nii multivariate10_map.nii.gz -3.69072
+DEV081 beta_0058.nii multivariate4_map.nii.gz -0.402809
+DEV081 beta_0058.nii multivariate5_map.nii.gz -0.87331
+DEV081 beta_0058.nii multivariate6_map.nii.gz 0.220667
+DEV081 beta_0058.nii multivariate7_map.nii.gz -1.01238
+DEV081 beta_0058.nii multivariate8_map.nii.gz 2.33376
+DEV081 beta_0058.nii multivariate9_map.nii.gz -2.19433
+DEV081 beta_0058.nii univariate10_map.nii.gz 3012.96
+DEV081 beta_0058.nii univariate4_map.nii.gz 5513.68
+DEV081 beta_0058.nii univariate5_map.nii.gz -5087.15
+DEV081 beta_0058.nii univariate6_map.nii.gz -3819.75
+DEV081 beta_0058.nii univariate7_map.nii.gz -3251.55
+DEV081 beta_0058.nii univariate8_map.nii.gz 2833.88
+DEV081 beta_0058.nii univariate9_map.nii.gz -7006.1
+DEV081 beta_0059.nii multivariate10_map.nii.gz -2.39245
+DEV081 beta_0059.nii multivariate4_map.nii.gz 0.316974
+DEV081 beta_0059.nii multivariate5_map.nii.gz 0.468353
+DEV081 beta_0059.nii multivariate6_map.nii.gz -0.4088
+DEV081 beta_0059.nii multivariate7_map.nii.gz 0.106727
+DEV081 beta_0059.nii multivariate8_map.nii.gz 0.165598
+DEV081 beta_0059.nii multivariate9_map.nii.gz 0.552136
+DEV081 beta_0059.nii univariate10_map.nii.gz -953.231
+DEV081 beta_0059.nii univariate4_map.nii.gz 2823.36
+DEV081 beta_0059.nii univariate5_map.nii.gz 1994.39
+DEV081 beta_0059.nii univariate6_map.nii.gz -377.045
+DEV081 beta_0059.nii univariate7_map.nii.gz -6596.88
+DEV081 beta_0059.nii univariate8_map.nii.gz 2216.04
+DEV081 beta_0059.nii univariate9_map.nii.gz -4260.88
+DEV081 beta_0060.nii multivariate10_map.nii.gz -1.44802
+DEV081 beta_0060.nii multivariate4_map.nii.gz 1.55147
+DEV081 beta_0060.nii multivariate5_map.nii.gz 3.40878
+DEV081 beta_0060.nii multivariate6_map.nii.gz 0.835339
+DEV081 beta_0060.nii multivariate7_map.nii.gz -1.4638
+DEV081 beta_0060.nii multivariate8_map.nii.gz 2.87087
+DEV081 beta_0060.nii multivariate9_map.nii.gz 1.13052
+DEV081 beta_0060.nii univariate10_map.nii.gz 3078.97
+DEV081 beta_0060.nii univariate4_map.nii.gz 5241.54
+DEV081 beta_0060.nii univariate5_map.nii.gz 1017.09
+DEV081 beta_0060.nii univariate6_map.nii.gz 809.327
+DEV081 beta_0060.nii univariate7_map.nii.gz 1535.2
+DEV081 beta_0060.nii univariate8_map.nii.gz 2167.96
+DEV081 beta_0060.nii univariate9_map.nii.gz -2477.6
+DEV081 beta_0061.nii multivariate10_map.nii.gz -1.61045
+DEV081 beta_0061.nii multivariate4_map.nii.gz 2.81202
+DEV081 beta_0061.nii multivariate5_map.nii.gz 0.938509
+DEV081 beta_0061.nii multivariate6_map.nii.gz 0.653483
+DEV081 beta_0061.nii multivariate7_map.nii.gz 2.71944
+DEV081 beta_0061.nii multivariate8_map.nii.gz 2.73605
+DEV081 beta_0061.nii multivariate9_map.nii.gz -1.44169
+DEV081 beta_0061.nii univariate10_map.nii.gz 605.624
+DEV081 beta_0061.nii univariate4_map.nii.gz 1007.92
+DEV081 beta_0061.nii univariate5_map.nii.gz 1787.26
+DEV081 beta_0061.nii univariate6_map.nii.gz -1348.44
+DEV081 beta_0061.nii univariate7_map.nii.gz -5281.32
+DEV081 beta_0061.nii univariate8_map.nii.gz 445.504
+DEV081 beta_0061.nii univariate9_map.nii.gz -786.957
+DEV081 beta_0062.nii multivariate10_map.nii.gz -0.274026
+DEV081 beta_0062.nii multivariate4_map.nii.gz -0.536685
+DEV081 beta_0062.nii multivariate5_map.nii.gz 0.129196
+DEV081 beta_0062.nii multivariate6_map.nii.gz -0.0674466
+DEV081 beta_0062.nii multivariate7_map.nii.gz -1.73367
+DEV081 beta_0062.nii multivariate8_map.nii.gz 1.78226
+DEV081 beta_0062.nii multivariate9_map.nii.gz 2.32214
+DEV081 beta_0062.nii univariate10_map.nii.gz -4463.97
+DEV081 beta_0062.nii univariate4_map.nii.gz -523.44
+DEV081 beta_0062.nii univariate5_map.nii.gz -2256.53
+DEV081 beta_0062.nii univariate6_map.nii.gz -1075.58
+DEV081 beta_0062.nii univariate7_map.nii.gz -4156.41
+DEV081 beta_0062.nii univariate8_map.nii.gz -5555.14
+DEV081 beta_0062.nii univariate9_map.nii.gz -4440.09
+DEV081 beta_0063.nii multivariate10_map.nii.gz 0.811064
+DEV081 beta_0063.nii multivariate4_map.nii.gz 0.558
+DEV081 beta_0063.nii multivariate5_map.nii.gz 3.10624
+DEV081 beta_0063.nii multivariate6_map.nii.gz 1.04561
+DEV081 beta_0063.nii multivariate7_map.nii.gz -1.52155
+DEV081 beta_0063.nii multivariate8_map.nii.gz 0.173894
+DEV081 beta_0063.nii multivariate9_map.nii.gz 0.119571
+DEV081 beta_0063.nii univariate10_map.nii.gz -1240.99
+DEV081 beta_0063.nii univariate4_map.nii.gz 2243.73
+DEV081 beta_0063.nii univariate5_map.nii.gz 0.865487
+DEV081 beta_0063.nii univariate6_map.nii.gz 4368.64
+DEV081 beta_0063.nii univariate7_map.nii.gz -1106.62
+DEV081 beta_0063.nii univariate8_map.nii.gz -2866.6
+DEV081 beta_0063.nii univariate9_map.nii.gz -4845.83
+DEV081 beta_0064.nii multivariate10_map.nii.gz -0.423471
+DEV081 beta_0064.nii multivariate4_map.nii.gz -0.81745
+DEV081 beta_0064.nii multivariate5_map.nii.gz 1.27319
+DEV081 beta_0064.nii multivariate6_map.nii.gz 1.32047
+DEV081 beta_0064.nii multivariate7_map.nii.gz -1.84678
+DEV081 beta_0064.nii multivariate8_map.nii.gz -1.03979
+DEV081 beta_0064.nii multivariate9_map.nii.gz -0.506556
+DEV081 beta_0064.nii univariate10_map.nii.gz 44.7831
+DEV081 beta_0064.nii univariate4_map.nii.gz 411.313
+DEV081 beta_0064.nii univariate5_map.nii.gz 4745.95
+DEV081 beta_0064.nii univariate6_map.nii.gz 1527.14
+DEV081 beta_0064.nii univariate7_map.nii.gz -4477.54
+DEV081 beta_0064.nii univariate8_map.nii.gz -4587.56
+DEV081 beta_0064.nii univariate9_map.nii.gz -2576.71
+DEV081 beta_0065.nii multivariate10_map.nii.gz -0.569292
+DEV081 beta_0065.nii multivariate4_map.nii.gz 1.39721
+DEV081 beta_0065.nii multivariate5_map.nii.gz 1.69198
+DEV081 beta_0065.nii multivariate6_map.nii.gz -1.41541
+DEV081 beta_0065.nii multivariate7_map.nii.gz 0.0168058
+DEV081 beta_0065.nii multivariate8_map.nii.gz -0.0040587
+DEV081 beta_0065.nii multivariate9_map.nii.gz -0.39462
+DEV081 beta_0065.nii univariate10_map.nii.gz 1783.69
+DEV081 beta_0065.nii univariate4_map.nii.gz 578.475
+DEV081 beta_0065.nii univariate5_map.nii.gz -2699.07
+DEV081 beta_0065.nii univariate6_map.nii.gz 1906.87
+DEV081 beta_0065.nii univariate7_map.nii.gz 1542.29
+DEV081 beta_0065.nii univariate8_map.nii.gz -4293.33
+DEV081 beta_0065.nii univariate9_map.nii.gz -5454.18
+DEV081 beta_0066.nii multivariate10_map.nii.gz 0.197101
+DEV081 beta_0066.nii multivariate4_map.nii.gz 1.63344
+DEV081 beta_0066.nii multivariate5_map.nii.gz 3.82863
+DEV081 beta_0066.nii multivariate6_map.nii.gz -0.190289
+DEV081 beta_0066.nii multivariate7_map.nii.gz -0.0586465
+DEV081 beta_0066.nii multivariate8_map.nii.gz 2.36903
+DEV081 beta_0066.nii multivariate9_map.nii.gz 0.0860424
+DEV081 beta_0066.nii univariate10_map.nii.gz -3461.77
+DEV081 beta_0066.nii univariate4_map.nii.gz 1048.27
+DEV081 beta_0066.nii univariate5_map.nii.gz -2803.65
+DEV081 beta_0066.nii univariate6_map.nii.gz 832.5
+DEV081 beta_0066.nii univariate7_map.nii.gz 1322.55
+DEV081 beta_0066.nii univariate8_map.nii.gz -277.472
+DEV081 beta_0066.nii univariate9_map.nii.gz -9001.78
+DEV081 beta_0067.nii multivariate10_map.nii.gz -0.342504
+DEV081 beta_0067.nii multivariate4_map.nii.gz 3.16982
+DEV081 beta_0067.nii multivariate5_map.nii.gz -0.325771
+DEV081 beta_0067.nii multivariate6_map.nii.gz 0.117619
+DEV081 beta_0067.nii multivariate7_map.nii.gz 3.72733
+DEV081 beta_0067.nii multivariate8_map.nii.gz 0.704179
+DEV081 beta_0067.nii multivariate9_map.nii.gz 0.23266
+DEV081 beta_0067.nii univariate10_map.nii.gz 7793.11
+DEV081 beta_0067.nii univariate4_map.nii.gz 2669.52
+DEV081 beta_0067.nii univariate5_map.nii.gz -7720.16
+DEV081 beta_0067.nii univariate6_map.nii.gz -3033.74
+DEV081 beta_0067.nii univariate7_map.nii.gz -507.499
+DEV081 beta_0067.nii univariate8_map.nii.gz -5926.14
+DEV081 beta_0067.nii univariate9_map.nii.gz -6463.27
+DEV081 beta_0068.nii multivariate10_map.nii.gz 1.26381
+DEV081 beta_0068.nii multivariate4_map.nii.gz 1.93877
+DEV081 beta_0068.nii multivariate5_map.nii.gz 1.99867
+DEV081 beta_0068.nii multivariate6_map.nii.gz -0.641239
+DEV081 beta_0068.nii multivariate7_map.nii.gz -1.34052
+DEV081 beta_0068.nii multivariate8_map.nii.gz 6.31614
+DEV081 beta_0068.nii multivariate9_map.nii.gz 0.396808
+DEV081 beta_0068.nii univariate10_map.nii.gz -1740.75
+DEV081 beta_0068.nii univariate4_map.nii.gz 4570.65
+DEV081 beta_0068.nii univariate5_map.nii.gz -895.582
+DEV081 beta_0068.nii univariate6_map.nii.gz -4899.44
+DEV081 beta_0068.nii univariate7_map.nii.gz 928.598
+DEV081 beta_0068.nii univariate8_map.nii.gz 3061.34
+DEV081 beta_0068.nii univariate9_map.nii.gz -6703.73
+DEV081 beta_0069.nii multivariate10_map.nii.gz -0.484473
+DEV081 beta_0069.nii multivariate4_map.nii.gz 3.43235
+DEV081 beta_0069.nii multivariate5_map.nii.gz 0.190803
+DEV081 beta_0069.nii multivariate6_map.nii.gz -0.334827
+DEV081 beta_0069.nii multivariate7_map.nii.gz -1.43547
+DEV081 beta_0069.nii multivariate8_map.nii.gz 1.99744
+DEV081 beta_0069.nii multivariate9_map.nii.gz -2.85648
+DEV081 beta_0069.nii univariate10_map.nii.gz -1550.37
+DEV081 beta_0069.nii univariate4_map.nii.gz 6378.93
+DEV081 beta_0069.nii univariate5_map.nii.gz -2407.65
+DEV081 beta_0069.nii univariate6_map.nii.gz -2785.36
+DEV081 beta_0069.nii univariate7_map.nii.gz -801.523
+DEV081 beta_0069.nii univariate8_map.nii.gz -221.09
+DEV081 beta_0069.nii univariate9_map.nii.gz -2880.38
+DEV081 beta_0070.nii multivariate10_map.nii.gz -0.982033
+DEV081 beta_0070.nii multivariate4_map.nii.gz 5.01409
+DEV081 beta_0070.nii multivariate5_map.nii.gz 0.206854
+DEV081 beta_0070.nii multivariate6_map.nii.gz -0.1692
+DEV081 beta_0070.nii multivariate7_map.nii.gz 0.0339667
+DEV081 beta_0070.nii multivariate8_map.nii.gz 2.25816
+DEV081 beta_0070.nii multivariate9_map.nii.gz -2.38535
+DEV081 beta_0070.nii univariate10_map.nii.gz 1108.79
+DEV081 beta_0070.nii univariate4_map.nii.gz 5383.24
+DEV081 beta_0070.nii univariate5_map.nii.gz -2086.02
+DEV081 beta_0070.nii univariate6_map.nii.gz 423.781
+DEV081 beta_0070.nii univariate7_map.nii.gz 1415.83
+DEV081 beta_0070.nii univariate8_map.nii.gz 1753.25
+DEV081 beta_0070.nii univariate9_map.nii.gz -6090.91
+DEV081 beta_0071.nii multivariate10_map.nii.gz 2.48117
+DEV081 beta_0071.nii multivariate4_map.nii.gz -0.403062
+DEV081 beta_0071.nii multivariate5_map.nii.gz 0.954569
+DEV081 beta_0071.nii multivariate6_map.nii.gz -1.60705
+DEV081 beta_0071.nii multivariate7_map.nii.gz -2.37832
+DEV081 beta_0071.nii multivariate8_map.nii.gz -2.02362
+DEV081 beta_0071.nii multivariate9_map.nii.gz 1.11169
+DEV081 beta_0071.nii univariate10_map.nii.gz 5852.26
+DEV081 beta_0071.nii univariate4_map.nii.gz 4493.03
+DEV081 beta_0071.nii univariate5_map.nii.gz -499.564
+DEV081 beta_0071.nii univariate6_map.nii.gz 4534.21
+DEV081 beta_0071.nii univariate7_map.nii.gz -4521.4
+DEV081 beta_0071.nii univariate8_map.nii.gz 1394.97
+DEV081 beta_0071.nii univariate9_map.nii.gz -7638.02
+DEV081 beta_0072.nii multivariate10_map.nii.gz -1.36615
+DEV081 beta_0072.nii multivariate4_map.nii.gz 4.11113
+DEV081 beta_0072.nii multivariate5_map.nii.gz 3.14525
+DEV081 beta_0072.nii multivariate6_map.nii.gz -0.770759
+DEV081 beta_0072.nii multivariate7_map.nii.gz 5.74793
+DEV081 beta_0072.nii multivariate8_map.nii.gz -3.33462
+DEV081 beta_0072.nii multivariate9_map.nii.gz -1.13495
+DEV081 beta_0072.nii univariate10_map.nii.gz -1027.41
+DEV081 beta_0072.nii univariate4_map.nii.gz 4788.66
+DEV081 beta_0072.nii univariate5_map.nii.gz -52.9254
+DEV081 beta_0072.nii univariate6_map.nii.gz -5620.75
+DEV081 beta_0072.nii univariate7_map.nii.gz -5170.96
+DEV081 beta_0072.nii univariate8_map.nii.gz 2622.33
+DEV081 beta_0072.nii univariate9_map.nii.gz -2054.84
+DEV081 beta_0073.nii multivariate10_map.nii.gz 1.4848
+DEV081 beta_0073.nii multivariate4_map.nii.gz -0.0771389
+DEV081 beta_0073.nii multivariate5_map.nii.gz 3.04459
+DEV081 beta_0073.nii multivariate6_map.nii.gz -1.79508
+DEV081 beta_0073.nii multivariate7_map.nii.gz 2.40851
+DEV081 beta_0073.nii multivariate8_map.nii.gz -1.68281
+DEV081 beta_0073.nii multivariate9_map.nii.gz 0.502363
+DEV081 beta_0073.nii univariate10_map.nii.gz -7967.14
+DEV081 beta_0073.nii univariate4_map.nii.gz 5709.13
+DEV081 beta_0073.nii univariate5_map.nii.gz 4606.12
+DEV081 beta_0073.nii univariate6_map.nii.gz -3823.08
+DEV081 beta_0073.nii univariate7_map.nii.gz -9087.43
+DEV081 beta_0073.nii univariate8_map.nii.gz 3951.07
+DEV081 beta_0073.nii univariate9_map.nii.gz -3581.39
+DEV081 beta_0074.nii multivariate10_map.nii.gz -1.59929
+DEV081 beta_0074.nii multivariate4_map.nii.gz 3.40876
+DEV081 beta_0074.nii multivariate5_map.nii.gz 3.20481
+DEV081 beta_0074.nii multivariate6_map.nii.gz -1.01978
+DEV081 beta_0074.nii multivariate7_map.nii.gz 0.515721
+DEV081 beta_0074.nii multivariate8_map.nii.gz -1.94366
+DEV081 beta_0074.nii multivariate9_map.nii.gz -0.0256931
+DEV081 beta_0074.nii univariate10_map.nii.gz -1865.14
+DEV081 beta_0074.nii univariate4_map.nii.gz 4320.73
+DEV081 beta_0074.nii univariate5_map.nii.gz 972.805
+DEV081 beta_0074.nii univariate6_map.nii.gz 73.3233
+DEV081 beta_0074.nii univariate7_map.nii.gz -384.116
+DEV081 beta_0074.nii univariate8_map.nii.gz 5609.33
+DEV081 beta_0074.nii univariate9_map.nii.gz 204.966
+DEV081 beta_0082.nii multivariate10_map.nii.gz 102.032
+DEV081 beta_0082.nii multivariate4_map.nii.gz 477.803
+DEV081 beta_0082.nii multivariate5_map.nii.gz -495.608
+DEV081 beta_0082.nii multivariate6_map.nii.gz -21.3227
+DEV081 beta_0082.nii multivariate7_map.nii.gz -47.812
+DEV081 beta_0082.nii multivariate8_map.nii.gz -35.9512
+DEV081 beta_0082.nii multivariate9_map.nii.gz -261.553
+DEV081 beta_0082.nii univariate10_map.nii.gz 628724
+DEV081 beta_0082.nii univariate4_map.nii.gz -1.0379e+06
+DEV081 beta_0082.nii univariate5_map.nii.gz -880450
+DEV081 beta_0082.nii univariate6_map.nii.gz -702974
+DEV081 beta_0082.nii univariate7_map.nii.gz 778578
+DEV081 beta_0082.nii univariate8_map.nii.gz 632087
+DEV081 beta_0082.nii univariate9_map.nii.gz 609338
+DEV081 beta_0083.nii multivariate10_map.nii.gz 105.375
+DEV081 beta_0083.nii multivariate4_map.nii.gz 482.021
+DEV081 beta_0083.nii multivariate5_map.nii.gz -485.317
+DEV081 beta_0083.nii multivariate6_map.nii.gz -14.4187
+DEV081 beta_0083.nii multivariate7_map.nii.gz -37.2731
+DEV081 beta_0083.nii multivariate8_map.nii.gz -36.5215
+DEV081 beta_0083.nii multivariate9_map.nii.gz -252.189
+DEV081 beta_0083.nii univariate10_map.nii.gz 630080
+DEV081 beta_0083.nii univariate4_map.nii.gz -1.025e+06
+DEV081 beta_0083.nii univariate5_map.nii.gz -893059
+DEV081 beta_0083.nii univariate6_map.nii.gz -694320
+DEV081 beta_0083.nii univariate7_map.nii.gz 817938
+DEV081 beta_0083.nii univariate8_map.nii.gz 619670
+DEV081 beta_0083.nii univariate9_map.nii.gz 588449
+DEV081 beta_0084.nii multivariate10_map.nii.gz 105.519
+DEV081 beta_0084.nii multivariate4_map.nii.gz 478.268
+DEV081 beta_0084.nii multivariate5_map.nii.gz -480.835
+DEV081 beta_0084.nii multivariate6_map.nii.gz -22.6225
+DEV081 beta_0084.nii multivariate7_map.nii.gz -36.7994
+DEV081 beta_0084.nii multivariate8_map.nii.gz -35.6668
+DEV081 beta_0084.nii multivariate9_map.nii.gz -264.514
+DEV081 beta_0084.nii univariate10_map.nii.gz 593832
+DEV081 beta_0084.nii univariate4_map.nii.gz -1.0101e+06
+DEV081 beta_0084.nii univariate5_map.nii.gz -899227
+DEV081 beta_0084.nii univariate6_map.nii.gz -698311
+DEV081 beta_0084.nii univariate7_map.nii.gz 842018
+DEV081 beta_0084.nii univariate8_map.nii.gz 620595
+DEV081 beta_0084.nii univariate9_map.nii.gz 599908
+DEV081 beta_0085.nii multivariate10_map.nii.gz
+DEV081 beta_0085.nii multivariate4_map.nii.gz
+DEV081 beta_0085.nii multivariate5_map.nii.gz
+DEV081 beta_0085.nii multivariate6_map.nii.gz
+DEV081 beta_0085.nii multivariate7_map.nii.gz
+DEV081 beta_0085.nii multivariate8_map.nii.gz
+DEV081 beta_0085.nii multivariate9_map.nii.gz
+DEV081 beta_0085.nii univariate10_map.nii.gz
+DEV081 beta_0085.nii univariate4_map.nii.gz
+DEV081 beta_0085.nii univariate5_map.nii.gz
+DEV081 beta_0085.nii univariate6_map.nii.gz
+DEV081 beta_0085.nii univariate7_map.nii.gz
+DEV081 beta_0085.nii univariate8_map.nii.gz
+DEV081 beta_0085.nii univariate9_map.nii.gz
+DEV081 beta_0086.nii multivariate10_map.nii.gz
+DEV081 beta_0086.nii multivariate4_map.nii.gz
+DEV081 beta_0086.nii multivariate5_map.nii.gz
+DEV081 beta_0086.nii multivariate6_map.nii.gz
+DEV081 beta_0086.nii multivariate7_map.nii.gz
+DEV081 beta_0086.nii multivariate8_map.nii.gz
+DEV081 beta_0086.nii multivariate9_map.nii.gz
+DEV081 beta_0086.nii univariate10_map.nii.gz
+DEV081 beta_0086.nii univariate4_map.nii.gz
+DEV081 beta_0086.nii univariate5_map.nii.gz
+DEV081 beta_0086.nii univariate6_map.nii.gz
+DEV081 beta_0086.nii univariate7_map.nii.gz
+DEV081 beta_0086.nii univariate8_map.nii.gz
+DEV081 beta_0086.nii univariate9_map.nii.gz
+DEV081 beta_0087.nii multivariate10_map.nii.gz
+DEV081 beta_0087.nii multivariate4_map.nii.gz
+DEV081 beta_0087.nii multivariate5_map.nii.gz
+DEV081 beta_0087.nii multivariate6_map.nii.gz
+DEV081 beta_0087.nii multivariate7_map.nii.gz
+DEV081 beta_0087.nii multivariate8_map.nii.gz
+DEV081 beta_0087.nii multivariate9_map.nii.gz
+DEV081 beta_0087.nii univariate10_map.nii.gz
+DEV081 beta_0087.nii univariate4_map.nii.gz
+DEV081 beta_0087.nii univariate5_map.nii.gz
+DEV081 beta_0087.nii univariate6_map.nii.gz
+DEV081 beta_0087.nii univariate7_map.nii.gz
+DEV081 beta_0087.nii univariate8_map.nii.gz
+DEV081 beta_0087.nii univariate9_map.nii.gz
+DEV081 beta_0088.nii multivariate10_map.nii.gz
+DEV081 beta_0088.nii multivariate4_map.nii.gz
+DEV081 beta_0088.nii multivariate5_map.nii.gz
+DEV081 beta_0088.nii multivariate6_map.nii.gz
+DEV081 beta_0088.nii multivariate7_map.nii.gz
+DEV081 beta_0088.nii multivariate8_map.nii.gz
+DEV081 beta_0088.nii multivariate9_map.nii.gz
+DEV081 beta_0088.nii univariate10_map.nii.gz
+DEV081 beta_0088.nii univariate4_map.nii.gz
+DEV081 beta_0088.nii univariate5_map.nii.gz
+DEV081 beta_0088.nii univariate6_map.nii.gz
+DEV081 beta_0088.nii univariate7_map.nii.gz
+DEV081 beta_0088.nii univariate8_map.nii.gz
+DEV081 beta_0088.nii univariate9_map.nii.gz
+DEV081 beta_0089.nii multivariate10_map.nii.gz
+DEV081 beta_0089.nii multivariate4_map.nii.gz
+DEV081 beta_0089.nii multivariate5_map.nii.gz
+DEV081 beta_0089.nii multivariate6_map.nii.gz
+DEV081 beta_0089.nii multivariate7_map.nii.gz
+DEV081 beta_0089.nii multivariate8_map.nii.gz
+DEV081 beta_0089.nii multivariate9_map.nii.gz
+DEV081 beta_0089.nii univariate10_map.nii.gz
+DEV081 beta_0089.nii univariate4_map.nii.gz
+DEV081 beta_0089.nii univariate5_map.nii.gz
+DEV081 beta_0089.nii univariate6_map.nii.gz
+DEV081 beta_0089.nii univariate7_map.nii.gz
+DEV081 beta_0089.nii univariate8_map.nii.gz
+DEV081 beta_0089.nii univariate9_map.nii.gz
+DEV081 beta_0090.nii multivariate10_map.nii.gz
+DEV081 beta_0090.nii multivariate4_map.nii.gz
+DEV081 beta_0090.nii multivariate5_map.nii.gz
+DEV081 beta_0090.nii multivariate6_map.nii.gz
+DEV081 beta_0090.nii multivariate7_map.nii.gz
+DEV081 beta_0090.nii multivariate8_map.nii.gz
+DEV081 beta_0090.nii multivariate9_map.nii.gz
+DEV081 beta_0090.nii univariate10_map.nii.gz
+DEV081 beta_0090.nii univariate4_map.nii.gz
+DEV081 beta_0090.nii univariate5_map.nii.gz
+DEV081 beta_0090.nii univariate6_map.nii.gz
+DEV081 beta_0090.nii univariate7_map.nii.gz
+DEV081 beta_0090.nii univariate8_map.nii.gz
+DEV081 beta_0090.nii univariate9_map.nii.gz
+DEV081 beta_0091.nii multivariate10_map.nii.gz
+DEV081 beta_0091.nii multivariate4_map.nii.gz
+DEV081 beta_0091.nii multivariate5_map.nii.gz
+DEV081 beta_0091.nii multivariate6_map.nii.gz
+DEV081 beta_0091.nii multivariate7_map.nii.gz
+DEV081 beta_0091.nii multivariate8_map.nii.gz
+DEV081 beta_0091.nii multivariate9_map.nii.gz
+DEV081 beta_0091.nii univariate10_map.nii.gz
+DEV081 beta_0091.nii univariate4_map.nii.gz
+DEV081 beta_0091.nii univariate5_map.nii.gz
+DEV081 beta_0091.nii univariate6_map.nii.gz
+DEV081 beta_0091.nii univariate7_map.nii.gz
+DEV081 beta_0091.nii univariate8_map.nii.gz
+DEV081 beta_0091.nii univariate9_map.nii.gz
+DEV081 beta_0092.nii multivariate10_map.nii.gz
+DEV081 beta_0092.nii multivariate4_map.nii.gz
+DEV081 beta_0092.nii multivariate5_map.nii.gz
+DEV081 beta_0092.nii multivariate6_map.nii.gz
+DEV081 beta_0092.nii multivariate7_map.nii.gz
+DEV081 beta_0092.nii multivariate8_map.nii.gz
+DEV081 beta_0092.nii multivariate9_map.nii.gz
+DEV081 beta_0092.nii univariate10_map.nii.gz
+DEV081 beta_0092.nii univariate4_map.nii.gz
+DEV081 beta_0092.nii univariate5_map.nii.gz
+DEV081 beta_0092.nii univariate6_map.nii.gz
+DEV081 beta_0092.nii univariate7_map.nii.gz
+DEV081 beta_0092.nii univariate8_map.nii.gz
+DEV081 beta_0092.nii univariate9_map.nii.gz
+DEV081 beta_0093.nii multivariate10_map.nii.gz
+DEV081 beta_0093.nii multivariate4_map.nii.gz
+DEV081 beta_0093.nii multivariate5_map.nii.gz
+DEV081 beta_0093.nii multivariate6_map.nii.gz
+DEV081 beta_0093.nii multivariate7_map.nii.gz
+DEV081 beta_0093.nii multivariate8_map.nii.gz
+DEV081 beta_0093.nii multivariate9_map.nii.gz
+DEV081 beta_0093.nii univariate10_map.nii.gz
+DEV081 beta_0093.nii univariate4_map.nii.gz
+DEV081 beta_0093.nii univariate5_map.nii.gz
+DEV081 beta_0093.nii univariate6_map.nii.gz
+DEV081 beta_0093.nii univariate7_map.nii.gz
+DEV081 beta_0093.nii univariate8_map.nii.gz
+DEV081 beta_0093.nii univariate9_map.nii.gz
+DEV081 beta_0094.nii multivariate10_map.nii.gz
+DEV081 beta_0094.nii multivariate4_map.nii.gz
+DEV081 beta_0094.nii multivariate5_map.nii.gz
+DEV081 beta_0094.nii multivariate6_map.nii.gz
+DEV081 beta_0094.nii multivariate7_map.nii.gz
+DEV081 beta_0094.nii multivariate8_map.nii.gz
+DEV081 beta_0094.nii multivariate9_map.nii.gz
+DEV081 beta_0094.nii univariate10_map.nii.gz
+DEV081 beta_0094.nii univariate4_map.nii.gz
+DEV081 beta_0094.nii univariate5_map.nii.gz
+DEV081 beta_0094.nii univariate6_map.nii.gz
+DEV081 beta_0094.nii univariate7_map.nii.gz
+DEV081 beta_0094.nii univariate8_map.nii.gz
+DEV081 beta_0094.nii univariate9_map.nii.gz
+DEV081 beta_0095.nii multivariate10_map.nii.gz
+DEV081 beta_0095.nii multivariate4_map.nii.gz
+DEV081 beta_0095.nii multivariate5_map.nii.gz
+DEV081 beta_0095.nii multivariate6_map.nii.gz
+DEV081 beta_0095.nii multivariate7_map.nii.gz
+DEV081 beta_0095.nii multivariate8_map.nii.gz
+DEV081 beta_0095.nii multivariate9_map.nii.gz
+DEV081 beta_0095.nii univariate10_map.nii.gz
+DEV081 beta_0095.nii univariate4_map.nii.gz
+DEV081 beta_0095.nii univariate5_map.nii.gz
+DEV081 beta_0095.nii univariate6_map.nii.gz
+DEV081 beta_0095.nii univariate7_map.nii.gz
+DEV081 beta_0095.nii univariate8_map.nii.gz
+DEV081 beta_0095.nii univariate9_map.nii.gz
+DEV081 beta_0096.nii multivariate10_map.nii.gz
+DEV081 beta_0096.nii multivariate4_map.nii.gz
+DEV081 beta_0096.nii multivariate5_map.nii.gz
+DEV081 beta_0096.nii multivariate6_map.nii.gz
+DEV081 beta_0096.nii multivariate7_map.nii.gz
+DEV081 beta_0096.nii multivariate8_map.nii.gz
+DEV081 beta_0096.nii multivariate9_map.nii.gz
+DEV081 beta_0096.nii univariate10_map.nii.gz
+DEV081 beta_0096.nii univariate4_map.nii.gz
+DEV081 beta_0096.nii univariate5_map.nii.gz
+DEV081 beta_0096.nii univariate6_map.nii.gz
+DEV081 beta_0096.nii univariate7_map.nii.gz
+DEV081 beta_0096.nii univariate8_map.nii.gz
+DEV081 beta_0096.nii univariate9_map.nii.gz
+DEV081 beta_0097.nii multivariate10_map.nii.gz
+DEV081 beta_0097.nii multivariate4_map.nii.gz
+DEV081 beta_0097.nii multivariate5_map.nii.gz
+DEV081 beta_0097.nii multivariate6_map.nii.gz
+DEV081 beta_0097.nii multivariate7_map.nii.gz
+DEV081 beta_0097.nii multivariate8_map.nii.gz
+DEV081 beta_0097.nii multivariate9_map.nii.gz
+DEV081 beta_0097.nii univariate10_map.nii.gz
+DEV081 beta_0097.nii univariate4_map.nii.gz
+DEV081 beta_0097.nii univariate5_map.nii.gz
+DEV081 beta_0097.nii univariate6_map.nii.gz
+DEV081 beta_0097.nii univariate7_map.nii.gz
+DEV081 beta_0097.nii univariate8_map.nii.gz
+DEV081 beta_0097.nii univariate9_map.nii.gz
+DEV081 beta_0098.nii multivariate10_map.nii.gz
+DEV081 beta_0098.nii multivariate4_map.nii.gz
+DEV081 beta_0098.nii multivariate5_map.nii.gz
+DEV081 beta_0098.nii multivariate6_map.nii.gz
+DEV081 beta_0098.nii multivariate7_map.nii.gz
+DEV081 beta_0098.nii multivariate8_map.nii.gz
+DEV081 beta_0098.nii multivariate9_map.nii.gz
+DEV081 beta_0098.nii univariate10_map.nii.gz
+DEV081 beta_0098.nii univariate4_map.nii.gz
+DEV081 beta_0098.nii univariate5_map.nii.gz
+DEV081 beta_0098.nii univariate6_map.nii.gz
+DEV081 beta_0098.nii univariate7_map.nii.gz
+DEV081 beta_0098.nii univariate8_map.nii.gz
+DEV081 beta_0098.nii univariate9_map.nii.gz
+DEV081 beta_0099.nii multivariate10_map.nii.gz
+DEV081 beta_0099.nii multivariate4_map.nii.gz
+DEV081 beta_0099.nii multivariate5_map.nii.gz
+DEV081 beta_0099.nii multivariate6_map.nii.gz
+DEV081 beta_0099.nii multivariate7_map.nii.gz
+DEV081 beta_0099.nii multivariate8_map.nii.gz
+DEV081 beta_0099.nii multivariate9_map.nii.gz
+DEV081 beta_0099.nii univariate10_map.nii.gz
+DEV081 beta_0099.nii univariate4_map.nii.gz
+DEV081 beta_0099.nii univariate5_map.nii.gz
+DEV081 beta_0099.nii univariate6_map.nii.gz
+DEV081 beta_0099.nii univariate7_map.nii.gz
+DEV081 beta_0099.nii univariate8_map.nii.gz
+DEV081 beta_0099.nii univariate9_map.nii.gz
+DEV081 beta_0100.nii multivariate10_map.nii.gz
+DEV081 beta_0100.nii multivariate4_map.nii.gz
+DEV081 beta_0100.nii multivariate5_map.nii.gz
+DEV081 beta_0100.nii multivariate6_map.nii.gz
+DEV081 beta_0100.nii multivariate7_map.nii.gz
+DEV081 beta_0100.nii multivariate8_map.nii.gz
+DEV081 beta_0100.nii multivariate9_map.nii.gz
+DEV081 beta_0100.nii univariate10_map.nii.gz
+DEV081 beta_0100.nii univariate4_map.nii.gz
+DEV081 beta_0100.nii univariate5_map.nii.gz
+DEV081 beta_0100.nii univariate6_map.nii.gz
+DEV081 beta_0100.nii univariate7_map.nii.gz
+DEV081 beta_0100.nii univariate8_map.nii.gz
+DEV081 beta_0100.nii univariate9_map.nii.gz
+DEV081 beta_0101.nii multivariate10_map.nii.gz
+DEV081 beta_0101.nii multivariate4_map.nii.gz
+DEV081 beta_0101.nii multivariate5_map.nii.gz
+DEV081 beta_0101.nii multivariate6_map.nii.gz
+DEV081 beta_0101.nii multivariate7_map.nii.gz
+DEV081 beta_0101.nii multivariate8_map.nii.gz
+DEV081 beta_0101.nii multivariate9_map.nii.gz
+DEV081 beta_0101.nii univariate10_map.nii.gz
+DEV081 beta_0101.nii univariate4_map.nii.gz
+DEV081 beta_0101.nii univariate5_map.nii.gz
+DEV081 beta_0101.nii univariate6_map.nii.gz
+DEV081 beta_0101.nii univariate7_map.nii.gz
+DEV081 beta_0101.nii univariate8_map.nii.gz
+DEV081 beta_0101.nii univariate9_map.nii.gz

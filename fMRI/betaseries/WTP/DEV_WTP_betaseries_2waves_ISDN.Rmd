@@ -1,0 +1,563 @@
+---
+title: "DEV WTP betaseries: ISDN talk"
+author: "Dani Cosme"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    code_folding: hide
+    df_print: paged
+    highlight: tango
+    theme: united
+    toc: yes
+    toc_float:
+      collapsed: yes
+      smooth_scroll: yes
+  pdf_document:
+    toc: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+options(scipen = 999)
+```
+
+# prep {.tabset}
+## load packages
+```{r}
+library(tidyverse)
+library(lme4)
+library(lmerTest)
+library(knitr)
+```
+
+## define aesthetics
+```{r}
+algorithm = c("#006989", "#FEC601", "#F43C13", "#00A5CF", "#00A878")
+food = c("#A4C960", "#2A5C8C")
+liking = c("#FF0000", "#F2AD00")
+bid = c("#00A08A", "#F2AD00", "#F98400", "#FF0000")
+palette_condition = c("#685369", "#EEAC00", "#C1C3DE")
+dc_bw = plot_aes = theme_minimal() +
+  theme(legend.position = "top",
+        legend.text = element_text(size = 12),
+        text = element_text(size = 16, family = "Futura Medium"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.text = element_text(color = "black"),
+        axis.line = element_line(colour = "black"),
+        axis.ticks.y = element_blank())
+```
+
+## define functions
+```{r}
+table_model = function(model_data) {
+  model_data %>%
+    broom.mixed::tidy(., conf.int = TRUE) %>%
+    rename("SE" = std.error,
+           "t" = statistic,
+           "p" = p.value) %>%
+    filter(effect == "fixed") %>%
+    select(-group, -effect) %>%
+    mutate_at(vars(-contains("term"), -contains("value")), round, 2) %>%
+    mutate(term = gsub(":", " x ", term),
+           term = gsub("dot_", "", term),
+           term = gsub("liking_rating", "liking", term),
+           term = gsub("wave1", "wave", term),
+           term = gsub("healthunhealthy", "health (unhealthy)", term),
+           term = gsub("conditionCognitive", "condition (cognitive)", term),
+           term = gsub("conditionBehavioral", "condition (behavioral)", term),
+           p = ifelse(p < .001, "< .001",
+                      ifelse(p == 1, "1.000", gsub("0.(.*)", ".\\1", sprintf("%.3f", p)))),
+           `b [95% CI]` = sprintf("%.2f [%0.2f, %.2f]", estimate, conf.low, conf.high)) %>%
+    select(term, `b [95% CI]`, df, t, p) %>%
+    kable()
+}
+```
+
+## load and tidy task data
+```{r}
+task = read.csv("~/Documents/code/sanlab/DEV_scripts/fMRI/fx/multiconds/WTP/betaseries/events.csv", stringsAsFactors = FALSE) %>%
+  mutate(bid = ifelse(bid == "NULL", NA, bid),
+         bid = as.integer(bid),
+         health = as.factor(health),
+         liking = as.factor(liking)) %>%
+  group_by(subjectID, wave, run) %>%
+  mutate(trial = row_number()) %>%
+  filter(wave %in% 1:2)
+```
+
+## check responses
+Check if wrong buttons were used (i.e., not 5-8)
+
+* DEV002 = wrong button box (i.e. 1-4) used 
+* DEV007 = wrong button box (i.e. 1-4) used
+* DEV011 = code normally
+* DEV017 = exclude; can't tell if they're missed responses or incorrect placement of fingers
+* DEV019 = exclude; can't tell if they're missed responses or incorrect placement of fingers
+* DEV032 = code normally
+* DEV033 = incorrect placement of fingers; recode runs 1-3
+* DEV054 = exclude; technical error?
+* DEV061 = code normally
+
+> NB! NEED TO GO THROUGH NEW PARTICPANTS/WAVES
+
+```{r}
+subs = task %>%
+  mutate(bid = as.character(bid)) %>%
+  group_by(subjectID, run, bid) %>%
+  summarize(n = n()) %>%
+  spread(bid, n) %>%
+  mutate(messed = ifelse(!is.na(`2`), "yes", NA),
+         messed = ifelse(is.na(`5`) & !is.na(`<NA>`), "yes", messed)) %>%
+  filter(messed == "yes") %>% 
+  ungroup() %>% 
+  select(subjectID) %>% 
+  unique()
+
+task %>%
+  mutate(bid = as.character(bid)) %>%
+  group_by(subjectID, run, bid) %>%
+  summarize(n = n()) %>%
+  spread(bid, n) %>%
+  mutate(messed = ifelse(!is.na(`2`), "yes", NA),
+         messed = ifelse(is.na(`5`) & !is.na(`<NA>`), "yes", messed)) %>%
+  filter(subjectID %in% subs$subjectID)
+```
+
+## recode and exclude
+Recoding  
+* DEV033: recode runs1-3, but if liking rating < 3, leave as missing
+
+> NB! NEED TO GO THROUGH NEW PARTICPANTS/WAVES
+
+```{r}
+data.ex = task %>%
+  mutate(bid = ifelse(subjectID == "DEV033" & wave == 1 & !run == "run4", bid - 1, bid),
+         bid = ifelse(subjectID == "DEV033" & wave == 1 & !run == "run4" & is.na(bid) & liking_rating > 2, 8, bid),
+         bid = (bid - 5) / 2) %>%
+  group_by(subjectID, wave) %>%
+  arrange(subjectID, run) %>%
+  mutate(trial = row_number())
+```
+
+## load mean intensity values
+```{r}
+file_dir = "~/Documents/code/sanlab/DEV_scripts/fMRI/betaseries/WTP/dotProducts_WTP_wave1/"
+file_pattern = "DEV[0-9]{3}_meanIntensity.txt"
+file_list = list.files(file_dir, pattern = file_pattern)
+
+intensities = data.frame()
+
+for (file in file_list) {
+  temp = tryCatch(read.table(file.path(file_dir,file), fill = TRUE) %>%
+                    rename("subjectID" = V1,
+                           "meanIntensity" = V3) %>%
+                    extract(V2, "beta", "beta_([0-9]{4}).nii") %>%
+                    mutate(beta = as.integer(beta),
+                           wave = 1), error = function(e) message(file))
+  intensities = rbind(intensities, temp)
+  rm(temp)
+}
+
+file_dir = "~/Documents/code/sanlab/DEV_scripts/fMRI/betaseries/WTP/dotProducts_WTP_wave2/"
+file_list = list.files(file_dir, pattern = file_pattern)
+for (file in file_list) {
+  temp = tryCatch(read.table(file.path(file_dir,file), fill = TRUE) %>%
+                    rename("subjectID" = V1,
+                           "meanIntensity" = V3) %>%
+                    extract(V2, "beta", "beta_([0-9]{4}).nii") %>%
+                    mutate(beta = as.integer(beta),
+                           wave = 2), error = function(e) message(file))
+  intensities = rbind(intensities, temp)
+  rm(temp)
+}
+```
+
+## load dot products
+```{r}
+file_dir = "~/Documents/code/sanlab/DEV_scripts/fMRI/betaseries/WTP/dotProducts_WTP_wave1/"
+file_pattern = "DEV[0-9]{3}_dotProducts.txt"
+file_list = list.files(file_dir, pattern = file_pattern)
+
+dots = data.frame()
+
+for (file in file_list) {
+  temp = tryCatch(read.table(file.path(file_dir,file), fill = TRUE) %>%
+                    rename("subjectID" = V1,
+                           "map" = V3,
+                           "dotProduct" = V4) %>%
+                    extract(V2, "beta", "beta_([0-9]{4}).nii") %>%
+                    extract(map, "algorithm", "(.*)_.*.nii") %>%
+                    mutate(beta = as.integer(beta),
+                            wave = 1), error = function(e) message(file))
+  dots = rbind(dots, temp)
+  rm(temp)
+}
+
+file_dir = "~/Documents/code/sanlab/DEV_scripts/fMRI/betaseries/WTP/dotProducts_WTP_wave2/"
+file_list = list.files(file_dir, pattern = file_pattern)
+
+for (file in file_list) {
+  temp = tryCatch(read.table(file.path(file_dir,file), fill = TRUE) %>%
+                    rename("subjectID" = V1,
+                           "map" = V3,
+                           "dotProduct" = V4) %>%
+                    extract(V2, "beta", "beta_([0-9]{4}).nii") %>%
+                    extract(map, "algorithm", "(.*)_.*.nii") %>%
+                    mutate(beta = as.integer(beta),
+                            wave = 2), error = function(e) message(file))
+  dots = rbind(dots, temp)
+  rm(temp)
+}
+```
+
+## join intensities and dots
+* recode trials with extreme intensities as NA
+```{r}
+dots.merged = dots %>%
+  left_join(., intensities, by = c("subjectID", "wave", "beta")) %>%
+  group_by(subjectID, wave, algorithm) %>%
+  mutate(rownum = row_number())
+
+# plot original
+dots.merged %>%
+  filter(algorithm == "craving_regulation") %>%
+  ggplot(aes(1, meanIntensity)) +
+    geom_boxplot()
+
+# assess extreme values and exclude when calculating SDs
+dots.merged %>%
+  filter(algorithm == "craving_regulation") %>%
+  arrange(meanIntensity)
+
+dots.merged %>%
+  filter(algorithm == "craving_regulation") %>%
+  arrange(-meanIntensity)
+
+# recode outliers as NA
+dots.merged = dots.merged %>%
+  ungroup() %>%
+  mutate(meanIntensity = ifelse(meanIntensity > 1 | meanIntensity < -1, NA, meanIntensity),
+         median = median(meanIntensity, na.rm = TRUE),
+         sd3 = 3*sd(meanIntensity, na.rm = TRUE),
+         outlier = ifelse(meanIntensity > median + sd3 | meanIntensity < median - sd3, "yes", "no"),
+         dotProduct = ifelse(outlier == "yes", NA, dotProduct))
+  
+# plot after
+dots.merged %>%
+  filter(algorithm == "craving_regulation") %>%
+  ggplot(aes(1, meanIntensity)) +
+  geom_boxplot()
+```
+
+## exclude outliers and standardize
+* standardize within algorithm and contrast
+```{r}
+dots.ex = dots.merged %>%
+  group_by(algorithm, wave, subjectID) %>%
+  mutate(trial = row_number()) 
+```
+
+## merge data
+Exclusions
+
+* Didn't scan: DEV002, DEV007
+* MRI motion and data quality exclusions: DEV001, DEV020, DEV032, DEV047, DEV063, DEV067, DEV078
+* Button box exclusions: DEV017, DEV019, DEV054
+* Run exclusions: DEV028 (run1), DEV048 (run3), DEV064 (run1), DEV069 (run1)
+
+> NB! NEED TO GO THROUGH NEW PARTICPANTS/WAVES
+
+```{r}
+conditions = read.csv("~/Desktop/dev_conditions.csv")
+
+data_all = left_join(dots.ex, data.ex, by = c("subjectID", "wave", "trial")) %>%
+  filter(!subjectID %in% c("DEV002", "DEV007", "DEV001", "DEV020", "DEV032", "DEV047", "DEV063", "DEV067", "DEV078", "DEV017", "DEV019", "DEV054")) %>%
+  filter(!(subjectID == "DEV028" & run == "run1" & wave == 1) & !(subjectID == "DEV048" & run == "run3" & wave == 1) &
+         !(subjectID == "DEV064" & run == "run1" & wave == 1) & !(subjectID == "DEV069" & run == "run1" & wave == 1)) %>%
+  ungroup() %>%
+  ungroup() %>%
+  mutate(algorithm = gsub("_signature", "", algorithm),
+         wave = as.character(wave),
+         liking = ifelse(liking_rating > 2, "liked",
+                  ifelse(liking_rating < 3, "disliked", NA))) %>%
+  filter(!is.na(health)) %>%
+  left_join(., conditions) %>%
+  filter(condition %in% c("Cognitive", "Control")) %>%
+  mutate(condition = recode(condition, "Cognitive" = "Reappraisal"),
+         wave = as.numeric(recode(wave, "1" = "0", "2" = "1")))
+
+data = data_all %>%
+  filter(liking == "liked") %>%
+  filter(algorithm == "craving_regulation") %>%
+  filter(health == "unhealthy")
+```
+
+
+# descriptives {.tabset}
+## number of participants
+```{r}
+data %>%
+  select(subjectID, wave) %>%
+  unique() %>%
+  group_by(wave) %>%
+  summarize(n = n())
+```
+
+## bids {.tabset}
+### across waves
+```{r}
+data %>%
+  group_by(health) %>%
+  summarize(n = n(),
+            mean = round(mean(bid, na.rm = TRUE), 2),
+            sd = round(sd(bid, na.rm = TRUE), 2),
+            min = min(bid, na.rm = TRUE),
+            max = max(bid, na.rm = TRUE)) %>%
+  kable(format = "pandoc")
+```
+
+### by wave
+```{r}
+data %>%
+  group_by(wave, health) %>%
+  summarize(n = n(),
+            mean = round(mean(bid, na.rm = TRUE), 2),
+            sd = round(sd(bid, na.rm = TRUE), 2),
+            min = min(bid, na.rm = TRUE),
+            max = max(bid, na.rm = TRUE)) %>%
+  kable(format = "pandoc")
+```
+
+## session 0 liking ratings {.tabset}
+```{r}
+data_all %>%
+  group_by(health) %>%
+  summarize(n = n(),
+            mean = round(mean(liking_rating, na.rm = TRUE), 2),
+            sd = round(sd(liking_rating, na.rm = TRUE), 2),
+            min = min(liking_rating, na.rm = TRUE),
+            max = max(liking_rating, na.rm = TRUE)) %>%
+  kable(format = "pandoc")
+```
+
+# MLM {.tabset}
+Disaggregate within and between person relationships
+
+* `dot_between` = grand mean centered person average signature expression
+* `dot_within` = person-centered signature expression
+
+```{r}
+between = data %>%
+  group_by(condition, wave, subjectID, algorithm) %>%
+  summarize(dot_between = mean(dotProduct, na.rm = TRUE),
+            variability = var(dotProduct, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(dot_between = scale(dot_between, center = TRUE, scale = TRUE),
+         var_between = scale(variability, center = TRUE, scale = TRUE))
+
+data_diss = data %>%
+  group_by(wave, subjectID, algorithm) %>%
+  mutate(dot_within = scale(dotProduct, center = TRUE, scale = TRUE)) %>%
+  left_join(., between) %>%
+  select(condition, subjectID, wave, trial, bid, algorithm, dotProduct, dot_within, dot_between, var_between)
+```
+
+# no brain
+## bid ~ wave x condition {.tabset}
+
+> the intervention decreased bids for unhealthy foods and slightly increased bids for healthy foods
+
+### tidytable
+```{r}
+mod_bid = lmer(bid ~ wave * condition + (1 + wave | subjectID),
+                  data = data_diss,
+                  control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_bid)
+```
+
+### plot
+```{r}
+ggeffects::ggpredict(mod_bid, terms = c("wave", "condition")) %>%
+  data.frame() %>%
+  mutate(x = recode(x, "0" = "pre", "1" = "post"),
+         x = factor(x, levels = c("pre", "post"))) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high), size = 1.5, linewidth = 1.5, position = position_dodge(.05)) +
+  geom_line(aes(group = group), size = 1.5, position = position_dodge(.05)) +
+  scale_color_manual(name = "", values = palette_condition) + 
+  scale_fill_manual(name = "", values = palette_condition) + 
+  labs(x = "", y = "predicted bid value\n") + 
+  #scale_y_continuous(limits = c(0.65, 1.1)) +
+  dc_bw +
+  theme(legend.position = c(.2, .2))
+```
+
+### model summary
+```{r}
+summary(mod_bid)
+```
+
+# craving regulation {.tabset}
+## brain ~ condition x wave {.tabset}
+
+> signature expression was stronger for unhealthy foods
+
+> signature expression for unhealthy foods increase after the intervention
+
+### tidytable
+```{r}
+mod_dot = lmer(dotProduct ~ wave * condition + (1 + wave | subjectID),
+                  data = data_diss,
+                  control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_dot)
+```
+
+### plot
+```{r}
+ggeffects::ggpredict(mod_dot, terms = c("wave", "condition")) %>%
+  data.frame() %>%
+  mutate(x = recode(x, "0" = "pre", "1" = "post"),
+         x = factor(x, levels = c("pre", "post"))) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high), size = 1.5, linewidth = 1.5, position = position_dodge(.05)) +
+  geom_line(aes(group = group), size = 1.5, position = position_dodge(.05)) +
+  scale_color_manual(name = "", values = palette_condition) + 
+  scale_fill_manual(name = "", values = palette_condition) + 
+  #scale_y_continuous(limits = c(-6, -1.5)) +
+  labs(x = "", y = "predicted signature expression\n") + 
+  dc_bw +
+  theme(legend.position = c(.2, .9))
+```
+
+### model summary
+```{r}
+summary(mod_dot)
+```
+
+
+## brain variability ~ condition x wave {.tabset}
+
+> signature expression was stronger for unhealthy foods
+
+> signature expression for unhealthy foods increase after the intervention
+
+### tidytable
+```{r}
+mod_var = lmer(var_between ~ wave * condition + (1 | subjectID),
+                  data = between,
+                  control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_var)
+```
+
+### plot
+```{r}
+ggeffects::ggpredict(mod_var, terms = c("wave", "condition")) %>%
+  data.frame() %>%
+  mutate(x = recode(x, "0" = "pre", "1" = "post"),
+         x = factor(x, levels = c("pre", "post"))) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high), size = 1.5, linewidth = 1.5, position = position_dodge(.05)) +
+  geom_line(aes(group = group), size = 1.5, position = position_dodge(.05)) +
+  scale_color_manual(name = "", values = palette_condition) + 
+  scale_fill_manual(name = "", values = palette_condition) + 
+  labs(x = "", y = "predicted variability in signature expression\n") + 
+  dc_bw +
+  theme(legend.position = c(.2, .9))
+```
+
+### model summary
+```{r}
+summary(mod_dot)
+```
+
+
+## bid ~ brain x wave x condition {.tabset}
+
+> between-person expression: higher average expression is associated with lower bids
+
+> within-person expression: higher trial-level expression is associated with lower bids
+
+> intervention-related decreases in bid value are stronger (i.e., more negative) on trials with higher than average expression
+
+### tidy table
+```{r}
+mod_bid_diss = lmer(bid ~ dot_between * wave * condition + dot_within * wave * condition + (1 + dot_within + wave | subjectID),
+               data = data_diss,
+               control = lmerControl(optimizer = "bobyqa"))
+table_model(mod_bid_diss)
+```
+
+### plot {.tabset}
+#### by wave
+```{r}
+vals = seq(-6, 6, .2)
+ggeffects::ggpredict(mod_bid_diss, terms = c("dot_between[vals]", "wave", "condition")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_bid_diss, terms = c("dot_within[vals]", "wave", "condition")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_ribbon(aes(ymin = conf.low, ymax = conf.high), alpha = .5, color = NA) +
+  geom_line(aes(group = group)) +
+  facet_grid(facet~type) +
+  scale_color_manual(name = "wave", values = algorithm) + 
+  scale_fill_manual(name = "wave", values = algorithm) + 
+  labs(x = "\nsignature expression", y = "predicted bid value\n") + 
+  dc_bw
+```
+
+#### by expression
+```{r}
+ggeffects::ggpredict(mod_bid_diss, terms = c("wave", "dot_between [-1, 0, 1]", "condition")) %>%
+  data.frame() %>%
+  mutate(type = "between-person") %>%
+  bind_rows(ggeffects::ggpredict(mod_bid_diss, terms = c("wave", "dot_within [-1, 0, 1]", "condition")) %>%
+              data.frame() %>%
+              mutate(type = "within-person")) %>%
+  mutate(x = as.factor(x)) %>%
+  ggplot(aes(x, predicted, color = group, fill = group)) +
+  geom_pointrange(aes(ymin = conf.low, ymax = conf.high)) +
+  geom_line(aes(group = group)) +
+  facet_grid(facet~type) +
+  scale_color_manual(name = "expression", values = algorithm) + 
+  scale_fill_manual(name = "expression", values = algorithm) + 
+  labs(x = "\nwave", y = "predicted bid value\n") + 
+  dc_bw
+```
+
+#### pre-post change {.tabset}
+##### between-person
+```{r}
+palette_condition = c("#EEAC00", "#685369", "#C1C3DE")
+modelbased::estimate_contrasts(mod_bid_diss, "wave=c(1,0)", at = c("condition", "dot_between=seq(-4,4,.2)")) %>%
+  data.frame() %>%
+  ggplot(aes(x = dot_between, y = Difference)) +
+  geom_ribbon(aes(fill = condition, ymin = CI_low, ymax = CI_high), alpha = 0.2) +
+  geom_line(aes(colour = condition), size = 2) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_color_manual(name = "", values = palette_condition) + 
+  scale_fill_manual(name = "", values = palette_condition) + 
+  labs(x = "\naverage signature expression", y = "pre-post change in bid value\n") +
+  dc_bw
+```
+
+##### within-person
+```{r}
+modelbased::estimate_contrasts(mod_bid_diss, "wave=c(1,0)", at = c("condition", "dot_within")) %>%
+  data.frame() %>%
+  ggplot(aes(x = dot_within, y = Difference)) +
+  geom_ribbon(aes(fill = condition, ymin = CI_low, ymax = CI_high), alpha = 0.2) +
+  geom_line(aes(colour = condition), size = 2) +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  scale_color_manual(name = "", values = palette_condition) + 
+  scale_fill_manual(name = "", values = palette_condition) + 
+  labs(x = "\nwithin-person signature expresison", y = "pre-post change in bid value\n") +
+  dc_bw
+```
+
+### model summary
+```{r}
+summary(mod_bid_diss)
+```

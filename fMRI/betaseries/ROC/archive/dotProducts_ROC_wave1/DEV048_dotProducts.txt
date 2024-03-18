@@ -1,0 +1,240 @@
+DEV048 beta_0001.nii craving_regulation_signature.nii 21.3551
+DEV048 beta_0001.nii craving_signature_logistic.nii -11.8323
+DEV048 beta_0002.nii craving_regulation_signature.nii 17.967
+DEV048 beta_0002.nii craving_signature_logistic.nii -21.1184
+DEV048 beta_0003.nii craving_regulation_signature.nii -2.64453
+DEV048 beta_0003.nii craving_signature_logistic.nii 1.67093
+DEV048 beta_0004.nii craving_regulation_signature.nii -0.48033
+DEV048 beta_0004.nii craving_signature_logistic.nii 8.37971
+DEV048 beta_0005.nii craving_regulation_signature.nii -3.89122
+DEV048 beta_0005.nii craving_signature_logistic.nii -14.8881
+DEV048 beta_0006.nii craving_regulation_signature.nii -1.31904
+DEV048 beta_0006.nii craving_signature_logistic.nii -8.21639
+DEV048 beta_0007.nii craving_regulation_signature.nii -12.5367
+DEV048 beta_0007.nii craving_signature_logistic.nii 0.494052
+DEV048 beta_0008.nii craving_regulation_signature.nii 3.26825
+DEV048 beta_0008.nii craving_signature_logistic.nii -22.629
+DEV048 beta_0009.nii craving_regulation_signature.nii 6.4459
+DEV048 beta_0009.nii craving_signature_logistic.nii -14.9286
+DEV048 beta_0010.nii craving_regulation_signature.nii -0.613815
+DEV048 beta_0010.nii craving_signature_logistic.nii -26.5357
+DEV048 beta_0011.nii craving_regulation_signature.nii 12.8541
+DEV048 beta_0011.nii craving_signature_logistic.nii -5.86831
+DEV048 beta_0012.nii craving_regulation_signature.nii -6.72972
+DEV048 beta_0012.nii craving_signature_logistic.nii 3.64312
+DEV048 beta_0013.nii craving_regulation_signature.nii -4.34222
+DEV048 beta_0013.nii craving_signature_logistic.nii -23.9204
+DEV048 beta_0014.nii craving_regulation_signature.nii 5.72327
+DEV048 beta_0014.nii craving_signature_logistic.nii -10.6847
+DEV048 beta_0015.nii craving_regulation_signature.nii -16.5516
+DEV048 beta_0015.nii craving_signature_logistic.nii -5.93884
+DEV048 beta_0016.nii craving_regulation_signature.nii -12.4567
+DEV048 beta_0016.nii craving_signature_logistic.nii 6.30083
+DEV048 beta_0017.nii craving_regulation_signature.nii -6.54949
+DEV048 beta_0017.nii craving_signature_logistic.nii -4.21285
+DEV048 beta_0018.nii craving_regulation_signature.nii 0.0102675
+DEV048 beta_0018.nii craving_signature_logistic.nii -2.74858
+DEV048 beta_0019.nii craving_regulation_signature.nii 14.9104
+DEV048 beta_0019.nii craving_signature_logistic.nii 4.61899
+DEV048 beta_0020.nii craving_regulation_signature.nii 13.1322
+DEV048 beta_0020.nii craving_signature_logistic.nii -21.2514
+DEV048 beta_0028.nii craving_regulation_signature.nii -8.67929
+DEV048 beta_0028.nii craving_signature_logistic.nii 22.7719
+DEV048 beta_0029.nii craving_regulation_signature.nii 7.20143
+DEV048 beta_0029.nii craving_signature_logistic.nii 0.599359
+DEV048 beta_0030.nii craving_regulation_signature.nii -3.35441
+DEV048 beta_0030.nii craving_signature_logistic.nii -4.80401
+DEV048 beta_0031.nii craving_regulation_signature.nii -4.02464
+DEV048 beta_0031.nii craving_signature_logistic.nii -5.65931
+DEV048 beta_0032.nii craving_regulation_signature.nii 11.3603
+DEV048 beta_0032.nii craving_signature_logistic.nii 0.655225
+DEV048 beta_0033.nii craving_regulation_signature.nii 3.39321
+DEV048 beta_0033.nii craving_signature_logistic.nii -14.0114
+DEV048 beta_0034.nii craving_regulation_signature.nii -7.16531
+DEV048 beta_0034.nii craving_signature_logistic.nii -5.30052
+DEV048 beta_0035.nii craving_regulation_signature.nii 11.1804
+DEV048 beta_0035.nii craving_signature_logistic.nii -2.31641
+DEV048 beta_0036.nii craving_regulation_signature.nii -3.34552
+DEV048 beta_0036.nii craving_signature_logistic.nii -9.30957
+DEV048 beta_0037.nii craving_regulation_signature.nii 9.40537
+DEV048 beta_0037.nii craving_signature_logistic.nii 3.43765
+DEV048 beta_0038.nii craving_regulation_signature.nii 30.6754
+DEV048 beta_0038.nii craving_signature_logistic.nii -11.1682
+DEV048 beta_0039.nii craving_regulation_signature.nii 3.38073
+DEV048 beta_0039.nii craving_signature_logistic.nii -7.51743
+DEV048 beta_0040.nii craving_regulation_signature.nii -8.32592
+DEV048 beta_0040.nii craving_signature_logistic.nii 0.190177
+DEV048 beta_0041.nii craving_regulation_signature.nii 5.32723
+DEV048 beta_0041.nii craving_signature_logistic.nii 14.2283
+DEV048 beta_0042.nii craving_regulation_signature.nii -5.97063
+DEV048 beta_0042.nii craving_signature_logistic.nii 5.73138
+DEV048 beta_0043.nii craving_regulation_signature.nii 2.366
+DEV048 beta_0043.nii craving_signature_logistic.nii -11.3983
+DEV048 beta_0044.nii craving_regulation_signature.nii -17.6547
+DEV048 beta_0044.nii craving_signature_logistic.nii 5.68061
+DEV048 beta_0045.nii craving_regulation_signature.nii -1.17053
+DEV048 beta_0045.nii craving_signature_logistic.nii 2.96961
+DEV048 beta_0046.nii craving_regulation_signature.nii -5.86861
+DEV048 beta_0046.nii craving_signature_logistic.nii 5.52319
+DEV048 beta_0047.nii craving_regulation_signature.nii -12.9934
+DEV048 beta_0047.nii craving_signature_logistic.nii -9.14175
+DEV048 beta_0055.nii craving_regulation_signature.nii 28.6659
+DEV048 beta_0055.nii craving_signature_logistic.nii 16.7135
+DEV048 beta_0056.nii craving_regulation_signature.nii 0.911131
+DEV048 beta_0056.nii craving_signature_logistic.nii -1.34349
+DEV048 beta_0057.nii craving_regulation_signature.nii 8.21748
+DEV048 beta_0057.nii craving_signature_logistic.nii 4.33724
+DEV048 beta_0058.nii craving_regulation_signature.nii 1.36187
+DEV048 beta_0058.nii craving_signature_logistic.nii 4.1762
+DEV048 beta_0059.nii craving_regulation_signature.nii 5.82048
+DEV048 beta_0059.nii craving_signature_logistic.nii 1.84625
+DEV048 beta_0060.nii craving_regulation_signature.nii 1.77236
+DEV048 beta_0060.nii craving_signature_logistic.nii -1.42125
+DEV048 beta_0061.nii craving_regulation_signature.nii -6.95304
+DEV048 beta_0061.nii craving_signature_logistic.nii -4.87433
+DEV048 beta_0062.nii craving_regulation_signature.nii -0.878971
+DEV048 beta_0062.nii craving_signature_logistic.nii 0.915754
+DEV048 beta_0063.nii craving_regulation_signature.nii 18.2493
+DEV048 beta_0063.nii craving_signature_logistic.nii 0.181682
+DEV048 beta_0064.nii craving_regulation_signature.nii 15.1272
+DEV048 beta_0064.nii craving_signature_logistic.nii 2.61498
+DEV048 beta_0065.nii craving_regulation_signature.nii 6.22042
+DEV048 beta_0065.nii craving_signature_logistic.nii 13.9293
+DEV048 beta_0066.nii craving_regulation_signature.nii 13.6992
+DEV048 beta_0066.nii craving_signature_logistic.nii -2.30763
+DEV048 beta_0067.nii craving_regulation_signature.nii 9.00066
+DEV048 beta_0067.nii craving_signature_logistic.nii 2.93374
+DEV048 beta_0068.nii craving_regulation_signature.nii 4.79667
+DEV048 beta_0068.nii craving_signature_logistic.nii 1.19369
+DEV048 beta_0069.nii craving_regulation_signature.nii 10.4549
+DEV048 beta_0069.nii craving_signature_logistic.nii 11.1748
+DEV048 beta_0070.nii craving_regulation_signature.nii 20.3384
+DEV048 beta_0070.nii craving_signature_logistic.nii -9.2126
+DEV048 beta_0071.nii craving_regulation_signature.nii 23.0998
+DEV048 beta_0071.nii craving_signature_logistic.nii -1.15275
+DEV048 beta_0072.nii craving_regulation_signature.nii 3.93329
+DEV048 beta_0072.nii craving_signature_logistic.nii 3.0058
+DEV048 beta_0073.nii craving_regulation_signature.nii -0.593859
+DEV048 beta_0073.nii craving_signature_logistic.nii 9.15773
+DEV048 beta_0074.nii craving_regulation_signature.nii 3.26317
+DEV048 beta_0074.nii craving_signature_logistic.nii -1.96338
+DEV048 beta_0082.nii craving_regulation_signature.nii -6.92106
+DEV048 beta_0082.nii craving_signature_logistic.nii -345.109
+DEV048 beta_0083.nii craving_regulation_signature.nii 75.0389
+DEV048 beta_0083.nii craving_signature_logistic.nii -362.886
+DEV048 beta_0084.nii craving_regulation_signature.nii 52.4526
+DEV048 beta_0084.nii craving_signature_logistic.nii -353.391
+DEV048 beta_0085.nii craving_regulation_signature.nii
+DEV048 beta_0085.nii craving_signature_logistic.nii
+DEV048 beta_0086.nii craving_regulation_signature.nii
+DEV048 beta_0086.nii craving_signature_logistic.nii
+DEV048 beta_0087.nii craving_regulation_signature.nii
+DEV048 beta_0087.nii craving_signature_logistic.nii
+DEV048 beta_0088.nii craving_regulation_signature.nii
+DEV048 beta_0088.nii craving_signature_logistic.nii
+DEV048 beta_0089.nii craving_regulation_signature.nii
+DEV048 beta_0089.nii craving_signature_logistic.nii
+DEV048 beta_0090.nii craving_regulation_signature.nii
+DEV048 beta_0090.nii craving_signature_logistic.nii
+DEV048 beta_0091.nii craving_regulation_signature.nii
+DEV048 beta_0091.nii craving_signature_logistic.nii
+DEV048 beta_0092.nii craving_regulation_signature.nii
+DEV048 beta_0092.nii craving_signature_logistic.nii
+DEV048 beta_0093.nii craving_regulation_signature.nii
+DEV048 beta_0093.nii craving_signature_logistic.nii
+DEV048 beta_0094.nii craving_regulation_signature.nii
+DEV048 beta_0094.nii craving_signature_logistic.nii
+DEV048 beta_0095.nii craving_regulation_signature.nii
+DEV048 beta_0095.nii craving_signature_logistic.nii
+DEV048 beta_0096.nii craving_regulation_signature.nii
+DEV048 beta_0096.nii craving_signature_logistic.nii
+DEV048 beta_0097.nii craving_regulation_signature.nii
+DEV048 beta_0097.nii craving_signature_logistic.nii
+DEV048 beta_0098.nii craving_regulation_signature.nii
+DEV048 beta_0098.nii craving_signature_logistic.nii
+DEV048 beta_0099.nii craving_regulation_signature.nii
+DEV048 beta_0099.nii craving_signature_logistic.nii
+DEV048 beta_0100.nii craving_regulation_signature.nii
+DEV048 beta_0100.nii craving_signature_logistic.nii
+DEV048 beta_0101.nii craving_regulation_signature.nii
+DEV048 beta_0101.nii craving_signature_logistic.nii
+DEV048 beta_0001.nii nsc_koban_2mm.nii 11.7308
+DEV048 beta_0002.nii nsc_koban_2mm.nii 9.93866
+DEV048 beta_0003.nii nsc_koban_2mm.nii 7.45335
+DEV048 beta_0004.nii nsc_koban_2mm.nii 8.69917
+DEV048 beta_0005.nii nsc_koban_2mm.nii 7.08711
+DEV048 beta_0006.nii nsc_koban_2mm.nii 13.9892
+DEV048 beta_0007.nii nsc_koban_2mm.nii 4.0661
+DEV048 beta_0008.nii nsc_koban_2mm.nii -11.1166
+DEV048 beta_0009.nii nsc_koban_2mm.nii -4.26243
+DEV048 beta_0010.nii nsc_koban_2mm.nii 8.08614
+DEV048 beta_0011.nii nsc_koban_2mm.nii -4.91084
+DEV048 beta_0012.nii nsc_koban_2mm.nii -4.88547
+DEV048 beta_0013.nii nsc_koban_2mm.nii -3.06317
+DEV048 beta_0014.nii nsc_koban_2mm.nii 11.3155
+DEV048 beta_0015.nii nsc_koban_2mm.nii 14.9729
+DEV048 beta_0016.nii nsc_koban_2mm.nii 9.96023
+DEV048 beta_0017.nii nsc_koban_2mm.nii 1.48227
+DEV048 beta_0018.nii nsc_koban_2mm.nii 2.18868
+DEV048 beta_0019.nii nsc_koban_2mm.nii 0.869012
+DEV048 beta_0020.nii nsc_koban_2mm.nii 6.61004
+DEV048 beta_0028.nii nsc_koban_2mm.nii -0.102751
+DEV048 beta_0029.nii nsc_koban_2mm.nii -3.46024
+DEV048 beta_0030.nii nsc_koban_2mm.nii -4.60445
+DEV048 beta_0031.nii nsc_koban_2mm.nii -1.80074
+DEV048 beta_0032.nii nsc_koban_2mm.nii -4.92853
+DEV048 beta_0033.nii nsc_koban_2mm.nii 0.574234
+DEV048 beta_0034.nii nsc_koban_2mm.nii -9.12025
+DEV048 beta_0035.nii nsc_koban_2mm.nii 5.89611
+DEV048 beta_0036.nii nsc_koban_2mm.nii -2.6025
+DEV048 beta_0037.nii nsc_koban_2mm.nii 2.18669
+DEV048 beta_0038.nii nsc_koban_2mm.nii -5.92732
+DEV048 beta_0039.nii nsc_koban_2mm.nii -6.14362
+DEV048 beta_0040.nii nsc_koban_2mm.nii 0.385822
+DEV048 beta_0041.nii nsc_koban_2mm.nii 0.202287
+DEV048 beta_0042.nii nsc_koban_2mm.nii 10.3964
+DEV048 beta_0043.nii nsc_koban_2mm.nii 11.6305
+DEV048 beta_0044.nii nsc_koban_2mm.nii 9.00874
+DEV048 beta_0045.nii nsc_koban_2mm.nii 1.65894
+DEV048 beta_0046.nii nsc_koban_2mm.nii 15.6208
+DEV048 beta_0047.nii nsc_koban_2mm.nii 2.15122
+DEV048 beta_0055.nii nsc_koban_2mm.nii -1.25255
+DEV048 beta_0056.nii nsc_koban_2mm.nii 1.8365
+DEV048 beta_0057.nii nsc_koban_2mm.nii -0.960531
+DEV048 beta_0058.nii nsc_koban_2mm.nii 6.52415
+DEV048 beta_0059.nii nsc_koban_2mm.nii 1.62107
+DEV048 beta_0060.nii nsc_koban_2mm.nii 11.4372
+DEV048 beta_0061.nii nsc_koban_2mm.nii 10.6445
+DEV048 beta_0062.nii nsc_koban_2mm.nii 1.34245
+DEV048 beta_0063.nii nsc_koban_2mm.nii 3.51758
+DEV048 beta_0064.nii nsc_koban_2mm.nii 4.12373
+DEV048 beta_0065.nii nsc_koban_2mm.nii 4.57499
+DEV048 beta_0066.nii nsc_koban_2mm.nii -0.666209
+DEV048 beta_0067.nii nsc_koban_2mm.nii 12.851
+DEV048 beta_0068.nii nsc_koban_2mm.nii -4.40981
+DEV048 beta_0069.nii nsc_koban_2mm.nii 4.84221
+DEV048 beta_0070.nii nsc_koban_2mm.nii -0.749522
+DEV048 beta_0071.nii nsc_koban_2mm.nii -0.765492
+DEV048 beta_0072.nii nsc_koban_2mm.nii 7.7122
+DEV048 beta_0073.nii nsc_koban_2mm.nii -2.31437
+DEV048 beta_0074.nii nsc_koban_2mm.nii 3.03744
+DEV048 beta_0082.nii nsc_koban_2mm.nii 1056.16
+DEV048 beta_0083.nii nsc_koban_2mm.nii 1035.48
+DEV048 beta_0084.nii nsc_koban_2mm.nii 1051.92
+DEV048 beta_0085.nii nsc_koban_2mm.nii
+DEV048 beta_0086.nii nsc_koban_2mm.nii
+DEV048 beta_0087.nii nsc_koban_2mm.nii
+DEV048 beta_0088.nii nsc_koban_2mm.nii
+DEV048 beta_0089.nii nsc_koban_2mm.nii
+DEV048 beta_0090.nii nsc_koban_2mm.nii
+DEV048 beta_0091.nii nsc_koban_2mm.nii
+DEV048 beta_0092.nii nsc_koban_2mm.nii
+DEV048 beta_0093.nii nsc_koban_2mm.nii
+DEV048 beta_0094.nii nsc_koban_2mm.nii
+DEV048 beta_0095.nii nsc_koban_2mm.nii
+DEV048 beta_0096.nii nsc_koban_2mm.nii
+DEV048 beta_0097.nii nsc_koban_2mm.nii
+DEV048 beta_0098.nii nsc_koban_2mm.nii
+DEV048 beta_0099.nii nsc_koban_2mm.nii
+DEV048 beta_0100.nii nsc_koban_2mm.nii
+DEV048 beta_0101.nii nsc_koban_2mm.nii

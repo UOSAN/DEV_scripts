@@ -3,13 +3,14 @@
 # This script takes the dot product of template maps and subject beta maps. Output is 
 # saved as a text file in the output directory.
 
-# load afni
+# load afni & fsl
 module load afni
+module load fsl
 
 # Set paths and variables
 # ------------------------------------------------------------------------------------------
 # variables
-maps=(/projects/sanlab/shared/DEV/nonbids_data/rois_patterns/nsc_koban_2mm.nii) #$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
+maps=$(ls /projects/sanlab/shared/DEV/nonbids_data/rois_patterns/*.nii)
 betasALL=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..47}) $(printf "beta_%04d.nii\n" {55..74}) $(printf "beta_%04d.nii\n" {82..101})`
 betasDEV022=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..47}) $(printf "beta_%04d.nii\n" {55..74}) $(printf "beta_%04d.nii\n" {82..89})`
 betasDEV060=`echo $(printf "beta_%04d.nii\n" {1..19}) $(printf "beta_%04d.nii\n" {27..46}) $(printf "beta_%04d.nii\n" {54..73}) $(printf "beta_%04d.nii\n" {81..100})`
@@ -17,6 +18,7 @@ betasDEV061=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n"
 betasDEV063=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..38}) $(printf "beta_%04d.nii\n" {46..65}) $(printf "beta_%04d.nii\n" {73..92})`
 betasDEV082=`echo $(printf "beta_%04d.nii\n" {1..20}) $(printf "beta_%04d.nii\n" {28..42}) $(printf "beta_%04d.nii\n" {50..69}) $(printf "beta_%04d.nii\n" {77..96})`
 
+# fslhd beta_0001.nii | sed -n '66p' | cut -c 16-
 # paths
 image_dir=/projects/sanlab/shared/DEV/nonbids_data/fMRI/fx/models/ROC/wave1/betaseries
 output_dir=/projects/sanlab/shared/DEV/DEV_scripts/fMRI/betaseries/ROC/dotProducts_ROC_wave1
