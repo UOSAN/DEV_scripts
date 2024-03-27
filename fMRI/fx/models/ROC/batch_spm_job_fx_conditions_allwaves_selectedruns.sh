@@ -9,7 +9,7 @@
 STUDY=DEV
 
 # Set subject list
-SUBJLIST="roc_run_data_quality_20231206.tsv"
+SUBJLIST="roc_run_data_quality_20240311a.tsv"
 
 # Which SID should be replaced?
 REPLACESID=DEV001
@@ -43,13 +43,6 @@ cpuspertask=1
 mempercpu=8G
 
 set -x
-
-
-
-
-
-
-
 
 
 

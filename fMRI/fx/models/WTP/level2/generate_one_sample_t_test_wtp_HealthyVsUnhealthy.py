@@ -2,15 +2,21 @@ import pandas as pd
 import os
 from glob import glob
 import numpy as np
+import sys
+sys.path.append("fMRI/fx/models/")
+from modeling_utils import load_config
+config_data = load_config("fMRI/fx/models/WTP/level2/l2_config.yml")
+import yaml
+sys.path.append(config_data['sst_level_2_analysis_path'])
 from level2_utils import *
 #beta_paths = glob("/Users/benjaminsmith/Google Drive/oregon/data/DEV/nonbids_data/fMRI/fx/models/SST/wave1/conditions/sub-DEV*/beta_0002.nii")
 
-config_data = read_yaml_for_host("l2_config.yml")
+
 
 #beta_df['spm_l2_path_description'] =beta_df.beta_filepath
 #paths
 nonbids_data_path = config_data['nonbids_data_path']
-dropbox_data_path = config_data['dropbox_data_path']
+dropbox_data_path = config_data['dropbox_datapath']
 ml_data_folderpath = nonbids_data_path + "fMRI/ml"
 dev_scripts_path = config_data['dev_scripts_path']
 ml_scripting_path = dev_scripts_path + "/fMRI/ml"
@@ -35,6 +41,7 @@ train_betas_with_data = get_data_for_confirmed_train_subjs(
 betas_with_contrasts = get_contrasts_for_betas(train_betas_with_data)
 
 contrast_name_list = ['HealthyLiked(T2>T1)','UnhealthyLiked(T2>T1)','HealthyDisliked(T2>T1)','UnhealthyDisliked(T2>T1)', 'HealthyVSUnhealthy', 'UnealthyVSHealthy', 'HealthyLikedVsUnhealthyLiked', 'UnhealthyLikedVsHealthyLiked'], 
+#contrast_name_list = ['HealthyLiked(T2>T1)','UnhealthyLiked(T2>T1)','HealthyDisliked(T2>T1)','UnhealthyDisliked(T2>T1)', 'HealthyLiked(T2<T1)','UnhealthyLiked(T2<T1)','HealthyDisliked(T2<T1)','UnhealthyDisliked(T2<T1)', 'HealthyVSUnhealthy', 'UnealthyVSHealthy', 'HealthyLikedVsUnhealthyLiked', 'UnhealthyLikedVsHealthyLiked'] 
 # for contrast_name in ['HealthyLiked(T2>T1)','UnhealthyLiked(T2>T1)','HealthyDisliked(T2>T1)','UnhealthyDisliked(T2>T1)']:
 #     contrast_colname = 'contrast_' + contrast_name + '_fname'
 #     print(contrast_name)
