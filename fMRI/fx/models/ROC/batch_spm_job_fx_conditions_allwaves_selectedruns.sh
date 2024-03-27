@@ -21,7 +21,7 @@ SPM_PATH=/projects/sanlab/shared/spm12
 SCRIPTS_DIR=/projects/sanlab/shared/${STUDY}/${STUDY}_scripts
 
 # Set MATLAB script path
-SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/ROC/fx_conditions_allwaves_no_contrasts.m
+SCRIPT=${SCRIPTS_DIR}/fMRI/fx/models/ROC/fx_conditions_allwaves_all_contrasts.m
 
 TASK=ROC
 
