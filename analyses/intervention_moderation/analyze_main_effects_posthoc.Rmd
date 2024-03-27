@@ -60,6 +60,8 @@ main_effect_long <- full_dataset_aim3[,c(key_cols,outcome_cols)] %>%
   pivot_longer(cols=outcome_cols,names_to=c("outcome_type","outcome_time"),names_pattern = "(.*)\\_(.*)$", values_to = "outcome_value")
 
 main_effect_long$outcome_time <- factor(main_effect_long$outcome_time,levels = c("baseline","1wkpost","3mopost","6mopost","12mopost"))
+
+main_effect_long_demo<-main_effect_long %>% merge(full_dataset_aim3[,c(key_cols,confounder_cols)])
 ```
 
 
@@ -169,5 +171,99 @@ for (ot in outcome_types){
   
   
 }
+```
+
+# Demographics
+
+# 1wk post only
+
+
+
+Why don't we loop over the different otucome types and see what comes out for each?
+```{r}
+
+outcome_types <- unique(main_effect_long$outcome_type)
+
+for (ot in outcome_types){
+  print("----")
+  print(ot)
+  
+  outcome_table_3month<-main_effect_long_demo %>% filter(outcome_type==ot & outcome_time %in% c("baseline","1wkpost"))
+  
+  outcome_table_3month$outcome_time_f <- factor(outcome_table_3month$outcome_time,ordered = TRUE,levels=c("baseline","1wkpost","3mopost"))
+#  outcome_table_3month$outcome_time_int <- as.integer(outcome_table_3month$outcome_time_f)
+  
+  
+  library(lme4)
+  model_base <- lme4::lmer(outcome_value~intervention_group+outcome_time_f + age365 + birthsex_factor + (1|SID),outcome_table_3month)
+  model_int <- lme4::lmer(outcome_value~intervention_group*outcome_time_f + age365 + birthsex_factor + (1|SID),outcome_table_3month)
+  
+  print(summary(model_int))
+  print(anova(model_base, model_int))
+
+}
+
+
+```
+
+# 1 wk post and 3mo post
+
+## as int
+
+
+```{r}
+
+outcome_types <- unique(main_effect_long$outcome_type)
+
+for (ot in outcome_types){
+  print("----")
+  print(ot)
+  
+  outcome_table_3month<-main_effect_long_demo %>% filter(outcome_type==ot & outcome_time %in% c("baseline","1wkpost","3mopost"))
+  
+  outcome_table_3month$outcome_time_f <- factor(outcome_table_3month$outcome_time,ordered = FALSE,levels=c("baseline","1wkpost","3mopost"))
+  outcome_table_3month$outcome_time_int <- as.integer(outcome_table_3month$outcome_time_f)
+  
+  
+  library(lme4)
+  model_base <- lme4::lmer(outcome_value~intervention_group+outcome_time_int + age365 + birthsex_factor + (1|SID),outcome_table_3month)
+  model_int <- lme4::lmer(outcome_value~intervention_group*outcome_time_int + age365 + birthsex_factor + (1|SID),outcome_table_3month)
+  
+  print(summary(model_int))
+  print(anova(model_base, model_int))
+
+}
+
+
+```
+
+
+
+## As factor
+Why don't we loop over the different otucome types and see what comes out for each?
+```{r}
+
+outcome_types <- unique(main_effect_long$outcome_type)
+
+for (ot in outcome_types){
+  print("----")
+  print(ot)
+  
+  outcome_table_3month<-main_effect_long_demo %>% filter(outcome_type==ot & outcome_time %in% c("baseline","1wkpost","3mopost"))
+  
+  outcome_table_3month$outcome_time_f <- factor(outcome_table_3month$outcome_time,ordered = FALSE,levels=c("baseline","1wkpost","3mopost"))
+  outcome_table_3month$outcome_time_int <- as.integer(outcome_table_3month$outcome_time_f)
+  
+  
+  library(lme4)
+  model_base <- lme4::lmer(outcome_value~intervention_group+outcome_time_f + age365 + birthsex_factor + (1|SID),outcome_table_3month)
+  model_int <- lme4::lmer(outcome_value~intervention_group*outcome_time_f + age365 + birthsex_factor + (1|SID),outcome_table_3month)
+  
+  print(summary(model_int))
+  print(anova(model_base, model_int))
+
+}
+
+
 ```
 

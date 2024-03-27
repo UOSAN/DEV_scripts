@@ -55,11 +55,14 @@ Do the transform into a long format, for the mixed effects model.
 
 
 key_cols = c("SID","intervention_group")
+confounder_cols = c("age365","birthsex_factor")
 
 main_effect_long <- full_dataset_aim3[,c(key_cols,outcome_cols)] %>% 
-  pivot_longer(cols=outcome_cols,names_to=c("outcome_type","outcome_time"),names_pattern = "(.*)\\_(.*)$", values_to = "outcome_value")
+  pivot_longer(cols=c(outcome_cols),names_to=c("outcome_type","outcome_time"),names_pattern = "(.*)\\_(.*)$", values_to = "outcome_value")
 
 main_effect_long$outcome_time <- factor(main_effect_long$outcome_time,levels = c("baseline","1wkpost","3mopost","6mopost","12mopost"))
+
+
 ```
 
 
